@@ -56,7 +56,7 @@ public class StandFishCar : Stand
         fishCountCurrent += (_fishCountTotal[carLevel] - fishCountTotal);
         //_FishDropArea.requirementCount += (_fishCountTotal[carLevel] - fishCountTotal);
 
-        FishManager.Instance.fishCount[0] += (int)((float)(_fishCountTotal[carLevel] - fishCountTotal) * fishCoun_Factor);
+        //FishManager.Instance.fishCount[0] += (int)((float)(_fishCountTotal[carLevel] - fishCountTotal) * fishCoun_Factor);
 
         LevelInit();
         fishCountText.text = (fishCountTotal - fishCountCurrent).ToString() + "/" + (fishCountTotal).ToString();
@@ -69,7 +69,7 @@ public class StandFishCar : Stand
     }
     void FishCountInit()
     {
-        FishManager.Instance.fishCount[0] += (int)(fishCountTotal * fishCoun_Factor);
+        //FishManager.Instance.fishCount[0] += (int)(fishCountTotal * fishCoun_Factor);
     }
     public override void SpecificReset()
     {

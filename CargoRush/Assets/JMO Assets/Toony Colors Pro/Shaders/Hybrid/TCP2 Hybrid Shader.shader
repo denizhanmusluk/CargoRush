@@ -144,7 +144,7 @@ Shader "Toony Colors Pro 2/Hybrid Shader"
 
 		[TCP2HeaderToggle(TCP2_OCCLUSION)] _UseOcclusion ("Occlusion", Float) = 0
 	//# IF_KEYWORD TCP2_OCCLUSION
-		_OcclusionStrength ("Strength", Range(0.0, 1.0)) = 1.0
+		_OcclusionStrength ("Strength", Range(0.0, 10.0)) = 10.0
 	//# IF_PROPERTY _OcclusionChannel >= 1 || _UseMobileMode == 1
 		[NoScaleOffset] _OcclusionMap ("Texture#Texture (A)", 2D) = "white" {}
 	//# END_IF

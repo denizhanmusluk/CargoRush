@@ -172,7 +172,7 @@ public class UIManager : Subject
 
         CharacterUpgradeManager.Instance.isEnoughMoney();
         HRUpgradeManager.Instance.isEnoughMoney();
-        HoleUpgradeManager.Instance.isEnoughMoney();
+        //HoleUpgradeManager.Instance.isEnoughMoney();
         StarPanelManager.Instance.MoneyEnoughCheck();
 
         //if (miktar > 0)

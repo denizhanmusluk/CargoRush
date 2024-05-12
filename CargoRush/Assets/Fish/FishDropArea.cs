@@ -28,6 +28,7 @@ public class FishDropArea : MonoBehaviour
         //IndicatorManager.Instance._FishDropAreaList.Add(this);
         CollectProductList.Add(_CollectProduct);
         //_CollectProduct._FishDropArea = this;
+        StartCoroutine(GarbageDropping());
     }
     IEnumerator GarbageDropping()
     {

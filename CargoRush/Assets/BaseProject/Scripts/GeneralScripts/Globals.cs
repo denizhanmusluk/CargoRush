@@ -86,4 +86,5 @@ public static class Globals
 
 
     public static bool isSkillCreated = false;
+    public static int sortMasterLevel = 2;
 }

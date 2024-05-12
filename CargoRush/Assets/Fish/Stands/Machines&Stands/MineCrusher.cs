@@ -172,7 +172,7 @@ public class MineCrusher : Stand
     int areaCount = 1;
     void MinesDropAreaCheck()
     {
-        if (PlayerPrefs.GetInt("envlevel") >= 3)
+        if (Globals.sortMasterLevel >= 1)
         {
             if (areaOpener_1)
             {
@@ -188,7 +188,7 @@ public class MineCrusher : Stand
 
             }
         }
-        if (PlayerPrefs.GetInt("envlevel") >= 4)
+        if (Globals.sortMasterLevel >= 2)
         {
             if (areaOpener_2)
             {
@@ -206,7 +206,7 @@ public class MineCrusher : Stand
             }
         }
 
-        if (PlayerPrefs.GetInt("envlevel") >= 5)
+        if (Globals.sortMasterLevel >= 3)
         {
             if (areaOpener_3)
             {
@@ -227,24 +227,24 @@ public class MineCrusher : Stand
         }
 
 
-        //if (PlayerPrefs.GetInt("rawlevel") == 4)
-        //{
-        //    if (areaOpener_4)
-        //    {
-        //        areaOpener_4 = false;
-        //        _CollectProducts[0].gameObject.SetActive(true);
-        //        _CollectProducts[1].gameObject.SetActive(true);
-        //        _CollectProducts[2].gameObject.SetActive(true);
-        //        _CollectProducts[3].gameObject.SetActive(true);
-        //        _CollectProducts[4].gameObject.SetActive(true);
+        if (PlayerPrefs.GetInt("rawlevel") == 4)
+        {
+            if (areaOpener_4)
+            {
+                areaOpener_4 = false;
+                _CollectProducts[0].gameObject.SetActive(true);
+                _CollectProducts[1].gameObject.SetActive(true);
+                _CollectProducts[2].gameObject.SetActive(true);
+                _CollectProducts[3].gameObject.SetActive(true);
+                _CollectProducts[4].gameObject.SetActive(true);
 
-        //        _CollectProducts[0].transform.position = L5list[0].position;
-        //        _CollectProducts[1].transform.position = L5list[1].position;
-        //        _CollectProducts[2].transform.position = L5list[2].position;
-        //        _CollectProducts[3].transform.position = L5list[3].position;
-        //        _CollectProducts[4].transform.position = L5list[4].position;
-        //    }
-        //}
+                _CollectProducts[0].transform.position = L5list[0].position;
+                _CollectProducts[1].transform.position = L5list[1].position;
+                _CollectProducts[2].transform.position = L5list[2].position;
+                _CollectProducts[3].transform.position = L5list[3].position;
+                _CollectProducts[4].transform.position = L5list[4].position;
+            }
+        }
     }
     IEnumerator CannedCreator()
     {
