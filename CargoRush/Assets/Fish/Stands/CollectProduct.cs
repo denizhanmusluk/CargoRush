@@ -27,6 +27,7 @@ public class CollectProduct : MonoBehaviour
     public GameObject noneCollectGO;
 
     public float ratio;
+    public Transform boxPosTR;
     private void Start()
     {
         aiCollectTargetCheck = new int[aiCollectTargetTR.Length];
@@ -63,7 +64,7 @@ public class CollectProduct : MonoBehaviour
                         {
                             if(noneCollectGO != null)
                             {
-                                if ( (collectableType == CollectType.Plastic && Globals.plasticActive)  || (collectableType == CollectType.Wood && Globals.woodActive)|| (collectableType == CollectType.Yarn && Globals.threadActive) || (collectableType == CollectType.Iron && Globals.ironActive))
+                                if ( (collectableType == CollectType.Type2 && Globals.plasticActive)  || (collectableType == CollectType.Type4 && Globals.woodActive)|| (collectableType == CollectType.Type3 && Globals.threadActive) || (collectableType == CollectType.Type1 && Globals.ironActive))
                                 {
                                     collectables[collectables.Count - 1].productCollectActive = false;
 

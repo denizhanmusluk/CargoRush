@@ -66,6 +66,11 @@ public class StandFishCar : Stand
         //_FishDropArea.standList.Add(this);
         CarCreate();
         FishCountInit();
+        foreach (var wrkArea in workAreaList)
+        {
+            wrkArea.standList.Add(this);
+            //wrkArea.CollectProductList.Add(_CollectProducts);
+        }
     }
     void FishCountInit()
     {

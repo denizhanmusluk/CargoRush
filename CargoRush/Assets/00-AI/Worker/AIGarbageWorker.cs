@@ -142,6 +142,7 @@ public class AIGarbageWorker : MonoBehaviour, IWorkerModelSelect
     {
         followActive = true;
         StartCoroutine(StartDelay());
+        Debug.Log("start ai");
     }
     public void AIStop()
     {

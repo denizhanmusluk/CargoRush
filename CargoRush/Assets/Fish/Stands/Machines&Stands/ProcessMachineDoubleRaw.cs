@@ -64,19 +64,19 @@ public class ProcessMachineDoubleRaw : Stand
             PlayerPrefs.SetInt(machineName + "firstopen", 1);
             PopUpManager.Instance.PopUpOpen(machineId);
         }
-        if (collectType == CollectType.Iron)
+        if (collectType == CollectType.Type1)
         {
             Globals.ironActive = true;
         }
-        if (collectType == CollectType.Wood)
+        if (collectType == CollectType.Type4)
         {
             Globals.woodActive = true;
         }
-        if (collectType == CollectType.Yarn)
+        if (collectType == CollectType.Type3)
         {
             Globals.threadActive = true;
         }
-        if (collectType == CollectType.Plastic)
+        if (collectType == CollectType.Type2)
         {
             Globals.plasticActive = true;
         }

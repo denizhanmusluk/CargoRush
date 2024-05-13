@@ -269,28 +269,28 @@ public class MineCrusher : Stand
             StartCoroutine(CreateCanned(waitTime, fish));
             dropActive = false;
 
-            if (fish.collectType == CollectType.Wood)
+            if (fish.collectType == CollectType.Type4)
             {
                 cannedCount += 1;
             }
-            if (fish.collectType == CollectType.Plastic)
+            if (fish.collectType == CollectType.Type2)
             {
                 cannedCount += 1;
             }
-            if (fish.collectType == CollectType.Iron)
+            if (fish.collectType == CollectType.Type1)
             {
                 cannedCount += 1;
             }
 
-            if (fish.collectType == CollectType.Wool)
+            if (fish.collectType == CollectType.Type5)
             {
                 cannedCount += 1;
             }
-            if (fish.collectType == CollectType.Yarn)
+            if (fish.collectType == CollectType.Type3)
             {
                 cannedCount += 1;
             }
-            if (fish.collectType == CollectType.Glass)
+            if (fish.collectType == CollectType.Type6)
             {
                 cannedCount += 1;
             }
@@ -321,6 +321,7 @@ public class MineCrusher : Stand
 
     IEnumerator CreateCanned(float waitTime, Collectable fish)
     {
+
         foreach (var lst in ironCollectionList)
         {
             lst.productCollectActive = true;
@@ -342,6 +343,28 @@ public class MineCrusher : Stand
 
         Quaternion targetRot = inTR.transform.rotation;
         Vector3 dropPos = inTR.transform.position;
+
+
+        int prefabSelect = 0;
+        for (int i = 0; i < productsPrefab.Length; i++)
+        {
+            if (productsPrefab[i].collectType == fish.collectType)
+            {
+                prefabSelect = i;
+                break;
+            }
+        }
+        
+            GameObject newProduct = Instantiate(productsPrefab[prefabSelect].gameObject, _CollectProducts[prefabSelect].boxPosTR.position, outTR.rotation);
+            newProduct.GetComponent<Collectable>().collectActive = false;
+
+            yield return new WaitForSeconds(0.1f);
+
+        newProduct.GetComponent<Collectable>().anim.SetTrigger("open");
+
+
+
+
 
 
         // go in position
@@ -376,137 +399,28 @@ public class MineCrusher : Stand
             yield return null;
         }
 
-        int prefabSelect = 0;
-        for (int i = 0; i < productsPrefab.Length; i++)
-        {
-            if (productsPrefab[i].collectType == fish.collectType)
-            {
-                prefabSelect = i;
-                break;
-            }
-        }
-        float productCount = fish.rawCount;
+    
 
         // converting
-        Destroy(fish.gameObject,1f);
+        //Destroy(fish.gameObject,1f);
 
         Vector3 firstScale = fish.transform.localScale;
         firstPos = fish.transform.position;
         firstRot = fish.transform.rotation;
 
-        //if (prefabSelect == 0)
-        //{
-        //    if (PlayerPrefs.GetInt("buydiamondrayon" + Globals.currentLevelIndex.ToString()) == 0)
-        //    {
-        //        if (PlayerPrefs.GetInt("minecrushcount") < 5)
-        //        {
-        //            PlayerPrefs.SetInt("minecrushcount", PlayerPrefs.GetInt("minecrushcount") + 1);
-        //            productCount = 2;
-               
-        //        }
-        //        else
-        //        {
-        //            productCount = Random.Range(1, 3);
-        //        }
-        //    }
-        //    else
-        //    {
-        //        productCount = Random.Range(2, 4);
 
-        //    }
-        //}
-        //else if (prefabSelect == 1)
-        //{
-        //    productCount = 1;
-        //}
-
-        //if(productCountTotal - cannedCount < 3)
-        //{
-        //    productCount = 1;
-        //}
-        //if(fish.collectType == CollectType.Null)
-        //{
-        //    productCount = 0;
-        //}
-
-        for (int i = 0; i < productCount; i++)
-        {
-            GameObject newProduct = Instantiate(productsPrefab[prefabSelect].gameObject, firstPos, firstRot);
-            newProduct.GetComponent<Collectable>().collectActive = false;
-            StartCoroutine(CreateMultiProduct(newProduct, prefabSelect, firstPos,productCount));
-            yield return new WaitForSeconds(0.1f);
-        }
-
-        /*
-        counter = 0f;
-        yield return null;
-        while (counter < 1f)
-        {
-            counter += 2 * Time.deltaTime;
-            newProduct.transform.position = Vector3.Lerp(firstPos, fishOutTR.transform.position, counter);
-
-            yield return null;
-        }
-        // converting finish
-
-        if(prefabSelect == 0)
-        {
-            newProduct.GetComponent<Collectable>().fishCollectable = silverCollectionList;
-
-            silverCollectionList.Add(newProduct.GetComponent<Collectable>());
-        }
-        else if(prefabSelect == 1)
-        {
-            newProduct.GetComponent<Collectable>().fishCollectable = goldCollectionList;
-
-            goldCollectionList.Add(newProduct.GetComponent<Collectable>());
-        }
-        else
-        {
-            newProduct.GetComponent<Collectable>().fishCollectable = diamondCollectionList;
-
-            diamondCollectionList.Add(newProduct.GetComponent<Collectable>());
-        }
-
-      
+        StartCoroutine(CreateMultiProduct(newProduct, fish, prefabSelect, firstPos));
 
 
-        float deltaY = 0;
-        Transform targetTR;
-        if (prefabSelect == 0)
-        {
-            deltaY = (silverCollectionList.Count - 1) / silverProductPosTR.Length;
-            targetTR = silverProductPosTR[(silverCollectionList.Count - 1) % silverProductPosTR.Length];
-        }
-        else if (prefabSelect == 1)
-        {
-            deltaY = (goldCollectionList.Count - 1) / goldProductPosTR.Length;
-            targetTR = goldProductPosTR[(goldCollectionList.Count - 1) % goldProductPosTR.Length];
-        }
-        else
-        {
-            deltaY = (diamondCollectionList.Count - 1) / diamondProductPosTR.Length;
-            targetTR = diamondProductPosTR[(diamondCollectionList.Count - 1) % diamondProductPosTR.Length];
-        }
 
 
-        dropPos = targetTR.position + new Vector3(0, deltaY * 0.3f, 0);
-
-        StartCoroutine(GoCannedPos(newProduct.GetComponent<Collectable>(), targetTR, dropPos));
-        */
     }
-    IEnumerator CreateMultiProduct(GameObject _newProduct, int prefabSelect,Vector3 _firstPos, float productCount)
+    IEnumerator CreateMultiProduct(GameObject _newProduct, Collectable oldProduct, int prefabSelect, Vector3 _firstPos)
     {
         bool selfDestroyActive = true;
-       float counter = 0f;
+        float counter = 0f;
         yield return null;
-        //while (counter < 1f)
-        //{
-        //    counter += 2 * Time.deltaTime;
-        //    _newProduct.transform.position = Vector3.Lerp(_firstPos, outTR.transform.position, counter);
 
-        //    yield return null;
-        //}
 
         if (prefabSelect == 0)
         {
@@ -520,20 +434,6 @@ public class MineCrusher : Stand
                 iron_garbage_count -= 1;
             }
 
-            //if (ironCollectionList.Count < productCountTotal)
-            //{
-            //    iron_garbage_count -= _newProduct.GetComponent<Collectable>().rawCount;
-
-            //    if (Mathf.Abs(iron_garbage_Precount - iron_garbage_count )>= 1f)
-            //    {
-            //        iron_garbage_Precount = iron_garbage_count;
-            //        _newProduct.GetComponent<Collectable>().fishCollectable = ironCollectionList;
-
-            //        ironCollectionList.Add(_newProduct.GetComponent<Collectable>());
-            //        selfDestroyActive = false;
-            //        PlayerPrefs.SetInt(machineName + "col1", ironCollectionList.Count);
-            //    }
-            //}
         }
         else if (prefabSelect == 1)
         {
@@ -548,7 +448,7 @@ public class MineCrusher : Stand
 
             }
         }
-        else if(prefabSelect == 2)
+        else if (prefabSelect == 2)
         {
             if (yarnCollectionList.Count < productCountTotal && yarn_garbage_count >= 1f)
             {
@@ -580,13 +480,7 @@ public class MineCrusher : Stand
         }
         else
         {
-            //while (counter < 1f && !_newProduct.GetComponent<Collectable>().isCollected)
-            //{
-            //    counter += 2 * Time.deltaTime;
-            //    _newProduct.transform.position = Vector3.Lerp(_firstPos, outTR.transform.position, counter);
 
-            //    yield return null;
-            //}
 
 
             float deltaY = 0;
@@ -649,7 +543,7 @@ public class MineCrusher : Stand
             while (counter < 1f && !_newProduct.GetComponent<Collectable>().isCollected)
             {
                 counter += 2 * Time.deltaTime;
-                _newProduct.transform.position = Vector3.Lerp(_firstPos, outTR.transform.position, counter);
+                oldProduct.transform.position = Vector3.Lerp(_firstPos, _CollectProducts[prefabSelect].boxPosTR.position, counter);
 
                 yield return null;
             }
@@ -657,7 +551,12 @@ public class MineCrusher : Stand
             if (!_newProduct.GetComponent<Collectable>().isCollected)
             {
                 _newProduct.transform.parent = targetTR.parent;
+                oldProduct.transform.parent = _newProduct.transform;
             }
+            _newProduct.GetComponent<Collectable>().anim.SetTrigger("close");
+            yield return new WaitForSeconds(0.25f);
+            Destroy(oldProduct.gameObject);
+
             StartCoroutine(GoCannedPos(_newProduct.GetComponent<Collectable>(), targetTR, dropPos, selfDestroyActive));
         }
     }
@@ -882,22 +781,22 @@ public class MineCrusher : Stand
                     {
                         droppingCollection = _stackCollect.collectionTrs[i];
 
-                        if (_stackCollect.collectionTrs[i].collectType == CollectType.Iron)
+                        if (_stackCollect.collectionTrs[i].collectType == CollectType.Type1)
                         {
                             iron_garbage_count += _stackCollect.collectionTrs[i].rawCount;
                         }
 
-                        if (_stackCollect.collectionTrs[i].collectType == CollectType.Plastic)
+                        if (_stackCollect.collectionTrs[i].collectType == CollectType.Type2)
                         {
                             plastic_garbage_count += _stackCollect.collectionTrs[i].rawCount;
 
                         }
-                        if (_stackCollect.collectionTrs[i].collectType == CollectType.Yarn)
+                        if (_stackCollect.collectionTrs[i].collectType == CollectType.Type3)
                         {
                             yarn_garbage_count += _stackCollect.collectionTrs[i].rawCount;
 
                         }
-                        if (_stackCollect.collectionTrs[i].collectType == CollectType.Wood)
+                        if (_stackCollect.collectionTrs[i].collectType == CollectType.Type4)
                         {
                             wood_garbage_count += _stackCollect.collectionTrs[i].rawCount;
 

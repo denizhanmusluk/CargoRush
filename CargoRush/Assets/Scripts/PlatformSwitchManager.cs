@@ -105,6 +105,7 @@ public class PlatformSwitchManager : MonoBehaviour
 
         yield return new WaitForSeconds(1f);
         Camera.main.GetComponent<CinemachineBrain>().m_DefaultBlend.m_Time = a;
+        //DnzEvents.AIworkerStart();
 
     }
 
