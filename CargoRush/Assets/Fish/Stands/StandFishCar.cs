@@ -12,6 +12,7 @@ public class StandFishCar : Stand
 
     [SerializeField] Transform carCreateTR, carStandTR, carGoTR;
     [SerializeField] GameObject carPrefab;
+    [SerializeField] List<GameObject> carPrefabList = new List<GameObject>();
 
     GameObject currentCar;
     [SerializeField] string standNameLevel;
@@ -51,15 +52,15 @@ public class StandFishCar : Stand
         carLevel = PlayerPrefs.GetInt(standNameLevel);
         if (currentCar != null)
         {
-            currentCar.GetComponent<FishCar>().CarLevelCreate(carLevel);
+            //currentCar.GetComponent<FishCar>().CarLevelCreate(carLevel);
+            ResetStand();
+
         }
         fishCountCurrent += (_fishCountTotal[carLevel] - fishCountTotal);
-        //_FishDropArea.requirementCount += (_fishCountTotal[carLevel] - fishCountTotal);
 
-        //FishManager.Instance.fishCount[0] += (int)((float)(_fishCountTotal[carLevel] - fishCountTotal) * fishCoun_Factor);
 
-        LevelInit();
-        fishCountText.text = (fishCountTotal - fishCountCurrent).ToString() + "/" + (fishCountTotal).ToString();
+        //LevelInit();
+        //fishCountText.text = (fishCountTotal - fishCountCurrent).ToString() + "/" + (fishCountTotal).ToString();
     }
     public override void SpecificStart()
     {
@@ -85,7 +86,7 @@ public class StandFishCar : Stand
 
     void CarCreate()
     {
-        currentCar = Instantiate(carPrefab, carCreateTR.position, Quaternion.identity);
+        currentCar = Instantiate(carPrefabList[carLevel], carCreateTR.position, Quaternion.identity);
         currentCar.GetComponent<FishCar>().CarLevelCreate(carLevel);
         currentCar.GetComponent<FishCar>().stand = this;
         currentCar.GetComponent<FishCar>().standPos = carStandTR;
@@ -155,7 +156,7 @@ public class StandFishCar : Stand
             //PlayerController.Instance.animator.SetBool("carrying", false);
         }
         _stackCollect.collectActive = true;
-        DropMoney(droppingCollectionList);
+        //DropMoney(droppingCollectionList);
     }
 
     IEnumerator Drop(Transform dropPosTR, Vector3 dropPos, Collectable collectable, float waitTime)
@@ -202,7 +203,7 @@ public class StandFishCar : Stand
         timeCounter = 0f;
 
 
-        Quaternion targetAngle = Quaternion.Euler(dropPosTR.eulerAngles.x, dropPosTR.eulerAngles.y + Random.Range(-30f, 30f), dropPosTR.eulerAngles.z + Random.Range(-30f, 30f));
+        //Quaternion targetAngle = Quaternion.Euler(dropPosTR.eulerAngles.x, dropPosTR.eulerAngles.y + Random.Range(-30f, 30f), dropPosTR.eulerAngles.z + Random.Range(-30f, 30f));
 
         while (timeCounter < 1f)
         {
@@ -215,7 +216,7 @@ public class StandFishCar : Stand
             if (collectable.gameObject != null)
             {
                 collectable.transform.position = Vector3.Lerp(firstPos, new Vector3(dropPos.x, dropPos.y + posY, dropPos.z), timeCounter);
-                collectable.transform.rotation = Quaternion.Lerp(firstRot, targetAngle, timeCounter);
+                collectable.transform.rotation = Quaternion.Lerp(firstRot, dropPosTR.rotation, timeCounter);
             }
   
             yield return null;
@@ -247,6 +248,8 @@ public class StandFishCar : Stand
             moneyArea.moneyList.Add(banknot);
             yield return null;
         }
+        droppedCollectionList.Clear();
+
     }
     void ResetStand()
     {
@@ -259,7 +262,8 @@ public class StandFishCar : Stand
         GetComponent<Collider>().enabled = false;
 
         yield return new WaitForSeconds(1f);
-        droppedCollectionList.Clear();
+        DropMoney(droppedCollectionList);
+
         currentCar.GetComponent<FishCar>().CarGoOut();
         yield return new WaitForSeconds(0.1f);
 
@@ -276,12 +280,15 @@ public class StandFishCar : Stand
         imageFill.fillAmount = 1;
         canvasDeliveringGO.SetActive(false);
         canvasProductGO.SetActive(true);
-
+        LevelInit();
+        fishCountText.text = (fishCountTotal - fishCountCurrent).ToString() + "/" + (fishCountTotal).ToString();
         TextInit();
         CarCreate();
 
         yield return new WaitForSeconds(1f);
         resetActive = false;
+
+
     }
 
 }

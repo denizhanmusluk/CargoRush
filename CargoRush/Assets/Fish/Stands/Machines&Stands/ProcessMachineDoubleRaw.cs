@@ -66,19 +66,19 @@ public class ProcessMachineDoubleRaw : Stand
         }
         if (collectType == CollectType.Type1)
         {
-            Globals.ironActive = true;
+            Globals.productType1 = true;
         }
         if (collectType == CollectType.Type4)
         {
-            Globals.woodActive = true;
+            Globals.productType4 = true;
         }
         if (collectType == CollectType.Type3)
         {
-            Globals.threadActive = true;
+            Globals.productType3 = true;
         }
         if (collectType == CollectType.Type2)
         {
-            Globals.plasticActive = true;
+            Globals.productType2 = true;
         }
         switch (marketType)
         {

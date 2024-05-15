@@ -55,10 +55,11 @@ public static class Globals
     public static int extraCustomerCount_Toys = 2;
 
 
-    public static bool ironActive = false;
-    public static bool plasticActive = false;
-    public static bool threadActive = false;
-    public static bool woodActive = false;
+    public static bool productType1 = false;
+    public static bool productType2 = false;
+    public static bool productType3 = false;
+    public static bool productType4 = false;
+    public static bool productType5 = false;
 
 
     public static float extraSpeed = 1f;
@@ -86,5 +87,5 @@ public static class Globals
 
 
     public static bool isSkillCreated = false;
-    public static int sortMasterLevel = 2;
+    public static int collectableLevel = 2;
 }

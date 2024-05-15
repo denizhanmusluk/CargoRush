@@ -77,12 +77,14 @@ public class MineCrusher : Stand
         {
             wrkArea.standList.Add(this);
 
-            for (int i = 0; i < wrkArea.CollectProductID.Count; i++)
+            for(int i = 0; i < _CollectProducts.Count;i++)
             {
-                //if(wrkArea.CollectProductID[i] == )
-                wrkArea.CollectProductList.Add(_CollectProducts[wrkArea.CollectProductID[i]]);
+                wrkArea.CollectProductList.Add(_CollectProducts[i]);
             }
-            //wrkArea.CollectProductList.Add(_CollectProduct);
+            //for (int i = 0; i < wrkArea.CollectProductID.Count; i++)
+            //{
+            //    wrkArea.CollectProductList.Add(_CollectProducts[wrkArea.CollectProductID[i]]);
+            //}
         }
 
         StandReActive();
@@ -172,7 +174,7 @@ public class MineCrusher : Stand
     int areaCount = 1;
     void MinesDropAreaCheck()
     {
-        if (Globals.sortMasterLevel >= 1)
+        if (Globals.collectableLevel >= 1)
         {
             if (areaOpener_1)
             {
@@ -188,7 +190,7 @@ public class MineCrusher : Stand
 
             }
         }
-        if (Globals.sortMasterLevel >= 2)
+        if (Globals.collectableLevel >= 2)
         {
             if (areaOpener_2)
             {
@@ -206,7 +208,7 @@ public class MineCrusher : Stand
             }
         }
 
-        if (Globals.sortMasterLevel >= 3)
+        if (Globals.collectableLevel >= 3)
         {
             if (areaOpener_3)
             {
@@ -404,18 +406,16 @@ public class MineCrusher : Stand
         // converting
         //Destroy(fish.gameObject,1f);
 
-        Vector3 firstScale = fish.transform.localScale;
-        firstPos = fish.transform.position;
-        firstRot = fish.transform.rotation;
 
 
-        StartCoroutine(CreateMultiProduct(newProduct, fish, prefabSelect, firstPos));
+
+        StartCoroutine(CreateMultiProduct(newProduct, fish, prefabSelect));
 
 
 
 
     }
-    IEnumerator CreateMultiProduct(GameObject _newProduct, Collectable oldProduct, int prefabSelect, Vector3 _firstPos)
+    IEnumerator CreateMultiProduct(GameObject _newProduct, Collectable oldProduct, int prefabSelect)
     {
         bool selfDestroyActive = true;
         float counter = 0f;
@@ -538,12 +538,26 @@ public class MineCrusher : Stand
                 }
             }
 
+           Vector3 firstPos = oldProduct.transform.position;
+            for (int i = 0; i < _CollectProducts[prefabSelect].bandPosList.Count; i++)
+            {
+                firstPos = oldProduct.transform.position;
+                counter = 0f;
+                while (counter < 1f)
+                {
+                    counter += 4 * Time.deltaTime;
+                    oldProduct.transform.position = Vector3.Lerp(firstPos, _CollectProducts[prefabSelect].bandPosList[i].position, counter);
+
+                    yield return null;
+                }
+            }
             Vector3 dropPos = targetTR.position + new Vector3(0, deltaY * 0.3f, 0);
+            firstPos = oldProduct.transform.position;
 
             while (counter < 1f && !_newProduct.GetComponent<Collectable>().isCollected)
             {
                 counter += 2 * Time.deltaTime;
-                oldProduct.transform.position = Vector3.Lerp(_firstPos, _CollectProducts[prefabSelect].boxPosTR.position, counter);
+                oldProduct.transform.position = Vector3.Lerp(firstPos, _CollectProducts[prefabSelect].boxPosTR.position, counter);
 
                 yield return null;
             }

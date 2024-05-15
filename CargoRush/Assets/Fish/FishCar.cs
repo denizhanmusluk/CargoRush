@@ -40,7 +40,7 @@ public class FishCar : MonoBehaviour
         float counter = 0f;
         while (counter < 1f)
         {
-            counter += 6 * Time.deltaTime;
+            counter += 3 * Time.deltaTime;
 
             transform.position = Vector3.Lerp(firstPos, targetPos, counter);
             transform.rotation = Quaternion.Lerp(firstRot, standPos.rotation, counter);

@@ -28,6 +28,8 @@ public class CollectProduct : MonoBehaviour
 
     public float ratio;
     public Transform boxPosTR;
+
+    public List<Transform> bandPosList;
     private void Start()
     {
         aiCollectTargetCheck = new int[aiCollectTargetTR.Length];
@@ -64,7 +66,7 @@ public class CollectProduct : MonoBehaviour
                         {
                             if(noneCollectGO != null)
                             {
-                                if ( (collectableType == CollectType.Type2 && Globals.plasticActive)  || (collectableType == CollectType.Type4 && Globals.woodActive)|| (collectableType == CollectType.Type3 && Globals.threadActive) || (collectableType == CollectType.Type1 && Globals.ironActive))
+                                if ((collectableType == CollectType.Type1 && Globals.productType1) || (collectableType == CollectType.Type2 && Globals.productType2) || (collectableType == CollectType.Type3 && Globals.productType3) || (collectableType == CollectType.Type4 && Globals.productType4) || (collectableType == CollectType.Type5 && Globals.productType5))
                                 {
                                     collectables[collectables.Count - 1].productCollectActive = false;
 
@@ -84,7 +86,7 @@ public class CollectProduct : MonoBehaviour
 
                                     }
 
-                                   
+
 
                                 }
                                 else

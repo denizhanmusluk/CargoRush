@@ -3,8 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
+[System.Serializable]
+public struct productType
+{
+    public List<Collectable> productList;
+}
+
 public class FishDropArea : MonoBehaviour
 {
+    private static FishDropArea _instance = null;
+    public static FishDropArea Instance => _instance;
+
     public GameObject[] garbagePrefabs;
     public Transform[] fishPosTR;
     public Transform[] gemPosTR;
@@ -21,6 +30,17 @@ public class FishDropArea : MonoBehaviour
     public List<Collectable> collectableList;
 
     public GameObject gemCollectable;
+
+    public Transform createPos, forceDirPos;
+
+    public int totalProductCapacity = 50;
+
+   public List<productType> proType = new List<productType>();
+
+    private void Awake()
+    {
+        _instance = this;
+    }
     void Start()
     {
         _CollectProduct.collectables = fishCollectable;
@@ -34,15 +54,41 @@ public class FishDropArea : MonoBehaviour
     {
         while (true)
         {
-            int garbageSelect = Random.Range(0, garbagePrefabs.Length);
+            //int garbageSelect = Random.Range(0, garbagePrefabs.Length);
+
+            while(totalProductCapacity <= collectableList.Count)
+            {
+                yield return new WaitForSeconds(1f);
+            }
+
+            int garbageSelect = LeastIdCheck();
             GarbageCreate(garbageSelect);
             yield return new WaitForSeconds(1f);
         }
     }
+    int LeastIdCheck()
+    {
+        int minId = 0;
+        int count = 0;
+        if (collectableList.Count > 0)
+        {
+            count = proType[0].productList.Count;
+            for (int i = 0; i < Globals.collectableLevel; i++)
+            {
+                if (proType[i].productList.Count < count)
+                {
+                    count = proType[i].productList.Count;
+                    minId = i;
+                }
+            }
+        }
+        return minId;
+    }
     public void GarbageCreate(int id)
     {
         Collectable _fishCollect;
-        GameObject fsh = Instantiate(garbagePrefabs[id], fishPosTR[posNo % fishPosTR.Length].position, Quaternion.identity);
+        GameObject fsh = Instantiate(garbagePrefabs[id], createPos.position, Quaternion.identity);
+        //GameObject fsh = Instantiate(garbagePrefabs[id], fishPosTR[posNo % fishPosTR.Length].position, Quaternion.identity);
         fsh.transform.rotation = Quaternion.Euler(0, Random.Range(-180, 180), 0);
         posNo++;
 
@@ -50,9 +96,14 @@ public class FishDropArea : MonoBehaviour
         _fishCollect.collectActive = true;
         collectableList.Add(_fishCollect);
         _fishCollect.collectableList = collectableList;
-        //_fishCollect.fishArea = this;
-        //fishCollectable.Add(_fishCollect);
-        //_fishCollect.fishCollectable = fishCollectable;
+
+        proType[id].productList.Add(_fishCollect);
+
+        if (fsh.GetComponent<Collector>() != null)
+        {
+            Vector3 forceDir = (forceDirPos.position - createPos.position).normalized;
+            fsh.GetComponent<Collector>().FirstPush(forceDir);
+        }
     }
     public void GemCreating()
     {

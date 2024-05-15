@@ -27,8 +27,19 @@ public class CollisionController : MonoBehaviour
             {
                 if (stackCollect.collectionTrs.Count < _characterUpgradeSettings.stackCapacity[Globals.stackCapacityLevel] + Globals.extraStackSkin + Globals.extraStack)
                 {
+                    if(other.GetComponent<Collector>() != null)
+                    {
+                        Destroy(other.GetComponent<Collector>().shadowGO);
+                        other.GetComponent<Collector>().pushActive = false;
+                        Destroy(other.GetComponent<Collector>());
+                    }
+                    if (other.GetComponent<Rigidbody>() != null)
+                    {
+                        Destroy(other.GetComponent<Rigidbody>());
+                    }
                     stackCollect.Collecting(other.GetComponent<Collectable>());
                     other.GetComponent<Collectable>().collectableList.Remove(other.GetComponent<Collectable>());
+                    FishDropArea.Instance.proType[other.GetComponent<Collector>().productId].productList.Remove(other.GetComponent<Collectable>());
                     if (other.GetComponent<Collectable>().collectableList.Count == 0)
                     {
                         IndicatorManager.Instance.transUpIndActive = true;
@@ -46,6 +57,16 @@ public class CollisionController : MonoBehaviour
         {
             if (!other.GetComponent<Collectable>().isGem && stackCollect.collectionTrs.Count < stackCollect.GetComponent<StackCollectWorker>().baseStackCapacity + _characterUpgradeSettings.workerCapacity[Globals.workerCapacityLevel])
             {
+                if (other.GetComponent<Collector>() != null)
+                {
+                    Destroy(other.GetComponent<Collector>().shadowGO);
+                    other.GetComponent<Collector>().pushActive = false;
+                    Destroy(other.GetComponent<Collector>());
+                }
+                if (other.GetComponent<Rigidbody>() != null)
+                {
+                    Destroy(other.GetComponent<Rigidbody>());
+                }
                 stackCollect.Collecting(other.GetComponent<Collectable>());
                 other.GetComponent<Collectable>().collectableList.Remove(other.GetComponent<Collectable>());
                 if (other.GetComponent<Collectable>().collectableList.Count == 0)

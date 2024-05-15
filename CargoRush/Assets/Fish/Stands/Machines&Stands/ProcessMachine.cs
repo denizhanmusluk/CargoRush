@@ -65,20 +65,25 @@ public class ProcessMachine : Stand
         }
         if(collectType == CollectType.Type1)
         {
-            Globals.ironActive = true;
-        }
-        if (collectType == CollectType.Type4)
-        {
-            Globals.woodActive = true;
-        }
-        if (collectType == CollectType.Type3)
-        {
-            Globals.threadActive = true;
+            Globals.productType1 = true;
         }
         if (collectType == CollectType.Type2)
         {
-            Globals.plasticActive = true;
+            Globals.productType2 = true;
         }
+        if (collectType == CollectType.Type3)
+        {
+            Globals.productType3 = true;
+        }
+        if (collectType == CollectType.Type4)
+        {
+            Globals.productType4 = true;
+        }
+        if (collectType == CollectType.Type5)
+        {
+            Globals.productType5 = true;
+        }
+
         switch (marketType)
         {
             case MarketType.Electronics:
