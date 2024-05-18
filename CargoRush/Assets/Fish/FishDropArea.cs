@@ -13,6 +13,8 @@ public class FishDropArea : MonoBehaviour
 {
     private static FishDropArea _instance = null;
     public static FishDropArea Instance => _instance;
+    public float createPeriod = 1f;
+    public float reactiveRate = 1f;
 
     public GameObject[] garbagePrefabs;
     public Transform[] fishPosTR;
@@ -32,6 +34,7 @@ public class FishDropArea : MonoBehaviour
     public GameObject gemCollectable;
 
     public Transform createPos, forceDirPos;
+    public List<Transform> createPosList = new List<Transform>();
 
     public int totalProductCapacity = 50;
 
@@ -56,14 +59,20 @@ public class FishDropArea : MonoBehaviour
         {
             //int garbageSelect = Random.Range(0, garbagePrefabs.Length);
 
-            while(totalProductCapacity <= collectableList.Count)
+            while (totalProductCapacity <= collectableList.Count)
             {
+                while ((float)totalProductCapacity * reactiveRate + 1 < collectableList.Count)
+                {
+                    yield return new WaitForSeconds(1f);
+
+                }
+
                 yield return new WaitForSeconds(1f);
             }
 
             int garbageSelect = LeastIdCheck();
             GarbageCreate(garbageSelect);
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(createPeriod);
         }
     }
     int LeastIdCheck()
@@ -73,7 +82,7 @@ public class FishDropArea : MonoBehaviour
         if (collectableList.Count > 0)
         {
             count = proType[0].productList.Count;
-            for (int i = 0; i < Globals.collectableLevel; i++)
+            for (int i = 0; i <= Globals.collectableLevel; i++)
             {
                 if (proType[i].productList.Count < count)
                 {
@@ -86,8 +95,9 @@ public class FishDropArea : MonoBehaviour
     }
     public void GarbageCreate(int id)
     {
+        int createPosSelect = Random.Range(0, createPosList.Count);
         Collectable _fishCollect;
-        GameObject fsh = Instantiate(garbagePrefabs[id], createPos.position, Quaternion.identity);
+        GameObject fsh = Instantiate(garbagePrefabs[id], createPosList[createPosSelect].position, Quaternion.identity);
         //GameObject fsh = Instantiate(garbagePrefabs[id], fishPosTR[posNo % fishPosTR.Length].position, Quaternion.identity);
         fsh.transform.rotation = Quaternion.Euler(0, Random.Range(-180, 180), 0);
         posNo++;
@@ -101,7 +111,8 @@ public class FishDropArea : MonoBehaviour
 
         if (fsh.GetComponent<Collector>() != null)
         {
-            Vector3 forceDir = (forceDirPos.position - createPos.position).normalized;
+            //Vector3 forceDir = (forceDirPos.position - createPos.position).normalized;
+            Vector3 forceDir = (-createPosList[createPosSelect].up).normalized;
             fsh.GetComponent<Collector>().FirstPush(forceDir);
         }
     }

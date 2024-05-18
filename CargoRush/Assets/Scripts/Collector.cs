@@ -13,7 +13,7 @@ public class Collector : MonoBehaviour
     {
         rb.isKinematic = false;
         pushActive = true;
-        rb.AddForce(forceDir * impulse);
+        rb.AddForce(forceDir * impulse * 10);
     }
     public void Push(Transform collTR, float _impulse)
     {
@@ -28,7 +28,7 @@ public class Collector : MonoBehaviour
     IEnumerator Kinemator()
     {
         yield return new WaitForSeconds(1f);
-        while(rb != null && (rb.velocity.x > 0 || rb.velocity.y > 0 || rb.velocity.z > 0))
+        while (rb != null && (rb.velocity.x > 0 || rb.velocity.y > 0 || rb.velocity.z > 0))
         {
             yield return new WaitForSeconds(0.1f);
         }
@@ -41,9 +41,10 @@ public class Collector : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.transform.GetComponent<Collector>() != null && pushActive)
+        if (collision.transform.GetComponent<Collector>() != null && pushActive && impulse > 10f)
         {
-            collision.transform.GetComponent<Collector>().Push(transform, impulse * 0.9f);
+            collision.transform.GetComponent<Collector>().Push(transform, impulse * 0.4f);
+            impulse *= 0.4f;
         }
     }
 }

@@ -87,5 +87,5 @@ public static class Globals
 
 
     public static bool isSkillCreated = false;
-    public static int collectableLevel = 2;
+    public static int collectableLevel = 1;
 }

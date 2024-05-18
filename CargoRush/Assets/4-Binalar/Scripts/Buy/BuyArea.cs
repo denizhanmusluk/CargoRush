@@ -6,6 +6,9 @@ using TMPro;
 using Cinemachine;
 public class BuyArea : MonoBehaviour, BuyCamera
 {
+    public bool standUpgradeActive = false;
+    public int standUpgradeLevel = 0;
+
     public bool shopBayArea = false;
     public int shopId;
     public int ratioValue;
@@ -392,7 +395,16 @@ public class BuyArea : MonoBehaviour, BuyCamera
     }
     void instantiateBuild(float waitTime, bool cameraActive)
     {
-        buildPrefab.SetActive(true);
+        if (standUpgradeActive && buildPrefab.GetComponent<IStandUpgrade>() != null)
+        {
+            buildPrefab.GetComponent<IStandUpgrade>().standLevel = standUpgradeLevel;
+            buildPrefab.GetComponent<IStandUpgrade>().UpgradeValueInit();
+        }
+        else
+        {
+            buildPrefab.SetActive(true);
+        }
+
         StartCoroutine(OpenBuyAreas(waitTime, cameraActive));
         ClosedAreas();
     }

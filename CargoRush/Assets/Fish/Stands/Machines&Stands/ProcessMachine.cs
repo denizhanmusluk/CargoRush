@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ProcessMachine : Stand
+public class ProcessMachine : Stand, IStandUpgrade
 {
     [SerializeField] Transform fishInTR, converFishtoCannedTR, fishOutTR;
     public Collectable[] productsPrefab;
@@ -32,6 +32,13 @@ public class ProcessMachine : Stand
     public bool missionActive = true;
     public int machineLevel;
     public bool machinePopUpActive = true;
+
+
+    public int standLevel { get; set; }
+    public int[] capacities;
+    public float[] speedFactors;
+
+    float speedFactor = 1f;
 
     public override void CollectableCountSet()
     {
@@ -120,6 +127,7 @@ public class ProcessMachine : Stand
         StandCarCollectIdSet();
         ManuealRawCreate();
         ManuealProductCreate();
+        CapacityInit();
 
         //if (PlayerPrefs.GetInt("minecrushmach") == 0)
         //{
@@ -228,30 +236,27 @@ public class ProcessMachine : Stand
 
 
 
-            List<Collectable> raws = new List<Collectable>();
-            
-            //droppedCollectionList.Remove(droppedCollectionList[droppedCollectionList.Count - 1]);
+            //List<Collectable> raws = new List<Collectable>();
 
-            for (int i = 0; i < rawCountPerProduct; i++)
-            {
-                raws.Add(droppedCollectionList[droppedCollectionList.Count - 1]);
-                droppedCollectionList.Remove(droppedCollectionList[droppedCollectionList.Count - 1]);
-                PlayerPrefs.SetInt(machineName + "rawcount", droppedCollectionList.Count);
-            }
 
-            //for (int i = 0; i < rawCountPerProduct - 1; i++)
+            //for (int i = 0; i < rawCountPerProduct; i++)
             //{
-            //    var rmvLqd = droppedCollectionList[droppedCollectionList.Count - 1];
-            //    droppedCollectionList.Remove(rmvLqd);
-            //    Destroy(rmvLqd, 0.1f);
-
+            //    raws.Add(droppedCollectionList[droppedCollectionList.Count - 1]);
+            //    droppedCollectionList.Remove(droppedCollectionList[droppedCollectionList.Count - 1]);
+            //    PlayerPrefs.SetInt(machineName + "rawcount", droppedCollectionList.Count);
             //}
 
+            Collectable raws = droppedCollectionList[droppedCollectionList.Count - 1];
+            droppedCollectionList.Remove(droppedCollectionList[droppedCollectionList.Count - 1]);
+            PlayerPrefs.SetInt(machineName + "rawcount", droppedCollectionList.Count);
+
+
+        
             StartCoroutine(CreateCanned(raws));
             dropActive = false;
             fishCountCurrent += rawCountPerProduct;
             fishCountText.text = (fishCountTotal - fishCountCurrent).ToString() + "/" + (fishCountTotal).ToString();
-            yield return new WaitForSeconds(waitTime / Globals.machineSpeedSkin);
+            yield return new WaitForSeconds((waitTime / Globals.machineSpeedSkin) / speedFactor);
             workAreaList[0].StnadFullCheck();
         }
         //  MinesDropAreaCheck();
@@ -263,41 +268,26 @@ public class ProcessMachine : Stand
             StartCoroutine(CreatorChecking());
         }
     }
-
-    
-    IEnumerator CreateCanned(List<Collectable> raws)
+    IEnumerator CreateCanned(Collectable raws)
     {
-        if (missionActive)
-        {
-            if (_CollectProducts.CollectId >= 3)
-            {
-                MissionManager.Instance.MachineMission_Start(_CollectProducts.CollectId - 2);
-            }
-        }
+
 
         foreach (var lst in productCollectionList)
         {
             lst.productCollectActive = true;
         }
-        Vector3[] firstPoss = new Vector3[raws.Count];
-        Quaternion[] firstRots = new Quaternion[raws.Count];
-        Vector3[] dropPoss = new Vector3[raws.Count];
-        Quaternion[]  targetRots = new Quaternion[raws.Count];
+        Vector3 firstPoss;
+        Quaternion firstRots;
+        Vector3 dropPoss;
+        Quaternion targetRots;
 
-        for (int i = 0; i < raws.Count; i++)
-        {
-            firstPoss[i] = raws[i].transform.position;
-            firstRots[i] = raws[i].transform.rotation;
+        firstPoss = raws.transform.position;
+        firstRots = raws.transform.rotation;
 
-            dropPoss[i] = fishInTR.transform.position + new Vector3(0, i * 0.3f, 0);
-            targetRots[i] = fishInTR.transform.rotation;
-        }
+        dropPoss = fishInTR.transform.position;
+        targetRots = fishInTR.transform.rotation;
 
-        //Vector3 firstPos = fish.transform.position;
-        //Quaternion firstRot = fish.transform.rotation;
 
-        //Quaternion targetRot = fishInTR.transform.rotation;
-        //Vector3 dropPos = fishInTR.transform.position;
 
 
         // go in position
@@ -311,57 +301,35 @@ public class ProcessMachine : Stand
 
             angle = counter * Mathf.PI;
             posY = psoY_Factor * Mathf.Sin(angle);
-            for (int i = 0; i < raws.Count; i++)
-            {
-                raws[i].transform.position = Vector3.Lerp(firstPoss[i], new Vector3(dropPoss[i].x, dropPoss[i].y + posY, dropPoss[i].z), counter);
-                raws[i].transform.rotation = Quaternion.Lerp(firstRots[i], targetRots[i], counter);
-
-            }
-            //fish.transform.position = Vector3.Lerp(firstPos, new Vector3(dropPos.x, dropPos.y + posY, dropPos.z), counter);
-            //fish.transform.rotation = Quaternion.Lerp(firstRot, targetRot, counter);
-
+            raws.transform.position = Vector3.Lerp(firstPoss, new Vector3(dropPoss.x, dropPoss.y + posY, dropPoss.z), counter);
+            raws.transform.rotation = Quaternion.Lerp(firstRots, targetRots, counter);
+       
             yield return null;
         }
 
 
 
         // go convert position
-
-        //firstPos = fish.transform.position;
-        for (int i = 0; i < raws.Count; i++)
-        {
-            firstPoss[i] = raws[i].transform.position;
-            firstRots[i] = raws[i].transform.rotation;
-        }
+        firstPoss = raws.transform.position;
+        firstRots = raws.transform.rotation;
+      
         counter = 0f;
         while (counter < 1f)
         {
             counter += 4 * Time.deltaTime;
 
-            for (int i = 0; i < raws.Count; i++)
-            {
-                raws[i].transform.position = Vector3.Lerp(firstPoss[i], converFishtoCannedTR.transform.position, counter);
-            }
+            raws.transform.position = Vector3.Lerp(firstPoss, converFishtoCannedTR.transform.position, counter);
+
             yield return null;
         }
 
         int prefabSelect = 0;
-        //for (int i = 0; i < productsPrefab.Length; i++)
-        //{
-        //    if (productsPrefab[i].collectType == fish.collectType)
-        //    {
-        //        prefabSelect = i;
-        //        break;
-        //    }
-        //}
+
 
         // converting
-        for (int i = 0; i < raws.Count; i++)
-        {
-            Destroy(raws[i].gameObject, 1f);
-        }
+        Destroy(raws.gameObject, 1f);
 
-        //Vector3 firstScale = fish.transform.localScale;
+
         Vector3 firstPos = converFishtoCannedTR.position;
         Quaternion firstRot = converFishtoCannedTR.rotation;
 
@@ -370,25 +338,6 @@ public class ProcessMachine : Stand
         GameObject newProduct = Instantiate(productsPrefab[prefabSelect].gameObject, firstPos, firstRot);
         newProduct.GetComponent<Collectable>().collectActive = false;
         newProduct.GetComponent<Collectable>().fishCollectable = productCollectionList;
-
-        MissionManager.Instance.ProductMission_Start(_CollectProducts.CollectId - 2, (float)productPrefabs[0].price / 5);
-
-        if (MissionManager.Instance.productMissionList[_CollectProducts.CollectId - 2].gameObject.activeInHierarchy)
-        {
-            MissionManager.Instance.productMissionList[_CollectProducts.CollectId - 2].MissionUpdateProduce(_CollectProducts.CollectId - 2);
-        }
-        MissionManager.Instance.SalingMission_Start(_CollectProducts.CollectId - 2, (float)productPrefabs[0].price / 5);
-
-        MissionManager.Instance.StandMission_Start(_CollectProducts.CollectId - 2);
-
-        if (_CollectProducts.CollectId >= 3)
-        {
-            MissionManager.Instance.MachineMission_Start(_CollectProducts.CollectId - 2);
-        }
-        //MissionManager.Instance.saleMissionList[_CollectProducts.CollectId - 2].MissionUpdateProduce(_CollectProducts.CollectId - 2);
-
-
-        //newProduct.GetComponent<Collectable>().fishCollectable = cannedCollectionList;
 
 
         counter = 0f;
@@ -411,10 +360,131 @@ public class ProcessMachine : Stand
         Vector3 dropPos = targetTR.position + new Vector3(0, deltaY * 0.3f, 0);
 
         StartCoroutine(GoCannedPos(newProduct.GetComponent<Collectable>(), targetTR, dropPos));
-        //newProduct.transform.localScale = firstScale;
-
-
     }
+
+    //IEnumerator CreateCanned(List<Collectable> raws)
+    //{
+    //    if (missionActive)
+    //    {
+    //        if (_CollectProducts.CollectId >= 3)
+    //        {
+    //            MissionManager.Instance.MachineMission_Start(_CollectProducts.CollectId - 2);
+    //        }
+    //    }
+
+    //    foreach (var lst in productCollectionList)
+    //    {
+    //        lst.productCollectActive = true;
+    //    }
+    //    Vector3[] firstPoss = new Vector3[raws.Count];
+    //    Quaternion[] firstRots = new Quaternion[raws.Count];
+    //    Vector3[] dropPoss = new Vector3[raws.Count];
+    //    Quaternion[]  targetRots = new Quaternion[raws.Count];
+
+    //    for (int i = 0; i < raws.Count; i++)
+    //    {
+    //        firstPoss[i] = raws[i].transform.position;
+    //        firstRots[i] = raws[i].transform.rotation;
+
+    //        dropPoss[i] = fishInTR.transform.position + new Vector3(0, i * 0.3f, 0);
+    //        targetRots[i] = fishInTR.transform.rotation;
+    //    }
+
+
+    //    // go in position
+    //    float angle = 0f;
+    //    float posY = 0f;
+    //    float psoY_Factor = 1f;
+    //    float counter = 0f;
+    //    while (counter < 1f)
+    //    {
+    //        counter += 4 * Time.deltaTime;
+
+    //        angle = counter * Mathf.PI;
+    //        posY = psoY_Factor * Mathf.Sin(angle);
+    //        for (int i = 0; i < raws.Count; i++)
+    //        {
+    //            raws[i].transform.position = Vector3.Lerp(firstPoss[i], new Vector3(dropPoss[i].x, dropPoss[i].y + posY, dropPoss[i].z), counter);
+    //            raws[i].transform.rotation = Quaternion.Lerp(firstRots[i], targetRots[i], counter);
+    //        }
+    //        yield return null;
+    //    }
+
+
+
+    //    // go convert position
+
+    //    for (int i = 0; i < raws.Count; i++)
+    //    {
+    //        firstPoss[i] = raws[i].transform.position;
+    //        firstRots[i] = raws[i].transform.rotation;
+    //    }
+    //    counter = 0f;
+    //    while (counter < 1f)
+    //    {
+    //        counter += 4 * Time.deltaTime;
+
+    //        for (int i = 0; i < raws.Count; i++)
+    //        {
+    //            raws[i].transform.position = Vector3.Lerp(firstPoss[i], converFishtoCannedTR.transform.position, counter);
+    //        }
+    //        yield return null;
+    //    }
+
+    //    int prefabSelect = 0;
+
+    //    // converting
+    //    for (int i = 0; i < raws.Count; i++)
+    //    {
+    //        Destroy(raws[i].gameObject, 1f);
+    //    }
+
+    //    Vector3 firstPos = converFishtoCannedTR.position;
+    //    Quaternion firstRot = converFishtoCannedTR.rotation;
+
+
+
+    //    GameObject newProduct = Instantiate(productsPrefab[prefabSelect].gameObject, firstPos, firstRot);
+    //    newProduct.GetComponent<Collectable>().collectActive = false;
+    //    newProduct.GetComponent<Collectable>().fishCollectable = productCollectionList;
+
+    //    MissionManager.Instance.ProductMission_Start(_CollectProducts.CollectId - 2, (float)productPrefabs[0].price / 5);
+
+    //    if (MissionManager.Instance.productMissionList[_CollectProducts.CollectId - 2].gameObject.activeInHierarchy)
+    //    {
+    //        MissionManager.Instance.productMissionList[_CollectProducts.CollectId - 2].MissionUpdateProduce(_CollectProducts.CollectId - 2);
+    //    }
+    //    MissionManager.Instance.SalingMission_Start(_CollectProducts.CollectId - 2, (float)productPrefabs[0].price / 5);
+
+    //    MissionManager.Instance.StandMission_Start(_CollectProducts.CollectId - 2);
+
+    //    if (_CollectProducts.CollectId >= 3)
+    //    {
+    //        MissionManager.Instance.MachineMission_Start(_CollectProducts.CollectId - 2);
+    //    }
+
+
+    //    counter = 0f;
+    //    yield return null;
+    //    while (counter < 1f)
+    //    {
+    //        counter += 4 * Time.deltaTime;
+    //        newProduct.transform.position = Vector3.Lerp(firstPos, fishOutTR.transform.position, counter);
+
+    //        yield return null;
+    //    }
+    //    // converting finish
+    //    productCollectionList.Add(newProduct.GetComponent<Collectable>());
+    //    PlayerPrefs.SetInt(machineName + "col", productCollectionList.Count);
+    //    float deltaY = 0;
+
+    //    deltaY = (productCollectionList.Count - 1) / productPosTR.Length;
+    //    Transform targetTR = productPosTR[(productCollectionList.Count - 1) % productPosTR.Length];
+
+    //    Vector3 dropPos = targetTR.position + new Vector3(0, deltaY * 0.3f, 0);
+
+    //    StartCoroutine(GoCannedPos(newProduct.GetComponent<Collectable>(), targetTR, dropPos));
+    //}
     IEnumerator GoCannedPos(Collectable newProduct, Transform targetTR, Vector3 dropPos)
     {
 
@@ -702,5 +772,16 @@ public class ProcessMachine : Stand
             yield return null;
             newProduct.GetComponent<Collectable>().productCollectActive = true;
         }
+    }
+
+    public void UpgradeValueInit()
+    {
+        CapacityInit();
+    }
+    void CapacityInit()
+    {
+        productCountTotal = capacities[standLevel];
+        fishCountCurrent = capacities[standLevel] - droppedCollectionList.Count;
+        speedFactor = speedFactors[standLevel];
     }
 }

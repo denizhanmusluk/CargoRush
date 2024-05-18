@@ -77,7 +77,7 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0.5
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0.5
   m_UseGravity: 1
   m_IsKinematic: 1
   m_Interpolate: 0
@@ -112,6 +112,7 @@ MonoBehaviour:
   pushActive: 0
   rb: {fileID: 6633081907204807285}
   productId: 1
+  shadowGO: {fileID: 0}
 --- !u!135 &-4968638076623587845
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -217,7 +218,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5522947120323051126}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 14a0ff5692672884e84ad90670322d03, type: 3}
   m_Name: 

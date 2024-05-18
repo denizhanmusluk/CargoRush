@@ -43,7 +43,7 @@ public abstract class Stand : MonoBehaviour
 
     public bool resetActive = false;
     public float waitTime = 1f;
-
+    public bool customerCar = false;
     public abstract void SpecificStart();
     public abstract void SpecificReset();
     public abstract void DropCollection(int collectAmount, StackCollect _stackCollect);
@@ -70,7 +70,10 @@ public abstract class Stand : MonoBehaviour
     public void TextInit()
     {
         fishCountCurrent = fishCountTotal;
-        fishCountText.text = (0).ToString() + "/" + (fishCountTotal).ToString();
+        if (fishCountText != null)
+        {
+            fishCountText.text = (0).ToString() + "/" + (fishCountTotal).ToString();
+        }
     }
     //void FishCountInit()
     //{
@@ -151,11 +154,21 @@ public abstract class Stand : MonoBehaviour
                 if (collects.collectID == cltId)
                 {
 
-
-                    if (collectType2 == CollectType.All || collectType == CollectType.All || collects.collectType == collectType || collects.collectType == collectType2)
+                    if (customerCar)
                     {
-                        collectedNo++;
-                        break;
+                        if (fishCountCurrent > 0)
+                        {
+                            collectedNo++;
+                            break;
+                        }
+                    }
+                    else
+                    {
+                        if (collectType2 == CollectType.All || collectType == CollectType.All || collects.collectType == collectType || collects.collectType == collectType2)
+                        {
+                            collectedNo++;
+                            break;
+                        }
                     }
                 }
             }
@@ -165,17 +178,24 @@ public abstract class Stand : MonoBehaviour
         _stackCollect.ReverseCollectedList();
         _stackCollect.CollectedListReset();
 
-        if (collectedNo > 0 && fishCountCurrent > 0)
+        if (customerCar && collectedNo > 0)
         {
-            if (collectedNo <= fishCountCurrent)
+            DropCollection(fishCountCurrent, _stackCollect);
+        }
+        else
+        {
+            if (collectedNo > 0 && fishCountCurrent > 0)
             {
-                DropCollection(collectedNo, _stackCollect);
-                StartCoroutine(SetFishAmount(-collectedNo));
-            }
-            else
-            {
-                DropCollection(fishCountCurrent, _stackCollect);
-                StartCoroutine(SetFishAmount(-fishCountCurrent));
+                if (collectedNo <= fishCountCurrent)
+                {
+                    DropCollection(collectedNo, _stackCollect);
+                    StartCoroutine(SetFishAmount(-collectedNo));
+                }
+                else
+                {
+                    DropCollection(fishCountCurrent, _stackCollect);
+                    StartCoroutine(SetFishAmount(-fishCountCurrent));
+                }
             }
         }
     }
