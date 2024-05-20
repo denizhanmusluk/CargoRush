@@ -33,6 +33,8 @@ public class ShopManager : MonoBehaviour
     public Sprite[] shopSpriteList = new Sprite[4];
     public Sprite questionMark;
 
+    public GameObject buyOthersGO;
+
     void Awake()
     {
         _instance = this;
@@ -57,6 +59,11 @@ public class ShopManager : MonoBehaviour
             newShopBuyArea[i - 1].GetComponent<BuyArea>().OpenAndActive();
             newShopBuyArea[i - 1].GetComponent<BuyArea>().buyActive = true;
 
+        }
+
+        if (PlayerPrefs.GetInt("tutorialseq1") == 1)
+        {
+            buyOthersGO.SetActive(true);
         }
     }
     private void Update()

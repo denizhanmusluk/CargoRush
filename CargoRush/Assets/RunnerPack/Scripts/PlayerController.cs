@@ -174,7 +174,7 @@ public class PlayerController : MonoBehaviour
         }
         model.transform.parent = characterSkinParent;
         model.transform.localPosition = Vector3.zero;
-        model.transform.localScale = Vector3.one;
+        //model.transform.localScale = Vector3.one;
         model.transform.localRotation = Quaternion.Euler(0, 0, 0);
         animator = model.GetComponent<Animator>();
     }

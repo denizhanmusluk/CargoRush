@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
-public class MineCrusher : Stand
+public class MineCrusher : Stand, IStandUpgrade
 {
     [SerializeField] Transform inTR, convertTR, outTR;
     public Collectable[] productsPrefab;
@@ -52,6 +52,13 @@ public class MineCrusher : Stand
     bool areaOpener_3 = true;
     bool areaOpener_4 = true;
     public int rawLevel;
+
+
+
+    public int standLevel { get; set; }
+
+
+    float speedFactor = 1f;
     public override void CollectableCountSet()
     {
         PlayerPrefs.SetInt(machineName + "col1", ironCollectionList.Count);
@@ -95,7 +102,7 @@ public class MineCrusher : Stand
         MinesDropAreaCheck();
 
         ManuealRawCreate();
-
+        CapacityInit();
     }
 
     void FishCountInit()
@@ -182,10 +189,10 @@ public class MineCrusher : Stand
                 areaOpener_1 = false;
                 _CollectProducts[0].gameObject.SetActive(true);
                 _CollectProducts[1].gameObject.SetActive(true);
-                _CollectProducts[0].transform.position = L2list[0].position;
-                _CollectProducts[1].transform.position = L2list[1].position;
-                fishCountTotal += 25;
-                fishCountCurrent += 25;
+                //_CollectProducts[0].transform.position = L2list[0].position;
+                //_CollectProducts[1].transform.position = L2list[1].position;
+                //fishCountTotal += 25;
+                //fishCountCurrent += 25;
                 fishCountText.text = (fishCountTotal - fishCountCurrent).ToString() + "/" + (fishCountTotal).ToString();
 
             }
@@ -199,11 +206,11 @@ public class MineCrusher : Stand
                 _CollectProducts[0].gameObject.SetActive(true);
                 _CollectProducts[1].gameObject.SetActive(true);
                 _CollectProducts[2].gameObject.SetActive(true);
-                _CollectProducts[0].transform.position = L3list[0].position;
-                _CollectProducts[1].transform.position = L3list[1].position;
-                _CollectProducts[2].transform.position = L3list[2].position;
-                fishCountTotal += 25;
-                fishCountCurrent += 25;
+                //_CollectProducts[0].transform.position = L3list[0].position;
+                //_CollectProducts[1].transform.position = L3list[1].position;
+                //_CollectProducts[2].transform.position = L3list[2].position;
+                //fishCountTotal += 25;
+                //fishCountCurrent += 25;
                 fishCountText.text = (fishCountTotal - fishCountCurrent).ToString() + "/" + (fishCountTotal).ToString();
             }
         }
@@ -218,12 +225,12 @@ public class MineCrusher : Stand
                 _CollectProducts[1].gameObject.SetActive(true);
                 _CollectProducts[2].gameObject.SetActive(true);
                 _CollectProducts[3].gameObject.SetActive(true);
-                _CollectProducts[0].transform.position = L4list[0].position;
-                _CollectProducts[1].transform.position = L4list[1].position;
-                _CollectProducts[2].transform.position = L4list[2].position;
-                _CollectProducts[3].transform.position = L4list[3].position;
-                fishCountTotal += 50;
-                fishCountCurrent += 50;
+                //_CollectProducts[0].transform.position = L4list[0].position;
+                //_CollectProducts[1].transform.position = L4list[1].position;
+                //_CollectProducts[2].transform.position = L4list[2].position;
+                //_CollectProducts[3].transform.position = L4list[3].position;
+                //fishCountTotal += 50;
+                //fishCountCurrent += 50;
                 fishCountText.text = (fishCountTotal - fishCountCurrent).ToString() + "/" + (fishCountTotal).ToString();
             }
         }
@@ -240,11 +247,11 @@ public class MineCrusher : Stand
                 _CollectProducts[3].gameObject.SetActive(true);
                 _CollectProducts[4].gameObject.SetActive(true);
 
-                _CollectProducts[0].transform.position = L5list[0].position;
-                _CollectProducts[1].transform.position = L5list[1].position;
-                _CollectProducts[2].transform.position = L5list[2].position;
-                _CollectProducts[3].transform.position = L5list[3].position;
-                _CollectProducts[4].transform.position = L5list[4].position;
+                //_CollectProducts[0].transform.position = L5list[0].position;
+                //_CollectProducts[1].transform.position = L5list[1].position;
+                //_CollectProducts[2].transform.position = L5list[2].position;
+                //_CollectProducts[3].transform.position = L5list[3].position;
+                //_CollectProducts[4].transform.position = L5list[4].position;
             }
         }
     }
@@ -268,7 +275,7 @@ public class MineCrusher : Stand
          
             Collectable fish = droppedCollectionList[droppedCollectionList.Count - 1];
             droppedCollectionList.Remove(droppedCollectionList[droppedCollectionList.Count - 1]);
-            StartCoroutine(CreateCanned(waitTime, fish));
+            StartCoroutine(CreateCanned(fish));
             dropActive = false;
 
             if (fish.collectType == CollectType.Type4)
@@ -300,13 +307,13 @@ public class MineCrusher : Stand
 
             fishCountText.text = (fishCountTotal - fishCountCurrent).ToString() + "/" + (fishCountTotal).ToString();
 
-            float _waitTime = waitTime - (PlayerPrefs.GetInt("envlevel") * 0.05f);
+            //float _waitTime = waitTime - (PlayerPrefs.GetInt("envlevel") * 0.05f);
 
-            if(_waitTime <= 0)
-            {
-                _waitTime = Time.deltaTime;
-            }
-            yield return new WaitForSeconds(_waitTime);
+            //if(_waitTime <= 0)
+            //{
+            //    _waitTime = Time.deltaTime;
+            //}
+            yield return new WaitForSeconds(waitTime / speedFactor);
             CollectableCountSet();
         }
         MinesDropAreaCheck();
@@ -321,7 +328,7 @@ public class MineCrusher : Stand
     }
 
 
-    IEnumerator CreateCanned(float waitTime, Collectable fish)
+    IEnumerator CreateCanned(Collectable fish)
     {
 
         foreach (var lst in ironCollectionList)
@@ -357,7 +364,7 @@ public class MineCrusher : Stand
             }
         }
         
-            GameObject newProduct = Instantiate(productsPrefab[prefabSelect].gameObject, _CollectProducts[prefabSelect].boxPosTR.position, outTR.rotation);
+            GameObject newProduct = Instantiate(productsPrefab[prefabSelect].gameObject, _CollectProducts[prefabSelect].boxPosTR.position, _CollectProducts[prefabSelect].boxPosTR.rotation);
             newProduct.GetComponent<Collectable>().collectActive = false;
 
             yield return new WaitForSeconds(0.1f);
@@ -422,6 +429,23 @@ public class MineCrusher : Stand
         yield return null;
 
 
+        float moveSpeed = 6f;
+        float rotSpeed = 5f;
+        for (int i = 0; i < _CollectProducts[prefabSelect].bandPosList.Count; i++)
+        {
+            while (Vector3.Distance(oldProduct.transform.position, _CollectProducts[prefabSelect].bandPosList[i].transform.position) > 0.5f)
+            {
+                Vector3 direction = (_CollectProducts[prefabSelect].bandPosList[i].transform.position - oldProduct.transform.position).normalized;
+
+                Quaternion targetRotation = Quaternion.LookRotation(direction);
+                oldProduct.transform.rotation = Quaternion.Slerp(oldProduct.transform.rotation, targetRotation, speedFactor * rotSpeed * Time.deltaTime);
+
+                oldProduct.transform.Translate(oldProduct.transform.forward * moveSpeed * speedFactor * Time.deltaTime, Space.World);
+
+                yield return null;
+            }
+        }
+
         if (prefabSelect == 0)
         {
             if (ironCollectionList.Count < productCountTotal && iron_garbage_count >= 1f)
@@ -476,12 +500,12 @@ public class MineCrusher : Stand
         }
         if (selfDestroyActive)
         {
+            Destroy(oldProduct.gameObject, 0.1f);
             Destroy(_newProduct.gameObject, 0.1f);
         }
         else
         {
-
-
+           
 
             float deltaY = 0;
             Transform targetTR;
@@ -539,21 +563,21 @@ public class MineCrusher : Stand
             }
 
            Vector3 firstPos = oldProduct.transform.position;
-            for (int i = 0; i < _CollectProducts[prefabSelect].bandPosList.Count; i++)
-            {
-                firstPos = oldProduct.transform.position;
-                counter = 0f;
-                while (counter < 1f)
-                {
-                    counter += 4 * Time.deltaTime;
-                    oldProduct.transform.position = Vector3.Lerp(firstPos, _CollectProducts[prefabSelect].bandPosList[i].position, counter);
+            //for (int i = 0; i < _CollectProducts[prefabSelect].bandPosList.Count; i++)
+            //{
+            //    firstPos = oldProduct.transform.position;
+            //    counter = 0f;
+            //    while (counter < 1f)
+            //    {
+            //        counter += 4 * Time.deltaTime;
+            //        oldProduct.transform.position = Vector3.Lerp(firstPos, _CollectProducts[prefabSelect].bandPosList[i].position, counter);
 
-                    yield return null;
-                }
-            }
+            //        yield return null;
+            //    }
+            //}
             Vector3 dropPos = targetTR.position + new Vector3(0, deltaY * 0.3f, 0);
             firstPos = oldProduct.transform.position;
-
+            counter = 0f;
             while (counter < 1f && !_newProduct.GetComponent<Collectable>().isCollected)
             {
                 counter += 2 * Time.deltaTime;
@@ -569,6 +593,9 @@ public class MineCrusher : Stand
             }
             _newProduct.GetComponent<Collectable>().anim.SetTrigger("close");
             yield return new WaitForSeconds(0.25f);
+
+
+            
             Destroy(oldProduct.gameObject);
 
             StartCoroutine(GoCannedPos(_newProduct.GetComponent<Collectable>(), targetTR, dropPos, selfDestroyActive));
@@ -1056,5 +1083,19 @@ public class MineCrusher : Stand
 
             });
         return tween;
+    }
+
+    public int[] capacities;
+    public float[] speedFactors;
+    public void UpgradeValueInit()
+    {
+        CapacityInit();
+    }
+    void CapacityInit()
+    {
+        fishCountTotal = capacities[standLevel];
+        productCountTotal = capacities[standLevel];
+        fishCountCurrent = capacities[standLevel] - droppedCollectionList.Count;
+        speedFactor = speedFactors[standLevel];
     }
 }

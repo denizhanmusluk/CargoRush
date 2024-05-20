@@ -6,8 +6,8 @@ using DG.Tweening;
 public class PlaneGround : MonoBehaviour
 {
     [SerializeField] Transform canvasTR;
-    Vector3 firstScaleCanvasTR;
-    Vector3 firstScale;
+    [SerializeField] Vector3 firstScaleCanvasTR;
+    [SerializeField] Vector3 firstScale;
     private void Start()
     {
         firstScale = transform.localScale;

@@ -109,7 +109,7 @@ NavMeshSettings:
     agentRadius: 0.5
     agentHeight: 2
     agentSlope: 45
-    agentClimb: 0.4
+    agentClimb: 1
     ledgeDropHeight: 0
     maxJumpAcrossDistance: 0
     minRegionArea: 2
@@ -22213,21 +22213,6 @@ MonoBehaviour:
   m_Script: {fileID: 631335621, guid: ffea41b2ef7376143bee608c897e587a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baked: 0
-  bakeOnAwake: 0
-  flipNormals: 0
-  backfaceCulling: 0
-  distance: 0.01
-  angleConstraint: 180
-  technique: 0
-  deferredFlags: -1
-  inclusion: 0
-  transformObserver:
-    lastPosition: {x: 0, y: 0, z: 0}
-    lastScale: {x: 1, y: 1, z: 1}
-    lastRotation: {x: 0, y: 0, z: 0, w: 1}
-    transform: {fileID: 1235061873}
-  needsDynamicGeometry: 1
 --- !u!4 &1235061873
 Transform:
   m_ObjectHideFlags: 0
@@ -44663,7 +44648,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.00024414062, y: -126.75586}
+  m_AnchoredPosition: {x: 0, y: -126.75586}
   m_SizeDelta: {x: 0, y: 52}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &4459160080687135861
@@ -46809,7 +46794,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.00024414062, y: -126.75519}
+  m_AnchoredPosition: {x: 0, y: -126.75519}
   m_SizeDelta: {x: 0, y: 52}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4459160081253685048

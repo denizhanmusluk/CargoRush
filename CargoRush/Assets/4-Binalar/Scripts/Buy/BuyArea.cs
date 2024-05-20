@@ -417,15 +417,17 @@ public class BuyArea : MonoBehaviour, BuyCamera
         }
         for (int i = 0; i < buyAreas.Length; i++)
         {
+
             buyAreas[i].SetActive(true);
+            if (buyAreas[i].GetComponent<BuyArea>() != null)
+            {
+                // satýn alýndýktan sonra bir sonrakileri
+                buyAreas[i].GetComponent<BuyArea>().buyActive = true;
+                buyAreas[i].GetComponent<BuyArea>().OpenNextBuyArea();
 
-            // satýn alýndýktan sonra bir sonrakileri
-            buyAreas[i].GetComponent<BuyArea>().buyActive = true;
-            buyAreas[i].GetComponent<BuyArea>().OpenNextBuyArea();
 
-
-            buyAreas[i].GetComponent<BuyArea>().OpenAndActive();
-
+                buyAreas[i].GetComponent<BuyArea>().OpenAndActive();
+            }
             if (isNewOpen && !cameraPassive)
             {
                 yield return new WaitForSeconds(0.5f);
@@ -436,6 +438,7 @@ public class BuyArea : MonoBehaviour, BuyCamera
                     yield return new WaitForSeconds(buyAreas[i].GetComponent<BuyArea>().showingTime);
                 }
             }
+
         }
         if (isNewOpen && !cameraPassive)
         {
@@ -480,10 +483,16 @@ public class BuyArea : MonoBehaviour, BuyCamera
         {
             for (int i = 0; i < buyAreas.Length; i++)
             {
-                buyAreas[i].SetActive(true);
-                buyAreas[i].GetComponent<BuyArea>().buyActive = false;
-                buyAreas[i].GetComponent<BuyArea>().OpenButDeactive();
-                buyAreas[i].GetComponent<BuyArea>().standShowLockedText.text = "Unlock \n" + standShowName;
+                if (buyAreas[i].GetComponent<BuyArea>() != null)
+                {
+                    if (!buyAreas[i].GetComponent<BuyArea>().standUpgradeActive)
+                    {
+                        buyAreas[i].SetActive(true);
+                        buyAreas[i].GetComponent<BuyArea>().buyActive = false;
+                        buyAreas[i].GetComponent<BuyArea>().OpenButDeactive();
+                        buyAreas[i].GetComponent<BuyArea>().standShowLockedText.text = "Unlock \n" + standShowName;
+                    }
+                }
             }
         }
     }
@@ -496,7 +505,7 @@ public class BuyArea : MonoBehaviour, BuyCamera
     public void OpenAndActive()
     {
         buyActive = true;
-        transparentModel_GO.SetActive(true);
+        //transparentModel_GO.SetActive(true);
         showBuyPNG_GO.SetActive(true);
         lockedPNG_GO.SetActive(false);
         buyCanvasGO.SetActive(true);

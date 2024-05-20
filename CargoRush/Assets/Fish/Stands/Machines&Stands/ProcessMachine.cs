@@ -31,6 +31,7 @@ public class ProcessMachine : Stand, IStandUpgrade
     public int machineId;
     public bool missionActive = true;
     public int machineLevel;
+    public int collectableLevel;
     public bool machinePopUpActive = true;
 
 
@@ -39,15 +40,22 @@ public class ProcessMachine : Stand, IStandUpgrade
     public float[] speedFactors;
 
     float speedFactor = 1f;
+    public AIPath aiPath;
+    [SerializeField] List<GameObject> trayList = new List<GameObject>();
 
     public override void CollectableCountSet()
     {
         PlayerPrefs.SetInt(machineName + "rawcount", droppedCollectionList.Count);
         PlayerPrefs.SetInt(machineName + "col", productCollectionList.Count);
+        TraySet();
 
     }
     public override void SpecificStart()
     {
+        if (Globals.collectableLevel < collectableLevel)
+        {
+            Globals.collectableLevel = collectableLevel;
+        }
         IndicatorManager.Instance.machines.Add(this);
 
         if (PlayerPrefs.GetInt(machineName + "firstopen") == 0)
@@ -135,10 +143,10 @@ public class ProcessMachine : Stand, IStandUpgrade
         //    IndicatorManager.Instance.IndicatorTargeterActive();
         //    mineCrusher.ManuealGemCreate();
         //}
-        foreach (var stands in _CollectProductStands)
-        {
-            stands.machineActive = true;
-        }
+        //foreach (var stands in _CollectProductStands)
+        //{
+        //    stands.machineActive = true;
+        //}
         MissionManager.Instance.ProductMission_Start(_CollectProducts.CollectId - 2 , (float)productPrefabs[0].price / 5);
         MissionManager.Instance.SalingMission_Start(_CollectProducts.CollectId - 2, (float)productPrefabs[0].price / 5);
 
@@ -350,18 +358,58 @@ public class ProcessMachine : Stand, IStandUpgrade
             yield return null;
         }
         // converting finish
-        productCollectionList.Add(newProduct.GetComponent<Collectable>());
+
+        StartCoroutine(GoBand(newProduct.GetComponent<Collectable>()));
+
+
+
+
+
+        //productCollectionList.Add(newProduct.GetComponent<Collectable>());
+        //PlayerPrefs.SetInt(machineName + "col", productCollectionList.Count);
+        //float deltaY = 0;
+
+        //deltaY = (productCollectionList.Count - 1) / productPosTR.Length;
+        //Transform targetTR = productPosTR[(productCollectionList.Count - 1) % productPosTR.Length];
+
+        //Vector3 dropPos = targetTR.position + new Vector3(0, deltaY * 0.3f, 0);
+
+        //StartCoroutine(GoCannedPos(newProduct.GetComponent<Collectable>(), targetTR, dropPos));
+    }
+
+    IEnumerator GoBand(Collectable box)
+    {
+        float moveSpeed = 6f;
+        float rotSpeed = 5f;
+        for(int i = 0; i < aiPath.aiNodes.Count; i++)
+        {
+            while(Vector3.Distance( box.transform.position,aiPath.aiNodes[i].transform.position ) > 0.5f)
+            {
+                Vector3 direction = (aiPath.aiNodes[i].transform.position - box.transform.position).normalized;
+
+
+                Quaternion targetRotation = Quaternion.LookRotation(direction);
+                box.transform.rotation = Quaternion.Slerp(box.transform.rotation, targetRotation, speedFactor * rotSpeed * Time.deltaTime);
+
+                box.transform.Translate(box.transform.forward * moveSpeed * speedFactor * Time.deltaTime, Space.World);
+
+                yield return null;
+            }
+
+        }
+
+
+        productCollectionList.Add(box);
         PlayerPrefs.SetInt(machineName + "col", productCollectionList.Count);
         float deltaY = 0;
 
         deltaY = (productCollectionList.Count - 1) / productPosTR.Length;
         Transform targetTR = productPosTR[(productCollectionList.Count - 1) % productPosTR.Length];
 
-        Vector3 dropPos = targetTR.position + new Vector3(0, deltaY * 0.3f, 0);
+        Vector3 dropPos = targetTR.position + new Vector3(0, deltaY * 3f, 0);
 
-        StartCoroutine(GoCannedPos(newProduct.GetComponent<Collectable>(), targetTR, dropPos));
+        StartCoroutine(GoCannedPos(box, targetTR, dropPos));
     }
-
     //IEnumerator CreateCanned(List<Collectable> raws)
     //{
     //    if (missionActive)
@@ -516,6 +564,7 @@ public class ProcessMachine : Stand, IStandUpgrade
         }
         yield return new WaitForSeconds(0.2f);
         newProduct.productCollectActive = true;
+        TraySet();
 
         //icedFish.collectActive = true;
 
@@ -634,6 +683,7 @@ public class ProcessMachine : Stand, IStandUpgrade
         }
         collectable.transform.position = dropPos;
 
+
     }
 
 
@@ -715,7 +765,7 @@ public class ProcessMachine : Stand, IStandUpgrade
             deltaY = (productCollectionList.Count - 1) / productPosTR.Length;
             targetTR = productPosTR[(productCollectionList.Count - 1) % productPosTR.Length];
 
-            Vector3 dropPos = targetTR.position + new Vector3(0, deltaY * 0.3f, 0);
+            Vector3 dropPos = targetTR.position + new Vector3(0, deltaY * 3f, 0);
             Quaternion targetRot = targetTR.transform.rotation;
 
             //newProduct.transform.parent = targetTR.parent;
@@ -729,6 +779,7 @@ public class ProcessMachine : Stand, IStandUpgrade
 
             yield return null;
             newProduct.GetComponent<Collectable>().productCollectActive = true;
+            TraySet();
         }
     }
 
@@ -757,7 +808,7 @@ public class ProcessMachine : Stand, IStandUpgrade
             deltaY = (productCollectionList.Count - 1) / productPosTR.Length;
             targetTR = productPosTR[(productCollectionList.Count - 1) % productPosTR.Length];
 
-            Vector3 dropPos = targetTR.position + new Vector3(0, deltaY * 0.3f, 0);
+            Vector3 dropPos = targetTR.position + new Vector3(0, deltaY * 3f, 0);
             Quaternion targetRot = targetTR.transform.rotation;
 
             //newProduct.transform.parent = targetTR.parent;
@@ -771,6 +822,7 @@ public class ProcessMachine : Stand, IStandUpgrade
 
             yield return null;
             newProduct.GetComponent<Collectable>().productCollectActive = true;
+            TraySet();
         }
     }
 
@@ -780,8 +832,34 @@ public class ProcessMachine : Stand, IStandUpgrade
     }
     void CapacityInit()
     {
+        fishCountTotal = capacities[standLevel];
         productCountTotal = capacities[standLevel];
         fishCountCurrent = capacities[standLevel] - droppedCollectionList.Count;
         speedFactor = speedFactors[standLevel];
+    }
+
+    public void TraySet()
+    {
+        int trayCount = (productCollectionList.Count) / productPosTR.Length;
+
+        if (trayCount > trayList.Count)
+        {
+            trayCount = trayList.Count;
+        }
+        for (int i = 0; i < trayList.Count; i++)
+        {
+            if (i < trayCount)
+            {
+                trayList[i].SetActive(true);
+            }
+            else
+            {
+                trayList[i].SetActive(false);
+            }
+        }
+        //for (int i = 0; i < trayCount; i++)
+        //{
+        //    trayList[i].SetActive(true);
+        //}
     }
 }

@@ -53,7 +53,8 @@ public class MissionPanel : MonoBehaviour
         moneyButton.interactable = false;
         missionRateSlider.fillAmount = (float)currentCount / (float)maxCount;
 
-        MissionManager.Instance.panelOpenButton.gameObject.SetActive(true);
+        MissionManager.Instance.OpenPanelButton();
+
 
         if (currentCount == maxCount)
         {
@@ -243,7 +244,8 @@ public class MissionPanel : MonoBehaviour
         moneyButton.interactable = false;
         missionRateSlider.fillAmount = 0;
 
-        MissionManager.Instance.panelOpenButton.gameObject.SetActive(true);
+        MissionManager.Instance.OpenPanelButton();
+
 
         if (currentCount == maxCount)
         {
@@ -335,7 +337,8 @@ public class MissionPanel : MonoBehaviour
         moneyButton.interactable = false;
         missionRateSlider.fillAmount = 0;
 
-        MissionManager.Instance.panelOpenButton.gameObject.SetActive(true);
+        MissionManager.Instance.OpenPanelButton();
+
 
         if (currentCount == maxCount)
         {

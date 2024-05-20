@@ -11,7 +11,8 @@ public class StandFishCar : Stand
     [SerializeField] float cooldownTime;
     [SerializeField] MoneyArea moneyArea;
 
-    [SerializeField] Transform carCreateTR, carStandTR, carGoTR;
+    [SerializeField] Transform carCreateTR, carGoTR;
+    [SerializeField] List<Transform> carStandPosList;
     [SerializeField] GameObject carPrefab;
     [SerializeField] List<GameObject> carPrefabList = new List<GameObject>();
 
@@ -109,9 +110,9 @@ public class StandFishCar : Stand
     void CarCreate()
     {
         currentCar = Instantiate(carPrefabList[carLevel], carCreateTR.position, Quaternion.identity);
-        currentCar.GetComponent<FishCar>().CarLevelCreate(carLevel);
+        //currentCar.GetComponent<FishCar>().CarLevelCreate(carLevel);
         currentCar.GetComponent<FishCar>().stand = this;
-        currentCar.GetComponent<FishCar>().standPos = carStandTR;
+        currentCar.GetComponent<FishCar>().standPos = carStandPosList[carLevel];
         currentCar.GetComponent<FishCar>().carGoPos = carGoTR;
 
 

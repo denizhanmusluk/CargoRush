@@ -101,7 +101,7 @@ public class MissionManager : MonoBehaviour
         {
             if (PlayerPrefs.GetInt(missionPanels[i].missionName + "missionactive") == 1)
             {
-                panelOpenButton.gameObject.SetActive(true);
+                OpenPanelButton();
                 missionPanels[i].gameObject.SetActive(true);
                 missionPanels[i].MissionStart(PlayerPrefs.GetInt(missionPanels[i].missionName + "count"), PlayerPrefs.GetInt(missionPanels[i].missionName + "maxcount"), PlayerPrefs.GetInt(missionPanels[i].missionName + "missionprice"));
                 missionPanels[i].missionRateText.text = PlayerPrefs.GetInt(missionPanels[i].missionName + "maxcount").ToString();
@@ -113,7 +113,7 @@ public class MissionManager : MonoBehaviour
         {
             if (PlayerPrefs.GetInt(productMissionList[i].missionName + i.ToString() + "missionactive") == 1)
             {
-                panelOpenButton.gameObject.SetActive(true);
+                OpenPanelButton();
                 productMissionList[i].gameObject.SetActive(true);
                 productMissionList[i].MissionStartProduce(PlayerPrefs.GetInt(productMissionList[i].missionName + i.ToString() + "count"), PlayerPrefs.GetInt(productMissionList[i].missionName + i.ToString() + "maxcount"), PlayerPrefs.GetInt(productMissionList[i].missionName + i.ToString() + "missionprice"), PlayerPrefs.GetInt(productMissionList[i].missionName));
                 productMissionList[i].missionRateText.text = PlayerPrefs.GetInt(productMissionList[i].missionName + i.ToString() + "maxcount").ToString();
@@ -126,7 +126,7 @@ public class MissionManager : MonoBehaviour
         {
             if (PlayerPrefs.GetInt(saleMissionList[i].missionName + i.ToString() + "missionactive") == 1)
             {
-                panelOpenButton.gameObject.SetActive(true);
+                OpenPanelButton();
                 saleMissionList[i].gameObject.SetActive(true);
                 saleMissionList[i].MissionStartSale(PlayerPrefs.GetInt(saleMissionList[i].missionName + i.ToString() + "count"), PlayerPrefs.GetInt(saleMissionList[i].missionName + i.ToString() + "maxcount"), PlayerPrefs.GetInt(saleMissionList[i].missionName + i.ToString() + "missionprice"), PlayerPrefs.GetInt(saleMissionList[i].missionName));
                 saleMissionList[i].missionRateText.text = PlayerPrefs.GetInt(saleMissionList[i].missionName + i.ToString() + "maxcount").ToString();
@@ -137,7 +137,7 @@ public class MissionManager : MonoBehaviour
 
         if (PlayerPrefs.GetInt(technoShopMission.missionName + "missionactive") == 1)
         {
-            panelOpenButton.gameObject.SetActive(true);
+            OpenPanelButton();
             technoShopMission.gameObject.SetActive(true);
             technoShopMission.MissionStart(PlayerPrefs.GetInt(technoShopMission.missionName + "count"), PlayerPrefs.GetInt(technoShopMission.missionName + "maxcount"), PlayerPrefs.GetInt(technoShopMission.missionName + "missionprice"));
             technoShopMission.missionRateText.text = PlayerPrefs.GetInt(technoShopMission.missionName + "maxcount").ToString();
@@ -151,7 +151,7 @@ public class MissionManager : MonoBehaviour
 
         if (PlayerPrefs.GetInt(sportShopMission.missionName + "missionactive") == 1)
         {
-            panelOpenButton.gameObject.SetActive(true);
+            OpenPanelButton();
             sportShopMission.gameObject.SetActive(true);
             sportShopMission.MissionStart(PlayerPrefs.GetInt(sportShopMission.missionName + "count"), PlayerPrefs.GetInt(sportShopMission.missionName + "maxcount"), PlayerPrefs.GetInt(sportShopMission.missionName + "missionprice"));
             sportShopMission.missionRateText.text = PlayerPrefs.GetInt(sportShopMission.missionName + "maxcount").ToString();
@@ -165,7 +165,7 @@ public class MissionManager : MonoBehaviour
 
         if (PlayerPrefs.GetInt(toysShopMission.missionName + "missionactive") == 1)
         {
-            panelOpenButton.gameObject.SetActive(true);
+            OpenPanelButton();
             toysShopMission.gameObject.SetActive(true);
             toysShopMission.MissionStart(PlayerPrefs.GetInt(toysShopMission.missionName + "count"), PlayerPrefs.GetInt(toysShopMission.missionName + "maxcount"), PlayerPrefs.GetInt(toysShopMission.missionName + "missionprice"));
             toysShopMission.missionRateText.text = PlayerPrefs.GetInt(toysShopMission.missionName + "maxcount").ToString();
@@ -178,7 +178,7 @@ public class MissionManager : MonoBehaviour
 
         if (PlayerPrefs.GetInt(technoShopFullMission.missionName + "missionactive") == 1)
         {
-            panelOpenButton.gameObject.SetActive(true);
+            OpenPanelButton();
             technoShopFullMission.gameObject.SetActive(true);
             technoShopFullMission.MissionStart(PlayerPrefs.GetInt(technoShopFullMission.missionName + "count"), PlayerPrefs.GetInt(technoShopFullMission.missionName + "maxcount"), PlayerPrefs.GetInt(technoShopFullMission.missionName + "missionprice"));
             technoShopFullMission.missionRateText.text = PlayerPrefs.GetInt(technoShopFullMission.missionName + "maxcount").ToString();
@@ -192,7 +192,7 @@ public class MissionManager : MonoBehaviour
 
         if (PlayerPrefs.GetInt(sportShopFullMission.missionName + "missionactive") == 1)
         {
-            panelOpenButton.gameObject.SetActive(true);
+            OpenPanelButton();
             sportShopFullMission.gameObject.SetActive(true);
             sportShopFullMission.MissionStart(PlayerPrefs.GetInt(sportShopFullMission.missionName + "count"), PlayerPrefs.GetInt(sportShopFullMission.missionName + "maxcount"), PlayerPrefs.GetInt(sportShopFullMission.missionName + "missionprice"));
             sportShopFullMission.missionRateText.text = PlayerPrefs.GetInt(sportShopFullMission.missionName + "maxcount").ToString();
@@ -206,7 +206,7 @@ public class MissionManager : MonoBehaviour
 
         if (PlayerPrefs.GetInt(toysShopFullMission.missionName + "missionactive") == 1)
         {
-            panelOpenButton.gameObject.SetActive(true);
+            OpenPanelButton();
             toysShopFullMission.gameObject.SetActive(true);
             toysShopFullMission.MissionStart(PlayerPrefs.GetInt(toysShopFullMission.missionName + "count"), PlayerPrefs.GetInt(toysShopFullMission.missionName + "maxcount"), PlayerPrefs.GetInt(toysShopFullMission.missionName + "missionprice"));
             toysShopFullMission.missionRateText.text = PlayerPrefs.GetInt(toysShopFullMission.missionName + "maxcount").ToString();
@@ -219,7 +219,7 @@ public class MissionManager : MonoBehaviour
 
         if (PlayerPrefs.GetInt(machineMission.missionName + "missionactive") == 1)
         {
-            panelOpenButton.gameObject.SetActive(true);
+            OpenPanelButton();
             machineMission.gameObject.SetActive(true);
             //productMissionList[productID].MissionStart(0, 1,5);
             machineMission.MissionStart(PlayerPrefs.GetInt(machineMission.missionName + "count"), 1, PlayerPrefs.GetInt(machineMission.missionName + "missionprice"));
@@ -237,7 +237,7 @@ public class MissionManager : MonoBehaviour
 
         if (PlayerPrefs.GetInt(standMission.missionName + "missionactive") == 1)
         {
-            panelOpenButton.gameObject.SetActive(true);
+            OpenPanelButton();
             standMission.gameObject.SetActive(true);
             //productMissionList[productID].MissionStart(0, 1,5);
             standMission.MissionStart(PlayerPrefs.GetInt(standMission.missionName + "count"), PlayerPrefs.GetInt(standMission.missionName + "maxcount"), PlayerPrefs.GetInt(standMission.missionName + "missionprice"));
@@ -733,4 +733,11 @@ public class MissionManager : MonoBehaviour
 
     }
     */
+
+
+
+    public void OpenPanelButton()
+    {
+        //panelOpenButton.gameObject.SetActive(true);
+    }
 }

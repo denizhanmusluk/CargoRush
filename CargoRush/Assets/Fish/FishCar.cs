@@ -60,6 +60,12 @@ public class FishCar : MonoBehaviour
         navmeshAgent.SetDestination(carGoPos.position);
         Destroy(gameObject, 4f);
 
+        if (PlayerPrefs.GetInt("tutorialseq1") == 0)
+        {
+            PlayerPrefs.SetInt("tutorialseq1", 1);
+            ShopManager.Instance.buyOthersGO.SetActive(true);
+        }
+
     }
     public void CarLevelCreate(int level)
     {
