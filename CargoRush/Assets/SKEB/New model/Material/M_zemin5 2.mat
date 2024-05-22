@@ -14,6 +14,7 @@ Material:
   - TCP2_RIM_LIGHTING
   - TCP2_RIM_LIGHTING_LIGHTMASK
   - TCP2_SHADOW_LIGHT_COLOR
+  - _NORMALMAP
   m_InvalidKeywords:
   - BACKSOLID
   - FRONTSOLID
@@ -62,12 +63,12 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseMap:
-        m_Texture: {fileID: 2800000, guid: a45d010d5f86b44a2b74478a85107a56, type: 3}
-        m_Scale: {x: 4, y: 4}
+        m_Texture: {fileID: 2800000, guid: 3c88e2cd33f64b844b314c9fb6aa104d, type: 3}
+        m_Scale: {x: 5, y: 5}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
+        m_Texture: {fileID: 2800000, guid: e2a3395f3446c2143879e3a2613945b2, type: 3}
+        m_Scale: {x: 22, y: 22}
         m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
         m_Texture: {fileID: 0}
@@ -215,8 +216,8 @@ Material:
     - _RampBandsSmoothing: 0.1
     - _RampOffset: 0
     - _RampScale: 1
-    - _RampSmoothing: 0.2
-    - _RampThreshold: 0.75
+    - _RampSmoothing: 0.4
+    - _RampThreshold: 0.67
     - _RampType: 0
     - _RealtimeShadow: 0
     - _ReceiveShadows: 1
@@ -278,7 +279,7 @@ Material:
     - _UseMatCap: 0
     - _UseMatCapMask: 0
     - _UseMobileMode: 0
-    - _UseNormalMap: 0
+    - _UseNormalMap: 1
     - _UseOcclusion: 0
     - _UseOutline: 0
     - _UseReflections: 0
@@ -292,7 +293,7 @@ Material:
     m_Colors:
     - _AOColor: {r: 1, g: 1, b: 1, a: 1}
     - _AmbientColor: {r: 0, g: 0, b: 0, a: 0}
-    - _BaseColor: {r: 1, g: 0.8784769, b: 0.759434, a: 1}
+    - _BaseColor: {r: 0.10991457, g: 0.2144693, b: 0.3584906, a: 1}
     - _Color: {r: 0.7353569, g: 0.7353569, b: 0.7353569, a: 1}
     - _Color1_B: {r: 1, g: 0.7764706, b: 0.64705884, a: 1}
     - _Color1_D: {r: 1, g: 1, b: 1, a: 1}
@@ -326,7 +327,7 @@ Material:
     - _MatCapColor: {r: 1, g: 1, b: 1, a: 1}
     - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
     - _ReflectionColor: {r: 1, g: 1, b: 1, a: 1}
-    - _RimColor: {r: 0.4528302, g: 0.4528302, b: 0.4528302, a: 0.5}
+    - _RimColor: {r: 0.6509434, g: 0.6509434, b: 0.6509434, a: 0.5}
     - _SColor: {r: 1, g: 1, b: 1, a: 1}
     - _ShadowColor: {r: 0.09999997, g: 0.09999997, b: 0.09999997, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
