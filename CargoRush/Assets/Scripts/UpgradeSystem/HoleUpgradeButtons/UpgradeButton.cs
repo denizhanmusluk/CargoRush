@@ -31,8 +31,4 @@ public abstract class UpgradeButton : MonoBehaviour
         //levelText.transform.localPosition = new Vector3(0, -186, 0);
         costText.text = "MAX";
     }
-    private void OnEnable()
-    {
-        HoleUpgradeManager.Instance.isEnoughMoney();
-    }
 }

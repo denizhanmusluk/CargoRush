@@ -968,11 +968,11 @@ public class MineCrusher : Stand, IStandUpgrade
     IEnumerator Drop(Transform dropPosTR, Vector3 dropPos, Collectable collectable, float waitTime)
     {
         collectable.grindActive = true;
-        if (PlayerPrefs.GetInt("collectstonecount10") < 8)
+        if (PlayerPrefs.GetInt("collectstonecount10") < 3)
         {
             PlayerPrefs.SetInt("collectstonecount10", PlayerPrefs.GetInt("collectstonecount10") + 1);
 
-            if (PlayerPrefs.GetInt("collectstonecount10") == 8)
+            if (PlayerPrefs.GetInt("collectstonecount10") == 3)
             {
                 IndicatorManager.Instance.IndicatorTargeterActive();
             }

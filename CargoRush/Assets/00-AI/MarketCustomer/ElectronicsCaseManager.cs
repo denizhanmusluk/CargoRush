@@ -351,7 +351,7 @@ public class ElectronicsCaseManager : MonoBehaviour, IMoneyArea
             Transform targetTR = moneyArea.dropMoneyPosList[(i) % moneyArea.dropMoneyPosList.Count];
             Vector3 dropPos = targetTR.position + new Vector3(0, deltaY * 0.2f, 0);
             BanknotMoney banknot = Instantiate(moneyArea.moneyPrefab, moneyArea.firstMoneyCreatePosTR.position, Quaternion.identity).GetComponent<BanknotMoney>();
-            banknot.MovingMoney(moneyArea.firstMoneyCreatePosTR.position, dropPos);
+            banknot.MovingMoney(moneyArea.firstMoneyCreatePosTR.position, dropPos, targetTR);
             banknot.banknotValue = banknotVal;
             moneyArea.moneyList.Add(banknot);
             yield return null;
@@ -372,7 +372,7 @@ public class ElectronicsCaseManager : MonoBehaviour, IMoneyArea
             Transform targetTR = moneyArea.dropMoneyPosList[(moneyListCount + i) % moneyArea.dropMoneyPosList.Count];
             Vector3 dropPos = targetTR.position + new Vector3(0, deltaY * 0.2f, 0);
             BanknotMoney banknot = Instantiate(moneyArea.moneyPrefab, moneyArea.firstMoneyCreatePosTR.position, Quaternion.identity).GetComponent<BanknotMoney>();
-            banknot.MovingMoney(moneyArea.firstMoneyCreatePosTR.position, dropPos);
+            banknot.MovingMoney(moneyArea.firstMoneyCreatePosTR.position, dropPos, targetTR);
             banknot.banknotValue = droppingCollectionList[i].price + Globals.extraMoneySkin;
             moneyArea.moneyList.Add(banknot);
             PlayerPrefs.SetInt(caseName + "totalvalue", PlayerPrefs.GetInt(caseName + "totalvalue") + banknot.banknotValue);
@@ -395,7 +395,7 @@ public class ElectronicsCaseManager : MonoBehaviour, IMoneyArea
                 Transform targetTR = moneyArea.dropMoneyPosList[(moneyListCount + i) % moneyArea.dropMoneyPosList.Count];
                 Vector3 dropPos = targetTR.position + new Vector3(0, deltaY * 0.2f, 0);
                 BanknotMoney banknot = Instantiate(moneyArea.moneyPrefab, moneyArea.firstMoneyCreatePosTR.position, Quaternion.identity).GetComponent<BanknotMoney>();
-                banknot.MovingMoney(moneyArea.firstMoneyCreatePosTR.position, dropPos);
+                banknot.MovingMoney(moneyArea.firstMoneyCreatePosTR.position, dropPos, targetTR);
                 banknot.banknotValue = droppingCollectionList[i].price;
                 moneyArea.moneyList.Add(banknot);
                 PlayerPrefs.SetInt(caseName + "totalvalue", PlayerPrefs.GetInt(caseName + "totalvalue") + banknot.banknotValue);
@@ -559,7 +559,7 @@ public class ElectronicsCaseManager : MonoBehaviour, IMoneyArea
             Transform targetTR = vipMoneyDropArea.dropMoneyPosList[(moneyListCount + i) % vipMoneyDropArea.dropMoneyPosList.Count];
             Vector3 dropPos = targetTR.position + new Vector3(0, deltaY * 0.2f, 0);
             BanknotMoney banknot = Instantiate(vipMoneyDropArea.moneyPrefab, vipMoneyDropArea.firstMoneyCreatePosTR.position, Quaternion.identity).GetComponent<BanknotMoney>();
-            banknot.MovingMoney(vipMoneyDropArea.firstMoneyCreatePosTR.position, dropPos);
+            banknot.MovingMoney(vipMoneyDropArea.firstMoneyCreatePosTR.position, dropPos, targetTR);
             banknot.banknotValue = (droppingCollectionList[i].price + vipCustomer.extraPrice + Globals.extraMoneySkin);
             vipMoneyDropArea.moneyList.Add(banknot);
             yield return null;
@@ -574,7 +574,7 @@ public class ElectronicsCaseManager : MonoBehaviour, IMoneyArea
                 Transform targetTR = vipMoneyDropArea.dropMoneyPosList[(moneyListCount + i) % vipMoneyDropArea.dropMoneyPosList.Count];
                 Vector3 dropPos = targetTR.position + new Vector3(0, deltaY * 0.2f, 0);
                 BanknotMoney banknot = Instantiate(vipMoneyDropArea.moneyPrefab, vipMoneyDropArea.firstMoneyCreatePosTR.position, Quaternion.identity).GetComponent<BanknotMoney>();
-                banknot.MovingMoney(vipMoneyDropArea.firstMoneyCreatePosTR.position, dropPos);
+                banknot.MovingMoney(vipMoneyDropArea.firstMoneyCreatePosTR.position, dropPos, targetTR);
                 banknot.banknotValue = (droppingCollectionList[i].price + vipCustomer.extraPrice);
                 vipMoneyDropArea.moneyList.Add(banknot);
                 yield return null;

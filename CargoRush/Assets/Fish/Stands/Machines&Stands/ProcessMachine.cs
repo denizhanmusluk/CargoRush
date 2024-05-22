@@ -75,7 +75,7 @@ public class ProcessMachine : Stand, IStandUpgrade
             PlayerPrefs.SetInt(machineName + "firstopen", 1);
             if (machinePopUpActive)
             {
-                PopUpManager.Instance.PopUpOpen(machineId);
+                //PopUpManager.Instance.PopUpOpen(machineId);
             }
         }
         if(collectType == CollectType.Type1)

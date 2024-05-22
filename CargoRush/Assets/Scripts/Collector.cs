@@ -30,7 +30,7 @@ public class Collector : MonoBehaviour
         yield return new WaitForSeconds(1f);
         while (rb != null && (rb.velocity.x > 0 || rb.velocity.y > 0 || rb.velocity.z > 0))
         {
-            yield return new WaitForSeconds(0.1f);
+            yield return null;
         }
         if (rb != null)
         {

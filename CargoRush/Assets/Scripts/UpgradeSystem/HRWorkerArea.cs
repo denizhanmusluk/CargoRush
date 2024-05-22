@@ -36,7 +36,10 @@ public class HRWorkerArea : MonoBehaviour, BuyCamera
     {
         if (other.GetComponent<PlayerController>() != null)
         {
-            sleepyParticle.Stop();
+            if (sleepyParticle != null)
+            {
+                sleepyParticle.Stop();
+            }
             upgradeOpenActive = true;
             StartCoroutine(CooldownActive(0.7f));
             foreach (var anim in animators)
@@ -49,7 +52,10 @@ public class HRWorkerArea : MonoBehaviour, BuyCamera
     {
         if (other.GetComponent<PlayerController>() != null)
         {
-            sleepyParticle.Play();
+            if (sleepyParticle != null)
+            {
+                sleepyParticle.Play();
+            }
             upgradeOpenActive = false;
             foreach (var anim in animators)
             {

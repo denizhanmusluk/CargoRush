@@ -53,16 +53,16 @@ public class BanknotMoney : MonoBehaviour
         Destroy(gameObject);
     }
 
-    public void MovingMoney(Vector3 _firstPos, Vector3 _targetPos)
+    public void MovingMoney(Vector3 _firstPos, Vector3 _targetPos, Transform targetTR)
     {
         Vector3 randomPos = new Vector3(Random.Range(-0.5f, 0.5f), 0, 0);
         firstPos = _firstPos + randomPos;
         targetPos = _targetPos;
-        StartCoroutine(MoveDropMoney());
+        StartCoroutine(MoveDropMoney(targetTR));
     }
-    IEnumerator MoveDropMoney()
+    IEnumerator MoveDropMoney(Transform targetTR)
     {
-        Quaternion targetRot = Quaternion.Euler(0, Random.Range(-15, 15), 0);
+        Quaternion targetRot = Quaternion.Euler(0, targetTR.eulerAngles.y + Random.Range(-15, 15), 0);
         Quaternion firstRot = transform.rotation;
         float counter = 0f;
         //float maxDistance = Vector3.Distance(firstPos, targetPos);

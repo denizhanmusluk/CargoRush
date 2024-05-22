@@ -64,7 +64,14 @@ public class StandFishCar : Stand
     public void LevelInit()
     {
         carLevel = PlayerPrefs.GetInt(standNameLevel);
-        fishCountTotal = _fishCountTotal[carLevel];
+        if (PlayerPrefs.GetInt("tutorialseq1") == 0)
+        {
+            fishCountTotal = 3;
+        }
+        else
+        {
+            fishCountTotal = _fishCountTotal[carLevel];
+        }
     }
     public void LevelUp()
     {
@@ -426,7 +433,7 @@ public class StandFishCar : Stand
             Transform targetTR = moneyArea.dropMoneyPosList[(moneyListCount + i) % moneyArea.dropMoneyPosList.Count];
             Vector3 dropPos = targetTR.position + new Vector3(0, deltaY * 0.2f, 0);
             BanknotMoney banknot = Instantiate(moneyArea.moneyPrefab, moneyArea.firstMoneyCreatePosTR.position, Quaternion.identity).GetComponent<BanknotMoney>();
-            banknot.MovingMoney(moneyArea.firstMoneyCreatePosTR.position, dropPos);
+            banknot.MovingMoney(moneyArea.firstMoneyCreatePosTR.position, dropPos, targetTR);
             banknot.banknotValue = droppingCollectionList[i].price;
             moneyArea.moneyList.Add(banknot);
             yield return null;

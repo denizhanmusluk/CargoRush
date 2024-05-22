@@ -106,8 +106,12 @@ public class IndicatorManager : MonoBehaviour
     void IndicatorScaleSet(float distance)
     {
         indicator.transform.localScale = new Vector3(indicator.transform.localScale.x, indicator.transform.localScale.y, distance);
-        indicatorMesh.material.mainTextureScale = new Vector2(1, distance);
+        indicatorMesh.material.mainTextureScale = new Vector2(1, distance/2);
         offset -= Time.deltaTime * 2;
+        if(offset < -250)
+        {
+            offset = 0;
+        }
         indicatorMesh.material.mainTextureOffset = new Vector2(1, offset);
     }
 

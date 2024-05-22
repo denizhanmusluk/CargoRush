@@ -35,7 +35,7 @@ public class SushiCaseManager : MonoBehaviour
             Transform targetTR = moneyArea.dropMoneyPosList[(moneyListCount + i) % moneyArea.dropMoneyPosList.Count];
             Vector3 dropPos = targetTR.position + new Vector3(0, deltaY * 0.2f, 0);
             BanknotMoney banknot = Instantiate(moneyArea.moneyPrefab, moneyArea.firstMoneyCreatePosTR.position, Quaternion.identity).GetComponent<BanknotMoney>();
-            banknot.MovingMoney(moneyArea.firstMoneyCreatePosTR.position, dropPos);
+            banknot.MovingMoney(moneyArea.firstMoneyCreatePosTR.position, dropPos, targetTR);
             banknot.banknotValue = droppingCollectionList[i].price;
             moneyArea.moneyList.Add(banknot);
             yield return null;

@@ -14,9 +14,14 @@ public class FishCar : MonoBehaviour
     public Transform carGoPos;
     bool arrived = false;
     [SerializeField] GameObject[] carLevelsGO;
+    public Car _car;
     private void Start()
     {
         navmeshAgent.SetDestination(standPos.position);
+        if(_car != null)
+        {
+            _car.WheelActivator(true);
+        }
     }
     private void Update()
     {
@@ -40,7 +45,7 @@ public class FishCar : MonoBehaviour
         float counter = 0f;
         while (counter < 1f)
         {
-            counter += 3 * Time.deltaTime;
+            counter += Time.deltaTime;
 
             transform.position = Vector3.Lerp(firstPos, targetPos, counter);
             transform.rotation = Quaternion.Lerp(firstRot, standPos.rotation, counter);
@@ -52,9 +57,17 @@ public class FishCar : MonoBehaviour
         navmeshAgent.enabled = true;
         navmeshAgent.SetDestination(transform.position);
         stand.StandReActive();
+        if (_car != null)
+        {
+            _car.WheelActivator(false);
+        }
     }
     public void CarGoOut()
     {
+        if (_car != null)
+        {
+            _car.WheelActivator(true);
+        }
         navmeshAgent.enabled = true;
         navmeshAgent.obstacleAvoidanceType = ObstacleAvoidanceType.MedQualityObstacleAvoidance;
         navmeshAgent.SetDestination(carGoPos.position);
