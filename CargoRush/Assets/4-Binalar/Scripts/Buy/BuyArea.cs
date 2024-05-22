@@ -334,7 +334,7 @@ public class BuyArea : MonoBehaviour, BuyCamera
         }
         if (tipUpActive)
         {
-            PopUpManager.Instance.TipPopUpOpen(tipId);
+            //PopUpManager.Instance.TipPopUpOpen(tipId);
         }
 
         if (isWorkerBuy && HRUpgradeManager.Instance._upgradeAreaWorkers.gameObject.activeInHierarchy)
@@ -465,8 +465,8 @@ public class BuyArea : MonoBehaviour, BuyCamera
             }
         }
 
-        PopUpManager.Instance.ActionInvoke();
-        PopUpManager.Instance.TipActionInvoke();
+        //PopUpManager.Instance.ActionInvoke();
+        //PopUpManager.Instance.TipActionInvoke();
     }
     void ClosedAreas()
     {

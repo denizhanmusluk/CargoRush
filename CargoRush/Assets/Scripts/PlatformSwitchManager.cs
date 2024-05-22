@@ -140,8 +140,8 @@ public class PlatformSwitchManager : MonoBehaviour
 
         if (PlayerPrefs.GetInt("switcupcount") == 3)
         {
-            PopUpManager.Instance.TipPopUpOpen(2);
-            PopUpManager.Instance.TipActionInvoke();
+            //PopUpManager.Instance.TipPopUpOpen(2);
+            //PopUpManager.Instance.TipActionInvoke();
         }
     }
     IEnumerator HoleUpgradeOpenDelayed()

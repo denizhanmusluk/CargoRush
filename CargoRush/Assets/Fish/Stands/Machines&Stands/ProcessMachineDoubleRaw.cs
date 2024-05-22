@@ -62,7 +62,7 @@ public class ProcessMachineDoubleRaw : Stand
                 }
             }
             PlayerPrefs.SetInt(machineName + "firstopen", 1);
-            PopUpManager.Instance.PopUpOpen(machineId);
+            //PopUpManager.Instance.PopUpOpen(machineId);
         }
         if (collectType == CollectType.Type1)
         {
