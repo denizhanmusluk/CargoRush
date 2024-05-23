@@ -318,7 +318,7 @@ public class MineCrusher : Stand, IStandUpgrade
         }
         MinesDropAreaCheck();
         //machineActive = false;
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(2f);
         cannedCount = woodCollectionList.Count + plasticCollectionList.Count + ironCollectionList.Count + yarnCollectionList.Count;
         MachineStop();
         //if (droppedCollectionList.Count > 0)

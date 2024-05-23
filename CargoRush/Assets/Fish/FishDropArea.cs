@@ -13,7 +13,8 @@ public class FishDropArea : MonoBehaviour
 {
     private static FishDropArea _instance = null;
     public static FishDropArea Instance => _instance;
-    public float createPeriod = 1f;
+    //public float createPeriod = 1f;
+    public float[] createPeriodTime;
     public float reactiveRate = 1f;
 
     public GameObject[] garbagePrefabs;
@@ -39,7 +40,7 @@ public class FishDropArea : MonoBehaviour
     public int totalProductCapacity = 50;
 
    public List<productType> proType = new List<productType>();
-
+    public MineCrusher mineCrusher;
     private void Awake()
     {
         _instance = this;
@@ -59,9 +60,9 @@ public class FishDropArea : MonoBehaviour
         {
             //int garbageSelect = Random.Range(0, garbagePrefabs.Length);
 
-            while (totalProductCapacity <= collectableList.Count)
+            while ((Globals.collectableLevel + 1) * totalProductCapacity <= collectableList.Count)
             {
-                while ((float)totalProductCapacity * reactiveRate + 1 < collectableList.Count)
+                while ((float)(Globals.collectableLevel + 1) * (float)totalProductCapacity * reactiveRate + 1 < collectableList.Count)
                 {
                     yield return new WaitForSeconds(1f);
 
@@ -72,7 +73,7 @@ public class FishDropArea : MonoBehaviour
 
             int garbageSelect = LeastIdCheck();
             GarbageCreate(garbageSelect);
-            yield return new WaitForSeconds(createPeriod);
+            yield return new WaitForSeconds(createPeriodTime[mineCrusher.standLevel]);
         }
     }
     int LeastIdCheck()
