@@ -617,7 +617,7 @@ public class ProcessMachine : Stand, IStandUpgrade
             float deltaY = 0;
             deltaY = (droppedCollectionList.Count - 1) / fishPosTR.Length;
             Transform targetTR = fishPosTR[(droppedCollectionList.Count - 1) % fishPosTR.Length];
-            Vector3 dropPos = targetTR.position + new Vector3(0, deltaY * 0.3f, 0);
+            Vector3 dropPos = targetTR.position + new Vector3(0, deltaY * 1.25f, 0);
             StartCoroutine(Drop(targetTR, dropPos, droppingCollection, Time.deltaTime));
             if (_stackCollect.player)
             {
@@ -727,7 +727,7 @@ public class ProcessMachine : Stand, IStandUpgrade
             deltaY = (droppedCollectionList.Count - 1) / fishPosTR.Length;
             targetTR = fishPosTR[(droppedCollectionList.Count - 1) % fishPosTR.Length];
 
-            Vector3 dropPos = targetTR.position + new Vector3(0, deltaY * 0.3f, 0);
+            Vector3 dropPos = targetTR.position + new Vector3(0, deltaY * 1.25f, 0);
             Quaternion targetRot = targetTR.transform.rotation;
 
             //newProduct.transform.parent = targetTR.parent;
