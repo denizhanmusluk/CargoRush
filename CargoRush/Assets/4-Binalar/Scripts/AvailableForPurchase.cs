@@ -71,7 +71,7 @@ public class AvailableForPurchase : MonoBehaviour
             //GameManager.Instance.ui.NextLevel();
             NextLevelActivision();
             StartCoroutine(ShowArea());
-            PlayerController.Instance._stackCollect.DisperseCollected();
+            //PlayerController.Instance._stackCollect.DisperseCollected();
             CollectableList.Instance.ClearAllCollectable();
         }
     }

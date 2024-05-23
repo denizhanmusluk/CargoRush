@@ -44,7 +44,7 @@ public class Collectable : MonoBehaviour
     {
         firstSize = transform.localScale;
     }
-    public void DisperseCollected()
+    public void DisperseCollected(Transform impulseTR)
     {
         //roofPushActive = false;
         //StartCoroutine(RoofPushActivator());
@@ -57,20 +57,31 @@ public class Collectable : MonoBehaviour
         {
             gameObject.AddComponent<Rigidbody>();
         }
-        if (GetComponent<BoxCollider>() == null)
-        {
-            gameObject.AddComponent<BoxCollider>();
-        }
+        //if (GetComponent<BoxCollider>() == null)
+        //{
+        //    gameObject.AddComponent<BoxCollider>();
+        //}
         if (GetComponent<Rigidbody>() != null)
         {
             GetComponent<Rigidbody>().isKinematic = false;
             float[] xDirection = { -1, 1 };
             float[] zDirection = { -1, 1 };
-            GetComponent<Rigidbody>().AddForce(new Vector3(Random.Range(1f, 2f) * xDirection[Random.Range(0, 2)], 1f, Random.Range(1f, 2f) * zDirection[Random.Range(0, 2)]) * 10);
+            Vector3 impulseDir = (impulseTR.position - transform.position).normalized;
+            GetComponent<Rigidbody>().AddForce(new Vector3(10 * impulseDir.x + Random.Range(-5f,5f), 10 * impulseDir.y, 10 * impulseDir.z + Random.Range(-5f, 5f)) * 50);
         }
+        FishDropArea.Instance.proType[GetComponent<Collector>().productId].productList.Add(this);
+        StartCoroutine(CollectActivator());
+
         //GetComponent<Rigidbody>().AddTorque(new Vector3(Random.Range(-2f, 2f), Random.Range(-2f, 2f), Random.Range(-2f, 2f)) * 50);
         //StartCoroutine(rotateCoin());
-        Destroy(gameObject, 4f);
+        //Destroy(gameObject, 4f);
+    }
+    IEnumerator CollectActivator()
+    {
+        yield return new WaitForSeconds(1f);
+        collectActive = true;
+        isCollected = false;
+        GetComponent<Collector>().collectorActive = true;
     }
     IEnumerator RoofPushActivator()
     {

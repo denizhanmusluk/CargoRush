@@ -9,6 +9,7 @@ public class Collector : MonoBehaviour
     [SerializeField] Rigidbody rb;
     public int productId;
     public GameObject shadowGO;
+    public bool collectorActive = true;
     public void FirstPush(Vector3 forceDir)
     {
         rb.isKinematic = false;
@@ -17,13 +18,16 @@ public class Collector : MonoBehaviour
     }
     public void Push(Transform collTR, float _impulse)
     {
-        impulse = _impulse;
-        pushActive = true;
-        rb.isKinematic = false;
-        Vector3 forceDirection = (transform.position - collTR.position).normalized;
-        Vector3 randomPosOffset = new Vector3(Random.Range(-0.1f, 0.1f), 0, Random.Range(-0.1f, 0.1f));
-        rb.AddForce((forceDirection + randomPosOffset) * impulse);
-        StartCoroutine(Kinemator());
+        if (collectorActive && rb != null)
+        {
+            impulse = _impulse;
+            pushActive = true;
+            rb.isKinematic = false;
+            Vector3 forceDirection = (transform.position - collTR.position).normalized;
+            Vector3 randomPosOffset = new Vector3(Random.Range(-0.1f, 0.1f), 0, Random.Range(-0.1f, 0.1f));
+            rb.AddForce((forceDirection + randomPosOffset) * impulse);
+            StartCoroutine(Kinemator());
+        }
     }
     IEnumerator Kinemator()
     {
@@ -41,7 +45,7 @@ public class Collector : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.transform.GetComponent<Collector>() != null && pushActive && impulse > 10f)
+        if (collectorActive && collision.transform.GetComponent<Collector>() != null && pushActive && impulse > 10f)
         {
             collision.transform.GetComponent<Collector>().Push(transform, impulse * 0.4f);
             impulse *= 0.4f;

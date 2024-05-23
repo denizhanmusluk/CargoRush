@@ -41,9 +41,32 @@ public class FishDropArea : MonoBehaviour
 
    public List<productType> proType = new List<productType>();
     public MineCrusher mineCrusher;
+    public List<GameObject> wallListGO = new List<GameObject>();
+    bool colliderResetActive = true;
     private void Awake()
     {
         _instance = this;
+    }
+    public void WallColliderReset()
+    {
+        if (colliderResetActive)
+        {
+            StartCoroutine(WallCollReset());
+        }
+    }
+    IEnumerator WallCollReset()
+    {
+        colliderResetActive = false;
+        foreach (GameObject wall in wallListGO)
+        {
+            wall.GetComponent<BoxCollider>().isTrigger = true;
+        }
+        yield return new WaitForSeconds(1f);
+        foreach (GameObject wall in wallListGO)
+        {
+            wall.GetComponent<BoxCollider>().isTrigger = false;
+        }
+        colliderResetActive = true;
     }
     void Start()
     {

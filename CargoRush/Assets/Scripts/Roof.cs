@@ -16,7 +16,7 @@ public class Roof : MonoBehaviour
         {
             if (other.GetComponent<Collectable>().roofPushActive)
             {
-                other.GetComponent<Collectable>().DisperseCollected();
+                //other.GetComponent<Collectable>().DisperseCollected();
             }
         }
     }

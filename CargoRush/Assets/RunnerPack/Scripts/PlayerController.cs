@@ -376,7 +376,7 @@ public class PlayerController : MonoBehaviour
     }
     public void PlayerDisperseCollected()
     {
-        _stackCollect.DisperseCollected();
+        //_stackCollect.DisperseCollected();
         //StartCoroutine(MoveTarget(targetPosTR));
     }
     IEnumerator MoveTarget(Transform targetPosTR)
@@ -691,11 +691,11 @@ public class PlayerController : MonoBehaviour
         GameObject confetti = Instantiate(confettiParticles, transform.position + new Vector3(0, 2, 0), Quaternion.identity);
         Destroy(confetti, 5f);
     }
-    public void JumpToHoleCenter(Transform holeTR)
-    {
-        _stackCollect.DisperseCollected();
-        StartCoroutine(SetRot(holeTR));
-    }
+    //public void JumpToHoleCenter(Transform holeTR)
+    //{
+    //    _stackCollect.DisperseCollected();
+    //    StartCoroutine(SetRot(holeTR));
+    //}
     IEnumerator SetRot(Transform holeTR)
     {
         Vector3 _direction = holeTR.position - transform.position;

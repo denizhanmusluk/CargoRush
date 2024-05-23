@@ -28,12 +28,12 @@ public class StackCollectAI : MonoBehaviour
 
     Vector3 firstSize;
 
-    public void DisperseCollected()
+    public void DisperseCollected(Transform impulseTR)
     {
         for (int i = 0; i < collectionTrs.Count; i++)
         {
             collectionTrs[i].transform.parent = null;
-            collectionTrs[i].DisperseCollected();
+            collectionTrs[i].DisperseCollected(impulseTR);
         }
         currentStackCount = 0;
         collectionTrs.Clear();

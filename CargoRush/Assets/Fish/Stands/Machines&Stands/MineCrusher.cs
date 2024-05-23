@@ -968,6 +968,7 @@ public class MineCrusher : Stand, IStandUpgrade
 
     IEnumerator Drop(Transform dropPosTR, Vector3 dropPos, Collectable collectable, float waitTime)
     {
+        Destroy(collectable.GetComponent<Collector>().shadowGO);
         collectable.grindActive = true;
         if (PlayerPrefs.GetInt("collectstonecount10") < 3)
         {

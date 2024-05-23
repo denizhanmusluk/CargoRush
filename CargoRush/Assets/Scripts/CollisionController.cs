@@ -29,9 +29,10 @@ public class CollisionController : MonoBehaviour
                 {
                     if(other.GetComponent<Collector>() != null)
                     {
-                        Destroy(other.GetComponent<Collector>().shadowGO);
+                        //Destroy(other.GetComponent<Collector>().shadowGO);
+                        other.GetComponent<Collector>().collectorActive = false;
                         other.GetComponent<Collector>().pushActive = false;
-                        Destroy(other.GetComponent<Collector>());
+                        //Destroy(other.GetComponent<Collector>());
                     }
                     if (other.GetComponent<Rigidbody>() != null)
                     {
@@ -47,7 +48,8 @@ public class CollisionController : MonoBehaviour
                 }
                 else
                 {
-                    StartCoroutine(FullCapacity());
+                    PlayerController.Instance._stackCollect.StackFullCheck();
+                    //StartCoroutine(FullCapacity());
                 }
             }
         }

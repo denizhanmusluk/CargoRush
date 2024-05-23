@@ -74,7 +74,7 @@ public class TransUpPlatform : MonoBehaviour, BuyCamera
         if(counter >= time)
         {
             transActive = false;
-            StartCoroutine(TransUpPlatformOpen());
+            //StartCoroutine(TransUpPlatformOpen());
             StartCoroutine(CooldownPasive());
             blinkUpPaticle.Stop();
         }
@@ -102,30 +102,30 @@ public class TransUpPlatform : MonoBehaviour, BuyCamera
         if (transActive)
         {
             transActive = false;
-            TransUpPlatformOpen();
+            //TransUpPlatformOpen();
         }
     }
-    IEnumerator TransUpPlatformOpen()
-    {
-        if (!transOpened)
-        {
-            triggerActive = false;
-            transOpened = true;
+    //IEnumerator TransUpPlatformOpen()
+    //{
+    //    if (!transOpened)
+    //    {
+    //        triggerActive = false;
+    //        transOpened = true;
 
-            PlayerController.Instance.JumpToHoleCenter(transform);
-            yield return new WaitForSeconds(2f);
+    //        PlayerController.Instance.JumpToHoleCenter(transform);
+    //        yield return new WaitForSeconds(2f);
 
-            PlayerController.Instance.PlayerControlDeActive();
-            //PlatformSwitchManager.Instance.SwitchToUp();
-            IndicatorManager.Instance.IndicaorDeActive();
-
-
+    //        PlayerController.Instance.PlayerControlDeActive();
+    //        //PlatformSwitchManager.Instance.SwitchToUp();
+    //        IndicatorManager.Instance.IndicaorDeActive();
 
 
 
-            StartCoroutine(SetCollider());
-        }
-    }
+
+
+    //        StartCoroutine(SetCollider());
+    //    }
+    //}
     IEnumerator SetCollider()
     {
         GetComponent<Collider>().enabled = false;

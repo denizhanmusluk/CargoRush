@@ -475,7 +475,7 @@ public class SportsCaseManager : MonoBehaviour,IMoneyArea
         else
         {
             vipCustomer.emojiAngryGO.SetActive(true);
-            vipCustomer.aiStackCollect.DisperseCollected();
+            //vipCustomer.aiStackCollect.DisperseCollected();
         }
         vipCustomer.GoExit();
         waitProgressGO.SetActive(false);

@@ -44,16 +44,31 @@ public abstract class StackCollect : MonoBehaviour
             StackAnimation();
         }
     }
-    public void DisperseCollected()
+    public void DisperseCollected(Transform impulseTR)
     {
+        List<Collectable> tempColList = new List<Collectable>();
+
         for (int i = 0; i < collectionTrs.Count; i++)
         {
-            collectionTrs[i].transform.parent = null;
-            collectionTrs[i].DisperseCollected();
+            if (collectionTrs[i].collectID == 0)
+            {
+                currentStackCount--;
+                collectionTrs[i].transform.parent = null;
+                collectionTrs[i].DisperseCollected(impulseTR);
+                tempColList.Add(collectionTrs[i]);
+            }
         }
-        currentStackCount = 0;
-        collectionTrs.Clear();
-        StackEmptyAnimation();
+
+        for(int i = 0; i < tempColList.Count; i++)
+        {
+            collectionTrs.Remove(tempColList[i]);
+        }
+        //currentStackCount = 0;
+        //collectionTrs.Clear();
+
+        if (collectionTrs.Count == 0) {
+            StackEmptyAnimation();
+        }
     }
     public void Collecting(Collectable collectable)
     {
@@ -541,7 +556,7 @@ public abstract class StackCollect : MonoBehaviour
             Collect.transform.localScale = Collect.firstSize;
     }
 
-    void StackFullCheck()
+    public void StackFullCheck()
     {
         if (player == true)
         {
