@@ -576,7 +576,7 @@ public class MineCrusher : Stand, IStandUpgrade
             //        yield return null;
             //    }
             //}
-            Vector3 dropPos = targetTR.position + new Vector3(0, deltaY * 0.3f, 0);
+            Vector3 dropPos = targetTR.position + new Vector3(0, deltaY * 1.5f, 0);
             firstPos = oldProduct.transform.position;
             counter = 0f;
             while (counter < 1f && !_newProduct.GetComponent<Collectable>().isCollected)
@@ -666,7 +666,7 @@ public class MineCrusher : Stand, IStandUpgrade
             deltaY = (ironCollectionList.Count - 1) / ironProductPosTR.Length;
             targetTR = ironProductPosTR[(ironCollectionList.Count - 1) % ironProductPosTR.Length];
 
-            Vector3 dropPos = targetTR.position + new Vector3(0, deltaY * 0.3f, 0);
+            Vector3 dropPos = targetTR.position + new Vector3(0, deltaY * 1.5f, 0);
             Quaternion targetRot = targetTR.transform.rotation;
 
             newProduct.transform.parent = targetTR.parent;
@@ -697,7 +697,7 @@ public class MineCrusher : Stand, IStandUpgrade
             deltaY = (plasticCollectionList.Count - 1) / plasticProductPosTR.Length;
             targetTR = plasticProductPosTR[(plasticCollectionList.Count - 1) % plasticProductPosTR.Length];
 
-            Vector3 dropPos = targetTR.position + new Vector3(0, deltaY * 0.3f, 0);
+            Vector3 dropPos = targetTR.position + new Vector3(0, deltaY * 1.5f, 0);
             Quaternion targetRot = targetTR.transform.rotation;
 
             newProduct.transform.parent = targetTR.parent;
@@ -729,7 +729,7 @@ public class MineCrusher : Stand, IStandUpgrade
             deltaY = (yarnCollectionList.Count - 1) / yarnProductPosTR.Length;
             targetTR = yarnProductPosTR[(yarnCollectionList.Count - 1) % yarnProductPosTR.Length];
 
-            Vector3 dropPos = targetTR.position + new Vector3(0, deltaY * 0.3f, 0);
+            Vector3 dropPos = targetTR.position + new Vector3(0, deltaY * 1.5f, 0);
             Quaternion targetRot = targetTR.transform.rotation;
 
             newProduct.transform.parent = targetTR.parent;
@@ -761,7 +761,7 @@ public class MineCrusher : Stand, IStandUpgrade
             deltaY = (woodCollectionList.Count - 1) / woodProductPosTR.Length;
             targetTR = woodProductPosTR[(woodCollectionList.Count - 1) % woodProductPosTR.Length];
 
-            Vector3 dropPos = targetTR.position + new Vector3(0, deltaY * 0.3f, 0);
+            Vector3 dropPos = targetTR.position + new Vector3(0, deltaY * 1.5f, 0);
             Quaternion targetRot = targetTR.transform.rotation;
 
             newProduct.transform.parent = targetTR.parent;
