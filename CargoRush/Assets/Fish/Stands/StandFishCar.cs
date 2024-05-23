@@ -18,7 +18,8 @@ public class StandFishCar : Stand
 
     GameObject currentCar;
     [SerializeField] string standNameLevel;
-    public int[] _fishCountTotal;
+    public Vector2[] boxCountTotal;
+    //public int[] _fishCountTotal;
 
     int carLevel = 0;
     [SerializeField] float fishCoun_Factor;
@@ -27,6 +28,7 @@ public class StandFishCar : Stand
     [SerializeField] int[] productTypeCountTotal;
     [SerializeField] List<GameObject> productTextGOList;
     [SerializeField] List<TextMeshProUGUI> productTextList;
+    public int[] typeCount;
     void TextInitCheck()
     {
         for (int i = 0; i < productTypeCount.Length; i++)
@@ -61,8 +63,10 @@ public class StandFishCar : Stand
             IndicatorManager.Instance.IndicatorTargeterActive();
         }
     }
+    int totalBoxCount = 0;
     public void LevelInit()
     {
+        totalBoxCount = (int)Random.Range(boxCountTotal[carLevel].x, boxCountTotal[carLevel].y + 1);
         carLevel = PlayerPrefs.GetInt(standNameLevel);
         if (PlayerPrefs.GetInt("tutorialseq1") == 0)
         {
@@ -70,7 +74,7 @@ public class StandFishCar : Stand
         }
         else
         {
-            fishCountTotal = _fishCountTotal[carLevel];
+            fishCountTotal = totalBoxCount;
         }
     }
     public void LevelUp()
@@ -86,7 +90,7 @@ public class StandFishCar : Stand
             ResetStand();
 
         }
-        fishCountCurrent += (_fishCountTotal[carLevel] - fishCountTotal);
+        fishCountCurrent += (totalBoxCount - fishCountTotal);
 
 
         //LevelInit();
@@ -126,17 +130,50 @@ public class StandFishCar : Stand
         productTypeCount = new int[Globals.collectableLevel + 1];
         productTypeCountTotal = new int[Globals.collectableLevel + 1];
 
+        int typcnt = typeCount[carLevel];
+
+        if(typcnt > Globals.collectableLevel + 1)
+        {
+            typcnt = Globals.collectableLevel + 1;
+        }
+
+
+        List<int> typeTempList = new List<int>();
+        for(int i = 0; i < Globals.collectableLevel + 1; i++)
+        {
+            typeTempList.Add(i);
+        }
+
+        List<int> typeList = new List<int>();
+
+        for(int i = 0; i < typcnt; i++)
+        {
+            int rndm = Random.Range(0, typeTempList.Count);
+            typeList.Add(typeTempList[rndm]);
+            typeTempList.Remove(typeTempList[rndm]);
+        }
+
+        
         int productCount = fishCountTotal;
         for(int i = 0; i <= Globals.collectableLevel; i++)
         {
-            productTypeCount[i] = Random.Range(0, productCount);
-            productCount -= productTypeCount[i];
+            for (int t = 0; t < typeList.Count; t++)
+            {
+                if(i == typeList[t])
+                {
+                    productTypeCount[i] = Random.Range(0, productCount);
+                    productCount -= productTypeCount[i];
+                    break;
+                }
+            }
+
+       
         }
         if(productCount > 0)
         {
-            int randomSelect = Random.Range(0, productTypeCount.Length);
-            productTypeCount[randomSelect] += productCount;
-            productCount -= productTypeCount[randomSelect];
+            int randomSelect = Random.Range(0, typeList.Count);
+            productTypeCount[typeList[ randomSelect]] += productCount;
+            productCount -= productTypeCount[typeList[randomSelect]];
         }
         for (int i = 0; i < productTypeCountTotal.Length; i++)
         {
@@ -150,7 +187,6 @@ public class StandFishCar : Stand
     {
         if (collectAmount > 0 && fishCountCurrent > 0 && _stackCollect.collectionTrs[0] != null)
         {
-            //VibratoManager.Instance.MediumMultiVibration();
             _stackCollect.collectActive = false;
             StartCoroutine(DropSequantial(collectAmount, _stackCollect));
         }
@@ -171,7 +207,7 @@ public class StandFishCar : Stand
                         bool loopActive = true;
                         for (int j = 0; j < productTypeCount.Length; j++)
                         {
-                            if (_stackCollect.collectionTrs[i].collectType == CollectType.Type1 && productTypeCount[0] > 0)
+                            if (productTypeCount.Length > 0 && _stackCollect.collectionTrs[i].collectType == CollectType.Type1 && productTypeCount[0] > 0)
                             {
                                 productTypeCount[0]--;
                                 droppingCollection = _stackCollect.collectionTrs[i];
@@ -179,7 +215,7 @@ public class StandFishCar : Stand
                                 loopActive = false;
                                 break;
                             }
-                            if (_stackCollect.collectionTrs[i].collectType == CollectType.Type2 && productTypeCount[1] > 0)
+                            if (productTypeCount.Length > 1 && _stackCollect.collectionTrs[i].collectType == CollectType.Type2 && productTypeCount[1] > 0)
                             {
                                 productTypeCount[1]--;
                                 droppingCollection = _stackCollect.collectionTrs[i];
@@ -187,7 +223,7 @@ public class StandFishCar : Stand
                                 loopActive = false;
                                 break;
                             }
-                            if (_stackCollect.collectionTrs[i].collectType == CollectType.Type3 && productTypeCount[2] > 0)
+                            if (productTypeCount.Length > 2 && _stackCollect.collectionTrs[i].collectType == CollectType.Type3 && productTypeCount[2] > 0)
                             {
                                 productTypeCount[2]--;
                                 droppingCollection = _stackCollect.collectionTrs[i];
@@ -195,7 +231,7 @@ public class StandFishCar : Stand
                                 loopActive = false;
                                 break;
                             }
-                            if (_stackCollect.collectionTrs[i].collectType == CollectType.Type4 && productTypeCount[3] > 0)
+                            if (productTypeCount.Length > 3 && _stackCollect.collectionTrs[i].collectType == CollectType.Type4 && productTypeCount[3] > 0)
                             {
                                 productTypeCount[3]--;
                                 droppingCollection = _stackCollect.collectionTrs[i];
@@ -203,7 +239,7 @@ public class StandFishCar : Stand
                                 loopActive = false;
                                 break;
                             }
-                            if (_stackCollect.collectionTrs[i].collectType == CollectType.Type5 && productTypeCount[4] > 0)
+                            if (productTypeCount.Length > 4 && _stackCollect.collectionTrs[i].collectType == CollectType.Type5 && productTypeCount[4] > 0)
                             {
                                 productTypeCount[4]--;
                                 droppingCollection = _stackCollect.collectionTrs[i];
@@ -260,93 +296,6 @@ public class StandFishCar : Stand
         yield return new WaitForSeconds(0.5f);
         _stackCollect.collectActive = true;
 
-        //yield return null;
-
-        //List<Collectable> droppingCollectionList = new List<Collectable>();
-
-        //int amount = collectAmount;
-        //int loopCount = _stackCollect.collectionTrs.Count;
-        //for (int i = 0; i < loopCount; i++)
-        //{
-        //    foreach (var clListId in collectIDList)
-        //    {
-        //        if (_stackCollect.collectionTrs[i].collectID == clListId && amount > 0)
-        //        {
-        //            bool loopActive = true;
-        //            for (int j = 0; j < productTypeCount.Length; j++)
-        //            {
-        //                if(_stackCollect.collectionTrs[i].collectType == CollectType.Type1 && productTypeCount[0] > 0)
-        //                {
-        //                    productTypeCount[0]--;
-        //                    droppingCollectionList.Add(_stackCollect.collectionTrs[i]);
-        //                    amount--;
-        //                    loopActive = false;
-        //                    break;
-        //                }
-        //                if (_stackCollect.collectionTrs[i].collectType == CollectType.Type2 && productTypeCount[1] > 0)
-        //                {
-        //                    productTypeCount[1]--;
-        //                    droppingCollectionList.Add(_stackCollect.collectionTrs[i]);
-        //                    amount--;
-        //                    loopActive = false;
-        //                    break;
-        //                }
-        //                if (_stackCollect.collectionTrs[i].collectType == CollectType.Type3 && productTypeCount[2] > 0)
-        //                {
-        //                    productTypeCount[2]--;
-        //                    droppingCollectionList.Add(_stackCollect.collectionTrs[i]);
-        //                    amount--;
-        //                    loopActive = false;
-        //                    break;
-        //                }
-        //                if (_stackCollect.collectionTrs[i].collectType == CollectType.Type4 && productTypeCount[3] > 0)
-        //                {
-        //                    productTypeCount[3]--;
-        //                    droppingCollectionList.Add(_stackCollect.collectionTrs[i]);
-        //                    amount--;
-        //                    loopActive = false;
-        //                    break;
-        //                }
-        //                if (_stackCollect.collectionTrs[i].collectType == CollectType.Type5 && productTypeCount[4] > 0)
-        //                {
-        //                    productTypeCount[4]--;
-        //                    droppingCollectionList.Add(_stackCollect.collectionTrs[i]);
-        //                    amount--;
-        //                    loopActive = false;
-        //                    break;
-        //                }
-        //            }
-        //            if (!loopActive)
-        //            {
-        //                break;
-        //            }
-        //        }
-        //    }
-        //}
-
-
-        //for (int i = 0; i < droppingCollectionList.Count; i++)
-        //{
-        //    Collectable deletedCollect = droppingCollectionList[i];
-
-        //    _stackCollect.collectionTrs.Remove(deletedCollect);
-        //}
-        //for (int i = 0; i < droppingCollectionList.Count; i++)
-        //{
-        //    droppedCollectionList.Add(droppingCollectionList[i]);
-
-        //    float deltaY = 0;
-        //    deltaY = (droppedCollectionList.Count - 1) / currentCar.GetComponent<FishCar>().fishPosTR.Length;
-        //    Transform targetTR = currentCar.GetComponent<FishCar>().fishPosTR[(droppedCollectionList.Count - 1) % currentCar.GetComponent<FishCar>().fishPosTR.Length];
-        //    Vector3 dropPos = targetTR.position + new Vector3(0, deltaY * 0.3f, 0);
-        //    StartCoroutine(Drop(targetTR, dropPos, droppingCollectionList[i], i * 0.05f));
-        //    if (_stackCollect.player)
-        //    {
-        //        VibratoManager.Instance.LightVibration();
-        //    }
-        //}
-
-        //_stackCollect.collectActive = true;
     }
 
     IEnumerator Drop(Transform dropPosTR, Vector3 dropPos, Collectable collectable, float waitTime)

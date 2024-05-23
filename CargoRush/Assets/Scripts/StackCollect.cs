@@ -98,7 +98,8 @@ public abstract class StackCollect : MonoBehaviour
             collectable.rotateActive = false;
             collectable.roofPushActive = false;
             collectionTrs.Add(collectable);
-        
+            StackFullCheck();
+
             currentStackCount = collectionTrs.Count;
             StackAnimation();
 
@@ -169,6 +170,8 @@ public abstract class StackCollect : MonoBehaviour
                 StackEmptyAnimation();
             }
         }
+        StackFullCheck();
+
     }
     public void CollectedListReset()
     {
@@ -190,6 +193,8 @@ public abstract class StackCollect : MonoBehaviour
                 StackEmptyAnimation();
             }
         }
+        StackFullCheck();
+
         yield return new WaitForSeconds(0.4f);
       
         for (int i = 0; i < collectionTrs.Count; i++)
@@ -534,5 +539,20 @@ public abstract class StackCollect : MonoBehaviour
         }
         if (Collect.transform != null)
             Collect.transform.localScale = Collect.firstSize;
+    }
+
+    void StackFullCheck()
+    {
+        if (player == true)
+        {
+            if (collectionTrs.Count > 0 && collectionTrs[0].collectID != 20 && PlayerController.Instance._characterUpgradeSettings.stackCapacity[Globals.stackCapacityLevel] + Globals.extraStack == collectionTrs.Count)
+            {
+                PlayerController.Instance.fullTextGO.SetActive(true);
+            }
+            else
+            {
+                PlayerController.Instance.fullTextGO.SetActive(false);
+            }
+        }
     }
 }

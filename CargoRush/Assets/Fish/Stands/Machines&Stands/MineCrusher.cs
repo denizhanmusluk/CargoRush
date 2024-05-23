@@ -364,12 +364,7 @@ public class MineCrusher : Stand, IStandUpgrade
             }
         }
         
-            GameObject newProduct = Instantiate(productsPrefab[prefabSelect].gameObject, _CollectProducts[prefabSelect].boxPosTR.position, _CollectProducts[prefabSelect].boxPosTR.rotation);
-            newProduct.GetComponent<Collectable>().collectActive = false;
-
-            yield return new WaitForSeconds(0.1f);
-
-        newProduct.GetComponent<Collectable>().anim.SetTrigger("open");
+       
 
 
 
@@ -408,21 +403,22 @@ public class MineCrusher : Stand, IStandUpgrade
             yield return null;
         }
 
-    
+
 
         // converting
         //Destroy(fish.gameObject,1f);
 
 
 
+  
 
-        StartCoroutine(CreateMultiProduct(newProduct, fish, prefabSelect));
+        StartCoroutine(CreateMultiProduct(fish, prefabSelect));
 
 
 
 
     }
-    IEnumerator CreateMultiProduct(GameObject _newProduct, Collectable oldProduct, int prefabSelect)
+    IEnumerator CreateMultiProduct(Collectable oldProduct, int prefabSelect)
     {
         bool selfDestroyActive = true;
         float counter = 0f;
@@ -445,7 +441,12 @@ public class MineCrusher : Stand, IStandUpgrade
                 yield return null;
             }
         }
+        GameObject _newProduct = Instantiate(productsPrefab[prefabSelect].gameObject, _CollectProducts[prefabSelect].boxPosTR.position, _CollectProducts[prefabSelect].boxPosTR.rotation);
+        _newProduct.GetComponent<Collectable>().collectActive = false;
 
+        yield return new WaitForSeconds(0.1f);
+
+        _newProduct.GetComponent<Collectable>().anim.SetTrigger("open");
         if (prefabSelect == 0)
         {
             if (ironCollectionList.Count < productCountTotal && iron_garbage_count >= 1f)

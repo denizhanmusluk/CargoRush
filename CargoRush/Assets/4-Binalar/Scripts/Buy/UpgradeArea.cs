@@ -65,12 +65,12 @@ public class UpgradeArea : MonoBehaviour, BuyCamera
         if (PlayerPrefs.GetInt(currentCostBuild) == 0)
         {
             currentAmount = cost;
-            costText.text = cost.ToString();
+            costText.text = CoefficientTransformation.Converter(cost);
         }
         else
         {
             currentAmount = PlayerPrefs.GetInt(currentCostBuild);
-            costText.text = currentAmount.ToString();
+            costText.text = CoefficientTransformation.Converter(currentAmount);
         }
         outline.fillAmount = 1 - (float)currentAmount / (float)cost;
         yield return new WaitForSeconds(0.1f);
@@ -144,7 +144,7 @@ public class UpgradeArea : MonoBehaviour, BuyCamera
         }
 
 
-        costText.text = currentAmount.ToString();
+        costText.text = CoefficientTransformation.Converter(currentAmount);
         GameManager.Instance.MoneyUpdate(-deltaCost);
 
         PlayerPrefs.SetInt(currentCostBuild, currentAmount);

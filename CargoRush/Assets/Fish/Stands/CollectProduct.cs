@@ -128,7 +128,7 @@ public class CollectProduct : MonoBehaviour
                         }
                         if(other.GetComponent<PlayerController>()._stackCollect.collectionTrs.Count >= (other.GetComponent<PlayerController>()._characterUpgradeSettings.stackCapacity[Globals.stackCapacityLevel] + Globals.extraStackSkin + Globals.extraStack))
                         {
-                            StartCoroutine(FullCapacity());
+                            //StartCoroutine(FullCapacity());
                         }
                     }
 

@@ -380,7 +380,7 @@ public class ProcessMachine : Stand, IStandUpgrade
     IEnumerator GoBand(Collectable box)
     {
         float moveSpeed = 6f;
-        float rotSpeed = 5f;
+        float rotSpeed = 8f;
         for(int i = 0; i < aiPath.aiNodes.Count; i++)
         {
             while(Vector3.Distance( box.transform.position,aiPath.aiNodes[i].transform.position ) > 0.5f)

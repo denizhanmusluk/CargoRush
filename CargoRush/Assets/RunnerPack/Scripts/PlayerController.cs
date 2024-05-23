@@ -71,6 +71,8 @@ public class PlayerController : MonoBehaviour
 
     public GameObject nullVehicleGO;
     public Player _player;
+    public GameObject fullTextGO;
+
     void Awake()
     {
         _instance = this;
