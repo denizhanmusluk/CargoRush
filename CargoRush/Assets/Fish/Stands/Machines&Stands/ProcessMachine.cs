@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ProcessMachine : Stand, IStandUpgrade
 {
-    [SerializeField] Transform fishInTR, converFishtoCannedTR, fishOutTR;
+    [SerializeField] Transform fishInTR, converFishtoCannedTR, fishOutTR, outTR2;
     public Collectable[] productsPrefab;
    
     public Transform[] fishPosTR;
@@ -42,7 +42,7 @@ public class ProcessMachine : Stand, IStandUpgrade
     float speedFactor = 1f;
     public AIPath aiPath;
     [SerializeField] List<GameObject> trayList = new List<GameObject>();
-
+    public bool isVipActivator = false;
     public override void CollectableCountSet()
     {
         PlayerPrefs.SetInt(machineName + "rawcount", droppedCollectionList.Count);
@@ -52,6 +52,10 @@ public class ProcessMachine : Stand, IStandUpgrade
     }
     public override void SpecificStart()
     {
+        if (isVipActivator)
+        {
+            Globals.vipCreateActive = true;
+        }
         if (Globals.collectableLevel < collectableLevel)
         {
             Globals.collectableLevel = collectableLevel;
@@ -232,7 +236,7 @@ public class ProcessMachine : Stand, IStandUpgrade
         yield return new WaitForSeconds(0.1f);
         if (droppedCollectionList.Count > rawCountPerProduct - 1 && cannedCount < productCountTotal)
         {
-            MachineActive();
+            //MachineActive();
         }
 
         while (droppedCollectionList.Count > rawCountPerProduct - 1 && cannedCount < productCountTotal)
@@ -270,7 +274,7 @@ public class ProcessMachine : Stand, IStandUpgrade
         //  MinesDropAreaCheck();
         yield return new WaitForSeconds(2f);
         cannedCount = productCollectionList.Count;
-        MachineStop();
+        //MachineStop();
         //if (droppedCollectionList.Count > 0)
         {
             StartCoroutine(CreatorChecking());
@@ -324,7 +328,7 @@ public class ProcessMachine : Stand, IStandUpgrade
         counter = 0f;
         while (counter < 1f)
         {
-            counter += 4 * Time.deltaTime;
+            counter += 2 * Time.deltaTime;
 
             raws.transform.position = Vector3.Lerp(firstPoss, converFishtoCannedTR.transform.position, counter);
 
@@ -332,10 +336,12 @@ public class ProcessMachine : Stand, IStandUpgrade
         }
 
         int prefabSelect = 0;
+        float _speedFactor = 1f;
 
-
+        machineAnimator.SetFloat("speed", speedFactor * _speedFactor);
+        machineAnimator.SetTrigger("band");
         // converting
-        Destroy(raws.gameObject, 1f);
+        Destroy(raws.gameObject, 0f);
 
 
         Vector3 firstPos = converFishtoCannedTR.position;
@@ -347,13 +353,27 @@ public class ProcessMachine : Stand, IStandUpgrade
         newProduct.GetComponent<Collectable>().collectActive = false;
         newProduct.GetComponent<Collectable>().fishCollectable = productCollectionList;
 
+        newProduct.GetComponent<Collectable>().anim.SetTrigger("etiket");
+        newProduct.GetComponent<Collectable>().anim.SetFloat("speed", speedFactor * _speedFactor);
 
         counter = 0f;
-        yield return null;
+
         while (counter < 1f)
         {
-            counter += 4 * Time.deltaTime;
+            counter += 2 * Time.deltaTime;
             newProduct.transform.position = Vector3.Lerp(firstPos, fishOutTR.transform.position, counter);
+
+            yield return null;
+        }
+        firstPos = fishOutTR.position;
+
+        newProduct.GetComponent<Collectable>().bantGO.SetActive(true);
+        newProduct.GetComponent<Collectable>().bantGO.GetComponent<Animator>().SetFloat("speed", speedFactor * _speedFactor);
+       counter = 0f;
+        while (counter < 1f)
+        {
+            counter += 2 * Time.deltaTime;
+            newProduct.transform.position = Vector3.Lerp(firstPos, outTR2.transform.position, counter);
 
             yield return null;
         }
@@ -755,6 +775,10 @@ public class ProcessMachine : Stand, IStandUpgrade
             newProduct.GetComponent<Collectable>().collectActive = false;
 
             newProduct.GetComponent<Collectable>().fishCollectable = productCollectionList;
+            newProduct.GetComponent<Collectable>().anim.SetTrigger("etiket");
+            newProduct.GetComponent<Collectable>().anim.SetFloat("speed" , 1);
+            newProduct.GetComponent<Collectable>().bantGO.SetActive(true);
+            newProduct.GetComponent<Collectable>().bantGO.GetComponent<Animator>().SetFloat("speed", 1);
 
             productCollectionList.Add(newProduct.GetComponent<Collectable>());
 
@@ -798,6 +822,11 @@ public class ProcessMachine : Stand, IStandUpgrade
             newProduct.GetComponent<Collectable>().collectActive = false;
 
             newProduct.GetComponent<Collectable>().fishCollectable = productCollectionList;
+            newProduct.GetComponent<Collectable>().anim.SetTrigger("etiket");
+            newProduct.GetComponent<Collectable>().anim.SetFloat("speed", 1);
+
+            newProduct.GetComponent<Collectable>().bantGO.SetActive(true);
+            newProduct.GetComponent<Collectable>().bantGO.GetComponent<Animator>().SetFloat("speed", 1);
 
             productCollectionList.Add(newProduct.GetComponent<Collectable>());
 

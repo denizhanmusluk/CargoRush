@@ -18,6 +18,7 @@ public class StandFishCar : Stand
 
     GameObject currentCar;
     [SerializeField] string standNameLevel;
+    public int[] extraMoney;
     public Vector2[] boxCountTotal;
     //public int[] _fishCountTotal;
 
@@ -51,6 +52,7 @@ public class StandFishCar : Stand
     }
     private void Awake()
     {
+        Globals.carSlotCount++;
         LevelInit();
         StartCoroutine(StartDelay());
     }
@@ -66,7 +68,19 @@ public class StandFishCar : Stand
     int totalBoxCount = 0;
     public void LevelInit()
     {
-        totalBoxCount = (int)Random.Range(boxCountTotal[carLevel].x, boxCountTotal[carLevel].y + 1);
+        if (Globals.vipCreateActive && !Globals.isThereVip)
+        {
+            Globals.carCustomerCount++;
+        }
+        if (Globals.carCustomerCount % (Globals.carSlotCount * 10) == 0)
+        {
+            totalBoxCount = (int)boxCountTotal[carLevel].y;
+            VipActive();
+        }
+        else
+        {
+            totalBoxCount = (int)Random.Range(boxCountTotal[carLevel].x, boxCountTotal[carLevel].y + 1);
+        }
         carLevel = PlayerPrefs.GetInt(standNameLevel);
         if (PlayerPrefs.GetInt("tutorialseq1") == 0)
         {
@@ -120,6 +134,7 @@ public class StandFishCar : Stand
 
     void CarCreate()
     {
+      
         currentCar = Instantiate(carPrefabList[carLevel], carCreateTR.position, Quaternion.identity);
         //currentCar.GetComponent<FishCar>().CarLevelCreate(carLevel);
         currentCar.GetComponent<FishCar>().stand = this;
@@ -374,6 +389,12 @@ public class StandFishCar : Stand
     }
     IEnumerator DroppingMoney(List<Collectable> droppingCollectionList)
     {
+        float moneyFactor = 1f;
+        if (thisVip)
+        {
+            moneyFactor = 1.5f;
+        }
+      
         int moneyListCount = moneyArea.moneyList.Count;
         for (int i = 0; i < droppingCollectionList.Count; i++)
         {
@@ -383,10 +404,25 @@ public class StandFishCar : Stand
             Vector3 dropPos = targetTR.position + new Vector3(0, deltaY * 0.2f, 0);
             BanknotMoney banknot = Instantiate(moneyArea.moneyPrefab, moneyArea.firstMoneyCreatePosTR.position, Quaternion.identity).GetComponent<BanknotMoney>();
             banknot.MovingMoney(moneyArea.firstMoneyCreatePosTR.position, dropPos, targetTR);
-            banknot.banknotValue = droppingCollectionList[i].price;
+            banknot.banknotValue = extraMoney[carLevel] + (int)((float)droppingCollectionList[i].price * moneyFactor);
             moneyArea.moneyList.Add(banknot);
             yield return null;
         }
+
+        //moneyListCount = moneyArea.moneyList.Count;
+        //for (int i = 0; i < extraMoney[carLevel]; i++)
+        //{
+        //    float deltaY = 0;
+        //    deltaY = (moneyListCount + i) / moneyArea.dropMoneyPosList.Count;
+        //    Transform targetTR = moneyArea.dropMoneyPosList[(moneyListCount + i) % moneyArea.dropMoneyPosList.Count];
+        //    Vector3 dropPos = targetTR.position + new Vector3(0, deltaY * 0.2f, 0);
+        //    BanknotMoney banknot = Instantiate(moneyArea.moneyPrefab, moneyArea.firstMoneyCreatePosTR.position, Quaternion.identity).GetComponent<BanknotMoney>();
+        //    banknot.MovingMoney(moneyArea.firstMoneyCreatePosTR.position, dropPos, targetTR);
+        //    banknot.banknotValue = 1;
+        //    moneyArea.moneyList.Add(banknot);
+        //    yield return null;
+        //}
+
         droppedCollectionList.Clear();
 
     }
@@ -401,8 +437,20 @@ public class StandFishCar : Stand
         GetComponent<Collider>().enabled = false;
 
         yield return new WaitForSeconds(1f);
-        DropMoney(droppedCollectionList);
-
+        if (!thisVip)
+        {
+            DropMoney(droppedCollectionList);
+        }
+        else if (vipWaiting)
+        {
+            vipWaiting = false;
+            DropMoney(droppedCollectionList);
+            vipCounter = 0;
+        }
+        else
+        {
+            droppedCollectionList.Clear();
+        }
         currentCar.GetComponent<FishCar>().CarGoOut();
         yield return new WaitForSeconds(0.1f);
 
@@ -415,6 +463,11 @@ public class StandFishCar : Stand
             counter += Time.deltaTime;
             imageFill.fillAmount = counter / cooldownTime;
             yield return null;
+        }
+        if (thisVip)
+        {
+            thisVip = false;
+            Globals.isThereVip = false;
         }
         imageFill.fillAmount = 1;
         canvasDeliveringGO.SetActive(false);
@@ -430,4 +483,75 @@ public class StandFishCar : Stand
 
     }
 
+    public void VipActive()
+    {
+        Globals.isThereVip = true;
+        thisVip = true;
+
+        StartCoroutine(DigitalCounter(150));
+
+    }
+    bool thisVip = false;
+    public int vipCounter;
+    bool vipWaiting = false;
+
+    IEnumerator DigitalCounter(int _time)
+    {
+        vipWaiting = true;
+        vipCounter = _time;
+        RewardPanel.Instance.vipPanelGO.SetActive(true);
+        while (vipCounter > 0)
+        {
+            int minute = Mathf.FloorToInt(vipCounter / 60);
+            int second = Mathf.FloorToInt(vipCounter % 60);
+
+            RewardPanel.Instance.vipCounterText.text = minute.ToString() + ":" + ($"{second}");
+            if (minute < 10)
+            {
+                RewardPanel.Instance.vipCounterText.text = "0" + minute.ToString() + ":" + ($"{second}");
+
+            }
+            if (second < 10)
+            {
+                RewardPanel.Instance.vipCounterText.text = minute.ToString() + ":0" + ($"{second}");
+                if (minute < 10)
+                {
+                    RewardPanel.Instance.vipCounterText.text = "0" + minute.ToString() + ":0" + ($"{second}");
+
+                }
+                if (vipCounter <= 3)
+                {
+                    StartCoroutine(CounterTextColorSet(RewardPanel.Instance.vipCounterText));
+                    VibratoManager.Instance.LightVibration();
+                }
+            }
+            vipCounter--;
+            yield return new WaitForSeconds(1);
+  
+        }
+
+        RewardPanel.Instance.vipCounterText.text = "00:00";
+        yield return new WaitForSeconds(0.5f);
+        RewardPanel.Instance.vipPanelGO.SetActive(false);
+        if (vipWaiting)
+        {
+            ResetStand();
+        }
+            vipWaiting = false;
+
+    }
+    IEnumerator CounterTextColorSet(TextMeshProUGUI txt)
+    {
+        float counter = 0f;
+        float value = 0f;
+        while (counter < 1f)
+        {
+            counter += Time.deltaTime;
+            value = (Mathf.Sin(Mathf.PI * counter));
+            //holeTimerBG_Image.color = Color.Lerp(firstColor, targetColor, value);
+            txt.color = Color.Lerp(Color.white, Color.red, value);
+            yield return null;
+        }
+        txt.color = Color.white;
+    }
 }

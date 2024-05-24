@@ -88,4 +88,11 @@ public static class Globals
 
     public static bool isSkillCreated = false;
     public static int collectableLevel = 0;
+    public static int carSlotCount = 0;
+    public static int carCustomerCount = 1;
+
+    public static bool vipCreateActive = false;
+
+    public static bool isThereVip = false;
+
 }

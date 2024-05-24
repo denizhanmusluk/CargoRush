@@ -39,7 +39,7 @@ public class Collectable : MonoBehaviour
     public List<Collectable> collectableList;
     public Animator anim;
     public bool isGem = false;
-
+    public GameObject bantGO;
     public void Start()
     {
         firstSize = transform.localScale;
