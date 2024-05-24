@@ -17,12 +17,14 @@ public class WorkerMoveSpeedButton : WorkerUpgradeButton
 
     public override void ButtonLevel(int currentLvl)
     {
-        if (currentLvl > 0)
-        {
-            for (int i = 0; i < currentLvl; i++)
-            {
-                barList[i].SetActive(true);
-            }
-        }
+        levelText.text = currentLvl.ToString();
+
+        //if (currentLvl > 0)
+        //{
+        //    for (int i = 0; i < currentLvl; i++)
+        //    {
+        //        barList[i].SetActive(true);
+        //    }
+        //}
     }
 }

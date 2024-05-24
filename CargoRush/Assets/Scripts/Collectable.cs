@@ -67,7 +67,7 @@ public class Collectable : MonoBehaviour
             float[] xDirection = { -1, 1 };
             float[] zDirection = { -1, 1 };
             Vector3 impulseDir = (impulseTR.position - transform.position).normalized;
-            GetComponent<Rigidbody>().AddForce(new Vector3(10 * impulseDir.x + Random.Range(-5f,5f), 10 * impulseDir.y, 10 * impulseDir.z + Random.Range(-5f, 5f)) * 50);
+            GetComponent<Rigidbody>().AddForce(new Vector3(10 * impulseDir.x + Random.Range(-5f,5f), 10 * impulseDir.y, 10 * impulseDir.z + Random.Range(-5f, 5f)) * 80);
         }
         FishDropArea.Instance.proType[GetComponent<Collector>().productId].productList.Add(this);
         StartCoroutine(CollectActivator());

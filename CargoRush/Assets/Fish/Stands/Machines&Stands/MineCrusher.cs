@@ -40,7 +40,7 @@ public class MineCrusher : Stand, IStandUpgrade
     //public List<Collectable> cannedCollectionList = new List<Collectable>();
 
     [SerializeField] List<CollectProduct> _CollectProducts;
-
+    [SerializeField] List<GameObject> kizakListGO = new List<GameObject>();
     //[SerializeField] CollectProduct _CollectProduct;
     [SerializeField] Animator machineAnimator;
     [SerializeField] CollectProduct _CollectProductRaf;
@@ -187,6 +187,8 @@ public class MineCrusher : Stand, IStandUpgrade
             {
                 areaCount = 2;
                 areaOpener_1 = false;
+                kizakListGO[0].SetActive(true);
+                kizakListGO[1].SetActive(true);
                 _CollectProducts[0].gameObject.SetActive(true);
                 _CollectProducts[1].gameObject.SetActive(true);
                 //_CollectProducts[0].transform.position = L2list[0].position;
@@ -203,6 +205,9 @@ public class MineCrusher : Stand, IStandUpgrade
             {
                 areaCount = 3;
                 areaOpener_2 = false;
+                kizakListGO[0].SetActive(true);
+                kizakListGO[1].SetActive(true);
+                kizakListGO[2].SetActive(true);
                 _CollectProducts[0].gameObject.SetActive(true);
                 _CollectProducts[1].gameObject.SetActive(true);
                 _CollectProducts[2].gameObject.SetActive(true);
@@ -221,6 +226,10 @@ public class MineCrusher : Stand, IStandUpgrade
             {
                 areaCount = 4;
                 areaOpener_3 = false;
+                kizakListGO[0].SetActive(true);
+                kizakListGO[1].SetActive(true);
+                kizakListGO[2].SetActive(true);
+                kizakListGO[3].SetActive(true);
                 _CollectProducts[0].gameObject.SetActive(true);
                 _CollectProducts[1].gameObject.SetActive(true);
                 _CollectProducts[2].gameObject.SetActive(true);

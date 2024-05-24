@@ -104,6 +104,7 @@ public class BuyArea : MonoBehaviour, BuyCamera
     {
         if (PlayerPrefs.GetInt(buyName) == 1)
         {
+            checkMoneyActive = false;
             IndicatorActive = false;
             instantiateBuild(Time.deltaTime, false);
 
@@ -321,6 +322,8 @@ public class BuyArea : MonoBehaviour, BuyCamera
     public bool indTutorialActive;
     void FirstOpenArea()
     {
+        checkMoneyActive = false;
+
         VibratoManager.Instance.HeavyVibration();
         fireWork.Play();
         fireWork.transform.parent = null;
