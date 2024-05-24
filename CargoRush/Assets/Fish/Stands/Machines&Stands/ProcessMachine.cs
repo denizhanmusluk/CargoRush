@@ -18,6 +18,7 @@ public class ProcessMachine : Stand, IStandUpgrade
 
     public CollectProduct _CollectProducts;
     [SerializeField] Animator machineAnimator;
+    [SerializeField] Animator machineAnimator2;
     [SerializeField] public List<CollectProduct> _CollectProductStands;
     [SerializeField] int extraCustomerCount;
 
@@ -43,6 +44,7 @@ public class ProcessMachine : Stand, IStandUpgrade
     public AIPath aiPath;
     [SerializeField] List<GameObject> trayList = new List<GameObject>();
     public bool isVipActivator = false;
+    public bool kizakRunning = false;
     public override void CollectableCountSet()
     {
         PlayerPrefs.SetInt(machineName + "rawcount", droppedCollectionList.Count);
@@ -192,13 +194,16 @@ public class ProcessMachine : Stand, IStandUpgrade
     bool creatingActive = false;
     void MachineActive()
     {
-        machineAnimator.SetBool("kizak", true);
+        machineAnimator2.SetBool("kizak", true);
         machineActive = true;
     }
     void MachineStop()
     {
-        machineAnimator.SetBool("kizak", false);
-        machineActive = false;
+        if (!kizakRunning)
+        {
+            machineAnimator2.SetBool("kizak", false);
+            machineActive = false;
+        }
     }
     IEnumerator CreatorChecking()
     {
@@ -214,6 +219,8 @@ public class ProcessMachine : Stand, IStandUpgrade
             }
             else
             {
+                kizakRunning = false;
+                //MachineStop();
                 fullTextGO.SetActive(true);
             }
             if (!creatingActive)
@@ -236,7 +243,7 @@ public class ProcessMachine : Stand, IStandUpgrade
         yield return new WaitForSeconds(0.1f);
         if (droppedCollectionList.Count > rawCountPerProduct - 1 && cannedCount < productCountTotal)
         {
-            //MachineActive();
+            MachineActive();
         }
 
         while (droppedCollectionList.Count > rawCountPerProduct - 1 && cannedCount < productCountTotal)
@@ -274,7 +281,7 @@ public class ProcessMachine : Stand, IStandUpgrade
         //  MinesDropAreaCheck();
         yield return new WaitForSeconds(2f);
         cannedCount = productCollectionList.Count;
-        //MachineStop();
+        MachineStop();
         //if (droppedCollectionList.Count > 0)
         {
             StartCoroutine(CreatorChecking());
@@ -403,7 +410,8 @@ public class ProcessMachine : Stand, IStandUpgrade
         float rotSpeed = 8f;
         for(int i = 0; i < aiPath.aiNodes.Count; i++)
         {
-            while(Vector3.Distance( box.transform.position,aiPath.aiNodes[i].transform.position ) > 0.5f)
+            kizakRunning = true;
+            while (Vector3.Distance( box.transform.position,aiPath.aiNodes[i].transform.position ) > 0.5f)
             {
                 Vector3 direction = (aiPath.aiNodes[i].transform.position - box.transform.position).normalized;
 
@@ -417,7 +425,7 @@ public class ProcessMachine : Stand, IStandUpgrade
             }
 
         }
-
+        kizakRunning = false;
 
         productCollectionList.Add(box);
         PlayerPrefs.SetInt(machineName + "col", productCollectionList.Count);
