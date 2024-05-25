@@ -177,7 +177,7 @@ public class UpgradeArea : MonoBehaviour, BuyCamera
 
     IEnumerator buildScaling()
     {
-        LevelSet(1f,true);
+        LevelSet(1f,false);
         yield return null;
 
         int buildChildCount = transform.childCount;
@@ -216,6 +216,7 @@ public class UpgradeArea : MonoBehaviour, BuyCamera
         }
         for (int i = 0; i < buyAreas.Length; i++)
         {
+            yield return new WaitForSeconds(10f);
             buyAreas[i].SetActive(true);
             if (cameraActive)
             {

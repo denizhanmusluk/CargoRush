@@ -54,7 +54,7 @@ public class GameManager : Observer
     {
         UnityEngine.Rendering.GraphicsSettings.useScriptableRenderPipelineBatching = true;
         //DefaultAnalytics.GameplayStarted();
-        //Application.targetFrameRate = 60;
+        Application.targetFrameRate = 60;
         ui.moneyText.text = CoefficientTransformation.Converter(Globals.moneyAmount);
         ui.moneyTextShop.text = CoefficientTransformation.Converter(Globals.moneyAmount);
         ui.gemText.text = CoefficientTransformation.Converter(Globals.gemAmount);

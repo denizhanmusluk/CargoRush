@@ -438,7 +438,10 @@ public class BuyArea : MonoBehaviour, BuyCamera
                 if (buyAreas[i].GetComponent<BuyCamera>() != null)
                 {
                     buyAreas[i].GetComponent<BuyCamera>().buyCamera.Priority = ((i + 1) * 10);
-                    yield return new WaitForSeconds(buyAreas[i].GetComponent<BuyArea>().showingTime);
+                    if (buyAreas[i].GetComponent<BuyArea>() != null)
+                    {
+                        yield return new WaitForSeconds(buyAreas[i].GetComponent<BuyArea>().showingTime);
+                    }
                 }
             }
 

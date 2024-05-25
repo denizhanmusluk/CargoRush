@@ -64,26 +64,26 @@ public class ProcessMachine : Stand, IStandUpgrade
         }
         IndicatorManager.Instance.machines.Add(this);
 
-        if (PlayerPrefs.GetInt(machineName + "firstopen") == 0)
-        {
-            Globals.machineLevel = machineLevel;
-            PlayerPrefs.SetInt("machineLevel", Globals.machineLevel);
-            if (HRUpgradeManager.Instance.HRWorkerGO != null)
-            {     
-                HRUpgradeManager.Instance.InitButtonValues();
-                HRUpgradeManager.Instance.HRWorkerGO.SetActive(true);
+        //if (PlayerPrefs.GetInt(machineName + "firstopen") == 0)
+        //{
+        //    Globals.machineLevel = machineLevel;
+        //    PlayerPrefs.SetInt("machineLevel", Globals.machineLevel);
+        //    if (HRUpgradeManager.Instance.HRWorkerGO != null)
+        //    {     
+        //        HRUpgradeManager.Instance.InitButtonValues();
+        //        HRUpgradeManager.Instance.HRWorkerGO.SetActive(true);
 
-                if (PlayerPrefs.GetInt("workerNoLevel") <= Globals.machineLevel)
-                {
-                    HRUpgradeManager.Instance._upgradeAreaWorkers.workerBuyAreaList[PlayerPrefs.GetInt("workerNoLevel")].gameObject.SetActive(true);
-                }
-            }
-            PlayerPrefs.SetInt(machineName + "firstopen", 1);
-            if (machinePopUpActive)
-            {
-                //PopUpManager.Instance.PopUpOpen(machineId);
-            }
-        }
+        //        if (PlayerPrefs.GetInt("workerNoLevel") <= Globals.machineLevel)
+        //        {
+        //            HRUpgradeManager.Instance._upgradeAreaWorkers.workerBuyAreaList[PlayerPrefs.GetInt("workerNoLevel")].gameObject.SetActive(true);
+        //        }
+        //    }
+        //    PlayerPrefs.SetInt(machineName + "firstopen", 1);
+        //    if (machinePopUpActive)
+        //    {
+        //        //PopUpManager.Instance.PopUpOpen(machineId);
+        //    }
+        //}
         if(collectType == CollectType.Type1)
         {
             Globals.productType1 = true;
