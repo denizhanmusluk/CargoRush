@@ -30,6 +30,8 @@ public class StandFishCar : Stand
     [SerializeField] List<GameObject> productTextGOList;
     [SerializeField] List<TextMeshProUGUI> productTextList;
     public int[] typeCount;
+    Vector3 firstColliderOffset;
+
     void TextInitCheck()
     {
         for (int i = 0; i < productTypeCount.Length; i++)
@@ -112,6 +114,8 @@ public class StandFishCar : Stand
     }
     public override void SpecificStart()
     {
+        firstColliderOffset = moneyArea.GetComponent<BoxCollider>().center;
+
         //_FishDropArea.standList.Add(this);
         CarCreate();
         FishCountInit();
@@ -389,25 +393,61 @@ public class StandFishCar : Stand
     }
     IEnumerator DroppingMoney(List<Collectable> droppingCollectionList)
     {
+
         float moneyFactor = 1f;
         if (thisVip)
         {
             moneyFactor = 1.5f;
         }
-      
+
         int moneyListCount = moneyArea.moneyList.Count;
+        int totalMoney = 0;
         for (int i = 0; i < droppingCollectionList.Count; i++)
+        {
+            totalMoney += droppingCollectionList[i].price + extraMoney[carLevel];
+        }
+        //if (Globals.doubleIncomeActive)
+        //{
+        //    totalMoney *= 2;
+        //}
+        totalMoney /= 2;
+        totalMoney = (int)((float)totalMoney * moneyFactor);
+        for (int i = 0; i < totalMoney; i++)
         {
             float deltaY = 0;
             deltaY = (moneyListCount + i) / moneyArea.dropMoneyPosList.Count;
             Transform targetTR = moneyArea.dropMoneyPosList[(moneyListCount + i) % moneyArea.dropMoneyPosList.Count];
-            Vector3 dropPos = targetTR.position + new Vector3(0, deltaY * 0.2f, 0);
+            Vector3 dropPos = targetTR.position + new Vector3(0, deltaY * 0.05f, 0);
             BanknotMoney banknot = Instantiate(moneyArea.moneyPrefab, moneyArea.firstMoneyCreatePosTR.position, Quaternion.identity).GetComponent<BanknotMoney>();
             banknot.MovingMoney(moneyArea.firstMoneyCreatePosTR.position, dropPos, targetTR);
-            banknot.banknotValue = extraMoney[carLevel] + (int)((float)droppingCollectionList[i].price * moneyFactor);
+            banknot.banknotValue = 2;
             moneyArea.moneyList.Add(banknot);
+
             yield return null;
         }
+
+
+
+
+        //float moneyFactor = 1f;
+        //if (thisVip)
+        //{
+        //    moneyFactor = 1.5f;
+        //}
+      
+        //int moneyListCount = moneyArea.moneyList.Count;
+        //for (int i = 0; i < droppingCollectionList.Count; i++)
+        //{
+        //    float deltaY = 0;
+        //    deltaY = (moneyListCount + i) / moneyArea.dropMoneyPosList.Count;
+        //    Transform targetTR = moneyArea.dropMoneyPosList[(moneyListCount + i) % moneyArea.dropMoneyPosList.Count];
+        //    Vector3 dropPos = targetTR.position + new Vector3(0, deltaY * 0.2f, 0);
+        //    BanknotMoney banknot = Instantiate(moneyArea.moneyPrefab, moneyArea.firstMoneyCreatePosTR.position, Quaternion.identity).GetComponent<BanknotMoney>();
+        //    banknot.MovingMoney(moneyArea.firstMoneyCreatePosTR.position, dropPos, targetTR);
+        //    banknot.banknotValue = extraMoney[carLevel] + (int)((float)droppingCollectionList[i].price * moneyFactor);
+        //    moneyArea.moneyList.Add(banknot);
+        //    yield return null;
+        //}
 
         //moneyListCount = moneyArea.moneyList.Count;
         //for (int i = 0; i < extraMoney[carLevel]; i++)
@@ -425,6 +465,22 @@ public class StandFishCar : Stand
 
         droppedCollectionList.Clear();
 
+        yield return new WaitForSeconds(1f);
+        StartCoroutine(ColliderReset());
+
+    }
+    IEnumerator ColliderReset()
+    {
+        Vector3 beginOffset = new Vector3(firstColliderOffset.x, -20, firstColliderOffset.z);
+        moneyArea.GetComponent<BoxCollider>().center = beginOffset;
+        float counter = 0f;
+        while (counter < 1f)
+        {
+            counter += 2 * Time.deltaTime;
+            moneyArea.GetComponent<BoxCollider>().center = Vector3.Lerp(beginOffset, firstColliderOffset, counter);
+            yield return null;
+        }
+        moneyArea.GetComponent<BoxCollider>().center = firstColliderOffset;
     }
     void ResetStand()
     {

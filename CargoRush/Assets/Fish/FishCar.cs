@@ -15,6 +15,7 @@ public class FishCar : MonoBehaviour
     bool arrived = false;
     [SerializeField] GameObject[] carLevelsGO;
     public Car _car;
+    public GameObject vipCanvasGo;
     private void Start()
     {
         navmeshAgent.SetDestination(standPos.position);
@@ -35,6 +36,7 @@ public class FishCar : MonoBehaviour
                 stand.GetComponent<AquariumCar>()._CollectProduct.collectActive = true;
             }
         }
+        vipCanvasGo.transform.rotation = Quaternion.Euler(45, 45, 0);
     }
     IEnumerator SetRot()
     {

@@ -46,29 +46,41 @@ public abstract class StackCollect : MonoBehaviour
     }
     public void DisperseCollected(Transform impulseTR)
     {
-        List<Collectable> tempColList = new List<Collectable>();
-
-        for (int i = 0; i < collectionTrs.Count; i++)
+        if (disperseActive)
         {
-            if (collectionTrs[i].collectID == 0)
+            List<Collectable> tempColList = new List<Collectable>();
+
+            for (int i = 0; i < collectionTrs.Count; i++)
             {
-                currentStackCount--;
-                collectionTrs[i].transform.parent = null;
-                collectionTrs[i].DisperseCollected(impulseTR);
-                tempColList.Add(collectionTrs[i]);
+                if (collectionTrs[i].collectID == 0)
+                {
+                    currentStackCount--;
+                    collectionTrs[i].transform.parent = null;
+                    collectionTrs[i].DisperseCollected(impulseTR);
+                    tempColList.Add(collectionTrs[i]);
+                }
             }
-        }
 
-        for(int i = 0; i < tempColList.Count; i++)
-        {
-            collectionTrs.Remove(tempColList[i]);
-        }
-        //currentStackCount = 0;
-        //collectionTrs.Clear();
+            for (int i = 0; i < tempColList.Count; i++)
+            {
+                collectionTrs.Remove(tempColList[i]);
+            }
+            //currentStackCount = 0;
+            //collectionTrs.Clear();
 
-        if (collectionTrs.Count == 0) {
-            StackEmptyAnimation();
+            if (collectionTrs.Count == 0)
+            {
+                StackEmptyAnimation();
+            }
+            StartCoroutine(DisperseActivator());
         }
+    }
+    bool disperseActive = true;
+    IEnumerator DisperseActivator()
+    {
+        disperseActive = false;
+        yield return new WaitForSeconds(1f);
+        disperseActive = true;
     }
     public void Collecting(Collectable collectable)
     {

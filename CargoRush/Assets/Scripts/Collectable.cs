@@ -46,35 +46,46 @@ public class Collectable : MonoBehaviour
     }
     public void DisperseCollected(Transform impulseTR)
     {
-        //roofPushActive = false;
-        //StartCoroutine(RoofPushActivator());
-
-        //PlayerPrefs.SetInt(malzemeName, 0);
-
-        //rotateActive = true;
-        //gameObject.AddComponent<Rigidbody>();
+  
         if (GetComponent<Rigidbody>() == null)
         {
             gameObject.AddComponent<Rigidbody>();
         }
-        //if (GetComponent<BoxCollider>() == null)
-        //{
-        //    gameObject.AddComponent<BoxCollider>();
-        //}
-        if (GetComponent<Rigidbody>() != null)
-        {
-            GetComponent<Rigidbody>().isKinematic = false;
-            float[] xDirection = { -1, 1 };
-            float[] zDirection = { -1, 1 };
-            Vector3 impulseDir = (impulseTR.position - transform.position).normalized;
-            GetComponent<Rigidbody>().AddForce(new Vector3(10 * impulseDir.x + Random.Range(-2f,2f), 10 * impulseDir.y, 10 * impulseDir.z + Random.Range(-2f, 2f)) * 80);
-        }
+
+        StartCoroutine(ColliderActivator(impulseTR));
+
         FishDropArea.Instance.proType[GetComponent<Collector>().productId].productList.Add(this);
         StartCoroutine(CollectActivator());
 
         //GetComponent<Rigidbody>().AddTorque(new Vector3(Random.Range(-2f, 2f), Random.Range(-2f, 2f), Random.Range(-2f, 2f)) * 50);
         //StartCoroutine(rotateCoin());
         //Destroy(gameObject, 4f);
+    }
+    IEnumerator ColliderActivator(Transform impulseTR)
+    {
+        yield return null;
+        if (GetComponent<Rigidbody>() != null)
+        {
+            GetComponent<Rigidbody>().isKinematic = false;
+            float[] xDirection = { -1, 1 };
+            float[] zDirection = { -1, 1 };
+            Vector3 impulseDir = (impulseTR.position - transform.position).normalized;
+            impulseDir.y = 0;
+            GetComponent<Rigidbody>().AddForce(new Vector3(10 * impulseDir.x + Random.Range(-5f, 5f), 40 * impulseDir.y, 10 * impulseDir.z + Random.Range(-5f, 5f)) * 60);
+        }
+        Collider[] colliders = GetComponents<Collider>();
+
+        // Her bir CapsuleCollider için isTrigger özelliðini true yap
+        foreach (Collider collider in colliders)
+        {
+            collider.isTrigger = true;
+        }
+
+        yield return new WaitForSeconds(0.5f);
+        foreach (Collider collider in colliders)
+        {
+            collider.isTrigger = false;
+        }
     }
     IEnumerator CollectActivator()
     {

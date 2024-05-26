@@ -102,6 +102,8 @@ public class BuyArea : MonoBehaviour, BuyCamera
     }
     IEnumerator StartDelay()
     {
+        yield return new WaitForSeconds(0.1f);
+
         if (PlayerPrefs.GetInt(buyName) == 1)
         {
             checkMoneyActive = false;
@@ -249,20 +251,23 @@ public class BuyArea : MonoBehaviour, BuyCamera
     {
         if (other.GetComponent<PlayerController>() != null)
         {
-            if (PlayerPrefs.GetInt("money", 0) >= deltaCost)
+            if (!other.GetComponent<PlayerController>().pressJoystick)
             {
-                if (sellActive && isbuy && buyActive && paymentActive)
+                if (PlayerPrefs.GetInt("money", 0) >= deltaCost)
                 {
-                    StartCoroutine(Buy(true));
-                    other.GetComponent<Payment>().Pay(transform.position);
+                    if (sellActive && isbuy && buyActive && paymentActive)
+                    {
+                        StartCoroutine(Buy(true));
+                        other.GetComponent<Payment>().Pay(transform.position);
+                    }
                 }
-            }
-            else
-            {
-                if (sellActive && isbuy && buyActive && paymentActive)
+                else
                 {
-                    StartCoroutine(Buy(false));
-                    //other.GetComponent<Payment>().Pay(transform.position);
+                    if (sellActive && isbuy && buyActive && paymentActive)
+                    {
+                        StartCoroutine(Buy(false));
+                        //other.GetComponent<Payment>().Pay(transform.position);
+                    }
                 }
             }
         }
@@ -444,7 +449,7 @@ public class BuyArea : MonoBehaviour, BuyCamera
                     }
                 }
             }
-
+            yield return null;
         }
         if (isNewOpen && !cameraPassive)
         {
@@ -485,6 +490,10 @@ public class BuyArea : MonoBehaviour, BuyCamera
 
     public void OpenNextBuyArea()
     {
+        StartCoroutine(OpenNextBuyAreaDelay());
+    }
+    IEnumerator OpenNextBuyAreaDelay()
+    {
         if (buyActive)
         {
             for (int i = 0; i < buyAreas.Length; i++)
@@ -497,12 +506,12 @@ public class BuyArea : MonoBehaviour, BuyCamera
                         buyAreas[i].GetComponent<BuyArea>().buyActive = false;
                         buyAreas[i].GetComponent<BuyArea>().OpenButDeactive();
                         buyAreas[i].GetComponent<BuyArea>().standShowLockedText.text = "Unlock \n" + standShowName;
+                        yield return new WaitForSeconds(0.1f);
                     }
                 }
             }
         }
     }
-
 
 
 

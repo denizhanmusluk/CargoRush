@@ -41,6 +41,7 @@ public class MineCrusher : Stand, IStandUpgrade
 
     [SerializeField] List<CollectProduct> _CollectProducts;
     [SerializeField] List<GameObject> kizakListGO = new List<GameObject>();
+    [SerializeField] List<GameObject> rawimgListGO = new List<GameObject>();
     //[SerializeField] CollectProduct _CollectProduct;
     [SerializeField] Animator machineAnimator;
     [SerializeField] CollectProduct _CollectProductRaf;
@@ -65,6 +66,7 @@ public class MineCrusher : Stand, IStandUpgrade
         PlayerPrefs.SetInt(machineName + "col2", plasticCollectionList.Count);
         PlayerPrefs.SetInt(machineName + "col3", yarnCollectionList.Count);
         PlayerPrefs.SetInt(machineName + "col4", woodCollectionList.Count);
+        ProductFullCheck();
     }
 
     public override void SpecificStart()
@@ -99,7 +101,6 @@ public class MineCrusher : Stand, IStandUpgrade
         //_CollectProductRaf.machineActive = true;
         StartCoroutine(CreatorChecking());
 
-        MinesDropAreaCheck();
 
         ManuealRawCreate();
         CapacityInit();
@@ -128,6 +129,8 @@ public class MineCrusher : Stand, IStandUpgrade
     }
     IEnumerator CreatorChecking()
     {
+        MinesDropAreaCheck();
+
         creatingActive = false;
         while (!creatingActive)
         {
@@ -187,6 +190,8 @@ public class MineCrusher : Stand, IStandUpgrade
             {
                 areaCount = 2;
                 areaOpener_1 = false;
+                rawimgListGO[0].SetActive(true);
+                rawimgListGO[1].SetActive(true);
                 kizakListGO[0].SetActive(true);
                 kizakListGO[1].SetActive(true);
                 _CollectProducts[0].gameObject.SetActive(true);
@@ -205,6 +210,9 @@ public class MineCrusher : Stand, IStandUpgrade
             {
                 areaCount = 3;
                 areaOpener_2 = false;
+                rawimgListGO[0].SetActive(true);
+                rawimgListGO[1].SetActive(true);
+                rawimgListGO[2].SetActive(true);
                 kizakListGO[0].SetActive(true);
                 kizakListGO[1].SetActive(true);
                 kizakListGO[2].SetActive(true);
@@ -226,6 +234,10 @@ public class MineCrusher : Stand, IStandUpgrade
             {
                 areaCount = 4;
                 areaOpener_3 = false;
+                rawimgListGO[0].SetActive(true);
+                rawimgListGO[1].SetActive(true);
+                rawimgListGO[2].SetActive(true);
+                rawimgListGO[3].SetActive(true);
                 kizakListGO[0].SetActive(true);
                 kizakListGO[1].SetActive(true);
                 kizakListGO[2].SetActive(true);
@@ -427,6 +439,47 @@ public class MineCrusher : Stand, IStandUpgrade
 
 
     }
+    public List<GameObject> productFullTextGoList = new List<GameObject>();
+    void ProductFullCheck()
+    {
+
+        if (ironCollectionList.Count < productCountTotal)
+        {
+            productFullTextGoList[0].SetActive(false);
+        }
+        else
+        {
+            productFullTextGoList[0].SetActive(true);
+        }
+
+        if (plasticCollectionList.Count < productCountTotal)
+        {
+            productFullTextGoList[1].SetActive(false);
+        }
+        else
+        {
+            productFullTextGoList[1].SetActive(true);
+        }
+
+        if (yarnCollectionList.Count < productCountTotal)
+        {
+            productFullTextGoList[2].SetActive(false);
+        }
+        else
+        {
+            productFullTextGoList[2].SetActive(true);
+        }
+
+        if (woodCollectionList.Count < productCountTotal)
+        {
+            productFullTextGoList[3].SetActive(false);
+        }
+        else
+        {
+            productFullTextGoList[3].SetActive(true);
+        }
+
+    }
     IEnumerator CreateMultiProduct(Collectable oldProduct, int prefabSelect)
     {
         bool selfDestroyActive = true;
@@ -508,6 +561,7 @@ public class MineCrusher : Stand, IStandUpgrade
 
             }
         }
+        ProductFullCheck();
         if (selfDestroyActive)
         {
             Destroy(oldProduct.gameObject, 0.1f);
@@ -883,7 +937,7 @@ public class MineCrusher : Stand, IStandUpgrade
         deltaY = (posNo) / fishPosTR.Length;
 
         Transform targetTR = fishPosTR[(posNo) % fishPosTR.Length];
-        Vector3 dropPos = targetTR.position + new Vector3(0, deltaY * 0.3f, 0);
+        Vector3 dropPos = targetTR.position + new Vector3(0, deltaY * 0.7f, 0);
         StartCoroutine(Drop(targetTR, dropPos, droppingCollection, Time.deltaTime));
         if (_stackCollect.player)
         {

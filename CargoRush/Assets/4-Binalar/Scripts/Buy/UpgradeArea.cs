@@ -121,12 +121,15 @@ public class UpgradeArea : MonoBehaviour, BuyCamera
     {
         if (other.GetComponent<PlayerController>() != null)
         {
-            if (PlayerPrefs.GetInt("money", 0) >= deltaCost)
+            if (!other.GetComponent<PlayerController>().pressJoystick)
             {
-                if (sellActive && isbuy && buyActive && paymentActive)
+                if (PlayerPrefs.GetInt("money", 0) >= deltaCost)
                 {
-                    StartCoroutine(buy());
-                    other.GetComponent<Payment>().Pay(transform.position);
+                    if (sellActive && isbuy && buyActive && paymentActive)
+                    {
+                        StartCoroutine(buy());
+                        other.GetComponent<Payment>().Pay(transform.position);
+                    }
                 }
             }
         }
