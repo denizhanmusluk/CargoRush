@@ -89,7 +89,7 @@ public class UpgradeArea : MonoBehaviour, BuyCamera
     bool paymentActive = false;
     private void OnTriggerEnter(Collider other)
     {
-        if (other.GetComponent<PlayerController>() != null)
+        if (other.GetComponent<PlayerController>() != null && Globals.buyActive)
         {
             StartCoroutine(CooldownActive(0.9f));
         }
@@ -170,6 +170,8 @@ public class UpgradeArea : MonoBehaviour, BuyCamera
     }
     void FirstOpenArea()
     {
+        StartCoroutine(BuyActivator());
+
         VibratoManager.Instance.HeavyVibration();
         outline.fillAmount = 0;
         sellActive = false;
@@ -177,7 +179,12 @@ public class UpgradeArea : MonoBehaviour, BuyCamera
         GetComponent<Collider>().enabled = false;
         _StandFishCar.LevelUp();
     }
-
+    IEnumerator BuyActivator()
+    {
+        Globals.buyActive = false;
+        yield return new WaitForSeconds(1f);
+        Globals.buyActive = true;
+    }
     IEnumerator buildScaling()
     {
         LevelSet(1f,false);

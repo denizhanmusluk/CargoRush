@@ -16,6 +16,7 @@ public class FishDropArea : MonoBehaviour
     //public float createPeriod = 1f;
     public float[] createPeriodTime;
     public float reactiveRate = 1f;
+    float reactiveRateTemp = 1f;
 
     public GameObject[] garbagePrefabs;
     public Transform[] fishPosTR;
@@ -46,6 +47,17 @@ public class FishDropArea : MonoBehaviour
     private void Awake()
     {
         _instance = this;
+    }
+    public void ReactiveActivator()
+    {
+        StartCoroutine(ReactiveActivatorDelay());
+    }
+    IEnumerator ReactiveActivatorDelay()
+    {
+        reactiveRateTemp = reactiveRate;
+        reactiveRate = 1f;
+        yield return new WaitForSeconds(2f);
+        reactiveRate = reactiveRateTemp;
     }
     public void WallColliderReset()
     {

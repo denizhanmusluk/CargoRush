@@ -126,6 +126,9 @@ public class AIWorker : MonoBehaviour, IWorkerModelSelect
     }
     public void PlayerMovingDirection(Vector3 targetPos)
     {
+        float speed = 0.5f + 0.05f * Globals.workerMoveSpeedLevel;
+        animator.SetFloat("Speed", speed);
+
         animator.SetBool("walk", true);
         Vector3 direction = (targetPos - transform.position).normalized;
         direction.y = 0;

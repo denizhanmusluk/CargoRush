@@ -98,7 +98,7 @@ public class BanknotMoney : MonoBehaviour
         Vector3 randomRotSpeed = new Vector3(Random.Range(0.5f, 2f), Random.Range(0.5f, 2f), Random.Range(0.5f, 2f));
         Vector3 tempPos = _targetTR.position;
         float counter = 0f;
-        float speed = 4f;
+        float speed = 8f;
         while (counter < 1f)
         {
             counter += speed * Time.deltaTime;

@@ -110,6 +110,8 @@ public class AIGarbageWorker : MonoBehaviour, IWorkerModelSelect
     }
     public void PlayerMovingDirection(Vector3 targetPos)
     {
+        float speed = 0.5f + 0.05f * Globals.workerMoveSpeedLevel;
+        animator.SetFloat("Speed", speed);
         animator.SetBool("walk", true);
         Vector3 direction = (targetPos - transform.position).normalized;
         direction.y = 0;
@@ -250,7 +252,7 @@ public class AIGarbageWorker : MonoBehaviour, IWorkerModelSelect
             following += StopPositionGo;
             return;
         }
-        if (Vector3.Distance(new Vector2(transform.position.x, transform.position.z), new Vector2(currentCollectable.transform.position.x, currentCollectable.transform.position.z)) > 0.5f)
+        if (Vector3.Distance(new Vector2(transform.position.x, transform.position.z), new Vector2(currentCollectable.transform.position.x, currentCollectable.transform.position.z)) > 1f)
         {
             characterStayActive = false;
 

@@ -37,7 +37,8 @@ public class ProcessMachine : Stand, IStandUpgrade
 
 
     public int standLevel { get; set; }
-    public int[] capacities;
+    public int[] capacitiesRaw;
+    public int[] capacitiesProduct;
     public float[] speedFactors;
 
     float speedFactor = 1f;
@@ -62,6 +63,7 @@ public class ProcessMachine : Stand, IStandUpgrade
         {
             Globals.collectableLevel = collectableLevel;
         }
+        FishDropArea.Instance.ReactiveActivator();
         IndicatorManager.Instance.machines.Add(this);
 
         //if (PlayerPrefs.GetInt(machineName + "firstopen") == 0)
@@ -153,33 +155,29 @@ public class ProcessMachine : Stand, IStandUpgrade
         //{
         //    stands.machineActive = true;
         //}
-        MissionManager.Instance.ProductMission_Start(_CollectProducts.CollectId - 2 , (float)productPrefabs[0].price / 5);
-        MissionManager.Instance.SalingMission_Start(_CollectProducts.CollectId - 2, (float)productPrefabs[0].price / 5);
+        //MissionManager.Instance.ProductMission_Start(_CollectProducts.CollectId - 2 , (float)productPrefabs[0].price / 5);
+        //MissionManager.Instance.SalingMission_Start(_CollectProducts.CollectId - 2, (float)productPrefabs[0].price / 5);
 
 
-        if (missionActive)
-        {
-            if (PlayerPrefs.GetInt("missionactivator") == 0)
-            {
-                PlayerPrefs.SetInt("missionactivator", 1);
-                MissionManager.Instance.tapTutorialGO.SetActive(true);
-            }
-            if (_CollectProducts.CollectId >= 3)
-            {
-                MissionManager.Instance.MachineMission_Start(_CollectProducts.CollectId - 2);
-            }
-            if (_CollectProducts.CollectId > 3)
-            {
-                if (MissionManager.Instance.machineMission.gameObject.activeInHierarchy)
-                {
-                    MissionManager.Instance.machineMission.MissionUpdate();
-                }
-            }
-
-           
-
-            
-        }
+        //if (missionActive)
+        //{
+        //    if (PlayerPrefs.GetInt("missionactivator") == 0)
+        //    {
+        //        PlayerPrefs.SetInt("missionactivator", 1);
+        //        MissionManager.Instance.tapTutorialGO.SetActive(true);
+        //    }
+        //    if (_CollectProducts.CollectId >= 3)
+        //    {
+        //        MissionManager.Instance.MachineMission_Start(_CollectProducts.CollectId - 2);
+        //    }
+        //    if (_CollectProducts.CollectId > 3)
+        //    {
+        //        if (MissionManager.Instance.machineMission.gameObject.activeInHierarchy)
+        //        {
+        //            MissionManager.Instance.machineMission.MissionUpdate();
+        //        }
+        //    }
+        //}
     }
     void StandCarCollectIdSet()
     {
@@ -205,6 +203,7 @@ public class ProcessMachine : Stand, IStandUpgrade
             machineActive = false;
         }
     }
+    bool machineIsFull = false;
     IEnumerator CreatorChecking()
     {
         creatingActive = false;
@@ -216,12 +215,14 @@ public class ProcessMachine : Stand, IStandUpgrade
 
                 StartCoroutine(CannedCreator());
                 fullTextGO.SetActive(false);
+                machineIsFull = false;
             }
             else
             {
                 kizakRunning = false;
-                //MachineStop();
+                MachineStop();
                 fullTextGO.SetActive(true);
+                machineIsFull = true;
             }
             if (!creatingActive)
             {
@@ -413,6 +414,10 @@ public class ProcessMachine : Stand, IStandUpgrade
             kizakRunning = true;
             while (Vector3.Distance( box.transform.position,aiPath.aiNodes[i].transform.position ) > 0.5f)
             {
+                while (machineIsFull)
+                {
+                    yield return null;
+                }
                 Vector3 direction = (aiPath.aiNodes[i].transform.position - box.transform.position).normalized;
 
 
@@ -869,9 +874,9 @@ public class ProcessMachine : Stand, IStandUpgrade
     }
     void CapacityInit()
     {
-        fishCountTotal = capacities[standLevel];
-        productCountTotal = capacities[standLevel];
-        fishCountCurrent = capacities[standLevel] - droppedCollectionList.Count;
+        fishCountTotal = capacitiesRaw[standLevel];
+        productCountTotal = capacitiesProduct[standLevel];
+        fishCountCurrent = capacitiesRaw[standLevel] - droppedCollectionList.Count;
         speedFactor = speedFactors[standLevel];
     }
 

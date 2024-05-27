@@ -247,7 +247,7 @@ public abstract class Stand : MonoBehaviour
     IEnumerator Staying(AIWorker character)
     {
         bool newTargetSelected = false;
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(2f);
         bool goOut = false;
         while (!goOut)
         {

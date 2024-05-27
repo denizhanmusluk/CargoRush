@@ -17,7 +17,7 @@ public class FishRubbish : MonoBehaviour
             {
                 cooldowner = true;
                 dropActive = false;
-                StartCoroutine(CooldownActive(1.0f));
+                StartCoroutine(CooldownActive(0.5f));
             }
         }
     }

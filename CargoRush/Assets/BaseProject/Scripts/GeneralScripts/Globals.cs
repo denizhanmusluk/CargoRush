@@ -94,5 +94,6 @@ public static class Globals
     public static bool vipCreateActive = false;
 
     public static bool isThereVip = false;
+    public static bool buyActive = true;
 
 }

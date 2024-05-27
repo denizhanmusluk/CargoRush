@@ -88,6 +88,7 @@ public abstract class StackCollect : MonoBehaviour
         {
             if (collectable.collectID == 0)
             {
+                stackStepOffset = 0.5f;
                 if (PlayerPrefs.GetInt("collectablecount" ) < IndicatorManager.Instance.gemCountForTutorial)
                 {
                     PlayerPrefs.SetInt("collectablecount", PlayerPrefs.GetInt("collectablecount") + 1);
@@ -117,6 +118,10 @@ public abstract class StackCollect : MonoBehaviour
                         }
                     }
                 }
+            }
+            else
+            {
+                stackStepOffset = 1.25f;
             }
 
             collectable.transform.parent = null;

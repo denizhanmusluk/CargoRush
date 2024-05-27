@@ -31,7 +31,7 @@ public class StandFishCar : Stand
     [SerializeField] List<TextMeshProUGUI> productTextList;
     public int[] typeCount;
     Vector3 firstColliderOffset;
-
+    public int[] tempIdList;
     void TextInitCheck()
     {
         for (int i = 0; i < productTypeCount.Length; i++)
@@ -41,10 +41,12 @@ public class StandFishCar : Stand
             if (productTypeCount[i] == 0)
             {
                 productTextGOList[i].SetActive(false);
+                collectIDList[i] = 0;
             }
             else
             {
                 productTextGOList[i].SetActive(true);
+                collectIDList[i] = tempIdList[i];
             }
         }
     }

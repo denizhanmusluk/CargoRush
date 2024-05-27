@@ -56,10 +56,10 @@ public class ProcessMachineDoubleRaw : Stand
                 HRUpgradeManager.Instance.InitButtonValues();
                 HRUpgradeManager.Instance.HRWorkerGO.SetActive(true);
 
-                if (PlayerPrefs.GetInt("workerNoLevel") <= Globals.machineLevel)
-                {
-                    HRUpgradeManager.Instance._upgradeAreaWorkers.workerBuyAreaList[PlayerPrefs.GetInt("workerNoLevel")].gameObject.SetActive(true);
-                }
+                //if (PlayerPrefs.GetInt("workerNoLevel") <= Globals.machineLevel)
+                //{
+                //    HRUpgradeManager.Instance._upgradeAreaWorkers.workerBuyAreaList[PlayerPrefs.GetInt("workerNoLevel")].gameObject.SetActive(true);
+                //}
             }
             PlayerPrefs.SetInt(machineName + "firstopen", 1);
             //PopUpManager.Instance.PopUpOpen(machineId);

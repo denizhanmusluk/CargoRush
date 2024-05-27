@@ -12,11 +12,12 @@ public class HRWorkerArea : MonoBehaviour, BuyCamera
     bool opened = false;
     [SerializeField] List<Animator> animators;
     public List<GameObject> workerList;
-    public List<BuyArea> workerBuyAreaList;
+    //public List<BuyArea> workerBuyAreaList;
     public Transform firstCreateTR;
     public ParticleSystem sleepyParticle;
     public GameObject HRWorkerGO;
-
+    public GameObject circleWhite;
+    public GameObject circleGreen;
     public CinemachineVirtualCamera thisBuyViewCamera;
     public CinemachineVirtualCamera buyCamera
     {
@@ -46,6 +47,8 @@ public class HRWorkerArea : MonoBehaviour, BuyCamera
             {
                 anim.SetBool("getR", true);
             }
+            circleWhite.SetActive(false);
+            circleGreen.SetActive(true);
         }
     }
     private void OnTriggerExit(Collider other)
@@ -61,6 +64,8 @@ public class HRWorkerArea : MonoBehaviour, BuyCamera
             {
                 anim.SetBool("getR", false);
             }
+            circleWhite.SetActive(true);
+            circleGreen.SetActive(false);
         }
     }
 

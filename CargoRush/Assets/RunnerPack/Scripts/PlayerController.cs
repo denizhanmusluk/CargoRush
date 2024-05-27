@@ -640,7 +640,7 @@ public class PlayerController : MonoBehaviour
     }
     public void playerMovingDirection(float RotY)
     {
-        animator.speed = 1 + 0.025f * Globals.characterSpeedLevel;
+        animator.speed = 0.75f + 0.05f * Globals.characterSpeedLevel;
         if (animator != null)
         {
             animator.SetBool("walk", true);

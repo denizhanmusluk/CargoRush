@@ -218,9 +218,9 @@ public class BuyArea : MonoBehaviour, BuyCamera
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.GetComponent<PlayerController>() != null)
+        if (other.GetComponent<PlayerController>() != null && Globals.buyActive)
         {
-            StartCoroutine(CooldownActive(1.4f));
+            StartCoroutine(CooldownActive(0.5f));
         }
     }
     private void OnTriggerExit(Collider other)
@@ -327,6 +327,8 @@ public class BuyArea : MonoBehaviour, BuyCamera
     public bool indTutorialActive;
     void FirstOpenArea()
     {
+        StartCoroutine(BuyActivator());
+        
         checkMoneyActive = false;
 
         VibratoManager.Instance.HeavyVibration();
@@ -373,7 +375,12 @@ public class BuyArea : MonoBehaviour, BuyCamera
             //MarketCustomerManager.Instance.currentCustomerCount = 125;
         }
     }
-
+    IEnumerator BuyActivator()
+    {
+        Globals.buyActive = false;
+        yield return new WaitForSeconds(1f);
+        Globals.buyActive = true;
+    }
     IEnumerator buildScaling()
     {
         instantiateBuild(0.2f,true);

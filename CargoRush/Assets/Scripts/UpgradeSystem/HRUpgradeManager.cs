@@ -133,10 +133,10 @@ public class HRUpgradeManager : MonoBehaviour
             {
                 int rebuyAmount = 0;
 
-                if (_upgradeAreaWorkers.workerBuyAreaList[PlayerPrefs.GetInt("workerNoLevel")].gameObject.activeInHierarchy)
-                {
-                    rebuyAmount = _upgradeAreaWorkers.workerBuyAreaList[PlayerPrefs.GetInt("workerNoLevel")].cost - _upgradeAreaWorkers.workerBuyAreaList[PlayerPrefs.GetInt("workerNoLevel")].currentAmount;
-                }
+                //if (_upgradeAreaWorkers.workerBuyAreaList[PlayerPrefs.GetInt("workerNoLevel")].gameObject.activeInHierarchy)
+                //{
+                //    rebuyAmount = _upgradeAreaWorkers.workerBuyAreaList[PlayerPrefs.GetInt("workerNoLevel")].cost - _upgradeAreaWorkers.workerBuyAreaList[PlayerPrefs.GetInt("workerNoLevel")].currentAmount;
+                //}
 
                 GameManager.Instance.MoneyUpdate(-_characterUpgradeSettings.workerNoCost[Globals.workerNoLevel + 1] + rebuyAmount);
                 Globals.workerNoLevel++;
@@ -204,7 +204,7 @@ public class HRUpgradeManager : MonoBehaviour
             for (int i = 0; i < PlayerPrefs.GetInt("workerNoLevel"); i++)
             {
                 _upgradeAreaWorkers.workerList[i].SetActive(true);
-                _upgradeAreaWorkers.workerBuyAreaList[i].gameObject.SetActive(false);
+                //_upgradeAreaWorkers.workerBuyAreaList[i].gameObject.SetActive(false);
             }
 
             StartCoroutine(WorkerCreateDelay());
