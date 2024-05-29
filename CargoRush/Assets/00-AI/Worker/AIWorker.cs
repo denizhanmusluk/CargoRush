@@ -126,7 +126,7 @@ public class AIWorker : MonoBehaviour, IWorkerModelSelect
     }
     public void PlayerMovingDirection(Vector3 targetPos)
     {
-        float speed = 0.5f + 0.05f * Globals.workerMoveSpeedLevel;
+        float speed = 0.75f + 0.05f * Globals.workerMoveSpeedLevel;
         animator.SetFloat("Speed", speed);
 
         animator.SetBool("walk", true);
@@ -242,6 +242,13 @@ public class AIWorker : MonoBehaviour, IWorkerModelSelect
 
     }
     int targetCollectId = 0;
+    IEnumerator AýStackCountInit(int i)
+    {
+        yield return new WaitForSeconds(2f);
+        aiStackCollect.GetComponent<StackCollectWorker>().currentCapacity = aiStackCollect.GetComponent<StackCollectWorker>().collectionTrs.Count + fishCollectArea.standList[fishCollectArea.standList.Count - 1 - i].fishCountCurrent;
+
+
+    }
     public void TargetFishAreaSelect()
     {
         fishCollectArea.ShuffleStandList();
@@ -263,7 +270,8 @@ public class AIWorker : MonoBehaviour, IWorkerModelSelect
                         bool breakActive = false;
                         if ((fishCollectArea.standList[fishCollectArea.standList.Count - 1 - i].collectType == CollectType.All || env.collectables[env.collectables.Count - 1].collectType == fishCollectArea.standList[fishCollectArea.standList.Count - 1 - i].collectType || fishCollectArea.standList[fishCollectArea.standList.Count - 1 - i].collectType2 == CollectType.All || env.collectables[env.collectables.Count - 1].collectType == fishCollectArea.standList[fishCollectArea.standList.Count - 1 - i].collectType2) && cltId == env.CollectId && fishCollectArea.standList[fishCollectArea.standList.Count - 1 - i].fishCountCurrent > 0)
                         {
-                            aiStackCollect.GetComponent<StackCollectWorker>().currentCapacity = fishCollectArea.standList[fishCollectArea.standList.Count - 1 - i].fishCountCurrent;
+                            StartCoroutine(AýStackCountInit(i));
+                            //aiStackCollect.GetComponent<StackCollectWorker>().currentCapacity = aiStackCollect.GetComponent<StackCollectWorker>().collectionTrs.Count + fishCollectArea.standList[fishCollectArea.standList.Count - 1 - i].fishCountCurrent;
                             tempCollectArea.Add(env);
                             targetStand = fishCollectArea.standList[fishCollectArea.standList.Count - 1 - i];
 

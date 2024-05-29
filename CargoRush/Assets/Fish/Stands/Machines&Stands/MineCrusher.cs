@@ -62,10 +62,10 @@ public class MineCrusher : Stand, IStandUpgrade
     float speedFactor = 1f;
     public override void CollectableCountSet()
     {
-        PlayerPrefs.SetInt(machineName + "col1", ironCollectionList.Count);
-        PlayerPrefs.SetInt(machineName + "col2", plasticCollectionList.Count);
-        PlayerPrefs.SetInt(machineName + "col3", yarnCollectionList.Count);
-        PlayerPrefs.SetInt(machineName + "col4", woodCollectionList.Count);
+        PlayerPrefs.SetInt(machineName + "col1" + PlayerPrefs.GetInt("level"), ironCollectionList.Count);
+        PlayerPrefs.SetInt(machineName + "col2" + PlayerPrefs.GetInt("level"), plasticCollectionList.Count);
+        PlayerPrefs.SetInt(machineName + "col3" + PlayerPrefs.GetInt("level"), yarnCollectionList.Count);
+        PlayerPrefs.SetInt(machineName + "col4" + PlayerPrefs.GetInt("level"), woodCollectionList.Count);
         ProductFullCheck();
     }
 
@@ -713,7 +713,7 @@ public class MineCrusher : Stand, IStandUpgrade
     IEnumerator ManuealRawCreator()
     {
         yield return new WaitForSeconds(1.5f);
-        for (int i = 0; i < PlayerPrefs.GetInt(machineName + "col1"); i++)
+        for (int i = 0; i < PlayerPrefs.GetInt(machineName + "col1" + PlayerPrefs.GetInt("level")); i++)
         {
             GameObject newProduct = Instantiate(productsPrefab[0].gameObject);
             newProduct.GetComponent<Collectable>().collectActive = false;
@@ -744,7 +744,7 @@ public class MineCrusher : Stand, IStandUpgrade
         }
         yield return null;
 
-        for (int i = 0; i < PlayerPrefs.GetInt(machineName + "col2"); i++)
+        for (int i = 0; i < PlayerPrefs.GetInt(machineName + "col2" + PlayerPrefs.GetInt("level")); i++)
         {
             GameObject newProduct = Instantiate(productsPrefab[1].gameObject);
             newProduct.GetComponent<Collectable>().collectActive = false;
@@ -776,7 +776,7 @@ public class MineCrusher : Stand, IStandUpgrade
         }
         yield return null;
 
-        for (int i = 0; i < PlayerPrefs.GetInt(machineName + "col3"); i++)
+        for (int i = 0; i < PlayerPrefs.GetInt(machineName + "col3" + PlayerPrefs.GetInt("level")); i++)
         {
             GameObject newProduct = Instantiate(productsPrefab[2].gameObject);
             newProduct.GetComponent<Collectable>().collectActive = false;
@@ -808,7 +808,7 @@ public class MineCrusher : Stand, IStandUpgrade
         }
         yield return null;
 
-        for (int i = 0; i < PlayerPrefs.GetInt(machineName + "col4"); i++)
+        for (int i = 0; i < PlayerPrefs.GetInt(machineName + "col4" + PlayerPrefs.GetInt("level")); i++)
         {
             GameObject newProduct = Instantiate(productsPrefab[3].gameObject);
             newProduct.GetComponent<Collectable>().collectActive = false;
@@ -922,7 +922,7 @@ public class MineCrusher : Stand, IStandUpgrade
 
 
         droppedCollectionList.Add(droppingCollection);
-        PlayerPrefs.SetInt(machineName + "rawcount", droppedCollectionList.Count);
+        PlayerPrefs.SetInt(machineName + "rawcount" + PlayerPrefs.GetInt("level"), droppedCollectionList.Count);
 
         yield return null;
         droppingCollection.collectActive = false;

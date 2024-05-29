@@ -6,6 +6,9 @@ using TMPro;
 using Cinemachine;
 public class UpgradeArea : MonoBehaviour, BuyCamera
 {
+    public int ratioValue;
+    public bool shopBayArea = false;
+
     public bool buyActive = false;
     [SerializeField] GameObject[] buyAreas;
 
@@ -52,7 +55,7 @@ public class UpgradeArea : MonoBehaviour, BuyCamera
         if (PlayerPrefs.GetInt(buyName) == 1)
         {
 
-            LevelSet(Time.deltaTime, false);
+            LevelSet(Time.deltaTime, false, false);
 
             GetComponent<Collider>().enabled = false;
 
@@ -187,7 +190,7 @@ public class UpgradeArea : MonoBehaviour, BuyCamera
     }
     IEnumerator buildScaling()
     {
-        LevelSet(1f,false);
+        LevelSet(1f,false , true);
         yield return null;
 
         int buildChildCount = transform.childCount;
@@ -212,12 +215,12 @@ public class UpgradeArea : MonoBehaviour, BuyCamera
         }
         bld.localScale = new Vector3(lastSize, lastSize, lastSize);
     }
-    void LevelSet(float waitTime, bool cameraActive)
+    void LevelSet(float waitTime, bool cameraActive, bool isNewOpen)
     {
         //buildPrefab.SetActive(true);
-        StartCoroutine(OpenBuyAreas(waitTime, cameraActive));
+        StartCoroutine(OpenBuyAreas(waitTime, cameraActive, isNewOpen));
     }
-    IEnumerator OpenBuyAreas(float waitTime, bool cameraActive)
+    IEnumerator OpenBuyAreas(float waitTime, bool cameraActive, bool isNewOpen)
     {
         yield return new WaitForSeconds(waitTime);
         if (cameraActive)
@@ -249,6 +252,18 @@ public class UpgradeArea : MonoBehaviour, BuyCamera
                 {
                     buyAreas[i].GetComponent<BuyCamera>().buyCamera.Priority = 0;
                 }
+            }
+        }
+
+        if (shopBayArea)
+        {
+            if (isNewOpen)
+            {
+                ShopManager.Instance.SetShopCount(0, ratioValue, true);
+            }
+            else
+            {
+                ShopManager.Instance.SetShopCount(0, ratioValue, false);
             }
         }
     }

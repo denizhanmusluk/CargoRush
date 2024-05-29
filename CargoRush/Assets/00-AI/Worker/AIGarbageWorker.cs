@@ -110,7 +110,7 @@ public class AIGarbageWorker : MonoBehaviour, IWorkerModelSelect
     }
     public void PlayerMovingDirection(Vector3 targetPos)
     {
-        float speed = 0.5f + 0.05f * Globals.workerMoveSpeedLevel;
+        float speed = 0.75f + 0.05f * Globals.workerMoveSpeedLevel;
         animator.SetFloat("Speed", speed);
         animator.SetBool("walk", true);
         Vector3 direction = (targetPos - transform.position).normalized;
@@ -218,11 +218,20 @@ public class AIGarbageWorker : MonoBehaviour, IWorkerModelSelect
     public void TargetGarbageSelect()
     {
         //navMeshAgent.obstacleAvoidanceType = ObstacleAvoidanceType.MedQualityObstacleAvoidance;
-
+        float distance;
         isStayHoldActive = false;
         if (fishDropArea.collectableList.Count != 0)
         {
             currentCollectable = fishDropArea.collectableList[0];
+            distance = Vector3.Distance(currentCollectable.transform.position, transform.position);
+            for (int i = 0; i < fishDropArea.collectableList.Count; i++)
+            {
+                if(Vector3.Distance(fishDropArea.collectableList[i].transform.position, transform.position) < distance)
+                {
+                    currentCollectable = fishDropArea.collectableList[i];
+                    distance = Vector3.Distance(currentCollectable.transform.position, transform.position);
+                }
+            }
 
             following = null;
             following += GoToCollect;

@@ -19,6 +19,7 @@ public class GameManager : Observer
     float firstTime;
     public int firstLevelPartCount;
     [SerializeField] int createMoney;
+    [SerializeField] int createMoney2;
     void Awake()
     {
         Globals.moneyAmount = PlayerPrefs.GetInt("money");
@@ -80,6 +81,10 @@ public class GameManager : Observer
     {
         MoneyUpdate(createMoney);
     }
+    public void GetMoney2()
+    {
+        MoneyUpdate(createMoney2);
+    }
     void OnLevelStart()
     {
         ui.startCanvas.SetActive(false);
@@ -138,10 +143,10 @@ public class GameManager : Observer
         {
             MoneyUpdate(createMoney);
         }
-        if (Input.GetKeyDown(KeyCode.G))
-        {
-            GemUpdate(createMoney);
-        }
+        //if (Input.GetKeyDown(KeyCode.G))
+        //{
+        //    GemUpdate(createMoney);
+        //}
         if (Input.GetKeyDown(KeyCode.H))
         {
             PlayerPrefs.SetInt("holeLevel", 0);

@@ -87,9 +87,9 @@ public class BuyArea : MonoBehaviour, BuyCamera
     public void Start()
     {
         standShowText.text = standShowName;
-        if (PlayerPrefs.GetInt(buyName) == 0 && cost == 0 && buyActive)
+        if (PlayerPrefs.GetInt(buyName + PlayerPrefs.GetInt("level")) == 0 && cost == 0 && buyActive)
         {
-            PlayerPrefs.SetInt(buyName, 1);
+            PlayerPrefs.SetInt(buyName + PlayerPrefs.GetInt("level"), 1);
             IndicatorActive = false;
             instantiateBuild(Time.deltaTime, true);
 
@@ -104,7 +104,7 @@ public class BuyArea : MonoBehaviour, BuyCamera
     {
         yield return new WaitForSeconds(0.1f);
 
-        if (PlayerPrefs.GetInt(buyName) == 1)
+        if (PlayerPrefs.GetInt(buyName + PlayerPrefs.GetInt("level")) == 1)
         {
             checkMoneyActive = false;
             IndicatorActive = false;
@@ -144,14 +144,14 @@ public class BuyArea : MonoBehaviour, BuyCamera
 
 
 
-        if (PlayerPrefs.GetInt(currentCostBuild) == 0)
+        if (PlayerPrefs.GetInt(currentCostBuild + PlayerPrefs.GetInt("level")) == 0)
         {
             currentAmount = cost;
             costText.text = CoefficientTransformation.Converter(cost);
         }
         else
         {
-            currentAmount = PlayerPrefs.GetInt(currentCostBuild);
+            currentAmount = PlayerPrefs.GetInt(currentCostBuild + PlayerPrefs.GetInt("level"));
             costText.text = CoefficientTransformation.Converter(currentAmount);
         }
         if (cost == 0)
@@ -170,7 +170,7 @@ public class BuyArea : MonoBehaviour, BuyCamera
         }
         else
         {
-            if (IndicatorActive && PlayerPrefs.GetInt(buyName) == 0)
+            if (IndicatorActive && PlayerPrefs.GetInt(buyName + PlayerPrefs.GetInt("level")) == 0)
             {
                 IndicatorManager.Instance.IndicaorActive(transform);
             }
@@ -306,11 +306,11 @@ public class BuyArea : MonoBehaviour, BuyCamera
             GameManager.Instance.MoneyUpdate(-PlayerPrefs.GetInt("money"));
         }
 
-        PlayerPrefs.SetInt(currentCostBuild, currentAmount);
+        PlayerPrefs.SetInt(currentCostBuild + PlayerPrefs.GetInt("level"), currentAmount);
         if (currentAmount == 0)
         {
             FirstOpenArea();
-            PlayerPrefs.SetInt(buyName, 1);
+            PlayerPrefs.SetInt(buyName + PlayerPrefs.GetInt("level"), 1);
             PlayerPrefs.Save();
 
         }
@@ -438,10 +438,12 @@ public class BuyArea : MonoBehaviour, BuyCamera
             {
                 // satýn alýndýktan sonra bir sonrakileri
                 buyAreas[i].GetComponent<BuyArea>().buyActive = true;
+                yield return null;
                 buyAreas[i].GetComponent<BuyArea>().OpenNextBuyArea();
 
 
                 buyAreas[i].GetComponent<BuyArea>().OpenAndActive();
+
             }
             if (isNewOpen && !cameraPassive)
             {
@@ -513,11 +515,12 @@ public class BuyArea : MonoBehaviour, BuyCamera
                         buyAreas[i].GetComponent<BuyArea>().buyActive = false;
                         buyAreas[i].GetComponent<BuyArea>().OpenButDeactive();
                         buyAreas[i].GetComponent<BuyArea>().standShowLockedText.text = "Unlock \n" + standShowName;
-                        yield return new WaitForSeconds(0.1f);
+                        //yield return new WaitForSeconds(0.1f);
                     }
                 }
             }
         }
+        yield return new WaitForSeconds(0.1f);
     }
 
 

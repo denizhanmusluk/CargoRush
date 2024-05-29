@@ -31,6 +31,16 @@ public class HRWorkerArea : MonoBehaviour, BuyCamera
         HRUpgradeManager.Instance.firstCreateTR = firstCreateTR;
         HRUpgradeManager.Instance.WorkerCreate();
         HRUpgradeManager.Instance.HRWorkerGO = HRWorkerGO;
+        StartCoroutine(StartDelay());
+       
+    }
+    IEnumerator StartDelay()
+    {
+        yield return new WaitForSeconds(1f);
+        if (PlayerPrefs.GetInt("hropen") == 0)
+        {
+            IndicatorManager.Instance.IndicaorActive(circleWhite.transform);
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -49,6 +59,11 @@ public class HRWorkerArea : MonoBehaviour, BuyCamera
             }
             circleWhite.SetActive(false);
             circleGreen.SetActive(true);
+            if (PlayerPrefs.GetInt("hropen") == 0)
+            {
+                PlayerPrefs.SetInt("hropen", 1);
+                IndicatorManager.Instance.IndicaorDeActive();
+            }
         }
     }
     private void OnTriggerExit(Collider other)

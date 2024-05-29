@@ -252,17 +252,26 @@ public class PlayerController : MonoBehaviour
         if (!_FloatingJoystick.pressActive)
         {
             firstPressPos = (Vector2)Input.mousePosition;
-            Debug.Log("PRESS PRESS");
         }
         else
         {
             pressJoystick = true;
-            Debug.Log("None None");
 
         }
         OnUpdate = null;
-        OnUpdate += _Update;
         animator.SetBool("working", false);
+        StartCoroutine(ReactiveDelay());
+    }
+    bool reactivator = true;
+    IEnumerator ReactiveDelay()
+    {
+        float delayRnd = UnityEngine.Random.Range(0.1f, 0.5f);
+        yield return new WaitForSeconds(delayRnd);
+        if (reactivator)
+        {
+            OnUpdate += _Update;
+            reactivator = false;
+        }
     }
     public void OnDisable()
     {
@@ -356,6 +365,7 @@ public class PlayerController : MonoBehaviour
     }
     public void PlayerControlDeActive()
     {
+        reactivator = true;
         Globals.playerStackActive = false;
         OnUpdate = null;
         pressJoystick = false;

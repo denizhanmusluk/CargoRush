@@ -8,6 +8,8 @@ public class LoadingGame : MonoBehaviour
 {
     [SerializeField] List<Image> images = new List<Image>();
     [SerializeField] Image loadBar;
+    [SerializeField] Slider loadBar2;
+
     [SerializeField] float loadTime = 5f;
 
     [SerializeField] string[] textList;
@@ -30,6 +32,7 @@ public class LoadingGame : MonoBehaviour
         if (Globals.loadingPanelActive)
         {
             loadBar.fillAmount = 0f;
+            loadBar2.value = 0f;
             StartCoroutine(LoadinBar());
             StartCoroutine(LoadingText());
         }
@@ -52,6 +55,7 @@ public class LoadingGame : MonoBehaviour
         {
             counter += Time.deltaTime;
             loadBar.fillAmount = counter / loadTime;
+            loadBar2.value = counter / loadTime;
             yield return null;
         }
         loadingText.enabled = false;

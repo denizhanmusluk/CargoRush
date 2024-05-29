@@ -37,6 +37,7 @@ public class MoneyArea : MonoBehaviour
     }
     IEnumerator MoneyCollecting()
     {
+        int stepNo = 0;
         List<BanknotMoney> tempMoneyList = new List<BanknotMoney>();
         int totalEarn = 0;
         foreach(var mny in moneyList)
@@ -54,9 +55,14 @@ public class MoneyArea : MonoBehaviour
         {
             VibratoManager.Instance.LightVibration();
             tempMoneyList[i].MovingMoneyUI(tempMoneyList[i].transform.position, GameManager.Instance.ui.moneyTarget);
-            yield return null;
+            stepNo++;
+            if (stepNo % 5 == 0)
+            {
+                yield return null;
+            }
         }
 
+        yield return null;
 
     }
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DitzelGames.FastIK;
 
 [System.Serializable]
 public abstract class StackCollect : MonoBehaviour
@@ -32,7 +33,20 @@ public abstract class StackCollect : MonoBehaviour
     public Transform[] stackLevel_3_PosList;
     public int stackLevel = 0;
     public bool player;
+    public FastIKFabric ikLeft;
+    public FastIKFabric ikRight;
 
+    public Transform leftIkTarget;
+    public Transform rightIkTarget;
+
+    public Transform leftProductTarget;
+    public Transform rightProductTarget;
+
+    public Transform leftBoxTarget;
+    public Transform rightBoxTarget;
+
+    public Transform leftNullTarget;
+    public Transform rightNullTarget;
     public abstract void StackAnimation();
     public abstract void StackEmptyAnimation();
 
@@ -88,7 +102,6 @@ public abstract class StackCollect : MonoBehaviour
         {
             if (collectable.collectID == 0)
             {
-                stackStepOffset = 0.5f;
                 if (PlayerPrefs.GetInt("collectablecount" ) < IndicatorManager.Instance.gemCountForTutorial)
                 {
                     PlayerPrefs.SetInt("collectablecount", PlayerPrefs.GetInt("collectablecount") + 1);
@@ -121,7 +134,6 @@ public abstract class StackCollect : MonoBehaviour
             }
             else
             {
-                stackStepOffset = 1.25f;
             }
 
             collectable.transform.parent = null;
@@ -137,6 +149,16 @@ public abstract class StackCollect : MonoBehaviour
 
             if (stackLevel == 0)
             {
+                if(collectionTrs[0].collectID == 0)
+                {
+                    stackStepOffset = 0.5f;
+                    stackLevel_1_PosList[0].localPosition = new Vector3(stackLevel_1_PosList[0].localPosition.x, stackLevel_1_PosList[0].localPosition.y, -0.2f);
+                }
+                else
+                {
+                    stackStepOffset = 1.25f;
+                    stackLevel_1_PosList[0].localPosition = new Vector3(stackLevel_1_PosList[0].localPosition.x, stackLevel_1_PosList[0].localPosition.y, 0.1f);
+                }
 
                 Transform targetTR = stackLevel_1_PosList[(collectionTrs.Count - 1) % stackLevel_1_PosList.Length];
 
@@ -411,10 +433,10 @@ public abstract class StackCollect : MonoBehaviour
     private IEnumerator ComeToMe(Collectable collectable, Transform targetTR, float deltaY, bool parentActive)
     {
         collectable.isCollected = true;
-        foreach (var anim in collectable.GetComponentsInChildren<Animator>())
-        {
-            anim.enabled = false;
-        }
+        //foreach (var anim in collectable.GetComponentsInChildren<Animator>())
+        //{
+        //    anim.enabled = false;
+        //}
     
         if (collectable.GetComponent<BigFish>() != null)
         {

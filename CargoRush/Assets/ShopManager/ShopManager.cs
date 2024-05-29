@@ -34,6 +34,7 @@ public class ShopManager : MonoBehaviour
     public Sprite questionMark;
 
     public GameObject buyOthersGO;
+    public float nextLevelShowRatio;
 
     void Awake()
     {
@@ -81,18 +82,18 @@ public class ShopManager : MonoBehaviour
             preCount = shopCountCurrent[shopId];
             shopCountCurrent[shopId] += shopValue;
             CollectProgressManager.Instance.shopFirstIcon.sprite = shopSpriteList[shopId];
-            CollectProgressManager.Instance.shopTargetIcon.sprite = shopSpriteList[shopId + 1];
-            CollectProgressManager.Instance.questMarkImgGO.SetActive(false);
+            //CollectProgressManager.Instance.shopTargetIcon.sprite = shopSpriteList[shopId + 1];
+            //CollectProgressManager.Instance.questMarkImgGO.SetActive(false);
 
             if (shopId + 1 == PlayerPrefs.GetInt("shopLevel"))
             {
-                CollectProgressManager.Instance.shopTargetIcon.sprite = shopSpriteList[shopId + 1];
-                CollectProgressManager.Instance.questMarkImgGO.SetActive(false);
+                //CollectProgressManager.Instance.shopTargetIcon.sprite = shopSpriteList[shopId + 1];
+                //CollectProgressManager.Instance.questMarkImgGO.SetActive(false);
             }
             else
             {
-                CollectProgressManager.Instance.shopTargetIcon.sprite = questionMark;
-                CollectProgressManager.Instance.questMarkImgGO.SetActive(true);
+                //CollectProgressManager.Instance.shopTargetIcon.sprite = questionMark;
+                //CollectProgressManager.Instance.questMarkImgGO.SetActive(true);
             }
 
             if (newOpen)
@@ -279,13 +280,23 @@ public class ShopManager : MonoBehaviour
 
         if(targetFill >= shopRatio[shopID])
         {
-            CollectProgressManager.Instance.shopTargetIcon.sprite = shopSpriteList[shopID + 1];
-            CollectProgressManager.Instance.questMarkImgGO.SetActive(false);
+            //CollectProgressManager.Instance.shopTargetIcon.sprite = shopSpriteList[shopID + 1];
+            //CollectProgressManager.Instance.questMarkImgGO.SetActive(false);
 
             if (PlayerPrefs.GetInt("shopLevel") == shopID)
             {
                 NewShopOpen();
             }
+        }
+        if (nextLevelShowRatio <= shopProgresFill.fillAmount)
+        {
+            CollectProgressManager.Instance.shopTargetIcon.sprite = shopSpriteList[1];
+            CollectProgressManager.Instance.questMarkImgGO.SetActive(false);
+
+        }
+        else
+        {
+            CollectProgressManager.Instance.shopTargetIcon.sprite = questionMark;
         }
 
         //if (PlayerPrefs.GetInt(shopName[shopID]) < shopSettings._shopData[shopID].shopRatio.Length)

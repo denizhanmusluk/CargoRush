@@ -72,7 +72,7 @@ public class BanknotMoney : MonoBehaviour
         float psoY_Factor = 3f;
         while (counter < 1f)
         {
-            counter += 4 * Time.deltaTime;
+            counter += 20 * Time.deltaTime;
 
             angle = counter * Mathf.PI;
             posY = psoY_Factor * Mathf.Sin(angle);
@@ -98,7 +98,7 @@ public class BanknotMoney : MonoBehaviour
         Vector3 randomRotSpeed = new Vector3(Random.Range(0.5f, 2f), Random.Range(0.5f, 2f), Random.Range(0.5f, 2f));
         Vector3 tempPos = _targetTR.position;
         float counter = 0f;
-        float speed = 8f;
+        float speed = 25f;
         while (counter < 1f)
         {
             counter += speed * Time.deltaTime;

@@ -42,7 +42,7 @@ public class BuyBuild : MonoBehaviour
 
     void Start()
     {
-        if (PlayerPrefs.GetInt(buyName) == 1)
+        if (PlayerPrefs.GetInt(buyName + PlayerPrefs.GetInt("level")) == 1)
         {
             buyArea.SetActive(false);
             //Instantiate(buildPrefab, buildPositionOffset, transform.rotation, transform.parent);
@@ -64,7 +64,7 @@ public class BuyBuild : MonoBehaviour
         //outline.fillAmount = 1 - (float)currentAmount / (float)cost;
         // // // // // // // // // //
 
-        if (PlayerPrefs.GetInt(buyName) == 0)
+        if (PlayerPrefs.GetInt(buyName + PlayerPrefs.GetInt("level")) == 0)
         {
             TextInit();
             AvailableForPurchase.Instance._buyBuild.Add(this);
@@ -193,7 +193,7 @@ public class BuyBuild : MonoBehaviour
     {
         if (other.GetComponent<PlayerController>() != null)
         {
-            if (dropActive && PlayerPrefs.GetInt(buyName) == 0)
+            if (dropActive && PlayerPrefs.GetInt(buyName + PlayerPrefs.GetInt("level")) == 0)
             {
                 //CollectionChecking(other.GetComponent<PlayerController>()._stackCollect);
                 dropActive = false;
@@ -204,7 +204,7 @@ public class BuyBuild : MonoBehaviour
     {
         if (other.GetComponent<PlayerController>() != null && other.GetComponent<PlayerController>().pressJoystick == false)
         {
-            if (!dropActive && PlayerPrefs.GetInt(buyName) == 0)
+            if (!dropActive && PlayerPrefs.GetInt(buyName + PlayerPrefs.GetInt("level")) == 0)
             {
                 CollectionChecking(other.GetComponent<PlayerController>()._stackCollect);
                 dropActive = true;
@@ -407,7 +407,7 @@ public class BuyBuild : MonoBehaviour
         if (buyActive)
         {
             buildingManager.BuildOpen();
-            if (PlayerPrefs.GetInt(buyName) == 0)
+            if (PlayerPrefs.GetInt(buyName + PlayerPrefs.GetInt("level")) == 0)
             {
                 buildingManager.OpenNewBuild();
             }
@@ -440,6 +440,6 @@ public class BuyBuild : MonoBehaviour
         AvailableForPurchase.Instance.ListSet();
         Build _build = Instantiate(buildPrefab, transform.position, transform.rotation, transform.parent).GetComponent<Build>();
         _build.buildPositionTR = buildPosTR;
-        PlayerPrefs.SetInt(buyName, 1);
+        PlayerPrefs.SetInt(buyName + PlayerPrefs.GetInt("level"), 1);
     }
 }

@@ -20,22 +20,22 @@ public class WorkerNoButton : WorkerUpgradeButton
     {
         levelText.text = currentLvl.ToString();
         //Debug.Log("Globals.machineLevel  " + PlayerPrefs.GetInt("machineLevel") + "  " + currentLvl);
-        //for (int i = 0; i < currentLvl; i++)
-        //{
-        //    barList[i].SetActive(false);
-        //    infoList[i].SetActive(false);
-        //}
-        //barList[currentLvl].SetActive(true);
+        for (int i = 0; i < currentLvl; i++)
+        {
+            barList[i].SetActive(false);
+            infoList[i].SetActive(false);
+        }
+        barList[currentLvl].SetActive(true);
 
-        //if(currentLvl > PlayerPrefs.GetInt("machineLevel") + 1)
-        //{
-        //    infoList[currentLvl].SetActive(true);
-        //    moneyButton.gameObject.SetActive(false);
-        //}
-        //else
-        //{
-        //    infoList[currentLvl].SetActive(false);
-        //    moneyButton.gameObject.SetActive(true);
-        //}
+        if (currentLvl > PlayerPrefs.GetInt("machineLevel") + 1)
+        {
+            //infoList[currentLvl].SetActive(true);
+            //moneyButton.gameObject.SetActive(false);
+        }
+        else
+        {
+            //infoList[currentLvl].SetActive(false);
+            moneyButton.gameObject.SetActive(true);
+        }
     }
 }

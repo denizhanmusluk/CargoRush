@@ -10,6 +10,7 @@ public class Collector : MonoBehaviour
     public int productId;
     public GameObject shadowGO;
     public bool collectorActive = true;
+
     public void FirstPush(Vector3 forceDir)
     {
         rb.isKinematic = false;
@@ -32,7 +33,7 @@ public class Collector : MonoBehaviour
     IEnumerator Kinemator()
     {
         yield return new WaitForSeconds(1f);
-        while (rb != null && (rb.velocity.x > 0 || rb.velocity.y > 0 || rb.velocity.z > 0))
+        while (rb != null && (rb.velocity.x > 0 || rb.velocity.y > 0 || rb.velocity.z > 0 || transform.position.y > 1.5f))
         {
             yield return null;
         }

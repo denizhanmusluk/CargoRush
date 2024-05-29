@@ -73,10 +73,10 @@ public class NewWorldActive : MonoBehaviour
     }
     IEnumerator ResetDelay()
     {
-        if (MissionManager.Instance.newMapMission.gameObject.activeInHierarchy)
-        {
-            MissionManager.Instance.newMapMission.MissionUpdate();
-        }
+        //if (MissionManager.Instance.newMapMission.gameObject.activeInHierarchy)
+        //{
+        //    MissionManager.Instance.newMapMission.MissionUpdate();
+        //}
         PlayerController.Instance.PlayerControlDeActive();
         float firstSize = CameraManager.Instance.vCamPlayer.m_Lens.OrthographicSize;
         float counter = 0f;

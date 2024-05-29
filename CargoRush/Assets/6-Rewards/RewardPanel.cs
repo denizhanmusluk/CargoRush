@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class RewardPanel : MonoBehaviour
@@ -31,4 +32,7 @@ public class RewardPanel : MonoBehaviour
 
     public GameObject vipPanelGO;
     public TextMeshProUGUI vipCounterText;
+
+    public Image vipImg;
+
 }

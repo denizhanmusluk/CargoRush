@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class StandFishCar : Stand
+public class StandFishCar : Stand,IMoneyArea
 {
     [SerializeField] GameObject canvasProductGO, canvasDeliveringGO;
     [SerializeField] Image imageFill;
@@ -32,6 +32,9 @@ public class StandFishCar : Stand
     public int[] typeCount;
     Vector3 firstColliderOffset;
     public int[] tempIdList;
+
+    public Sprite[] vipImgList;
+
     void TextInitCheck()
     {
         for (int i = 0; i < productTypeCount.Length; i++)
@@ -50,6 +53,10 @@ public class StandFishCar : Stand
             }
         }
     }
+    public void MoneySave()
+    {
+        PlayerPrefs.SetInt(standNameLevel + "banknotcount", 0);
+    }
     public override void CollectableCountSet()
     {
 
@@ -63,6 +70,8 @@ public class StandFishCar : Stand
     IEnumerator StartDelay()
     {
         yield return new WaitForSeconds(1f);
+        StartCoroutine(MoneyCreate());
+
         if (PlayerPrefs.GetInt("firstindactive") == 0)
         {
             PlayerPrefs.SetInt("firstindactive", 1);
@@ -105,8 +114,10 @@ public class StandFishCar : Stand
         if (currentCar != null)
         {
             //currentCar.GetComponent<FishCar>().CarLevelCreate(carLevel);
-            ResetStand();
-
+            if (StandActive)
+            {
+                ResetStand();
+            }
         }
         fishCountCurrent += (totalBoxCount - fishCountTotal);
 
@@ -147,6 +158,10 @@ public class StandFishCar : Stand
         currentCar.GetComponent<FishCar>().standPos = carStandPosList[carLevel];
         currentCar.GetComponent<FishCar>().carGoPos = carGoTR;
 
+        if (thisVip)
+        {
+            currentCar.GetComponent<FishCar>().vipCanvasGo.SetActive(true);
+        }
 
         productTypeCount = new int[Globals.collectableLevel + 1];
         productTypeCountTotal = new int[Globals.collectableLevel + 1];
@@ -395,6 +410,7 @@ public class StandFishCar : Stand
     }
     IEnumerator DroppingMoney(List<Collectable> droppingCollectionList)
     {
+        int stepNo = 0;
 
         float moneyFactor = 1f;
         if (thisVip)
@@ -419,13 +435,17 @@ public class StandFishCar : Stand
             float deltaY = 0;
             deltaY = (moneyListCount + i) / moneyArea.dropMoneyPosList.Count;
             Transform targetTR = moneyArea.dropMoneyPosList[(moneyListCount + i) % moneyArea.dropMoneyPosList.Count];
-            Vector3 dropPos = targetTR.position + new Vector3(0, deltaY * 0.05f, 0);
+            Vector3 dropPos = targetTR.position + new Vector3(0, deltaY * 0.2f, 0);
             BanknotMoney banknot = Instantiate(moneyArea.moneyPrefab, moneyArea.firstMoneyCreatePosTR.position, Quaternion.identity).GetComponent<BanknotMoney>();
             banknot.MovingMoney(moneyArea.firstMoneyCreatePosTR.position, dropPos, targetTR);
             banknot.banknotValue = 2;
             moneyArea.moneyList.Add(banknot);
 
-            yield return null;
+            stepNo++;
+            if (stepNo % 5 == 0)
+            {
+                yield return null;
+            }
         }
 
 
@@ -466,10 +486,28 @@ public class StandFishCar : Stand
         //}
 
         droppedCollectionList.Clear();
+        PlayerPrefs.SetInt(standNameLevel + "banknotcount", PlayerPrefs.GetInt(standNameLevel + "banknotcount") + totalMoney);
 
         yield return new WaitForSeconds(1f);
         StartCoroutine(ColliderReset());
 
+    }
+    IEnumerator MoneyCreate()
+    {
+        int banknotVal = 2;
+        for (int i = 0; i < PlayerPrefs.GetInt(standNameLevel + "banknotcount"); i++)
+        {
+            float deltaY = 0;
+            deltaY = (i) / moneyArea.dropMoneyPosList.Count;
+            Transform targetTR = moneyArea.dropMoneyPosList[(i) % moneyArea.dropMoneyPosList.Count];
+            Vector3 dropPos = targetTR.position + new Vector3(0, deltaY * 0.2f, 0);
+            BanknotMoney banknot = Instantiate(moneyArea.moneyPrefab, moneyArea.firstMoneyCreatePosTR.position, Quaternion.identity).GetComponent<BanknotMoney>();
+            banknot.MovingMoney(moneyArea.firstMoneyCreatePosTR.position, dropPos, targetTR);
+            banknot.banknotValue = banknotVal;
+            moneyArea.moneyList.Add(banknot);
+            yield return null;
+        }
+        yield return null;
     }
     IEnumerator ColliderReset()
     {
@@ -490,8 +528,8 @@ public class StandFishCar : Stand
     }
     IEnumerator ResetDelay()
     {
-        //DropMoney();
-        StandActive = false;
+         //DropMoney();
+         StandActive = false;
         GetComponent<Collider>().enabled = false;
 
         yield return new WaitForSeconds(1f);
@@ -558,6 +596,8 @@ public class StandFishCar : Stand
         vipWaiting = true;
         vipCounter = _time;
         RewardPanel.Instance.vipPanelGO.SetActive(true);
+        RewardPanel.Instance.vipImg.sprite = vipImgList[carLevel];
+        
         while (vipCounter > 0)
         {
             int minute = Mathf.FloorToInt(vipCounter / 60);

@@ -23,6 +23,7 @@ public class ProcessMachine : Stand, IStandUpgrade
     [SerializeField] int extraCustomerCount;
 
     [SerializeField] GameObject fullTextGO;
+    [SerializeField] GameObject stoppedTextGO;
 
 
     public MineCrusher mineCrusher;
@@ -48,8 +49,8 @@ public class ProcessMachine : Stand, IStandUpgrade
     public bool kizakRunning = false;
     public override void CollectableCountSet()
     {
-        PlayerPrefs.SetInt(machineName + "rawcount", droppedCollectionList.Count);
-        PlayerPrefs.SetInt(machineName + "col", productCollectionList.Count);
+        PlayerPrefs.SetInt(machineName + "rawcount" + PlayerPrefs.GetInt("level"), droppedCollectionList.Count);
+        PlayerPrefs.SetInt(machineName + "col" + PlayerPrefs.GetInt("level"), productCollectionList.Count);
         TraySet();
 
     }
@@ -215,6 +216,7 @@ public class ProcessMachine : Stand, IStandUpgrade
 
                 StartCoroutine(CannedCreator());
                 fullTextGO.SetActive(false);
+                stoppedTextGO.SetActive(false);
                 machineIsFull = false;
             }
             else
@@ -222,6 +224,7 @@ public class ProcessMachine : Stand, IStandUpgrade
                 kizakRunning = false;
                 MachineStop();
                 fullTextGO.SetActive(true);
+                stoppedTextGO.SetActive(true);
                 machineIsFull = true;
             }
             if (!creatingActive)
@@ -643,7 +646,7 @@ public class ProcessMachine : Stand, IStandUpgrade
 
         
             droppedCollectionList.Add(droppingCollection);
-        PlayerPrefs.SetInt(machineName + "rawcount", droppedCollectionList.Count);
+        PlayerPrefs.SetInt(machineName + "rawcount" + PlayerPrefs.GetInt("level"), droppedCollectionList.Count);
 
         yield return null;
             droppingCollection.collectActive = false;
@@ -744,7 +747,7 @@ public class ProcessMachine : Stand, IStandUpgrade
     IEnumerator ManuealRawCreator()
     {
         yield return new WaitForSeconds(1.5f);
-        for (int i = 0; i < PlayerPrefs.GetInt(machineName + "rawcount"); i++)
+        for (int i = 0; i < PlayerPrefs.GetInt(machineName + "rawcount" + PlayerPrefs.GetInt("level")); i++)
         {
             GameObject newProduct = Instantiate(rawPrefabs[0].gameObject);
             newProduct.GetComponent<Collectable>().collectActive = false;
@@ -782,7 +785,7 @@ public class ProcessMachine : Stand, IStandUpgrade
     IEnumerator ManuealProductCreator()
     {
         yield return new WaitForSeconds(1.5f);
-        for (int i = 0; i < PlayerPrefs.GetInt(machineName + "col"); i++)
+        for (int i = 0; i < PlayerPrefs.GetInt(machineName + "col" + PlayerPrefs.GetInt("level")); i++)
         {
             GameObject newProduct = Instantiate(productPrefabs[0].gameObject);
             newProduct.GetComponent<Collectable>().collectActive = false;
