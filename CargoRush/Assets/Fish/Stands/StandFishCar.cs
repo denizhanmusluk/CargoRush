@@ -488,7 +488,7 @@ public class StandFishCar : Stand,IMoneyArea
         droppedCollectionList.Clear();
         PlayerPrefs.SetInt(standNameLevel + "banknotcount", PlayerPrefs.GetInt(standNameLevel + "banknotcount") + totalMoney);
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.1f);
         StartCoroutine(ColliderReset());
 
     }
@@ -532,7 +532,7 @@ public class StandFishCar : Stand,IMoneyArea
          StandActive = false;
         GetComponent<Collider>().enabled = false;
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.11f);
         if (!thisVip)
         {
             DropMoney(droppedCollectionList);

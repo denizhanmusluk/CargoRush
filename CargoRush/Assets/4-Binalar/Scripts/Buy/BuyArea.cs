@@ -164,17 +164,7 @@ public class BuyArea : MonoBehaviour, BuyCamera
         }
         yield return new WaitForSeconds(0.1f);
 
-        if (checkMoneyActive)
-        {
-            StartCoroutine(CheckMoney());
-        }
-        else
-        {
-            if (IndicatorActive && PlayerPrefs.GetInt(buyName + PlayerPrefs.GetInt("level")) == 0)
-            {
-                IndicatorManager.Instance.IndicaorActive(transform);
-            }
-        }
+  
     }
     IEnumerator CheckMoney()
     {
@@ -187,8 +177,8 @@ public class BuyArea : MonoBehaviour, BuyCamera
             }
             else
             {
-                IndicatorManager.Instance.IndicaorDeActive();
-                IndicatorManager.Instance.transUpIndActive = true;
+                //IndicatorManager.Instance.IndicaorDeActive();
+                //IndicatorManager.Instance.transUpIndActive = true;
             }
             yield return new WaitForSeconds(1f);
             if (currentAmount == 0)
@@ -535,6 +525,17 @@ public class BuyArea : MonoBehaviour, BuyCamera
         lockedPNG_GO.SetActive(false);
         buyCanvasGO.SetActive(true);
         Start();
+        if (checkMoneyActive)
+        {
+            StartCoroutine(CheckMoney());
+        }
+        else
+        {
+            if (IndicatorActive && PlayerPrefs.GetInt(buyName + PlayerPrefs.GetInt("level")) == 0)
+            {
+                IndicatorManager.Instance.IndicaorActive(transform);
+            }
+        }
     }
 
     public void OpenButDeactive()
