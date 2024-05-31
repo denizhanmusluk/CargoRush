@@ -87,6 +87,30 @@ public class HRWorkerArea : MonoBehaviour, BuyCamera
             }
             circleWhite.SetActive(true);
             circleGreen.SetActive(false);
+
+            if(PlayerPrefs.GetInt("againcollect") == 0)
+            {
+                PlayerPrefs.SetInt("againcollect", 1);
+                Transform indTr = IndicatorManager.Instance.targeterActiveList[0].transform;
+                float distance;
+                Collectable currentCollectable;
+                if (FishDropArea.Instance.collectableList.Count != 0)
+                {
+                    currentCollectable = FishDropArea.Instance.collectableList[0];
+                    distance = Vector3.Distance(currentCollectable.transform.position, transform.position);
+                    for (int i = 0; i < FishDropArea.Instance.collectableList.Count; i++)
+                    {
+                        if (Vector3.Distance(FishDropArea.Instance.collectableList[i].transform.position, transform.position) < distance)
+                        {
+                            currentCollectable = FishDropArea.Instance.collectableList[i];
+                            distance = Vector3.Distance(currentCollectable.transform.position, transform.position);
+                        }
+                    }
+                    indTr.position = new Vector3(currentCollectable.transform.position.x, indTr.position.y, currentCollectable.transform.position.z);
+                    IndicatorManager.Instance.IndicatorTargeterActive();
+                }
+            
+            }
         }
     }
 

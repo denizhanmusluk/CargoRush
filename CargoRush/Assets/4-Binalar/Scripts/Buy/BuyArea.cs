@@ -529,6 +529,11 @@ public class BuyArea : MonoBehaviour, BuyCamera
 
     public void OpenAndActive()
     {
+        StartCoroutine(OpenAndActiveDelay());
+    }
+    IEnumerator OpenAndActiveDelay()
+    {
+        yield return new WaitForSeconds(0.25f);
         buyActive = true;
         //transparentModel_GO.SetActive(true);
         showBuyPNG_GO.SetActive(true);
@@ -554,8 +559,8 @@ public class BuyArea : MonoBehaviour, BuyCamera
                 GameManager.Instance.ui.hrBuyTextGO.SetActive(true);
             }
         }
-    }
 
+    }
     public void OpenButDeactive()
     {
         buyActive = false;

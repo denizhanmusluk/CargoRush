@@ -581,6 +581,7 @@ public class StandFishCar : Stand,IMoneyArea
 
     public void VipActive()
     {
+        Globals.carCustomerCount = 1;
         Globals.isThereVip = true;
         thisVip = true;
 

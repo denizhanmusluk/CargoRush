@@ -33,6 +33,7 @@ public class AIGarbageWorker : MonoBehaviour, IWorkerModelSelect
     [SerializeField] Stand targetStand;
     public Board _board;
     public List<GameObject> modelList = new List<GameObject>();
+    Vector3 magnetFirstSize;
     public void LevelInit()
     {
         workerLevel = PlayerPrefs.GetInt(workerLevelName);
@@ -64,6 +65,20 @@ public class AIGarbageWorker : MonoBehaviour, IWorkerModelSelect
         aiStackCollect.GetComponent<StackCollectWorker>().characterUpgradeSettings = HRUpgradeManager.Instance._characterUpgradeSettings;
         LevelInit();
     }
+    IEnumerator MagnetSizer()
+    {
+        Vector3 targetSize = magnetFirstSize * 2f;
+        float counter = 0;
+        float value = 0;
+        while(counter < 1f)
+        {
+            counter += 2 * Time.deltaTime;
+            value = Mathf.Sin(counter * Mathf.PI);
+            collisionController.transform.localScale = Vector3.Lerp(magnetFirstSize, targetSize, value);
+            yield return null;
+        }
+        collisionController.transform.localScale = magnetFirstSize;
+    }
     public void DropActivator()
     {
         StartCoroutine(DropActivate());
@@ -93,6 +108,10 @@ public class AIGarbageWorker : MonoBehaviour, IWorkerModelSelect
 
         following = null;
         following += StopPositionGo;
+
+
+        magnetFirstSize = collisionController.transform.localScale;
+
     }
     public void MoveSpeedInit()
     {
@@ -279,7 +298,7 @@ public class AIGarbageWorker : MonoBehaviour, IWorkerModelSelect
             if (!isStayHoldActive)
             {
                 isStayHoldActive = true;
-
+                StartCoroutine(MagnetSizer());
                 playerStop();
                 //navMeshAgent.obstacleAvoidanceType = ObstacleAvoidanceType.HighQualityObstacleAvoidance;
 

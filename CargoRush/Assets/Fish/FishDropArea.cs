@@ -82,6 +82,7 @@ public class FishDropArea : MonoBehaviour
     }
     void Start()
     {
+        createTime = createPeriodTime[mineCrusher.standLevel];
         _CollectProduct.collectables = fishCollectable;
         //FishManager.Instance.rubbishDropArea = this;
         //IndicatorManager.Instance._FishDropAreaList.Add(this);
@@ -89,6 +90,7 @@ public class FishDropArea : MonoBehaviour
         //_CollectProduct._FishDropArea = this;
         StartCoroutine(GarbageDropping());
     }
+    float createTime;
     IEnumerator GarbageDropping()
     {
         while (true)
@@ -97,8 +99,11 @@ public class FishDropArea : MonoBehaviour
 
             while ((Globals.collectableLevel + 1) * totalProductCapacity <= collectableList.Count)
             {
+                createTime = createPeriodTime[mineCrusher.standLevel];
+
                 while ((float)(Globals.collectableLevel + 1) * (float)totalProductCapacity * reactiveRate + 1 < collectableList.Count)
                 {
+                    createTime = 0.1f;
                     yield return new WaitForSeconds(1f);
 
                 }
@@ -108,7 +113,7 @@ public class FishDropArea : MonoBehaviour
 
             int garbageSelect = LeastIdCheck();
             GarbageCreate(garbageSelect);
-            yield return new WaitForSeconds(createPeriodTime[mineCrusher.standLevel]);
+            yield return new WaitForSeconds(createTime);
         }
     }
     int LeastIdCheck()
