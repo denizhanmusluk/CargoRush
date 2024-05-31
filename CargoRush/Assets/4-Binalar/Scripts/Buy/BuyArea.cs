@@ -69,6 +69,8 @@ public class BuyArea : MonoBehaviour, BuyCamera
     public float showingTime = 1.5f;
     public bool boosterOpener = false;
     public bool vipActivator = false;
+    public bool hrBuy;
+
     void Awake()
     {
         if (cost >= 20)
@@ -317,6 +319,14 @@ public class BuyArea : MonoBehaviour, BuyCamera
     public bool indTutorialActive;
     void FirstOpenArea()
     {
+        if (hrBuy)
+        {
+            if (PlayerPrefs.GetInt("hropen") == 0)
+            {
+                GameManager.Instance.ui.hrBuyTextGO.SetActive(false);
+            }
+        }
+
         StartCoroutine(BuyActivator());
         
         checkMoneyActive = false;
@@ -534,6 +544,14 @@ public class BuyArea : MonoBehaviour, BuyCamera
             if (IndicatorActive && PlayerPrefs.GetInt(buyName + PlayerPrefs.GetInt("level")) == 0)
             {
                 IndicatorManager.Instance.IndicaorActive(transform);
+            }
+        }
+
+        if (hrBuy)
+        {
+            if (PlayerPrefs.GetInt("hropen") == 0)
+            {
+                GameManager.Instance.ui.hrBuyTextGO.SetActive(true);
             }
         }
     }

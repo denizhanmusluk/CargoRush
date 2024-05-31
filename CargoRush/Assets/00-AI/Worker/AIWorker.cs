@@ -504,6 +504,7 @@ public class AIWorker : MonoBehaviour, IWorkerModelSelect
            
                 targetStand.TargetArrived(this);
                 //navMeshAgent.obstacleAvoidanceType = ObstacleAvoidanceType.HighQualityObstacleAvoidance;
+                DestroyBoxChack();
             }
         }
     }
@@ -518,5 +519,32 @@ public class AIWorker : MonoBehaviour, IWorkerModelSelect
     public void UpgradeSkateBoardInit()
     {
 
+    }
+    void DestroyBoxChack()
+    {
+        if (aiStackCollect.collectionTrs.Count > 0)
+        {
+            Collectable dstCol = aiStackCollect.collectionTrs[0];
+            bool destroyActive = true;
+            for (int i = 0; i < fishCollectArea.standList.Count; i++)
+            {
+                if (fishCollectArea.standList[i].GetComponent<StandFishCar>() != null)
+                {
+                    for (int j = 0; j < fishCollectArea.standList[i].GetComponent<StandFishCar>().collectIDList.Length; j++)
+                    {
+                        if(fishCollectArea.standList[i].GetComponent<StandFishCar>().collectIDList[j] == aiStackCollect.collectionTrs[0].collectID)
+                        {
+                            destroyActive = false;
+                        }
+                    }
+                }
+            }
+            if(destroyActive == true)
+            {
+                aiStackCollect.collectionTrs.Remove(dstCol);
+                aiStackCollect.CollectedListReset();
+                Destroy(dstCol.gameObject);
+            }
+        }
     }
 }

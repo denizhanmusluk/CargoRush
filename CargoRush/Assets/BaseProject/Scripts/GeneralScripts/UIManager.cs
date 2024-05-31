@@ -52,6 +52,9 @@ public class UIManager : Subject
     public GameObject yarnOpenTextGO;
     public GameObject woodOpenTextGO;
 
+
+    public GameObject hrBuyTextGO;
+    public GameObject hrUpgradeTextGO;
     //public GameObject biggerPanelGO;
     //public TextMeshProUGUI biggerCounterText;
 

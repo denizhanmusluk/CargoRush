@@ -18,6 +18,7 @@ public class HRWorkerArea : MonoBehaviour, BuyCamera
     public GameObject HRWorkerGO;
     public GameObject circleWhite;
     public GameObject circleGreen;
+    public GameObject upDownAnimationGO;
     public CinemachineVirtualCamera thisBuyViewCamera;
     public CinemachineVirtualCamera buyCamera
     {
@@ -40,6 +41,8 @@ public class HRWorkerArea : MonoBehaviour, BuyCamera
         if (PlayerPrefs.GetInt("hropen") == 0)
         {
             IndicatorManager.Instance.IndicaorActive(circleWhite.transform);
+            GameManager.Instance.ui.hrUpgradeTextGO.SetActive(true);
+            upDownAnimationGO.SetActive(true);
         }
     }
 
@@ -63,6 +66,9 @@ public class HRWorkerArea : MonoBehaviour, BuyCamera
             {
                 PlayerPrefs.SetInt("hropen", 1);
                 IndicatorManager.Instance.IndicaorDeActive();
+                GameManager.Instance.ui.hrUpgradeTextGO.SetActive(false);
+                upDownAnimationGO.SetActive(false);
+
             }
         }
     }

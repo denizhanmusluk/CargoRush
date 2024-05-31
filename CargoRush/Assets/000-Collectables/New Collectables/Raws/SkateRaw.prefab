@@ -69,6 +69,7 @@ MonoBehaviour:
   collectableList: []
   anim: {fileID: 0}
   isGem: 0
+  bantGO: {fileID: 0}
 --- !u!54 &1883133685317556854
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -100,8 +101,9 @@ MonoBehaviour:
   impulse: 150
   pushActive: 0
   rb: {fileID: 1883133685317556854}
-  productId: 0
+  productId: 1
   shadowGO: {fileID: 8726334831124579382}
+  collectorActive: 1
 --- !u!136 &7509101394143901432
 CapsuleCollider:
   m_ObjectHideFlags: 0
