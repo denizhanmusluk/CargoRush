@@ -47,7 +47,7 @@ public class PlatformSwitchManager : MonoBehaviour
             GameManager.Instance.ui.gemPanel.SetActive(true);
         }
         //GameManager.Instance.ui.ingameCanvas.SetActive(true);
-        GameManager.Instance.ui.panelMission.SetActive(true);
+        //GameManager.Instance.ui.panelMission.SetActive(true);
         GameManager.Instance.ui.moneyPanel.SetActive(true);
 
         bottomLight.SetActive(true);

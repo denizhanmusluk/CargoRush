@@ -102,11 +102,11 @@ public class CharacterUpgradeManager : MonoBehaviour
                 InitButtonValues();
                 PlayerController.Instance.GetComponent<BoingScale>().ScaleEffectTR(PlayerController.Instance.transform, 0.8f, 1f, 0.5f, Ease.OutElastic);
                 PlayerController.Instance.UpgradeTextSpawn("+Speed");
-                
-                
-                string tag = "Player Movespeed Upgrade " + Globals.characterSpeedLevel.ToString();
+
+                string tag = "M" + (PlayerPrefs.GetInt("level") + 1).ToString() + "-CharacterSpeedUpgrade" + Globals.characterSpeedLevel.ToString();
+                GameManager.Instance.GameAnalyticsTag(tag);
+
                 float time = CoefficientTransformation.FormatSaniye(Globals.playTime);
-                //GameAnalytics.NewDesignEvent(tag,time);
             }
         }
     }
@@ -123,9 +123,9 @@ public class CharacterUpgradeManager : MonoBehaviour
                 InitButtonValues();
                 PlayerController.Instance.GetComponent<BoingScale>().ScaleEffectTR(PlayerController.Instance.transform, 0.8f, 1f, 0.5f, Ease.OutElastic);
                 PlayerController.Instance.UpgradeTextSpawn("+Capacity");
-               
-                
-                string tag = "Player Capacity Upgrade " + Globals.stackCapacityLevel.ToString();
+
+                string tag = "M" + (PlayerPrefs.GetInt("level") + 1).ToString() + "-CharacterCapacityUpgrade" + Globals.stackCapacityLevel.ToString();
+                GameManager.Instance.GameAnalyticsTag(tag);
                 float time = CoefficientTransformation.FormatSaniye(Globals.playTime);
                 //GameAnalytics.NewDesignEvent(tag, time);
             }

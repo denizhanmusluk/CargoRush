@@ -16,7 +16,7 @@ public class UIManager : Subject
     public GameObject gemPanel;
     public GameObject startCanvas;
     public GameObject ingameCanvas;
-    public GameObject panelMission;
+    //public GameObject panelMission;
     //public GameObject finishCanvas;
     //public GameObject failCanvas;
     public GameObject pauseMenu;
@@ -407,7 +407,7 @@ public class UIManager : Subject
             });
         return tween;
     }
-    public Transform missionPanelTR;
+    //public Transform missionPanelTR;
 
     public Transform moneyFirstTR;
     public Transform gemFirstTR;
@@ -434,13 +434,13 @@ public class UIManager : Subject
             counter += 4 * Time.deltaTime;
             moneyPanel.transform.position = Vector3.Lerp(moneyPanel.transform.position, moneyFirstTR.position, counter);
             gemPanel.transform.position = Vector3.Lerp(gemPanel.transform.position, gemFirstTR.position, counter);
-            missionPanelTR.transform.position = Vector3.Lerp(missionPanelTR.transform.position, misPanFirstTR.position, counter);
+            //missionPanelTR.transform.position = Vector3.Lerp(missionPanelTR.transform.position, misPanFirstTR.position, counter);
             yield return null;
         }
 
         moneyPanel.transform.position = Vector3.Lerp( moneyTargetPos.position, moneyFirstTR.position, 1);
         gemPanel.transform.position = Vector3.Lerp( gemTarget.position, gemFirstTR.position, 1);
-        missionPanelTR.transform.position = Vector3.Lerp( misPanTarget.position, misPanFirstTR.position, 1);
+        //missionPanelTR.transform.position = Vector3.Lerp( misPanTarget.position, misPanFirstTR.position, 1);
     }
     IEnumerator PanelDown()
     {
@@ -451,13 +451,13 @@ public class UIManager : Subject
             counter += 4 * Time.deltaTime;
             moneyPanel.transform.position = Vector3.Lerp(moneyPanel.transform.position, moneyTargetPos.position, counter);
             gemPanel.transform.position = Vector3.Lerp(gemPanel.transform.position, gemTarget.position, counter);
-            missionPanelTR.transform.position = Vector3.Lerp(missionPanelTR.transform.position, misPanTarget.position, counter);
+            //missionPanelTR.transform.position = Vector3.Lerp(missionPanelTR.transform.position, misPanTarget.position, counter);
             yield return null;
         }
 
         moneyPanel.transform.position = Vector3.Lerp(moneyFirstTR.position, moneyTargetPos.position, 1);
         gemPanel.transform.position = Vector3.Lerp(gemFirstTR.position, gemTarget.position, 1);
-        missionPanelTR.transform.position = Vector3.Lerp(misPanFirstTR.position, misPanTarget.position, 1);
+        //missionPanelTR.transform.position = Vector3.Lerp(misPanFirstTR.position, misPanTarget.position, 1);
     }
 
     public GameObject acceptButtonGO;

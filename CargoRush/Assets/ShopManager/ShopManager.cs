@@ -111,76 +111,7 @@ public class ShopManager : MonoBehaviour
     {
         StartCoroutine(SetSlider(shopId, preValue));
 
-        if(shopId == 0)
-        {
-            MissionManager.Instance.TechnoShopMissionStart();
-            if (MissionManager.Instance.technoShopMission.gameObject.activeInHierarchy)
-            {
-                MissionManager.Instance.technoShopMission.MissionUpdate();
-            }
-        }
-        if (shopId == 1)
-        {
-            MissionManager.Instance.SportShopMissionStart();
-            if (MissionManager.Instance.sportShopMission.gameObject.activeInHierarchy)
-            {
-                MissionManager.Instance.sportShopMission.MissionUpdate();
-            }
-        }
-        if (shopId == 2)
-        {
-            MissionManager.Instance.ToysShopMissionStart();
-            if (MissionManager.Instance.toysShopMission.gameObject.activeInHierarchy)
-            {
-                MissionManager.Instance.toysShopMission.MissionUpdate();
-            }
-        }
-
-
-
-        if (shopId == 0 && PlayerPrefs.GetInt("shopLevel") == 3)
-        {
-            MissionManager.Instance.TechnoShopFullOpenMissionStart();
-            if (MissionManager.Instance.technoShopFullMission.gameObject.activeInHierarchy)
-            {
-                MissionManager.Instance.technoShopFullMission.MissionUpdate();
-            }
-
-            MissionManager.Instance.NewMapMissionStart();
-            if (MissionManager.Instance.newMapMission.gameObject.activeInHierarchy)
-            {
-                MissionManager.Instance.newMapMission.MissionUpdate();
-            }
-        }
-        if (shopId == 1 && PlayerPrefs.GetInt("shopLevel") == 3)
-        {
-            MissionManager.Instance.SportShopFullOpenMissionStart();
-            if (MissionManager.Instance.sportShopFullMission.gameObject.activeInHierarchy)
-            {
-                MissionManager.Instance.sportShopFullMission.MissionUpdate();
-            }
-
-
-            MissionManager.Instance.NewMapMissionStart();
-            if (MissionManager.Instance.newMapMission.gameObject.activeInHierarchy)
-            {
-                MissionManager.Instance.newMapMission.MissionUpdate();
-            }
-        }
-        if (shopId == 2 && PlayerPrefs.GetInt("shopLevel") == 3)
-        {
-            MissionManager.Instance.ToysShopFullOpenMissionStart();
-            if (MissionManager.Instance.toysShopFullMission.gameObject.activeInHierarchy)
-            {
-                MissionManager.Instance.toysShopFullMission.MissionUpdate();
-            }
-
-            MissionManager.Instance.NewMapMissionStart();
-            if (MissionManager.Instance.newMapMission.gameObject.activeInHierarchy)
-            {
-                MissionManager.Instance.newMapMission.MissionUpdate();
-            }
-        }
+       
     }
     IEnumerator SetSlider(int shopId, int preVal)
     {

@@ -87,6 +87,10 @@ public class HRUpgradeManager : MonoBehaviour
                 Globals.workerMoveSpeedLevel++;
                 PlayerPrefs.SetInt("workerMoveSpeedLevel", Globals.workerMoveSpeedLevel);
                 PlayerController.Instance.magnet.MagnetLevelUp();
+
+                string tag = "M" + (PlayerPrefs.GetInt("level") + 1).ToString() + "-WorkerSpeedUpgrade" + Globals.workerMoveSpeedLevel.ToString();
+                GameManager.Instance.GameAnalyticsTag(tag);
+                
                 //PlayerBehaviour.Instance.playerController.CharacterUpgrade(Globals.holeRadiusLevel);
                 isEnoughMoney();
                 InitButtonValues();
@@ -120,6 +124,8 @@ public class HRUpgradeManager : MonoBehaviour
                 PlayerPrefs.SetInt("workerCapacityLevel", Globals.workerCapacityLevel);
                 isEnoughMoney();
                 InitButtonValues();
+                string tag = "M" + (PlayerPrefs.GetInt("level") + 1).ToString() + "-WorkerCapacityUpgrade" + Globals.workerCapacityLevel.ToString();
+                GameManager.Instance.GameAnalyticsTag(tag);
                 //PlayerController.Instance.GetComponent<BoingScale>().ScaleEffectTR(PlayerController.Instance.transform, 0.8f, 1f, 0.5f, Ease.OutElastic);
                 //PlayerController.Instance.UpgradeTextSpawn("+Speed");
             }

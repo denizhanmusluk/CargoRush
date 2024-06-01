@@ -6,6 +6,7 @@ using TMPro;
 using Cinemachine;
 public class UpgradeArea : MonoBehaviour, BuyCamera
 {
+    public string gaTag;
     public int ratioValue;
     public bool shopBayArea = false;
 
@@ -173,6 +174,9 @@ public class UpgradeArea : MonoBehaviour, BuyCamera
     }
     void FirstOpenArea()
     {
+        string _tag = "M" + (PlayerPrefs.GetInt("level") + 1).ToString() + "-" + gaTag;
+        GameManager.Instance.GameAnalyticsTag(_tag);
+
         StartCoroutine(BuyActivator());
 
         VibratoManager.Instance.HeavyVibration();

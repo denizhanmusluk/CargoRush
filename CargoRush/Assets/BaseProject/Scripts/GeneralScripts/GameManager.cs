@@ -20,6 +20,11 @@ public class GameManager : Observer
     public int firstLevelPartCount;
     [SerializeField] int createMoney;
     [SerializeField] int createMoney2;
+    public void GameAnalyticsTag(string tag)
+    {
+        //GameAnalytics.NewDesignEvent(tag);
+        Debug.Log(tag);
+    }
     void Awake()
     {
         Globals.moneyAmount = PlayerPrefs.GetInt("money");

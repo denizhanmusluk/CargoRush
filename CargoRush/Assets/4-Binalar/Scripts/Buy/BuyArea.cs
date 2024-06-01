@@ -6,6 +6,8 @@ using TMPro;
 using Cinemachine;
 public class BuyArea : MonoBehaviour, BuyCamera
 {
+    public string gaTag;
+
     public bool standUpgradeActive = false;
     public int standUpgradeLevel = 0;
 
@@ -319,6 +321,11 @@ public class BuyArea : MonoBehaviour, BuyCamera
     public bool indTutorialActive;
     void FirstOpenArea()
     {
+        if (standUpgradeActive)
+        {
+            string _tag = "M" + (PlayerPrefs.GetInt("level") + 1).ToString() + "-" + gaTag;
+            GameManager.Instance.GameAnalyticsTag(_tag);
+        }
         if (hrBuy)
         {
             if (PlayerPrefs.GetInt("hropen") == 0)

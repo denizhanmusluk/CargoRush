@@ -8,13 +8,12 @@ public class OpenArea : MonoBehaviour
     [SerializeField] string areaName;
     private void OnEnable()
     {
-        if (PlayerPrefs.GetInt(areaName) == 0)
+        if (PlayerPrefs.GetInt(areaName + (PlayerPrefs.GetInt("level") + 1).ToString()) == 0)
         {
-            PlayerPrefs.SetInt(areaName, 1);
-            string str = areaName;
-            float time = CoefficientTransformation.FormatSaniye(Globals.playTime);
-            //GameAnalytics.NewDesignEvent(str, time);
-            Debug.Log(str + time);
+            PlayerPrefs.SetInt(areaName + (PlayerPrefs.GetInt("level") + 1).ToString(), 1);
+            string _tag = "M" + (PlayerPrefs.GetInt("level") + 1).ToString() + "-" + areaName;
+            GameManager.Instance.GameAnalyticsTag(_tag);
+            //GameAnalytics.NewDesignEvent(str);
         }
     }
 }
