@@ -242,7 +242,7 @@ public class AIWorker : MonoBehaviour, IWorkerModelSelect
 
     }
     int targetCollectId = 0;
-    IEnumerator AýStackCountInit(int i)
+    IEnumerator AiStackCountInit(int i)
     {
         yield return new WaitForSeconds(2f);
         aiStackCollect.GetComponent<StackCollectWorker>().currentCapacity = aiStackCollect.GetComponent<StackCollectWorker>().collectionTrs.Count + fishCollectArea.standList[fishCollectArea.standList.Count - 1 - i].fishCountCurrent;
@@ -270,7 +270,7 @@ public class AIWorker : MonoBehaviour, IWorkerModelSelect
                         bool breakActive = false;
                         if ((fishCollectArea.standList[fishCollectArea.standList.Count - 1 - i].collectType == CollectType.All || env.collectables[env.collectables.Count - 1].collectType == fishCollectArea.standList[fishCollectArea.standList.Count - 1 - i].collectType || fishCollectArea.standList[fishCollectArea.standList.Count - 1 - i].collectType2 == CollectType.All || env.collectables[env.collectables.Count - 1].collectType == fishCollectArea.standList[fishCollectArea.standList.Count - 1 - i].collectType2) && cltId == env.CollectId && fishCollectArea.standList[fishCollectArea.standList.Count - 1 - i].fishCountCurrent > 0)
                         {
-                            StartCoroutine(AýStackCountInit(i));
+                            StartCoroutine(AiStackCountInit(i));
                             //aiStackCollect.GetComponent<StackCollectWorker>().currentCapacity = aiStackCollect.GetComponent<StackCollectWorker>().collectionTrs.Count + fishCollectArea.standList[fishCollectArea.standList.Count - 1 - i].fishCountCurrent;
                             tempCollectArea.Add(env);
                             targetStand = fishCollectArea.standList[fishCollectArea.standList.Count - 1 - i];
