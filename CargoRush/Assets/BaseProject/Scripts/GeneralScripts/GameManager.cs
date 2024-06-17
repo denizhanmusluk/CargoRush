@@ -148,10 +148,10 @@ public class GameManager : Observer
         {
             MoneyUpdate(createMoney);
         }
-        //if (Input.GetKeyDown(KeyCode.G))
-        //{
-        //    GemUpdate(createMoney);
-        //}
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            GemUpdate(createMoney);
+        }
         if (Input.GetKeyDown(KeyCode.H))
         {
             PlayerPrefs.SetInt("holeLevel", 0);

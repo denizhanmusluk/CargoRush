@@ -44,6 +44,8 @@ public class FishDropArea : MonoBehaviour
     public MineCrusher mineCrusher;
     public List<GameObject> wallListGO = new List<GameObject>();
     bool colliderResetActive = true;
+    [SerializeField] int gemCreatePerDropCount;
+    int dropCount = 0;
     private void Awake()
     {
         _instance = this;
@@ -136,6 +138,7 @@ public class FishDropArea : MonoBehaviour
     }
     public void GarbageCreate(int id)
     {
+        dropCount++;
         int createPosSelect = Random.Range(0, createPosList.Count);
         Collectable _fishCollect;
         GameObject fsh = Instantiate(garbagePrefabs[id], createPosList[createPosSelect].position, Quaternion.identity);
@@ -156,8 +159,33 @@ public class FishDropArea : MonoBehaviour
             Vector3 forceDir = (-createPosList[createPosSelect].up).normalized;
             fsh.GetComponent<Collector>().FirstPush(forceDir);
         }
+        if (dropCount % gemCreatePerDropCount == 0)
+        {
+            GemCreating();
+        }
     }
     public void GemCreating()
+    {
+        int createPosSelect = Random.Range(0, createPosList.Count);
+        Collectable _fishCollect;
+        GameObject fsh = Instantiate(gemCollectable, createPosList[createPosSelect].position, Quaternion.identity);
+        fsh.transform.rotation = Quaternion.Euler(0, Random.Range(-180, 180), 0);
+
+        _fishCollect = fsh.GetComponent<Collectable>();
+        _fishCollect.collectActive = true;
+        collectableList.Add(_fishCollect);
+        _fishCollect.collectableList = collectableList;
+
+
+        if (fsh.GetComponent<Collector>() != null)
+        {
+            //Vector3 forceDir = (forceDirPos.position - createPos.position).normalized;
+            Vector3 forceDir = (-createPosList[createPosSelect].up).normalized;
+            fsh.GetComponent<Collector>().FirstPush(forceDir);
+        }
+    }
+
+    public void GemCreating2()
     {
         GameObject fsh = Instantiate(gemCollectable, gemPosTR[gemPosNo % gemPosTR.Length].position, Quaternion.identity);
         fsh.transform.rotation = Quaternion.Euler(0, 0, 0);

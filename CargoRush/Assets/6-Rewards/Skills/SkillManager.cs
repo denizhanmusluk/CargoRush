@@ -235,7 +235,7 @@ public class SkillManager : MonoBehaviour
                 PlayerPrefs.SetInt("skillCooldown", Globals.skillCooldown);
             }
 
-            if (Globals.skillCooldown >= 600 && !Globals.isSkillCreated)
+            if (Globals.skillCooldown >= 60 && !Globals.isSkillCreated)
             {
                 //Globals.skillCooldown = 0;
                 //PlayerPrefs.SetInt("skillCooldown", Globals.skillCooldown);

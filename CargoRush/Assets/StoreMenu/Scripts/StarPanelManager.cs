@@ -147,12 +147,12 @@ public class StarPanelManager : MonoBehaviour
         skinBuyTutorialGO.SetActive(false);
 
         StoreManager.Instance.storeButtonGlimmerGO.SetActive(false);
-        MissionManager.Instance.SkinMissionStart();
+        //MissionManager.Instance.SkinMissionStart();
 
-        if (MissionManager.Instance.skinMission.gameObject.activeInHierarchy)
-        {
-            MissionManager.Instance.skinMission.MissionUpdate();
-        }
+        //if (MissionManager.Instance.skinMission.gameObject.activeInHierarchy)
+        //{
+        //    MissionManager.Instance.skinMission.MissionUpdate();
+        //}
         buyButtons[buttonId].button.interactable = false;
         buyButtons[buttonId].button.interactable = true;
         PlayerPrefs.SetInt("adv" + buttonId.ToString(), PlayerPrefs.GetInt("adv" + buttonId.ToString()) + 1);

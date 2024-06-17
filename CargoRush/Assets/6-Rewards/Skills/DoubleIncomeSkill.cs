@@ -15,8 +15,8 @@ public class DoubleIncomeSkill : MonoBehaviour
             collectActive = false;
             particleGO.SetActive(true);
             particleGO.transform.parent = null;
-            //PopUpManager.Instance.BoostPopUpOpen(2);
-            //PopUpManager.Instance.BoosterInvoke();
+            PopUpManager.Instance.BoostPopUpOpen(2);
+            PopUpManager.Instance.BoosterInvoke();
             gameObject.SetActive(false);
             PlayerController.Instance.PlayerControlDeActive();
         }

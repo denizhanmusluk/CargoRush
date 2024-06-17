@@ -430,6 +430,10 @@ public class StandFishCar : Stand,IMoneyArea
         //}
         totalMoney /= 2;
         totalMoney = (int)((float)totalMoney * moneyFactor);
+        if (Globals.doubleIncomeActive)
+        {
+            totalMoney *= 2;
+        }
         for (int i = 0; i < totalMoney; i++)
         {
             float deltaY = 0;

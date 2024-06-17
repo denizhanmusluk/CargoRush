@@ -45,7 +45,7 @@ public class StoreManager : MonoBehaviour
         NewPanelManager.Instance.NewPanelActive();
         StarPanelManager.Instance.StarPAnelActive();
         //PopularPanelManager.Instance.popularPAnelActive();
-        MissionManager.Instance.SkinMissionStart();
+        //MissionManager.Instance.SkinMissionStart();
         storeButtonTapTutorialGO.SetActive(false);
     }
 

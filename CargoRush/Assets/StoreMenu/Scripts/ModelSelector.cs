@@ -33,10 +33,10 @@ public class ModelSelector : MonoBehaviour
             Destroy(modelCreatePoint.GetChild(0).gameObject);
         }
 
-        //if (createPointUI.childCount > 0)
-        //{
-        //    Destroy(createPointUI.GetChild(0).gameObject);
-        //}
+        if (createPointUI.childCount > 0)
+        {
+            Destroy(createPointUI.GetChild(0).gameObject);
+        }
 
         //if (createPos2.childCount > 0)
         //{
@@ -51,16 +51,16 @@ public class ModelSelector : MonoBehaviour
         {
             Vector3 UIPosOffset = new Vector3(-0f, 0f, 0f);
             var model = Instantiate(playerModels._newModels[PlayerPrefs.GetInt("starmodel")], transform.position, Quaternion.identity);
-            //var UImodel1 = Instantiate(playerModels._newModels[PlayerPrefs.GetInt("starmodel")], createPointUI.position, createPointUI.rotation, createPointUI);
-            //Destroy(UImodel1.GetComponent<Player>());
+            var UImodel1 = Instantiate(playerModels._newModels[PlayerPrefs.GetInt("starmodel")], createPointUI.position, createPointUI.rotation, createPointUI);
+            Destroy(UImodel1.GetComponent<Player>());
             //var knifeModelR = Instantiate(playerModels._knifeModels[Globals.knifeLevel], UImodel1.GetComponent<HandModel>().knifePosR_TR.position, UImodel1.GetComponent<HandModel>().knifePosR_TR.rotation, UImodel1.GetComponent<HandModel>().knifePosR_TR);
 
-            //UImodel1.transform.localPosition = UIPosOffset;
+            UImodel1.transform.localPosition = UIPosOffset;
             ////var UImodel2 = Instantiate(playerModels._newModels[PlayerPrefs.GetInt("newmodel")], createPos2.position, Quaternion.identity, createPos2);
-            //foreach (var trnsfrm in UImodel1.GetComponentsInChildren<Transform>())
-            //{
-            //    trnsfrm.gameObject.layer = LayerMask.NameToLayer("UICamera");
-            //}
+            foreach (var trnsfrm in UImodel1.GetComponentsInChildren<Transform>())
+            {
+                trnsfrm.gameObject.layer = LayerMask.NameToLayer("UICamera");
+            }
             //foreach (var trnsfrm in UImodel2.GetComponentsInChildren<Transform>())
             //{
             //    trnsfrm.gameObject.layer = LayerMask.NameToLayer("UICamera");
@@ -84,14 +84,14 @@ public class ModelSelector : MonoBehaviour
         if (PlayerPrefs.GetInt("category") == 1 && playerModels._popularModels.Length > 0)
         {
             var model = Instantiate(playerModels._newModels[PlayerPrefs.GetInt("popularmodel")], transform.position, Quaternion.identity);
-            //var UImodel1 = Instantiate(playerModels._popularModels[PlayerPrefs.GetInt("popularmodel")], createPointUI.position, Quaternion.identity, createPointUI);
-            //Destroy(UImodel1.GetComponent<Player>());
+            var UImodel1 = Instantiate(playerModels._popularModels[PlayerPrefs.GetInt("popularmodel")], createPointUI.position, Quaternion.identity, createPointUI);
+            Destroy(UImodel1.GetComponent<Player>());
 
             //var UImodel2 = Instantiate(playerModels._popularModels[PlayerPrefs.GetInt("popularmodel")], createPos2.position, Quaternion.identity, createPos2);
-            //foreach (var trnsfrm in UImodel1.GetComponentsInChildren<Transform>())
-            //{
-            //    trnsfrm.gameObject.layer = LayerMask.NameToLayer("UICamera");
-            //}
+            foreach (var trnsfrm in UImodel1.GetComponentsInChildren<Transform>())
+            {
+                trnsfrm.gameObject.layer = LayerMask.NameToLayer("UICamera");
+            }
             //foreach (var trnsfrm in UImodel2.GetComponentsInChildren<Transform>())
             //{
             //    trnsfrm.gameObject.layer = LayerMask.NameToLayer("UICamera");

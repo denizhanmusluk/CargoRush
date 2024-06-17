@@ -80,6 +80,7 @@ namespace DitzelGames.FastIK
                 SetPositionRootSpace(Target, GetPositionRootSpace(transform));
             }
             StartRotationTarget = GetRotationRootSpace(Target);
+            StartRotationTarget = Target.rotation;
 
 
             //init data

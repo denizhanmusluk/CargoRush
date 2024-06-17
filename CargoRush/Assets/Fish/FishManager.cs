@@ -114,7 +114,7 @@ public class FishManager : MonoBehaviour
     }
     public void GemCreate()
     {
-        rubbishDropArea.GemCreating();
+        rubbishDropArea.GemCreating2();
     }
 
     //public void BigFish_Create(int level , int bigFishID)
