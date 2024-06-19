@@ -33,7 +33,7 @@ public class BanknotMoney : MonoBehaviour
         //float currentDistance = maxDistance;
         float angle = 0f;
         float posY = 0f;
-        float psoY_Factor = 2f;
+        float psoY_Factor = 4f;
         while (counter < 1f)
         {
             counter += 5 * Time.deltaTime;

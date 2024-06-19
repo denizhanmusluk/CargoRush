@@ -22,7 +22,7 @@ public class RewardManager : MonoBehaviour
     }
     void Start()
     {
-        _holeUpgradeSettings = LevelManager.Instance._holeUpgradeSettings;
+        //_holeUpgradeSettings = LevelManager.Instance._holeUpgradeSettings;
         //RewardActiveCheck();
     }
     public void RewardActiveCheck()

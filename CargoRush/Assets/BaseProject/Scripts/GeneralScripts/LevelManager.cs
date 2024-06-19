@@ -10,7 +10,7 @@ public class LevelManager : Singleton<LevelManager>
 
     [SerializeField] private List<LevelScriptable> levelList;
     [SerializeField] private List< HoleUpgradeSettings> _holeUpgradeSettingsList;
-    public HoleUpgradeSettings _holeUpgradeSettings;
+    //public HoleUpgradeSettings _holeUpgradeSettings;
     //[SerializeField] public List<CollectableArrangement> requirementList;
 
     //[SerializeField] List<GameObject> levels;
@@ -50,7 +50,7 @@ public class LevelManager : Singleton<LevelManager>
 
         loadedLevel = Instantiate(levelList[Globals.currentLevelIndex]._levelPrefab, transform.position, Quaternion.identity);
 
-        _holeUpgradeSettings = _holeUpgradeSettingsList[Globals.currentLevelIndex];
+        //_holeUpgradeSettings = _holeUpgradeSettingsList[Globals.currentLevelIndex];
 
     }
 }

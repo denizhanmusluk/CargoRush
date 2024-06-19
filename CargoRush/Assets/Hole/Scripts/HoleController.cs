@@ -55,7 +55,7 @@ public class HoleController : Observer
     void Start()
     {
         ObserverManager.Instance.RegisterObserver(this, SubjectType.GameState);//observer register
-        _holeUpgradeSettings = LevelManager.Instance._holeUpgradeSettings;
+        //_holeUpgradeSettings = LevelManager.Instance._holeUpgradeSettings;
 
     }
     public override void OnNotify(NotificationType notificationType) //observer notify

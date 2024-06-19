@@ -48,7 +48,7 @@ public class HoleUpgradeManager : MonoBehaviour
     }
     private void Start()
     {
-        _holeUpgradeSettings = LevelManager.Instance._holeUpgradeSettings;
+        //_holeUpgradeSettings = LevelManager.Instance._holeUpgradeSettings;
 
         Globals.holeLevel = PlayerPrefs.GetInt("holeLevel" + Globals.currentLevelIndex.ToString());
         Globals.holeSpeedLevel = PlayerPrefs.GetInt("holeSpeedLevel" + Globals.currentLevelIndex.ToString());

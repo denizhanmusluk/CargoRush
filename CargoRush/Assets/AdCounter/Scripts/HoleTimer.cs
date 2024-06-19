@@ -26,7 +26,7 @@ public class HoleTimer : Observer
     }
     private void Start()
     {
-        _holeUpgradeSettings = LevelManager.Instance._holeUpgradeSettings;
+        //_holeUpgradeSettings = LevelManager.Instance._holeUpgradeSettings;
         counterText = GameManager.Instance.ui.holeTimer;
         holeTimerBG_Image = GameManager.Instance.ui.holeTimerBG_Image;
         //Initial();
