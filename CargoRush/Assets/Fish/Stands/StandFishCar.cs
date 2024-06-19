@@ -424,10 +424,7 @@ public class StandFishCar : Stand,IMoneyArea
         {
             totalMoney += droppingCollectionList[i].price + extraMoney[carLevel];
         }
-        //if (Globals.doubleIncomeActive)
-        //{
-        //    totalMoney *= 2;
-        //}
+ 
         totalMoney /= 2;
         totalMoney = (int)((float)totalMoney * moneyFactor);
         if (Globals.doubleIncomeActive)

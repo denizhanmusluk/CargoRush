@@ -47,6 +47,52 @@ public class ProcessMachine : Stand, IStandUpgrade
     [SerializeField] List<GameObject> trayList = new List<GameObject>();
     public bool isVipActivator = false;
     public bool kizakRunning = false;
+
+    [SerializeField] int errorTime = 60;
+    [SerializeField] int errorTimeCounter = 0;
+    public bool machineErrored = false;
+
+    [SerializeField] int repairTime = 60;
+    [SerializeField] int repairTimeCounter = 0;
+    public MachineRepairArea machineRepairArea;
+    public void RepairStarter()
+    {
+        PlayerPrefs.SetInt(machineName + "repairStarted" + PlayerPrefs.GetInt("level"), 1);
+
+        StartCoroutine(MachineRepairCounter());
+    }
+    IEnumerator MachineRepairCounter()
+    {
+        repairTimeCounter = PlayerPrefs.GetInt(machineName + "repairTimeCounter" + PlayerPrefs.GetInt("level"));
+        while (repairTimeCounter < repairTime)
+        {
+            repairTimeCounter++;
+            PlayerPrefs.SetInt(machineName + "repairTimeCounter" + PlayerPrefs.GetInt("level"), repairTimeCounter);
+            yield return new WaitForSeconds(1f);
+        }
+        repairTimeCounter = 0;
+        PlayerPrefs.SetInt(machineName + "repairTimeCounter" + PlayerPrefs.GetInt("level"), repairTimeCounter);
+        PlayerPrefs.SetInt(machineName + "iserror" + PlayerPrefs.GetInt("level"), 0);
+        PlayerPrefs.SetInt(machineName + "repairStarted" + PlayerPrefs.GetInt("level"), 0);
+        machineErrored = false;
+        StartCoroutine(MachineErrorCounter());
+    }
+    IEnumerator MachineErrorCounter()
+    {
+        errorTimeCounter = PlayerPrefs.GetInt(machineName + "errorTimeCounter" + PlayerPrefs.GetInt("level"));
+        while (errorTimeCounter < errorTime)
+        {
+            errorTimeCounter++;
+            PlayerPrefs.SetInt(machineName + "errorTimeCounter" + PlayerPrefs.GetInt("level") , errorTimeCounter);
+            yield return new WaitForSeconds(1f);
+        }
+        PlayerPrefs.SetInt(machineName + "iserror" + PlayerPrefs.GetInt("level"), 1);
+        errorTimeCounter = 0;
+        PlayerPrefs.SetInt(machineName + "errorTimeCounter" + PlayerPrefs.GetInt("level"), errorTimeCounter);
+
+        machineErrored = true;
+        machineRepairArea.gameObject.SetActive(true);
+    }
     public override void CollectableCountSet()
     {
         PlayerPrefs.SetInt(machineName + "rawcount" + PlayerPrefs.GetInt("level"), droppedCollectionList.Count);
@@ -146,39 +192,23 @@ public class ProcessMachine : Stand, IStandUpgrade
         ManuealProductCreate();
         CapacityInit();
 
-        //if (PlayerPrefs.GetInt("minecrushmach") == 0)
-        //{
-        //    PlayerPrefs.SetInt("minecrushmach", 1);
-        //    IndicatorManager.Instance.IndicatorTargeterActive();
-        //    mineCrusher.ManuealGemCreate();
-        //}
-        //foreach (var stands in _CollectProductStands)
-        //{
-        //    stands.machineActive = true;
-        //}
-        //MissionManager.Instance.ProductMission_Start(_CollectProducts.CollectId - 2 , (float)productPrefabs[0].price / 5);
-        //MissionManager.Instance.SalingMission_Start(_CollectProducts.CollectId - 2, (float)productPrefabs[0].price / 5);
-
-
-        //if (missionActive)
-        //{
-        //    if (PlayerPrefs.GetInt("missionactivator") == 0)
-        //    {
-        //        PlayerPrefs.SetInt("missionactivator", 1);
-        //        MissionManager.Instance.tapTutorialGO.SetActive(true);
-        //    }
-        //    if (_CollectProducts.CollectId >= 3)
-        //    {
-        //        MissionManager.Instance.MachineMission_Start(_CollectProducts.CollectId - 2);
-        //    }
-        //    if (_CollectProducts.CollectId > 3)
-        //    {
-        //        if (MissionManager.Instance.machineMission.gameObject.activeInHierarchy)
-        //        {
-        //            MissionManager.Instance.machineMission.MissionUpdate();
-        //        }
-        //    }
-        //}
+        if(PlayerPrefs.GetInt(machineName + "iserror" + PlayerPrefs.GetInt("level")) == 0)
+        {
+            machineErrored = false;
+            StartCoroutine(MachineErrorCounter());
+        }
+        else
+        {
+            machineErrored = true;
+            if (PlayerPrefs.GetInt(machineName + "repairStarted" + PlayerPrefs.GetInt("level")) == 1)
+            {
+                RepairStarter();
+            }
+            else
+            {
+                machineRepairArea.gameObject.SetActive(true);
+            }
+        }
     }
     void StandCarCollectIdSet()
     {

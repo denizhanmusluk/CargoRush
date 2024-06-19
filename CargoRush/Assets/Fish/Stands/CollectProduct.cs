@@ -30,6 +30,7 @@ public class CollectProduct : MonoBehaviour
     public Transform boxPosTR;
 
     public List<Transform> bandPosList;
+    public ProcessMachine processMachine;
     private void Start()
     {
         aiCollectTargetCheck = new int[aiCollectTargetTR.Length];
@@ -68,31 +69,33 @@ public class CollectProduct : MonoBehaviour
                             {
                                 if ((collectableType == CollectType.Type1 && Globals.productType1) || (collectableType == CollectType.Type2 && Globals.productType2) || (collectableType == CollectType.Type3 && Globals.productType3) || (collectableType == CollectType.Type4 && Globals.productType4) || (collectableType == CollectType.Type5 && Globals.productType5))
                                 {
-                                    collectables[collectables.Count - 1].productCollectActive = false;
-
-                                    other.GetComponent<PlayerController>()._stackCollect.Collecting(collectables[collectables.Count - 1]);
-                                    StartCoroutine(ColliderReset());
-                                    if (_stand != null)
+                                    if (!processMachine.machineErrored)
                                     {
-                                        _stand.cannedCount--;
-                                        _stand.CollectableCountSet();
+                                        collectables[collectables.Count - 1].productCollectActive = false;
+
+                                        other.GetComponent<PlayerController>()._stackCollect.Collecting(collectables[collectables.Count - 1]);
+                                        StartCoroutine(ColliderReset());
+                                        if (_stand != null)
+                                        {
+                                            _stand.cannedCount--;
+                                            _stand.CollectableCountSet();
+                                        }
+                                        if (standCabin != null)
+                                        {
+                                            standCabin.hangerCountCurrent--;
+                                            standCabin.cabineCollectableFull = false;
+                                            standCabin.fullTextGO.SetActive(false);
+                                            standCabin.hangerCountText.text = (standCabin.hangerCountCurrent).ToString() + "/" + (standCabin.hangerCountTotal).ToString();
+
+                                        }
+
                                     }
-                                    if (standCabin != null)
+                                    else
                                     {
-                                        standCabin.hangerCountCurrent--;
-                                        standCabin.cabineCollectableFull = false;
-                                        standCabin.fullTextGO.SetActive(false);
-                                        standCabin.hangerCountText.text = (standCabin.hangerCountCurrent).ToString() + "/" + (standCabin.hangerCountTotal).ToString();
-
+                                        noneCollectGO.SetActive(true);
                                     }
-
-
-
                                 }
-                                else
-                                {
-                                    noneCollectGO.SetActive(true);
-                                }
+                         
 
                             }
                             else

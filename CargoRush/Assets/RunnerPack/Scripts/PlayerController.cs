@@ -758,13 +758,13 @@ public class PlayerController : MonoBehaviour
     }
     IEnumerator RotReset()
     {
-        Quaternion firstRot = transform.rotation;
+        Quaternion firstRot = transform.localRotation;
         Quaternion targetRot = Quaternion.Euler(0, 0, 0);
         float counter = 0f;
         while (counter < 1f)
         {
             counter += 4 * Time.deltaTime;
-            transform.rotation = Quaternion.Lerp(firstRot, targetRot, counter);
+            transform.localRotation = Quaternion.Lerp(firstRot, targetRot, counter);
             yield return null;
         }
     }
@@ -786,11 +786,15 @@ public class PlayerController : MonoBehaviour
             transform.localRotation = Quaternion.Lerp(firstRot, targetRot, counter);
             yield return null;
         }
+
+        transform.localRotation = targetRot;
+
     }
+    public NewLevelBoss newLevelBoss;
     public void FollowCeo()
     {
-        PlayerCamZoomIn.LookAt = null;
-        PlayerCamZoomIn.Priority = 10;
+        //PlayerCamZoomIn.LookAt = null;
+        PlayerCamZoomIn.Priority = 0;
         isStayHoldActive = false;
         followActive = true;
         OnUpdate = null;
@@ -799,11 +803,11 @@ public class PlayerController : MonoBehaviour
     }
     void GoToCeoStand()
     {
-        if (Vector3.Distance(new Vector2(transform.position.x, transform.position.z), new Vector2(CeoManager.Instance.ceoCharacter.playerFollowPosTR.position.x, CeoManager.Instance.ceoCharacter.playerFollowPosTR.position.z)) > 0.25f)
+        if (Vector3.Distance(new Vector2(transform.position.x, transform.position.z), new Vector2(newLevelBoss.playerTargetPosTR.position.x, newLevelBoss.playerTargetPosTR.position.z)) > 0.25f)
         {
             characterStayActive = false;
 
-            Vector3 targetPos = new Vector3(CeoManager.Instance.ceoCharacter.playerFollowPosTR.position.x, transform.position.y, CeoManager.Instance.ceoCharacter.playerFollowPosTR.position.z);
+            Vector3 targetPos = new Vector3(newLevelBoss.playerTargetPosTR.position.x, transform.position.y, newLevelBoss.playerTargetPosTR.position.z);
             animator.SetBool("walk", true);
 
 
@@ -817,17 +821,16 @@ public class PlayerController : MonoBehaviour
                 characterStayActive = true;
             }
             animator.SetBool("walk", false);
-            if (!isStayHoldActive && !CeoManager.Instance.ceoCharacter.followActive)
+            if (!isStayHoldActive)
             {
                 isStayHoldActive = true;
 
-                navMeshAgent.SetDestination(transform.position);
+                navMeshAgent.ResetPath();
                 //navMeshAgent.obstacleAvoidanceType = ObstacleAvoidanceType.HighQualityObstacleAvoidance;
                 OnUpdate = null;
-                CeoManager.Instance.ceoCharacter.CeoRotReset();
 
                 StartCoroutine(RotReset2());
-      
+                BossTutorialPanel.Instance.newLevelBoss.CharacterArrivedBoss();
                 //OnUpdate = null;
                 //PlayerRotReset();
                 //PlayerControl_ReActive();
