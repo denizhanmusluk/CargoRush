@@ -371,10 +371,7 @@ public class ToysCaseManager : MonoBehaviour, IMoneyArea
             moneyArea.moneyList.Add(banknot);
             PlayerPrefs.SetInt(caseName + "totalvalue", PlayerPrefs.GetInt(caseName + "totalvalue") + banknot.banknotValue);
 
-            if (MissionManager.Instance.saleMissionList[droppingCollectionList[i].collectID - 2].gameObject.activeInHierarchy)
-            {
-                MissionManager.Instance.saleMissionList[droppingCollectionList[i].collectID - 2].MissionUpdateSale(droppingCollectionList[i].collectID - 2);
-            }
+    
             yield return null;
         }
 

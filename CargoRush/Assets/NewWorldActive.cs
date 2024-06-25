@@ -18,6 +18,8 @@ public class NewWorldActive : MonoBehaviour
         if (nextLevelIndex > PlayerPrefs.GetInt("mapindexmax"))
         {
             PlayerPrefs.SetInt("mapindexmax", nextLevelIndex);
+            MissionManager.Instance.newMapMission.MissionUpdate();
+
         }
 
     }

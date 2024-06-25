@@ -13,38 +13,13 @@ public class MissionManager : MonoBehaviour
     public GameObject tapTutorialGO;
     public bool missionOpenPanelActive = false;
     public Animator missionAnimator;
-    public Animator missionAnimator2;
     public MissionSettings missionSettings;
     public ShopSettings shopSettings;
 
 
-    public MissionPanel technoShopMission;
-    public MissionPanel sportShopMission;
-    public MissionPanel toysShopMission;
 
-    public MissionPanel technoShopFullMission;
-    public MissionPanel sportShopFullMission;
-    public MissionPanel toysShopFullMission;
-
-    public MissionPanel machineMission;
-    public MissionPanel standMission;
-    public MissionPanel skinMission;
-    public MissionPanel newMapMission;
     public MissionPanel dateMission;
 
-    //public MissionPanel phoneProductMission;
-    //public MissionPanel chairCleanMission;
-    //public MissionPanel customerTakeMission;
-    //public MissionPanel ticketTakeMission;
-    //public MissionPanel toiletCleanMission;
-    //public MissionPanel toiletPaperMission;
-    //public MissionPanel waterMission;
-    //public MissionPanel hotDogMission;
-    //public MissionPanel colaMission;
-    //public MissionPanel coffeeMission;
-    //public MissionPanel soapMission;
-    //public MissionPanel bedroomCleanMission;
-    //public MissionPanel vipCustomerTakeMission;
 
 
 
@@ -56,24 +31,167 @@ public class MissionManager : MonoBehaviour
     public GameObject completeMission;
     public int maxMissionCount;
 
-    public List<MissionPanel> missionPanels = new List<MissionPanel>();
     public GameObject clickPanel;
 
     public List<GameObject> tapList = new List<GameObject>();
 
 
-    public List<MissionPanel> productMissionList = new List<MissionPanel>();
-    public int activeProductMissionCount = 0;
-    [SerializeField] List<int> preProductIdList = new List<int>();
 
-    public List<MissionPanel> saleMissionList = new List<MissionPanel>();
-    public int activeSaleMissionCount = 0;
-    [SerializeField] List<int> preSaleIdList = new List<int>();
-
-    public List<Stand> allStandList = new List<Stand>();
     //public List<MissionPanel> standMissionList = new List<MissionPanel>();
     //public int activeStandMissionCount = 0;
     //[SerializeField] List<int> preStandIdList = new List<int>();
+
+
+    /////////////////////////////////////////////////////////////////
+
+
+    public MissionPanel orderMission;
+    public MissionPanel specialOrderMission;
+    public MissionPanel tapeBoxMission;
+    public MissionPanel shippingBuyMission;
+    public MissionPanel tapingLineBuyMission;
+    public MissionPanel newMapMission;
+
+    private void Start()
+    {
+        missionSettings = LevelManager.Instance.currentMissionSettings;
+        if (PlayerPrefs.GetInt(orderMission.missionName + "missionactive" + PlayerPrefs.GetInt("level")) == 1)
+        {
+            orderMission.gameObject.SetActive(true);
+            orderMission.MissionStart(PlayerPrefs.GetInt(orderMission.missionName + "count" + PlayerPrefs.GetInt("level")), PlayerPrefs.GetInt(orderMission.missionName + "maxcount" + PlayerPrefs.GetInt("level")), PlayerPrefs.GetInt(orderMission.missionName + "missionprice" + PlayerPrefs.GetInt("level")));
+
+            orderMission.missionRateText.text = PlayerPrefs.GetInt(orderMission.missionName + "maxcount" + PlayerPrefs.GetInt("level")).ToString();
+            //orderMission.missionRateText.text = missionSettings._orderName[PlayerPrefs.GetInt(orderMission.missionName + PlayerPrefs.GetInt("level"))].ToString();
+        }
+        if (PlayerPrefs.GetInt(specialOrderMission.missionName + "missionactive" + PlayerPrefs.GetInt("level")) == 1)
+        {
+            specialOrderMission.gameObject.SetActive(true);
+            specialOrderMission.MissionStart(PlayerPrefs.GetInt(specialOrderMission.missionName + "count" + PlayerPrefs.GetInt("level")), PlayerPrefs.GetInt(specialOrderMission.missionName + "maxcount" + PlayerPrefs.GetInt("level")), PlayerPrefs.GetInt(specialOrderMission.missionName + "missionprice" + PlayerPrefs.GetInt("level")));
+
+            specialOrderMission.missionRateText.text = PlayerPrefs.GetInt(specialOrderMission.missionName + "maxcount" + PlayerPrefs.GetInt("level")).ToString();
+            //orderMission.missionRateText.text = missionSettings._orderName[PlayerPrefs.GetInt(orderMission.missionName + PlayerPrefs.GetInt("level"))].ToString();
+        }
+        if (PlayerPrefs.GetInt(tapeBoxMission.missionName + "missionactive" + PlayerPrefs.GetInt("level")) == 1)
+        {
+            tapeBoxMission.gameObject.SetActive(true);
+            tapeBoxMission.MissionStart(PlayerPrefs.GetInt(tapeBoxMission.missionName + "count" + PlayerPrefs.GetInt("level")), PlayerPrefs.GetInt(tapeBoxMission.missionName + "maxcount" + PlayerPrefs.GetInt("level")), PlayerPrefs.GetInt(tapeBoxMission.missionName + "missionprice" + PlayerPrefs.GetInt("level")));
+
+            tapeBoxMission.missionRateText.text = PlayerPrefs.GetInt(tapeBoxMission.missionName + "maxcount" + PlayerPrefs.GetInt("level")).ToString();
+            //orderMission.missionRateText.text = missionSettings._orderName[PlayerPrefs.GetInt(orderMission.missionName + PlayerPrefs.GetInt("level"))].ToString();
+        }
+
+        if (PlayerPrefs.GetInt(shippingBuyMission.missionName + "missionactive" + PlayerPrefs.GetInt("level")) == 1)
+        {
+            shippingBuyMission.gameObject.SetActive(true);
+            shippingBuyMission.MissionStart(PlayerPrefs.GetInt(shippingBuyMission.missionName + "count" + PlayerPrefs.GetInt("level")), PlayerPrefs.GetInt(shippingBuyMission.missionName + "maxcount" + PlayerPrefs.GetInt("level")), PlayerPrefs.GetInt(shippingBuyMission.missionName + "missionprice" + PlayerPrefs.GetInt("level")));
+
+            shippingBuyMission.missionRateText.text = missionSettings._shippingName[PlayerPrefs.GetInt(shippingBuyMission.missionName + PlayerPrefs.GetInt("level"))].ToString();
+            //orderMission.missionRateText.text = missionSettings._orderName[PlayerPrefs.GetInt(orderMission.missionName + PlayerPrefs.GetInt("level"))].ToString();
+        }
+
+        if (PlayerPrefs.GetInt(tapingLineBuyMission.missionName + "missionactive" + PlayerPrefs.GetInt("level")) == 1)
+        {
+            tapingLineBuyMission.gameObject.SetActive(true);
+            tapingLineBuyMission.MissionStart(PlayerPrefs.GetInt(tapingLineBuyMission.missionName + "count" + PlayerPrefs.GetInt("level")), PlayerPrefs.GetInt(tapingLineBuyMission.missionName + "maxcount" + PlayerPrefs.GetInt("level")), PlayerPrefs.GetInt(tapingLineBuyMission.missionName + "missionprice" + PlayerPrefs.GetInt("level")));
+
+            tapingLineBuyMission.missionRateText.text = missionSettings._tapingLineName[PlayerPrefs.GetInt(tapingLineBuyMission.missionName + PlayerPrefs.GetInt("level"))].ToString();
+            //orderMission.missionRateText.text = missionSettings._orderName[PlayerPrefs.GetInt(orderMission.missionName + PlayerPrefs.GetInt("level"))].ToString();
+        }
+
+        if (PlayerPrefs.GetInt(newMapMission.missionName + "missionactive" + PlayerPrefs.GetInt("level")) == 1)
+        {
+            newMapMission.gameObject.SetActive(true);
+            newMapMission.MissionStart(PlayerPrefs.GetInt(newMapMission.missionName + "count" + PlayerPrefs.GetInt("level")), PlayerPrefs.GetInt(newMapMission.missionName + "maxcount" + PlayerPrefs.GetInt("level")), PlayerPrefs.GetInt(newMapMission.missionName + "missionprice" + PlayerPrefs.GetInt("level")));
+
+            newMapMission.missionRateText.text = missionSettings._newMapName[PlayerPrefs.GetInt(newMapMission.missionName + PlayerPrefs.GetInt("level"))].ToString();
+        }
+    }
+    public void OrderMissionStart()
+    {
+        if (PlayerPrefs.GetInt("missionactivator") == 1 && PlayerPrefs.GetInt(orderMission.missionName + PlayerPrefs.GetInt("level")) < missionSettings._orderCountMission.Length && !orderMission.mission_Active && activeMissionCount < maxMissionCount)
+        {
+            orderMission.gameObject.SetActive(true);
+            orderMission.MissionStart(0, missionSettings._orderCountMission[PlayerPrefs.GetInt(orderMission.missionName + PlayerPrefs.GetInt("level"))],
+                missionSettings._orderMissionPrice[PlayerPrefs.GetInt(orderMission.missionName + PlayerPrefs.GetInt("level"))]);
+
+
+            orderMission.missionRateText.text = missionSettings._orderCountMission[PlayerPrefs.GetInt(orderMission.missionName + PlayerPrefs.GetInt("level"))].ToString();
+        }
+    }
+    public void SpecialOrderMissionStart()
+    {
+        if (PlayerPrefs.GetInt("missionactivator") == 1 && PlayerPrefs.GetInt(specialOrderMission.missionName + PlayerPrefs.GetInt("level")) < missionSettings._specialOrderCountMission.Length && !specialOrderMission.mission_Active && activeMissionCount < maxMissionCount)
+        {
+            specialOrderMission.gameObject.SetActive(true);
+            specialOrderMission.MissionStart(0, missionSettings._specialOrderCountMission[PlayerPrefs.GetInt(specialOrderMission.missionName + PlayerPrefs.GetInt("level"))],
+                missionSettings._specialOrderMissionPrice[PlayerPrefs.GetInt(specialOrderMission.missionName + PlayerPrefs.GetInt("level"))]);
+
+
+            specialOrderMission.missionRateText.text = missionSettings._specialOrderCountMission[PlayerPrefs.GetInt(specialOrderMission.missionName + PlayerPrefs.GetInt("level"))].ToString();
+        }
+    }
+
+    public void TapeBoxMissionStart()
+    {
+        if (PlayerPrefs.GetInt("missionactivator") == 1 && PlayerPrefs.GetInt(tapeBoxMission.missionName + PlayerPrefs.GetInt("level")) < missionSettings._tapeBoxCountMission.Length && !tapeBoxMission.mission_Active && activeMissionCount < maxMissionCount)
+        {
+            tapeBoxMission.gameObject.SetActive(true);
+            tapeBoxMission.MissionStart(0, missionSettings._tapeBoxCountMission[PlayerPrefs.GetInt(tapeBoxMission.missionName + PlayerPrefs.GetInt("level"))],
+                missionSettings._tapeBoxMissionPrice[PlayerPrefs.GetInt(tapeBoxMission.missionName + PlayerPrefs.GetInt("level"))]);
+
+
+            tapeBoxMission.missionRateText.text = missionSettings._tapeBoxCountMission[PlayerPrefs.GetInt(tapeBoxMission.missionName + PlayerPrefs.GetInt("level"))].ToString();
+        }
+    }
+
+
+    public void ShippingLineMissionStart()
+    {
+        if (PlayerPrefs.GetInt("missionactivator") == 1 && PlayerPrefs.GetInt(shippingBuyMission.missionName + PlayerPrefs.GetInt("level")) < missionSettings._shippingCountMission.Length && !shippingBuyMission.mission_Active && activeMissionCount < maxMissionCount)
+        {
+            shippingBuyMission.gameObject.SetActive(true);
+            shippingBuyMission.MissionStart(0, missionSettings._shippingCountMission[PlayerPrefs.GetInt(shippingBuyMission.missionName + PlayerPrefs.GetInt("level"))],
+                missionSettings._shippingMissionPrice[PlayerPrefs.GetInt(shippingBuyMission.missionName + PlayerPrefs.GetInt("level"))]);
+
+
+            //shippingBuyMission.missionRateText.text = missionSettings._shippingCountMission[PlayerPrefs.GetInt(shippingBuyMission.missionName + PlayerPrefs.GetInt("level"))].ToString();
+  
+            shippingBuyMission.missionRateText.text = missionSettings._shippingName[PlayerPrefs.GetInt(shippingBuyMission.missionName + PlayerPrefs.GetInt("level"))].ToString();
+        }
+    }
+
+
+    public void TapingLineMissionStart()
+    {
+        if (PlayerPrefs.GetInt("missionactivator") == 1 && PlayerPrefs.GetInt(tapingLineBuyMission.missionName + PlayerPrefs.GetInt("level")) < missionSettings._tapingLineCountMission.Length && !tapingLineBuyMission.mission_Active && activeMissionCount < maxMissionCount)
+        {
+            tapingLineBuyMission.gameObject.SetActive(true);
+            tapingLineBuyMission.MissionStart(0, missionSettings._tapingLineCountMission[PlayerPrefs.GetInt(tapingLineBuyMission.missionName + PlayerPrefs.GetInt("level"))],
+                missionSettings._tapingLineMissionPrice[PlayerPrefs.GetInt(tapingLineBuyMission.missionName + PlayerPrefs.GetInt("level"))]);
+
+
+            //shippingBuyMission.missionRateText.text = missionSettings._shippingCountMission[PlayerPrefs.GetInt(shippingBuyMission.missionName + PlayerPrefs.GetInt("level"))].ToString();
+
+            tapingLineBuyMission.missionRateText.text = missionSettings._tapingLineName[PlayerPrefs.GetInt(tapingLineBuyMission.missionName + PlayerPrefs.GetInt("level"))].ToString();
+        }
+    }
+
+    public void NewMapMissionStart()
+    {
+        if (PlayerPrefs.GetInt("missionactivator") == 1 && PlayerPrefs.GetInt(newMapMission.missionName + PlayerPrefs.GetInt("level")) < missionSettings._newMapCountMission.Length && !newMapMission.mission_Active && activeMissionCount < maxMissionCount)
+        {
+            newMapMission.gameObject.SetActive(true);
+            newMapMission.MissionStart(0, missionSettings._newMapCountMission[PlayerPrefs.GetInt(newMapMission.missionName + PlayerPrefs.GetInt("level"))],
+                           missionSettings._tapingLineMissionPrice[PlayerPrefs.GetInt(newMapMission.missionName + PlayerPrefs.GetInt("level"))]);
+            newMapMission.missionRateText.text = missionSettings._newMapName[PlayerPrefs.GetInt(newMapMission.missionName + PlayerPrefs.GetInt("level"))].ToString();
+
+        }
+    }
+    /////////////////////////////////////////////////////////////////
+
+
+
+
     private void Awake()
     {
         _instance = this;
@@ -95,185 +213,11 @@ public class MissionManager : MonoBehaviour
 
         PlayerPrefs.Save();
     }
-    private void Start()
+    private void Start2()
     {
-        for (int i = 0; i < missionPanels.Count; i++)
-        {
-            if (PlayerPrefs.GetInt(missionPanels[i].missionName + "missionactive") == 1)
-            {
-                OpenPanelButton();
-                missionPanels[i].gameObject.SetActive(true);
-                missionPanels[i].MissionStart(PlayerPrefs.GetInt(missionPanels[i].missionName + "count"), PlayerPrefs.GetInt(missionPanels[i].missionName + "maxcount"), PlayerPrefs.GetInt(missionPanels[i].missionName + "missionprice"));
-                missionPanels[i].missionRateText.text = PlayerPrefs.GetInt(missionPanels[i].missionName + "maxcount").ToString();
-
-            }
-        }
-
-        for (int i = 0; i < productMissionList.Count; i++)
-        {
-            if (PlayerPrefs.GetInt(productMissionList[i].missionName + i.ToString() + "missionactive") == 1)
-            {
-                OpenPanelButton();
-                productMissionList[i].gameObject.SetActive(true);
-                productMissionList[i].MissionStartProduce(PlayerPrefs.GetInt(productMissionList[i].missionName + i.ToString() + "count"), PlayerPrefs.GetInt(productMissionList[i].missionName + i.ToString() + "maxcount"), PlayerPrefs.GetInt(productMissionList[i].missionName + i.ToString() + "missionprice"), PlayerPrefs.GetInt(productMissionList[i].missionName));
-                productMissionList[i].missionRateText.text = PlayerPrefs.GetInt(productMissionList[i].missionName + i.ToString() + "maxcount").ToString();
-
-            }
-        }
 
 
-        for (int i = 0; i < saleMissionList.Count; i++)
-        {
-            if (PlayerPrefs.GetInt(saleMissionList[i].missionName + i.ToString() + "missionactive") == 1)
-            {
-                OpenPanelButton();
-                saleMissionList[i].gameObject.SetActive(true);
-                saleMissionList[i].MissionStartSale(PlayerPrefs.GetInt(saleMissionList[i].missionName + i.ToString() + "count"), PlayerPrefs.GetInt(saleMissionList[i].missionName + i.ToString() + "maxcount"), PlayerPrefs.GetInt(saleMissionList[i].missionName + i.ToString() + "missionprice"), PlayerPrefs.GetInt(saleMissionList[i].missionName));
-                saleMissionList[i].missionRateText.text = PlayerPrefs.GetInt(saleMissionList[i].missionName + i.ToString() + "maxcount").ToString();
-            }
-        }
-
-
-
-        if (PlayerPrefs.GetInt(technoShopMission.missionName + "missionactive") == 1)
-        {
-            OpenPanelButton();
-            technoShopMission.gameObject.SetActive(true);
-            technoShopMission.MissionStart(PlayerPrefs.GetInt(technoShopMission.missionName + "count"), PlayerPrefs.GetInt(technoShopMission.missionName + "maxcount"), PlayerPrefs.GetInt(technoShopMission.missionName + "missionprice"));
-            technoShopMission.missionRateText.text = PlayerPrefs.GetInt(technoShopMission.missionName + "maxcount").ToString();
-
-            float ratio = shopSettings._shopData[0].shopRatio[PlayerPrefs.GetInt(technoShopMission.missionName)];
-            ratio *= 100;
-
-            technoShopMission.missionRateText.text = "%" + ((int)ratio).ToString();
-        }
-
-
-        if (PlayerPrefs.GetInt(sportShopMission.missionName + "missionactive") == 1)
-        {
-            OpenPanelButton();
-            sportShopMission.gameObject.SetActive(true);
-            sportShopMission.MissionStart(PlayerPrefs.GetInt(sportShopMission.missionName + "count"), PlayerPrefs.GetInt(sportShopMission.missionName + "maxcount"), PlayerPrefs.GetInt(sportShopMission.missionName + "missionprice"));
-            sportShopMission.missionRateText.text = PlayerPrefs.GetInt(sportShopMission.missionName + "maxcount").ToString();
-
-            float ratio = shopSettings._shopData[1].shopRatio[PlayerPrefs.GetInt(sportShopMission.missionName)];
-            ratio *= 100;
-
-            sportShopMission.missionRateText.text = "%" + ((int)ratio).ToString();
-        }
-
-
-        if (PlayerPrefs.GetInt(toysShopMission.missionName + "missionactive") == 1)
-        {
-            OpenPanelButton();
-            toysShopMission.gameObject.SetActive(true);
-            toysShopMission.MissionStart(PlayerPrefs.GetInt(toysShopMission.missionName + "count"), PlayerPrefs.GetInt(toysShopMission.missionName + "maxcount"), PlayerPrefs.GetInt(toysShopMission.missionName + "missionprice"));
-            toysShopMission.missionRateText.text = PlayerPrefs.GetInt(toysShopMission.missionName + "maxcount").ToString();
-
-            float ratio = shopSettings._shopData[2].shopRatio[PlayerPrefs.GetInt(toysShopMission.missionName)];
-            ratio *= 100;
-
-            toysShopMission.missionRateText.text = "%" + ((int)ratio).ToString();
-        }
-
-        if (PlayerPrefs.GetInt(technoShopFullMission.missionName + "missionactive") == 1)
-        {
-            OpenPanelButton();
-            technoShopFullMission.gameObject.SetActive(true);
-            technoShopFullMission.MissionStart(PlayerPrefs.GetInt(technoShopFullMission.missionName + "count"), PlayerPrefs.GetInt(technoShopFullMission.missionName + "maxcount"), PlayerPrefs.GetInt(technoShopFullMission.missionName + "missionprice"));
-            technoShopFullMission.missionRateText.text = PlayerPrefs.GetInt(technoShopFullMission.missionName + "maxcount").ToString();
-
-            float ratio = shopSettings._shopData2[0].shopRatio[PlayerPrefs.GetInt(technoShopFullMission.missionName)];
-            ratio *= 100;
-
-            technoShopFullMission.missionRateText.text = "%" + ((int)ratio).ToString();
-        }
-
-
-        if (PlayerPrefs.GetInt(sportShopFullMission.missionName + "missionactive") == 1)
-        {
-            OpenPanelButton();
-            sportShopFullMission.gameObject.SetActive(true);
-            sportShopFullMission.MissionStart(PlayerPrefs.GetInt(sportShopFullMission.missionName + "count"), PlayerPrefs.GetInt(sportShopFullMission.missionName + "maxcount"), PlayerPrefs.GetInt(sportShopFullMission.missionName + "missionprice"));
-            sportShopFullMission.missionRateText.text = PlayerPrefs.GetInt(sportShopFullMission.missionName + "maxcount").ToString();
-
-            float ratio = shopSettings._shopData2[1].shopRatio[PlayerPrefs.GetInt(sportShopFullMission.missionName)];
-            ratio *= 100;
-
-            sportShopFullMission.missionRateText.text = "%" + ((int)ratio).ToString();
-        }
-
-
-        if (PlayerPrefs.GetInt(toysShopFullMission.missionName + "missionactive") == 1)
-        {
-            OpenPanelButton();
-            toysShopFullMission.gameObject.SetActive(true);
-            toysShopFullMission.MissionStart(PlayerPrefs.GetInt(toysShopFullMission.missionName + "count"), PlayerPrefs.GetInt(toysShopFullMission.missionName + "maxcount"), PlayerPrefs.GetInt(toysShopFullMission.missionName + "missionprice"));
-            toysShopFullMission.missionRateText.text = PlayerPrefs.GetInt(toysShopFullMission.missionName + "maxcount").ToString();
-
-            float ratio = shopSettings._shopData2[2].shopRatio[PlayerPrefs.GetInt(toysShopFullMission.missionName)];
-            ratio *= 100;
-
-            toysShopFullMission.missionRateText.text = "%" + ((int)ratio).ToString();
-        }
-
-        if (PlayerPrefs.GetInt(machineMission.missionName + "missionactive") == 1)
-        {
-            OpenPanelButton();
-            machineMission.gameObject.SetActive(true);
-            //productMissionList[productID].MissionStart(0, 1,5);
-            machineMission.MissionStart(PlayerPrefs.GetInt(machineMission.missionName + "count"), 1, PlayerPrefs.GetInt(machineMission.missionName + "missionprice"));
-            int machineID = PlayerPrefs.GetInt(machineMission.missionName) + 1;
-
-            if (machineID == 1) { machineMission.missionRateText.text = "headphone"; }
-            if (machineID == 2) { machineMission.missionRateText.text = "shoe"; }
-            if (machineID == 3) { machineMission.missionRateText.text = "bat"; }
-            if (machineID == 4) { machineMission.missionRateText.text = "tshirt"; }
-            if (machineID == 5) { machineMission.missionRateText.text = "baby doll"; }
-            if (machineID == 6) { machineMission.missionRateText.text = "teddy bear"; }
-            if (machineID == 7) { machineMission.missionRateText.text = "toy car"; }
-        }
-
-
-        if (PlayerPrefs.GetInt(standMission.missionName + "missionactive") == 1)
-        {
-            OpenPanelButton();
-            standMission.gameObject.SetActive(true);
-            //productMissionList[productID].MissionStart(0, 1,5);
-            standMission.MissionStart(PlayerPrefs.GetInt(standMission.missionName + "count"), PlayerPrefs.GetInt(standMission.missionName + "maxcount"), PlayerPrefs.GetInt(standMission.missionName + "missionprice"));
-            int maxCount = PlayerPrefs.GetInt(standMission.missionName + "maxcount");
-
-            int stndId = PlayerPrefs.GetInt(standMission.missionName);
-
-            if (stndId == 0) { standMission.missionRateText.text = "phone stands"; }
-            if (stndId == 1) { standMission.missionRateText.text = "laptop stands"; }
-            if (stndId == 2) { standMission.missionRateText.text = "headphone stands"; }
-            if (stndId == 3) { standMission.missionRateText.text = "shoe stands"; }
-            if (stndId == 4) { standMission.missionRateText.text = "baseball bat stands"; }
-            if (stndId == 5) { standMission.missionRateText.text = "tshirt stands"; }
-            if (stndId == 6) { standMission.missionRateText.text = "baby doll stands"; }
-            if (stndId == 7) { standMission.missionRateText.text = "teddy bear stands"; }
-            if (stndId == 8) { standMission.missionRateText.text =  "toy car stands"; }
-        }
-
-
-        if (PlayerPrefs.GetInt(skinMission.missionName + "missionactive") == 1)
-        {
-            skinMission.gameObject.SetActive(true);
-            skinMission.MissionStart(PlayerPrefs.GetInt(skinMission.missionName + "count"), PlayerPrefs.GetInt(skinMission.missionName + "maxcount"), PlayerPrefs.GetInt(skinMission.missionName + "missionprice"));
-
-            skinMission.missionRateText.text = missionSettings._skinName[PlayerPrefs.GetInt(skinMission.missionName)].ToString();
-
-            //skinMission.missionRateText.text = PlayerPrefs.GetInt(skinMission.missionName + "maxcount").ToString();
-        }
-
-        if (PlayerPrefs.GetInt(newMapMission.missionName + "missionactive") == 1)
-        {
-            newMapMission.gameObject.SetActive(true);
-            newMapMission.MissionStart(0, 1, 25);
-
-
-        }
+      
 
         if (PlayerPrefs.GetInt(dateMission.missionName + "missionactive") == 1)
         {
@@ -330,213 +274,11 @@ public class MissionManager : MonoBehaviour
 
         }
     }
-    public void ProductMission_Start(int productID , float productMoneyValue)
-    {
-        for(int i = 0; i < preProductIdList.Count; i++)
-        {
-            if(preProductIdList[i] == productID)
-            {
-                return;
-            }
-        }
-        if (PlayerPrefs.GetInt("missionactivator") == 1 && !productMissionList[productID].mission_Active && activeMissionCount < maxMissionCount && activeProductMissionCount < 1)
-        {
-            preProductIdList.Add(productID);
-            if(PlayerPrefs.GetInt("shopindex") + 1 < preProductIdList.Count)
-            {
-                preProductIdList.Remove(preProductIdList[0]);
-            }
-            productMissionList[productID].gameObject.SetActive(true);
-            //productMissionList[productID].MissionStart(0, 1,5);
-            productMissionList[productID].MissionStartProduce(0, 50 * (PlayerPrefs.GetInt("shopindex") + 1), (int)(50 * (PlayerPrefs.GetInt("shopindex") + 1) * productMoneyValue), productID);
-            productMissionList[productID].missionRateText.text = (50 * (PlayerPrefs.GetInt("shopindex") + 1)).ToString();
-        }
-    }
-    public void SalingMission_Start(int productID, float productMoneyValue)
-    {
-        for (int i = 0; i < preSaleIdList.Count; i++)
-        {
-            if (preSaleIdList[i] == productID)
-            {
-                return;
-            }
-        }
-        if (PlayerPrefs.GetInt("missionactivator") == 1 && !saleMissionList[productID].mission_Active && activeMissionCount < maxMissionCount && activeSaleMissionCount < 1)
-        {
-            preSaleIdList.Add(productID);
-            if (PlayerPrefs.GetInt("shopindex") + 1 < preSaleIdList.Count)
-            {
-                preSaleIdList.Remove(preSaleIdList[0]);
-            }
-            saleMissionList[productID].gameObject.SetActive(true);
-            //productMissionList[productID].MissionStart(0, 1,5);
-            saleMissionList[productID].MissionStartSale(0, 50 * (PlayerPrefs.GetInt("shopindex") + 1), (int)(50 * (PlayerPrefs.GetInt("shopindex") + 1) * productMoneyValue), productID);
-            saleMissionList[productID].missionRateText.text = (50 * (PlayerPrefs.GetInt("shopindex") + 1)).ToString();
-
-        }
-    }
-    public void MachineMission_Start(int machineID)
-    {
-      
-        if (PlayerPrefs.GetInt("missionactivator") == 1 && PlayerPrefs.GetInt(machineMission.missionName) + 1 == machineID && PlayerPrefs.GetInt(machineMission.missionName) < missionSettings._openMachineMissionPrice.Length && !machineMission.mission_Active && activeMissionCount < maxMissionCount)
-        {
-
-            machineMission.gameObject.SetActive(true);
-            //productMissionList[productID].MissionStart(0, 1,5);
-            machineMission.MissionStart(0, 1, missionSettings._openMachineMissionPrice[PlayerPrefs.GetInt(machineMission.missionName)]);
-
-
-            if(machineID == 1) { machineMission.missionRateText.text = "headphone"; }
-            if(machineID == 2) { machineMission.missionRateText.text = "shoe"; }
-            if(machineID == 3) { machineMission.missionRateText.text = "bat"; }
-            if(machineID == 4) { machineMission.missionRateText.text = "tshirt"; }
-            if(machineID == 5) { machineMission.missionRateText.text = "baby doll"; }
-            if(machineID == 6) { machineMission.missionRateText.text = "teddy bear"; }
-            if(machineID == 7) { machineMission.missionRateText.text = "toy car"; }
-           
-        }
-    }
-    public void StandMission_Start(int productID)
-    {
-
-        if (PlayerPrefs.GetInt("missionactivator") == 1 && PlayerPrefs.GetInt(standMission.missionName) == productID && PlayerPrefs.GetInt(standMission.missionName) < missionSettings._standCountMission.Length && !standMission.mission_Active && activeMissionCount < maxMissionCount)
-        {
-
-            standMission.gameObject.SetActive(true);
-            //productMissionList[productID].MissionStart(0, 1,5);
-            standMission.MissionStart(0, missionSettings._standCountMission[PlayerPrefs.GetInt(standMission.missionName)], missionSettings._standMissionPrice[PlayerPrefs.GetInt(standMission.missionName)]);
-            int maxCount = missionSettings._standCountMission[PlayerPrefs.GetInt(standMission.missionName)];
-
-            if (productID == 0) { standMission.missionRateText.text = "phone stands"; }
-            if (productID == 1) { standMission.missionRateText.text = "laptop stands"; }
-            if (productID == 2) { standMission.missionRateText.text = "headphone stands"; }
-            if (productID == 3) { standMission.missionRateText.text = "shoe stands"; }
-            if (productID == 4) { standMission.missionRateText.text = "baseball bat stands"; }
-            if (productID == 5) { standMission.missionRateText.text = "tshirt stands"; }
-            if (productID == 6) { standMission.missionRateText.text = "baby doll stands"; }
-            if (productID == 7) { standMission.missionRateText.text = "teddy bear stands"; }
-            if (productID == 8) { standMission.missionRateText.text = "toy car stands"; }
-
-        }
-    }
-
-    public void TechnoShopFullOpenMissionStart()
-    {
-        if (PlayerPrefs.GetInt("missionactivator") == 1 && PlayerPrefs.GetInt(technoShopFullMission.missionName) < shopSettings._shopData2[0].openShopCount.Length && !technoShopFullMission.mission_Active && activeMissionCount < maxMissionCount)
-        {
-            technoShopFullMission.gameObject.SetActive(true);
-            technoShopFullMission.MissionStart(0, shopSettings._shopData2[0].openShopCount[PlayerPrefs.GetInt(technoShopFullMission.missionName)], shopSettings._shopData2[0].priceGem[PlayerPrefs.GetInt(technoShopFullMission.missionName)]);
 
 
 
-            float ratio = shopSettings._shopData2[0].shopRatio[PlayerPrefs.GetInt(technoShopFullMission.missionName)];
-            //float ratio = (float)(shopSettings._shopData[1].openShopCount[PlayerPrefs.GetInt(sportShopMission.missionName)]) / (float)(ShopManager.Instance.shopCountTotal[1]);
-            ratio *= 100;
 
-            technoShopFullMission.missionRateText.text = "%" + ((int)ratio).ToString();
-        }
-    }
-    public void SportShopFullOpenMissionStart()
-    {
-        if (PlayerPrefs.GetInt("missionactivator") == 1 && PlayerPrefs.GetInt(sportShopFullMission.missionName) < shopSettings._shopData2[1].openShopCount.Length && !sportShopFullMission.mission_Active && activeMissionCount < maxMissionCount)
-        {
-            sportShopFullMission.gameObject.SetActive(true);
-            sportShopFullMission.MissionStart(0, shopSettings._shopData2[1].openShopCount[PlayerPrefs.GetInt(sportShopFullMission.missionName)], shopSettings._shopData2[1].priceGem[PlayerPrefs.GetInt(sportShopFullMission.missionName)]);
-
-            float ratio = shopSettings._shopData2[1].shopRatio[PlayerPrefs.GetInt(sportShopFullMission.missionName)];
-            //float ratio = (float)(shopSettings._shopData[1].openShopCount[PlayerPrefs.GetInt(sportShopMission.missionName)]) / (float)(ShopManager.Instance.shopCountTotal[1]);
-            ratio *= 100;
-
-            sportShopFullMission.missionRateText.text = "%" + ((int)ratio).ToString();
-        }
-    }
-
-
-    public void ToysShopFullOpenMissionStart()
-    {
-        if (PlayerPrefs.GetInt("missionactivator") == 1 && PlayerPrefs.GetInt(toysShopFullMission.missionName) < shopSettings._shopData2[2].openShopCount.Length && !toysShopFullMission.mission_Active && activeMissionCount < maxMissionCount)
-        {
-            toysShopFullMission.gameObject.SetActive(true);
-            toysShopFullMission.MissionStart(0, shopSettings._shopData2[2].openShopCount[PlayerPrefs.GetInt(toysShopFullMission.missionName)], shopSettings._shopData2[2].priceGem[PlayerPrefs.GetInt(toysShopFullMission.missionName)]);
-
-            float ratio = shopSettings._shopData2[2].shopRatio[PlayerPrefs.GetInt(toysShopFullMission.missionName)];
-            ratio *= 100;
-
-            toysShopFullMission.missionRateText.text = "%" + ((int)ratio).ToString();
-        }
-    }
-    public void TechnoShopMissionStart()
-    {
-        if (PlayerPrefs.GetInt("missionactivator") == 1 && PlayerPrefs.GetInt(technoShopMission.missionName) < shopSettings._shopData[0].openShopCount.Length && !technoShopMission.mission_Active && activeMissionCount < maxMissionCount)
-        {
-            technoShopMission.gameObject.SetActive(true);
-            technoShopMission.MissionStart(0, shopSettings._shopData[0].openShopCount[PlayerPrefs.GetInt(technoShopMission.missionName)], shopSettings._shopData[0].priceGem[PlayerPrefs.GetInt(technoShopMission.missionName)]);
-
-
-
-            float ratio = shopSettings._shopData[0].shopRatio[PlayerPrefs.GetInt(technoShopMission.missionName)];
-            //float ratio = (float)(shopSettings._shopData[1].openShopCount[PlayerPrefs.GetInt(sportShopMission.missionName)]) / (float)(ShopManager.Instance.shopCountTotal[1]);
-            ratio *= 100;
-
-            technoShopMission.missionRateText.text = "%" + ((int)ratio).ToString();
-        }   
-    }
-
-    public void SportShopMissionStart()
-    {
-        if (PlayerPrefs.GetInt("missionactivator") == 1 && PlayerPrefs.GetInt(sportShopMission.missionName) < shopSettings._shopData[1].openShopCount.Length && !sportShopMission.mission_Active && activeMissionCount < maxMissionCount)
-        {
-            sportShopMission.gameObject.SetActive(true);
-            sportShopMission.MissionStart(0, shopSettings._shopData[1].openShopCount[PlayerPrefs.GetInt(sportShopMission.missionName)], shopSettings._shopData[1].priceGem[PlayerPrefs.GetInt(sportShopMission.missionName)]);
-
-            float ratio = shopSettings._shopData[1].shopRatio[PlayerPrefs.GetInt(sportShopMission.missionName)];
-            //float ratio = (float)(shopSettings._shopData[1].openShopCount[PlayerPrefs.GetInt(sportShopMission.missionName)]) / (float)(ShopManager.Instance.shopCountTotal[1]);
-            ratio *= 100;
-
-            sportShopMission.missionRateText.text = "%" + ((int)ratio).ToString();
-        }
-    }
-
-
-    public void ToysShopMissionStart()
-    {
-        if (PlayerPrefs.GetInt("missionactivator") == 1 && PlayerPrefs.GetInt(toysShopMission.missionName) < shopSettings._shopData[2].openShopCount.Length && !toysShopMission.mission_Active && activeMissionCount < maxMissionCount)
-        {
-            toysShopMission.gameObject.SetActive(true);
-            toysShopMission.MissionStart(0, shopSettings._shopData[2].openShopCount[PlayerPrefs.GetInt(toysShopMission.missionName)], shopSettings._shopData[2].priceGem[PlayerPrefs.GetInt(toysShopMission.missionName)]);
-
-            float ratio = shopSettings._shopData[2].shopRatio[PlayerPrefs.GetInt(toysShopMission.missionName)];
-            ratio *= 100;
-
-            toysShopMission.missionRateText.text = "%" + ((int)ratio).ToString();
-        }
-    }
-
-    public void SkinMissionStart()
-    {
-        if (PlayerPrefs.GetInt("missionactivator") == 1 && PlayerPrefs.GetInt(skinMission.missionName) < missionSettings._skinCountMission.Length && !skinMission.mission_Active && activeMissionCount < maxMissionCount)
-        {
-            skinMission.gameObject.SetActive(true);
-            skinMission.MissionStart(0, missionSettings._skinCountMission[PlayerPrefs.GetInt(skinMission.missionName)],
-                missionSettings._skinMissionPrice[PlayerPrefs.GetInt(skinMission.missionName)]);
-
-
-            skinMission.missionRateText.text = missionSettings._skinName[PlayerPrefs.GetInt(skinMission.missionName)].ToString();
-        }
-    }
-
-    public void NewMapMissionStart()
-    {
-        if (PlayerPrefs.GetInt("missionactivator") == 1 && PlayerPrefs.GetInt(newMapMission.missionName) < 1 && !newMapMission.mission_Active && activeMissionCount < maxMissionCount)
-        {
-            newMapMission.gameObject.SetActive(true);
-            newMapMission.MissionStart(0, 1, 25);
-                //missionSettings._skinMissionPrice[PlayerPrefs.GetInt(newMapMission.missionName)]);
-
-
-            //newMapMission.missionRateText.text = missionSettings._skinName[PlayerPrefs.GetInt(newMapMission.missionName)].ToString();
-        }
-    }
+  
 
     public Transform moneyTargetTR;
     public void MoneyCreate(int _moneyCount, Transform moneyCreatePosTR)
@@ -738,6 +480,6 @@ public class MissionManager : MonoBehaviour
 
     public void OpenPanelButton()
     {
-        //panelOpenButton.gameObject.SetActive(true);
+        panelOpenButton.gameObject.SetActive(true);
     }
 }

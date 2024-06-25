@@ -25,7 +25,7 @@ public class StandFishCar : Stand,IMoneyArea
     int carLevel = 0;
     [SerializeField] float fishCoun_Factor;
 
-    [SerializeField] int[] productTypeCount;
+    public int[] productTypeCount;
     [SerializeField] int[] productTypeCountTotal;
     [SerializeField] List<GameObject> productTextGOList;
     [SerializeField] List<TextMeshProUGUI> productTextList;
@@ -35,6 +35,7 @@ public class StandFishCar : Stand,IMoneyArea
 
     public Sprite[] vipImgList;
 
+    public bool specialVehicle = false;
     void TextInitCheck()
     {
         for (int i = 0; i < productTypeCount.Length; i++)
@@ -69,6 +70,8 @@ public class StandFishCar : Stand,IMoneyArea
     }
     IEnumerator StartDelay()
     {
+        MissionManager.Instance.ShippingLineMissionStart();
+
         yield return new WaitForSeconds(1f);
         StartCoroutine(MoneyCreate());
 
@@ -77,6 +80,12 @@ public class StandFishCar : Stand,IMoneyArea
             PlayerPrefs.SetInt("firstindactive", 1);
             IndicatorManager.Instance.IndicatorTargeterActive();
         }
+        if (PlayerPrefs.GetInt(standNameLevel + "firstopen") == 0)
+        {
+            PlayerPrefs.SetInt(standNameLevel + "firstopen", 1);
+            MissionManager.Instance.shippingBuyMission.MissionUpdate();
+        }
+
     }
     int totalBoxCount = 0;
     public void LevelInit()
@@ -127,10 +136,10 @@ public class StandFishCar : Stand,IMoneyArea
     }
     public override void SpecificStart()
     {
+        FishDropArea.Instance.carSlotList.Add(this);
         firstColliderOffset = moneyArea.GetComponent<BoxCollider>().center;
-
+        StartCoroutine(SpecificStartDelay());
         //_FishDropArea.standList.Add(this);
-        CarCreate();
         FishCountInit();
         foreach (var wrkArea in workAreaList)
         {
@@ -138,12 +147,25 @@ public class StandFishCar : Stand,IMoneyArea
             //wrkArea.CollectProductList.Add(_CollectProducts);
         }
     }
+    IEnumerator SpecificStartDelay()
+    {
+        yield return new WaitForSeconds(2f);
+        CarCreate();
+    }
     void FishCountInit()
     {
         //FishManager.Instance.fishCount[0] += (int)(fishCountTotal * fishCoun_Factor);
     }
     public override void SpecificReset()
     {
+        if (specialVehicle)
+        {
+            MissionManager.Instance.specialOrderMission.MissionUpdate();
+        }
+        else
+        {
+            MissionManager.Instance.orderMission.MissionUpdate();
+        }
         ResetStand();
     }
 
@@ -151,7 +173,16 @@ public class StandFishCar : Stand,IMoneyArea
 
     void CarCreate()
     {
-      
+        if (specialVehicle)
+        {
+            MissionManager.Instance.SpecialOrderMissionStart();
+        }
+        else
+        {
+            MissionManager.Instance.OrderMissionStart();
+        }
+        MissionManager.Instance.ShippingLineMissionStart();
+
         currentCar = Instantiate(carPrefabList[carLevel], carCreateTR.position, Quaternion.identity);
         //currentCar.GetComponent<FishCar>().CarLevelCreate(carLevel);
         currentCar.GetComponent<FishCar>().stand = this;
@@ -195,7 +226,7 @@ public class StandFishCar : Stand,IMoneyArea
         {
             for (int t = 0; t < typeList.Count; t++)
             {
-                if(i == typeList[t])
+                if(i == typeList[t] && FishDropArea.Instance.productDropActive[i])
                 {
                     productTypeCount[i] = Random.Range(0, productCount);
                     productCount -= productTypeCount[i];
@@ -208,6 +239,20 @@ public class StandFishCar : Stand,IMoneyArea
         if(productCount > 0)
         {
             int randomSelect = Random.Range(0, typeList.Count);
+
+            int maxLoopCount = 10;
+            int loopCounter = 0;
+            do
+            {
+                loopCounter++;
+                randomSelect = Random.Range(0, typeList.Count);
+                if (loopCounter >= maxLoopCount)
+                {
+                    break;
+                }
+            }
+            while (!FishDropArea.Instance.productDropActive[typeList[randomSelect]]);
+
             productTypeCount[typeList[ randomSelect]] += productCount;
             productCount -= productTypeCount[typeList[randomSelect]];
         }
@@ -523,7 +568,7 @@ public class StandFishCar : Stand,IMoneyArea
         }
         moneyArea.GetComponent<BoxCollider>().center = firstColliderOffset;
     }
-    void ResetStand()
+    public void ResetStand()
     {
         StartCoroutine(ResetDelay());
     }

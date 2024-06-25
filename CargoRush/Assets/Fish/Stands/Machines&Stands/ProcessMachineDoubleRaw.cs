@@ -125,25 +125,7 @@ public class ProcessMachineDoubleRaw : Stand
         {
             stands.machineActive = true;
         }
-        MissionManager.Instance.ProductMission_Start(_CollectProducts.CollectId - 2, (float)productPrefabs[0].price / 5);
-        MissionManager.Instance.SalingMission_Start(_CollectProducts.CollectId - 2, (float)productPrefabs[0].price / 5);
-
-        if (missionActive)
-        {
-            if (_CollectProducts.CollectId >= 3)
-            {
-                MissionManager.Instance.MachineMission_Start(_CollectProducts.CollectId - 2);
-            }
-            if (_CollectProducts.CollectId > 3)
-            {
-                if (MissionManager.Instance.machineMission.gameObject.activeInHierarchy)
-                {
-                    MissionManager.Instance.machineMission.MissionUpdate();
-                }
-            }
-
-          
-        }
+    
     }
     void StandCarCollectIdSet()
     {
@@ -252,13 +234,6 @@ public class ProcessMachineDoubleRaw : Stand
 
     IEnumerator CreateCanned(float waitTime, List<Collectable> raws, List<Collectable> rawsOther)
     {
-        if (missionActive)
-        {
-            if (_CollectProducts.CollectId >= 3)
-            {
-                MissionManager.Instance.MachineMission_Start(_CollectProducts.CollectId - 2);
-            }
-        }
 
 
 
@@ -393,18 +368,7 @@ public class ProcessMachineDoubleRaw : Stand
         newProduct.GetComponent<Collectable>().collectActive = false;
         newProduct.GetComponent<Collectable>().fishCollectable = productCollectionList;
 
-        MissionManager.Instance.ProductMission_Start(_CollectProducts.CollectId - 2, (float)productPrefabs[0].price / 5);
-        if (MissionManager.Instance.productMissionList[_CollectProducts.CollectId - 2].gameObject.activeInHierarchy)
-        {
-            MissionManager.Instance.productMissionList[_CollectProducts.CollectId - 2].MissionUpdateProduce(_CollectProducts.CollectId - 2);
-        }
-        MissionManager.Instance.SalingMission_Start(_CollectProducts.CollectId - 2, (float)productPrefabs[0].price / 5);
-
-        MissionManager.Instance.StandMission_Start(_CollectProducts.CollectId - 2);
-        if (_CollectProducts.CollectId >= 3)
-        {
-            MissionManager.Instance.MachineMission_Start(_CollectProducts.CollectId - 2);
-        }
+  
         //MissionManager.Instance.saleMissionList[_CollectProducts.CollectId - 2].MissionUpdateProduce(_CollectProducts.CollectId - 2);
 
 

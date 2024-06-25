@@ -29,11 +29,11 @@ public class MissionPanel : MonoBehaviour
         tickGO.SetActive(false);
         moneyButton.gameObject.SetActive(true);
 
-        PlayerPrefs.SetInt(missionName + "missionactive", 1);
+        PlayerPrefs.SetInt(missionName + "missionactive" + PlayerPrefs.GetInt("level"), 1);
         currentCount = _currentCount;
-        PlayerPrefs.SetInt(missionName + "count", currentCount);
-        PlayerPrefs.SetInt(missionName + "maxcount", _maxCount);
-        PlayerPrefs.SetInt(missionName + "missionprice", _price);
+        PlayerPrefs.SetInt(missionName + "count" + PlayerPrefs.GetInt("level"), currentCount);
+        PlayerPrefs.SetInt(missionName + "maxcount" + PlayerPrefs.GetInt("level"), _maxCount);
+        PlayerPrefs.SetInt(missionName + "missionprice" + PlayerPrefs.GetInt("level"), _price);
 
         maxCount = _maxCount;
         MissionManager.Instance.activeMissionCount++;
@@ -66,7 +66,7 @@ public class MissionPanel : MonoBehaviour
         if (mission_Active && currentCount < maxCount)
         {
             currentCount++;
-            PlayerPrefs.SetInt(missionName + "count", currentCount);
+            PlayerPrefs.SetInt(missionName + "count" + PlayerPrefs.GetInt("level"), currentCount);
 
             missionRateSlider.fillAmount = ((float)currentCount / (float)maxCount);
 
@@ -82,15 +82,7 @@ public class MissionPanel : MonoBehaviour
         {
             int openedStandCount = 0;
 
-            foreach(var stnd in MissionManager.Instance.allStandList)
-            {
-                if(stnd.GetComponent<StandFishTezgah>()._CollectProduct.CollectId - 2 == PlayerPrefs.GetInt(missionName))
-                {
-                    openedStandCount++;
-
-
-                }
-            }
+ 
             currentCount++;
             PlayerPrefs.SetInt(missionName + "count", openedStandCount);
 
@@ -120,7 +112,7 @@ public class MissionPanel : MonoBehaviour
     private void MissionComplete()
     {
         MissionManager.Instance.startParticleGO.SetActive(true);
-        PlayerPrefs.SetInt(missionName, PlayerPrefs.GetInt(missionName) + 1);
+        PlayerPrefs.SetInt(missionName + PlayerPrefs.GetInt("level"), PlayerPrefs.GetInt(missionName + PlayerPrefs.GetInt("level")) + 1);
         moneyButton.interactable = true;
         missionRateSlider.fillAmount = 1;
 
@@ -130,9 +122,9 @@ public class MissionPanel : MonoBehaviour
     IEnumerator MissionCompleteDelay()
     {
 
-        PlayerPrefs.SetInt(missionName + "missionactive", 0);
-        PlayerPrefs.SetInt(missionName + "count", 0);
-        mission_Active = false;
+        PlayerPrefs.SetInt(missionName + "missionactive" + PlayerPrefs.GetInt("level"), 0);
+        PlayerPrefs.SetInt(missionName + "count" + PlayerPrefs.GetInt("level"), 0);
+        //mission_Active = false;
 
         MissionManager.Instance.activeMissionCount--;
 
@@ -201,260 +193,14 @@ public class MissionPanel : MonoBehaviour
             transform.localScale = Vector3.Lerp(Vector3.one, new Vector3(1, 0, 1), counter);
             yield return null;
         }
-
+        mission_Active = false;
         transform.localScale = Vector3.one;
-        gameObject.SetActive(false);
         if (MissionManager.Instance.activeMissionCount == 0)
         {
             MissionManager.Instance.MissionClose();
             yield return new WaitForSeconds(0.5f);
             MissionManager.Instance.panelOpenButton.gameObject.SetActive(false);
         }
+        gameObject.SetActive(false);
     }
-
-
-
-    public void MissionStartProduce(int _currentCount, int _maxCount, int _price, int productId)
-    {
-        tickGO.SetActive(false);
-        moneyButton.gameObject.SetActive(true);
-
-        PlayerPrefs.SetInt(missionName + productId.ToString() + "missionactive", 1);
-        currentCount = _currentCount;
-        PlayerPrefs.SetInt(missionName + productId.ToString() + "count", currentCount);
-        PlayerPrefs.SetInt(missionName + productId.ToString() + "maxcount", _maxCount);
-        PlayerPrefs.SetInt(missionName + productId.ToString() + "missionprice", _price);
-
-        maxCount = _maxCount;
-        MissionManager.Instance.activeMissionCount++;
-        MissionManager.Instance.activeProductMissionCount++;
-        mission_Active = true;
-        price = _price;
-
-        if (moneyType == MoneyType.Money)
-        {
-            priceText.text = "$" + price.ToString();
-            moneyImg.sprite = moneyIcon;
-        }
-        else
-        {
-            priceText.text = price.ToString();
-            moneyImg.sprite = gemIcon;
-        }
-        moneyButton.interactable = false;
-        missionRateSlider.fillAmount = 0;
-
-        MissionManager.Instance.OpenPanelButton();
-
-
-        if (currentCount == maxCount)
-        {
-            MissionCompleteProduce(productId);
-        }
-    }
-    public void MissionUpdateProduce(int productId)
-    {
-        if (mission_Active && currentCount < maxCount)
-        {
-            currentCount++;
-            PlayerPrefs.SetInt(missionName + productId.ToString() + "count", currentCount);
-
-            missionRateSlider.fillAmount = ((float)currentCount / (float)maxCount);
-
-            if (currentCount == maxCount)
-            {
-                MissionCompleteProduce(productId);
-
-                string tag = "";
-
-                if (productId == 0) { tag = "Produce " + maxCount.ToString() + "Phone"; }
-                if (productId == 1) { tag = "Produce " + maxCount.ToString() + "Laptop"; }
-                if (productId == 2) { tag = "Produce " + maxCount.ToString() + "Headphone"; }
-                if (productId == 3) { tag = "Produce " + maxCount.ToString() + "Shoe"; }
-                if (productId == 4) { tag = "Produce " + maxCount.ToString() + "BaseballBat"; }
-                if (productId == 5) { tag = "Produce " + maxCount.ToString() + "Tshirt"; }
-                if (productId == 6) { tag = "Produce " + maxCount.ToString() + "BabyDoll"; }
-                if (productId == 7) { tag = "Produce " + maxCount.ToString() + "TeddyBear"; }
-                if (productId == 8) { tag = "Produce " + maxCount.ToString() + "ToyCar"; }
-
-                float time = CoefficientTransformation.FormatSaniye(Globals.playTime);
-                //GameAnalytics.NewDesignEvent(tag,time);
-            }
-        }
-    }
-    private void MissionCompleteProduce(int productId)
-    {
-        MissionManager.Instance.startParticleGO.SetActive(true);
-        PlayerPrefs.SetInt(missionName + productId.ToString(), PlayerPrefs.GetInt(missionName + productId.ToString()) + 1);
-        moneyButton.interactable = true;
-        missionRateSlider.fillAmount = 1;
-
-        MissionManager.Instance.activeProductMissionCount--;
-        StartCoroutine(MissionCompleteDelay());
-
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    public void MissionStartSale(int _currentCount, int _maxCount, int _price, int productId)
-    {
-        tickGO.SetActive(false);
-        moneyButton.gameObject.SetActive(true);
-
-        PlayerPrefs.SetInt(missionName + productId.ToString() + "missionactive", 1);
-        currentCount = _currentCount;
-        PlayerPrefs.SetInt(missionName + productId.ToString() + "count", currentCount);
-        PlayerPrefs.SetInt(missionName + productId.ToString() + "maxcount", _maxCount);
-        PlayerPrefs.SetInt(missionName + productId.ToString() + "missionprice", _price);
-
-        maxCount = _maxCount;
-        MissionManager.Instance.activeMissionCount++;
-        MissionManager.Instance.activeSaleMissionCount++;
-        mission_Active = true;
-        price = _price;
-
-        if (moneyType == MoneyType.Money)
-        {
-            priceText.text = "$" + price.ToString();
-            moneyImg.sprite = moneyIcon;
-        }
-        else
-        {
-            priceText.text = price.ToString();
-            moneyImg.sprite = gemIcon;
-        }
-        moneyButton.interactable = false;
-        missionRateSlider.fillAmount = 0;
-
-        MissionManager.Instance.OpenPanelButton();
-
-
-        if (currentCount == maxCount)
-        {
-            MissionCompleteSale(productId);
-        }
-    }
-    public void MissionUpdateSale(int productId)
-    {
-        if (mission_Active && currentCount < maxCount)
-        {
-            currentCount++;
-            PlayerPrefs.SetInt(missionName + productId.ToString() + "count", currentCount);
-
-            missionRateSlider.fillAmount = ((float)currentCount / (float)maxCount);
-
-            if (currentCount == maxCount)
-            {
-                MissionCompleteSale(productId);
-
-                string tag = "";
-
-                if (productId == 0) { tag = "Sell " + maxCount.ToString() + "Phone"; }
-                if (productId == 1) { tag = "Sell " + maxCount.ToString() + "Laptop"; }
-                if (productId == 2) { tag = "Sell " + maxCount.ToString() + "Headphone"; }
-                if (productId == 3) { tag = "Sell " + maxCount.ToString() + "Shoe"; }
-                if (productId == 4) { tag = "Sell " + maxCount.ToString() + "BaseballBat"; }
-                if (productId == 5) { tag = "Sell " + maxCount.ToString() + "Tshirt"; }
-                if (productId == 6) { tag = "Sell " + maxCount.ToString() + "BabyDoll"; }
-                if (productId == 7) { tag = "Sell " + maxCount.ToString() + "TeddyBear"; }
-                if (productId == 8) { tag = "Sell " + maxCount.ToString() + "ToyCar"; }
-
-
-                float time = CoefficientTransformation.FormatSaniye(Globals.playTime);
-                //GameAnalytics.NewDesignEvent(tag,time);
-            }
-        }
-    }
-    private void MissionCompleteSale(int productId)
-    {
-        MissionManager.Instance.startParticleGO.SetActive(true);
-        PlayerPrefs.SetInt(missionName + productId.ToString(), PlayerPrefs.GetInt(missionName + productId.ToString()) + 1);
-        moneyButton.interactable = true;
-        missionRateSlider.fillAmount = 1;
-
-        MissionManager.Instance.activeSaleMissionCount--;
-        StartCoroutine(MissionCompleteDelay());
-
-    }
-
-
-
-
-
-    //public void MissionStartStand(int _currentCount, int _maxCount, int _price, int productId)
-    //{
-    //    PlayerPrefs.SetInt(missionName + productId.ToString() + "missionactive", 1);
-    //    currentCount = _currentCount;
-    //    PlayerPrefs.SetInt(missionName + productId.ToString() + "count", currentCount);
-    //    PlayerPrefs.SetInt(missionName + productId.ToString() + "maxcount", _maxCount);
-    //    PlayerPrefs.SetInt(missionName + productId.ToString() + "missionprice", _price);
-
-    //    maxCount = _maxCount;
-    //    MissionManager.Instance.activeMissionCount++;
-    //    MissionManager.Instance.activeStandMissionCount++;
-    //    mission_Active = true;
-    //    price = _price;
-
-    //    if (moneyType == MoneyType.Money)
-    //    {
-    //        priceText.text = "$" + price.ToString();
-    //        moneyImg.sprite = moneyIcon;
-    //    }
-    //    else
-    //    {
-    //        priceText.text = price.ToString();
-    //        moneyImg.sprite = gemIcon;
-    //    }
-    //    moneyButton.interactable = false;
-    //    missionRateSlider.fillAmount = 0;
-    //    MissionManager.Instance.panelOpenButton.gameObject.SetActive(true);
-
-    //    if (currentCount == maxCount)
-    //    {
-    //        MissionCompleteStand(productId);
-    //    }
-    //}
-
-
-    //public void MissionUpdateStand(int productId)
-    //{
-    //    if (mission_Active && currentCount < maxCount)
-    //    {
-    //        currentCount++;
-    //        PlayerPrefs.SetInt(missionName + productId.ToString() + "count", currentCount);
-
-    //        missionRateSlider.fillAmount = ((float)currentCount / (float)maxCount);
-
-
-    //        if (currentCount == maxCount)
-    //        {
-    //            MissionCompleteStand(productId);
-    //        }
-    //    }
-    //}
-
-
-
-    //private void MissionCompleteStand(int productId)
-    //{
-    //    MissionManager.Instance.startParticleGO.SetActive(true);
-    //    PlayerPrefs.SetInt(missionName + productId.ToString(), PlayerPrefs.GetInt(missionName + productId.ToString()) + 1);
-    //    moneyButton.interactable = true;
-    //    missionRateSlider.fillAmount = 1;
-
-    //    MissionManager.Instance.activeStandMissionCount--;
-    //    StartCoroutine(MissionCompleteDelay());
-
-    //}
 }
