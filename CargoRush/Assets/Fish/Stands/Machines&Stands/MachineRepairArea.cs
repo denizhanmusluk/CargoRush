@@ -10,21 +10,26 @@ public class MachineRepairArea : MonoBehaviour
     bool upgradeOpenActive = false;
 
     bool repairActive = false;
+    public RepairWorker repairWorker;
+    public Transform repairCreatePos;
+    public Transform targetMachinePos;
+    public Transform repairExitPos;
+    bool repairStarted = false;
     private void OnEnable()
     {
         repairActive = true;
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.GetComponent<PlayerController>() != null)
+        if (other.GetComponent<PlayerController>() != null && !repairStarted)
         {
             upgradeOpenActive = true;
-            StartCoroutine(CooldownActive(0.7f));
+            StartCoroutine(CooldownActive(2f));
         }
     }
     private void OnTriggerExit(Collider other)
     {
-        if (other.GetComponent<PlayerController>() != null)
+        if (other.GetComponent<PlayerController>() != null && !repairStarted)
         {
             upgradeOpenActive = false;
         }
@@ -70,10 +75,18 @@ public class MachineRepairArea : MonoBehaviour
     }
     IEnumerator RepairStartedDelay()
     {
+        repairStarted = true;
+        repairWorker.transform.position = repairCreatePos.position;
+        yield return new WaitForSeconds(0.1f);
+        repairWorker.gameObject.SetActive(true);
+        repairWorker.GoToMachine();
+
+        yield return new WaitForSeconds(4f);
         processMachine.RepairStarter();
         yield return new WaitForSeconds(0.5f);
 
         repairActive = true;
+        repairStarted = false;
         gameObject.SetActive(false);
         
     }

@@ -8,6 +8,7 @@ public class IndTargeter : MonoBehaviour
     bool collisionActive = true;
     [SerializeField] float delayTime;
     [SerializeField] bool indicatorActivatorActive;
+    [SerializeField] bool tutorialCompleter = false;
     private void OnTriggerEnter(Collider other)
     {
         if(other.GetComponent<PlayerController>() != null)
@@ -21,6 +22,11 @@ public class IndTargeter : MonoBehaviour
                     PlayerPrefs.SetInt(targeterName, 1);
                     IndicatorManager.Instance.IndicaorDeActive();
                     StartCoroutine(SetDelay());
+                    if (tutorialCompleter)
+                    {
+                        PlayerPrefs.SetInt("tutorialcompleted", 1);
+                        TutorialManager.Instance.TutorialCompletedCheck();
+                    }
                 }
             }
         }

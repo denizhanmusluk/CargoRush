@@ -63,13 +63,8 @@ public class StandFishTezgah : Stand
         //MarketCustomerManager.Instance.collectAreaList.Add(_CollectProduct);
         //MarketCustomerManager.Instance.maxCharacterCount += customerCount;
 
-        MissionManager.Instance.allStandList.Add(this);
-        MissionManager.Instance.StandMission_Start(_CollectProduct.CollectId - 2);
 
-        if (MissionManager.Instance.standMission.gameObject.activeInHierarchy)
-        {
-            MissionManager.Instance.standMission.MissionUpdatestand(_CollectProduct.CollectId - 2);
-        }
+
         //if (_CollectProduct.CollectId > 2)
         //    {
         //        MissionManager.Instance.standMission.MissionUpdate();
@@ -258,7 +253,6 @@ public class StandFishTezgah : Stand
 
 
 
-        MissionManager.Instance.StandMission_Start(_CollectProduct.CollectId - 2);
         workAreaList[0].StnadFullCheck();
         _CollectProduct.ratio = (float)droppedCollectionList.Count / (float)fishCountTotal;
 

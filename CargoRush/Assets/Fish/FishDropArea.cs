@@ -44,11 +44,20 @@ public class FishDropArea : MonoBehaviour
     public MineCrusher mineCrusher;
     public List<GameObject> wallListGO = new List<GameObject>();
     bool colliderResetActive = true;
-    [SerializeField] int gemCreatePerDropCount;
+    //[SerializeField] int gemCreatePerDropCount;
     int dropCount = 0;
+
+    public bool[] productDropActive = new bool[4];
+
+    public List<StandFishCar> carSlotList = new List<StandFishCar>();
     private void Awake()
     {
         _instance = this;
+
+        for(int i = 0; i < productDropActive.Length; i++)
+        {
+            productDropActive[i] = true;
+        }
     }
     public void ReactiveActivator()
     {
@@ -91,6 +100,8 @@ public class FishDropArea : MonoBehaviour
         CollectProductList.Add(_CollectProduct);
         //_CollectProduct._FishDropArea = this;
         StartCoroutine(GarbageDropping());
+        //CarSlotsReset();
+
     }
     float createTime;
     IEnumerator GarbageDropping()
@@ -114,7 +125,10 @@ public class FishDropArea : MonoBehaviour
             }
 
             int garbageSelect = LeastIdCheck();
-            GarbageCreate(garbageSelect);
+            if (productDropActive[garbageSelect])
+            {
+                GarbageCreate(garbageSelect);
+            }
             yield return new WaitForSeconds(createTime);
         }
     }
@@ -127,7 +141,7 @@ public class FishDropArea : MonoBehaviour
             count = proType[0].productList.Count;
             for (int i = 0; i <= Globals.collectableLevel; i++)
             {
-                if (proType[i].productList.Count < count)
+                if (proType[i].productList.Count < count && productDropActive[i])
                 {
                     count = proType[i].productList.Count;
                     minId = i;
@@ -159,10 +173,10 @@ public class FishDropArea : MonoBehaviour
             Vector3 forceDir = (-createPosList[createPosSelect].up).normalized;
             fsh.GetComponent<Collector>().FirstPush(forceDir);
         }
-        if (dropCount % gemCreatePerDropCount == 0)
-        {
-            GemCreating();
-        }
+        //if (dropCount % gemCreatePerDropCount == 0)
+        //{
+        //    GemCreating();
+        //}
     }
     public void GemCreating()
     {
@@ -234,5 +248,32 @@ public class FishDropArea : MonoBehaviour
         List<Stand> sortedList = standList.OrderBy(x => (x.fishCountCurrent)).ToList();
         standList = sortedList;
         //Shuffle(standList);
+    }
+
+    public void DeleteErrorProduct(int productID)
+    {
+        for (int i = 0; i < proType[productID].productList.Count; i++)
+        {
+            Destroy(proType[productID].productList[i].gameObject);
+        }
+        proType[productID].productList.Clear();
+    }
+
+
+
+    public void CarSlotsReset()
+    {
+        foreach(var carSlot in carSlotList)
+        {
+            for(int i = 0; i < productDropActive.Length && i < carSlot.productTypeCount.Length; i++)
+            {
+                if (!productDropActive[i] && carSlot.productTypeCount[i] > 0)
+                {
+                    carSlot.ResetStand();
+                    break;
+                }
+
+            }
+        }
     }
 }

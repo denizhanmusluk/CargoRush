@@ -14,7 +14,6 @@ public class Shop : MonoBehaviour
         }
         if (machineProductID != 0)
         {
-            MissionManager.Instance.MachineMission_Start(machineProductID);
         }
     }
 }

@@ -56,6 +56,7 @@ public class NewLevelBoss : MonoBehaviour
         DropMoney();
         PlayerController.Instance.PlayerControl_ReActive();
         bossCharacter.GoExit(exitPosTR);
+        MissionManager.Instance.NewMapMissionStart();
     }
     void DropMoney()
     {

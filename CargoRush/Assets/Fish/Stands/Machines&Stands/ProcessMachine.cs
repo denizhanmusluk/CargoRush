@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class ProcessMachine : Stand, IStandUpgrade
 {
@@ -30,7 +32,7 @@ public class ProcessMachine : Stand, IStandUpgrade
     public int rawCountPerProduct = 1;
     public Collectable[] rawPrefabs;
     public Collectable[] productPrefabs;
-    public int machineId;
+    //public int machineId;
     public bool missionActive = true;
     public int machineLevel;
     public int collectableLevel;
@@ -38,6 +40,7 @@ public class ProcessMachine : Stand, IStandUpgrade
 
 
     public int standLevel { get; set; }
+
     public int[] capacitiesRaw;
     public int[] capacitiesProduct;
     public float[] speedFactors;
@@ -48,6 +51,9 @@ public class ProcessMachine : Stand, IStandUpgrade
     public bool isVipActivator = false;
     public bool kizakRunning = false;
 
+
+    public bool machineErrorActivator = false;
+
     [SerializeField] int errorTime = 60;
     [SerializeField] int errorTimeCounter = 0;
     public bool machineErrored = false;
@@ -55,6 +61,10 @@ public class ProcessMachine : Stand, IStandUpgrade
     [SerializeField] int repairTime = 60;
     [SerializeField] int repairTimeCounter = 0;
     public MachineRepairArea machineRepairArea;
+    public RepairWorker repairWorker;
+    public GameObject repairProgressGO;
+    public Image repairProgressImg;
+    public TextMeshProUGUI repairProgressText;
     public void RepairStarter()
     {
         PlayerPrefs.SetInt(machineName + "repairStarted" + PlayerPrefs.GetInt("level"), 1);
@@ -63,10 +73,14 @@ public class ProcessMachine : Stand, IStandUpgrade
     }
     IEnumerator MachineRepairCounter()
     {
+        repairProgressGO.SetActive(true);
+        repairProgressText.text = "00:00";
         repairTimeCounter = PlayerPrefs.GetInt(machineName + "repairTimeCounter" + PlayerPrefs.GetInt("level"));
         while (repairTimeCounter < repairTime)
         {
             repairTimeCounter++;
+            repairProgressImg.fillAmount = (float)repairTimeCounter / (float)repairTime;
+            repairProgressText.text = ConvertSecondToMinSec.Converter(repairTime - repairTimeCounter);
             PlayerPrefs.SetInt(machineName + "repairTimeCounter" + PlayerPrefs.GetInt("level"), repairTimeCounter);
             yield return new WaitForSeconds(1f);
         }
@@ -75,6 +89,9 @@ public class ProcessMachine : Stand, IStandUpgrade
         PlayerPrefs.SetInt(machineName + "iserror" + PlayerPrefs.GetInt("level"), 0);
         PlayerPrefs.SetInt(machineName + "repairStarted" + PlayerPrefs.GetInt("level"), 0);
         machineErrored = false;
+        FishDropArea.Instance.productDropActive[collectableLevel] = true;
+        repairWorker.GoExit();
+        repairProgressGO.SetActive(false);
         StartCoroutine(MachineErrorCounter());
     }
     IEnumerator MachineErrorCounter()
@@ -92,6 +109,10 @@ public class ProcessMachine : Stand, IStandUpgrade
 
         machineErrored = true;
         machineRepairArea.gameObject.SetActive(true);
+        FishDropArea.Instance.productDropActive[collectableLevel] = false;
+        FishDropArea.Instance.DeleteErrorProduct(collectableLevel);
+        FishDropArea.Instance.CarSlotsReset();
+
     }
     public override void CollectableCountSet()
     {
@@ -192,23 +213,45 @@ public class ProcessMachine : Stand, IStandUpgrade
         ManuealProductCreate();
         CapacityInit();
 
-        if(PlayerPrefs.GetInt(machineName + "iserror" + PlayerPrefs.GetInt("level")) == 0)
+        if (machineErrorActivator)
         {
-            machineErrored = false;
-            StartCoroutine(MachineErrorCounter());
-        }
-        else
-        {
-            machineErrored = true;
-            if (PlayerPrefs.GetInt(machineName + "repairStarted" + PlayerPrefs.GetInt("level")) == 1)
+            if (PlayerPrefs.GetInt(machineName + "iserror" + PlayerPrefs.GetInt("level")) == 0)
             {
-                RepairStarter();
+                machineErrored = false;
+                StartCoroutine(MachineErrorCounter());
             }
             else
             {
-                machineRepairArea.gameObject.SetActive(true);
+                machineErrored = true;
+                if (PlayerPrefs.GetInt(machineName + "repairStarted" + PlayerPrefs.GetInt("level")) == 1)
+                {
+                    RepairStarter();
+                }
+                else
+                {
+                    FishDropArea.Instance.productDropActive[collectableLevel] = false;
+                    machineRepairArea.gameObject.SetActive(true);
+                    FishDropArea.Instance.DeleteErrorProduct(collectableLevel);
+                    FishDropArea.Instance.CarSlotsReset();
+                }
             }
         }
+
+        StartCoroutine(StartDelay());
+    }
+    IEnumerator StartDelay()
+    {
+        MissionManager.Instance.TapingLineMissionStart();
+
+        yield return new WaitForSeconds(1f);
+
+        if (PlayerPrefs.GetInt(machineName + "firstopen") == 0)
+        {
+            PlayerPrefs.SetInt(machineName + "firstopen", 1);
+            MissionManager.Instance.tapingLineBuyMission.MissionUpdate();
+        }
+
+
     }
     void StandCarCollectIdSet()
     {
@@ -240,7 +283,7 @@ public class ProcessMachine : Stand, IStandUpgrade
         creatingActive = false;
         while (!creatingActive)
         {
-            if (cannedCount < productCountTotal)
+            if (cannedCount < productCountTotal && !machineErrored)
             {
                 creatingActive = true;
 
@@ -253,7 +296,10 @@ public class ProcessMachine : Stand, IStandUpgrade
             {
                 kizakRunning = false;
                 MachineStop();
-                fullTextGO.SetActive(true);
+                if (cannedCount >= productCountTotal)
+                {
+                    fullTextGO.SetActive(true);
+                }
                 stoppedTextGO.SetActive(true);
                 machineIsFull = true;
             }
@@ -266,6 +312,8 @@ public class ProcessMachine : Stand, IStandUpgrade
              
             }
             yield return new WaitForSeconds(0.1f);
+            MissionManager.Instance.TapingLineMissionStart();
+
         }
     }
 
@@ -275,12 +323,12 @@ public class ProcessMachine : Stand, IStandUpgrade
     {
 
         yield return new WaitForSeconds(0.1f);
-        if (droppedCollectionList.Count > rawCountPerProduct - 1 && cannedCount < productCountTotal)
+        if (droppedCollectionList.Count > rawCountPerProduct - 1 && cannedCount < productCountTotal && !machineErrored)
         {
             MachineActive();
         }
 
-        while (droppedCollectionList.Count > rawCountPerProduct - 1 && cannedCount < productCountTotal)
+        while (droppedCollectionList.Count > rawCountPerProduct - 1 && cannedCount < productCountTotal && !machineErrored)
         {
            // MinesDropAreaCheck();
             //CheckMinePNG();
@@ -311,6 +359,11 @@ public class ProcessMachine : Stand, IStandUpgrade
             fishCountText.text = (fishCountTotal - fishCountCurrent).ToString() + "/" + (fishCountTotal).ToString();
             yield return new WaitForSeconds((waitTime / Globals.machineSpeedSkin) / speedFactor);
             workAreaList[0].StnadFullCheck();
+            //MissionManager.Instance.OrderMissionStart();
+            //MissionManager.Instance.orderMission.MissionUpdate();
+            MissionManager.Instance.TapeBoxMissionStart();
+            MissionManager.Instance.tapeBoxMission.MissionUpdate();
+
         }
         //  MinesDropAreaCheck();
         yield return new WaitForSeconds(2f);
@@ -447,7 +500,7 @@ public class ProcessMachine : Stand, IStandUpgrade
             kizakRunning = true;
             while (Vector3.Distance( box.transform.position,aiPath.aiNodes[i].transform.position ) > 0.5f)
             {
-                while (machineIsFull)
+                while (machineIsFull || machineErrored)
                 {
                     yield return null;
                 }
