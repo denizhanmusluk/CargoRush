@@ -22,21 +22,29 @@ public class GraphManager : MonoBehaviour
         yield return new WaitForSeconds(2f);
         StartCoroutine(SetGraph());
     }
+    public bool openedShareUI = false;
     IEnumerator SetGraph()
     {
         while (true)
         {
 
-            //yield return new WaitForSeconds(0.1f);
-            DrawGraph();
 
-            yield return new WaitForSeconds(1f);
-            if (graphContainer != null)
+            if (openedShareUI)
             {
-                foreach (Transform child in graphContainer.transform)
+                DrawGraph();
+
+                yield return new WaitForSeconds(1f);
+                if (graphContainer != null)
                 {
-                    Destroy(child.gameObject);
+                    foreach (Transform child in graphContainer.transform)
+                    {
+                        Destroy(child.gameObject);
+                    }
                 }
+            }
+            else
+            {
+                yield return new WaitForSeconds(0.1f);
             }
         }
     }

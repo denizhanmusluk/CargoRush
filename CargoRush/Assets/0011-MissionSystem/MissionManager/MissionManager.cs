@@ -120,7 +120,7 @@ public class MissionManager : MonoBehaviour
     }
     public void OrderMissionStart()
     {
-        if (PlayerPrefs.GetInt("missionactivator") == 1 && PlayerPrefs.GetInt(orderMission.missionName + PlayerPrefs.GetInt("level")) < missionSettings._orderCountMission.Length && !orderMission.mission_Active && activeMissionCount < maxMissionCount)
+        if (PlayerPrefs.GetInt("missionactivator" + PlayerPrefs.GetInt("level")) == 1 && PlayerPrefs.GetInt(orderMission.missionName + PlayerPrefs.GetInt("level")) < missionSettings._orderCountMission.Length && !orderMission.mission_Active && activeMissionCount < maxMissionCount)
         {
             orderMission.gameObject.SetActive(true);
             orderMission.MissionStart(0, missionSettings._orderCountMission[PlayerPrefs.GetInt(orderMission.missionName + PlayerPrefs.GetInt("level"))],
@@ -133,7 +133,7 @@ public class MissionManager : MonoBehaviour
     }
     public void SpecialOrderMissionStart()
     {
-        if (PlayerPrefs.GetInt("missionactivator") == 1 && PlayerPrefs.GetInt(specialOrderMission.missionName + PlayerPrefs.GetInt("level")) < missionSettings._specialOrderCountMission.Length && !specialOrderMission.mission_Active && activeMissionCount < maxMissionCount)
+        if (PlayerPrefs.GetInt("missionactivator" + PlayerPrefs.GetInt("level")) == 1 && PlayerPrefs.GetInt(specialOrderMission.missionName + PlayerPrefs.GetInt("level")) < missionSettings._specialOrderCountMission.Length && !specialOrderMission.mission_Active && activeMissionCount < maxMissionCount)
         {
             specialOrderMission.gameObject.SetActive(true);
             specialOrderMission.MissionStart(0, missionSettings._specialOrderCountMission[PlayerPrefs.GetInt(specialOrderMission.missionName + PlayerPrefs.GetInt("level"))],
@@ -147,7 +147,7 @@ public class MissionManager : MonoBehaviour
 
     public void TapeBoxMissionStart()
     {
-        if (PlayerPrefs.GetInt("missionactivator") == 1 && PlayerPrefs.GetInt(tapeBoxMission.missionName + PlayerPrefs.GetInt("level")) < missionSettings._tapeBoxCountMission.Length && !tapeBoxMission.mission_Active && activeMissionCount < maxMissionCount)
+        if (PlayerPrefs.GetInt("missionactivator" + PlayerPrefs.GetInt("level")) == 1 && PlayerPrefs.GetInt(tapeBoxMission.missionName + PlayerPrefs.GetInt("level")) < missionSettings._tapeBoxCountMission.Length && !tapeBoxMission.mission_Active && activeMissionCount < maxMissionCount)
         {
             tapeBoxMission.gameObject.SetActive(true);
             tapeBoxMission.MissionStart(0, missionSettings._tapeBoxCountMission[PlayerPrefs.GetInt(tapeBoxMission.missionName + PlayerPrefs.GetInt("level"))],
@@ -162,7 +162,7 @@ public class MissionManager : MonoBehaviour
 
     public void ShippingLineMissionStart()
     {
-        if (PlayerPrefs.GetInt("missionactivator") == 1 && PlayerPrefs.GetInt(shippingBuyMission.missionName + PlayerPrefs.GetInt("level")) < missionSettings._shippingCountMission.Length && !shippingBuyMission.mission_Active && activeMissionCount < maxMissionCount)
+        if (PlayerPrefs.GetInt("missionactivator" + PlayerPrefs.GetInt("level")) == 1 && PlayerPrefs.GetInt(shippingBuyMission.missionName + PlayerPrefs.GetInt("level")) < missionSettings._shippingCountMission.Length && !shippingBuyMission.mission_Active && activeMissionCount < maxMissionCount)
         {
             shippingBuyMission.gameObject.SetActive(true);
             shippingBuyMission.MissionStart(0, missionSettings._shippingCountMission[PlayerPrefs.GetInt(shippingBuyMission.missionName + PlayerPrefs.GetInt("level"))],
@@ -177,7 +177,7 @@ public class MissionManager : MonoBehaviour
     }
     public void SpecialShippingLineMissionStart()
     {
-        if (PlayerPrefs.GetInt("missionactivator") == 1 && PlayerPrefs.GetInt(specialShippingBuyMission.missionName + PlayerPrefs.GetInt("level")) < missionSettings._specialShippingCountMission.Length && !specialShippingBuyMission.mission_Active && activeMissionCount < maxMissionCount)
+        if (PlayerPrefs.GetInt("missionactivator" + PlayerPrefs.GetInt("level")) == 1 && PlayerPrefs.GetInt(specialShippingBuyMission.missionName + PlayerPrefs.GetInt("level")) < missionSettings._specialShippingCountMission.Length && !specialShippingBuyMission.mission_Active && activeMissionCount < maxMissionCount)
         {
             specialShippingBuyMission.gameObject.SetActive(true);
             specialShippingBuyMission.MissionStart(0, missionSettings._specialShippingCountMission[PlayerPrefs.GetInt(specialShippingBuyMission.missionName + PlayerPrefs.GetInt("level"))],
@@ -193,7 +193,7 @@ public class MissionManager : MonoBehaviour
 
     public void TapingLineMissionStart()
     {
-        if (PlayerPrefs.GetInt("missionactivator") == 1 && PlayerPrefs.GetInt(tapingLineBuyMission.missionName + PlayerPrefs.GetInt("level")) < missionSettings._tapingLineCountMission.Length && !tapingLineBuyMission.mission_Active && activeMissionCount < maxMissionCount)
+        if (PlayerPrefs.GetInt("missionactivator" + PlayerPrefs.GetInt("level")) == 1 && PlayerPrefs.GetInt(tapingLineBuyMission.missionName + PlayerPrefs.GetInt("level")) < missionSettings._tapingLineCountMission.Length && !tapingLineBuyMission.mission_Active && activeMissionCount < maxMissionCount)
         {
             tapingLineBuyMission.gameObject.SetActive(true);
             tapingLineBuyMission.MissionStart(0, missionSettings._tapingLineCountMission[PlayerPrefs.GetInt(tapingLineBuyMission.missionName + PlayerPrefs.GetInt("level"))],
@@ -209,7 +209,7 @@ public class MissionManager : MonoBehaviour
 
     public void NewMapMissionStart()
     {
-        if (PlayerPrefs.GetInt("missionactivator") == 1 && PlayerPrefs.GetInt(newMapMission.missionName + PlayerPrefs.GetInt("level")) < missionSettings._newMapCountMission.Length && !newMapMission.mission_Active && activeMissionCount < maxMissionCount)
+        if (PlayerPrefs.GetInt("missionactivator" + PlayerPrefs.GetInt("level")) == 1 && PlayerPrefs.GetInt(newMapMission.missionName + PlayerPrefs.GetInt("level")) < missionSettings._newMapCountMission.Length && !newMapMission.mission_Active && activeMissionCount < maxMissionCount)
         {
             newMapMission.gameObject.SetActive(true);
             newMapMission.MissionStart(0, missionSettings._newMapCountMission[PlayerPrefs.GetInt(newMapMission.missionName + PlayerPrefs.GetInt("level"))],

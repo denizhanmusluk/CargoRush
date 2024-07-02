@@ -26,6 +26,7 @@ public class NewLevelBoss : MonoBehaviour
     }
     void BossActive()
     {
+        Globals.goToCeoActive = true;
         bossCharacter.gameObject.SetActive(true);
         BossTutorialPanel.Instance.newLevelBoss = this;
         PlayerController.Instance.newLevelBoss = this;

@@ -33,7 +33,7 @@ public class TutorialManager : MonoBehaviour
     {
         if(PlayerPrefs.GetInt("tutorialcompleted") == 1)
         {
-            PlayerPrefs.SetInt("missionactivator", 1);
+            PlayerPrefs.SetInt("missionactivator" + PlayerPrefs.GetInt("level"), 1);
             StarterMissions();
             MapManager.Instance.mapButton.gameObject.SetActive(true);
             HRUpgradeManager.Instance.upgradeButton.SetActive(true);

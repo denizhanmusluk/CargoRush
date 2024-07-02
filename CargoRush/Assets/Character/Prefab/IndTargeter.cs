@@ -24,8 +24,8 @@ public class IndTargeter : MonoBehaviour
                     StartCoroutine(SetDelay());
                     if (tutorialCompleter)
                     {
-                        PlayerPrefs.SetInt("tutorialcompleted", 1);
-                        TutorialManager.Instance.TutorialCompletedCheck();
+                        //PlayerPrefs.SetInt("tutorialcompleted", 1);
+                        //TutorialManager.Instance.TutorialCompletedCheck();
                     }
                 }
             }

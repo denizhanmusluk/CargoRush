@@ -52,6 +52,8 @@ public class FishDropArea : MonoBehaviour
     public bool[] productDropActive = new bool[4];
 
     public List<StandFishCar> carSlotList = new List<StandFishCar>();
+
+    int extraProduct = 0;
     private void Awake()
     {
         _instance = this;
@@ -69,8 +71,11 @@ public class FishDropArea : MonoBehaviour
     {
         createTime = 0.1f;
         reactiveRateCurrent = 1;
+        extraProduct = 75;
         yield return new WaitForSeconds(2f);
         reactiveRateCurrent = reactiveRate;
+        yield return new WaitForSeconds(5f);
+        extraProduct = 0;
     }
     public void WallColliderReset()
     {
@@ -112,7 +117,7 @@ public class FishDropArea : MonoBehaviour
         {
             //int garbageSelect = Random.Range(0, garbagePrefabs.Length);
 
-            while ((Globals.collectableLevel + 1) * totalProductCapacity <= collectableList.Count)
+            while ((Globals.collectableLevel + 1) * totalProductCapacity + extraProduct <= collectableList.Count)
             {
                 createTime = createPeriodTime[mineCrusher.standLevel];
 

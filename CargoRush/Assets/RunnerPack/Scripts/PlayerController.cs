@@ -849,6 +849,10 @@ public class PlayerController : MonoBehaviour
     {
         if (Vector3.Distance(new Vector2(transform.position.x, transform.position.z), new Vector2(newLevelBoss.playerTargetPosTR.position.x, newLevelBoss.playerTargetPosTR.position.z)) > 0.25f)
         {
+            if(OnUpdate != null)
+            {
+                OnUpdate = null;
+            }
             characterStayActive = false;
 
             Vector3 targetPos = new Vector3(newLevelBoss.playerTargetPosTR.position.x, transform.position.y, newLevelBoss.playerTargetPosTR.position.z);
@@ -877,7 +881,8 @@ public class PlayerController : MonoBehaviour
                 BossTutorialPanel.Instance.newLevelBoss.CharacterArrivedBoss();
                 //OnUpdate = null;
                 //PlayerRotReset();
-                //PlayerControl_ReActive();
+                PlayerControl_ReActive();
+                Globals.goToCeoActive = false;
             }
         }
     }

@@ -14,6 +14,7 @@ public class ShareManager : MonoBehaviour
     public Animator graphAnim;
     public GameObject graphButton;
     public GameObject cancelButton;
+    public GraphManager graphManager;
     //public List<HisseCompany> hisseCompaniesSequence = new List<HisseCompany>();
 
     private void Awake()
@@ -46,6 +47,7 @@ public class ShareManager : MonoBehaviour
         cancelButton.SetActive(true);
         graphAnim.SetBool("openactive", true);
         PlayerController.Instance.PlayerControlDeActive();
+        graphManager.openedShareUI = true;
     }
     public void CloseGraph()
     {
@@ -53,6 +55,6 @@ public class ShareManager : MonoBehaviour
         cancelButton.SetActive(false);
         graphAnim.SetBool("openactive", false);
         PlayerController.Instance.PlayerControl_ReActive();
-
+        graphManager.openedShareUI = false;
     }
 }

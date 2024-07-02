@@ -122,4 +122,6 @@ public static class Globals
 
     public static bool machineErrorActive = false;
 
+    public static bool goToCeoActive = false;
+
 }

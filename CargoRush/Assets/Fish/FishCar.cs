@@ -86,20 +86,24 @@ public class FishCar : MonoBehaviour
             ShopManager.Instance.buyOthersGO.SetActive(true);
             if (PlayerPrefs.GetInt("againcollect") == 0)
             {
+                PlayerPrefs.SetInt("tutorialcompleted", 1);
+                TutorialManager.Instance.TutorialCompletedCheck();
+
                 PlayerPrefs.SetInt("againcollect", 1);
                 Transform indTr = IndicatorManager.Instance.targeterActiveList[0].transform;
                 float distance;
                 Collectable currentCollectable;
                 if (FishDropArea.Instance.collectableList.Count != 0)
                 {
+                    Transform crusherTR = FishDropArea.Instance.mineCrusher.transform;
                     currentCollectable = FishDropArea.Instance.collectableList[0];
-                    distance = Vector3.Distance(currentCollectable.transform.position, transform.position);
+                    distance = Vector3.Distance(currentCollectable.transform.position, crusherTR.position);
                     for (int i = 0; i < FishDropArea.Instance.collectableList.Count; i++)
                     {
-                        if (Vector3.Distance(FishDropArea.Instance.collectableList[i].transform.position, transform.position) < distance)
+                        if (Vector3.Distance(FishDropArea.Instance.collectableList[i].transform.position, crusherTR.position) < distance)
                         {
                             currentCollectable = FishDropArea.Instance.collectableList[i];
-                            distance = Vector3.Distance(currentCollectable.transform.position, transform.position);
+                            distance = Vector3.Distance(currentCollectable.transform.position, crusherTR.position);
                         }
                     }
                     indTr.position = new Vector3(currentCollectable.transform.position.x, indTr.position.y, currentCollectable.transform.position.z);

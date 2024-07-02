@@ -468,7 +468,10 @@ public class BuyArea : MonoBehaviour, BuyCamera
         }
         if (isNewOpen && !cameraPassive)
         {
-            PlayerController.Instance.PlayerControl_ReActive();
+            if (!Globals.goToCeoActive)
+            {
+                PlayerController.Instance.PlayerControl_ReActive();
+            }
 
             for (int i = 0; i < buyAreas.Length; i++)
             {
