@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Cinemachine;
 
 public class ProcessMachine : Stand, IStandUpgrade
 {
     [SerializeField] Transform fishInTR, converFishtoCannedTR, fishOutTR, outTR2;
+    [SerializeField] Transform fishInTR_Second;
     public Collectable[] productsPrefab;
    
     public Transform[] fishPosTR;
@@ -57,14 +59,26 @@ public class ProcessMachine : Stand, IStandUpgrade
     [SerializeField] int errorTime = 60;
     [SerializeField] int errorTimeCounter = 0;
     public bool machineErrored = false;
-
-    [SerializeField] int repairTime = 60;
-    [SerializeField] int repairTimeCounter = 0;
+    public CinemachineVirtualCamera errorCamera;
+    public int repairTime = 60;
+    public int repairTimeCounter = 0;
     public MachineRepairArea machineRepairArea;
     public RepairWorker repairWorker;
     public GameObject repairProgressGO;
     public Image repairProgressImg;
     public TextMeshProUGUI repairProgressText;
+    public List<CollectProduct> collectProducts = new List<CollectProduct>();
+    public string productName;
+    public bool skinActivator = false;
+
+    public GameObject standOnlineGO;
+    void CollectProducts_CollectActivator(bool active)
+    {
+        foreach(var cltPrd in collectProducts)
+        {
+            cltPrd.collectActive = active;
+        }
+    }
     public void RepairStarter()
     {
         PlayerPrefs.SetInt(machineName + "repairStarted" + PlayerPrefs.GetInt("level"), 1);
@@ -82,25 +96,33 @@ public class ProcessMachine : Stand, IStandUpgrade
             repairProgressImg.fillAmount = (float)repairTimeCounter / (float)repairTime;
             repairProgressText.text = ConvertSecondToMinSec.Converter(repairTime - repairTimeCounter);
             PlayerPrefs.SetInt(machineName + "repairTimeCounter" + PlayerPrefs.GetInt("level"), repairTimeCounter);
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(1f / Globals.repairSpeedSkin);
         }
         repairTimeCounter = 0;
         PlayerPrefs.SetInt(machineName + "repairTimeCounter" + PlayerPrefs.GetInt("level"), repairTimeCounter);
         PlayerPrefs.SetInt(machineName + "iserror" + PlayerPrefs.GetInt("level"), 0);
         PlayerPrefs.SetInt(machineName + "repairStarted" + PlayerPrefs.GetInt("level"), 0);
         machineErrored = false;
+        Globals.machineErrorActive = false;
+        CollectProducts_CollectActivator(true);
         FishDropArea.Instance.productDropActive[collectableLevel] = true;
         repairWorker.GoExit();
         repairProgressGO.SetActive(false);
         StartCoroutine(MachineErrorCounter());
+        TutorialManager.Instance.repairFinishedGO.SetActive(true);
+        FishDropArea.Instance.ReactiveActivator();
+
     }
     IEnumerator MachineErrorCounter()
     {
         errorTimeCounter = PlayerPrefs.GetInt(machineName + "errorTimeCounter" + PlayerPrefs.GetInt("level"));
         while (errorTimeCounter < errorTime)
         {
-            errorTimeCounter++;
-            PlayerPrefs.SetInt(machineName + "errorTimeCounter" + PlayerPrefs.GetInt("level") , errorTimeCounter);
+            if (!Globals.machineErrorActive)
+            {
+                errorTimeCounter++;
+                PlayerPrefs.SetInt(machineName + "errorTimeCounter" + PlayerPrefs.GetInt("level"), errorTimeCounter);
+            }
             yield return new WaitForSeconds(1f);
         }
         PlayerPrefs.SetInt(machineName + "iserror" + PlayerPrefs.GetInt("level"), 1);
@@ -108,11 +130,17 @@ public class ProcessMachine : Stand, IStandUpgrade
         PlayerPrefs.SetInt(machineName + "errorTimeCounter" + PlayerPrefs.GetInt("level"), errorTimeCounter);
 
         machineErrored = true;
+        Globals.machineErrorActive = true;
+        CollectProducts_CollectActivator(false);
+
         machineRepairArea.gameObject.SetActive(true);
         FishDropArea.Instance.productDropActive[collectableLevel] = false;
         FishDropArea.Instance.DeleteErrorProduct(collectableLevel);
         FishDropArea.Instance.CarSlotsReset();
 
+        errorCamera.Priority = 50;
+        yield return new WaitForSeconds(2f);
+        errorCamera.Priority = 0;
     }
     public override void CollectableCountSet()
     {
@@ -123,6 +151,12 @@ public class ProcessMachine : Stand, IStandUpgrade
     }
     public override void SpecificStart()
     {
+        if (skinActivator)
+        {
+            PlayerPrefs.SetInt("skinactive", 1);
+            StoreManager.Instance.storeButton.SetActive(true);
+
+        }
         if (isVipActivator)
         {
             Globals.vipCreateActive = true;
@@ -131,7 +165,6 @@ public class ProcessMachine : Stand, IStandUpgrade
         {
             Globals.collectableLevel = collectableLevel;
         }
-        FishDropArea.Instance.ReactiveActivator();
         IndicatorManager.Instance.machines.Add(this);
 
         //if (PlayerPrefs.GetInt(machineName + "firstopen") == 0)
@@ -218,11 +251,17 @@ public class ProcessMachine : Stand, IStandUpgrade
             if (PlayerPrefs.GetInt(machineName + "iserror" + PlayerPrefs.GetInt("level")) == 0)
             {
                 machineErrored = false;
+                Globals.machineErrorActive = false;
+                CollectProducts_CollectActivator(true);
+
                 StartCoroutine(MachineErrorCounter());
             }
             else
             {
                 machineErrored = true;
+                Globals.machineErrorActive = true;
+                CollectProducts_CollectActivator(false);
+
                 if (PlayerPrefs.GetInt(machineName + "repairStarted" + PlayerPrefs.GetInt("level")) == 1)
                 {
                     RepairStarter();
@@ -238,6 +277,10 @@ public class ProcessMachine : Stand, IStandUpgrade
         }
 
         StartCoroutine(StartDelay());
+        if(standOnlineGO != null)
+        {
+            standOnlineGO.SetActive(true);
+        }
     }
     IEnumerator StartDelay()
     {
@@ -245,10 +288,13 @@ public class ProcessMachine : Stand, IStandUpgrade
 
         yield return new WaitForSeconds(1f);
 
-        if (PlayerPrefs.GetInt(machineName + "firstopen") == 0)
+        if (PlayerPrefs.GetInt(machineName + "firstopen" + PlayerPrefs.GetInt("level")) == 0)
         {
-            PlayerPrefs.SetInt(machineName + "firstopen", 1);
+            PlayerPrefs.SetInt(machineName + "firstopen" + PlayerPrefs.GetInt("level"), 1);
             MissionManager.Instance.tapingLineBuyMission.MissionUpdate();
+            FishDropArea.Instance.NewProductActive(productName);
+            FishDropArea.Instance.ReactiveActivator();
+
         }
 
 
@@ -349,7 +395,7 @@ public class ProcessMachine : Stand, IStandUpgrade
 
             Collectable raws = droppedCollectionList[droppedCollectionList.Count - 1];
             droppedCollectionList.Remove(droppedCollectionList[droppedCollectionList.Count - 1]);
-            PlayerPrefs.SetInt(machineName + "rawcount", droppedCollectionList.Count);
+            PlayerPrefs.SetInt(machineName + "rawcount" + PlayerPrefs.GetInt("level"), droppedCollectionList.Count);
 
 
         
@@ -357,12 +403,26 @@ public class ProcessMachine : Stand, IStandUpgrade
             dropActive = false;
             fishCountCurrent += rawCountPerProduct;
             fishCountText.text = (fishCountTotal - fishCountCurrent).ToString() + "/" + (fishCountTotal).ToString();
-            yield return new WaitForSeconds((waitTime / Globals.machineSpeedSkin) / speedFactor);
+            yield return new WaitForSeconds((waitTime / Globals.repairSpeedSkin) / speedFactor);
             workAreaList[0].StnadFullCheck();
             //MissionManager.Instance.OrderMissionStart();
             //MissionManager.Instance.orderMission.MissionUpdate();
             MissionManager.Instance.TapeBoxMissionStart();
             MissionManager.Instance.tapeBoxMission.MissionUpdate();
+
+            if (PlayerPrefs.GetInt("level") == 0)
+            {
+                Globals.myShareValue += 1;
+            }
+            else if(PlayerPrefs.GetInt("level") == 1)
+            {
+                Globals.myShareValue += 3;
+            }
+            else
+            {
+                Globals.myShareValue += 6;
+            }
+            PlayerPrefs.SetInt("myShareValue", Globals.myShareValue);
 
         }
         //  MinesDropAreaCheck();
@@ -413,7 +473,22 @@ public class ProcessMachine : Stand, IStandUpgrade
             yield return null;
         }
 
+        if (fishInTR_Second != null)
+        {
+            firstPoss = raws.transform.position;
+            firstRots = raws.transform.rotation;
 
+            counter = 0f;
+            while (counter < 1f)
+            {
+                counter += 2 * Time.deltaTime;
+
+                raws.transform.position = Vector3.Lerp(firstPoss, fishInTR_Second.transform.position, counter);
+                raws.transform.rotation = Quaternion.Lerp(firstRots, fishInTR_Second.rotation, counter);
+
+                yield return null;
+            }
+        }
 
         // go convert position
         firstPoss = raws.transform.position;
@@ -519,7 +594,7 @@ public class ProcessMachine : Stand, IStandUpgrade
         kizakRunning = false;
 
         productCollectionList.Add(box);
-        PlayerPrefs.SetInt(machineName + "col", productCollectionList.Count);
+        PlayerPrefs.SetInt(machineName + "col" + PlayerPrefs.GetInt("level"), productCollectionList.Count);
         float deltaY = 0;
 
         deltaY = (productCollectionList.Count - 1) / productPosTR.Length;
@@ -964,6 +1039,8 @@ public class ProcessMachine : Stand, IStandUpgrade
         productCountTotal = capacitiesProduct[standLevel];
         fishCountCurrent = capacitiesRaw[standLevel] - droppedCollectionList.Count;
         speedFactor = speedFactors[standLevel];
+        fishCountText.text = (fishCountTotal - fishCountCurrent).ToString() + "/" + (fishCountTotal).ToString();
+
     }
 
     public void TraySet()

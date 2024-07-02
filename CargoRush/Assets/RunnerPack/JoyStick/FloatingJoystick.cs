@@ -121,5 +121,12 @@ public class FloatingJoystick : MonoBehaviour, IDragHandler, IPointerDownHandler
         speed = Vector2.zero;
         Handle.anchoredPosition = Vector2.zero;
     }
+    public void PointerUpManuel()
+    {
+        pressActive = false;
+        Background.gameObject.SetActive(false);
+        speed = Vector2.zero;
+        Handle.anchoredPosition = Vector2.zero;
+    }
 }
 

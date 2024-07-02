@@ -16,7 +16,10 @@ public class StarPanelManager : MonoBehaviour
     public Image storeButtonImage;
     public List<Sprite> skinSpriteList = new List<Sprite>();
     public GameObject skinBuyTutorialGO;
+    public GameObject skinSelectTutorialGO;
     public Animator skillAnim;
+
+    public int currentViewSkinID = 0;
     void Awake()
     {
         if (Instance == null)
@@ -32,9 +35,9 @@ public class StarPanelManager : MonoBehaviour
             {
                 if (Globals.moneyAmount >= playerModels._starModelCost[i])
                 {
-                    buyButtons[i].button.interactable = true;
-                    if (buyButtons[i].gameObject.activeInHierarchy && PlayerPrefs.GetInt("shopindex") >= modelButtons[i + 1].shopLevel)
+                    if (buyButtons[i].gameObject.activeInHierarchy && PlayerPrefs.GetInt("level") >= modelButtons[i + 1].shopLevel)
                     {
+                        buyButtons[i].button.interactable = true;
                         StoreManager.Instance.storeButtonGlimmerGO.SetActive(true);
                     }
                 }
@@ -48,7 +51,7 @@ public class StarPanelManager : MonoBehaviour
                 if (Globals.gemAmount >= playerModels._starModelCost[i])
                 {
                     buyButtons[i].button.interactable = true;
-                    if (buyButtons[i].gameObject.activeInHierarchy && PlayerPrefs.GetInt("shopindex") >= modelButtons[i + 1].shopLevel)
+                    if (buyButtons[i].gameObject.activeInHierarchy && PlayerPrefs.GetInt("level") >= modelButtons[i + 1].shopLevel)
                     {
                         StoreManager.Instance.storeButtonGlimmerGO.SetActive(true);
                     }
@@ -64,14 +67,16 @@ public class StarPanelManager : MonoBehaviour
     {
         for (int i = 0; i < modelButtons.Count; i++)
         {
-            if (modelButtons[i].GetComponent<Button>().interactable)
+            //if (modelButtons[i].GetComponent<Button>().interactable)
             {
                 modelButtons[i].selectedOutline.enabled = false;
+                modelButtons[i].selectedTick.enabled = false;
             }
         }
         if (PlayerPrefs.GetInt("category") == 0)
         {
             modelButtons[PlayerPrefs.GetInt("starmodel")].selectedOutline.enabled = true;
+            modelButtons[PlayerPrefs.GetInt("starmodel")].selectedTick.enabled = true;
             storeButtonImage.sprite = skinSpriteList[PlayerPrefs.GetInt("starmodel")];
         }
         BuyButtonsInit();
@@ -91,6 +96,7 @@ public class StarPanelManager : MonoBehaviour
         if(PlayerPrefs.GetInt("buyskinactive") == 0)
         {
             skinBuyTutorialGO.SetActive(true);
+            skinSelectTutorialGO.SetActive(true);
             PlayerPrefs.SetInt("buyskinactive", 1);
         }
     }
@@ -99,14 +105,16 @@ public class StarPanelManager : MonoBehaviour
     {
         for (int i = 0; i < modelButtons.Count; i++)
         {
-            if (modelButtons[i].GetComponent<Button>().interactable)
+            //if (modelButtons[i].GetComponent<Button>().interactable)
             {
                 modelButtons[i].selectedOutline.enabled = false;
+                modelButtons[i].selectedTick.enabled = false;
             }
         }
         if (PlayerPrefs.GetInt("category") == 0)
         {
             modelButtons[PlayerPrefs.GetInt("starmodel")].selectedOutline.enabled = true;
+            modelButtons[PlayerPrefs.GetInt("starmodel")].selectedTick.enabled = true;
             storeButtonImage.sprite = skinSpriteList[PlayerPrefs.GetInt("starmodel")];
         }
         for (int i = 0; i < modelButtons.Count; i++)
@@ -154,8 +162,8 @@ public class StarPanelManager : MonoBehaviour
         //    MissionManager.Instance.skinMission.MissionUpdate();
         //}
         buyButtons[buttonId].button.interactable = false;
-        buyButtons[buttonId].button.interactable = true;
-        PlayerPrefs.SetInt("adv" + buttonId.ToString(), PlayerPrefs.GetInt("adv" + buttonId.ToString()) + 1);
+        //buyButtons[buttonId].button.interactable = true;
+        PlayerPrefs.SetInt("buyskin" + buttonId.ToString(), PlayerPrefs.GetInt("buyskin" + buttonId.ToString()) + 1);
         CheckButtons();
 
         switch (mnyType)
@@ -185,23 +193,45 @@ public class StarPanelManager : MonoBehaviour
     public TextMeshProUGUI machineSpeedText;
     public void SelectClick(int buttonId)
     {
-        PlayerPrefs.SetInt("starmodel", buttonId);
-        PlayerPrefs.SetInt("category", 0);
+        currentViewSkinID = buttonId;
+        foreach (var mdlBtn in modelButtons)
+        {
+            mdlBtn.selectAndBuyGO.SetActive(false);
+        }
+        modelButtons[buttonId].selectAndBuyGO.SetActive(true);
 
-        CreateModel();
 
-        SelectCheckButton(modelButtons[buttonId]);
 
-        storeButtonImage.sprite = skinSpriteList[PlayerPrefs.GetInt("starmodel")];
+
+        //PlayerPrefs.SetInt("starmodel", buttonId);
+        //PlayerPrefs.SetInt("category", 0);
+
+        //CreateModel();
+
+        //SelectCheckButton(modelButtons[buttonId]);
+
+        //storeButtonImage.sprite = skinSpriteList[PlayerPrefs.GetInt("starmodel")];
+
+        ModelSelector.Instance.CreatePlayerUI();
+
+
+
+
         skillAnim.SetTrigger("open");
-        float speed = playerModels._newModels[PlayerPrefs.GetInt("starmodel")].GetComponent<Player>().extraSpeed;
-        int stack = playerModels._newModels[PlayerPrefs.GetInt("starmodel")].GetComponent<Player>().extraStack;
-        int extrMoney = playerModels._newModels[PlayerPrefs.GetInt("starmodel")].GetComponent<Player>().extraMoney;
-        float machineSpeed = playerModels._newModels[PlayerPrefs.GetInt("starmodel")].GetComponent<Player>().machineSpeed;
+
+        //float speed = playerModels._newModels[PlayerPrefs.GetInt("starmodel")].GetComponent<Player>().extraSpeed;
+        //int stack = playerModels._newModels[PlayerPrefs.GetInt("starmodel")].GetComponent<Player>().extraStack;
+        //int extrMoney = playerModels._newModels[PlayerPrefs.GetInt("starmodel")].GetComponent<Player>().extraMoney;
+        //float machineSpeed = playerModels._newModels[PlayerPrefs.GetInt("starmodel")].GetComponent<Player>().machineSpeed;    
+        float speed = playerModels._newModels[buttonId].GetComponent<Player>().extraSpeed;
+        int stack = playerModels._newModels[buttonId].GetComponent<Player>().extraStack;
+        float extrMoney = playerModels._newModels[buttonId].GetComponent<Player>().extraMoney;
+        float machineSpeed = playerModels._newModels[buttonId].GetComponent<Player>().repairSpeed;
+               
         if (speed > 1)
         {
             extraSpeedGO.SetActive(true);
-            extraSpeedText.text = "+%" + (5 * ((int)(100 * speed) - 100)).ToString() + " Move Speed";
+            extraSpeedText.text = "+%" + (((int)(100 * speed) - 100)).ToString() + " Move Speed";
         }
         else
         {
@@ -218,10 +248,10 @@ public class StarPanelManager : MonoBehaviour
             extraStackGO.SetActive(false);
         }
 
-        if (extrMoney > 0)
+        if (extrMoney > 1)
         {
             extraMoneyGO.SetActive(true);
-            extraStackText.text = "+" + extrMoney.ToString() + " Income Per Production";
+            extraMoneyText.text = "+%" + ((int)(100 * extrMoney) - 100).ToString() + " Money Bonus";
         }
         else
         {
@@ -230,35 +260,58 @@ public class StarPanelManager : MonoBehaviour
         if (machineSpeed > 1)
         {
             machineSpeedGO.SetActive(true);
-            extraSpeedText.text = "+%" + ((int)(100 * machineSpeed) - 100).ToString() + " Production Speed";
+            machineSpeedText.text = "+%" + ((int)(100 * machineSpeed) - 100).ToString() + " Repair Speed";
         }
         else
         {
             machineSpeedGO.SetActive(false);
         }
-    }
 
-    void CreateModel()
-    {
-        ModelSelector.Instance.CreatePlayer();
+
+
     }
+    public void SelectedButtonClick(int buttonId)
+    {
+        PlayerPrefs.SetInt("starmodel", buttonId);
+        PlayerPrefs.SetInt("category", 0);
+
+        ModelSelector.Instance.CreatePlayer();
+
+        SelectCheckButton(modelButtons[buttonId]);
+
+        storeButtonImage.sprite = skinSpriteList[PlayerPrefs.GetInt("starmodel")];
+        StartCoroutine(SelectedPopUp());
+    }
+    public GameObject selectedPopUpGO;
+    IEnumerator SelectedPopUp()
+    {
+        selectedPopUpGO.SetActive(true);
+        yield return new WaitForSeconds(2f);
+        selectedPopUpGO.SetActive(false);
+    }
+    //void CreateModel()
+    //{
+    //    ModelSelector.Instance.CreatePlayer();
+    //}
 
     void SelectCheckButton(ModelButton button)
     {
         for (int i = 0; i < modelButtons.Count; i++)
         {
-            if (modelButtons[i].GetComponent<Button>().interactable)
+            //if (modelButtons[i].GetComponent<Button>().interactable)
             {
                 modelButtons[i].selectedOutline.enabled = false;
+                modelButtons[i].selectedTick.enabled = false;
             }
         }
         //if (PlayerPrefs.GetInt("category") == 0)
         {
             button.selectedOutline.enabled = true;
+            button.selectedTick.enabled = true;
         }
 
 
 
-        NewPanelManager.Instance.Start();
+        //NewPanelManager.Instance.Start();
     }
 }

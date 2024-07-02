@@ -18,12 +18,13 @@ public class CharacterUpgradeManager : MonoBehaviour
     private void Awake()
     {
         _instance = this;
-        Globals.magnetRadiusLevel = PlayerPrefs.GetInt("magnetRadiusLevel");
-        Globals.characterSpeedLevel = PlayerPrefs.GetInt("characterSpeedLevel");
-        Globals.stackCapacityLevel = PlayerPrefs.GetInt("stackCapacityLevel");
+        Globals.magnetRadiusLevel = PlayerPrefs.GetInt("magnetRadiusLevel" + PlayerPrefs.GetInt("level"));
+        Globals.characterSpeedLevel = PlayerPrefs.GetInt("characterSpeedLevel" + PlayerPrefs.GetInt("level"));
+        Globals.stackCapacityLevel = PlayerPrefs.GetInt("stackCapacityLevel" + PlayerPrefs.GetInt("level"));
     }
     private void Start()
     {
+        _characterUpgradeSettings = LevelManager.Instance._currnetCharacterUpgradeSettings;
         isEnoughMoney();
         InitButtonValues();
     }
@@ -70,24 +71,24 @@ public class CharacterUpgradeManager : MonoBehaviour
         }
         VibratoManager.Instance.MediumVibration();
     }
-    public void MagnetRadiusUpgradeButton()
-    {
-        if (Globals.magnetRadiusLevel < _characterUpgradeSettings.magnetRadius.Length - 1)
-        {
-            if (Globals.moneyAmount >= _characterUpgradeSettings.magnetRadiusCost[Globals.magnetRadiusLevel + 1])
-            {
-                GameManager.Instance.MoneyUpdate(-_characterUpgradeSettings.magnetRadiusCost[Globals.magnetRadiusLevel + 1]);
-                Globals.magnetRadiusLevel++;
-                PlayerPrefs.SetInt("magnetRadiusLevel", Globals.magnetRadiusLevel);
-                PlayerController.Instance.magnet.MagnetLevelUp();
-                //PlayerBehaviour.Instance.playerController.CharacterUpgrade(Globals.holeRadiusLevel);
-                isEnoughMoney();
-                InitButtonValues();
-                PlayerController.Instance.GetComponent<BoingScale>().ScaleEffectTR(PlayerController.Instance.transform,0.8f, 1f, 0.5f, Ease.OutElastic);
-                PlayerController.Instance.UpgradeTextSpawn("+Magnet");
-            }
-        }
-    }
+    //public void MagnetRadiusUpgradeButton()
+    //{
+    //    if (Globals.magnetRadiusLevel < _characterUpgradeSettings.magnetRadius.Length - 1)
+    //    {
+    //        if (Globals.moneyAmount >= _characterUpgradeSettings.magnetRadiusCost[Globals.magnetRadiusLevel + 1])
+    //        {
+    //            GameManager.Instance.MoneyUpdate(-_characterUpgradeSettings.magnetRadiusCost[Globals.magnetRadiusLevel + 1]);
+    //            Globals.magnetRadiusLevel++;
+    //            PlayerPrefs.SetInt("magnetRadiusLevel", Globals.magnetRadiusLevel);
+    //            PlayerController.Instance.magnet.MagnetLevelUp();
+    //            //PlayerBehaviour.Instance.playerController.CharacterUpgrade(Globals.holeRadiusLevel);
+    //            isEnoughMoney();
+    //            InitButtonValues();
+    //            PlayerController.Instance.GetComponent<BoingScale>().ScaleEffectTR(PlayerController.Instance.transform,0.8f, 1f, 0.5f, Ease.OutElastic);
+    //            PlayerController.Instance.UpgradeTextSpawn("+Magnet");
+    //        }
+    //    }
+    //}
 
     public void MoveSpeedUpgradeButton()
     {
@@ -97,7 +98,7 @@ public class CharacterUpgradeManager : MonoBehaviour
             {
                 GameManager.Instance.MoneyUpdate(-_characterUpgradeSettings.characterSpeedCost[Globals.characterSpeedLevel + 1]);
                 Globals.characterSpeedLevel++;
-                PlayerPrefs.SetInt("characterSpeedLevel", Globals.characterSpeedLevel);
+                PlayerPrefs.SetInt("characterSpeedLevel" + PlayerPrefs.GetInt("level"), Globals.characterSpeedLevel);
                 isEnoughMoney();
                 InitButtonValues();
                 PlayerController.Instance.GetComponent<BoingScale>().ScaleEffectTR(PlayerController.Instance.transform, 0.8f, 1f, 0.5f, Ease.OutElastic);
@@ -106,7 +107,7 @@ public class CharacterUpgradeManager : MonoBehaviour
                 string tag = "M" + (PlayerPrefs.GetInt("level") + 1).ToString() + "-CharacterSpeedUpgrade" + Globals.characterSpeedLevel.ToString();
                 GameManager.Instance.GameAnalyticsTag(tag);
 
-                float time = CoefficientTransformation.FormatSaniye(Globals.playTime);
+                float time = CoefficientTransformation.FormatSaniye(Globals.speedPlayTime);
             }
         }
     }
@@ -118,7 +119,7 @@ public class CharacterUpgradeManager : MonoBehaviour
             {
                 GameManager.Instance.MoneyUpdate(-_characterUpgradeSettings.stackCapacityCost[Globals.stackCapacityLevel + 1]);
                 Globals.stackCapacityLevel++;
-                PlayerPrefs.SetInt("stackCapacityLevel", Globals.stackCapacityLevel);
+                PlayerPrefs.SetInt("stackCapacityLevel" + PlayerPrefs.GetInt("level"), Globals.stackCapacityLevel);
                 isEnoughMoney();
                 InitButtonValues();
                 PlayerController.Instance.GetComponent<BoingScale>().ScaleEffectTR(PlayerController.Instance.transform, 0.8f, 1f, 0.5f, Ease.OutElastic);
@@ -126,7 +127,7 @@ public class CharacterUpgradeManager : MonoBehaviour
 
                 string tag = "M" + (PlayerPrefs.GetInt("level") + 1).ToString() + "-CharacterCapacityUpgrade" + Globals.stackCapacityLevel.ToString();
                 GameManager.Instance.GameAnalyticsTag(tag);
-                float time = CoefficientTransformation.FormatSaniye(Globals.playTime);
+                float time = CoefficientTransformation.FormatSaniye(Globals.speedPlayTime);
                 //GameAnalytics.NewDesignEvent(tag, time);
             }
 
@@ -166,5 +167,48 @@ public class CharacterUpgradeManager : MonoBehaviour
     public void CharacterUpgradeClose()
     {
         _upgradeAreaCharacter.CharacterUpgradeClose();
+    }
+
+
+    public void MoveSpeedUpgrade_ADV_Click()
+    {
+        ADVManager.Instance.RewardedStart(MoveSpeedUpgradeFree);
+    }
+    public void StackCapacityUpgrade_ADV_Click()
+    {
+        ADVManager.Instance.RewardedStart(StackCapacityUpgradeFree);
+    }
+    public void MoveSpeedUpgradeFree()
+    {
+        if (Globals.characterSpeedLevel < _characterUpgradeSettings.characterSpeed.Length - 1)
+        {
+            
+                Globals.characterSpeedLevel++;
+                PlayerPrefs.SetInt("characterSpeedLevel" + PlayerPrefs.GetInt("level"), Globals.characterSpeedLevel);
+                isEnoughMoney();
+                InitButtonValues();
+                PlayerController.Instance.GetComponent<BoingScale>().ScaleEffectTR(PlayerController.Instance.transform, 0.8f, 1f, 0.5f, Ease.OutElastic);
+                PlayerController.Instance.UpgradeTextSpawn("+Speed");
+
+                //string tag = "M" + (PlayerPrefs.GetInt("level") + 1).ToString() + "-CharacterSpeedUpgrade" + Globals.characterSpeedLevel.ToString();
+                //GameManager.Instance.GameAnalyticsTag(tag);
+
+            
+        }
+    }
+   public void StackCapacityUpgradeFree()
+    {
+        if (Globals.stackCapacityLevel < _characterUpgradeSettings.stackCapacity.Length - 1)
+        {
+            Globals.stackCapacityLevel++;
+            PlayerPrefs.SetInt("stackCapacityLevel" + PlayerPrefs.GetInt("level"), Globals.stackCapacityLevel);
+            isEnoughMoney();
+            InitButtonValues();
+            PlayerController.Instance.GetComponent<BoingScale>().ScaleEffectTR(PlayerController.Instance.transform, 0.8f, 1f, 0.5f, Ease.OutElastic);
+            PlayerController.Instance.UpgradeTextSpawn("+Capacity");
+
+            //string tag = "M" + (PlayerPrefs.GetInt("level") + 1).ToString() + "-CharacterCapacityUpgrade" + Globals.stackCapacityLevel.ToString();
+            //GameManager.Instance.GameAnalyticsTag(tag);
+        }
     }
 }

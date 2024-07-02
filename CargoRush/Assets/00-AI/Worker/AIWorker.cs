@@ -29,6 +29,7 @@ public class AIWorker : MonoBehaviour, IWorkerModelSelect
     [SerializeField] GameObject forklift;
     public bool aiDropActive = true;
     public bool aiStackActive = false;
+    public bool sellingWorker = false;
     public void LevelUp()
     {
         int lvl = PlayerPrefs.GetInt(workerLevelName);
@@ -261,7 +262,7 @@ public class AIWorker : MonoBehaviour, IWorkerModelSelect
         bool collectTargetCheckActive = true;
         foreach (var env in fishCollectArea.CollectProductList)
         {
-            if (env.collectables.Count > 0 && collectTargetCheckActive)
+            if (env.collectables.Count > 0 && collectTargetCheckActive && env.collectActive)
             {
                 for (int i = 0; i < fishCollectArea.standList.Count; i++)
                 {
@@ -504,7 +505,10 @@ public class AIWorker : MonoBehaviour, IWorkerModelSelect
            
                 targetStand.TargetArrived(this);
                 //navMeshAgent.obstacleAvoidanceType = ObstacleAvoidanceType.HighQualityObstacleAvoidance;
-                DestroyBoxChack();
+                if (sellingWorker)
+                {
+                    DestroyBoxChack();
+                }
             }
         }
     }

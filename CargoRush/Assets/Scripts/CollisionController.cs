@@ -11,6 +11,7 @@ public class CollisionController : MonoBehaviour
     public bool playerActive;
     private void Start()
     {
+        _characterUpgradeSettings = LevelManager.Instance._currnetCharacterUpgradeSettings;
         MagnetLevelUp();
         fullTextGO = GameManager.Instance.ui.fullCapacityText;
     }
@@ -33,6 +34,10 @@ public class CollisionController : MonoBehaviour
                         other.GetComponent<Collector>().collectorActive = false;
                         other.GetComponent<Collector>().pushActive = false;
                         //Destroy(other.GetComponent<Collector>());
+                        if(other.GetComponent<Collector>().shadowGO != null)
+                        {
+                            Destroy(other.GetComponent<Collector>().shadowGO);
+                        }
                     }
                     if (other.GetComponent<Rigidbody>() != null)
                     {
@@ -46,11 +51,11 @@ public class CollisionController : MonoBehaviour
                         IndicatorManager.Instance.transUpIndActive = true;
                     }
                 }
-                else
-                {
+                //else
+                //{
                     PlayerController.Instance._stackCollect.StackFullCheck();
                     //StartCoroutine(FullCapacity());
-                }
+                //}
             }
         }
 
@@ -65,6 +70,10 @@ public class CollisionController : MonoBehaviour
                     other.GetComponent<Collector>().collectorActive = false;
                     other.GetComponent<Collector>().pushActive = false;
                     //Destroy(other.GetComponent<Collector>());
+                    if (other.GetComponent<Collector>().shadowGO != null)
+                    {
+                        Destroy(other.GetComponent<Collector>().shadowGO);
+                    }
                 }
                 if (other.GetComponent<Rigidbody>() != null)
                 {
@@ -72,6 +81,7 @@ public class CollisionController : MonoBehaviour
                 }
                 stackCollect.Collecting(other.GetComponent<Collectable>());
                 other.GetComponent<Collectable>().collectableList.Remove(other.GetComponent<Collectable>());
+                FishDropArea.Instance.proType[other.GetComponent<Collector>().productId].productList.Remove(other.GetComponent<Collectable>());
                 if (other.GetComponent<Collectable>().collectableList.Count == 0)
                 {
                     IndicatorManager.Instance.transUpIndActive = true;

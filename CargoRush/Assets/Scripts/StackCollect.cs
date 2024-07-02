@@ -87,6 +87,8 @@ public abstract class StackCollect : MonoBehaviour
                 StackEmptyAnimation();
             }
             StartCoroutine(DisperseActivator());
+            StackFullCheck();
+
         }
     }
     bool disperseActive = true;

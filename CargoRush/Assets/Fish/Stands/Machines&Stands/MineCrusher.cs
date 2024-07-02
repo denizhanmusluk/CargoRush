@@ -129,11 +129,12 @@ public class MineCrusher : Stand, IStandUpgrade
     }
     IEnumerator CreatorChecking()
     {
-        MinesDropAreaCheck();
 
         creatingActive = false;
         while (!creatingActive)
         {
+            MinesDropAreaCheck();
+
             if (cannedCount < productCountTotal * areaCount)
             {
                 //yield return new WaitForSeconds(0.1f);
@@ -257,7 +258,7 @@ public class MineCrusher : Stand, IStandUpgrade
         }
 
 
-        if (PlayerPrefs.GetInt("rawlevel") == 4)
+        if (PlayerPrefs.GetInt("rawlevel" + PlayerPrefs.GetInt("level")) == 4)
         {
             if (areaOpener_4)
             {
@@ -517,7 +518,7 @@ public class MineCrusher : Stand, IStandUpgrade
 
                 ironCollectionList.Add(_newProduct.GetComponent<Collectable>());
                 selfDestroyActive = false;
-                PlayerPrefs.SetInt(machineName + "col1", ironCollectionList.Count);
+                PlayerPrefs.SetInt(machineName + "col1" + PlayerPrefs.GetInt("level"), ironCollectionList.Count);
                 iron_garbage_count -= 1;
             }
 
@@ -530,7 +531,7 @@ public class MineCrusher : Stand, IStandUpgrade
 
                 plasticCollectionList.Add(_newProduct.GetComponent<Collectable>());
                 selfDestroyActive = false;
-                PlayerPrefs.SetInt(machineName + "col2", plasticCollectionList.Count);
+                PlayerPrefs.SetInt(machineName + "col2" + PlayerPrefs.GetInt("level"), plasticCollectionList.Count);
                 plastic_garbage_count -= 1;
 
             }
@@ -543,7 +544,7 @@ public class MineCrusher : Stand, IStandUpgrade
 
                 yarnCollectionList.Add(_newProduct.GetComponent<Collectable>());
                 selfDestroyActive = false;
-                PlayerPrefs.SetInt(machineName + "col3", yarnCollectionList.Count);
+                PlayerPrefs.SetInt(machineName + "col3" + PlayerPrefs.GetInt("level"), yarnCollectionList.Count);
                 yarn_garbage_count -= 1;
 
             }
@@ -556,7 +557,7 @@ public class MineCrusher : Stand, IStandUpgrade
 
                 woodCollectionList.Add(_newProduct.GetComponent<Collectable>());
                 selfDestroyActive = false;
-                PlayerPrefs.SetInt(machineName + "col4", woodCollectionList.Count);
+                PlayerPrefs.SetInt(machineName + "col4" + PlayerPrefs.GetInt("level"), woodCollectionList.Count);
                 wood_garbage_count -= 1;
 
             }
@@ -1031,7 +1032,7 @@ public class MineCrusher : Stand, IStandUpgrade
 
     IEnumerator Drop(Transform dropPosTR, Vector3 dropPos, Collectable collectable, float waitTime)
     {
-        Destroy(collectable.GetComponent<Collector>().shadowGO);
+        //Destroy(collectable.GetComponent<Collector>().shadowGO);
         collectable.grindActive = true;
         if (PlayerPrefs.GetInt("collectstonecount10") < 3)
         {

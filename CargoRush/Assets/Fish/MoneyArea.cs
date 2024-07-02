@@ -56,7 +56,7 @@ public class MoneyArea : MonoBehaviour
             VibratoManager.Instance.LightVibration();
             tempMoneyList[i].MovingMoneyUI(tempMoneyList[i].transform.position, GameManager.Instance.ui.moneyTarget);
             stepNo++;
-            if (stepNo % 5 == 0)
+            if (stepNo % 50 == 0)
             {
                 yield return null;
             }

@@ -130,7 +130,7 @@ public class EnvironmentList : MonoBehaviour
             }
 
             string str = "Hole Stage : " + (Globals.envLevel + 1).ToString() + " Unlocked";
-            float time = CoefficientTransformation.FormatSaniye(Globals.playTime);
+            float time = CoefficientTransformation.FormatSaniye(Globals.speedPlayTime);
             //GameAnalytics.NewDesignEvent(str,time);
         }
     }

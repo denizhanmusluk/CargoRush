@@ -51,16 +51,16 @@ public class ProcessMachineDoubleRaw : Stand
             Globals.machineLevel = machineLevel;
             PlayerPrefs.SetInt("machineLevel", Globals.machineLevel);
 
-            if (HRUpgradeManager.Instance.HRWorkerGO != null)
-            {       
-                HRUpgradeManager.Instance.InitButtonValues();
-                HRUpgradeManager.Instance.HRWorkerGO.SetActive(true);
+            //if (HRUpgradeManager.Instance.HRWorkerGO != null)
+            //{       
+            //    HRUpgradeManager.Instance.InitButtonValues();
+            //    //HRUpgradeManager.Instance.HRWorkerGO.SetActive(true);
 
-                //if (PlayerPrefs.GetInt("workerNoLevel") <= Globals.machineLevel)
-                //{
-                //    HRUpgradeManager.Instance._upgradeAreaWorkers.workerBuyAreaList[PlayerPrefs.GetInt("workerNoLevel")].gameObject.SetActive(true);
-                //}
-            }
+            //    //if (PlayerPrefs.GetInt("workerNoLevel") <= Globals.machineLevel)
+            //    //{
+            //    //    HRUpgradeManager.Instance._upgradeAreaWorkers.workerBuyAreaList[PlayerPrefs.GetInt("workerNoLevel")].gameObject.SetActive(true);
+            //    //}
+            //}
             PlayerPrefs.SetInt(machineName + "firstopen", 1);
             //PopUpManager.Instance.PopUpOpen(machineId);
         }
@@ -218,7 +218,7 @@ public class ProcessMachineDoubleRaw : Stand
             otherRawStand.fishCountCurrent += otherRawCountPerProduct;
             fishCountText.text = (fishCountTotal - fishCountCurrent).ToString() + "/" + (fishCountTotal).ToString();
             otherRawStand.fishCountText.text = (otherRawStand.fishCountTotal - otherRawStand.fishCountCurrent).ToString() + "/" + (otherRawStand.fishCountTotal).ToString();
-            yield return new WaitForSeconds(waitTime / Globals.machineSpeedSkin);
+            yield return new WaitForSeconds(waitTime / Globals.repairSpeedSkin);
             workAreaList[0].StnadFullCheck();
         }
         //  MinesDropAreaCheck();

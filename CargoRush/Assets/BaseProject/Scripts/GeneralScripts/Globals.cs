@@ -67,15 +67,14 @@ public static class Globals
 
     public static float extraSpeedSkins = 1f;
     public static int extraStackSkin = 0;
-    public static int extraMoneySkin = 0;
-    public static float machineSpeedSkin = 1f;
+    public static float extraMoneySkin = 0;
+    public static float repairSpeedSkin = 1f;
 
 
     public static bool vipActive = false;
 
 
-    public static int playTime = 0;
-    public static int skillCooldown = 0;
+
     public static bool doubleIncomeActive = false;
     public static bool holePlatformActive = false;
 
@@ -86,7 +85,6 @@ public static class Globals
     public static int machineLevel = 0;
 
 
-    public static bool isSkillCreated = false;
     public static int collectableLevel = 0;
     public static int carSlotCount = 0;
     public static int carCustomerCount = 1;
@@ -95,5 +93,33 @@ public static class Globals
 
     public static bool isThereVip = false;
     public static bool buyActive = true;
+
+
+    public static int myShareValue = 0;
+
+
+    public static bool isSpeedRewardCreated = false;
+    public static bool isCapacityRewardCreated = false;
+    public static bool isDoubleIncomeRewardCreated = false;
+    public static bool isMoneyRewardCreated = false;
+
+
+
+    public static int speedPlayTime = 0;
+    public static int capacityPlayTime = 0;
+    public static int doubleIncomePlayTime = 0;
+    public static int moneyPlayTime = 0;
+
+
+
+    public static int speedCreatingCooldown = 0;
+    public static int capacityCreatingCooldown = 0;
+    public static int doubleCreatingCooldown = 0;
+    public static int moneyCreatingCooldown = 0;
+
+
+    public static int openedCarSlotCount = 0;
+
+    public static bool machineErrorActive = false;
 
 }

@@ -39,7 +39,7 @@ public class BuyButtons : MonoBehaviour
     {
         StarPanelManager.Instance.BuyClick(id, _moneyType);
 
-        float time = CoefficientTransformation.FormatSaniye(Globals.playTime);
+        float time = CoefficientTransformation.FormatSaniye(Globals.speedPlayTime);
         //GameAnalytics.NewDesignEvent(skinName);
     }
     public void CostTextInit(int costAmount)
@@ -48,7 +48,15 @@ public class BuyButtons : MonoBehaviour
         {
             case MoneyType.Money:
                 {
-                    costText.text = "$" + CoefficientTransformation.Converter(costAmount);
+                    costText.text = costAmount.ToString();
+                    if(costAmount >= 1000)
+                    {
+                        int newValue = costAmount / 1000;
+                        costText.text = newValue.ToString() + "K";
+
+                    }
+
+                    //costText.text = CoefficientTransformation.Converter(costAmount);
                     costText.color = moneyColor;
                 }
                 break;

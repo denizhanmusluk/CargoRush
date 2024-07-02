@@ -31,6 +31,18 @@ public class CollectProduct : MonoBehaviour
 
     public List<Transform> bandPosList;
     public ProcessMachine processMachine;
+    private void Awake()
+    {
+        if (processMachine != null)
+        {
+            processMachine.collectProducts.Add(this);
+            if (processMachine.machineErrored)
+            {
+                collectActive = false;
+            }
+        }
+     
+    }
     private void Start()
     {
         aiCollectTargetCheck = new int[aiCollectTargetTR.Length];
@@ -157,6 +169,19 @@ public class CollectProduct : MonoBehaviour
                 break;
             case WorkType.customer:
                 {
+                    if (other.GetComponent<OnlineWorker>() != null)
+                    {
+                        if (other.GetComponent<OnlineWorker>().stackCollect.collectionTrs.Count < other.GetComponent<OnlineWorker>().stackCollect.baseStackCapacity)
+                        {
+                            if (collectables.Count > 0 && collectables[collectables.Count - 1].productCollectActive)
+                            {
+                                other.GetComponent<OnlineWorker>().stackCollect.Collecting(collectables[collectables.Count - 1]);
+                                _stand.fishCountCurrent++;
+                                StartCoroutine(ColliderReset());
+
+                            }
+                        }
+                    }
                     if (other.GetComponent<StackCollectMarketCustomer>() != null && CollectId == other.GetComponent<StackCollectMarketCustomer>().targetId && other.GetComponent<StackCollectMarketCustomer>()._aiCustomer.currentTarget.collectableType == collectableType)
                     {
                         if (other.GetComponent<StackCollectMarketCustomer>()._aiCustomer.shoppingActive)

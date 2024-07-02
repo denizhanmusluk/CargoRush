@@ -7,8 +7,8 @@ public class Player : MonoBehaviour
 {
     public float extraSpeed;
     public int extraStack;
-    public int extraMoney;
-    public float machineSpeed;
+    public float extraMoney;
+    public float repairSpeed;
     public Transform hoverboardCreatePos;
     public bool blendShapeActive = false;
     public FastIKFabric ikLeft;
@@ -37,7 +37,7 @@ public class Player : MonoBehaviour
             Globals.extraSpeedSkins = extraSpeed;
             Globals.extraStackSkin = extraStack;
             Globals.extraMoneySkin = extraMoney;
-            Globals.machineSpeedSkin = machineSpeed;
+            Globals.repairSpeedSkin = repairSpeed;
             PlayerController.Instance.hoverBoardCreatePos = hoverboardCreatePos;
             PlayerController.Instance._player = this;
             PlayerController.Instance._stackCollect.ikLeft = ikLeft;

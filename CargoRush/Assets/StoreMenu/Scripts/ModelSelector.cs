@@ -33,6 +33,15 @@ public class ModelSelector : MonoBehaviour
             Destroy(modelCreatePoint.GetChild(0).gameObject);
         }
 
+        //if (createPos2.childCount > 0)
+        //{
+        //    Destroy(createPos2.GetChild(0).gameObject);
+        //}
+
+        SelectPlayer();
+    }
+    public void CreatePlayerUI()
+    {
         if (createPointUI.childCount > 0)
         {
             Destroy(createPointUI.GetChild(0).gameObject);
@@ -43,7 +52,57 @@ public class ModelSelector : MonoBehaviour
         //    Destroy(createPos2.GetChild(0).gameObject);
         //}
 
-        SelectCategory();
+        SelectPlayerUI();
+    }
+    void SelectPlayer()
+    {
+        if(playerModels._newModels.Length > 0)
+        {
+            var model = Instantiate(playerModels._newModels[PlayerPrefs.GetInt("starmodel")], transform.position, Quaternion.identity);
+            PlayerController.Instance.CharacterSelect(model);
+
+            var UIParticle = Instantiate(particlePrefab, particlePoint.position + new Vector3(0, 1, 0), Quaternion.identity, particlePoint);
+            Destroy(UIParticle, 2);
+            foreach (var trnsfrm in UIParticle.GetComponentsInChildren<Transform>())
+            {
+                trnsfrm.gameObject.layer = LayerMask.NameToLayer("UICamera");
+            }
+        }
+    }
+    void SelectPlayerUI()
+    {
+        if (playerModels._newModels.Length > 0)
+        {
+            Vector3 UIPosOffset = new Vector3(-0f, 0f, 0f);
+            var UImodel1 = Instantiate(playerModels._newModels[StarPanelManager.Instance.currentViewSkinID], createPointUI.position, createPointUI.rotation, createPointUI);
+            Destroy(UImodel1.GetComponent<Player>());
+            UImodel1.transform.localPosition = UIPosOffset;
+            foreach (var trnsfrm in UImodel1.GetComponentsInChildren<Transform>())
+            {
+                trnsfrm.gameObject.layer = LayerMask.NameToLayer("UICamera");
+            }
+           
+        }
+    }
+    public void FirstOpenPlayerUI()
+    {
+        if (playerModels._newModels.Length > 0)
+        {
+            Vector3 UIPosOffset = new Vector3(-0f, 0f, 0f);
+            var UImodel1 = Instantiate(playerModels._newModels[PlayerPrefs.GetInt("starmodel")], createPointUI.position, createPointUI.rotation, createPointUI);
+            Destroy(UImodel1.GetComponent<Player>());
+            UImodel1.transform.localPosition = UIPosOffset;
+            foreach (var trnsfrm in UImodel1.GetComponentsInChildren<Transform>())
+            {
+                trnsfrm.gameObject.layer = LayerMask.NameToLayer("UICamera");
+            }
+            var UIParticle = Instantiate(particlePrefab, particlePoint.position + new Vector3(0, 1, 0), Quaternion.identity, particlePoint);
+            Destroy(UIParticle, 2);
+            foreach (var trnsfrm in UIParticle.GetComponentsInChildren<Transform>())
+            {
+                trnsfrm.gameObject.layer = LayerMask.NameToLayer("UICamera");
+            }
+        }
     }
     void SelectCategory()
     {

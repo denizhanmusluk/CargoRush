@@ -11,6 +11,10 @@ public class LevelManager : Singleton<LevelManager>
     [SerializeField] private List<LevelScriptable> levelList;
     [SerializeField] private List<MissionSettings> _missionSettings;
     public MissionSettings currentMissionSettings;
+
+    [SerializeField] private List<CharacterUpgradeSettings> _CharacterUpgradeSettings;
+     public CharacterUpgradeSettings _currnetCharacterUpgradeSettings;
+
     //public HoleUpgradeSettings _holeUpgradeSettings;
     //[SerializeField] public List<CollectableArrangement> requirementList;
 
@@ -51,5 +55,6 @@ public class LevelManager : Singleton<LevelManager>
 
         loadedLevel = Instantiate(levelList[Globals.currentLevelIndex]._levelPrefab, transform.position, Quaternion.identity);
         currentMissionSettings = _missionSettings[Globals.currentLevelIndex];
+        _currnetCharacterUpgradeSettings = _CharacterUpgradeSettings[Globals.currentLevelIndex];
     }
 }

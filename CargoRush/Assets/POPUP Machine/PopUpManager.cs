@@ -23,6 +23,9 @@ public class PopUpManager : MonoBehaviour
     int lastID = 0;
     int tipID = 0;
     int boosterID = 0;
+
+    public int freeMoneyValue;
+    public TextMeshProUGUI moneyText;
     private void Awake()
     {
         _instance = this;

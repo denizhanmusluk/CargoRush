@@ -53,7 +53,7 @@ public class UpgradeArea : MonoBehaviour, BuyCamera
     }
     IEnumerator StartDelay()
     {
-        if (PlayerPrefs.GetInt(buyName) == 1)
+        if (PlayerPrefs.GetInt(buyName + PlayerPrefs.GetInt("level")) == 1)
         {
 
             LevelSet(Time.deltaTime, false, false);
@@ -66,14 +66,14 @@ public class UpgradeArea : MonoBehaviour, BuyCamera
         }
 
 
-        if (PlayerPrefs.GetInt(currentCostBuild) == 0)
+        if (PlayerPrefs.GetInt(currentCostBuild + PlayerPrefs.GetInt("level")) == 0)
         {
             currentAmount = cost;
             costText.text = CoefficientTransformation.Converter(cost);
         }
         else
         {
-            currentAmount = PlayerPrefs.GetInt(currentCostBuild);
+            currentAmount = PlayerPrefs.GetInt(currentCostBuild + PlayerPrefs.GetInt("level"));
             costText.text = CoefficientTransformation.Converter(currentAmount);
         }
         outline.fillAmount = 1 - (float)currentAmount / (float)cost;
@@ -154,11 +154,11 @@ public class UpgradeArea : MonoBehaviour, BuyCamera
         costText.text = CoefficientTransformation.Converter(currentAmount);
         GameManager.Instance.MoneyUpdate(-deltaCost);
 
-        PlayerPrefs.SetInt(currentCostBuild, currentAmount);
+        PlayerPrefs.SetInt(currentCostBuild + PlayerPrefs.GetInt("level"), currentAmount);
         if (currentAmount == 0)
         {
             FirstOpenArea();
-            PlayerPrefs.SetInt(buyName, 1);
+            PlayerPrefs.SetInt(buyName + PlayerPrefs.GetInt("level"), 1);
             PlayerPrefs.Save();
 
         }

@@ -18,6 +18,12 @@ public class MachineRepairArea : MonoBehaviour
     private void OnEnable()
     {
         repairActive = true;
+
+        if(PlayerPrefs.GetInt("firsterrormachine") == 0)
+        {
+            TutorialManager.Instance.repairMachineGO.SetActive(true);
+            IndicatorManager.Instance.IndicaorActive(transform);
+        }
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -75,6 +81,12 @@ public class MachineRepairArea : MonoBehaviour
     }
     IEnumerator RepairStartedDelay()
     {
+        if (PlayerPrefs.GetInt("firsterrormachine") == 0)
+        {
+            PlayerPrefs.SetInt("firsterrormachine", 1);
+            TutorialManager.Instance.repairMachineGO.SetActive(false);
+            IndicatorManager.Instance.IndicaorDeActive();
+        }
         repairStarted = true;
         repairWorker.transform.position = repairCreatePos.position;
         yield return new WaitForSeconds(0.1f);
@@ -88,6 +100,8 @@ public class MachineRepairArea : MonoBehaviour
         repairActive = true;
         repairStarted = false;
         gameObject.SetActive(false);
-        
+        repairWorker.showBuyRapairReward.showActive = true;
+        repairWorker.showBuyRapairReward.Canvas.SetActive(true);
+
     }
 }

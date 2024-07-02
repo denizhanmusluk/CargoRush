@@ -125,7 +125,7 @@ public class HoleUpgradeManager : MonoBehaviour
               
                 
                 string tag = "Hole Size Upgrade " + Globals.holeLevel.ToString();
-                float time = CoefficientTransformation.FormatSaniye(Globals.playTime);
+                float time = CoefficientTransformation.FormatSaniye(Globals.speedPlayTime);
                 //GameAnalytics.NewDesignEvent(tag,time);
             }
         }
@@ -145,7 +145,7 @@ public class HoleUpgradeManager : MonoBehaviour
               
                 
                 string tag = "Hole Speed Upgrade " + Globals.holeSpeedLevel.ToString();
-                float time = CoefficientTransformation.FormatSaniye(Globals.playTime);
+                float time = CoefficientTransformation.FormatSaniye(Globals.speedPlayTime);
                 //GameAnalytics.NewDesignEvent(tag,time);
             }
         }
@@ -167,7 +167,7 @@ public class HoleUpgradeManager : MonoBehaviour
                 
                 
                 string tag = "Hole Time Upgrade " + Globals.holeTimeLevel.ToString();
-                float time = CoefficientTransformation.FormatSaniye(Globals.playTime);
+                float time = CoefficientTransformation.FormatSaniye(Globals.speedPlayTime);
                 //GameAnalytics.NewDesignEvent(tag,time);
             }
 

@@ -73,6 +73,7 @@ public class BuyArea : MonoBehaviour, BuyCamera
     public bool vipActivator = false;
     public bool hrBuy;
 
+    public bool specialVehicleOpener = false;
     void Awake()
     {
         if (cost >= 20)
@@ -321,6 +322,10 @@ public class BuyArea : MonoBehaviour, BuyCamera
     public bool indTutorialActive;
     void FirstOpenArea()
     {
+        if (specialVehicleOpener)
+        {
+            MissionManager.Instance.SpecialShippingLineMissionStart();
+        }
         if (standUpgradeActive)
         {
             string _tag = "M" + (PlayerPrefs.GetInt("level") + 1).ToString() + "-" + gaTag;
@@ -365,12 +370,6 @@ public class BuyArea : MonoBehaviour, BuyCamera
             keyAnimator.SetTrigger("unlock");
         }
 
-        if (ceoActive)
-        {
-            //ceoStand.gameObject.SetActive(true);
-            //ceoStand.MissionStart(ceoProductID, ceoProductCount, ceoProductPrice);
-            CeoManager.Instance.CeoStart();
-        }
         if (boosterOpener)
         {
             //SkillManager.Instance.SkillCreate();

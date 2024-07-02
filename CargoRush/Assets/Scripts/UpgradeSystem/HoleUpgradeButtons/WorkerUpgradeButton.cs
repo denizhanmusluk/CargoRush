@@ -7,6 +7,7 @@ using TMPro;
 public abstract class WorkerUpgradeButton : MonoBehaviour
 {
     public Button moneyButton;
+    public Button advButton;
     public Image moneyIMG;
     public GameObject tutorialGO;
 
@@ -30,5 +31,7 @@ public abstract class WorkerUpgradeButton : MonoBehaviour
         //levelText.fontSize = 80;
         //levelText.transform.localPosition = new Vector3(0, -186, 0);
         costText.text = "MAX";
+        costText.transform.localPosition = new Vector3(0, costText.transform.localPosition.y, costText.transform.localPosition.z);
+        advButton.gameObject.SetActive(false);
     }
 }

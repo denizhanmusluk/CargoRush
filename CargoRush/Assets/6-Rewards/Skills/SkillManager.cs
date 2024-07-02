@@ -20,32 +20,52 @@ public class SkillManager : MonoBehaviour
     public int doubleIncomeRewardTime;
     TextMeshProUGUI doubleIncomeCounterText;
 
-    public List<RewardPos> rewardPos = new List<RewardPos>();
-    [SerializeField] GameObject[] rewards;
+
+    [SerializeField] int speedRewPeriod;
+    [SerializeField] int capacityRewPeriod;
+    [SerializeField] int doubleIncomeRewPeriod;
+    [SerializeField] int moneyRewPeriod;
+
+    public List<Transform> speedRewardPos = new List<Transform>();
+    [SerializeField] GameObject[] speedRewards;
+
+    public List<Transform> capacityRewardPos = new List<Transform>();
+    [SerializeField] GameObject[] capacityRewards;
+
+    public List<Transform> doubleIncomeRewardPos = new List<Transform>();
+    [SerializeField] GameObject[] doubleIncomeRewards;
+
+    public List<Transform> moneyRewardPos = new List<Transform>();
+    [SerializeField] GameObject[] moneyRewards;
 
     private void Awake()
     {
         _instance = this;
     }
-    private void Start()
-    {
-        Globals.playTime = PlayerPrefs.GetInt("playtime");
-        Globals.skillCooldown = PlayerPrefs.GetInt("skillCooldown");
-        StartCoroutine(PlayTimeCounter());
 
-        firstColor = Color.white;
-
-        hoverboardCounterText = RewardPanel.Instance.hoverboardCounterText;
-
-        capacityCounterText = RewardPanel.Instance.capacityCounterText;
-        doubleIncomeCounterText = RewardPanel.Instance.doubleIncomeCounterText;
-    }
     public void HoverboardActive()
     {
+        int rewardSelect = PlayerPrefs.GetInt("speedskil") % 3;
+
         RewardPanel.Instance.hoverboardPanelGO.SetActive(true);
         StartCoroutine(Hoverboard_Reset(hoverboardRewardTime));
-        PlayerController.Instance.HoverBoardActive();
 
+        if(rewardSelect == 0)
+        {
+            PlayerController.Instance.BandBoardActive();
+        }
+        else if(rewardSelect == 1)
+        {
+            PlayerController.Instance.SkateBoardActive();
+        }
+        else
+        {
+            PlayerController.Instance.HoverBoardActive();
+        }
+
+
+
+        PlayerPrefs.SetInt("speedskil", PlayerPrefs.GetInt("speedskil") + 1);
 
         //if (PlayerPrefs.GetInt("hoverboardskill") % 2 == 0)
         //{
@@ -96,7 +116,7 @@ public class SkillManager : MonoBehaviour
         hoverboardCounterText.text = "00:00";
         PlayerController.Instance.NoneVehicle();
         RewardPanel.Instance.hoverboardPanelGO.SetActive(false);
-        Globals.isSkillCreated = false;
+        Globals.isSpeedRewardCreated = false;
 
     }
 
@@ -152,7 +172,7 @@ public class SkillManager : MonoBehaviour
         RewardPanel.Instance.capacityPanelGO.SetActive(false);
         Globals.extraStack = 0;
         PlayerController.Instance.CapacityReset();
-        Globals.isSkillCreated = false;
+        Globals.isCapacityRewardCreated = false;
 
     }
 
@@ -204,7 +224,7 @@ public class SkillManager : MonoBehaviour
         doubleIncomeCounterText.text = "00:00";
         RewardPanel.Instance.doubleIncomePanelGO.SetActive(false);
         Globals.doubleIncomeActive = false;
-        Globals.isSkillCreated = false;
+        Globals.isDoubleIncomeRewardCreated = false;
 
 
     }
@@ -222,55 +242,194 @@ public class SkillManager : MonoBehaviour
         }
     }
 
-    IEnumerator PlayTimeCounter()
+
+
+
+
+    private void Start()
+    {
+        StartCoroutine(StartDelay());
+    }
+    IEnumerator StartDelay()
+    {
+        yield return new WaitForSeconds(5f);
+
+        Globals.speedPlayTime = PlayerPrefs.GetInt("speedPlayTime");
+        Globals.speedCreatingCooldown = PlayerPrefs.GetInt("speedCreatingCooldown");
+        StartCoroutine(SpeedTimeCounter());
+
+
+        Globals.capacityPlayTime = PlayerPrefs.GetInt("capacityPlayTime");
+        Globals.capacityCreatingCooldown = PlayerPrefs.GetInt("capacityCreatingCooldown");
+        StartCoroutine(CapacityTimeCounter());
+
+        Globals.doubleIncomePlayTime = PlayerPrefs.GetInt("doubleIncomePlayTime");
+        Globals.doubleCreatingCooldown = PlayerPrefs.GetInt("doubleCreatingCooldown");
+        StartCoroutine(DoubleIncomeTimeCounter());
+
+
+        Globals.moneyPlayTime = PlayerPrefs.GetInt("moneyPlayTime");
+        Globals.moneyCreatingCooldown = PlayerPrefs.GetInt("moneyCreatingCooldown");
+        StartCoroutine(MoneyTimeCounter());
+
+        firstColor = Color.white;
+
+        hoverboardCounterText = RewardPanel.Instance.hoverboardCounterText;
+
+        capacityCounterText = RewardPanel.Instance.capacityCounterText;
+        doubleIncomeCounterText = RewardPanel.Instance.doubleIncomeCounterText;
+    }
+
+    IEnumerator SpeedTimeCounter()
     {
         while (true)
         {
-            Globals.playTime++;
-            PlayerPrefs.SetInt("playtime", Globals.playTime);
+            Globals.speedPlayTime++;
+            PlayerPrefs.SetInt("speedPlayTime", Globals.speedPlayTime);
 
             if (PlayerPrefs.GetInt("skillActive") == 1)
             {
-                Globals.skillCooldown++;
-                PlayerPrefs.SetInt("skillCooldown", Globals.skillCooldown);
+                Globals.speedCreatingCooldown++;
+                PlayerPrefs.SetInt("speedCreatingCooldown", Globals.speedCreatingCooldown);
             }
 
-            if (Globals.skillCooldown >= 60 && !Globals.isSkillCreated)
+            if (Globals.speedCreatingCooldown >= speedRewPeriod && !Globals.isSpeedRewardCreated)
             {
                 //Globals.skillCooldown = 0;
                 //PlayerPrefs.SetInt("skillCooldown", Globals.skillCooldown);
 
-                SkillCreate();
+                SpeedRewardCreate();
             }
             yield return new WaitForSeconds(1);
         }
     }
 
-
-
-    public void SkillCreate()
+    IEnumerator CapacityTimeCounter()
     {
-        Globals.isSkillCreated = true;
-        Globals.skillCooldown = 0;
-        PlayerPrefs.SetInt("skillCooldown", Globals.skillCooldown);
-        List<RewardPos> rewPosList = new List<RewardPos>();
-        foreach (var pos in rewardPos)
+        while (true)
         {
-            if (PlayerPrefs.GetInt("shopindex") >= pos.levelID)
+            Globals.capacityPlayTime++;
+            PlayerPrefs.SetInt("capacityPlayTime", Globals.capacityPlayTime);
+
+            if (PlayerPrefs.GetInt("skillActive") == 1)
             {
-                rewPosList.Add(pos);
+                Globals.capacityCreatingCooldown++;
+                PlayerPrefs.SetInt("capacityCreatingCooldown", Globals.capacityCreatingCooldown);
+            }
+
+            if (Globals.capacityCreatingCooldown >= capacityRewPeriod && !Globals.isCapacityRewardCreated)
+            {
+                //Globals.skillCooldown = 0;
+                //PlayerPrefs.SetInt("skillCooldown", Globals.skillCooldown);
+
+                CapacityRewardCreate();
+            }
+            yield return new WaitForSeconds(1);
+        }
+    }
+    IEnumerator DoubleIncomeTimeCounter()
+    {
+        while (true)
+        {
+            Globals.doubleIncomePlayTime++;
+            PlayerPrefs.SetInt("doubleIncomePlayTime", Globals.doubleIncomePlayTime);
+
+            if (PlayerPrefs.GetInt("skillActive") == 1)
+            {
+                Globals.doubleCreatingCooldown++;
+                PlayerPrefs.SetInt("doubleCreatingCooldown", Globals.doubleCreatingCooldown);
+            }
+
+            if (Globals.doubleCreatingCooldown >= doubleIncomeRewPeriod && !Globals.isDoubleIncomeRewardCreated)
+            {
+                //Globals.skillCooldown = 0;
+                //PlayerPrefs.SetInt("skillCooldown", Globals.skillCooldown);
+
+                DoubleRewardCreate();
+            }
+            yield return new WaitForSeconds(1);
+        }
+    }
+        IEnumerator MoneyTimeCounter()
+        {
+            while (true)
+            {
+                Globals.moneyPlayTime++;
+                PlayerPrefs.SetInt("moneyPlayTime", Globals.moneyPlayTime);
+
+                if (PlayerPrefs.GetInt("skillActive") == 1)
+                {
+                    Globals.moneyCreatingCooldown++;
+                    PlayerPrefs.SetInt("moneyCreatingCooldown", Globals.moneyCreatingCooldown);
+                }
+
+                if (Globals.moneyCreatingCooldown >= moneyRewPeriod && !Globals.isMoneyRewardCreated)
+                {
+                    //Globals.skillCooldown = 0;
+                    //PlayerPrefs.SetInt("skillCooldown", Globals.skillCooldown);
+
+                    MoneyRewardCreate();
+                }
+                yield return new WaitForSeconds(1);
             }
         }
+    public void SpeedRewardCreate()
+    {
+        Globals.isSpeedRewardCreated = true;
+        Globals.speedCreatingCooldown = 0;
+        PlayerPrefs.SetInt("speedCreatingCooldown", Globals.speedCreatingCooldown);
 
-        int rewPosRandomSelcet = Random.Range(0, rewPosList.Count);
+
+        int rewPosRandomSelcet = Random.Range(0, speedRewardPos.Count);
+        int rewardSelect = Random.Range(0, speedRewards.Length);
+
+        GameObject newReward = Instantiate(speedRewards[rewardSelect], speedRewardPos[rewPosRandomSelcet].transform.position, Quaternion.identity);
 
 
+        //int rewardSelect = PlayerPrefs.GetInt("skill") % rewards.Length;
+        //PlayerPrefs.SetInt("skill", PlayerPrefs.GetInt("skill") + 1);
+    }
 
-        int rewardSelect = PlayerPrefs.GetInt("skill") % rewards.Length;
-        GameObject newReward = Instantiate(rewards[rewardSelect], rewPosList[rewPosRandomSelcet].transform.position, Quaternion.identity);
-        //newReward.transform.localScale = Vector3.one * rewardSize;
-        //newReward.transform.position += new Vector3(Random.Range(-5f, 5f), 0, Random.Range(0f, 10f));
+    public void CapacityRewardCreate()
+    {
+        Globals.isCapacityRewardCreated = true;
+        Globals.capacityCreatingCooldown = 0;
+        PlayerPrefs.SetInt("capacityCreatingCooldown", Globals.capacityCreatingCooldown);
 
-        PlayerPrefs.SetInt("skill", PlayerPrefs.GetInt("skill") + 1);
+        int rewPosRandomSelcet = Random.Range(0, capacityRewardPos.Count);
+        int rewardSelect = Random.Range(0, capacityRewards.Length);
+
+        GameObject newReward = Instantiate(capacityRewards[rewardSelect], capacityRewardPos[rewPosRandomSelcet].transform.position, Quaternion.identity);
+    }
+
+
+    public void DoubleRewardCreate()
+    {
+        Globals.isDoubleIncomeRewardCreated = true;
+        Globals.doubleCreatingCooldown = 0;
+        PlayerPrefs.SetInt("doubleCreatingCooldown", Globals.doubleCreatingCooldown);
+
+        int rewPosRandomSelcet = Random.Range(0, doubleIncomeRewardPos.Count);
+        int rewardSelect = Random.Range(0, doubleIncomeRewards.Length);
+
+        GameObject newReward = Instantiate(doubleIncomeRewards[rewardSelect], doubleIncomeRewardPos[rewPosRandomSelcet].transform.position, Quaternion.identity);
+    }
+
+    public void MoneyRewardCreate()
+    {
+        Globals.isMoneyRewardCreated = true;
+        Globals.moneyCreatingCooldown = 0;
+        PlayerPrefs.SetInt("moneyCreatingCooldown", Globals.moneyCreatingCooldown);
+
+        int rewPosRandomSelcet = Random.Range(0, moneyRewardPos.Count);
+        int rewardSelect = Random.Range(0, moneyRewards.Length);
+
+        GameObject newReward = Instantiate(moneyRewards[rewardSelect], moneyRewardPos[rewPosRandomSelcet].transform.position, Quaternion.identity);
+
+        if(newReward.GetComponent<MoneySkill>() != null)
+        {
+            newReward.GetComponent<MoneySkill>().moneyValue = (Globals.collectableLevel * 300) + (Globals.openedCarSlotCount * 200) * (PlayerPrefs.GetInt("level") + 1);
+               newReward.GetComponent<MoneySkill>().ValueInit();
+        }
     }
 }

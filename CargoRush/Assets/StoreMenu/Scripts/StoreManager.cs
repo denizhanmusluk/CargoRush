@@ -31,7 +31,7 @@ public class StoreManager : MonoBehaviour
         if (PlayerPrefs.GetInt("skinactive") == 1)
         {
             storeButton.SetActive(true);
-            GameManager.Instance.ui.gemPanel.SetActive(true);
+            //GameManager.Instance.ui.gemPanel.SetActive(true);
         }
     }
 
@@ -47,6 +47,7 @@ public class StoreManager : MonoBehaviour
         //PopularPanelManager.Instance.popularPAnelActive();
         //MissionManager.Instance.SkinMissionStart();
         storeButtonTapTutorialGO.SetActive(false);
+        PlayerController.Instance.PlayerControlDeActive();
     }
 
     public void newButton()
@@ -96,6 +97,8 @@ public class StoreManager : MonoBehaviour
         starPanel.SetActive(false);
         exclusivePanel.SetActive(false);
         storeButton.SetActive(true);
+        PlayerController.Instance.PlayerControl_ReActive();
+
     }
 
     public void buttonSetPos(RectTransform btn)

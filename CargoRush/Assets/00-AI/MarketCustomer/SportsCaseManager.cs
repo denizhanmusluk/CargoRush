@@ -372,7 +372,7 @@ public class SportsCaseManager : MonoBehaviour,IMoneyArea
             Vector3 dropPos = targetTR.position + new Vector3(0, deltaY * 0.2f, 0);
             BanknotMoney banknot = Instantiate(moneyArea.moneyPrefab, moneyArea.firstMoneyCreatePosTR.position, Quaternion.identity).GetComponent<BanknotMoney>();
             banknot.MovingMoney(moneyArea.firstMoneyCreatePosTR.position, dropPos, targetTR);
-            banknot.banknotValue = droppingCollectionList[i].price + Globals.extraMoneySkin;
+            //banknot.banknotValue = droppingCollectionList[i].price + Globals.extraMoneySkin;
             moneyArea.moneyList.Add(banknot);
             PlayerPrefs.SetInt(caseName + "totalvalue", PlayerPrefs.GetInt(caseName + "totalvalue") + banknot.banknotValue);
 
@@ -544,7 +544,7 @@ public class SportsCaseManager : MonoBehaviour,IMoneyArea
             Vector3 dropPos = targetTR.position + new Vector3(0, deltaY * 0.2f, 0);
             BanknotMoney banknot = Instantiate(vipMoneyDropArea.moneyPrefab, vipMoneyDropArea.firstMoneyCreatePosTR.position, Quaternion.identity).GetComponent<BanknotMoney>();
             banknot.MovingMoney(vipMoneyDropArea.firstMoneyCreatePosTR.position, dropPos, targetTR);
-            banknot.banknotValue = (droppingCollectionList[i].price * vipCustomer.extraPrice + Globals.extraMoneySkin);
+            //banknot.banknotValue = (droppingCollectionList[i].price * vipCustomer.extraPrice + Globals.extraMoneySkin);
             vipMoneyDropArea.moneyList.Add(banknot);
             yield return null;
         }

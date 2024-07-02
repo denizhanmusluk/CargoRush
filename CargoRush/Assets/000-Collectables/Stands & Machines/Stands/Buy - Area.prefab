@@ -134,6 +134,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 275bb31ea44de264ab6e3448feeb1449, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gaTag: 
   standUpgradeActive: 0
   standUpgradeLevel: 0
   shopBayArea: 1
@@ -176,6 +177,8 @@ MonoBehaviour:
   showingTime: 1.5
   boosterOpener: 0
   vipActivator: 0
+  hrBuy: 0
+  specialVehicleOpener: 0
   paymentActive: 0
   indTutorialActive: 0
 --- !u!1 &2501875409152763445
@@ -195,7 +198,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2317023297409784941
 RectTransform:
   m_ObjectHideFlags: 0
@@ -213,7 +216,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 2.35, y: 8.53}
+  m_AnchoredPosition: {x: -2.35, y: 5.61}
   m_SizeDelta: {x: 4, y: 4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6025881546910702424
@@ -575,7 +578,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &688555017693904373
 RectTransform:
   m_ObjectHideFlags: 0
@@ -593,7 +596,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 2.4100003, y: 4.76}
+  m_AnchoredPosition: {x: 2.4100003, y: 5.61}
   m_SizeDelta: {x: 4, y: 4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3231055540050023690

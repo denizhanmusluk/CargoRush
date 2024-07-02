@@ -31,8 +31,8 @@ public class HRWorkerArea : MonoBehaviour, BuyCamera
         HRUpgradeManager.Instance._upgradeAreaWorkers = this;
         HRUpgradeManager.Instance.firstCreateTR = firstCreateTR;
         HRUpgradeManager.Instance.WorkerCreate();
-        HRUpgradeManager.Instance.HRWorkerGO = HRWorkerGO;
-        StartCoroutine(StartDelay());
+        //HRUpgradeManager.Instance.HRWorkerGO = HRWorkerGO;
+        //StartCoroutine(StartDelay());
        
     }
     IEnumerator StartDelay()
