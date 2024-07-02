@@ -23,9 +23,11 @@ public class MissionPanel : MonoBehaviour
     public Image moneyImg;
     public GameObject tickGO;
     public string missionTag;
+    public string missionNameString;
 
-    public void MissionStart(int _currentCount, int _maxCount , int _price)
+    public void MissionStart(int _currentCount, int _maxCount , int _price, string _missionName)
     {
+        missionNameString = _missionName;
         tickGO.SetActive(false);
         moneyButton.gameObject.SetActive(true);
 
@@ -42,7 +44,7 @@ public class MissionPanel : MonoBehaviour
 
         if (moneyType == MoneyType.Money)
         {
-            priceText.text = "$" + price.ToString();
+            priceText.text = price.ToString();
             moneyImg.sprite = moneyIcon;
         }
         else
@@ -104,7 +106,7 @@ public class MissionPanel : MonoBehaviour
                 if (collectId == 7) { tag = "All teddy bear stands unlocked"; }
                 if (collectId == 8) { tag = "All toy car stands unlocked"; }
 
-                float time = CoefficientTransformation.FormatSaniye(Globals.playTime);
+                float time = CoefficientTransformation.FormatSaniye(Globals.speedPlayTime);
                 //GameAnalytics.NewDesignEvent(tag,time);
             }
         }
@@ -118,6 +120,12 @@ public class MissionPanel : MonoBehaviour
 
         StartCoroutine(MissionCompleteDelay());
         
+        if(PlayerPrefs.GetInt("firstmissioncompleted") == 0)
+        {
+            PlayerPrefs.SetInt("firstmissioncompleted", 1);
+            MissionManager.Instance.tapTutorialGO.SetActive(true);
+        }
+        MissionManager.Instance.MissionCompPopUpOpen(missionNameString);
     }
     IEnumerator MissionCompleteDelay()
     {

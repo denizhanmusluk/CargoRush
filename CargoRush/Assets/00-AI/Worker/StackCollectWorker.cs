@@ -8,12 +8,18 @@ public class StackCollectWorker : StackCollect
     public int baseStackCapacity;
     [SerializeField] AIWorker _aiWorker;
     [SerializeField] AIGarbageWorker _aiGarbageWorker;
+    [SerializeField] OnlineWorker _onlineWorker;
     public int targetId;
     public bool aiCollectActive = true;
 
     public CollectType collectableType;
     public bool carryPassive;
     public CharacterUpgradeSettings characterUpgradeSettings;
+
+    private void Awake()
+    {
+        //characterUpgradeSettings = LevelManager.Instance._currnetCharacterUpgradeSettings;
+    }
     public override float StackFollowSpeed()
     {
         if (_aiWorker != null)
@@ -21,9 +27,17 @@ public class StackCollectWorker : StackCollect
             return _aiWorker.AImoveSpeed;
 
         }
-        else
+        else if (_aiGarbageWorker != null)
         {
             return _aiGarbageWorker.AImoveSpeed;
+        }
+        else if (_onlineWorker != null)
+        {
+            return _onlineWorker.aiMoving.AImoveSpeed;
+        }
+        else
+        {
+            return 5f;
         }
     }
     public override void StackAnimation()
@@ -34,10 +48,13 @@ public class StackCollectWorker : StackCollect
             {
                 _aiWorker.animator.SetBool("carry", true);
             }
-            else
+            else if (_aiGarbageWorker != null)
             {
                 _aiGarbageWorker.animator.SetBool("carry", true);
-                
+            }
+            else if (_onlineWorker != null)
+            {
+                _onlineWorker.workerAnimator.SetBool("carry", true);
             }
         }
 
@@ -60,9 +77,13 @@ public class StackCollectWorker : StackCollect
             _aiWorker.animator.SetBool("carry", false);
 
         }
-        else
+        else if (_aiGarbageWorker != null)
         {
             _aiGarbageWorker.animator.SetBool("carry", false);
+        }
+        else if (_onlineWorker != null)
+        {
+            _onlineWorker.workerAnimator.SetBool("carry", false);
         }
 
         StartCoroutine(StackIkPosReset(leftIkTarget, leftNullTarget));

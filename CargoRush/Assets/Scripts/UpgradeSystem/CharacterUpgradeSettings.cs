@@ -3,9 +3,9 @@ using UnityEngine;
 public class CharacterUpgradeSettings : ScriptableObject
 {
     [Header("       MAGNET RADIUS")]
-    public float throwSpeedDivideRatio;
     public float[] magnetRadius;
-    public int[] magnetRadiusCost;
+
+
     [Header("       CHARACTER SPEED")]
     public float[] characterSpeed;
     public int[] characterSpeedCost;

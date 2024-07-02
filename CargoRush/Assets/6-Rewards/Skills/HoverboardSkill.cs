@@ -1,9 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class HoverboardSkill : MonoBehaviour
 {
+    [SerializeField] TextMeshProUGUI viewCounterText;
+    [SerializeField] int viewTime;
+    int viewTimeCounter = 0;
     bool collectActive = true;
     [SerializeField] GameObject cicrcle;
     [SerializeField] GameObject particleGO;
@@ -20,5 +24,20 @@ public class HoverboardSkill : MonoBehaviour
             gameObject.SetActive(false);
             PlayerController.Instance.PlayerControlDeActive();
         }
+    }
+    private void Start()
+    {
+        StartCoroutine(ViewCounter());
+    }
+    IEnumerator ViewCounter()
+    {
+        while(viewTimeCounter < viewTime)
+        {
+            viewTimeCounter++;
+            viewCounterText.text = ConvertSecondToMinSec.Converter(viewTime - viewTimeCounter);
+            yield return new WaitForSeconds(1f);
+        }
+        Globals.isSpeedRewardCreated = false;
+        Destroy(gameObject);
     }
 }

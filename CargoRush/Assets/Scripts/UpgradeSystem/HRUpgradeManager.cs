@@ -17,17 +17,20 @@ public class HRUpgradeManager : MonoBehaviour
     public HRWorkerArea _upgradeAreaWorkers;
     public Transform firstCreateTR;
     public GameObject HRWorkerGO;
+
+    public GameObject upgradeButton;
     private void Awake()
     {
         _instance = this;
-        Globals.workerMoveSpeedLevel = PlayerPrefs.GetInt("workerMoveSpeedLevel");
-        Globals.workerCapacityLevel = PlayerPrefs.GetInt("workerCapacityLevel");
-        Globals.workerNoLevel = PlayerPrefs.GetInt("workerNoLevel");
-        Globals.machineLevel = PlayerPrefs.GetInt("machineLevel");
+        Globals.workerMoveSpeedLevel = PlayerPrefs.GetInt("workerMoveSpeedLevel" + PlayerPrefs.GetInt("level"));
+        Globals.workerCapacityLevel = PlayerPrefs.GetInt("workerCapacityLevel" + PlayerPrefs.GetInt("level"));
+        Globals.workerNoLevel = PlayerPrefs.GetInt("workerNoLevel" + PlayerPrefs.GetInt("level"));
+        Globals.machineLevel = PlayerPrefs.GetInt("machineLevel" + PlayerPrefs.GetInt("level"));
 
     }
     private void Start()
     {
+        _characterUpgradeSettings = LevelManager.Instance._currnetCharacterUpgradeSettings;
         isEnoughMoney();
         InitButtonValues();
     }
@@ -85,7 +88,7 @@ public class HRUpgradeManager : MonoBehaviour
             {
                 GameManager.Instance.MoneyUpdate(-_characterUpgradeSettings.workerMoveSpeedCost[Globals.workerMoveSpeedLevel + 1]);
                 Globals.workerMoveSpeedLevel++;
-                PlayerPrefs.SetInt("workerMoveSpeedLevel", Globals.workerMoveSpeedLevel);
+                PlayerPrefs.SetInt("workerMoveSpeedLevel" + PlayerPrefs.GetInt("level"), Globals.workerMoveSpeedLevel);
                 PlayerController.Instance.magnet.MagnetLevelUp();
 
                 string tag = "M" + (PlayerPrefs.GetInt("level") + 1).ToString() + "-WorkerSpeedUpgrade" + Globals.workerMoveSpeedLevel.ToString();
@@ -94,7 +97,7 @@ public class HRUpgradeManager : MonoBehaviour
                 //PlayerBehaviour.Instance.playerController.CharacterUpgrade(Globals.holeRadiusLevel);
                 isEnoughMoney();
                 InitButtonValues();
-                for (int i = 0; i < PlayerPrefs.GetInt("workerNoLevel"); i++)
+                for (int i = 0; i < PlayerPrefs.GetInt("workerNoLevel" + PlayerPrefs.GetInt("level")); i++)
                 {
                     if (_upgradeAreaWorkers.workerList[i].GetComponent<AIWorker>() != null)
                     {
@@ -121,7 +124,7 @@ public class HRUpgradeManager : MonoBehaviour
             {
                 GameManager.Instance.MoneyUpdate(-_characterUpgradeSettings.workerCapacityCost[Globals.workerCapacityLevel + 1]);
                 Globals.workerCapacityLevel++;
-                PlayerPrefs.SetInt("workerCapacityLevel", Globals.workerCapacityLevel);
+                PlayerPrefs.SetInt("workerCapacityLevel" + PlayerPrefs.GetInt("level"), Globals.workerCapacityLevel);
                 isEnoughMoney();
                 InitButtonValues();
                 string tag = "M" + (PlayerPrefs.GetInt("level") + 1).ToString() + "-WorkerCapacityUpgrade" + Globals.workerCapacityLevel.ToString();
@@ -146,11 +149,11 @@ public class HRUpgradeManager : MonoBehaviour
 
                 GameManager.Instance.MoneyUpdate(-_characterUpgradeSettings.workerNoCost[Globals.workerNoLevel + 1] + rebuyAmount);
                 Globals.workerNoLevel++;
-                PlayerPrefs.SetInt("workerNoLevel", Globals.workerNoLevel);
+                PlayerPrefs.SetInt("workerNoLevel" + PlayerPrefs.GetInt("level"), Globals.workerNoLevel);
                 isEnoughMoney();
                 InitButtonValues();
                 WorkerCreate();
-                HRWorkerGO.SetActive(false);
+                //HRWorkerGO.SetActive(false);
 
                 //PlayerController.Instance.GetComponent<BoingScale>().ScaleEffectTR(PlayerController.Instance.transform, 0.8f, 1f, 0.5f, Ease.OutElastic);
                 //PlayerController.Instance.UpgradeTextSpawn("+Capacity");
@@ -191,37 +194,158 @@ public class HRUpgradeManager : MonoBehaviour
             button_WorkerNo.moneyButton.interactable = false;
         }
     }
-    public void CharacterUpgradeClose()
-    {
-        _upgradeAreaWorkers.CharacterUpgradeClose();
-    }
+  
     public void WorkerBuyArea()
     {
         Globals.workerNoLevel++;
-        PlayerPrefs.SetInt("workerNoLevel", Globals.workerNoLevel);
+        PlayerPrefs.SetInt("workerNoLevel" + PlayerPrefs.GetInt("level"), Globals.workerNoLevel);
         isEnoughMoney();
         InitButtonValues();
-        HRWorkerGO.SetActive(false);
+        //HRWorkerGO.SetActive(false);
     }
     public void WorkerCreate()
     {
-        if (PlayerPrefs.GetInt("workerNoLevel") >= 1)
+        if (PlayerPrefs.GetInt("workerNoLevel" + PlayerPrefs.GetInt("level")) >= 1)
         {
-            for (int i = 0; i < PlayerPrefs.GetInt("workerNoLevel"); i++)
+            for (int i = 0; i < PlayerPrefs.GetInt("workerNoLevel" + PlayerPrefs.GetInt("level")); i++)
             {
                 _upgradeAreaWorkers.workerList[i].SetActive(true);
                 //_upgradeAreaWorkers.workerBuyAreaList[i].gameObject.SetActive(false);
             }
 
-            StartCoroutine(WorkerCreateDelay());
+            //StartCoroutine(WorkerCreateDelay());
 
         }
     }
-    IEnumerator WorkerCreateDelay()
+    //IEnumerator WorkerCreateDelay()
+    //{
+    //    _upgradeAreaWorkers.workerList[PlayerPrefs.GetInt("workerNoLevel") - 1].GetComponent<NavMeshAgent>().enabled = false;
+    //   yield return null;
+    //    _upgradeAreaWorkers.workerList[PlayerPrefs.GetInt("workerNoLevel") - 1].transform.position = firstCreateTR.position;
+    //    _upgradeAreaWorkers.workerList[PlayerPrefs.GetInt("workerNoLevel") - 1].GetComponent<NavMeshAgent>().enabled = true;
+    //}
+
+
+    bool opened = false;
+
+    public void CharacterUpgradeOpen()
     {
-        _upgradeAreaWorkers.workerList[PlayerPrefs.GetInt("workerNoLevel") - 1].GetComponent<NavMeshAgent>().enabled = false;
-       yield return null;
-        _upgradeAreaWorkers.workerList[PlayerPrefs.GetInt("workerNoLevel") - 1].transform.position = firstCreateTR.position;
-        _upgradeAreaWorkers.workerList[PlayerPrefs.GetInt("workerNoLevel") - 1].GetComponent<NavMeshAgent>().enabled = true;
+        if (!opened)
+        {
+            opened = true;
+            workerUpgradePanel.SetActive(true);
+            PlayerController.Instance.PlayerControlDeActive();
+            upgradeButton.SetActive(false);
+            TutorialManager.Instance.clickUpgradeButtonGO.SetActive(false);
+        }
     }
+    public void CharacterUpgradeClose()
+    {
+        if (opened)
+        {
+            opened = false;
+            PlayerController.Instance.PlayerControl_ReActive();
+            upgradeButton.SetActive(true);
+        }
+    }
+    //public void CharacterUpgradeClose()
+    //{
+    //    if (opened)
+    //    {
+    //        opened = false;
+    //        upgradeOpenActive = false;
+    //        PlayerController.Instance.PlayerControl_ReActive();
+    //    }
+
+    //}
+
+
+    public void WorkerMoveSpeedUpgrade_ADV_Click()
+    {
+        ADVManager.Instance.RewardedStart(WorkerMoveSpeedUpgradeFree);
+
+    }
+    public void WorkerCapacityUpgrade_ADV_Click()
+    {
+        ADVManager.Instance.RewardedStart(WorkerCapacityUpgradeFree);
+
+    }
+    public void WorkerNoUpgrade_ADV_Click()
+    {
+        ADVManager.Instance.RewardedStart(WorkerNoUpgradeFree);
+
+    }
+
+
+
+
+
+
+
+
+
+    public void WorkerMoveSpeedUpgradeFree()
+    {
+        if (Globals.workerMoveSpeedLevel < _characterUpgradeSettings.workerMoveSpeed.Length - 1)
+        {
+
+            GameManager.Instance.MoneyUpdate(-_characterUpgradeSettings.workerMoveSpeedCost[Globals.workerMoveSpeedLevel + 1]);
+            Globals.workerMoveSpeedLevel++;
+            PlayerPrefs.SetInt("workerMoveSpeedLevel" + PlayerPrefs.GetInt("level"), Globals.workerMoveSpeedLevel);
+            PlayerController.Instance.magnet.MagnetLevelUp();
+
+            string tag = "M" + (PlayerPrefs.GetInt("level") + 1).ToString() + "-WorkerSpeedUpgrade" + Globals.workerMoveSpeedLevel.ToString();
+            GameManager.Instance.GameAnalyticsTag(tag);
+
+            isEnoughMoney();
+            InitButtonValues();
+            for (int i = 0; i < PlayerPrefs.GetInt("workerNoLevel" + PlayerPrefs.GetInt("level")); i++)
+            {
+                if (_upgradeAreaWorkers.workerList[i].GetComponent<AIWorker>() != null)
+                {
+                    _upgradeAreaWorkers.workerList[i].GetComponent<AIWorker>().MoveSpeedInit();
+                }
+
+                if (_upgradeAreaWorkers.workerList[i].GetComponent<AIGarbageWorker>() != null)
+                {
+                    _upgradeAreaWorkers.workerList[i].GetComponent<AIGarbageWorker>().MoveSpeedInit();
+                }
+            }
+        }
+    }
+
+    public void WorkerCapacityUpgradeFree()
+    {
+        if (Globals.workerCapacityLevel < _characterUpgradeSettings.workerCapacity.Length - 1)
+        {
+                GameManager.Instance.MoneyUpdate(-_characterUpgradeSettings.workerCapacityCost[Globals.workerCapacityLevel + 1]);
+                Globals.workerCapacityLevel++;
+                PlayerPrefs.SetInt("workerCapacityLevel" + PlayerPrefs.GetInt("level"), Globals.workerCapacityLevel);
+                isEnoughMoney();
+                InitButtonValues();
+                string tag = "M" + (PlayerPrefs.GetInt("level") + 1).ToString() + "-WorkerCapacityUpgrade" + Globals.workerCapacityLevel.ToString();
+                GameManager.Instance.GameAnalyticsTag(tag);
+        }
+    }
+    public void WorkerNoUpgradeFree()
+    {
+        if (Globals.workerNoLevel < _characterUpgradeSettings.workerNo.Length - 1)
+        {
+
+            int rebuyAmount = 0;
+
+
+            GameManager.Instance.MoneyUpdate(-_characterUpgradeSettings.workerNoCost[Globals.workerNoLevel + 1] + rebuyAmount);
+            Globals.workerNoLevel++;
+            PlayerPrefs.SetInt("workerNoLevel" + PlayerPrefs.GetInt("level"), Globals.workerNoLevel);
+            isEnoughMoney();
+            InitButtonValues();
+            WorkerCreate();
+
+
+
+        }
+    }
+
+
 }

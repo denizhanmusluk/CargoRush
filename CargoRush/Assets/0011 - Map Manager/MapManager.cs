@@ -28,6 +28,8 @@ public class MapManager : MonoBehaviour
 
     public GameObject nextButton;
 
+    public GameObject mapTapTut_GO;
+    public GameObject textTutorial_GO;
     private void Awake()
     {
         _instance = this;
@@ -54,6 +56,7 @@ public class MapManager : MonoBehaviour
         if(PlayerPrefs.GetInt("newworldactivation") > 0)
         {
             mapButton.SetActive(true);
+            textTutorial_GO.SetActive(true);
         }
     }
     public void MapButtonClick()
@@ -108,6 +111,7 @@ public class MapManager : MonoBehaviour
         _levelIndex = levelIndex;
         nextButton.SetActive(true);
         StartCoroutine(NeedleAnimation(levelIndex));
+        textTutorial_GO.SetActive(false);
 
         //StartCoroutine(New_Level_Select(levelIndex));
     }
@@ -118,6 +122,8 @@ public class MapManager : MonoBehaviour
     }
     IEnumerator New_Level_Select()
     {
+        Globals.collectableLevel = 0;
+
         PlayerController.Instance.PlayerControlDeActive();
         yield return new WaitForSeconds(0.5f);
         Fade.Instance.Hide();

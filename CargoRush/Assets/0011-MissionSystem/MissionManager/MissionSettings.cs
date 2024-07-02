@@ -66,6 +66,22 @@ public class MissionSettings : ScriptableObject
     [SerializeField] private string[] shippingName;
     public string[] _shippingName { get { return shippingName; } }
 
+    [SerializeField] private string[] shippingNameTut;
+    public string[] _shippingNameTut { get { return shippingNameTut; } }
+
+    [Header("        Buy Special ShippingLine Mission")]
+    [SerializeField] private int[] specialShippingCountMission;
+    public int[] _specialShippingCountMission { get { return specialShippingCountMission; } }
+
+
+    [SerializeField] private int[] specialShippingMissionPrice;
+    public int[] _specialShippingMissionPrice { get { return specialShippingMissionPrice; } }
+
+    [SerializeField] private string[] specialShippingName;
+    public string[] _specialShippingName { get { return specialShippingName; } }
+
+    [SerializeField] private string[] specialShippingNameTut;
+    public string[] _specialShippingNameTut { get { return specialShippingNameTut; } }
 
     [Header("        Buy TapingLine Mission")]
     [SerializeField] private int[] tapingLineCountMission;
@@ -79,6 +95,8 @@ public class MissionSettings : ScriptableObject
     public string[] _tapingLineName { get { return tapingLineName; } }
 
 
+    [SerializeField] private string[] tapingLineNameTut;
+    public string[] _tapingLineNameTut { get { return tapingLineNameTut; } }
 
 
 
@@ -93,7 +111,8 @@ public class MissionSettings : ScriptableObject
     [SerializeField] private string[] newMapName;
     public string[] _newMapName { get { return newMapName; } }
 
-
+    [SerializeField] private string[] newMapNameTut;
+    public string[] _newMapNameTut { get { return newMapNameTut; } }
 
     /////////////////////////////////////////
 }

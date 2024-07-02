@@ -36,6 +36,7 @@ public class StandFishCar : Stand,IMoneyArea
     public Sprite[] vipImgList;
 
     public bool specialVehicle = false;
+    public Animator goatAnim;
     void TextInitCheck()
     {
         for (int i = 0; i < productTypeCount.Length; i++)
@@ -45,7 +46,7 @@ public class StandFishCar : Stand,IMoneyArea
             if (productTypeCount[i] == 0)
             {
                 productTextGOList[i].SetActive(false);
-                collectIDList[i] = 0;
+                collectIDList[i] = -1;
             }
             else
             {
@@ -56,7 +57,7 @@ public class StandFishCar : Stand,IMoneyArea
     }
     public void MoneySave()
     {
-        PlayerPrefs.SetInt(standNameLevel + "banknotcount", 0);
+        PlayerPrefs.SetInt(standNameLevel + "banknotcount" + PlayerPrefs.GetInt("level"), 0);
     }
     public override void CollectableCountSet()
     {
@@ -70,9 +71,9 @@ public class StandFishCar : Stand,IMoneyArea
     }
     IEnumerator StartDelay()
     {
-        MissionManager.Instance.ShippingLineMissionStart();
 
         yield return new WaitForSeconds(1f);
+        MissionManager.Instance.ShippingLineMissionStart();
         StartCoroutine(MoneyCreate());
 
         if (PlayerPrefs.GetInt("firstindactive") == 0)
@@ -80,10 +81,13 @@ public class StandFishCar : Stand,IMoneyArea
             PlayerPrefs.SetInt("firstindactive", 1);
             IndicatorManager.Instance.IndicatorTargeterActive();
         }
-        if (PlayerPrefs.GetInt(standNameLevel + "firstopen") == 0)
+        if (!specialVehicle)
         {
-            PlayerPrefs.SetInt(standNameLevel + "firstopen", 1);
-            MissionManager.Instance.shippingBuyMission.MissionUpdate();
+            if (PlayerPrefs.GetInt(standNameLevel + "firstopen" + PlayerPrefs.GetInt("level")) == 0)
+            {
+                PlayerPrefs.SetInt(standNameLevel + "firstopen" + PlayerPrefs.GetInt("level"), 1);
+                MissionManager.Instance.shippingBuyMission.MissionUpdate();
+            }
         }
 
     }
@@ -103,7 +107,7 @@ public class StandFishCar : Stand,IMoneyArea
         {
             totalBoxCount = (int)Random.Range(boxCountTotal[carLevel].x, boxCountTotal[carLevel].y + 1);
         }
-        carLevel = PlayerPrefs.GetInt(standNameLevel);
+        carLevel = PlayerPrefs.GetInt(standNameLevel + PlayerPrefs.GetInt("level"));
         if (PlayerPrefs.GetInt("tutorialseq1") == 0)
         {
             fishCountTotal = 3;
@@ -115,11 +119,11 @@ public class StandFishCar : Stand,IMoneyArea
     }
     public void LevelUp()
     {
-        int lvl = PlayerPrefs.GetInt(standNameLevel);
+        int lvl = PlayerPrefs.GetInt(standNameLevel + PlayerPrefs.GetInt("level"));
         lvl++;
-        PlayerPrefs.SetInt(standNameLevel, lvl);
+        PlayerPrefs.SetInt(standNameLevel + PlayerPrefs.GetInt("level"), lvl);
 
-        carLevel = PlayerPrefs.GetInt(standNameLevel);
+        carLevel = PlayerPrefs.GetInt(standNameLevel + PlayerPrefs.GetInt("level"));
         if (currentCar != null)
         {
             //currentCar.GetComponent<FishCar>().CarLevelCreate(carLevel);
@@ -136,6 +140,11 @@ public class StandFishCar : Stand,IMoneyArea
     }
     public override void SpecificStart()
     {
+        if (specialVehicle)
+        {
+            MissionManager.Instance.specialShippingBuyMission.MissionUpdate();
+        }
+        Globals.openedCarSlotCount++;
         FishDropArea.Instance.carSlotList.Add(this);
         firstColliderOffset = moneyArea.GetComponent<BoxCollider>().center;
         StartCoroutine(SpecificStartDelay());
@@ -161,10 +170,37 @@ public class StandFishCar : Stand,IMoneyArea
         if (specialVehicle)
         {
             MissionManager.Instance.specialOrderMission.MissionUpdate();
+
+            if (PlayerPrefs.GetInt("level") == 0)
+            {
+                Globals.myShareValue += 100;
+            }
+            else if (PlayerPrefs.GetInt("level") == 1)
+            {
+                Globals.myShareValue += 150;
+            }
+            else
+            {
+                Globals.myShareValue += 250;
+            }
+            PlayerPrefs.SetInt("myShareValue", Globals.myShareValue);
         }
         else
         {
             MissionManager.Instance.orderMission.MissionUpdate();
+
+            if (PlayerPrefs.GetInt("level") == 0)
+            {
+                Globals.myShareValue += 30;
+            }
+            else if (PlayerPrefs.GetInt("level") == 1)
+            {
+                Globals.myShareValue += 50;
+            }
+            else
+            {
+                Globals.myShareValue += 80;
+            }
         }
         ResetStand();
     }
@@ -173,15 +209,11 @@ public class StandFishCar : Stand,IMoneyArea
 
     void CarCreate()
     {
-        if (specialVehicle)
+        if(goatAnim != null)
         {
-            MissionManager.Instance.SpecialOrderMissionStart();
+            goatAnim.SetBool("openactive", true);
         }
-        else
-        {
-            MissionManager.Instance.OrderMissionStart();
-        }
-        MissionManager.Instance.ShippingLineMissionStart();
+
 
         currentCar = Instantiate(carPrefabList[carLevel], carCreateTR.position, Quaternion.identity);
         //currentCar.GetComponent<FishCar>().CarLevelCreate(carLevel);
@@ -261,6 +293,17 @@ public class StandFishCar : Stand,IMoneyArea
             productTypeCountTotal[i] = productTypeCount[i];
         }
         TextInitCheck();
+
+
+        if (specialVehicle)
+        {
+            MissionManager.Instance.SpecialOrderMissionStart();
+        }
+        else
+        {
+            MissionManager.Instance.OrderMissionStart();
+        }
+        MissionManager.Instance.ShippingLineMissionStart();
     }
 
 
@@ -290,6 +333,10 @@ public class StandFishCar : Stand,IMoneyArea
                         {
                             if (productTypeCount.Length > 0 && _stackCollect.collectionTrs[i].collectType == CollectType.Type1 && productTypeCount[0] > 0)
                             {
+                                if (PlayerPrefs.GetInt("boxcounteractive"+ PlayerPrefs.GetInt("level")) == 0)
+                                {
+                                    PlayerPrefs.SetInt("box1counter"  + PlayerPrefs.GetInt("level"), PlayerPrefs.GetInt("box1counter" + PlayerPrefs.GetInt("level")) + 1);
+                                }
                                 productTypeCount[0]--;
                                 droppingCollection = _stackCollect.collectionTrs[i];
                                 i = _stackCollect.collectionTrs.Count;
@@ -298,6 +345,10 @@ public class StandFishCar : Stand,IMoneyArea
                             }
                             if (productTypeCount.Length > 1 && _stackCollect.collectionTrs[i].collectType == CollectType.Type2 && productTypeCount[1] > 0)
                             {
+                                if (PlayerPrefs.GetInt("boxcounteractive" , PlayerPrefs.GetInt("level")) == 0)
+                                {
+                                    PlayerPrefs.SetInt("box2counter" + PlayerPrefs.GetInt("level"), PlayerPrefs.GetInt("box2counter" + PlayerPrefs.GetInt("level")) + 1);
+                                }
                                 productTypeCount[1]--;
                                 droppingCollection = _stackCollect.collectionTrs[i];
                                 i = _stackCollect.collectionTrs.Count;
@@ -306,6 +357,10 @@ public class StandFishCar : Stand,IMoneyArea
                             }
                             if (productTypeCount.Length > 2 && _stackCollect.collectionTrs[i].collectType == CollectType.Type3 && productTypeCount[2] > 0)
                             {
+                                if (PlayerPrefs.GetInt("boxcounteractive", PlayerPrefs.GetInt("level")) == 0)
+                                {
+                                    PlayerPrefs.SetInt("box3counter" + PlayerPrefs.GetInt("level"), PlayerPrefs.GetInt("box3counter" + PlayerPrefs.GetInt("level")) + 1);
+                                }
                                 productTypeCount[2]--;
                                 droppingCollection = _stackCollect.collectionTrs[i];
                                 i = _stackCollect.collectionTrs.Count;
@@ -314,6 +369,10 @@ public class StandFishCar : Stand,IMoneyArea
                             }
                             if (productTypeCount.Length > 3 && _stackCollect.collectionTrs[i].collectType == CollectType.Type4 && productTypeCount[3] > 0)
                             {
+                                if (PlayerPrefs.GetInt("boxcounteractive", PlayerPrefs.GetInt("level")) == 0)
+                                {
+                                    PlayerPrefs.SetInt("box4counter" + PlayerPrefs.GetInt("level"), PlayerPrefs.GetInt("box4counter" + PlayerPrefs.GetInt("level")) + 1);
+                                }
                                 productTypeCount[3]--;
                                 droppingCollection = _stackCollect.collectionTrs[i];
                                 i = _stackCollect.collectionTrs.Count;
@@ -347,7 +406,7 @@ public class StandFishCar : Stand,IMoneyArea
 
 
             droppedCollectionList.Add(droppingCollection);
-            PlayerPrefs.SetInt(machineName + "rawcount", droppedCollectionList.Count);
+            PlayerPrefs.SetInt(machineName + "rawcount" + PlayerPrefs.GetInt("level"), droppedCollectionList.Count);
 
             yield return null;
             droppingCollection.collectActive = false;
@@ -474,8 +533,9 @@ public class StandFishCar : Stand,IMoneyArea
         totalMoney = (int)((float)totalMoney * moneyFactor);
         if (Globals.doubleIncomeActive)
         {
-            totalMoney *= 2;
+            totalMoney = (int)((float)totalMoney * 2f);
         }
+        totalMoney = (int)((float)totalMoney * Globals.extraMoneySkin);
         for (int i = 0; i < totalMoney; i++)
         {
             float deltaY = 0;
@@ -484,7 +544,7 @@ public class StandFishCar : Stand,IMoneyArea
             Vector3 dropPos = targetTR.position + new Vector3(0, deltaY * 0.2f, 0);
             BanknotMoney banknot = Instantiate(moneyArea.moneyPrefab, moneyArea.firstMoneyCreatePosTR.position, Quaternion.identity).GetComponent<BanknotMoney>();
             banknot.MovingMoney(moneyArea.firstMoneyCreatePosTR.position, dropPos, targetTR);
-            banknot.banknotValue = 2 + Globals.extraMoneySkin;
+            banknot.banknotValue = 2;
             moneyArea.moneyList.Add(banknot);
 
             stepNo++;
@@ -532,7 +592,7 @@ public class StandFishCar : Stand,IMoneyArea
         //}
 
         droppedCollectionList.Clear();
-        PlayerPrefs.SetInt(standNameLevel + "banknotcount", PlayerPrefs.GetInt(standNameLevel + "banknotcount") + totalMoney);
+        PlayerPrefs.SetInt(standNameLevel + "banknotcount" + PlayerPrefs.GetInt("level"), PlayerPrefs.GetInt(standNameLevel + "banknotcount" + PlayerPrefs.GetInt("level")) + totalMoney);
 
         yield return new WaitForSeconds(0.1f);
         StartCoroutine(ColliderReset());
@@ -541,7 +601,7 @@ public class StandFishCar : Stand,IMoneyArea
     IEnumerator MoneyCreate()
     {
         int banknotVal = 2;
-        for (int i = 0; i < PlayerPrefs.GetInt(standNameLevel + "banknotcount"); i++)
+        for (int i = 0; i < PlayerPrefs.GetInt(standNameLevel + "banknotcount" + PlayerPrefs.GetInt("level")); i++)
         {
             float deltaY = 0;
             deltaY = (i) / moneyArea.dropMoneyPosList.Count;
@@ -549,7 +609,7 @@ public class StandFishCar : Stand,IMoneyArea
             Vector3 dropPos = targetTR.position + new Vector3(0, deltaY * 0.2f, 0);
             BanknotMoney banknot = Instantiate(moneyArea.moneyPrefab, moneyArea.firstMoneyCreatePosTR.position, Quaternion.identity).GetComponent<BanknotMoney>();
             banknot.MovingMoney(moneyArea.firstMoneyCreatePosTR.position, dropPos, targetTR);
-            banknot.banknotValue = banknotVal + Globals.extraMoneySkin;
+            banknot.banknotValue = banknotVal;
             moneyArea.moneyList.Add(banknot);
             yield return null;
         }
@@ -596,6 +656,10 @@ public class StandFishCar : Stand,IMoneyArea
         currentCar.GetComponent<FishCar>().CarGoOut();
         yield return new WaitForSeconds(0.1f);
 
+        if (goatAnim != null)
+        {
+            goatAnim.SetBool("openactive", false);
+        }
 
         canvasDeliveringGO.SetActive(true);
         canvasProductGO.SetActive(false);

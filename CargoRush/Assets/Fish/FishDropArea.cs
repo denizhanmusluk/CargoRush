@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using Cinemachine;
 
 [System.Serializable]
 public struct productType
@@ -13,10 +14,11 @@ public class FishDropArea : MonoBehaviour
 {
     private static FishDropArea _instance = null;
     public static FishDropArea Instance => _instance;
+    [SerializeField] CinemachineVirtualCamera productViewCamera;
     //public float createPeriod = 1f;
     public float[] createPeriodTime;
     public float reactiveRate = 1f;
-    float reactiveRateTemp = 1f;
+   [SerializeField] float reactiveRateCurrent = 1f;
 
     public GameObject[] garbagePrefabs;
     public Transform[] fishPosTR;
@@ -65,10 +67,10 @@ public class FishDropArea : MonoBehaviour
     }
     IEnumerator ReactiveActivatorDelay()
     {
-        reactiveRateTemp = reactiveRate;
-        reactiveRate = 1f;
+        createTime = 0.1f;
+        reactiveRateCurrent = 1;
         yield return new WaitForSeconds(2f);
-        reactiveRate = reactiveRateTemp;
+        reactiveRateCurrent = reactiveRate;
     }
     public void WallColliderReset()
     {
@@ -103,7 +105,7 @@ public class FishDropArea : MonoBehaviour
         //CarSlotsReset();
 
     }
-    float createTime;
+   [SerializeField] float createTime;
     IEnumerator GarbageDropping()
     {
         while (true)
@@ -114,7 +116,7 @@ public class FishDropArea : MonoBehaviour
             {
                 createTime = createPeriodTime[mineCrusher.standLevel];
 
-                while ((float)(Globals.collectableLevel + 1) * (float)totalProductCapacity * reactiveRate + 1 < collectableList.Count)
+                while ((float)(Globals.collectableLevel + 1) * (float)totalProductCapacity * reactiveRateCurrent + 1 < collectableList.Count)
                 {
                     createTime = 0.1f;
                     yield return new WaitForSeconds(1f);
@@ -254,6 +256,7 @@ public class FishDropArea : MonoBehaviour
     {
         for (int i = 0; i < proType[productID].productList.Count; i++)
         {
+            collectableList.Remove(proType[productID].productList[i]);
             Destroy(proType[productID].productList[i].gameObject);
         }
         proType[productID].productList.Clear();
@@ -275,5 +278,19 @@ public class FishDropArea : MonoBehaviour
 
             }
         }
+    }
+
+    public void NewProductActive(string newProductName)
+    {
+        StartCoroutine(ViewCamera(newProductName));
+    }
+    IEnumerator ViewCamera(string newProductName)
+    {
+        TutorialManager.Instance.newProductTutorialGO.SetActive(true);
+        TutorialManager.Instance.newProducttext.text = newProductName;
+        productViewCamera.Priority = 2;
+        yield return new WaitForSeconds(5f);
+        productViewCamera.Priority = 0;
+        TutorialManager.Instance.newProductTutorialGO.SetActive(false);
     }
 }

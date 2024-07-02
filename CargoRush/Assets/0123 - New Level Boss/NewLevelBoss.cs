@@ -19,13 +19,14 @@ public class NewLevelBoss : MonoBehaviour
 
     void Start()
     {
-        if(PlayerPrefs.GetInt(bossName) == 0)
+        if(PlayerPrefs.GetInt(bossName + PlayerPrefs.GetInt("level")) == 0)
         {
             BossActive();
         }
     }
     void BossActive()
     {
+        bossCharacter.gameObject.SetActive(true);
         BossTutorialPanel.Instance.newLevelBoss = this;
         PlayerController.Instance.newLevelBoss = this;
         PlayerController.Instance.PlayerRotReset();
@@ -52,6 +53,7 @@ public class NewLevelBoss : MonoBehaviour
     }
     public void BossFinish()
     {
+        PlayerPrefs.SetInt(bossName + PlayerPrefs.GetInt("level"), 1);
         popUp2_GO.SetActive(false);
         DropMoney();
         PlayerController.Instance.PlayerControl_ReActive();

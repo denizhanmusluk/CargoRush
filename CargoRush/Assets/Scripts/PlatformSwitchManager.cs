@@ -44,7 +44,7 @@ public class PlatformSwitchManager : MonoBehaviour
         if (PlayerPrefs.GetInt("skinactive") == 1)
         {
             StoreManager.Instance.storeButton.SetActive(true);
-            GameManager.Instance.ui.gemPanel.SetActive(true);
+            //GameManager.Instance.ui.gemPanel.SetActive(true);
         }
         //GameManager.Instance.ui.ingameCanvas.SetActive(true);
         //GameManager.Instance.ui.panelMission.SetActive(true);

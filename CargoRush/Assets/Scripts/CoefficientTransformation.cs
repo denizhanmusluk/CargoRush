@@ -16,12 +16,12 @@ public static class CoefficientTransformation
             if(decimalPart >= 100)
             {
                 decimalPart /= 10;
-                result = integerPart.ToString() + "." + decimalPart.ToString() + "k";
+                result = integerPart.ToString() + "." + decimalPart.ToString() + "K";
             }
             else
             {
                 decimalPart /= 10;
-                result = integerPart.ToString() + ".0" + decimalPart.ToString() + "k";
+                result = integerPart.ToString() + ".0" + decimalPart.ToString() + "K";
             }
         }
         return result;

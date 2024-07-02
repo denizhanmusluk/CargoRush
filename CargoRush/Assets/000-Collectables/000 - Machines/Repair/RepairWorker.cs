@@ -7,6 +7,7 @@ public class RepairWorker : MonoBehaviour
     public AIMoving aiMoving;
     public Animator animator;
     public MachineRepairArea machineRepairArea;
+    public ShowBuyRapairReward showBuyRapairReward;
     public void GoToMachine()
     {
         aiMoving.GoTargetStart(machineRepairArea.targetMachinePos);

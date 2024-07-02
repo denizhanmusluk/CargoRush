@@ -32,7 +32,7 @@ public class Door : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if ((other.GetComponent<AIMarketCustomer>() != null || other.GetComponent<AIWorker>() != null || other.GetComponent<CEOCharacter>() != null || other.GetComponent<PlayerController>() != null || other.GetComponent<VipCustomer>() != null) || wievAllActive)
+        if ((other.GetComponent<AIMarketCustomer>() != null || other.GetComponent<AIWorker>() != null || other.GetComponent<PlayerController>() != null || other.GetComponent<VipCustomer>() != null) || wievAllActive)
         {
             if (!isOpen)
             {
@@ -43,7 +43,7 @@ public class Door : MonoBehaviour
     }
     private void OnTriggerStay(Collider other)
     {
-        if ((other.GetComponent<AIMarketCustomer>() != null || other.GetComponent<AIWorker>() != null || other.GetComponent<CEOCharacter>() != null || other.GetComponent<PlayerController>() != null || other.GetComponent<VipCustomer>()) || wievAllActive)
+        if ((other.GetComponent<AIMarketCustomer>() != null || other.GetComponent<AIWorker>() != null || other.GetComponent<PlayerController>() != null || other.GetComponent<VipCustomer>()) || wievAllActive)
         {
             if (!isOpen)
             {
@@ -54,7 +54,7 @@ public class Door : MonoBehaviour
     }
     private void OnTriggerExit(Collider other)
     {
-        if ((other.GetComponent<AIMarketCustomer>() != null || other.GetComponent<AIWorker>() != null || other.GetComponent<CEOCharacter>() != null || other.GetComponent<PlayerController>() != null || other.GetComponent<VipCustomer>()) || wievAllActive)
+        if ((other.GetComponent<AIMarketCustomer>() != null || other.GetComponent<AIWorker>() != null || other.GetComponent<PlayerController>() != null || other.GetComponent<VipCustomer>()) || wievAllActive)
         {
             if (isOpen)
             {

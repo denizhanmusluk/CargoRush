@@ -33,10 +33,15 @@ public class FishCar : MonoBehaviour
             StartCoroutine(SetRot());
             if (stand.GetComponent<AquariumCar>() != null)
             {
-                stand.GetComponent<AquariumCar>()._CollectProduct.collectActive = true;
+                //stand.GetComponent<AquariumCar>()._CollectProduct.collectActive = true;
             }
         }
-        vipCanvasGo.transform.rotation = Quaternion.Euler(45, 45, 0);
+        VipCanvasSetRot();
+    }
+    private void VipCanvasSetRot()
+    {
+        Quaternion cameraRot = Camera.main.transform.rotation;
+        vipCanvasGo.transform.rotation = Quaternion.Euler(cameraRot.eulerAngles.x, cameraRot.eulerAngles.y, cameraRot.eulerAngles.z);
     }
     IEnumerator SetRot()
     {
@@ -79,6 +84,29 @@ public class FishCar : MonoBehaviour
         {
             PlayerPrefs.SetInt("tutorialseq1", 1);
             ShopManager.Instance.buyOthersGO.SetActive(true);
+            if (PlayerPrefs.GetInt("againcollect") == 0)
+            {
+                PlayerPrefs.SetInt("againcollect", 1);
+                Transform indTr = IndicatorManager.Instance.targeterActiveList[0].transform;
+                float distance;
+                Collectable currentCollectable;
+                if (FishDropArea.Instance.collectableList.Count != 0)
+                {
+                    currentCollectable = FishDropArea.Instance.collectableList[0];
+                    distance = Vector3.Distance(currentCollectable.transform.position, transform.position);
+                    for (int i = 0; i < FishDropArea.Instance.collectableList.Count; i++)
+                    {
+                        if (Vector3.Distance(FishDropArea.Instance.collectableList[i].transform.position, transform.position) < distance)
+                        {
+                            currentCollectable = FishDropArea.Instance.collectableList[i];
+                            distance = Vector3.Distance(currentCollectable.transform.position, transform.position);
+                        }
+                    }
+                    indTr.position = new Vector3(currentCollectable.transform.position.x, indTr.position.y, currentCollectable.transform.position.z);
+                    IndicatorManager.Instance.IndicatorTargeterActive();
+                }
+
+            }
         }
 
     }

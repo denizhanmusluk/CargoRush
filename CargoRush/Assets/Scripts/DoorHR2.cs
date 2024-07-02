@@ -11,72 +11,104 @@ public class DoorHR2 : MonoBehaviour
 
     [SerializeField] bool frontInActive = false;
     [SerializeField] bool backInActive = false;
+
     private void OnTriggerEnter(Collider other)
     {
-        if (other.GetComponent<PlayerController>() != null)
+        if (other.GetComponent<PlayerController>() != null || other.GetComponent<RepairWorker>() != null || other.GetComponent<BossCharacter>() != null)
         {
             if (!isOpen)
             {
                 isOpen = true;
 
-                if (Vector3.Distance(other.transform.position, frontGO.transform.position) < Vector3.Distance(other.transform.position, backGO.transform.position))
-                {
+                doorAnimator.SetBool("openfront", true);
 
-                    doorAnimator.SetBool("openfront", true);
-                    frontInActive = true;
-                    backInActive = false;
-
-                }
-                else
-                {
-                    doorAnimator.SetBool("openback", true);
-                    frontInActive = false;
-                    backInActive = true;
-                }
 
 
             }
-         
+
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.GetComponent<PlayerController>() != null)
+        if (other.GetComponent<PlayerController>() != null || other.GetComponent<RepairWorker>() != null || other.GetComponent<BossCharacter>() != null)
         {
             if (isOpen)
             {
                 isOpen = false;
-                if (Vector3.Distance(other.transform.position, frontGO.transform.position) > Vector3.Distance(other.transform.position, backGO.transform.position))
-                {
-                
-                    if (frontInActive)
-                    {
-                        doorAnimator.SetBool("openfront", false);
-                        frontInActive = false;
-                    }
-                    else
-                    {
-                        doorAnimator.SetBool("openback", false);
-                        backInActive = false;
-                    }
+                doorAnimator.SetBool("openfront", false);
 
-                }
-                else
-                {
-                    if (backInActive)
-                    {
-                        doorAnimator.SetBool("openback", false);
-                        backInActive = false;
-                    }
-                   else
-                    {
-                        doorAnimator.SetBool("openfront", false);
-                        frontInActive = false;
-                    }
-                }
             }
         }
-  
+
     }
+
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if (other.GetComponent<PlayerController>() != null || other.GetComponent<RepairWorker>() != null || other.GetComponent<BossCharacter>() != null)
+    //    {
+    //        if (!isOpen)
+    //        {
+    //            isOpen = true;
+
+    //            if (Vector3.Distance(other.transform.position, frontGO.transform.position) < Vector3.Distance(other.transform.position, backGO.transform.position))
+    //            {
+
+    //                doorAnimator.SetBool("openfront", true);
+    //                frontInActive = true;
+    //                backInActive = false;
+
+    //            }
+    //            else
+    //            {
+    //                doorAnimator.SetBool("openback", true);
+    //                frontInActive = false;
+    //                backInActive = true;
+    //            }
+
+
+    //        }
+
+    //    }
+    //}
+
+    //private void OnTriggerExit(Collider other)
+    //{
+    //    if (other.GetComponent<PlayerController>() != null || other.GetComponent<RepairWorker>() != null || other.GetComponent<BossCharacter>() != null)
+    //    {
+    //        if (isOpen)
+    //        {
+    //            isOpen = false;
+    //            if (Vector3.Distance(other.transform.position, frontGO.transform.position) > Vector3.Distance(other.transform.position, backGO.transform.position))
+    //            {
+
+    //                if (frontInActive)
+    //                {
+    //                    doorAnimator.SetBool("openfront", false);
+    //                    frontInActive = false;
+    //                }
+    //                else
+    //                {
+    //                    doorAnimator.SetBool("openback", false);
+    //                    backInActive = false;
+    //                }
+
+    //            }
+    //            else
+    //            {
+    //                if (backInActive)
+    //                {
+    //                    doorAnimator.SetBool("openback", false);
+    //                    backInActive = false;
+    //                }
+    //               else
+    //                {
+    //                    doorAnimator.SetBool("openfront", false);
+    //                    frontInActive = false;
+    //                }
+    //            }
+    //        }
+    //    }
+
+    //}
 }

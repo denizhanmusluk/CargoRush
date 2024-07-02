@@ -35,8 +35,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 5, y: 4}
+  m_AnchoredPosition: {x: 0, y: 0.25}
+  m_SizeDelta: {x: 4, y: 4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7376307820050634124
 CanvasRenderer:
@@ -68,8 +68,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: The growth of the company is great
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: a24cf60d8105fa04f9d45e5ee4b3e4cf, type: 2}
-  m_sharedMaterial: {fileID: -3731926256545307584, guid: a24cf60d8105fa04f9d45e5ee4b3e4cf, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 0f653a8aa45b6c94fafe1d36e755753d, type: 2}
+  m_sharedMaterial: {fileID: -7083103767658072, guid: 0f653a8aa45b6c94fafe1d36e755753d, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -93,8 +93,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 1
-  m_fontSizeBase: 1
+  m_fontSize: 0.5
+  m_fontSizeBase: 0.5
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -105,7 +105,7 @@ MonoBehaviour:
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
-  m_lineSpacing: -80
+  m_lineSpacing: -37.8
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
@@ -146,6 +146,7 @@ GameObject:
   - component: {fileID: 3953535215025550966}
   - component: {fileID: 839250569312135599}
   - component: {fileID: 6453210073648458787}
+  - component: {fileID: 3727234731145332139}
   m_Layer: 0
   m_Name: Image - Dialog 1
   m_TagString: Untagged
@@ -172,7 +173,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 5, y: 3}
+  m_SizeDelta: {x: 4.3, y: 3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &839250569312135599
 CanvasRenderer:
@@ -212,6 +213,22 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &3727234731145332139
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1900495137928804741}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6036ae5e7ca25814d9e21b968d0c5df5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialog: The growth of the company is great
+  targetText: {fileID: 744876545884290163}
+  delay: 0.1
+  fullText: 
 --- !u!1 &2237652488903755446
 GameObject:
   m_ObjectHideFlags: 0
@@ -238,7 +255,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2237652488903755446}
   m_LocalRotation: {x: -0, y: 0.7071089, z: -0, w: -0.70710474}
-  m_LocalPosition: {x: 40.2, y: 0.05502987, z: -65}
+  m_LocalPosition: {x: -99.46, y: 0.05502987, z: -25.41}
   m_LocalScale: {x: 2.25, y: 2.25, z: 2.25}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -320,14 +337,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2428978041330589158}
-  m_LocalRotation: {x: -0, y: 0.7071089, z: -0, w: -0.70710474}
-  m_LocalPosition: {x: -5.53, y: 0.05502987, z: 0}
+  m_LocalRotation: {x: -0, y: 0.6444254, z: -0, w: 0.76466715}
+  m_LocalPosition: {x: -2.635136, y: 0.05502987, z: 1.1730405}
   m_LocalScale: {x: 2.25, y: 2.25, z: 2.25}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8146470003191437410}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 80.245, z: 0}
 --- !u!33 &6517765558040793478
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -402,9 +419,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2895483242269369769}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2.6228135, y: 2.6228135, z: 2.6228135}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5431124290934996042}
@@ -472,8 +489,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 5, y: 4}
+  m_AnchoredPosition: {x: 0, y: 0.25}
+  m_SizeDelta: {x: 4, y: 4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7924515215253997160
 CanvasRenderer:
@@ -503,10 +520,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: I help you unlock the second factory
+  m_text: I invest in you to buy new warehouse
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: a24cf60d8105fa04f9d45e5ee4b3e4cf, type: 2}
-  m_sharedMaterial: {fileID: -3731926256545307584, guid: a24cf60d8105fa04f9d45e5ee4b3e4cf, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 0f653a8aa45b6c94fafe1d36e755753d, type: 2}
+  m_sharedMaterial: {fileID: -7083103767658072, guid: 0f653a8aa45b6c94fafe1d36e755753d, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -530,8 +547,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 0.9
-  m_fontSizeBase: 0.9
+  m_fontSize: 0.5
+  m_fontSizeBase: 0.5
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -542,7 +559,7 @@ MonoBehaviour:
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
-  m_lineSpacing: -80
+  m_lineSpacing: -37.8
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
@@ -583,6 +600,7 @@ GameObject:
   - component: {fileID: 1557952003621187918}
   - component: {fileID: 8615332175683012210}
   - component: {fileID: 2275764174754655157}
+  - component: {fileID: 971563209066698018}
   m_Layer: 0
   m_Name: Image - Dialog 1 (1)
   m_TagString: Untagged
@@ -609,7 +627,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 5, y: 3}
+  m_SizeDelta: {x: 4.3, y: 3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8615332175683012210
 CanvasRenderer:
@@ -649,6 +667,22 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &971563209066698018
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3149445242949693553}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6036ae5e7ca25814d9e21b968d0c5df5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialog: I invest in you to buy new warehouse
+  targetText: {fileID: 8022258910155923728}
+  delay: 0.1
+  fullText: 
 --- !u!1 &7720702878271579099
 GameObject:
   m_ObjectHideFlags: 0
@@ -758,8 +792,8 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8312942578216896053}
-  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0.35355327, y: 0.35355285, z: -0.14644638, w: 0.8535537}
+  m_LocalPosition: {x: 0, y: 0, z: 0.44}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -767,10 +801,10 @@ RectTransform:
   - {fileID: 1557952003621187918}
   m_Father: {fileID: 8146470003191437410}
   m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+  m_LocalEulerAnglesHint: {x: 45, y: 45, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 5.83}
+  m_AnchoredPosition: {x: 0.38, y: 5.83}
   m_SizeDelta: {x: 2, y: 2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &7173942196666909180
@@ -792,7 +826,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 50
   m_TargetDisplay: 0
 --- !u!114 &3235990838201353684
 MonoBehaviour:
@@ -933,6 +967,10 @@ PrefabInstance:
     - target: {fileID: 2691555912549132322, guid: dd1285cc7960c5946bf4077265825173, type: 3}
       propertyPath: m_Name
       value: ceo
+      objectReference: {fileID: 0}
+    - target: {fileID: 2691555912549132322, guid: dd1285cc7960c5946bf4077265825173, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2691555912549132323, guid: dd1285cc7960c5946bf4077265825173, type: 3}
       propertyPath: m_RootOrder

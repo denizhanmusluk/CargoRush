@@ -54,7 +54,7 @@ public class ShopManager : MonoBehaviour
     IEnumerator StartDelay()
     {
         yield return new WaitForSeconds(2f);
-        for (int i = 1; i <= PlayerPrefs.GetInt("shopLevel"); i++)
+        for (int i = 1; i <= PlayerPrefs.GetInt("shopLevel" +PlayerPrefs.GetInt("level")); i++)
         {
             newShopBuyArea[i - 1].SetActive(true);
             newShopBuyArea[i - 1].GetComponent<BuyArea>().OpenAndActive();
@@ -65,7 +65,7 @@ public class ShopManager : MonoBehaviour
         if (PlayerPrefs.GetInt("tutorialseq1") == 1)
         {
             buyOthersGO.SetActive(true);
-        }
+        }    
     }
     private void Update()
     {
@@ -85,7 +85,7 @@ public class ShopManager : MonoBehaviour
             //CollectProgressManager.Instance.shopTargetIcon.sprite = shopSpriteList[shopId + 1];
             //CollectProgressManager.Instance.questMarkImgGO.SetActive(false);
 
-            if (shopId + 1 == PlayerPrefs.GetInt("shopLevel"))
+            if (shopId + 1 == PlayerPrefs.GetInt("shopLevel" + PlayerPrefs.GetInt("level")))
             {
                 //CollectProgressManager.Instance.shopTargetIcon.sprite = shopSpriteList[shopId + 1];
                 //CollectProgressManager.Instance.questMarkImgGO.SetActive(false);
@@ -214,7 +214,7 @@ public class ShopManager : MonoBehaviour
             //CollectProgressManager.Instance.shopTargetIcon.sprite = shopSpriteList[shopID + 1];
             //CollectProgressManager.Instance.questMarkImgGO.SetActive(false);
 
-            if (PlayerPrefs.GetInt("shopLevel") == shopID)
+            if (PlayerPrefs.GetInt("shopLevel" + PlayerPrefs.GetInt("level")) == shopID)
             {
                 NewShopOpen();
             }
@@ -242,11 +242,11 @@ public class ShopManager : MonoBehaviour
     }
     void NewShopOpen()
     {
-        PlayerPrefs.SetInt("shopLevel", PlayerPrefs.GetInt("shopLevel") + 1);
+        PlayerPrefs.SetInt("shopLevel" + PlayerPrefs.GetInt("level"), PlayerPrefs.GetInt("shopLevel" + PlayerPrefs.GetInt("level")) + 1);
 
-        newShopBuyArea[PlayerPrefs.GetInt("shopLevel") - 1].SetActive(true);
-        newShopBuyArea[PlayerPrefs.GetInt("shopLevel") - 1].GetComponent<BuyArea>().OpenAndActive();
-        StartCoroutine(ViewNewArea(newShopBuyArea[PlayerPrefs.GetInt("shopLevel") - 1]));
+        newShopBuyArea[PlayerPrefs.GetInt("shopLevel" + PlayerPrefs.GetInt("level")) - 1].SetActive(true);
+        newShopBuyArea[PlayerPrefs.GetInt("shopLevel" + PlayerPrefs.GetInt("level")) - 1].GetComponent<BuyArea>().OpenAndActive();
+        StartCoroutine(ViewNewArea(newShopBuyArea[PlayerPrefs.GetInt("shopLevel" + PlayerPrefs.GetInt("level")) - 1]));
     }
     IEnumerator ViewNewArea(GameObject buyArea)
     {

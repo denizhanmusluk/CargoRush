@@ -201,7 +201,7 @@ public class UIManager : Subject
 
         if(PlayerPrefs.GetInt("skinactive") == 0)
         {
-            gemPanel.SetActive(true);
+            //gemPanel.SetActive(true);
             StoreManager.Instance.storeButton.SetActive(true);
             StoreManager.Instance.storeButtonTapTutorialGO.SetActive(true);
             PlayerPrefs.SetInt("skinactive", 1);
@@ -462,35 +462,94 @@ public class UIManager : Subject
 
     public GameObject acceptButtonGO;
     public GameObject yesButtonGO;
-    public void AcceptButtonClick()
+
+
+
+
+
+    public void HoverboardSkill_ADV_Click()
     {
-        CeoManager.Instance.AcceptButtonClick();
+        PlayerController.Instance.PlayerControl_ReActive();
+        ADVManager.Instance.RewardedStart(HoverboardSkillClick);
     }
-    public void YesSirButtonClick()
-    {
-        PlayerController.Instance.YesSir();
-        CeoManager.Instance.YesSirButtonClick();
-    }
-
-
-
-
     public void HoverboardSkillClick()
     {
         SkillManager.Instance.HoverboardActive();
         PlayerController.Instance.PlayerControl_ReActive();
     }
+    public void HoverboardSkillClick_Cancel()
+    {
+        Globals.isSpeedRewardCreated = false;
+        PlayerController.Instance.PlayerControl_ReActive();
+    }
 
+
+
+
+    public void CapacitySkill_ADV_Click()
+    {
+        PlayerController.Instance.PlayerControl_ReActive();
+        ADVManager.Instance.RewardedStart(CapacitySkillClick);
+    }
     public void CapacitySkillClick()
     {
         SkillManager.Instance.CapacityActive();
         PlayerController.Instance.PlayerControl_ReActive();
     }
 
+    public void CapacitySkillClick_Cancel()
+    {
+        Globals.isCapacityRewardCreated = false;
+        PlayerController.Instance.PlayerControl_ReActive();
+    }
+
+
+
+
+    public void DoubleIncomeSkill_ADV_Click()
+    {
+        PlayerController.Instance.PlayerControl_ReActive();
+        ADVManager.Instance.RewardedStart(DoubleIncomeSkillClick);
+    }
+
     public void DoubleIncomeSkillClick()
     {
         SkillManager.Instance.DoubleIncomeActive();
         PlayerController.Instance.PlayerControl_ReActive();
+    }
+    public void DoubleIncomeSkillClick_Cancel()
+    {
+        Globals.isDoubleIncomeRewardCreated = false;
+        PlayerController.Instance.PlayerControl_ReActive();
+
+    }
+
+
+
+
+
+
+
+
+    public void FreeMoneySkill_ADV_Click()
+    {
+        PlayerController.Instance.PlayerControl_ReActive();
+        ADVManager.Instance.RewardedStart(FreeMoneySkill);
+    }
+
+    public void FreeMoneySkill()
+    {
+        Globals.isMoneyRewardCreated = false;
+
+        GameManager.Instance.MoneyUpdate(PopUpManager.Instance.freeMoneyValue);
+    }
+
+    public void FreeMoneySkillClickCancel()
+    {
+        Globals.isMoneyRewardCreated = false;
+
+        PlayerController.Instance.PlayerControl_ReActive();
+
     }
 }
 

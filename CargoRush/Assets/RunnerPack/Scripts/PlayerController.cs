@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
     private static PlayerController _instance = null;
     public static PlayerController Instance => _instance;
 
-    public static Action OnControl, OnUpdate;
+    public static Action OnControl, OnUpdate, GoToCeo_Update;
 
     public enum Controls { runner, joystick, swing, none }
     public Controls ControlType;
@@ -61,6 +61,9 @@ public class PlayerController : MonoBehaviour
     public Transform posTR;
     public Board _board;
     public List<GameObject> modelList = new List<GameObject>();
+    public GameObject bandBoard;
+    public Transform bandBoardCreatePos;
+
     public GameObject skateBoard;
     public Transform skateCreatePos;
 
@@ -93,7 +96,8 @@ public class PlayerController : MonoBehaviour
     }
     private void Start()
     {
-        _FloatingJoystick = FindObjectOfType<FloatingJoystick>();
+        _characterUpgradeSettings = LevelManager.Instance._currnetCharacterUpgradeSettings;
+       _FloatingJoystick = FindObjectOfType<FloatingJoystick>();
         Init();
 
         //moneyTarget = GameObject.Find("MoneyTarget");
@@ -105,13 +109,18 @@ public class PlayerController : MonoBehaviour
         //    GameStart();
         //}
         StartCoroutine(StartDelay());
-
+        if(PlayerPrefs.GetInt("gamefirstopen") == 0)
+        {
+            PlayerPrefs.SetInt("gamefirstopen", 1);
+            PlayerSetPos();
+        }
     }
     IEnumerator StartDelay()
     {
         yield return new WaitForSeconds(1f);
         //ModelSelect();
         ModelSelector.Instance.CreatePlayer();
+        ModelSelector.Instance.FirstOpenPlayerUI();
     }
     public void SkateBoardActive()
     {
@@ -126,6 +135,20 @@ public class PlayerController : MonoBehaviour
         StartCoroutine(AnimationSet("singlewheel"));
         _stackCollect.stackLevel_1_PosList[0].transform.localPosition = new Vector3(_stackCollect.stackLevel_1_PosList[0].transform.localPosition.x, _stackCollect.stackLevel_1_PosList[0].transform.localPosition.y, -0.6f);
 
+    }
+    public void BandBoardActive()
+    {
+        if (_board != null)
+        {
+            Destroy(_board.gameObject);
+            _board = null;
+        }
+        nullVehicleGO.SetActive(false);
+        Board _sakteboard = Instantiate(bandBoard, bandBoardCreatePos.position, bandBoardCreatePos.rotation, bandBoardCreatePos).GetComponent<Board>();
+        _board = _sakteboard;
+        StartCoroutine(AnimationSet("singlewheel"));
+        _stackCollect.stackLevel_1_PosList[0].transform.localPosition = new Vector3(_stackCollect.stackLevel_1_PosList[0].transform.localPosition.x, _stackCollect.stackLevel_1_PosList[0].transform.localPosition.y, 0.5f);
+        //transform.localPosition = new Vector3(transform.localPosition.x, 0.65f, transform.localPosition.z);
     }
     public void HoverBoardActive()
     {
@@ -151,6 +174,7 @@ public class PlayerController : MonoBehaviour
             StartCoroutine(AnimationSet("null"));
             nullVehicleGO.SetActive(true);
             _stackCollect.stackLevel_1_PosList[0].transform.localPosition = new Vector3(_stackCollect.stackLevel_1_PosList[0].transform.localPosition.x, _stackCollect.stackLevel_1_PosList[0].transform.localPosition.y, 0.1f);
+            transform.localPosition = new Vector3(transform.localPosition.x, 0f, transform.localPosition.z);
 
         }
     }
@@ -267,7 +291,7 @@ public class PlayerController : MonoBehaviour
     {
         float delayRnd = UnityEngine.Random.Range(0.1f, 0.5f);
         yield return new WaitForSeconds(delayRnd);
-        if (reactivator)
+        if (OnUpdate == null)
         {
             OnUpdate += _Update;
             reactivator = false;
@@ -342,6 +366,7 @@ public class PlayerController : MonoBehaviour
         moneyTextCreateTR.rotation = Quaternion.Euler(moneyTextCreateTR.eulerAngles.x, 42.038f, moneyTextCreateTR.eulerAngles.z);
 
         OnUpdate?.Invoke();
+        GoToCeo_Update?.Invoke();
         if (Input.GetKeyDown(KeyCode.Alpha0))
         {
             NoneVehicle();
@@ -358,7 +383,7 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            HoverBoardActive();
+            BandBoardActive();
             //PlayerPrefs.SetInt("modelselect", 2);
             //ModelSelect();
         }
@@ -650,7 +675,7 @@ public class PlayerController : MonoBehaviour
     }
     public void playerMovingDirection(float RotY)
     {
-        animator.speed = 0.75f + 0.05f * Globals.characterSpeedLevel;
+        animator.speed = 0.75f + 0.02f * Globals.characterSpeedLevel;
         if (animator != null)
         {
             animator.SetBool("walk", true);
@@ -745,7 +770,6 @@ public class PlayerController : MonoBehaviour
 
 
 
-    public StandCEO standCeo;
     public NavMeshAgent navMeshAgent;
 
     public bool characterStayActive = false;
@@ -768,7 +792,26 @@ public class PlayerController : MonoBehaviour
             yield return null;
         }
     }
+    IEnumerator RotSetTarget(Transform targetTR)
+    {
+        float rotDelta = transform.parent.eulerAngles.y;
+        Quaternion firstRotParent = transform.parent.rotation;
+        Quaternion targetRotParent = Quaternion.Euler(0, 0, 0);
 
+        Quaternion firstRot = transform.localRotation;
+        Quaternion targetRot = Quaternion.Euler(0, targetTR.eulerAngles.y, 0);
+
+        float counter = 0f;
+        while (counter < 1f)
+        {
+            counter += 2 * Time.deltaTime;
+            transform.parent.rotation = Quaternion.Lerp(firstRotParent, targetRotParent, counter);
+            transform.rotation = Quaternion.Lerp(firstRot, targetRot, 1.5f * counter);
+            yield return null;
+        }
+        transform.parent.rotation = targetRotParent;
+        transform.rotation = targetRot;
+    }
     IEnumerator RotReset2()
     {
         float rotDelta = transform.parent.eulerAngles.y;
@@ -798,7 +841,8 @@ public class PlayerController : MonoBehaviour
         isStayHoldActive = false;
         followActive = true;
         OnUpdate = null;
-        OnUpdate += GoToCeoStand;
+        GoToCeo_Update = null;
+        GoToCeo_Update += GoToCeoStand;
 
     }
     void GoToCeoStand()
@@ -827,9 +871,9 @@ public class PlayerController : MonoBehaviour
 
                 navMeshAgent.ResetPath();
                 //navMeshAgent.obstacleAvoidanceType = ObstacleAvoidanceType.HighQualityObstacleAvoidance;
-                OnUpdate = null;
+                GoToCeo_Update = null;
 
-                StartCoroutine(RotReset2());
+                StartCoroutine(RotSetTarget(newLevelBoss.playerTargetPosTR));
                 BossTutorialPanel.Instance.newLevelBoss.CharacterArrivedBoss();
                 //OnUpdate = null;
                 //PlayerRotReset();

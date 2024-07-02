@@ -153,7 +153,7 @@ public class WorkArea : MonoBehaviour
 
         if (isFull)
         {
-            float time = CoefficientTransformation.FormatSaniye(Globals.playTime);
+            float time = CoefficientTransformation.FormatSaniye(Globals.speedPlayTime);
             string productTag = productName + "Full";
             //GameAnalytics.NewDesignEvent(productTag, time);
             Debug.Log(productTag +" "+ time);
