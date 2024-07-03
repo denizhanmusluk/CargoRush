@@ -396,7 +396,7 @@ public class MineCrusher : Stand, IStandUpgrade
         // go in position
         float angle = 0f;
         float posY = 0f;
-        float psoY_Factor = 1f;
+        float psoY_Factor = 0f;
         float counter = 0f;
         while (counter < 1f)
         {
@@ -410,10 +410,10 @@ public class MineCrusher : Stand, IStandUpgrade
 
             yield return null;
         }
+        fish.transform.position = dropPos;
 
 
-
-        // go convert position
+      // go convert position
 
         firstPos = fish.transform.position;
         counter = 0f;
@@ -425,14 +425,14 @@ public class MineCrusher : Stand, IStandUpgrade
             yield return null;
         }
 
-
+        fish.transform.position = convertTR.transform.position;
 
         // converting
         //Destroy(fish.gameObject,1f);
 
 
 
-  
+
 
         StartCoroutine(CreateMultiProduct(fish, prefabSelect));
 
@@ -1163,5 +1163,7 @@ public class MineCrusher : Stand, IStandUpgrade
         productCountTotal = capacities[standLevel];
         fishCountCurrent = capacities[standLevel] - droppedCollectionList.Count;
         speedFactor = speedFactors[standLevel];
+        fishCountText.text = (fishCountTotal - fishCountCurrent).ToString() + "/" + (fishCountTotal).ToString();
+
     }
 }

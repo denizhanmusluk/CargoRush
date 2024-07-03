@@ -20,7 +20,7 @@ public class StandFishTezgah : Stand, IMoneyArea
     }
     public override void CollectableCountSet()
     {
-        PlayerPrefs.SetInt(machineName + "col", droppedCollectionList.Count);
+        PlayerPrefs.SetInt(machineName + "col" + PlayerPrefs.GetInt("level"), droppedCollectionList.Count);
         _CollectProduct.ratio = (float)droppedCollectionList.Count / (float)fishCountTotal;
     }
     public override void SpecificStart()
@@ -218,7 +218,7 @@ public class StandFishTezgah : Stand, IMoneyArea
     IEnumerator ManuelGemCreator()
     {
         yield return new WaitForSeconds(1.5f);
-        for (int i = 0; i < PlayerPrefs.GetInt(machineName + "col"); i++)
+        for (int i = 0; i < PlayerPrefs.GetInt(machineName + "col" + PlayerPrefs.GetInt("level")); i++)
         {
             GameObject newProduct = Instantiate(productsPrefab[0].gameObject);
             newProduct.GetComponent<Collectable>().collectActive = false;

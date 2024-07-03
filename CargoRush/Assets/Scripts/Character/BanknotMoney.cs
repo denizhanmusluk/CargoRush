@@ -65,6 +65,7 @@ public class BanknotMoney : MonoBehaviour
         Quaternion targetRot = Quaternion.Euler(0, targetTR.eulerAngles.y + Random.Range(-15, 15), 0);
         Quaternion firstRot = transform.rotation;
         float counter = 0f;
+        float moveSpeed = Random.Range(10f, 20f);
         //float maxDistance = Vector3.Distance(firstPos, targetPos);
         //float currentDistance = maxDistance;
         float angle = 0f;
@@ -72,7 +73,7 @@ public class BanknotMoney : MonoBehaviour
         float psoY_Factor = 3f;
         while (counter < 1f)
         {
-            counter += 20 * Time.deltaTime;
+            counter += moveSpeed * Time.deltaTime;
 
             angle = counter * Mathf.PI;
             posY = psoY_Factor * Mathf.Sin(angle);

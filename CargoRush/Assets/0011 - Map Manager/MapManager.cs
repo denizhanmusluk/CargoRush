@@ -123,8 +123,12 @@ public class MapManager : MonoBehaviour
     IEnumerator New_Level_Select()
     {
         Globals.collectableLevel = 0;
+        Globals.isSpeedRewardCreated = false;
+        Globals.isCapacityRewardCreated = false;
+        Globals.isDoubleIncomeRewardCreated = false;
+        Globals.isMoneyRewardCreated = false;
 
-        PlayerController.Instance.PlayerControlDeActive();
+    PlayerController.Instance.PlayerControlDeActive();
         yield return new WaitForSeconds(0.5f);
         Fade.Instance.Hide();
         //yield return new WaitForSeconds(0.5f);

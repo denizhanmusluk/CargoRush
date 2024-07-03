@@ -44,14 +44,25 @@ public class NewLevelBoss : MonoBehaviour
     public void CharacterArrivedBoss()
     {
         popUp1_GO.SetActive(true);
+        StartCoroutine(Tap1Img_Open_delay());
+    }
+    IEnumerator Tap1Img_Open_delay()
+    {
+        yield return new WaitForSeconds(1f);
         BossTutorialPanel.Instance.tap1ImgGO.SetActive(true);
     }
     public void PopUp2_Open()
     {
         popUp1_GO.SetActive(false);
         popUp2_GO.SetActive(true);
-
+        StartCoroutine(Tap2Img_Open_delay());
     }
+    IEnumerator Tap2Img_Open_delay()
+    {
+        yield return new WaitForSeconds(1f);
+        BossTutorialPanel.Instance.tap2ImgGO.SetActive(true);
+    }
+
     public void BossFinish()
     {
         PlayerPrefs.SetInt(bossName + PlayerPrefs.GetInt("level"), 1);
@@ -67,6 +78,7 @@ public class NewLevelBoss : MonoBehaviour
     }
     IEnumerator DroppingMoney()
     {
+
         int stepNo = 0;
         int banknotValue = 2;
      
@@ -94,7 +106,7 @@ public class NewLevelBoss : MonoBehaviour
             moneyArea.moneyList.Add(banknot);
 
             stepNo++;
-            if (stepNo % 5 == 0)
+            if (stepNo % 50 == 0)
             {
                 yield return null;
             }

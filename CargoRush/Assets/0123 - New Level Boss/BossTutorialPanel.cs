@@ -22,7 +22,6 @@ public class BossTutorialPanel : MonoBehaviour
     public void Tap1Screen()
     {
         tap1ImgGO.SetActive(false);
-        tap2ImgGO.SetActive(true);
         newLevelBoss.PopUp2_Open();
     }
     public void Tap2Screen()

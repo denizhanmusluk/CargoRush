@@ -16,6 +16,7 @@ public class FishCar : MonoBehaviour
     [SerializeField] GameObject[] carLevelsGO;
     public Car _car;
     public GameObject vipCanvasGo;
+    public Animator vehicleAnim;
     private void Start()
     {
         navmeshAgent.SetDestination(standPos.position);
@@ -68,9 +69,25 @@ public class FishCar : MonoBehaviour
         {
             _car.WheelActivator(false);
         }
+
+        if(vehicleAnim != null)
+        {
+            vehicleAnim.SetBool("openactive", true);
+        }
     }
     public void CarGoOut()
     {
+
+        StartCoroutine(CarGoOurDelay());
+    }
+
+    IEnumerator CarGoOurDelay()
+    {
+        if (vehicleAnim != null)
+        {
+            vehicleAnim.SetBool("openactive", false);
+        }
+        yield return new WaitForSeconds(1f);
         if (_car != null)
         {
             _car.WheelActivator(true);
@@ -112,7 +129,6 @@ public class FishCar : MonoBehaviour
 
             }
         }
-
     }
     public void CarLevelCreate(int level)
     {

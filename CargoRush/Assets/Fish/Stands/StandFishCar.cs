@@ -548,7 +548,7 @@ public class StandFishCar : Stand,IMoneyArea
             moneyArea.moneyList.Add(banknot);
 
             stepNo++;
-            if (stepNo % 5 == 0)
+            if (stepNo % 50 == 0)
             {
                 yield return null;
             }
@@ -611,8 +611,15 @@ public class StandFishCar : Stand,IMoneyArea
             banknot.MovingMoney(moneyArea.firstMoneyCreatePosTR.position, dropPos, targetTR);
             banknot.banknotValue = banknotVal;
             moneyArea.moneyList.Add(banknot);
-            yield return null;
+
+            int stepNo = 0;
+            stepNo++;
+            if (stepNo % 50 == 0)
+            {
+                yield return null;
+            }
         }
+
         yield return null;
     }
     IEnumerator ColliderReset()
