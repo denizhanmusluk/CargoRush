@@ -15,6 +15,7 @@ public class TutorialManager : MonoBehaviour
     public TextMeshProUGUI newProducttext;
 
     public GameObject repairFinishedGO;
+    public GameObject rceycleTutorialGO;
 
     private void Awake()
     {
@@ -43,7 +44,10 @@ public class TutorialManager : MonoBehaviour
                 PlayerPrefs.SetInt("upgradeclicktutorial", 1);
                 clickUpgradeButtonGO.SetActive(true);
             }
-
+           if( ShopManager.Instance.standOnlineGO != null)
+            {
+                ShopManager.Instance.standOnlineGO.SetActive(true);
+            }
         }
     }
     void StarterMissions()

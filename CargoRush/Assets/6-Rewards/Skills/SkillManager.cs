@@ -350,29 +350,29 @@ public class SkillManager : MonoBehaviour
             yield return new WaitForSeconds(1);
         }
     }
-        IEnumerator MoneyTimeCounter()
+    IEnumerator MoneyTimeCounter()
+    {
+        while (true)
         {
-            while (true)
+            Globals.moneyPlayTime++;
+            PlayerPrefs.SetInt("moneyPlayTime", Globals.moneyPlayTime);
+
+            if (PlayerPrefs.GetInt("skillActive") == 1)
             {
-                Globals.moneyPlayTime++;
-                PlayerPrefs.SetInt("moneyPlayTime", Globals.moneyPlayTime);
-
-                if (PlayerPrefs.GetInt("skillActive") == 1)
-                {
-                    Globals.moneyCreatingCooldown++;
-                    PlayerPrefs.SetInt("moneyCreatingCooldown", Globals.moneyCreatingCooldown);
-                }
-
-                if (Globals.moneyCreatingCooldown >= moneyRewPeriod && !Globals.isMoneyRewardCreated)
-                {
-                    //Globals.skillCooldown = 0;
-                    //PlayerPrefs.SetInt("skillCooldown", Globals.skillCooldown);
-
-                    MoneyRewardCreate();
-                }
-                yield return new WaitForSeconds(1);
+                Globals.moneyCreatingCooldown++;
+                PlayerPrefs.SetInt("moneyCreatingCooldown", Globals.moneyCreatingCooldown);
             }
+
+            if (Globals.moneyCreatingCooldown >= moneyRewPeriod && !Globals.isMoneyRewardCreated)
+            {
+                //Globals.skillCooldown = 0;
+                //PlayerPrefs.SetInt("skillCooldown", Globals.skillCooldown);
+
+                MoneyRewardCreate();
+            }
+            yield return new WaitForSeconds(1);
         }
+    }
     public void SpeedRewardCreate()
     {
         Globals.isSpeedRewardCreated = true;

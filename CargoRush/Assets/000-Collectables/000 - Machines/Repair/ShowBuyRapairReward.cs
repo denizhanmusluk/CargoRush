@@ -35,7 +35,7 @@ public class ShowBuyRapairReward : MonoBehaviour
         Canvas.transform.rotation = Quaternion.Euler(-cameraRot.eulerAngles.x, cameraRot.eulerAngles.y + 180, cameraRot.eulerAngles.z);
         if(PlayerPrefs.GetInt("level") == 1)
         {
-            Canvas.transform.rotation = Quaternion.Euler(cameraRot.eulerAngles.x, cameraRot.eulerAngles.y, cameraRot.eulerAngles.z);
+            //Canvas.transform.rotation = Quaternion.Euler(cameraRot.eulerAngles.x, cameraRot.eulerAngles.y, cameraRot.eulerAngles.z);
         }
     }
     private void OnTriggerStay(Collider other)

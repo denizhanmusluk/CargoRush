@@ -68,6 +68,7 @@ public class MapManager : MonoBehaviour
     {
         StartCoroutine(OpenDelay());
         panelGO.SetActive(true);
+        PlayerController.Instance.PlayerControlDeActive();
         //if (PlayerPrefs.GetInt("level") >= PlayerPrefs.GetInt("mapindex"))
         //{
         //    PlayerPrefs.SetInt("mapindex", PlayerPrefs.GetInt("level"));
@@ -122,15 +123,13 @@ public class MapManager : MonoBehaviour
     }
     IEnumerator New_Level_Select()
     {
-        Globals.collectableLevel = 0;
-        Globals.isSpeedRewardCreated = false;
-        Globals.isCapacityRewardCreated = false;
-        Globals.isDoubleIncomeRewardCreated = false;
-        Globals.isMoneyRewardCreated = false;
+  
 
     PlayerController.Instance.PlayerControlDeActive();
         yield return new WaitForSeconds(0.5f);
         Fade.Instance.Hide();
+        yield return new WaitForSeconds(0.5f);
+
         //yield return new WaitForSeconds(0.5f);
         PlayerPrefs.SetInt("prelevel", _levelIndex);
 
@@ -138,7 +137,27 @@ public class MapManager : MonoBehaviour
         Globals.currentLevelIndex = PlayerPrefs.GetInt("level");
 
         //PlayerPrefs.DeleteAll();
-        yield return new WaitForSeconds(0.5f);
+
+        Globals.collectableLevel = 0;
+        Globals.isSpeedRewardCreated = false;
+        Globals.isCapacityRewardCreated = false;
+        Globals.isDoubleIncomeRewardCreated = false;
+        Globals.isMoneyRewardCreated = false;
+
+        Globals.machineErrorActive = false;
+        Globals.machineErrorActivator = false;
+
+        Globals.productType1 = false;
+        Globals.productType2 = false;
+        Globals.productType3 = false;
+        Globals.productType4 = false;
+
+        Globals.carSlotCount = 0;
+
+        Globals.isThereVip = false;
+
+        Globals.openedCarSlotCount = 0;
+
         GameManager.Instance.OnLevelRestart();
     }
     IEnumerator NeedleAnimation(int levelIndex)
@@ -213,5 +232,10 @@ public class MapManager : MonoBehaviour
 
             });
         return tween;
+    }
+
+    public void ClickCancel()
+    {
+        PlayerController.Instance.PlayerControl_ReActive();
     }
 }

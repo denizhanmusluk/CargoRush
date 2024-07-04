@@ -201,7 +201,10 @@ public class IndicatorManager : MonoBehaviour
 
     public TextMeshProUGUI gemCounter;
     public TextMeshProUGUI gemCounter2;
-    public int gemCountForTutorial = 8;
+    public TextMeshProUGUI boxPackCounter;
+    public int productCountForTutorial = 3;
+    public int boxCountForTutorial = 3;
+    public int boxpackCountForTutorial = 3;
     //public void StoneCounter(int stoneCount)
     //{
     //    digStoneCounter.text = stoneCount.ToString() + "/5";
@@ -209,10 +212,14 @@ public class IndicatorManager : MonoBehaviour
 
     public void GemCounter(int gemCount)
     {
-        gemCounter.text = gemCount.ToString() + "/" + gemCountForTutorial.ToString();
+        gemCounter.text = gemCount.ToString() + "/" + productCountForTutorial.ToString();
     }
     public void GemCounter2(int gemCount)
     {
-        gemCounter2.text = gemCount.ToString() + "/" + gemCountForTutorial.ToString();
+        gemCounter2.text = gemCount.ToString() + "/" + boxCountForTutorial.ToString();
+    }
+    public void BoxCounter(int gemCount)
+    {
+        boxPackCounter.text = gemCount.ToString() + "/" + boxpackCountForTutorial.ToString();
     }
 }

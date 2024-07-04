@@ -118,7 +118,7 @@ public class ProcessMachine : Stand, IStandUpgrade
         errorTimeCounter = PlayerPrefs.GetInt(machineName + "errorTimeCounter" + PlayerPrefs.GetInt("level"));
         while (errorTimeCounter < errorTime)
         {
-            if (!Globals.machineErrorActive)
+            if (!Globals.machineErrorActive && Globals.machineErrorActivator)
             {
                 errorTimeCounter++;
                 PlayerPrefs.SetInt(machineName + "errorTimeCounter" + PlayerPrefs.GetInt("level"), errorTimeCounter);

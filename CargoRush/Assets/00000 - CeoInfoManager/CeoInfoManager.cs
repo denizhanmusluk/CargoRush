@@ -71,8 +71,9 @@ public class CeoInfoManager : MonoBehaviour
         BoxSellingInfoManager.Instance.infoPanelGO.SetActive(true);
         BoxSellingInfoManager.Instance.priceButton.interactable = true;
         BoxValueInitialize();
+        PlayerController.Instance.PlayerControlDeActive();
     }
-        
+
     void BoxValueInitialize()
     {
         int priceValue = 0;

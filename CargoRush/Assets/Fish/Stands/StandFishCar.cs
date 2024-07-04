@@ -71,7 +71,6 @@ public class StandFishCar : Stand,IMoneyArea
     }
     IEnumerator StartDelay()
     {
-
         yield return new WaitForSeconds(1f);
         MissionManager.Instance.ShippingLineMissionStart();
         StartCoroutine(MoneyCreate());
@@ -94,6 +93,8 @@ public class StandFishCar : Stand,IMoneyArea
     int totalBoxCount = 0;
     public void LevelInit()
     {
+        carLevel = PlayerPrefs.GetInt(standNameLevel + PlayerPrefs.GetInt("level"));
+
         if (Globals.vipCreateActive && !Globals.isThereVip)
         {
             Globals.carCustomerCount++;
@@ -107,7 +108,6 @@ public class StandFishCar : Stand,IMoneyArea
         {
             totalBoxCount = (int)Random.Range(boxCountTotal[carLevel].x, boxCountTotal[carLevel].y + 1);
         }
-        carLevel = PlayerPrefs.GetInt(standNameLevel + PlayerPrefs.GetInt("level"));
         if (PlayerPrefs.GetInt("tutorialseq1") == 0)
         {
             fishCountTotal = 3;
@@ -203,6 +203,8 @@ public class StandFishCar : Stand,IMoneyArea
             }
         }
         ResetStand();
+
+  
     }
 
 
@@ -769,5 +771,16 @@ public class StandFishCar : Stand,IMoneyArea
             yield return null;
         }
         txt.color = Color.white;
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (PlayerPrefs.GetInt("tutorialcompleted") == 1 && PlayerPrefs.GetInt("recycletutorial") == 1 && PlayerController.Instance._stackCollect.collectionTrs.Count > 0 && other.GetComponent<PlayerController>() != null)
+        {
+            PlayerPrefs.SetInt("recycletutorial", 2);
+            StandFishTezgah.Instance.tutorialPosTR.SetActive(true);
+            IndicatorManager.Instance.IndicaorActive(StandFishTezgah.Instance.tutorialPosTR.transform);
+            TutorialManager.Instance.rceycleTutorialGO.SetActive(true);
+        }
     }
 }

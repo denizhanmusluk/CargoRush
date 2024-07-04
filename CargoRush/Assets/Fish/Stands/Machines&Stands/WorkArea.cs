@@ -55,7 +55,7 @@ public class WorkArea : MonoBehaviour
     IEnumerator Staying(AIWorker character)
     {
         //character.aiPopUp.OpenOperationPopUp(5);
-        yield return new WaitForSeconds(Random.Range(0.5f, 1f));
+        yield return new WaitForSeconds(Random.Range(2.5f, 3f));
         //character.aiPopUp.ClosedAllPopUp();
         //ShuffleList();
 
@@ -63,7 +63,7 @@ public class WorkArea : MonoBehaviour
         {
             character.TargetFishStandSelect();
         }
-        yield return new WaitForSeconds(1f);
+        //yield return new WaitForSeconds(1f);
 
         //targetActive = true;
     }

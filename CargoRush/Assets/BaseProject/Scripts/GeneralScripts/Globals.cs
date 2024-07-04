@@ -121,6 +121,7 @@ public static class Globals
     public static int openedCarSlotCount = 0;
 
     public static bool machineErrorActive = false;
+    public static bool machineErrorActivator = false;
 
     public static bool goToCeoActive = false;
 

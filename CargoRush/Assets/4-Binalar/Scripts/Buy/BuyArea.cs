@@ -72,6 +72,7 @@ public class BuyArea : MonoBehaviour, BuyCamera
     public bool boosterOpener = false;
     public bool vipActivator = false;
     public bool hrBuy;
+    public bool machineErrorActivator = false;
 
     public bool specialVehicleOpener = false;
     void Awake()
@@ -496,6 +497,11 @@ public class BuyArea : MonoBehaviour, BuyCamera
 
         //PopUpManager.Instance.ActionInvoke();
         //PopUpManager.Instance.TipActionInvoke();
+
+        if (machineErrorActivator)
+        {
+            Globals.machineErrorActivator = true;
+        }
     }
     void ClosedAreas()
     {

@@ -24,6 +24,8 @@ public class BoxSellingInfoManager : MonoBehaviour
     public void GetPriceButton_ADVClick()
     {
         ADVManager.Instance.RewardedStart(GetPriceDouble);
+        priceButton.interactable = false;
+        PlayerController.Instance.PlayerControl_ReActive();
     }
     void GetPriceDouble()
     {
@@ -37,6 +39,7 @@ public class BoxSellingInfoManager : MonoBehaviour
         MoneyCreate(priceValue, priceButton.transform);
         priceButton.interactable = false;
         StartCoroutine(ButtonClickDelay());
+        PlayerController.Instance.PlayerControl_ReActive();
     }
 
     IEnumerator ButtonClickDelay()

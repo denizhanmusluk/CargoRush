@@ -60,6 +60,10 @@ public class MineCrusher : Stand, IStandUpgrade
 
 
     float speedFactor = 1f;
+    private void Awake()
+    {
+        //Globals.collectableLevel = 0;
+    }
     public override void CollectableCountSet()
     {
         PlayerPrefs.SetInt(machineName + "col1" + PlayerPrefs.GetInt("level"), ironCollectionList.Count);

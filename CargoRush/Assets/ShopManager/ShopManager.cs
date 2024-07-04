@@ -36,6 +36,8 @@ public class ShopManager : MonoBehaviour
     public GameObject buyOthersGO;
     public float nextLevelShowRatio;
 
+    public GameObject standOnlineGO;
+
     void Awake()
     {
         _instance = this;

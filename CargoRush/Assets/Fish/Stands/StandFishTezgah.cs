@@ -4,14 +4,19 @@ using UnityEngine;
 
 public class StandFishTezgah : Stand, IMoneyArea
 {
+    private static StandFishTezgah _instance = null;
+    public static StandFishTezgah Instance => _instance;
     public CollectProduct _CollectProduct;
 
     public Transform[] productPosTR;
     [SerializeField] int customerCount;
     public CollectType collectTypeMachine;
     public Collectable[] productsPrefab;
+    public GameObject tutorialPosTR;
     private void Awake()
     {
+        _instance = this;
+
         GetComponent<Collider>().enabled = false;
     }
     public void MoneySave()
@@ -32,6 +37,12 @@ public class StandFishTezgah : Stand, IMoneyArea
         FishCountInit();
        
         StartCoroutine(StartDelay());
+
+        if (PlayerPrefs.GetInt("recycletutorial") == 0)
+        {
+            PlayerPrefs.SetInt("recycletutorial", 1);
+        }
+
     }
     IEnumerator StartDelay()
     {
@@ -191,6 +202,14 @@ public class StandFishTezgah : Stand, IMoneyArea
 
         _CollectProduct.ratio = (float)droppedCollectionList.Count / (float)fishCountTotal;
 
+
+        if(PlayerPrefs.GetInt("recycletutorial") == 2)
+        {
+            PlayerPrefs.SetInt("recycletutorial", 3);
+            tutorialPosTR.SetActive(false);
+            IndicatorManager.Instance.IndicaorDeActive();
+            TutorialManager.Instance.rceycleTutorialGO.SetActive(false);
+        }
     }
 
 

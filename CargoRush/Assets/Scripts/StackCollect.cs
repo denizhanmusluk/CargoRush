@@ -104,40 +104,59 @@ public abstract class StackCollect : MonoBehaviour
         {
             if (collectable.collectID == 0)
             {
-                if (PlayerPrefs.GetInt("collectablecount" ) < IndicatorManager.Instance.gemCountForTutorial)
+                if (PlayerPrefs.GetInt("collectablecount" ) < IndicatorManager.Instance.productCountForTutorial)
                 {
                     PlayerPrefs.SetInt("collectablecount", PlayerPrefs.GetInt("collectablecount") + 1);
 
                     IndicatorManager.Instance.gemCounter.gameObject.SetActive(true);
                     IndicatorManager.Instance.GemCounter(PlayerPrefs.GetInt("collectablecount"));
 
-                    if (PlayerPrefs.GetInt("collectablecount") == IndicatorManager.Instance.gemCountForTutorial)
+                    if (PlayerPrefs.GetInt("collectablecount") == IndicatorManager.Instance.productCountForTutorial)
                     {
                         IndicatorManager.Instance.gemCounter.gameObject.SetActive(false);
                         IndicatorManager.Instance.IndicatorTargeterActive();
+                        //PlayerPrefs.GetInt("collectsection2", 1);
                     }
                 }
-                if (PlayerPrefs.GetInt("tutorialsection2") == 1)
-                {
-                    if (PlayerPrefs.GetInt("collectablecount2") < IndicatorManager.Instance.gemCountForTutorial)
-                    {
-                        PlayerPrefs.SetInt("collectablecount2", PlayerPrefs.GetInt("collectablecount2") + 1);
-
-                        IndicatorManager.Instance.gemCounter.gameObject.SetActive(true);
-                        IndicatorManager.Instance.GemCounter2(PlayerPrefs.GetInt("collectablecount2"));
-
-                        if (PlayerPrefs.GetInt("collectablecount2") == IndicatorManager.Instance.gemCountForTutorial)
-                        {
-                            IndicatorManager.Instance.gemCounter.gameObject.SetActive(false);
-                            IndicatorManager.Instance.IndicatorTargeterActive();
-                        }
-                    }
-                }
+         
             }
-            else
+            if (collectable.collectID == 1)
             {
+
+                if (PlayerPrefs.GetInt("collectablecount2") < IndicatorManager.Instance.boxCountForTutorial)
+                {
+                    PlayerPrefs.SetInt("collectablecount2", PlayerPrefs.GetInt("collectablecount2") + 1);
+
+                    IndicatorManager.Instance.gemCounter2.gameObject.SetActive(true);
+                    IndicatorManager.Instance.GemCounter2(PlayerPrefs.GetInt("collectablecount2"));
+
+                    if (PlayerPrefs.GetInt("collectablecount2") == IndicatorManager.Instance.boxCountForTutorial)
+                    {
+                        IndicatorManager.Instance.gemCounter2.gameObject.SetActive(false);
+                        IndicatorManager.Instance.IndicatorTargeterActive();
+                    }
+                }
+
             }
 
+            if (collectable.collectID == 11)
+            {
+
+                if (PlayerPrefs.GetInt("collectablecount3") < IndicatorManager.Instance.boxpackCountForTutorial)
+                {
+                    PlayerPrefs.SetInt("collectablecount3", PlayerPrefs.GetInt("collectablecount3") + 1);
+
+                    IndicatorManager.Instance.boxPackCounter.gameObject.SetActive(true);
+                    IndicatorManager.Instance.BoxCounter(PlayerPrefs.GetInt("collectablecount3"));
+
+                    if (PlayerPrefs.GetInt("collectablecount3") == IndicatorManager.Instance.boxpackCountForTutorial)
+                    {
+                        IndicatorManager.Instance.boxPackCounter.gameObject.SetActive(false);
+                        IndicatorManager.Instance.IndicatorTargeterActive();
+                    }
+                }
+
+            }
             collectable.transform.parent = null;
             //firstSize = collectable.transform.localScale;
             collectable.collectActive = false;

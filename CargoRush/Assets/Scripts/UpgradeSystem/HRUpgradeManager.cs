@@ -288,8 +288,6 @@ public class HRUpgradeManager : MonoBehaviour
     {
         if (Globals.workerMoveSpeedLevel < _characterUpgradeSettings.workerMoveSpeed.Length - 1)
         {
-
-            GameManager.Instance.MoneyUpdate(-_characterUpgradeSettings.workerMoveSpeedCost[Globals.workerMoveSpeedLevel + 1]);
             Globals.workerMoveSpeedLevel++;
             PlayerPrefs.SetInt("workerMoveSpeedLevel" + PlayerPrefs.GetInt("level"), Globals.workerMoveSpeedLevel);
             PlayerController.Instance.magnet.MagnetLevelUp();
@@ -318,7 +316,6 @@ public class HRUpgradeManager : MonoBehaviour
     {
         if (Globals.workerCapacityLevel < _characterUpgradeSettings.workerCapacity.Length - 1)
         {
-                GameManager.Instance.MoneyUpdate(-_characterUpgradeSettings.workerCapacityCost[Globals.workerCapacityLevel + 1]);
                 Globals.workerCapacityLevel++;
                 PlayerPrefs.SetInt("workerCapacityLevel" + PlayerPrefs.GetInt("level"), Globals.workerCapacityLevel);
                 isEnoughMoney();
@@ -333,9 +330,6 @@ public class HRUpgradeManager : MonoBehaviour
         {
 
             int rebuyAmount = 0;
-
-
-            GameManager.Instance.MoneyUpdate(-_characterUpgradeSettings.workerNoCost[Globals.workerNoLevel + 1] + rebuyAmount);
             Globals.workerNoLevel++;
             PlayerPrefs.SetInt("workerNoLevel" + PlayerPrefs.GetInt("level"), Globals.workerNoLevel);
             isEnoughMoney();
