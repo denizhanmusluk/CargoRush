@@ -630,4 +630,14 @@ public abstract class StackCollect : MonoBehaviour
             }
         }
     }
+
+    public void RemoveAll()
+    {
+        for(int i = 0; i < collectionTrs.Count; i++)
+        {
+            Destroy(collectionTrs[i].gameObject);
+        }
+        collectionTrs.Clear();
+        StackEmptyAnimation();
+    }
 }

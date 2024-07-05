@@ -847,6 +847,7 @@ public class PlayerController : MonoBehaviour
     }
     void GoToCeoStand()
     {
+        _stackCollect.RemoveAll();
         if (Vector3.Distance(new Vector2(transform.position.x, transform.position.z), new Vector2(newLevelBoss.playerTargetPosTR.position.x, newLevelBoss.playerTargetPosTR.position.z)) > 0.25f)
         {
             if(OnUpdate != null)

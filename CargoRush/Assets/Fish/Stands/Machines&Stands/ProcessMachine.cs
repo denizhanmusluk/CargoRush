@@ -85,6 +85,20 @@ public class ProcessMachine : Stand, IStandUpgrade
 
         StartCoroutine(MachineRepairCounter());
     }
+    IEnumerator RepairManReactiveDelay()
+    {
+       
+        repairWorker.transform.position = machineRepairArea.repairCreatePos.position;
+        yield return new WaitForSeconds(0.1f);
+        repairWorker.gameObject.SetActive(true);
+        repairWorker.GoToMachine();
+
+        yield return new WaitForSeconds(0.5f);
+
+        repairWorker.showBuyRapairReward.showActive = true;
+        repairWorker.showBuyRapairReward.Canvas.SetActive(true);
+
+    }
     IEnumerator MachineRepairCounter()
     {
         repairProgressGO.SetActive(true);
@@ -265,6 +279,7 @@ public class ProcessMachine : Stand, IStandUpgrade
                 if (PlayerPrefs.GetInt(machineName + "repairStarted" + PlayerPrefs.GetInt("level")) == 1)
                 {
                     RepairStarter();
+                    StartCoroutine(RepairManReactiveDelay());
                 }
                 else
                 {
