@@ -53,12 +53,7 @@ public class ShowBuyRapairReward : MonoBehaviour
     {
         if (other.GetComponent<PlayerController>() != null)
         {
-            StartCoroutine(OpenCanvas());
-            //GameManager.Instance.ui.joyStick.GetComponent<FloatingJoystick>().PointerUpManuel();
-            //GameManager.Instance.ui.joyStick.SetActive(false);
-
-
-  
+            //StartCoroutine(OpenCanvas());
         }
     }
 
@@ -66,7 +61,7 @@ public class ShowBuyRapairReward : MonoBehaviour
     {
         if (other.GetComponent<PlayerController>() != null)
         {
-            StartCoroutine(CloseCanvas());
+            //StartCoroutine(CloseCanvas());
             GameManager.Instance.ui.joyStick.SetActive(true);
         }
     }

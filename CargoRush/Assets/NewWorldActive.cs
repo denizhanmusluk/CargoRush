@@ -15,12 +15,11 @@ public class NewWorldActive : MonoBehaviour
     {
         PlayerPrefs.SetInt("newworldactivation", 1);
         MapManager.Instance.MapButtonActive();
-        MapManager.Instance.mapTapTut_GO.SetActive(true);
         if (nextLevelIndex > PlayerPrefs.GetInt("mapindexmax"))
         {
             PlayerPrefs.SetInt("mapindexmax", nextLevelIndex);
             MissionManager.Instance.newMapMission.MissionUpdate();
-
+            MapManager.Instance.mapTapTut_GO.SetActive(true);
         }
     }
     private void OnTriggerEnter(Collider other)
