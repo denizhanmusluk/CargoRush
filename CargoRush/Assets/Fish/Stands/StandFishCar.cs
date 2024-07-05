@@ -337,7 +337,9 @@ public class StandFishCar : Stand,IMoneyArea
                             {
                                 if (PlayerPrefs.GetInt("boxcounteractive"+ PlayerPrefs.GetInt("level")) == 0)
                                 {
-                                    PlayerPrefs.SetInt("box1counter"  + PlayerPrefs.GetInt("level"), PlayerPrefs.GetInt("box1counter" + PlayerPrefs.GetInt("level")) + 1);
+                                    PlayerPrefs.SetInt("1boxcounter"  + PlayerPrefs.GetInt("level"), PlayerPrefs.GetInt("1boxcounter" + PlayerPrefs.GetInt("level")) + 1);
+                                    Debug.Log("boxcount  " + PlayerPrefs.GetInt("1boxcounter" + PlayerPrefs.GetInt("level")));
+
                                 }
                                 productTypeCount[0]--;
                                 droppingCollection = _stackCollect.collectionTrs[i];
@@ -347,9 +349,11 @@ public class StandFishCar : Stand,IMoneyArea
                             }
                             if (productTypeCount.Length > 1 && _stackCollect.collectionTrs[i].collectType == CollectType.Type2 && productTypeCount[1] > 0)
                             {
-                                if (PlayerPrefs.GetInt("boxcounteractive" , PlayerPrefs.GetInt("level")) == 0)
+                                if (PlayerPrefs.GetInt("boxcounteractive" + PlayerPrefs.GetInt("level")) == 0)
                                 {
-                                    PlayerPrefs.SetInt("box2counter" + PlayerPrefs.GetInt("level"), PlayerPrefs.GetInt("box2counter" + PlayerPrefs.GetInt("level")) + 1);
+                                    PlayerPrefs.SetInt("2boxcounter" + PlayerPrefs.GetInt("level"), PlayerPrefs.GetInt("2boxcounter" + PlayerPrefs.GetInt("level")) + 1);
+                                    Debug.Log("boxcount  " + PlayerPrefs.GetInt("2boxcounter" + PlayerPrefs.GetInt("level")));
+
                                 }
                                 productTypeCount[1]--;
                                 droppingCollection = _stackCollect.collectionTrs[i];
@@ -359,9 +363,11 @@ public class StandFishCar : Stand,IMoneyArea
                             }
                             if (productTypeCount.Length > 2 && _stackCollect.collectionTrs[i].collectType == CollectType.Type3 && productTypeCount[2] > 0)
                             {
-                                if (PlayerPrefs.GetInt("boxcounteractive", PlayerPrefs.GetInt("level")) == 0)
+                                if (PlayerPrefs.GetInt("boxcounteractive"+ PlayerPrefs.GetInt("level")) == 0)
                                 {
-                                    PlayerPrefs.SetInt("box3counter" + PlayerPrefs.GetInt("level"), PlayerPrefs.GetInt("box3counter" + PlayerPrefs.GetInt("level")) + 1);
+                                    PlayerPrefs.SetInt("3boxcounter" + PlayerPrefs.GetInt("level"), PlayerPrefs.GetInt("3boxcounter" + PlayerPrefs.GetInt("level")) + 1);
+                                    Debug.Log("boxcount  " + PlayerPrefs.GetInt("3boxcounter" + PlayerPrefs.GetInt("level")));
+
                                 }
                                 productTypeCount[2]--;
                                 droppingCollection = _stackCollect.collectionTrs[i];
@@ -371,9 +377,9 @@ public class StandFishCar : Stand,IMoneyArea
                             }
                             if (productTypeCount.Length > 3 && _stackCollect.collectionTrs[i].collectType == CollectType.Type4 && productTypeCount[3] > 0)
                             {
-                                if (PlayerPrefs.GetInt("boxcounteractive", PlayerPrefs.GetInt("level")) == 0)
+                                if (PlayerPrefs.GetInt("boxcounteractive"+ PlayerPrefs.GetInt("level")) == 0)
                                 {
-                                    PlayerPrefs.SetInt("box4counter" + PlayerPrefs.GetInt("level"), PlayerPrefs.GetInt("box4counter" + PlayerPrefs.GetInt("level")) + 1);
+                                    PlayerPrefs.SetInt("4boxcounter" + PlayerPrefs.GetInt("level"), PlayerPrefs.GetInt("4boxcounter" + PlayerPrefs.GetInt("level")) + 1);
                                 }
                                 productTypeCount[3]--;
                                 droppingCollection = _stackCollect.collectionTrs[i];

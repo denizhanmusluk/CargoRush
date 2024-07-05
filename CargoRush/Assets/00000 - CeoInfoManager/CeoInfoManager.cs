@@ -80,8 +80,8 @@ public class CeoInfoManager : MonoBehaviour
         for (int i = 0; i < Globals.collectableLevel + 1; i++)
         {
 
-            int boxCount = PlayerPrefs.GetInt("box" + (i + 1).ToString() + "counter" + PlayerPrefs.GetInt("level"));
-
+            int boxCount = PlayerPrefs.GetInt((i + 1) + "boxcounter" + PlayerPrefs.GetInt("level"));
+            Debug.Log("boxcount" + PlayerPrefs.GetInt((i + 1) + "boxcounter" + PlayerPrefs.GetInt("level")));
 
             BoxSellingInfoManager.Instance.boxSellingInfos[i].gameObject.SetActive(true);
             BoxSellingInfoManager.Instance.boxSellingInfos[i].sellingBoxCount = boxCount;

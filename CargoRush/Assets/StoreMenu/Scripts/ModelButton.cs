@@ -28,6 +28,7 @@ public class ModelButton : MonoBehaviour
     public TextMeshProUGUI advCountText;
 
     public int totalADV_Count = 3;
+    public string skinName;
     public void SelectClick()
     {
         StarPanelManager.Instance.SelectClick(buttonId);
@@ -114,14 +115,16 @@ public class ModelButton : MonoBehaviour
 
     public void ClickADV_Button()
     {
-        PlayerPrefs.SetInt("adv" + buyButton.id, PlayerPrefs.GetInt("adv" + buyButton.id) + 1);
-        advCountText.text = PlayerPrefs.GetInt("adv" + buyButton.id).ToString() + "/" + totalADV_Count.ToString();
-
-        AdvEnd();
+        ADVManager.Instance.RewardedStart(AdvEnd);
     }
 
     void AdvEnd()
     {
+        PlayerPrefs.SetInt("adv" + buyButton.id, PlayerPrefs.GetInt("adv" + buyButton.id) + 1);
+        advCountText.text = PlayerPrefs.GetInt("adv" + buyButton.id).ToString() + "/" + totalADV_Count.ToString();
+
+        string tag = skinName + PlayerPrefs.GetInt("adv" + buyButton.id).ToString();
+        GameManager.Instance.GameAnalyticsTag(tag);
 
         OpenedCheck();
     }

@@ -26,6 +26,8 @@ public class BoxSellingInfoManager : MonoBehaviour
         ADVManager.Instance.RewardedStart(GetPriceDouble);
         priceButton.interactable = false;
         PlayerController.Instance.PlayerControl_ReActive();
+        string tag = "DeliveryPerformanceDoubleRewarded";
+        GameManager.Instance.GameAnalyticsTag(tag);
     }
     void GetPriceDouble()
     {

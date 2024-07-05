@@ -153,6 +153,9 @@ public class HRUpgradeManager : MonoBehaviour
                 isEnoughMoney();
                 InitButtonValues();
                 WorkerCreate();
+
+                string tag = "M" + (PlayerPrefs.GetInt("level") + 1).ToString() + "-BuyWorker" + Globals.workerNoLevel.ToString() + "-REWARDED";
+                GameManager.Instance.GameAnalyticsTag(tag);
                 //HRWorkerGO.SetActive(false);
 
                 //PlayerController.Instance.GetComponent<BoingScale>().ScaleEffectTR(PlayerController.Instance.transform, 0.8f, 1f, 0.5f, Ease.OutElastic);
@@ -292,7 +295,7 @@ public class HRUpgradeManager : MonoBehaviour
             PlayerPrefs.SetInt("workerMoveSpeedLevel" + PlayerPrefs.GetInt("level"), Globals.workerMoveSpeedLevel);
             PlayerController.Instance.magnet.MagnetLevelUp();
 
-            string tag = "M" + (PlayerPrefs.GetInt("level") + 1).ToString() + "-WorkerSpeedUpgrade" + Globals.workerMoveSpeedLevel.ToString();
+            string tag = "M" + (PlayerPrefs.GetInt("level") + 1).ToString() + "-WorkerSpeedUpgrade" + Globals.workerMoveSpeedLevel.ToString() + "-REWARDED";
             GameManager.Instance.GameAnalyticsTag(tag);
 
             isEnoughMoney();
@@ -320,8 +323,8 @@ public class HRUpgradeManager : MonoBehaviour
                 PlayerPrefs.SetInt("workerCapacityLevel" + PlayerPrefs.GetInt("level"), Globals.workerCapacityLevel);
                 isEnoughMoney();
                 InitButtonValues();
-                string tag = "M" + (PlayerPrefs.GetInt("level") + 1).ToString() + "-WorkerCapacityUpgrade" + Globals.workerCapacityLevel.ToString();
-                GameManager.Instance.GameAnalyticsTag(tag);
+                string tag = "M" + (PlayerPrefs.GetInt("level") + 1).ToString() + "-WorkerCapacityUpgrade" + Globals.workerCapacityLevel.ToString() + "-REWARDED";
+            GameManager.Instance.GameAnalyticsTag(tag);
         }
     }
     public void WorkerNoUpgradeFree()
@@ -337,7 +340,8 @@ public class HRUpgradeManager : MonoBehaviour
             WorkerCreate();
 
 
-
+            string tag = "M" + (PlayerPrefs.GetInt("level") + 1).ToString() + "-BuyWorker" + Globals.workerNoLevel.ToString() + "-REWARDED";
+            GameManager.Instance.GameAnalyticsTag(tag);
         }
     }
 

@@ -471,6 +471,8 @@ public class UIManager : Subject
     {
         PlayerController.Instance.PlayerControl_ReActive();
         ADVManager.Instance.RewardedStart(HoverboardSkillClick);
+        string tag = "SpeedBoostRewarded";
+        GameManager.Instance.GameAnalyticsTag(tag);
     }
     public void HoverboardSkillClick()
     {
@@ -490,6 +492,8 @@ public class UIManager : Subject
     {
         PlayerController.Instance.PlayerControl_ReActive();
         ADVManager.Instance.RewardedStart(CapacitySkillClick);
+        string tag = "InfiniteCapacityRewarded";
+        GameManager.Instance.GameAnalyticsTag(tag);
     }
     public void CapacitySkillClick()
     {
@@ -510,6 +514,9 @@ public class UIManager : Subject
     {
         PlayerController.Instance.PlayerControl_ReActive();
         ADVManager.Instance.RewardedStart(DoubleIncomeSkillClick);
+
+        string tag = "DoubleIncomeRewarded";
+        GameManager.Instance.GameAnalyticsTag(tag);
     }
 
     public void DoubleIncomeSkillClick()
@@ -535,6 +542,9 @@ public class UIManager : Subject
     {
         PlayerController.Instance.PlayerControl_ReActive();
         ADVManager.Instance.RewardedStart(FreeMoneySkill);
+
+        string tag = "MoneyBagRewarded";
+        GameManager.Instance.GameAnalyticsTag(tag);
     }
 
     public void FreeMoneySkill()

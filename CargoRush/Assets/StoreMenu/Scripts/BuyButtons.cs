@@ -40,6 +40,11 @@ public class BuyButtons : MonoBehaviour
         StarPanelManager.Instance.BuyClick(id, _moneyType);
 
         float time = CoefficientTransformation.FormatSaniye(Globals.speedPlayTime);
+
+        if (id != 0)
+        {
+            GameManager.Instance.GameAnalyticsTag(skinName);
+        }
         //GameAnalytics.NewDesignEvent(skinName);
     }
     public void CostTextInit(int costAmount)

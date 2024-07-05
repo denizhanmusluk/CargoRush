@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 using TMPro;
 using ObserverSystem;
 //using HomaGames.HomaBelly;
-//using HomaGames.HomaBelly;
 //using GameAnalyticsSDK;
 
 public class GameManager : Observer

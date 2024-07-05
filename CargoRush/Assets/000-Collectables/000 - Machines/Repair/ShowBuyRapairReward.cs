@@ -20,6 +20,8 @@ public class ShowBuyRapairReward : MonoBehaviour
     void RepairImmediate()
     {
         processMachine.repairTimeCounter = processMachine.repairTime - 1;
+        string tag = "InstantRepairRewarded";
+        GameManager.Instance.GameAnalyticsTag(tag);
     }
     private void Start()
     {
