@@ -15,16 +15,17 @@ public class ADVManager : MonoBehaviour
     {
         _instance = this;
     }
-    public void RewardedSuggest()
-    {
-        //Analytics.RewardedAdSuggested("rewarded_ad");
-    }
     public void RewardedStart(Action fnct)
     {
         rewardedFunction = null;
         rewardedFunction += fnct;
+
+
+        // kapanacak
         RewardedEnd();
 
+
+        //acilacak
         //if (HomaBelly.Instance.IsRewardedVideoAdAvailable())
         //{
         //    //// Show ad
