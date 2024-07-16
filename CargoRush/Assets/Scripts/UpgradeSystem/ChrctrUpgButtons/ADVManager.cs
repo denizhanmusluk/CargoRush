@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-//using HomaGames.HomaBelly;
+using HomaGames.HomaBelly;
 
 public class ADVManager : MonoBehaviour
 {
@@ -22,21 +22,24 @@ public class ADVManager : MonoBehaviour
 
 
         // kapanacak
-        RewardedEnd();
+        //RewardedEnd();
 
 
         //acilacak
-        //if (HomaBelly.Instance.IsRewardedVideoAdAvailable())
-        //{
-        //    //// Show ad
-        //    HomaBelly.Instance.ShowRewardedVideoAd("rewarded_ad");
-        //}
-        //HomaBelly.Instance.onRewardedVideoAdRewardedEvent += RewardedEnd;
+        if (HomaBelly.Instance.IsRewardedVideoAdAvailable())
+        {
+            //// Show ad
+            HomaBelly.Instance.ShowRewardedVideoAd("rewarded_ad");
+        }
+       
+        Events.onRewardedVideoAdRewardedEvent += RewardedEnd;
+
 
     }
-    private void RewardedEnd()
+    private void RewardedEnd(VideoAdReward videoAdReward, AdInfo adInfo)
     {
         rewardedFunction?.Invoke();
+        Events.onRewardedVideoAdRewardedEvent -= RewardedEnd;
     }
 
     public void InterstialStart(Action fnct)

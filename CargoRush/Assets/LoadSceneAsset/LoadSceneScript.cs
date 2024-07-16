@@ -1,9 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
-//using Facebook.Unity;
+using Facebook.Unity;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-//using HomaGames.HomaBelly;
+using HomaGames.HomaBelly;
 
 public class LoadSceneScript : MonoBehaviour
 {
@@ -12,18 +12,20 @@ public class LoadSceneScript : MonoBehaviour
     public Animator StartAnimator;
     public void Awake()
     {
-        //if (!HomaBelly.Instance.IsInitialized)
-        //{
-        //    Events.onInitialized += OnInitialized;
-        //}
-        //else
-        //{
-        //}
+        if (!HomaBelly.Instance.IsInitialized)
+        {
+            // Listen event for initialization
+            Events.onInitialized += OnInitialized;
+        }
+        else
+        {
+            // Homa Belly already initialized
+        }
     }
 
     private void OnDisable()
     {
-        //Events.onInitialized -= OnInitialized;
+        Events.onInitialized -= OnInitialized;
     }
 
     private void OnInitialized()
@@ -33,7 +35,7 @@ public class LoadSceneScript : MonoBehaviour
     void Start()
     {
 
-        //GameAnalyticsSDK.GameAnalytics.Initialize();
+        GameAnalyticsSDK.GameAnalytics.Initialize();
         StartCoroutine(StartDelayFunction());
         StartCoroutine(StartDelayAnimationFunction());
     }

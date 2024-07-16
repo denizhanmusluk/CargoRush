@@ -5,8 +5,8 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
 using ObserverSystem;
-//using HomaGames.HomaBelly;
-//using GameAnalyticsSDK;
+using HomaGames.HomaBelly;
+using GameAnalyticsSDK;
 
 public class GameManager : Observer
 {
@@ -21,7 +21,7 @@ public class GameManager : Observer
     [SerializeField] int createMoney2;
     public void GameAnalyticsTag(string tag)
     {
-        //GameAnalytics.NewDesignEvent(tag);
+        GameAnalytics.NewDesignEvent(tag);
         Debug.Log(tag);
     }
     void Awake()

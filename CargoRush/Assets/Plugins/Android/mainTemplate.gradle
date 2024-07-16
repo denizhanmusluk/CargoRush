@@ -1,0 +1,133 @@
+// Android Resolver Repos Start
+([rootProject] + (rootProject.subprojects as List)).each { project ->
+    project.repositories {
+        def unityProjectPath = $/file:///**DIR_UNITYPROJECT**/$.replace("\\", "/")
+        maven {
+            url "https://maven.google.com"
+        }
+        maven {
+            url "https://unity3ddist.jfrog.io/artifactory/unity-mediation-mvn-prod-local/" // Assets/Editor/MediationAdapterDependencies.xml:6
+        }
+        maven {
+            url "https://verve.jfrog.io/artifactory/verve-gradle-release" // Assets/MaxSdk/Mediation/Verve/Editor/Dependencies.xml:7
+        }
+        maven {
+            url "https://aws.oss.sonatype.org/content/repositories/releases/" // Assets/Amazon/Scripts/Editor/AmazonDependencies.xml:10
+        }
+        maven {
+            url "https://artifact.bytedance.com/repository/pangle" // Assets/MaxSdk/Mediation/ByteDance/Editor/Dependencies.xml:8
+        }
+        maven {
+            url "https://cboost.jfrog.io/artifactory/chartboost-ads/" // Assets/MaxSdk/Mediation/Chartboost/Editor/Dependencies.xml:8
+        }
+        maven {
+            url "https://android-sdk.is.com/" // Assets/MaxSdk/Mediation/IronSource/Editor/Dependencies.xml:8
+        }
+        maven {
+            url "https://dl-maven-android.mintegral.com/repository/mbridge_android_sdk_oversea" // Assets/MaxSdk/Mediation/Mintegral/Editor/Dependencies.xml:8
+        }
+        mavenLocal()
+        mavenCentral()
+    }
+}
+// Android Resolver Repos End
+apply plugin: 'com.android.library'
+**APPLY_PLUGINS**
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+// Android Resolver Dependencies Start
+    implementation 'androidx.appcompat:appcompat:1.1.0' // Assets/Amazon/Scripts/Editor/AmazonDependencies.xml:5
+    implementation 'androidx.fragment:fragment-ktx:[1.5, 1.6)' // Assets/MaxSdk/Mediation/HyprMX/Editor/Dependencies.xml:4
+    implementation 'androidx.recyclerview:recyclerview:1.2.1' // Assets/MaxSdk/Mediation/Mintegral/Editor/Dependencies.xml:9
+    implementation 'com.amazon.android:aps-sdk:9.9.+@aar' // Assets/Amazon/Scripts/Editor/AmazonDependencies.xml:10
+    implementation 'com.android.installreferrer:installreferrer:2.2' // Packages/com.homagames.attribution.adjust/Editor/AdjustDependencies.xml:4
+    implementation 'com.android.support:appcompat-v7:25.3.1' // Facebook.Unity.Editor.AndroidSupportLibraryResolver.addSupportLibraryDependency
+    implementation 'com.android.support:cardview-v7:25.3.1' // Facebook.Unity.Editor.AndroidSupportLibraryResolver.addSupportLibraryDependency
+    // implementation 'com.android.support:customtabs:25.3.1' // Facebook.Unity.Editor.AndroidSupportLibraryResolver.addSupportLibraryDependency
+    implementation 'com.android.support:customtabs:28.+' // Assets/MaxSdk/Mediation/InMobi/Editor/Dependencies.xml:7
+    implementation 'com.android.support:recyclerview-v7:28.+' // Assets/MaxSdk/Mediation/InMobi/Editor/Dependencies.xml:6
+    implementation 'com.android.support:support-v4:25.3.1' // Facebook.Unity.Editor.AndroidSupportLibraryResolver.addSupportLibraryDependency
+    implementation 'com.applovin.mediation:amazon-tam-adapter:9.+@aar' // Assets/Amazon/Scripts/Mediations/AppLovinMediation/Editor/Dependencies.xml:4
+    implementation 'com.applovin.mediation:bytedance-adapter:5.9.0.4.0' // Assets/MaxSdk/Mediation/ByteDance/Editor/Dependencies.xml:8
+    implementation 'com.applovin.mediation:chartboost-adapter:9.7.0.0' // Assets/MaxSdk/Mediation/Chartboost/Editor/Dependencies.xml:8
+    implementation 'com.applovin.mediation:facebook-adapter:[6.17.0.0]' // Assets/MaxSdk/Mediation/Facebook/Editor/Dependencies.xml:9
+    implementation 'com.applovin.mediation:fyber-adapter:8.2.7.1' // Assets/MaxSdk/Mediation/Fyber/Editor/Dependencies.xml:4
+    implementation 'com.applovin.mediation:google-adapter:[22.3.0.0]' // Assets/MaxSdk/Mediation/Google/Editor/Dependencies.xml:5
+    implementation 'com.applovin.mediation:google-ad-manager-adapter:[22.3.0.0]' // Assets/MaxSdk/Mediation/GoogleAdManager/Editor/Dependencies.xml:5
+    implementation 'com.applovin.mediation:hyprmx-adapter:6.2.3.0' // Assets/MaxSdk/Mediation/HyprMX/Editor/Dependencies.xml:5
+    implementation 'com.applovin.mediation:inmobi-adapter:10.6.7.0' // Assets/MaxSdk/Mediation/InMobi/Editor/Dependencies.xml:4
+    implementation 'com.applovin.mediation:ironsource-adapter:8.0.0.0.0' // Assets/MaxSdk/Mediation/IronSource/Editor/Dependencies.xml:8
+    implementation 'com.applovin.mediation:line-adapter:2024.2.14.0' // Assets/MaxSdk/Mediation/Line/Editor/Dependencies.xml:4
+    implementation 'com.applovin.mediation:mintegral-adapter:16.7.11.0' // Assets/MaxSdk/Mediation/Mintegral/Editor/Dependencies.xml:8
+    implementation 'com.applovin.mediation:mobilefuse-adapter:1.7.3.0' // Assets/MaxSdk/Mediation/MobileFuse/Editor/Dependencies.xml:4
+    implementation 'com.applovin.mediation:unityads-adapter:4.10.0.0' // Assets/MaxSdk/Mediation/UnityAds/Editor/Dependencies.xml:4
+    implementation 'com.applovin.mediation:verve-adapter:2.20.0.0' // Assets/MaxSdk/Mediation/Verve/Editor/Dependencies.xml:4
+    implementation 'com.applovin.mediation:vungle-adapter:7.3.1.2' // Assets/MaxSdk/Mediation/Vungle/Editor/Dependencies.xml:4
+    implementation 'com.applovin:applovin-sdk:12.4.2' // Assets/MaxSdk/AppLovin/Editor/Dependencies.xml:4
+    implementation 'com.facebook.android:facebook-applinks:[16.0,17)' // Assets/FacebookSDK/Plugins/Editor/Dependencies.xml:6
+    implementation 'com.facebook.android:facebook-core:[16.0,17)' // Assets/FacebookSDK/Plugins/Editor/Dependencies.xml:5
+    implementation 'com.facebook.android:facebook-gamingservices:[16.0,17)' // Assets/FacebookSDK/Plugins/Editor/Dependencies.xml:9
+    implementation 'com.facebook.android:facebook-login:[16.0,17)' // Assets/FacebookSDK/Plugins/Editor/Dependencies.xml:7
+    implementation 'com.facebook.android:facebook-share:[16.0,17)' // Assets/FacebookSDK/Plugins/Editor/Dependencies.xml:8
+    // implementation 'com.google.android.gms:play-services-ads-identifier:[18.0.0]' // Packages/com.homagames.attribution.adjust/Editor/AdjustDependencies.xml:6
+    implementation 'com.google.android.gms:play-services-ads-identifier:[18.0.1]' // Packages/com.homagames.sdk-core/Utilities/Editor/Android/CoreDependencies.xml:6
+    // implementation 'com.google.android.gms:play-services-appset:[16.0.2]' // Packages/com.homagames.sdk-core/Utilities/Editor/Android/CoreDependencies.xml:4
+    implementation 'com.google.android.gms:play-services-appset:16.0.2' // Packages/com.gameanalytics.sdk/Editor/Android/Dependencies.xml:4
+    implementation 'com.google.android.gms:play-services-base:16.1.0' // Assets/MaxSdk/Mediation/Chartboost/Editor/Dependencies.xml:9
+    // implementation 'com.google.android.gms:play-services-basement:[18.0.0]' // Packages/com.homagames.attribution.adjust/Editor/AdjustDependencies.xml:5
+    implementation 'com.google.android.gms:play-services-basement:[18.1.0]' // Assets/MaxSdk/Mediation/Facebook/Editor/Dependencies.xml:4
+    implementation 'com.google.android.instantapps:instantapps:1.1.0' // Packages/com.gameanalytics.sdk/Editor/Android/Dependencies.xml:3
+    implementation 'com.iabtcf:iabtcf-decoder:2.0.10' // Assets/Amazon/Scripts/Editor/AmazonDependencies.xml:4
+    implementation 'com.parse.bolts:bolts-android:1.4.0' // Assets/FacebookSDK/Plugins/Editor/Dependencies.xml:4
+    implementation 'com.squareup.picasso:picasso:2.71828' // Assets/MaxSdk/Mediation/InMobi/Editor/Dependencies.xml:5
+    implementation 'com.unity3d.mediation:mediation-sdk:[1.0,2.0[' // Assets/Editor/MediationAdapterDependencies.xml:8
+    implementation 'com.unity3d.mediation:unityads-adapter:[1.0,2.0[' // Assets/Editor/MediationAdapterDependencies.xml:10
+    implementation 'com.usercentrics.sdk:usercentrics-ui-unity:[2.13.1-unity]' // Packages/com.homagames.usercentrics-sdk/Usercentrics/Editor/UsercentricsDependencies.xml:4
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8:[1.8.0]' // Packages/com.homagames.usercentrics-sdk/Usercentrics/Editor/UsercentricsDependencies.xml:3
+// Android Resolver Dependencies End
+**DEPS**}
+
+// Android Resolver Exclusions Start
+android {
+  packagingOptions {
+      exclude ('/lib/armeabi/*' + '*')
+      exclude ('/lib/mips/*' + '*')
+      exclude ('/lib/mips64/*' + '*')
+      exclude ('/lib/x86/*' + '*')
+      exclude ('/lib/x86_64/*' + '*')
+  }
+}
+// Android Resolver Exclusions End
+android {
+    compileSdkVersion **APIVERSION**
+    buildToolsVersion '**BUILDTOOLS**'
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    defaultConfig {
+        minSdkVersion **MINSDKVERSION**
+        targetSdkVersion **TARGETSDKVERSION**
+        ndk {
+            abiFilters **ABIFILTERS**
+        }
+        versionCode **VERSIONCODE**
+        versionName '**VERSIONNAME**'
+        consumerProguardFiles 'proguard-unity.txt'**USER_PROGUARD**
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+
+    aaptOptions {
+        noCompress = **BUILTIN_NOCOMPRESS** + unityStreamingAssets.tokenize(', ')
+        ignoreAssetsPattern = "!.svn:!.git:!.ds_store:!*.scc:.*:!CVS:!thumbs.db:!picasa.ini:!*~"
+    }**PACKAGING_OPTIONS**
+}**REPOSITORIES**
+**IL_CPP_BUILD_SETUP**
+**SOURCE_BUILD_SETUP**
+**EXTERNAL_SOURCES**

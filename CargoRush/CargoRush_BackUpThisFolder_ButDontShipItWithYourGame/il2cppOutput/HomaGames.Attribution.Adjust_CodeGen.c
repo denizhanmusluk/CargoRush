@@ -1,0 +1,348 @@
+﻿#include "pch-c.h"
+#ifndef _MSC_VER
+# include <alloca.h>
+#else
+# include <malloc.h>
+#endif
+
+
+#include "codegen/il2cpp-codegen-metadata.h"
+
+
+
+
+
+// 0x00000001 System.Void HomaGames.HomaBelly.AdjustAttributionAdapter::Initialize(System.String)
+extern void AdjustAttributionAdapter_Initialize_m39283D492A9177BB49BB16B323FE9EB6B00A697E (void);
+// 0x00000002 System.Void HomaGames.HomaBelly.AdjustAttributionAdapter::Initialize(System.String,System.Action)
+extern void AdjustAttributionAdapter_Initialize_mC97B053ABC9E62DACC281947055FE9E67EA6B2CD (void);
+// 0x00000003 System.Void HomaGames.HomaBelly.AdjustAttributionAdapter::UpdateDynamicSessionCallbackParameters(System.String)
+extern void AdjustAttributionAdapter_UpdateDynamicSessionCallbackParameters_mEECC6C3424214CA8138ABA4FB76699E9F3F9E5EE (void);
+// 0x00000004 System.Boolean HomaGames.HomaBelly.AdjustAttributionAdapter::IsDevelopmentBuild()
+extern void AdjustAttributionAdapter_IsDevelopmentBuild_m5F82316A27E54FCAB525C63FB7392AB7BDD5E403 (void);
+// 0x00000005 System.Void HomaGames.HomaBelly.AdjustAttributionAdapter::EventSuccessCallback(com.adjust.sdk.AdjustEventSuccess)
+extern void AdjustAttributionAdapter_EventSuccessCallback_m8519547C943F7C2166ED4EE21097BDCC72A83E87 (void);
+// 0x00000006 System.Void HomaGames.HomaBelly.AdjustAttributionAdapter::EventFailureCallback(com.adjust.sdk.AdjustEventFailure)
+extern void AdjustAttributionAdapter_EventFailureCallback_m09FA630442F8F2C81C2C2C72E002861F5431B819 (void);
+// 0x00000007 System.Void HomaGames.HomaBelly.AdjustAttributionAdapter::SessionSuccessCallback(com.adjust.sdk.AdjustSessionSuccess)
+extern void AdjustAttributionAdapter_SessionSuccessCallback_m4F99C0EA229469407AAB2AE7FB939984F4AB6F74 (void);
+// 0x00000008 System.Void HomaGames.HomaBelly.AdjustAttributionAdapter::SessionFailureCallback(com.adjust.sdk.AdjustSessionFailure)
+extern void AdjustAttributionAdapter_SessionFailureCallback_m7AC6C11868E30A421E6C5280D6C0D3AD3C4E4CE8 (void);
+// 0x00000009 System.Void HomaGames.HomaBelly.AdjustAttributionAdapter::AttributionChangedCallback(com.adjust.sdk.AdjustAttribution)
+extern void AdjustAttributionAdapter_AttributionChangedCallback_mCF5697EEB5C3472EC2D032FE432D0A93E38322E1 (void);
+// 0x0000000A System.Void HomaGames.HomaBelly.AdjustAttributionAdapter::OnApplicationPause(System.Boolean)
+extern void AdjustAttributionAdapter_OnApplicationPause_m34D29E71CB7E765DC8D78E78069CD9D0A29B26BE (void);
+// 0x0000000B System.Void HomaGames.HomaBelly.AdjustAttributionAdapter::ValidateIntegration()
+extern void AdjustAttributionAdapter_ValidateIntegration_mCC97096EBF0038DE43C842D269D20DFC421A4FFB (void);
+// 0x0000000C System.Void HomaGames.HomaBelly.AdjustAttributionAdapter::SetUserIsAboveRequiredAge(System.Boolean)
+extern void AdjustAttributionAdapter_SetUserIsAboveRequiredAge_m6F1363ABD167FE3740DE6C4B400CDBFB82AA5A1B (void);
+// 0x0000000D System.Void HomaGames.HomaBelly.AdjustAttributionAdapter::SetTermsAndConditionsAcceptance(System.Boolean)
+extern void AdjustAttributionAdapter_SetTermsAndConditionsAcceptance_mDE5528E0599FAC3A483DD1B5026A0F9AE9F29347 (void);
+// 0x0000000E System.Void HomaGames.HomaBelly.AdjustAttributionAdapter::SetAnalyticsTrackingConsentGranted(System.Boolean)
+extern void AdjustAttributionAdapter_SetAnalyticsTrackingConsentGranted_m932583E474A1B7DB5C40A7F499A36FF8740B1A39 (void);
+// 0x0000000F System.Void HomaGames.HomaBelly.AdjustAttributionAdapter::SetTailoredAdsConsentGranted(System.Boolean)
+extern void AdjustAttributionAdapter_SetTailoredAdsConsentGranted_m9A9C7591A952239A2A86C30A1EB33BD4DED4C803 (void);
+// 0x00000010 System.Void HomaGames.HomaBelly.AdjustAttributionAdapter::TrackInAppPurchaseEvent(System.String,System.String,System.Double,System.String,System.String,System.Boolean)
+extern void AdjustAttributionAdapter_TrackInAppPurchaseEvent_m663561C3CFB11E1611B4DA9F716BE4D70804F915 (void);
+// 0x00000011 System.Void HomaGames.HomaBelly.AdjustAttributionAdapter::TrackAdRevenue(HomaGames.HomaBelly.AdRevenueData)
+extern void AdjustAttributionAdapter_TrackAdRevenue_mCFB6D5D57A29C541386941950FB140DBE7D3FF22 (void);
+// 0x00000012 System.Void HomaGames.HomaBelly.AdjustAttributionAdapter::TrackEvent(System.String,System.Collections.Generic.Dictionary`2<System.String,System.Object>,System.Collections.Generic.Dictionary`2<System.String,System.Object>)
+extern void AdjustAttributionAdapter_TrackEvent_m6739B2E632C49149E6FB10881161EC5D4D355380 (void);
+// 0x00000013 System.Void HomaGames.HomaBelly.AdjustAttributionAdapter::TrackEvent(System.String,System.Collections.Generic.Dictionary`2<System.String,System.Object>)
+extern void AdjustAttributionAdapter_TrackEvent_mDB8329B8F4F9744917C9DCFC0CD42260C5A06E7B (void);
+// 0x00000014 System.Void HomaGames.HomaBelly.AdjustAttributionAdapter::TrackEventWithPartnerParameters(System.String,System.Collections.Generic.Dictionary`2<System.String,System.Object>,System.Collections.Generic.Dictionary`2<System.String,System.Object>)
+extern void AdjustAttributionAdapter_TrackEventWithPartnerParameters_mB303511AEBE952FBDED600CA0E8953B72D8D1736 (void);
+// 0x00000015 System.Void HomaGames.HomaBelly.AdjustAttributionAdapter::.ctor()
+extern void AdjustAttributionAdapter__ctor_m33C969FAC1C948FA856558E03D1F82486C6A9EB1 (void);
+// 0x00000016 System.Void HomaGames.HomaBelly.AdjustAttributionAdapter/<SetAdjustId>d__10::MoveNext()
+extern void U3CSetAdjustIdU3Ed__10_MoveNext_m33CA09038776FB5FEC6768EEB488AF9892411291 (void);
+// 0x00000017 System.Void HomaGames.HomaBelly.AdjustAttributionAdapter/<SetAdjustId>d__10::SetStateMachine(System.Runtime.CompilerServices.IAsyncStateMachine)
+extern void U3CSetAdjustIdU3Ed__10_SetStateMachine_mBAD01FF2234296834BA9F607B01837617BECF408 (void);
+// 0x00000018 System.Void HomaGames.HomaBelly.AdjustAttributionAdapter/<GetAdjustId>d__11::MoveNext()
+extern void U3CGetAdjustIdU3Ed__11_MoveNext_m0ADD49C6406580F225D9460E32E60F4D5369968E (void);
+// 0x00000019 System.Void HomaGames.HomaBelly.AdjustAttributionAdapter/<GetAdjustId>d__11::SetStateMachine(System.Runtime.CompilerServices.IAsyncStateMachine)
+extern void U3CGetAdjustIdU3Ed__11_SetStateMachine_mD5ED02B21ADE59B13F1A36846B9C5C242E9C433F (void);
+// 0x0000001A System.Boolean HomaGames.HomaBelly.HomaAdjustConfig::get_IsReferralSystemEnabled()
+extern void HomaAdjustConfig_get_IsReferralSystemEnabled_m7EC6D936DDBCD533C83C5EBB8C7069593E8128D5 (void);
+// 0x0000001B System.Boolean HomaGames.HomaBelly.HomaAdjustConfig::TryGetAppToken(System.String&)
+extern void HomaAdjustConfig_TryGetAppToken_mB9BCD924680D45DF47F4175D0C0E71B3E34A551D (void);
+// 0x0000001C HomaGames.HomaBelly.ReferralSystem HomaGames.HomaBelly.ReferralSystem::get_Instance()
+extern void ReferralSystem_get_Instance_m48A46CDA2D5A7C7A8E309A3700811F229FAEEFE2 (void);
+// 0x0000001D System.Void HomaGames.HomaBelly.ReferralSystem::.ctor()
+extern void ReferralSystem__ctor_m016FD1F42CFEA2B8D59940E91C532FE894638E1B (void);
+// 0x0000001E System.Void HomaGames.HomaBelly.ReferralSystem::Initialize()
+extern void ReferralSystem_Initialize_mAAC47C1ECD92EA78E0C601D99185E4C1D5D980BA (void);
+// 0x0000001F System.Void HomaGames.HomaBelly.ReferralSystem::OnDeepLinkResolved(System.String)
+extern void ReferralSystem_OnDeepLinkResolved_m575C78E0FE73B7049F39101E051CD9ACFBB0C819 (void);
+// 0x00000020 System.Void HomaGames.HomaBelly.ReferralSystem::NotifyReferredInstall(System.String)
+extern void ReferralSystem_NotifyReferredInstall_m71AC3ED2FB8CF72B57EB5F7BD1B3DBE5E02A2173 (void);
+// 0x00000021 System.Threading.Tasks.Task`1<System.Collections.Generic.Dictionary`2<System.String,System.Object>> HomaGames.HomaBelly.ReferralSystem::ReadTrackingData()
+extern void ReferralSystem_ReadTrackingData_m40D6E97FD0690AC225BB495D5223A6FE8A5B3428 (void);
+// 0x00000022 System.Threading.Tasks.Task`1<HomaGames.HomaBelly.ReferralSystem/ReferralModel> HomaGames.HomaBelly.ReferralSystem::QueryAPI(System.String)
+extern void ReferralSystem_QueryAPI_mBED63AC31AC888B39397B8C68A36C5AE632B4796 (void);
+// 0x00000023 System.Threading.Tasks.Task`1<HomaGames.HomaBelly.ReferralSystem/ReferralModel> HomaGames.HomaBelly.ReferralSystem::WaitFor(System.Func`1<System.Boolean>,System.String)
+extern void ReferralSystem_WaitFor_mD28F5B0AF374507D9C96D14B9C82667544E73FBB (void);
+// 0x00000024 System.Threading.Tasks.Task`1<HomaGames.HomaBelly.ReferralSystem/ReferralModel> HomaGames.HomaBelly.ReferralSystem::DeserializeReferralModel(System.Net.Http.HttpResponseMessage)
+extern void ReferralSystem_DeserializeReferralModel_mABAC149D435F32311F4068B12E999936976BFA06 (void);
+// 0x00000025 System.Void HomaGames.HomaBelly.ReferralSystem::.cctor()
+extern void ReferralSystem__cctor_m6EEAEB8F1629860FA37695F9DB92320CF656B622 (void);
+// 0x00000026 System.Boolean HomaGames.HomaBelly.ReferralSystem::<QueryAPI>b__32_1()
+extern void ReferralSystem_U3CQueryAPIU3Eb__32_1_m715DE2D35F36603C18F5BBC29E594872BE0B8D09 (void);
+// 0x00000027 System.Boolean HomaGames.HomaBelly.ReferralSystem/ReferralModel::get_Enabled()
+extern void ReferralModel_get_Enabled_m498600FD94F90610DC826AFC74BA3BD7C0B6FC30 (void);
+// 0x00000028 System.Void HomaGames.HomaBelly.ReferralSystem/ReferralModel::set_Enabled(System.Boolean)
+extern void ReferralModel_set_Enabled_mEF88C2F96C2189EA3B7D465C029A44FFC28C13B0 (void);
+// 0x00000029 System.String HomaGames.HomaBelly.ReferralSystem/ReferralModel::get_ReferralUrlWithMacros()
+extern void ReferralModel_get_ReferralUrlWithMacros_mFCAA4B0D76019A1B3632AEF1B2018B3A7DE509E2 (void);
+// 0x0000002A System.Void HomaGames.HomaBelly.ReferralSystem/ReferralModel::set_ReferralUrlWithMacros(System.String)
+extern void ReferralModel_set_ReferralUrlWithMacros_m7CE7BEA194A5240378F45D5908D68D5487AAFA6B (void);
+// 0x0000002B System.String HomaGames.HomaBelly.ReferralSystem/ReferralModel::get_ReferralUrlToShare()
+extern void ReferralModel_get_ReferralUrlToShare_m44BECF75777E5C7DA1F08019F4AA3C86807E8142 (void);
+// 0x0000002C System.Void HomaGames.HomaBelly.ReferralSystem/ReferralModel::set_ReferralUrlToShare(System.String)
+extern void ReferralModel_set_ReferralUrlToShare_mCED2270F0DCD21F2F6941854B7880E24DCE8E004 (void);
+// 0x0000002D System.Int32 HomaGames.HomaBelly.ReferralSystem/ReferralModel::get_TotalAttributedInstalls()
+extern void ReferralModel_get_TotalAttributedInstalls_mEEDA87B3337B218BB9EFE3674F3EFB2F47DA8587 (void);
+// 0x0000002E System.Void HomaGames.HomaBelly.ReferralSystem/ReferralModel::set_TotalAttributedInstalls(System.Int32)
+extern void ReferralModel_set_TotalAttributedInstalls_m9088F0B6E7BA255CCEC7C895C7502B4B58DC6651 (void);
+// 0x0000002F HomaGames.HomaBelly.ReferralSystem/ReferralModel/ReferralError HomaGames.HomaBelly.ReferralSystem/ReferralModel::get_Error()
+extern void ReferralModel_get_Error_mA2E857F77B332BF365FCFCD65A6D92327283FD82 (void);
+// 0x00000030 System.Void HomaGames.HomaBelly.ReferralSystem/ReferralModel::set_Error(HomaGames.HomaBelly.ReferralSystem/ReferralModel/ReferralError)
+extern void ReferralModel_set_Error_m01052337F6EE55F1A9576CBE0F69BA40FE9F656C (void);
+// 0x00000031 System.String HomaGames.HomaBelly.ReferralSystem/ReferralModel::ToString()
+extern void ReferralModel_ToString_mA389F445038429B031E9F82E4E58316181D0E0CC (void);
+// 0x00000032 System.Void HomaGames.HomaBelly.ReferralSystem/ReferralModel::.ctor()
+extern void ReferralModel__ctor_mE8E2C12A37B6B1AC598E73DE5B5697A25194865A (void);
+// 0x00000033 System.String HomaGames.HomaBelly.ReferralSystem/ReferralModel/ReferralError::get_Message()
+extern void ReferralError_get_Message_mD55D3A550557B956A1E59548BFAD125A228B5C8E (void);
+// 0x00000034 System.Void HomaGames.HomaBelly.ReferralSystem/ReferralModel/ReferralError::set_Message(System.String)
+extern void ReferralError_set_Message_m88CFDA5E2EFFC719F117130062A1212886A99E0D (void);
+// 0x00000035 System.Int32 HomaGames.HomaBelly.ReferralSystem/ReferralModel/ReferralError::get_Code()
+extern void ReferralError_get_Code_m23DB508599A5395245E12114AAF8D69C6DAB6221 (void);
+// 0x00000036 System.Void HomaGames.HomaBelly.ReferralSystem/ReferralModel/ReferralError::set_Code(System.Int32)
+extern void ReferralError_set_Code_m2F3ABE6B3C742E7F9096D7CE1B64A986D1B30B7D (void);
+// 0x00000037 System.String HomaGames.HomaBelly.ReferralSystem/ReferralModel/ReferralError::ToString()
+extern void ReferralError_ToString_m2904C7307EDEEC46E04019447ADC004B544377A9 (void);
+// 0x00000038 System.Void HomaGames.HomaBelly.ReferralSystem/ReferralModel/ReferralError::.ctor()
+extern void ReferralError__ctor_mCFE1708A978640F7D94D824CC2D332BD69A49BF8 (void);
+// 0x00000039 System.Void HomaGames.HomaBelly.ReferralSystem/<NotifyReferredInstall>d__30::MoveNext()
+extern void U3CNotifyReferredInstallU3Ed__30_MoveNext_mA5505F28BD587D1619320EFE55BB21CD1C1328F1 (void);
+// 0x0000003A System.Void HomaGames.HomaBelly.ReferralSystem/<NotifyReferredInstall>d__30::SetStateMachine(System.Runtime.CompilerServices.IAsyncStateMachine)
+extern void U3CNotifyReferredInstallU3Ed__30_SetStateMachine_m68C3AD5BBE8BC9D7D57E82296C717DC24D20E6AB (void);
+// 0x0000003B System.Void HomaGames.HomaBelly.ReferralSystem/<ReadTrackingData>d__31::MoveNext()
+extern void U3CReadTrackingDataU3Ed__31_MoveNext_m0D41040D0B4489F66EDDD1B97D5840B140F95AC4 (void);
+// 0x0000003C System.Void HomaGames.HomaBelly.ReferralSystem/<ReadTrackingData>d__31::SetStateMachine(System.Runtime.CompilerServices.IAsyncStateMachine)
+extern void U3CReadTrackingDataU3Ed__31_SetStateMachine_m44BFDC4BD9DD9EB35B60CCE0766C98AAD25F4BC3 (void);
+// 0x0000003D System.Void HomaGames.HomaBelly.ReferralSystem/<>c::.cctor()
+extern void U3CU3Ec__cctor_m23670EFFB61AFF549A3A8E56C378A3806CD7ECCA (void);
+// 0x0000003E System.Void HomaGames.HomaBelly.ReferralSystem/<>c::.ctor()
+extern void U3CU3Ec__ctor_mF4FE5D456FE30D71F0CA3E5BE2E2ED5DC972BEEF (void);
+// 0x0000003F System.Boolean HomaGames.HomaBelly.ReferralSystem/<>c::<QueryAPI>b__32_0()
+extern void U3CU3Ec_U3CQueryAPIU3Eb__32_0_mA2516FC294B3C0ED8703FECB0BAEBAF6F7D7D901 (void);
+// 0x00000040 System.Void HomaGames.HomaBelly.ReferralSystem/<QueryAPI>d__32::MoveNext()
+extern void U3CQueryAPIU3Ed__32_MoveNext_mD616C7FF0D98B15EF9D47F0192435A0C532C5BDB (void);
+// 0x00000041 System.Void HomaGames.HomaBelly.ReferralSystem/<QueryAPI>d__32::SetStateMachine(System.Runtime.CompilerServices.IAsyncStateMachine)
+extern void U3CQueryAPIU3Ed__32_SetStateMachine_m1596457B527EF3A67BBB62877195F2FACAEBF15D (void);
+// 0x00000042 System.Void HomaGames.HomaBelly.ReferralSystem/<WaitFor>d__33::MoveNext()
+extern void U3CWaitForU3Ed__33_MoveNext_mE3C7ABE9F035C16CAB700C5A38C331FD823C899A (void);
+// 0x00000043 System.Void HomaGames.HomaBelly.ReferralSystem/<WaitFor>d__33::SetStateMachine(System.Runtime.CompilerServices.IAsyncStateMachine)
+extern void U3CWaitForU3Ed__33_SetStateMachine_mE8DBCF1B1BCEF4753B34DBCD5814E6657AFFAD75 (void);
+// 0x00000044 System.Void HomaGames.HomaBelly.ReferralSystem/<DeserializeReferralModel>d__34::MoveNext()
+extern void U3CDeserializeReferralModelU3Ed__34_MoveNext_m8FE4CAFEA7890C6E6FA85FC2BC1B6E50BE562F39 (void);
+// 0x00000045 System.Void HomaGames.HomaBelly.ReferralSystem/<DeserializeReferralModel>d__34::SetStateMachine(System.Runtime.CompilerServices.IAsyncStateMachine)
+extern void U3CDeserializeReferralModelU3Ed__34_SetStateMachine_m9E363FD71E321142635A781288154B8137C38297 (void);
+static Il2CppMethodPointer s_methodPointers[69] = 
+{
+	AdjustAttributionAdapter_Initialize_m39283D492A9177BB49BB16B323FE9EB6B00A697E,
+	AdjustAttributionAdapter_Initialize_mC97B053ABC9E62DACC281947055FE9E67EA6B2CD,
+	AdjustAttributionAdapter_UpdateDynamicSessionCallbackParameters_mEECC6C3424214CA8138ABA4FB76699E9F3F9E5EE,
+	AdjustAttributionAdapter_IsDevelopmentBuild_m5F82316A27E54FCAB525C63FB7392AB7BDD5E403,
+	AdjustAttributionAdapter_EventSuccessCallback_m8519547C943F7C2166ED4EE21097BDCC72A83E87,
+	AdjustAttributionAdapter_EventFailureCallback_m09FA630442F8F2C81C2C2C72E002861F5431B819,
+	AdjustAttributionAdapter_SessionSuccessCallback_m4F99C0EA229469407AAB2AE7FB939984F4AB6F74,
+	AdjustAttributionAdapter_SessionFailureCallback_m7AC6C11868E30A421E6C5280D6C0D3AD3C4E4CE8,
+	AdjustAttributionAdapter_AttributionChangedCallback_mCF5697EEB5C3472EC2D032FE432D0A93E38322E1,
+	AdjustAttributionAdapter_OnApplicationPause_m34D29E71CB7E765DC8D78E78069CD9D0A29B26BE,
+	AdjustAttributionAdapter_ValidateIntegration_mCC97096EBF0038DE43C842D269D20DFC421A4FFB,
+	AdjustAttributionAdapter_SetUserIsAboveRequiredAge_m6F1363ABD167FE3740DE6C4B400CDBFB82AA5A1B,
+	AdjustAttributionAdapter_SetTermsAndConditionsAcceptance_mDE5528E0599FAC3A483DD1B5026A0F9AE9F29347,
+	AdjustAttributionAdapter_SetAnalyticsTrackingConsentGranted_m932583E474A1B7DB5C40A7F499A36FF8740B1A39,
+	AdjustAttributionAdapter_SetTailoredAdsConsentGranted_m9A9C7591A952239A2A86C30A1EB33BD4DED4C803,
+	AdjustAttributionAdapter_TrackInAppPurchaseEvent_m663561C3CFB11E1611B4DA9F716BE4D70804F915,
+	AdjustAttributionAdapter_TrackAdRevenue_mCFB6D5D57A29C541386941950FB140DBE7D3FF22,
+	AdjustAttributionAdapter_TrackEvent_m6739B2E632C49149E6FB10881161EC5D4D355380,
+	AdjustAttributionAdapter_TrackEvent_mDB8329B8F4F9744917C9DCFC0CD42260C5A06E7B,
+	AdjustAttributionAdapter_TrackEventWithPartnerParameters_mB303511AEBE952FBDED600CA0E8953B72D8D1736,
+	AdjustAttributionAdapter__ctor_m33C969FAC1C948FA856558E03D1F82486C6A9EB1,
+	U3CSetAdjustIdU3Ed__10_MoveNext_m33CA09038776FB5FEC6768EEB488AF9892411291,
+	U3CSetAdjustIdU3Ed__10_SetStateMachine_mBAD01FF2234296834BA9F607B01837617BECF408,
+	U3CGetAdjustIdU3Ed__11_MoveNext_m0ADD49C6406580F225D9460E32E60F4D5369968E,
+	U3CGetAdjustIdU3Ed__11_SetStateMachine_mD5ED02B21ADE59B13F1A36846B9C5C242E9C433F,
+	HomaAdjustConfig_get_IsReferralSystemEnabled_m7EC6D936DDBCD533C83C5EBB8C7069593E8128D5,
+	HomaAdjustConfig_TryGetAppToken_mB9BCD924680D45DF47F4175D0C0E71B3E34A551D,
+	ReferralSystem_get_Instance_m48A46CDA2D5A7C7A8E309A3700811F229FAEEFE2,
+	ReferralSystem__ctor_m016FD1F42CFEA2B8D59940E91C532FE894638E1B,
+	ReferralSystem_Initialize_mAAC47C1ECD92EA78E0C601D99185E4C1D5D980BA,
+	ReferralSystem_OnDeepLinkResolved_m575C78E0FE73B7049F39101E051CD9ACFBB0C819,
+	ReferralSystem_NotifyReferredInstall_m71AC3ED2FB8CF72B57EB5F7BD1B3DBE5E02A2173,
+	ReferralSystem_ReadTrackingData_m40D6E97FD0690AC225BB495D5223A6FE8A5B3428,
+	ReferralSystem_QueryAPI_mBED63AC31AC888B39397B8C68A36C5AE632B4796,
+	ReferralSystem_WaitFor_mD28F5B0AF374507D9C96D14B9C82667544E73FBB,
+	ReferralSystem_DeserializeReferralModel_mABAC149D435F32311F4068B12E999936976BFA06,
+	ReferralSystem__cctor_m6EEAEB8F1629860FA37695F9DB92320CF656B622,
+	ReferralSystem_U3CQueryAPIU3Eb__32_1_m715DE2D35F36603C18F5BBC29E594872BE0B8D09,
+	ReferralModel_get_Enabled_m498600FD94F90610DC826AFC74BA3BD7C0B6FC30,
+	ReferralModel_set_Enabled_mEF88C2F96C2189EA3B7D465C029A44FFC28C13B0,
+	ReferralModel_get_ReferralUrlWithMacros_mFCAA4B0D76019A1B3632AEF1B2018B3A7DE509E2,
+	ReferralModel_set_ReferralUrlWithMacros_m7CE7BEA194A5240378F45D5908D68D5487AAFA6B,
+	ReferralModel_get_ReferralUrlToShare_m44BECF75777E5C7DA1F08019F4AA3C86807E8142,
+	ReferralModel_set_ReferralUrlToShare_mCED2270F0DCD21F2F6941854B7880E24DCE8E004,
+	ReferralModel_get_TotalAttributedInstalls_mEEDA87B3337B218BB9EFE3674F3EFB2F47DA8587,
+	ReferralModel_set_TotalAttributedInstalls_m9088F0B6E7BA255CCEC7C895C7502B4B58DC6651,
+	ReferralModel_get_Error_mA2E857F77B332BF365FCFCD65A6D92327283FD82,
+	ReferralModel_set_Error_m01052337F6EE55F1A9576CBE0F69BA40FE9F656C,
+	ReferralModel_ToString_mA389F445038429B031E9F82E4E58316181D0E0CC,
+	ReferralModel__ctor_mE8E2C12A37B6B1AC598E73DE5B5697A25194865A,
+	ReferralError_get_Message_mD55D3A550557B956A1E59548BFAD125A228B5C8E,
+	ReferralError_set_Message_m88CFDA5E2EFFC719F117130062A1212886A99E0D,
+	ReferralError_get_Code_m23DB508599A5395245E12114AAF8D69C6DAB6221,
+	ReferralError_set_Code_m2F3ABE6B3C742E7F9096D7CE1B64A986D1B30B7D,
+	ReferralError_ToString_m2904C7307EDEEC46E04019447ADC004B544377A9,
+	ReferralError__ctor_mCFE1708A978640F7D94D824CC2D332BD69A49BF8,
+	U3CNotifyReferredInstallU3Ed__30_MoveNext_mA5505F28BD587D1619320EFE55BB21CD1C1328F1,
+	U3CNotifyReferredInstallU3Ed__30_SetStateMachine_m68C3AD5BBE8BC9D7D57E82296C717DC24D20E6AB,
+	U3CReadTrackingDataU3Ed__31_MoveNext_m0D41040D0B4489F66EDDD1B97D5840B140F95AC4,
+	U3CReadTrackingDataU3Ed__31_SetStateMachine_m44BFDC4BD9DD9EB35B60CCE0766C98AAD25F4BC3,
+	U3CU3Ec__cctor_m23670EFFB61AFF549A3A8E56C378A3806CD7ECCA,
+	U3CU3Ec__ctor_mF4FE5D456FE30D71F0CA3E5BE2E2ED5DC972BEEF,
+	U3CU3Ec_U3CQueryAPIU3Eb__32_0_mA2516FC294B3C0ED8703FECB0BAEBAF6F7D7D901,
+	U3CQueryAPIU3Ed__32_MoveNext_mD616C7FF0D98B15EF9D47F0192435A0C532C5BDB,
+	U3CQueryAPIU3Ed__32_SetStateMachine_m1596457B527EF3A67BBB62877195F2FACAEBF15D,
+	U3CWaitForU3Ed__33_MoveNext_mE3C7ABE9F035C16CAB700C5A38C331FD823C899A,
+	U3CWaitForU3Ed__33_SetStateMachine_mE8DBCF1B1BCEF4753B34DBCD5814E6657AFFAD75,
+	U3CDeserializeReferralModelU3Ed__34_MoveNext_m8FE4CAFEA7890C6E6FA85FC2BC1B6E50BE562F39,
+	U3CDeserializeReferralModelU3Ed__34_SetStateMachine_m9E363FD71E321142635A781288154B8137C38297,
+};
+extern void U3CSetAdjustIdU3Ed__10_MoveNext_m33CA09038776FB5FEC6768EEB488AF9892411291_AdjustorThunk (void);
+extern void U3CSetAdjustIdU3Ed__10_SetStateMachine_mBAD01FF2234296834BA9F607B01837617BECF408_AdjustorThunk (void);
+extern void U3CGetAdjustIdU3Ed__11_MoveNext_m0ADD49C6406580F225D9460E32E60F4D5369968E_AdjustorThunk (void);
+extern void U3CGetAdjustIdU3Ed__11_SetStateMachine_mD5ED02B21ADE59B13F1A36846B9C5C242E9C433F_AdjustorThunk (void);
+extern void U3CNotifyReferredInstallU3Ed__30_MoveNext_mA5505F28BD587D1619320EFE55BB21CD1C1328F1_AdjustorThunk (void);
+extern void U3CNotifyReferredInstallU3Ed__30_SetStateMachine_m68C3AD5BBE8BC9D7D57E82296C717DC24D20E6AB_AdjustorThunk (void);
+extern void U3CReadTrackingDataU3Ed__31_MoveNext_m0D41040D0B4489F66EDDD1B97D5840B140F95AC4_AdjustorThunk (void);
+extern void U3CReadTrackingDataU3Ed__31_SetStateMachine_m44BFDC4BD9DD9EB35B60CCE0766C98AAD25F4BC3_AdjustorThunk (void);
+extern void U3CQueryAPIU3Ed__32_MoveNext_mD616C7FF0D98B15EF9D47F0192435A0C532C5BDB_AdjustorThunk (void);
+extern void U3CQueryAPIU3Ed__32_SetStateMachine_m1596457B527EF3A67BBB62877195F2FACAEBF15D_AdjustorThunk (void);
+extern void U3CWaitForU3Ed__33_MoveNext_mE3C7ABE9F035C16CAB700C5A38C331FD823C899A_AdjustorThunk (void);
+extern void U3CWaitForU3Ed__33_SetStateMachine_mE8DBCF1B1BCEF4753B34DBCD5814E6657AFFAD75_AdjustorThunk (void);
+extern void U3CDeserializeReferralModelU3Ed__34_MoveNext_m8FE4CAFEA7890C6E6FA85FC2BC1B6E50BE562F39_AdjustorThunk (void);
+extern void U3CDeserializeReferralModelU3Ed__34_SetStateMachine_m9E363FD71E321142635A781288154B8137C38297_AdjustorThunk (void);
+static Il2CppTokenAdjustorThunkPair s_adjustorThunks[14] = 
+{
+	{ 0x06000016, U3CSetAdjustIdU3Ed__10_MoveNext_m33CA09038776FB5FEC6768EEB488AF9892411291_AdjustorThunk },
+	{ 0x06000017, U3CSetAdjustIdU3Ed__10_SetStateMachine_mBAD01FF2234296834BA9F607B01837617BECF408_AdjustorThunk },
+	{ 0x06000018, U3CGetAdjustIdU3Ed__11_MoveNext_m0ADD49C6406580F225D9460E32E60F4D5369968E_AdjustorThunk },
+	{ 0x06000019, U3CGetAdjustIdU3Ed__11_SetStateMachine_mD5ED02B21ADE59B13F1A36846B9C5C242E9C433F_AdjustorThunk },
+	{ 0x06000039, U3CNotifyReferredInstallU3Ed__30_MoveNext_mA5505F28BD587D1619320EFE55BB21CD1C1328F1_AdjustorThunk },
+	{ 0x0600003A, U3CNotifyReferredInstallU3Ed__30_SetStateMachine_m68C3AD5BBE8BC9D7D57E82296C717DC24D20E6AB_AdjustorThunk },
+	{ 0x0600003B, U3CReadTrackingDataU3Ed__31_MoveNext_m0D41040D0B4489F66EDDD1B97D5840B140F95AC4_AdjustorThunk },
+	{ 0x0600003C, U3CReadTrackingDataU3Ed__31_SetStateMachine_m44BFDC4BD9DD9EB35B60CCE0766C98AAD25F4BC3_AdjustorThunk },
+	{ 0x06000040, U3CQueryAPIU3Ed__32_MoveNext_mD616C7FF0D98B15EF9D47F0192435A0C532C5BDB_AdjustorThunk },
+	{ 0x06000041, U3CQueryAPIU3Ed__32_SetStateMachine_m1596457B527EF3A67BBB62877195F2FACAEBF15D_AdjustorThunk },
+	{ 0x06000042, U3CWaitForU3Ed__33_MoveNext_mE3C7ABE9F035C16CAB700C5A38C331FD823C899A_AdjustorThunk },
+	{ 0x06000043, U3CWaitForU3Ed__33_SetStateMachine_mE8DBCF1B1BCEF4753B34DBCD5814E6657AFFAD75_AdjustorThunk },
+	{ 0x06000044, U3CDeserializeReferralModelU3Ed__34_MoveNext_m8FE4CAFEA7890C6E6FA85FC2BC1B6E50BE562F39_AdjustorThunk },
+	{ 0x06000045, U3CDeserializeReferralModelU3Ed__34_SetStateMachine_m9E363FD71E321142635A781288154B8137C38297_AdjustorThunk },
+};
+static const int32_t s_InvokerIndices[69] = 
+{
+	5467,
+	3235,
+	5467,
+	6518,
+	5467,
+	5467,
+	5467,
+	5467,
+	5467,
+	5369,
+	6743,
+	5369,
+	5369,
+	5369,
+	5369,
+	326,
+	5467,
+	1770,
+	3235,
+	1770,
+	6743,
+	6743,
+	5467,
+	6743,
+	5467,
+	10363,
+	9846,
+	10389,
+	6743,
+	6743,
+	5467,
+	5467,
+	6615,
+	4911,
+	2557,
+	4911,
+	10429,
+	6518,
+	6518,
+	5369,
+	6615,
+	5467,
+	6615,
+	5467,
+	6584,
+	5439,
+	6615,
+	5467,
+	6615,
+	6743,
+	6615,
+	5467,
+	6584,
+	5439,
+	6615,
+	6743,
+	6743,
+	5467,
+	6743,
+	5467,
+	10429,
+	6743,
+	6518,
+	6743,
+	5467,
+	6743,
+	5467,
+	6743,
+	5467,
+};
+IL2CPP_EXTERN_C const Il2CppCodeGenModule g_HomaGames_Attribution_Adjust_CodeGenModule;
+const Il2CppCodeGenModule g_HomaGames_Attribution_Adjust_CodeGenModule = 
+{
+	"HomaGames.Attribution.Adjust.dll",
+	69,
+	s_methodPointers,
+	14,
+	s_adjustorThunks,
+	s_InvokerIndices,
+	0,
+	NULL,
+	0,
+	NULL,
+	0,
+	NULL,
+	NULL,
+	NULL, // module initializer,
+	NULL,
+	NULL,
+	NULL,
+};
