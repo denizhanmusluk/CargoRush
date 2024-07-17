@@ -4,6 +4,7 @@ using UnityEngine;
 
 public interface IMachineActive
 {
-    bool machineActive { get; set; }
-
+    void MachineErrored();
+    void MachineRepaired();
+    bool errorActive { get; set; }
 }

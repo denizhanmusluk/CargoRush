@@ -10,7 +10,7 @@ public class RepairWorker : MonoBehaviour
     public ShowBuyRapairReward showBuyRapairReward;
     public void GoToMachine()
     {
-        aiMoving.GoTargetStart(machineRepairArea.targetMachinePos);
+        //aiMoving.GoTargetStart(machineRepairArea.targetMachinePos);
         aiMoving.BehaviourInit(StartRepairAnimation);
     }
     void StartRepairAnimation()
@@ -27,19 +27,19 @@ public class RepairWorker : MonoBehaviour
         while(counter < 1f)
         {
             counter += Time.deltaTime;
-            transform.position = Vector3.Lerp(firstPos, machineRepairArea.targetMachinePos.position, counter);
-            transform.rotation = Quaternion.Lerp(firstRot, machineRepairArea.targetMachinePos.rotation, counter);
+            //transform.position = Vector3.Lerp(firstPos, machineRepairArea.targetMachinePos.position, counter);
+            //transform.rotation = Quaternion.Lerp(firstRot, machineRepairArea.targetMachinePos.rotation, counter);
 
             yield return null;
         }
-        transform.position = machineRepairArea.targetMachinePos.position;
-        transform.rotation = machineRepairArea.targetMachinePos.rotation;
+        //transform.position = machineRepairArea.targetMachinePos.position;
+        //transform.rotation = machineRepairArea.targetMachinePos.rotation;
         animator.SetBool("repair", true);
     }
     public void GoExit()
     {
         animator.SetBool("repair", false);
-        aiMoving.GoTargetStart(machineRepairArea.repairExitPos);
+        //aiMoving.GoTargetStart(machineRepairArea.repairExitPos);
         aiMoving.BehaviourInit(SelfClose);
     }
     void SelfClose()

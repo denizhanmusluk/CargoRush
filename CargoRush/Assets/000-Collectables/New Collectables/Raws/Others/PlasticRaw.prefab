@@ -57,7 +57,7 @@ MonoBehaviour:
   collectActive: 0
   productCollectActive: 0
   rotateActive: 1
-  collectID: 0
+  collectID: 25
   spriteTR: {fileID: 0}
   roofPushActive: 1
   fishArea: {fileID: 0}
@@ -67,6 +67,7 @@ MonoBehaviour:
   collectableList: []
   anim: {fileID: 0}
   isGem: 0
+  bantGO: {fileID: 0}
 --- !u!54 &6633081907204807285
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -113,6 +114,7 @@ MonoBehaviour:
   rb: {fileID: 6633081907204807285}
   productId: 1
   shadowGO: {fileID: 0}
+  collectorActive: 1
 --- !u!135 &-4968638076623587845
 SphereCollider:
   m_ObjectHideFlags: 0

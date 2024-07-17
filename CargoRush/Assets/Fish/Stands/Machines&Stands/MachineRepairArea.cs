@@ -5,103 +5,67 @@ using UnityEngine.UI;
 
 public class MachineRepairArea : MonoBehaviour
 {
-    public ProcessMachine processMachine;
-    [SerializeField] Image imageFill;
-    bool upgradeOpenActive = false;
+    public GameObject processMachine;
+    public List<MachineRepair> machineRepairList = new List<MachineRepair>();
 
-    bool repairActive = false;
-    public RepairWorker repairWorker;
-    public Transform repairCreatePos;
-    public Transform targetMachinePos;
-    public Transform repairExitPos;
-    bool repairStarted = false;
     private void OnEnable()
     {
-        repairActive = true;
-
         if(PlayerPrefs.GetInt("firsterrormachine") == 0)
         {
             TutorialManager.Instance.repairMachineGO.SetActive(true);
-            IndicatorManager.Instance.IndicaorActive(transform);
+            IndicatorManager.Instance.IndicaorActive(machineRepairList[0].transform);
         }
+        RepairListOpen();
     }
-    private void OnTriggerEnter(Collider other)
+    void RepairListOpen()
     {
-        if (other.GetComponent<PlayerController>() != null && !repairStarted)
+        foreach(var rpr in machineRepairList)
         {
-            upgradeOpenActive = true;
-            StartCoroutine(CooldownActive(2f));
+            rpr.gameObject.SetActive(true);
+            rpr.machineRepairArea = this;
         }
     }
-    private void OnTriggerExit(Collider other)
+    public void RepairingCheck()
     {
-        if (other.GetComponent<PlayerController>() != null && !repairStarted)
-        {
-            upgradeOpenActive = false;
-        }
-    }
+        bool repairingActive = true;
 
-    IEnumerator CooldownActive(float time)
-    {
-        float counter = 0f;
-        while (counter < time && upgradeOpenActive)
+        for(int i = 0; i < machineRepairList.Count; i++)
         {
-            counter += Time.deltaTime;
-            imageFill.fillAmount = counter / time;
-            yield return null;
+            if (!machineRepairList[i].repairStarted)
+            {
+                repairingActive = false;
+            }
         }
-        if (counter >= time)
-        {
-            upgradeOpenActive = false;
-            RepairStarted();
-            StartCoroutine(CooldownPasive());
-        }
-        else
-        {
-            StartCoroutine(CooldownPasive());
-        }
-    }
-
-    IEnumerator CooldownPasive()
-    {
-        float lastValue = imageFill.fillAmount;
-        float counter = 0f;
-        while (counter < 1f)
-        {
-            counter += 4 * Time.deltaTime;
-            imageFill.fillAmount = Mathf.Lerp(lastValue, 0, counter);
-
-            yield return null;
-        }
-    }
-    void RepairStarted()
-    {
-        repairActive = false;
-        StartCoroutine(RepairStartedDelay());
-    }
-    IEnumerator RepairStartedDelay()
-    {
         if (PlayerPrefs.GetInt("firsterrormachine") == 0)
         {
-            PlayerPrefs.SetInt("firsterrormachine", 1);
-            TutorialManager.Instance.repairMachineGO.SetActive(false);
-            IndicatorManager.Instance.IndicaorDeActive();
+            List<MachineRepair> tempMachineRepair = new List<MachineRepair>();
+            for (int i = 0; i < machineRepairList.Count; i++)
+            {
+                if (!machineRepairList[i].repairStarted)
+                {
+                    tempMachineRepair.Add(machineRepairList[i]);
+                }
+            }
+
+            if (tempMachineRepair.Count > 0)
+            {
+                TutorialManager.Instance.repairMachineGO.SetActive(true);
+                IndicatorManager.Instance.IndicaorActive(tempMachineRepair[0].transform);
+            }
         }
-        repairStarted = true;
-        repairWorker.transform.position = repairCreatePos.position;
-        yield return new WaitForSeconds(0.1f);
-        repairWorker.gameObject.SetActive(true);
-        repairWorker.GoToMachine();
-
-        yield return new WaitForSeconds(4f);
-        processMachine.RepairStarter();
-        yield return new WaitForSeconds(0.5f);
-
-        repairActive = true;
-        repairStarted = false;
-        gameObject.SetActive(false);
-        repairWorker.showBuyRapairReward.showActive = true;
-        repairWorker.showBuyRapairReward.Canvas.SetActive(true);
-
+        if (repairingActive)
+        {
+            if (PlayerPrefs.GetInt("firsterrormachine") == 0)
+            {
+                PlayerPrefs.SetInt("firsterrormachine", 1);
+                TutorialManager.Instance.repairMachineGO.SetActive(false);
+                IndicatorManager.Instance.IndicaorDeActive();
+            }
+            if (processMachine.GetComponent<IMachineActive>() != null)
+            {
+                processMachine.GetComponent<IMachineActive>().MachineRepaired();
+            }
+            gameObject.SetActive(false);
+        }
     }
 }

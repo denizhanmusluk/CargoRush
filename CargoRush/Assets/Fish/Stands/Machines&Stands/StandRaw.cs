@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class StandRaw : Stand
 {
@@ -10,21 +11,28 @@ public class StandRaw : Stand
     [SerializeField] int customerCount;
 
     public Collectable[] rawPrefabs;
+    public int maxBandCapacity = 10;
+    public int currentBandCount = 0;
+    public ProcessMachine processMachine;
+    public TextMeshProUGUI bandText;
+
+    public BandStock bandStock;
     public override void CollectableCountSet()
     {
-        PlayerPrefs.SetInt(machineName + "rawcount", droppedCollectionList.Count);
+        PlayerPrefs.SetInt(machineName + "rawcount", currentBandCount);
+        bandText.text = (currentBandCount).ToString() + "/" + (maxBandCapacity).ToString();
 
     }
     public override void SpecificStart()
     {
-
+        bandText.text = (currentBandCount).ToString() + "/" + (maxBandCapacity).ToString();
         _CollectProduct.collectables = droppedCollectionList;
 
         //_FishDropArea.standList.Add(this);
-        foreach (var wrkArea in workAreaList)
-        {
-            wrkArea.standList.Add(this);
-        }
+        //foreach (var wrkArea in workAreaList)
+        //{
+        //    wrkArea.standList.Add(this);
+        //}
         StandReActive();
         FishCountInit();
         ManuealRawCreate();
@@ -46,7 +54,7 @@ public class StandRaw : Stand
 
     public override void DropCollection(int collectAmount, StackCollect _stackCollect)
     {
-        if (collectAmount > 0 && fishCountCurrent > 0 && _stackCollect.collectionTrs[0] != null)
+        if (collectAmount > 0 &&  _stackCollect.collectionTrs[0] != null)
         {
             //VibratoManager.Instance.MediumMultiVibration();
             _stackCollect.collectActive = false;
@@ -81,7 +89,7 @@ public class StandRaw : Stand
 
 
         droppedCollectionList.Add(droppingCollection);
-        PlayerPrefs.SetInt(machineName + "rawcount", droppedCollectionList.Count);
+        PlayerPrefs.SetInt(machineName + "rawcount", currentBandCount);
 
         yield return null;
         droppingCollection.collectActive = false;
@@ -102,11 +110,11 @@ public class StandRaw : Stand
         }
         yield return new WaitForSeconds(0.5f);
         _stackCollect.collectActive = true;
-        foreach (var wrkArea in workAreaList)
-        {
-            wrkArea.ShuffleStandList();
-            wrkArea.ShuffleCollectProductList();
-        }
+        //foreach (var wrkArea in workAreaList)
+        //{
+        //    wrkArea.ShuffleStandList();
+        //    wrkArea.ShuffleCollectProductList();
+        //}
     }
 
     IEnumerator Drop(Transform dropPosTR, Vector3 dropPos, Collectable collectable, float waitTime)
@@ -182,6 +190,20 @@ public class StandRaw : Stand
             //}
 
         }
+
+        currentBandCount++;
+        fishCountCurrent++;
+        bandText.text = (currentBandCount).ToString() + "/" + (maxBandCapacity).ToString();
+
+        if (currentBandCount >= maxBandCapacity)
+        {
+            currentBandCount = maxBandCapacity;
+            processMachine.bandActive = true;
+            FullBand();
+        }
+
+        droppedCollectionList.Remove(collectable);
+        Destroy(collectable.gameObject, 0.1f);
     }
 
 
@@ -212,13 +234,16 @@ public class StandRaw : Stand
         yield return new WaitForSeconds(1f);
         for (int i = 0; i < PlayerPrefs.GetInt(machineName + "rawcount"); i++)
         {
-            GameObject newProduct = Instantiate(rawPrefabs[0].gameObject);
-            newProduct.GetComponent<Collectable>().collectActive = false;
+            //GameObject newProduct = Instantiate(rawPrefabs[0].gameObject);
+            //newProduct.GetComponent<Collectable>().collectActive = false;
 
-            newProduct.GetComponent<Collectable>().fishCollectable = droppedCollectionList;
+            //newProduct.GetComponent<Collectable>().fishCollectable = droppedCollectionList;
 
-            droppedCollectionList.Add(newProduct.GetComponent<Collectable>());
-
+            //droppedCollectionList.Add(newProduct.GetComponent<Collectable>());
+            currentBandCount++;
+            bandText.text = (currentBandCount).ToString() + "/" + (maxBandCapacity).ToString();
+            processMachine.bandActive = true;
+            FullBand();
 
             float deltaY = 0;
             Transform targetTR;
@@ -229,16 +254,30 @@ public class StandRaw : Stand
             Vector3 dropPos = targetTR.position + new Vector3(0, deltaY * 0.3f, 0);
             Quaternion targetRot = targetTR.transform.rotation;
 
-            newProduct.transform.parent = targetTR.parent;
+            //newProduct.transform.parent = targetTR.parent;
 
 
-            newProduct.transform.position = dropPos;
-            newProduct.transform.rotation = targetRot;
-            fishCountCurrent -= 1;
-            fishCountText.text = (fishCountTotal - fishCountCurrent).ToString() + "/" + (fishCountTotal).ToString();
+            //newProduct.transform.position = dropPos;
+            //newProduct.transform.rotation = targetRot;
+            //fishCountCurrent -= 1;
             //yield return new WaitForSeconds(0.2f);
-            newProduct.GetComponent<Collectable>().productCollectActive = true;
+            //newProduct.GetComponent<Collectable>().productCollectActive = true;
             yield return null;
         }
+        bandText.text = (currentBandCount).ToString() + "/" + (maxBandCapacity).ToString();
+
+        if(currentBandCount == 0)
+        {
+            EmptyBand();
+        }
+    }
+
+    public void EmptyBand()
+    {
+        bandStock.ManuelRawCreate();
+    }
+    public void FullBand()
+    {
+
     }
 }

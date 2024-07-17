@@ -298,4 +298,32 @@ public class FishDropArea : MonoBehaviour
         productViewCamera.Priority = 0;
         TutorialManager.Instance.newProductTutorialGO.SetActive(false);
     }
+
+
+
+
+    public List<IMachineActive> packMachines = new List<IMachineActive>();
+    public void BoxPackageCounter()
+    {
+        PlayerPrefs.SetInt("totalboxpackagecount", PlayerPrefs.GetInt("totalboxpackagecount") + 1);
+
+        if (PlayerPrefs.GetInt("totalboxpackagecount") % ((Globals.collectableLevel + 1) * 15) == 0)
+        {
+            List<IMachineActive> packMachinesTemp = new List<IMachineActive>();
+
+            for(int i = 0; i < packMachines.Count; i++)
+            {
+                if (!packMachines[i].errorActive)
+                {
+                    packMachinesTemp.Add(packMachines[i]);
+                }
+            }
+            if (packMachinesTemp.Count > 0)
+            {
+                int randomSelectMach = Random.Range(0, packMachinesTemp.Count);
+                packMachinesTemp[randomSelectMach].MachineErrored();
+
+            }
+        }
+    }
 }

@@ -224,14 +224,17 @@ public abstract class Stand : MonoBehaviour
             counter += Time.deltaTime;
             float value = Mathf.Lerp((float)Old, (float)fishCountCurrent, counter);
 
-            fishCountText.text = (fishCountTotal - (int)value).ToString() + "/" + (fishCountTotal).ToString();
-
+            if (fishCountText != null)
+            {
+                fishCountText.text = (fishCountTotal - (int)value).ToString() + "/" + (fishCountTotal).ToString();
+            }
 
             yield return null;
         }
-
-        fishCountText.text = (fishCountTotal - fishCountCurrent).ToString() + "/" + (fishCountTotal).ToString();
-
+        if (fishCountText != null)
+        {
+            fishCountText.text = (fishCountTotal - fishCountCurrent).ToString() + "/" + (fishCountTotal).ToString();
+        }
         if (fishCountCurrent == 0 && !resetActive)
         {
             resetActive = true;

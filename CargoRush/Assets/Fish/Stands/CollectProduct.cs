@@ -33,14 +33,14 @@ public class CollectProduct : MonoBehaviour
     public ProcessMachine processMachine;
     private void Awake()
     {
-        if (processMachine != null)
-        {
-            processMachine.collectProducts.Add(this);
-            if (processMachine.machineErrored)
-            {
-                collectActive = false;
-            }
-        }
+        //if (processMachine != null)
+        //{
+        //    processMachine.collectProducts.Add(this);
+        //    if (processMachine.machineErrored)
+        //    {
+        //        collectActive = false;
+        //    }
+        //}
      
     }
     private void Start()
@@ -81,7 +81,7 @@ public class CollectProduct : MonoBehaviour
                             {
                                 if ((collectableType == CollectType.Type1 && Globals.productType1) || (collectableType == CollectType.Type2 && Globals.productType2) || (collectableType == CollectType.Type3 && Globals.productType3) || (collectableType == CollectType.Type4 && Globals.productType4) || (collectableType == CollectType.Type5 && Globals.productType5))
                                 {
-                                    if (!processMachine.machineErrored)
+                                    //if (!processMachine.machineErrored)
                                     {
                                         collectables[collectables.Count - 1].productCollectActive = false;
 
@@ -102,10 +102,10 @@ public class CollectProduct : MonoBehaviour
                                         }
 
                                     }
-                                    else
-                                    {
-                                        noneCollectGO.SetActive(true);
-                                    }
+                                    //else
+                                    //{
+                                    //    noneCollectGO.SetActive(true);
+                                    //}
                                 }
                          
 

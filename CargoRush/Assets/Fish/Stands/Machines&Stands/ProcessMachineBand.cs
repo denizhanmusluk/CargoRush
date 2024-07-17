@@ -5,12 +5,12 @@ using UnityEngine.UI;
 using TMPro;
 using Cinemachine;
 
-public class ProcessMachine : Stand, IStandUpgrade, IMachineActive
+public class ProcessMachineBand : Stand, IStandUpgrade, IMachineActive
 {
     [SerializeField] Transform fishInTR, converFishtoCannedTR, fishOutTR, outTR2;
     [SerializeField] Transform fishInTR_Second;
     public Collectable[] productsPrefab;
-   
+
     public Transform[] fishPosTR;
 
 
@@ -126,7 +126,7 @@ public class ProcessMachine : Stand, IStandUpgrade, IMachineActive
     }
     IEnumerator RepairManReactiveDelay()
     {
-       
+
         //repairWorker.transform.position = machineRepairArea.repairCreatePos.position;
         yield return new WaitForSeconds(0.1f);
         repairWorker.gameObject.SetActive(true);
@@ -220,7 +220,7 @@ public class ProcessMachine : Stand, IStandUpgrade, IMachineActive
         }
         IndicatorManager.Instance.machines.Add(this);
 
-        if(collectType == CollectType.Type1)
+        if (collectType == CollectType.Type1)
         {
             Globals.productType1 = true;
         }
@@ -311,7 +311,7 @@ public class ProcessMachine : Stand, IStandUpgrade, IMachineActive
         //}
 
         StartCoroutine(StartDelay());
-        if(standOnlineGO != null)
+        if (standOnlineGO != null)
         {
             standOnlineGO.SetActive(true);
         }
@@ -335,7 +335,7 @@ public class ProcessMachine : Stand, IStandUpgrade, IMachineActive
     }
     void StandCarCollectIdSet()
     {
-        
+
     }
     void FishCountInit()
     {
@@ -389,7 +389,7 @@ public class ProcessMachine : Stand, IStandUpgrade, IMachineActive
                 {
                     lst.productCollectActive = true;
                 }
-             
+
             }
             yield return new WaitForSeconds(0.1f);
             MissionManager.Instance.TapingLineMissionStart();
@@ -398,105 +398,66 @@ public class ProcessMachine : Stand, IStandUpgrade, IMachineActive
     }
 
 
-    public bool bandActive = false;
+
     IEnumerator CannedCreator()
     {
 
         yield return new WaitForSeconds(0.1f);
-        if (droppedCollectionList.Count > rawCountPerProduct - 1 && cannedCount < productCountTotal && !machineErrored)
+        if (otherRawStand.currentBandCount > 0 && droppedCollectionList.Count > rawCountPerProduct - 1 && cannedCount < productCountTotal && !machineErrored)
         {
-            if (otherRawStand != null)
+            MachineActive();
+        }
+
+        while (otherRawStand.currentBandCount > 0 && droppedCollectionList.Count > rawCountPerProduct - 1 && cannedCount < productCountTotal && !machineErrored)
+        {
+       
+            cannedCount++;
+
+            
+
+           
+            Collectable raws = droppedCollectionList[droppedCollectionList.Count - 1];
+            droppedCollectionList.Remove(droppedCollectionList[droppedCollectionList.Count - 1]);
+            PlayerPrefs.SetInt(machineName + "rawcount" + PlayerPrefs.GetInt("level"), droppedCollectionList.Count);
+
+
+
+            StartCoroutine(CreateCanned(raws));
+            dropActive = false;
+            fishCountCurrent += rawCountPerProduct;
+            fishCountText.text = (fishCountTotal - fishCountCurrent).ToString() + "/" + (fishCountTotal).ToString();
+            yield return new WaitForSeconds((waitTime / Globals.repairSpeedSkin) / speedFactor);
+            workAreaList[0].StnadFullCheck();
+            //MissionManager.Instance.OrderMissionStart();
+            //MissionManager.Instance.orderMission.MissionUpdate();
+            MissionManager.Instance.TapeBoxMissionStart();
+            MissionManager.Instance.tapeBoxMission.MissionUpdate();
+
+            if (PlayerPrefs.GetInt("level") == 0)
             {
-                if (otherRawStand.currentBandCount > 0 && bandActive)
-                {
-                    MachineActive();
-                }
+                Globals.myShareValue += 1;
+            }
+            else if (PlayerPrefs.GetInt("level") == 1)
+            {
+                Globals.myShareValue += 3;
             }
             else
             {
-                MachineActive();
+                Globals.myShareValue += 6;
             }
-        }
-        if (otherRawStand != null)
-        {
-            while (bandActive && otherRawStand.currentBandCount > 0 && droppedCollectionList.Count > rawCountPerProduct - 1 && cannedCount < productCountTotal && !machineErrored)
+            PlayerPrefs.SetInt("myShareValue", Globals.myShareValue);
+
+
+            FishDropArea.Instance.BoxPackageCounter();
+
+            packageCount++;
+
+            if (packageCount % bandPerPackageCount == 0)
             {
-                cannedCount++;
-                Collectable raws = droppedCollectionList[droppedCollectionList.Count - 1];
-                droppedCollectionList.Remove(droppedCollectionList[droppedCollectionList.Count - 1]);
-                PlayerPrefs.SetInt(machineName + "rawcount" + PlayerPrefs.GetInt("level"), droppedCollectionList.Count);
-                StartCoroutine(CreateCanned(raws));
-                dropActive = false;
-                fishCountCurrent += rawCountPerProduct;
-                fishCountText.text = (fishCountTotal - fishCountCurrent).ToString() + "/" + (fishCountTotal).ToString();
-                yield return new WaitForSeconds((waitTime / Globals.repairSpeedSkin) / speedFactor);
-                workAreaList[0].StnadFullCheck();
-                MissionManager.Instance.TapeBoxMissionStart();
-                MissionManager.Instance.tapeBoxMission.MissionUpdate();
-
-                if (PlayerPrefs.GetInt("level") == 0)
-                {
-                    Globals.myShareValue += 1;
-                }
-                else if (PlayerPrefs.GetInt("level") == 1)
-                {
-                    Globals.myShareValue += 3;
-                }
-                else
-                {
-                    Globals.myShareValue += 6;
-                }
-                PlayerPrefs.SetInt("myShareValue", Globals.myShareValue);
-                FishDropArea.Instance.BoxPackageCounter();
-                packageCount++;
-
-                if (packageCount % bandPerPackageCount == 0)
-                {
-                    otherRawStand.currentBandCount--;
-                    otherRawStand.CollectableCountSet();
-
-                    if(otherRawStand.currentBandCount == 0)
-                    {
-                        bandActive = false;
-                        otherRawStand.EmptyBand();
-                    }
-                }
+                otherRawStand.currentBandCount--;
             }
         }
-        else
-        {
-            while (droppedCollectionList.Count > rawCountPerProduct - 1 && cannedCount < productCountTotal && !machineErrored)
-            {
-                cannedCount++;
-                Collectable raws = droppedCollectionList[droppedCollectionList.Count - 1];
-                droppedCollectionList.Remove(droppedCollectionList[droppedCollectionList.Count - 1]);
-                PlayerPrefs.SetInt(machineName + "rawcount" + PlayerPrefs.GetInt("level"), droppedCollectionList.Count);
-                StartCoroutine(CreateCanned(raws));
-                dropActive = false;
-                fishCountCurrent += rawCountPerProduct;
-                fishCountText.text = (fishCountTotal - fishCountCurrent).ToString() + "/" + (fishCountTotal).ToString();
-                yield return new WaitForSeconds((waitTime / Globals.repairSpeedSkin) / speedFactor);
-                workAreaList[0].StnadFullCheck();
-                MissionManager.Instance.TapeBoxMissionStart();
-                MissionManager.Instance.tapeBoxMission.MissionUpdate();
-
-                if (PlayerPrefs.GetInt("level") == 0)
-                {
-                    Globals.myShareValue += 1;
-                }
-                else if (PlayerPrefs.GetInt("level") == 1)
-                {
-                    Globals.myShareValue += 3;
-                }
-                else
-                {
-                    Globals.myShareValue += 6;
-                }
-                PlayerPrefs.SetInt("myShareValue", Globals.myShareValue);
-                FishDropArea.Instance.BoxPackageCounter();
-            }
-        }
-
+        //  MinesDropAreaCheck();
         yield return new WaitForSeconds(2f);
         cannedCount = productCollectionList.Count;
         MachineStop();
@@ -505,7 +466,7 @@ public class ProcessMachine : Stand, IStandUpgrade, IMachineActive
             StartCoroutine(CreatorChecking());
         }
     }
-  
+
     IEnumerator CreateCanned(Collectable raws)
     {
 
@@ -541,7 +502,7 @@ public class ProcessMachine : Stand, IStandUpgrade, IMachineActive
             posY = psoY_Factor * Mathf.Sin(angle);
             raws.transform.position = Vector3.Lerp(firstPoss, new Vector3(dropPoss.x, dropPoss.y + posY, dropPoss.z), counter);
             raws.transform.rotation = Quaternion.Lerp(firstRots, targetRots, counter);
-       
+
             yield return null;
         }
 
@@ -565,7 +526,7 @@ public class ProcessMachine : Stand, IStandUpgrade, IMachineActive
         // go convert position
         firstPoss = raws.transform.position;
         firstRots = raws.transform.rotation;
-      
+
         counter = 0f;
         while (counter < 1f)
         {
@@ -610,7 +571,7 @@ public class ProcessMachine : Stand, IStandUpgrade, IMachineActive
 
         newProduct.GetComponent<Collectable>().bantGO.SetActive(true);
         newProduct.GetComponent<Collectable>().bantGO.GetComponent<Animator>().SetFloat("speed", speedFactor * _speedFactor);
-       counter = 0f;
+        counter = 0f;
         while (counter < 1f)
         {
             counter += 2 * Time.deltaTime;
@@ -642,10 +603,10 @@ public class ProcessMachine : Stand, IStandUpgrade, IMachineActive
     {
         float moveSpeed = 6f;
         float rotSpeed = 8f;
-        for(int i = 0; i < aiPath.aiNodes.Count; i++)
+        for (int i = 0; i < aiPath.aiNodes.Count; i++)
         {
             kizakRunning = true;
-            while (Vector3.Distance( box.transform.position,aiPath.aiNodes[i].transform.position ) > 0.5f)
+            while (Vector3.Distance(box.transform.position, aiPath.aiNodes[i].transform.position) > 0.5f)
             {
                 while (machineIsFull || machineErrored)
                 {
@@ -874,22 +835,22 @@ public class ProcessMachine : Stand, IStandUpgrade, IMachineActive
         _stackCollect.collectionTrs.Remove(deletedCollect);
 
 
-        
-            droppedCollectionList.Add(droppingCollection);
+
+        droppedCollectionList.Add(droppingCollection);
         PlayerPrefs.SetInt(machineName + "rawcount" + PlayerPrefs.GetInt("level"), droppedCollectionList.Count);
 
         yield return null;
-            droppingCollection.collectActive = false;
-            float deltaY = 0;
-            deltaY = (droppedCollectionList.Count - 1) / fishPosTR.Length;
-            Transform targetTR = fishPosTR[(droppedCollectionList.Count - 1) % fishPosTR.Length];
-            Vector3 dropPos = targetTR.position + new Vector3(0, deltaY * 1.25f, 0);
-            StartCoroutine(Drop(targetTR, dropPos, droppingCollection, Time.deltaTime));
-            if (_stackCollect.player)
-            {
-                VibratoManager.Instance.LightVibration();
-            }
-        
+        droppingCollection.collectActive = false;
+        float deltaY = 0;
+        deltaY = (droppedCollectionList.Count - 1) / fishPosTR.Length;
+        Transform targetTR = fishPosTR[(droppedCollectionList.Count - 1) % fishPosTR.Length];
+        Vector3 dropPos = targetTR.position + new Vector3(0, deltaY * 1.25f, 0);
+        StartCoroutine(Drop(targetTR, dropPos, droppingCollection, Time.deltaTime));
+        if (_stackCollect.player)
+        {
+            VibratoManager.Instance.LightVibration();
+        }
+
 
         if (_stackCollect.collectionTrs.Count == 0)
         {
@@ -922,7 +883,7 @@ public class ProcessMachine : Stand, IStandUpgrade, IMachineActive
         }
 
         float timeCounter = 0;
-     
+
 
         float angle = 0f;
         float posY = 0f;
@@ -1022,7 +983,7 @@ public class ProcessMachine : Stand, IStandUpgrade, IMachineActive
 
             newProduct.GetComponent<Collectable>().fishCollectable = productCollectionList;
             newProduct.GetComponent<Collectable>().anim.SetTrigger("etiket");
-            newProduct.GetComponent<Collectable>().anim.SetFloat("speed" , 1);
+            newProduct.GetComponent<Collectable>().anim.SetFloat("speed", 1);
             newProduct.GetComponent<Collectable>().bantGO.SetActive(true);
             newProduct.GetComponent<Collectable>().bantGO.GetComponent<Animator>().SetFloat("speed", 1);
 
