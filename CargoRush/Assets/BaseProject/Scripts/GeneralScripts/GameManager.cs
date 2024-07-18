@@ -29,6 +29,10 @@ public class GameManager : Observer
         Globals.moneyAmount = PlayerPrefs.GetInt("money");
         Globals.gemAmount = PlayerPrefs.GetInt("gem");
 
+        if (Globals.gemAmount > 0)
+        {
+            ui.gemPanel.SetActive(true);
+        }
         //if (PlayerPrefs.GetInt("money") != 0)
         //{
         //    Globals.moneyAmount = PlayerPrefs.GetInt("money");

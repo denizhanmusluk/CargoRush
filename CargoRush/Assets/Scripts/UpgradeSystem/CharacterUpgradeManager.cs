@@ -172,11 +172,13 @@ public class CharacterUpgradeManager : MonoBehaviour
 
     public void MoveSpeedUpgrade_ADV_Click()
     {
-        ADVManager.Instance.RewardedStart(MoveSpeedUpgradeFree);
+        string adv_name = "";
+        ADVManager.Instance.RewardedStart(MoveSpeedUpgradeFree, adv_name);
     }
     public void StackCapacityUpgrade_ADV_Click()
     {
-        ADVManager.Instance.RewardedStart(StackCapacityUpgradeFree);
+        string adv_name = "";
+        ADVManager.Instance.RewardedStart(StackCapacityUpgradeFree, adv_name);
     }
     public void MoveSpeedUpgradeFree()
     {

@@ -41,6 +41,12 @@ public class CollectProgressManager : MonoBehaviour
     public Image shopProgresFillBG;
     public Image shopFirstIcon, shopTargetIcon;
     public GameObject questMarkImgGO;
+
+
+    public Image errorFill;
+    public GameObject dirtyProgressPanelGo;
+    public GameObject dirtyProgressPanelBGGo;
+    public GameObject dirtyActiveImgGO;
     private void Awake()
     {
         _instance = this;

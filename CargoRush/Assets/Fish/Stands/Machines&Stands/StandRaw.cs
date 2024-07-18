@@ -17,6 +17,8 @@ public class StandRaw : Stand
     public TextMeshProUGUI bandText;
 
     public BandStock bandStock;
+
+    public GameObject needPackTape_GO;
     public override void CollectableCountSet()
     {
         PlayerPrefs.SetInt(machineName + "rawcount", currentBandCount);
@@ -115,6 +117,20 @@ public class StandRaw : Stand
         //    wrkArea.ShuffleStandList();
         //    wrkArea.ShuffleCollectProductList();
         //}
+        if (PlayerPrefs.GetInt("bandstocktutorial") == 2)
+        {
+            PlayerPrefs.SetInt("bandstocktutorial", 3);
+            TutorialManager.Instance.bandTut_2.SetActive(true);
+            TutorialManager.Instance.bandTut_3.SetActive(false);
+            IndicatorManager.Instance.IndicaorActive(bandStock._CollectProducts.transform);
+        }
+        if (PlayerPrefs.GetInt("bandstocktutorial") == 4)
+        {
+            PlayerPrefs.SetInt("bandstocktutorial", 5);
+            TutorialManager.Instance.bandTut_2.SetActive(false);
+            TutorialManager.Instance.bandTut_3.SetActive(false);
+            IndicatorManager.Instance.IndicaorDeActive();
+        }
     }
 
     IEnumerator Drop(Transform dropPosTR, Vector3 dropPos, Collectable collectable, float waitTime)
@@ -251,7 +267,7 @@ public class StandRaw : Stand
             deltaY = (droppedCollectionList.Count - 1) / fishPosTR.Length;
             targetTR = fishPosTR[(droppedCollectionList.Count - 1) % fishPosTR.Length];
 
-            Vector3 dropPos = targetTR.position + new Vector3(0, deltaY * 0.3f, 0);
+            Vector3 dropPos = targetTR.position + new Vector3(0, deltaY * 0.01f, 0);
             Quaternion targetRot = targetTR.transform.rotation;
 
             //newProduct.transform.parent = targetTR.parent;
@@ -275,9 +291,10 @@ public class StandRaw : Stand
     public void EmptyBand()
     {
         bandStock.ManuelRawCreate();
+        needPackTape_GO.SetActive(true);
     }
     public void FullBand()
     {
-
+        needPackTape_GO.SetActive(false);
     }
 }

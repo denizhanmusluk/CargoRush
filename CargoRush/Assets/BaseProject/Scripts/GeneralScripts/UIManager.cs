@@ -198,14 +198,15 @@ public class UIManager : Subject
         PlayerPrefs.SetInt("gem", Globals.gemAmount);
 
         StarPanelManager.Instance.MoneyEnoughCheck();
+        gemPanel.SetActive(true);
 
-        if(PlayerPrefs.GetInt("skinactive") == 0)
-        {
-            //gemPanel.SetActive(true);
-            StoreManager.Instance.storeButton.SetActive(true);
-            StoreManager.Instance.storeButtonTapTutorialGO.SetActive(true);
-            PlayerPrefs.SetInt("skinactive", 1);
-        }
+        //if(PlayerPrefs.GetInt("skinactive") == 0)
+        //{
+        //    //gemPanel.SetActive(true);
+        //    StoreManager.Instance.storeButton.SetActive(true);
+        //    StoreManager.Instance.storeButtonTapTutorialGO.SetActive(true);
+        //    PlayerPrefs.SetInt("skinactive", 1);
+        //}
     }
     bool gemSetActive;
 
@@ -470,7 +471,8 @@ public class UIManager : Subject
     public void HoverboardSkill_ADV_Click()
     {
         PlayerController.Instance.PlayerControl_ReActive();
-        ADVManager.Instance.RewardedStart(HoverboardSkillClick);
+        string adv_name = "";
+        ADVManager.Instance.RewardedStart(HoverboardSkillClick,adv_name);
         string tag = "SpeedBoostRewarded";
         GameManager.Instance.GameAnalyticsTag(tag);
     }
@@ -491,7 +493,9 @@ public class UIManager : Subject
     public void CapacitySkill_ADV_Click()
     {
         PlayerController.Instance.PlayerControl_ReActive();
-        ADVManager.Instance.RewardedStart(CapacitySkillClick);
+
+        string adv_name = "";
+        ADVManager.Instance.RewardedStart(CapacitySkillClick,adv_name);
         string tag = "InfiniteCapacityRewarded";
         GameManager.Instance.GameAnalyticsTag(tag);
     }
@@ -513,7 +517,8 @@ public class UIManager : Subject
     public void DoubleIncomeSkill_ADV_Click()
     {
         PlayerController.Instance.PlayerControl_ReActive();
-        ADVManager.Instance.RewardedStart(DoubleIncomeSkillClick);
+        string adv_name = "";
+        ADVManager.Instance.RewardedStart(DoubleIncomeSkillClick,adv_name);
 
         string tag = "DoubleIncomeRewarded";
         GameManager.Instance.GameAnalyticsTag(tag);
@@ -541,7 +546,8 @@ public class UIManager : Subject
     public void FreeMoneySkill_ADV_Click()
     {
         PlayerController.Instance.PlayerControl_ReActive();
-        ADVManager.Instance.RewardedStart(FreeMoneySkill);
+        string adv_name = "";
+        ADVManager.Instance.RewardedStart(FreeMoneySkill,adv_name);
 
         string tag = "MoneyBagRewarded";
         GameManager.Instance.GameAnalyticsTag(tag);

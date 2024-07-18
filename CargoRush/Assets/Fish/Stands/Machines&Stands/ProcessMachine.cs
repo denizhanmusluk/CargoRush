@@ -89,13 +89,14 @@ public class ProcessMachine : Stand, IStandUpgrade, IMachineActive
         {
             machineErrored = false;
             errorActive = false;
-
+            //Globals.machineErrorActive = false;
         }
         else
         {
             machineErrored = true;
             errorActive = true;
             machineRepairArea.gameObject.SetActive(true);
+            Globals.machineErrorActive = true;
         }
     }
     public void MachineErrored()
@@ -104,12 +105,17 @@ public class ProcessMachine : Stand, IStandUpgrade, IMachineActive
         machineErrored = true;
         machineRepairArea.gameObject.SetActive(true);
         PlayerPrefs.SetInt(machineName + "iserror" + PlayerPrefs.GetInt("level"), 1);
+        CollectProgressManager.Instance.dirtyActiveImgGO.SetActive(true);
+        Globals.machineErrorActive = true;
     }
     public void MachineRepaired()
     {
         errorActive = false;
         machineErrored = false;
         PlayerPrefs.SetInt(machineName + "iserror" + PlayerPrefs.GetInt("level"), 0);
+        CollectProgressManager.Instance.dirtyActiveImgGO.SetActive(false);
+        FishDropArea.Instance.RepairProgressSet();
+        Globals.machineErrorActive = false;
     }
     void CollectProducts_CollectActivator(bool active)
     {

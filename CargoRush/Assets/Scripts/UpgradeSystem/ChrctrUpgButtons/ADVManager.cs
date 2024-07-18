@@ -15,7 +15,7 @@ public class ADVManager : MonoBehaviour
     {
         _instance = this;
     }
-    public void RewardedStart(Action fnct)
+    public void RewardedStart(Action fnct, string rewardedName)
     {
         rewardedFunction = null;
         rewardedFunction += fnct;
@@ -29,7 +29,7 @@ public class ADVManager : MonoBehaviour
         if (HomaBelly.Instance.IsRewardedVideoAdAvailable())
         {
             //// Show ad
-            HomaBelly.Instance.ShowRewardedVideoAd("rewarded_ad");
+            HomaBelly.Instance.ShowRewardedVideoAd(rewardedName);
         }
        
         Events.onRewardedVideoAdRewardedEvent += RewardedEnd;
@@ -40,17 +40,24 @@ public class ADVManager : MonoBehaviour
     {
         rewardedFunction?.Invoke();
         Events.onRewardedVideoAdRewardedEvent -= RewardedEnd;
+        DayCycleManager.Instance.dayCycleCount = 0;
     }
 
-    public void InterstialStart(Action fnct)
+    public void InterstialStart(Action fnct, string rewardedName)
     {
         interstialFunction = null;
         interstialFunction += fnct;
-        InterstialEnd();
+        
+        if (HomaBelly.Instance.IsInterstitialAvailable())
+        {
+            HomaBelly.Instance.ShowInterstitial(rewardedName);
+        }
+        Events.onInterstitialAdClosedEvent += InterstialEnd;
     }
-    private void InterstialEnd()
+    private void InterstialEnd(AdInfo adInfo)
     {
         interstialFunction?.Invoke();
+        Events.onInterstitialAdClosedEvent -= InterstialEnd;
     }
 
 

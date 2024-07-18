@@ -115,7 +115,8 @@ public class ModelButton : MonoBehaviour
 
     public void ClickADV_Button()
     {
-        ADVManager.Instance.RewardedStart(AdvEnd);
+        string adv_name = "";
+        ADVManager.Instance.RewardedStart(AdvEnd, adv_name);
     }
 
     void AdvEnd()

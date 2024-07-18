@@ -265,17 +265,20 @@ public class HRUpgradeManager : MonoBehaviour
 
     public void WorkerMoveSpeedUpgrade_ADV_Click()
     {
-        ADVManager.Instance.RewardedStart(WorkerMoveSpeedUpgradeFree);
+        string adv_name = "";
+        ADVManager.Instance.RewardedStart(WorkerMoveSpeedUpgradeFree, adv_name);
 
     }
     public void WorkerCapacityUpgrade_ADV_Click()
     {
-        ADVManager.Instance.RewardedStart(WorkerCapacityUpgradeFree);
+        string adv_name = "";
+        ADVManager.Instance.RewardedStart(WorkerCapacityUpgradeFree, adv_name);
 
     }
     public void WorkerNoUpgrade_ADV_Click()
     {
-        ADVManager.Instance.RewardedStart(WorkerNoUpgradeFree);
+        string adv_name = "";
+        ADVManager.Instance.RewardedStart(WorkerNoUpgradeFree, adv_name);
 
     }
 

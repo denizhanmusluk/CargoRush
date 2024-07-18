@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using Cinemachine;
+using UnityEngine.UI;
 
 [System.Serializable]
 public struct productType
@@ -54,6 +55,9 @@ public class FishDropArea : MonoBehaviour
     public List<StandFishCar> carSlotList = new List<StandFishCar>();
 
     int extraProduct = 0;
+
+    public Image errorFill;
+
     private void Awake()
     {
         _instance = this;
@@ -100,6 +104,8 @@ public class FishDropArea : MonoBehaviour
     }
     void Start()
     {
+        errorFill = CollectProgressManager.Instance.errorFill;
+
         createTime = createPeriodTime[mineCrusher.standLevel];
         _CollectProduct.collectables = fishCollectable;
         //FishManager.Instance.rubbishDropArea = this;
@@ -108,7 +114,7 @@ public class FishDropArea : MonoBehaviour
         //_CollectProduct._FishDropArea = this;
         StartCoroutine(GarbageDropping());
         //CarSlotsReset();
-
+        StartCoroutine(StartDelay());
     }
    [SerializeField] float createTime;
     IEnumerator GarbageDropping()
@@ -300,15 +306,23 @@ public class FishDropArea : MonoBehaviour
     }
 
 
-
+    int errorCounter = 0;
 
     public List<IMachineActive> packMachines = new List<IMachineActive>();
     public void BoxPackageCounter()
     {
         PlayerPrefs.SetInt("totalboxpackagecount", PlayerPrefs.GetInt("totalboxpackagecount") + 1);
-
-        if (PlayerPrefs.GetInt("totalboxpackagecount") % ((Globals.collectableLevel + 1) * 15) == 0)
+        if (Globals.machineErrorActive)
         {
+            errorFill.fillAmount = 1f;
+        }
+        else
+        {
+            errorFill.fillAmount = (float)(PlayerPrefs.GetInt("totalboxpackagecount") % ((Globals.collectableLevel + 1) * 125)) / (float)((Globals.collectableLevel + 1) * 125);
+        }
+        if (PlayerPrefs.GetInt("totalboxpackagecount") % ((Globals.collectableLevel + 1) * 125) == 0)
+        {
+
             List<IMachineActive> packMachinesTemp = new List<IMachineActive>();
 
             for(int i = 0; i < packMachines.Count; i++)
@@ -320,10 +334,36 @@ public class FishDropArea : MonoBehaviour
             }
             if (packMachinesTemp.Count > 0)
             {
-                int randomSelectMach = Random.Range(0, packMachinesTemp.Count);
+                int randomSelectMach = errorCounter % packMachinesTemp.Count;
                 packMachinesTemp[randomSelectMach].MachineErrored();
 
             }
+
+
+            errorCounter++;
+        }
+    }
+    int boxPackCount = 0;
+
+    IEnumerator StartDelay()
+    {
+        yield return new WaitForSeconds(4f);
+        errorFill.fillAmount = (float)(PlayerPrefs.GetInt("totalboxpackagecount") % ((Globals.collectableLevel + 1) * 125)) / (float)((Globals.collectableLevel + 1) * 125);
+    }
+    public void RepairProgressSet()
+    {
+        StartCoroutine(RepairDelay());
+    }
+    IEnumerator RepairDelay()
+    {
+        float counter = 0f;
+        float value;
+        while(counter < 1f)
+        {
+            counter += Time.deltaTime;
+            value = Mathf.Lerp(1f, 0f, counter);
+            errorFill.fillAmount = value;
+           yield return null;
         }
     }
 }

@@ -338,7 +338,7 @@ public class StandFishCar : Stand,IMoneyArea
                                 if (PlayerPrefs.GetInt("boxcounteractive"+ PlayerPrefs.GetInt("level")) == 0)
                                 {
                                     PlayerPrefs.SetInt("1boxcounter"  + PlayerPrefs.GetInt("level"), PlayerPrefs.GetInt("1boxcounter" + PlayerPrefs.GetInt("level")) + 1);
-                                    Debug.Log("boxcount  " + PlayerPrefs.GetInt("1boxcounter" + PlayerPrefs.GetInt("level")));
+                                    //Debug.Log("boxcount  " + PlayerPrefs.GetInt("1boxcounter" + PlayerPrefs.GetInt("level")));
 
                                 }
                                 productTypeCount[0]--;
@@ -352,7 +352,7 @@ public class StandFishCar : Stand,IMoneyArea
                                 if (PlayerPrefs.GetInt("boxcounteractive" + PlayerPrefs.GetInt("level")) == 0)
                                 {
                                     PlayerPrefs.SetInt("2boxcounter" + PlayerPrefs.GetInt("level"), PlayerPrefs.GetInt("2boxcounter" + PlayerPrefs.GetInt("level")) + 1);
-                                    Debug.Log("boxcount  " + PlayerPrefs.GetInt("2boxcounter" + PlayerPrefs.GetInt("level")));
+                                    //Debug.Log("boxcount  " + PlayerPrefs.GetInt("2boxcounter" + PlayerPrefs.GetInt("level")));
 
                                 }
                                 productTypeCount[1]--;
@@ -366,7 +366,7 @@ public class StandFishCar : Stand,IMoneyArea
                                 if (PlayerPrefs.GetInt("boxcounteractive"+ PlayerPrefs.GetInt("level")) == 0)
                                 {
                                     PlayerPrefs.SetInt("3boxcounter" + PlayerPrefs.GetInt("level"), PlayerPrefs.GetInt("3boxcounter" + PlayerPrefs.GetInt("level")) + 1);
-                                    Debug.Log("boxcount  " + PlayerPrefs.GetInt("3boxcounter" + PlayerPrefs.GetInt("level")));
+                                    //Debug.Log("boxcount  " + PlayerPrefs.GetInt("3boxcounter" + PlayerPrefs.GetInt("level")));
 
                                 }
                                 productTypeCount[2]--;

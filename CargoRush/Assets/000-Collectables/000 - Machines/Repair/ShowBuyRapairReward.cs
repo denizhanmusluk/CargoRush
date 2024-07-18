@@ -15,7 +15,8 @@ public class ShowBuyRapairReward : MonoBehaviour
     {
         showActive = false;
         Canvas.SetActive(false);
-        ADVManager.Instance.RewardedStart(RepairImmediate);
+        string adv_name = "";
+        ADVManager.Instance.RewardedStart(RepairImmediate,adv_name);
     }
     void RepairImmediate()
     {

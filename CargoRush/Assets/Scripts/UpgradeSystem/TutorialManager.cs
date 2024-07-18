@@ -17,6 +17,9 @@ public class TutorialManager : MonoBehaviour
     public GameObject repairFinishedGO;
     public GameObject rceycleTutorialGO;
 
+    public GameObject bandTut_1;
+    public GameObject bandTut_2;
+    public GameObject bandTut_3;
     private void Awake()
     {
         _instance = this;
