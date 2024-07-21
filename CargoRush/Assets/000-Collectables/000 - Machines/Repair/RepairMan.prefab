@@ -120,6 +120,7 @@ MonoBehaviour:
   animator: {fileID: 8983941966438031207}
   machineRepairArea: {fileID: 0}
   showBuyRapairReward: {fileID: 4246268059828780798}
+  repairActive: 0
 --- !u!136 &7475972105179979562
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -2254,26 +2255,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4061255847439489222}
     m_Modifications:
-    - target: {fileID: 2189746547843423077, guid: ef4ac92a2ef97f74d808911785bac441, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: f49cd8db56954dd469350b1682c98997, type: 3}
-    - target: {fileID: 5023200910696533827, guid: ef4ac92a2ef97f74d808911785bac441, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 2c5ccbd4eb31a984eba2aba3dcb999f3, type: 3}
-    - target: {fileID: 5023200910696533827, guid: ef4ac92a2ef97f74d808911785bac441, type: 3}
-      propertyPath: m_Color.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5023200910696533827, guid: ef4ac92a2ef97f74d808911785bac441, type: 3}
-      propertyPath: m_Color.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5023200910696533827, guid: ef4ac92a2ef97f74d808911785bac441, type: 3}
-      propertyPath: m_Color.r
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5696436674016967952, guid: ef4ac92a2ef97f74d808911785bac441, type: 3}
       propertyPath: m_RootOrder
       value: 9
@@ -2318,57 +2299,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6722739609913325484, guid: ef4ac92a2ef97f74d808911785bac441, type: 3}
-      propertyPath: firstOpenCloseCanvas
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6878681500898602364, guid: ef4ac92a2ef97f74d808911785bac441, type: 3}
-      propertyPath: m_text
-      value: WATCH
-      objectReference: {fileID: 0}
-    - target: {fileID: 6878681500898602364, guid: ef4ac92a2ef97f74d808911785bac441, type: 3}
-      propertyPath: m_fontSize
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6878681500898602364, guid: ef4ac92a2ef97f74d808911785bac441, type: 3}
-      propertyPath: m_fontColor.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6878681500898602364, guid: ef4ac92a2ef97f74d808911785bac441, type: 3}
-      propertyPath: m_fontColor.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6878681500898602364, guid: ef4ac92a2ef97f74d808911785bac441, type: 3}
-      propertyPath: m_fontColor.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6878681500898602364, guid: ef4ac92a2ef97f74d808911785bac441, type: 3}
-      propertyPath: m_fontSizeBase
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6878681500898602364, guid: ef4ac92a2ef97f74d808911785bac441, type: 3}
-      propertyPath: m_fontColor32.rgba
-      value: 4294967295
-      objectReference: {fileID: 0}
-    - target: {fileID: 7119515533372845280, guid: ef4ac92a2ef97f74d808911785bac441, type: 3}
-      propertyPath: m_Size.x
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 7119515533372845280, guid: ef4ac92a2ef97f74d808911785bac441, type: 3}
-      propertyPath: m_Size.z
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 7119515533372845280, guid: ef4ac92a2ef97f74d808911785bac441, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7963532663883323988, guid: ef4ac92a2ef97f74d808911785bac441, type: 3}
       propertyPath: m_Name
       value: Show Buy Repair
-      objectReference: {fileID: 0}
-    - target: {fileID: 7963532663883323988, guid: ef4ac92a2ef97f74d808911785bac441, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ef4ac92a2ef97f74d808911785bac441, type: 3}

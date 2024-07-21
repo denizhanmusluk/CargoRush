@@ -124,5 +124,6 @@ public static class Globals
     public static bool machineErrorActivator = false;
 
     public static bool goToCeoActive = false;
+    public static bool repairManActive = false;
 
 }

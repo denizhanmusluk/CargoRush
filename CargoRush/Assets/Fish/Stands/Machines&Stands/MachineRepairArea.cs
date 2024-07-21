@@ -2,36 +2,50 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Linq;
 
 public class MachineRepairArea : MonoBehaviour
 {
     public GameObject processMachine;
-    public List<MachineRepair> machineRepairList = new List<MachineRepair>();
+    public List<MachineRepair> machineRepairListAll = new List<MachineRepair>();
+    public List<MachineRepair> selectedMachineRepairList = new List<MachineRepair>();
 
     private void OnEnable()
     {
         if(PlayerPrefs.GetInt("firsterrormachine") == 0)
         {
             TutorialManager.Instance.repairMachineGO.SetActive(true);
-            IndicatorManager.Instance.IndicaorActive(machineRepairList[0].transform);
+            IndicatorManager.Instance.IndicaorActive(machineRepairListAll[0].transform);
         }
         RepairListOpen();
     }
     void RepairListOpen()
     {
-        foreach(var rpr in machineRepairList)
+        int minElementCount = 6;
+        if(minElementCount > machineRepairListAll.Count - 1)
+        {
+            minElementCount = machineRepairListAll.Count - 1;
+        }
+        int numberOfElementsToSelect = Random.Range(minElementCount, machineRepairListAll.Count);
+        selectedMachineRepairList.Clear();
+        selectedMachineRepairList = GetRandomElements(machineRepairListAll, numberOfElementsToSelect);
+
+        foreach (var rpr in machineRepairListAll)
+        {
+            rpr.machineRepairArea = this;
+        }
+        foreach (var rpr in selectedMachineRepairList)
         {
             rpr.gameObject.SetActive(true);
-            rpr.machineRepairArea = this;
         }
     }
     public void RepairingCheck()
     {
         bool repairingActive = true;
 
-        for(int i = 0; i < machineRepairList.Count; i++)
+        for(int i = 0; i < selectedMachineRepairList.Count; i++)
         {
-            if (!machineRepairList[i].repairStarted)
+            if (!selectedMachineRepairList[i].repairStarted)
             {
                 repairingActive = false;
             }
@@ -39,11 +53,11 @@ public class MachineRepairArea : MonoBehaviour
         if (PlayerPrefs.GetInt("firsterrormachine") == 0)
         {
             List<MachineRepair> tempMachineRepair = new List<MachineRepair>();
-            for (int i = 0; i < machineRepairList.Count; i++)
+            for (int i = 0; i < selectedMachineRepairList.Count; i++)
             {
-                if (!machineRepairList[i].repairStarted)
+                if (!selectedMachineRepairList[i].repairStarted)
                 {
-                    tempMachineRepair.Add(machineRepairList[i]);
+                    tempMachineRepair.Add(selectedMachineRepairList[i]);
                 }
             }
 
@@ -67,5 +81,15 @@ public class MachineRepairArea : MonoBehaviour
             }
             gameObject.SetActive(false);
         }
+    }
+
+
+    List<T> GetRandomElements<T>(List<T> list, int count)
+    {
+        // Rastgele sayýlar oluþturmak için Random sýnýfýný kullanýyoruz
+        System.Random random = new System.Random();
+
+        // Listeyi rastgele sýraya diziyoruz ve istediðimiz sayýda elemaný alýyoruz
+        return list.OrderBy(x => random.Next()).Take(count).ToList();
     }
 }

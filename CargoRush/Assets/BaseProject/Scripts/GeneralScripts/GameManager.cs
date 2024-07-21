@@ -19,6 +19,7 @@ public class GameManager : Observer
     public int firstLevelPartCount;
     [SerializeField] int createMoney;
     [SerializeField] int createMoney2;
+    [SerializeField] int createTicket;
     public void GameAnalyticsTag(string tag)
     {
         GameAnalytics.NewDesignEvent(tag);
@@ -153,7 +154,7 @@ public class GameManager : Observer
         }
         if (Input.GetKeyDown(KeyCode.G))
         {
-            GemUpdate(createMoney);
+            GemUpdate(createTicket);
         }
         if (Input.GetKeyDown(KeyCode.H))
         {

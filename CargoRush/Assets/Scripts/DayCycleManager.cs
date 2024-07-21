@@ -55,6 +55,8 @@ public class DayCycleManager : MonoBehaviour
 
     IEnumerator AdvShow()
     {
+        TutorialManager.Instance.lunch_Break.SetActive(true);
+        yield return new WaitForSeconds(0.5f);
         Fade.Instance.Hide();
         yield return new WaitForSeconds(0.5f);
         ADVManager.Instance.InterstialStart(AdvCompleted, "interstial");

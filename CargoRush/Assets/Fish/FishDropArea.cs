@@ -311,36 +311,48 @@ public class FishDropArea : MonoBehaviour
     public List<IMachineActive> packMachines = new List<IMachineActive>();
     public void BoxPackageCounter()
     {
-        PlayerPrefs.SetInt("totalboxpackagecount", PlayerPrefs.GetInt("totalboxpackagecount") + 1);
-        if (Globals.machineErrorActive)
+        if (Globals.repairManActive)
         {
-            errorFill.fillAmount = 1f;
+            PlayerPrefs.SetInt("totalboxpackagecount", 1);
         }
         else
         {
-            errorFill.fillAmount = (float)(PlayerPrefs.GetInt("totalboxpackagecount") % ((Globals.collectableLevel + 1) * 125)) / (float)((Globals.collectableLevel + 1) * 125);
-        }
-        if (PlayerPrefs.GetInt("totalboxpackagecount") % ((Globals.collectableLevel + 1) * 125) == 0)
-        {
-
-            List<IMachineActive> packMachinesTemp = new List<IMachineActive>();
-
-            for(int i = 0; i < packMachines.Count; i++)
+            PlayerPrefs.SetInt("totalboxpackagecount", PlayerPrefs.GetInt("totalboxpackagecount") + 1);
+            if (Globals.machineErrorActive)
             {
-                if (!packMachines[i].errorActive)
+                errorFill.fillAmount = 1f;
+            }
+            else
+            {
+                errorFill.fillAmount = (float)(PlayerPrefs.GetInt("totalboxpackagecount") % ((Globals.collectableLevel + 1) * 125)) / (float)((Globals.collectableLevel + 1) * 125);
+            }
+            if (PlayerPrefs.GetInt("totalboxpackagecount") % ((Globals.collectableLevel + 1) * 125) == 0)
+            {
+
+                List<IMachineActive> packMachinesTemp = new List<IMachineActive>();
+
+                for (int i = 0; i < packMachines.Count; i++)
                 {
-                    packMachinesTemp.Add(packMachines[i]);
+                    if (!packMachines[i].errorActive)
+                    {
+                        packMachinesTemp.Add(packMachines[i]);
+                    }
                 }
+                if (packMachinesTemp.Count > 0)
+                {
+                    int randomSelectMach = errorCounter % packMachinesTemp.Count;
+                    packMachinesTemp[randomSelectMach].MachineErrored();
+                    PlayerPrefs.SetInt("machineerrorcount", PlayerPrefs.GetInt("machineerrorcount") + 1);
+
+                    if(PlayerPrefs.GetInt("machineerrorcount") == 2)
+                    {
+                        RepairManager.Instance.OpenRepairWorker();
+                    }
+                }
+
+
+                errorCounter++;
             }
-            if (packMachinesTemp.Count > 0)
-            {
-                int randomSelectMach = errorCounter % packMachinesTemp.Count;
-                packMachinesTemp[randomSelectMach].MachineErrored();
-
-            }
-
-
-            errorCounter++;
         }
     }
     int boxPackCount = 0;
@@ -364,6 +376,13 @@ public class FishDropArea : MonoBehaviour
             value = Mathf.Lerp(1f, 0f, counter);
             errorFill.fillAmount = value;
            yield return null;
+        }
+    }
+    public void AllMachineRepair()
+    {
+        foreach(var mch in packMachines)
+        {
+            mch.MachineRepaired();
         }
     }
 }

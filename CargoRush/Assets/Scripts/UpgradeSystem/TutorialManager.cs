@@ -20,6 +20,7 @@ public class TutorialManager : MonoBehaviour
     public GameObject bandTut_1;
     public GameObject bandTut_2;
     public GameObject bandTut_3;
+    public GameObject lunch_Break;
     private void Awake()
     {
         _instance = this;

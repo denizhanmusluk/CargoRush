@@ -136,9 +136,17 @@ public class HisseCompany : MonoBehaviour
     }
 
 
-    public void PosSet(Transform targetPos)
+    public void PosSet(Transform targetPos, int companyLevel)
     {
         StartCoroutine(PosTranslate(targetPos));
+        if (myCompany)
+        {
+            if(PlayerPrefs.GetInt("mycompanylevel") < companyLevel)
+            {
+                PlayerPrefs.SetInt("mycompanylevel", companyLevel);
+                ShareManager.Instance.CheckShareTutorialStart();
+            }
+        }
     }
 
     IEnumerator PosTranslate(Transform targetPos)

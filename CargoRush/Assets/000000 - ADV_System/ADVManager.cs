@@ -11,6 +11,8 @@ public class ADVManager : MonoBehaviour
 
     public event Action rewardedFunction;
     public event Action interstialFunction;
+
+    public List<RewardedButton> allRewardedButtons = new List<RewardedButton>();
     private void Awake()
     {
         _instance = this;
@@ -20,21 +22,20 @@ public class ADVManager : MonoBehaviour
         rewardedFunction = null;
         rewardedFunction += fnct;
 
-
-        // kapanacak
-        //RewardedEnd();
-
-
-        //acilacak
-        if (HomaBelly.Instance.IsRewardedVideoAdAvailable())
+        if (Globals.gemAmount > 0)
         {
-            //// Show ad
-            HomaBelly.Instance.ShowRewardedVideoAd(rewardedName);
+            GameManager.Instance.ui.GemUpdate(-1);
+            rewardedFunction?.Invoke();
         }
-       
-        Events.onRewardedVideoAdRewardedEvent += RewardedEnd;
+        else
+        {
+            if (HomaBelly.Instance.IsRewardedVideoAdAvailable())
+            {
+                HomaBelly.Instance.ShowRewardedVideoAd(rewardedName);
+            }
 
-
+            Events.onRewardedVideoAdRewardedEvent += RewardedEnd;
+        }
     }
     private void RewardedEnd(VideoAdReward videoAdReward, AdInfo adInfo)
     {

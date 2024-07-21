@@ -78,9 +78,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   processMachine: {fileID: 0}
-  machineRepairList:
+  machineRepairListAll:
   - {fileID: 3560433081079956378}
   - {fileID: 4660169074306652074}
+  selectedMachineRepairList: []
 --- !u!1001 &1642328795985863010
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -91,6 +92,10 @@ PrefabInstance:
     - target: {fileID: 2172062860202684278, guid: 9e6787d65b2bfbe4aab3b9e1c4502e27, type: 3}
       propertyPath: m_Name
       value: Machine Repair
+      objectReference: {fileID: 0}
+    - target: {fileID: 2172062860202684278, guid: 9e6787d65b2bfbe4aab3b9e1c4502e27, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3221518673929939010, guid: 9e6787d65b2bfbe4aab3b9e1c4502e27, type: 3}
       propertyPath: m_RootOrder
@@ -164,6 +169,10 @@ PrefabInstance:
     - target: {fileID: 2172062860202684278, guid: 9e6787d65b2bfbe4aab3b9e1c4502e27, type: 3}
       propertyPath: m_Name
       value: Machine Repair (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2172062860202684278, guid: 9e6787d65b2bfbe4aab3b9e1c4502e27, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3221518673929939010, guid: 9e6787d65b2bfbe4aab3b9e1c4502e27, type: 3}
       propertyPath: m_RootOrder

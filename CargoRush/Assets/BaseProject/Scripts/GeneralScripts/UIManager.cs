@@ -200,6 +200,11 @@ public class UIManager : Subject
         StarPanelManager.Instance.MoneyEnoughCheck();
         gemPanel.SetActive(true);
 
+
+        foreach(var rwdBtn in ADVManager.Instance.allRewardedButtons)
+        {
+            rwdBtn.UpdateCheckTicket();
+        }
         //if(PlayerPrefs.GetInt("skinactive") == 0)
         //{
         //    //gemPanel.SetActive(true);

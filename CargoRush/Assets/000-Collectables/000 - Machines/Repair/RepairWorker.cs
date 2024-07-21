@@ -8,9 +8,18 @@ public class RepairWorker : MonoBehaviour
     public Animator animator;
     public MachineRepairArea machineRepairArea;
     public ShowBuyRapairReward showBuyRapairReward;
+
+    Transform targetTR;
+   public bool repairActive = false;
+    public void SelectGoMachine()
+    {
+        int randomSelect = Random.Range(0, RepairManager.Instance.processMachines.Count);
+        targetTR = RepairManager.Instance.processMachines[randomSelect].repairWorkerWaitingPos_TR;
+        GoToMachine();
+    }
     public void GoToMachine()
     {
-        //aiMoving.GoTargetStart(machineRepairArea.targetMachinePos);
+        aiMoving.GoTargetStart(targetTR);
         aiMoving.BehaviourInit(StartRepairAnimation);
     }
     void StartRepairAnimation()
@@ -24,17 +33,60 @@ public class RepairWorker : MonoBehaviour
         Quaternion firstRot = transform.rotation;
         float counter = 0f;
 
-        while(counter < 1f)
+        while(counter < 1f && repairActive)
         {
             counter += Time.deltaTime;
-            //transform.position = Vector3.Lerp(firstPos, machineRepairArea.targetMachinePos.position, counter);
-            //transform.rotation = Quaternion.Lerp(firstRot, machineRepairArea.targetMachinePos.rotation, counter);
+            transform.position = Vector3.Lerp(firstPos, targetTR.position, counter);
+            transform.rotation = Quaternion.Lerp(firstRot, targetTR.rotation, counter);
 
             yield return null;
         }
-        //transform.position = machineRepairArea.targetMachinePos.position;
-        //transform.rotation = machineRepairArea.targetMachinePos.rotation;
-        animator.SetBool("repair", true);
+        if (repairActive)
+        {
+            transform.position = targetTR.position;
+            transform.rotation = targetTR.rotation;
+            animator.SetBool("repair", true);
+        }
+        counter = 0f;
+        while (counter < 5f && repairActive)
+        {
+            counter += Time.deltaTime;
+            yield return null;
+        }
+        if (repairActive)
+        {
+            animator.SetBool("repair", false);
+            SelectGoMachine();
+        }
+    }
+    public void WorkerRepairEnd()
+    {
+        animator.SetBool("repair", false);
+        aiMoving.GoTargetStart(RepairManager.Instance.repairWorkerFirstPosTR);
+        aiMoving.BehaviourInit(IdlePos);
+    }
+    void IdlePos()
+    {
+        StartCoroutine(IdleSetPos());
+    }
+    IEnumerator IdleSetPos()
+    {
+
+        Vector3 firstPos = transform.position;
+        Quaternion firstRot = transform.rotation;
+        float counter = 0f;
+
+        while (counter < 1f)
+        {
+            counter += Time.deltaTime;
+            transform.position = Vector3.Lerp(firstPos, RepairManager.Instance.repairWorkerFirstPosTR.position, counter);
+            transform.rotation = Quaternion.Lerp(firstRot, RepairManager.Instance.repairWorkerFirstPosTR.rotation, counter);
+
+            yield return null;
+        }
+        transform.position = RepairManager.Instance.repairWorkerFirstPosTR.position;
+        transform.rotation = RepairManager.Instance.repairWorkerFirstPosTR.rotation;
+
     }
     public void GoExit()
     {

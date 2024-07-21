@@ -76,6 +76,8 @@ public class ProcessMachine : Stand, IStandUpgrade, IMachineActive
     public StandRaw otherRawStand;
     public int bandPerPackageCount = 5;
     int packageCount = 0;
+
+    public Transform repairWorkerWaitingPos_TR;
     public bool errorActive { get; set; }
     private void Awake()
     {
@@ -107,15 +109,24 @@ public class ProcessMachine : Stand, IStandUpgrade, IMachineActive
         PlayerPrefs.SetInt(machineName + "iserror" + PlayerPrefs.GetInt("level"), 1);
         CollectProgressManager.Instance.dirtyActiveImgGO.SetActive(true);
         Globals.machineErrorActive = true;
+        ShareManager.Instance.ErrorCounter();
     }
     public void MachineRepaired()
     {
-        errorActive = false;
-        machineErrored = false;
-        PlayerPrefs.SetInt(machineName + "iserror" + PlayerPrefs.GetInt("level"), 0);
-        CollectProgressManager.Instance.dirtyActiveImgGO.SetActive(false);
-        FishDropArea.Instance.RepairProgressSet();
-        Globals.machineErrorActive = false;
+        if (errorActive)
+        {
+            errorActive = false;
+            machineErrored = false;
+            PlayerPrefs.SetInt(machineName + "iserror" + PlayerPrefs.GetInt("level"), 0);
+            CollectProgressManager.Instance.dirtyActiveImgGO.SetActive(false);
+            FishDropArea.Instance.RepairProgressSet();
+            Globals.machineErrorActive = false;
+            foreach (var repairs in machineRepairArea.machineRepairListAll)
+            {
+                repairs.gameObject.SetActive(false);
+            }
+            machineRepairArea.gameObject.SetActive(false);
+        }
     }
     void CollectProducts_CollectActivator(bool active)
     {
@@ -321,6 +332,7 @@ public class ProcessMachine : Stand, IStandUpgrade, IMachineActive
         {
             standOnlineGO.SetActive(true);
         }
+        RepairManager.Instance.processMachines.Add(this);
     }
     IEnumerator StartDelay()
     {

@@ -84,7 +84,7 @@ public class BandStock : Stand
             deltaY = (productCollectionList.Count - 1) / productPosTR.Length;
             targetTR = productPosTR[(productCollectionList.Count - 1) % productPosTR.Length];
 
-            Vector3 dropPos = targetTR.position + new Vector3(0, deltaY * 0.5f, 0);
+            Vector3 dropPos = targetTR.position + new Vector3(0, deltaY * 1.4f, 0);
             Quaternion targetRot = targetTR.transform.rotation;
 
             //newProduct.transform.parent = targetTR.parent;
