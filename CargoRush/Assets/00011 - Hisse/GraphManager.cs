@@ -93,7 +93,7 @@ public class GraphManager : MonoBehaviour
         circle.GetComponent<Image>().sprite = circleSprite;
         RectTransform rectTransform = circle.GetComponent<RectTransform>();
         rectTransform.anchoredPosition = anchoredPosition;
-        rectTransform.sizeDelta = new Vector2(20, 20);
+        rectTransform.sizeDelta = new Vector2(5, 5);
         rectTransform.anchorMin = new Vector2(0, 0);
         rectTransform.anchorMax = new Vector2(0, 0);
         rectTransform.GetComponent<Image>().color = lineColors[allHisseData.IndexOf(data)];

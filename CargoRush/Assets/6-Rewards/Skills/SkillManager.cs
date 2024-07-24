@@ -123,7 +123,7 @@ public class SkillManager : MonoBehaviour
 
     public void CapacityActive()
     {
-        PlayerController.Instance.CapacityUp();
+        //PlayerController.Instance.CapacityUp();
         RewardPanel.Instance.capacityPanelGO.SetActive(true);
         StartCoroutine(Capacity_Reset(capacityRewardTime));
         Globals.extraStack = extraStack;
@@ -256,16 +256,38 @@ public class SkillManager : MonoBehaviour
 
         Globals.speedPlayTime = PlayerPrefs.GetInt("speedPlayTime");
         Globals.speedCreatingCooldown = PlayerPrefs.GetInt("speedCreatingCooldown");
-        StartCoroutine(SpeedTimeCounter());
+        if (PlayerPrefs.GetInt("purchasespeedboost") == 0)
+        {
+            StartCoroutine(SpeedTimeCounter());
+        }
+        else
+        {
+            PurchaseSpeedBoostActive();
+        }
 
 
         Globals.capacityPlayTime = PlayerPrefs.GetInt("capacityPlayTime");
         Globals.capacityCreatingCooldown = PlayerPrefs.GetInt("capacityCreatingCooldown");
-        StartCoroutine(CapacityTimeCounter());
+        if (PlayerPrefs.GetInt("purchasecapacityboost") == 0)
+        {
+            StartCoroutine(CapacityTimeCounter());
+        }
+        else
+        {
+            PurchaseCapacityBoostActive();
+        }
 
         Globals.doubleIncomePlayTime = PlayerPrefs.GetInt("doubleIncomePlayTime");
         Globals.doubleCreatingCooldown = PlayerPrefs.GetInt("doubleCreatingCooldown");
-        StartCoroutine(DoubleIncomeTimeCounter());
+        if (PlayerPrefs.GetInt("purchasedoubleincomeboost") == 0)
+        {
+            StartCoroutine(DoubleIncomeTimeCounter());
+        }
+        else
+        {
+            PurchaseDoubleIncomeBoostActive();
+        }
+
 
 
         Globals.moneyPlayTime = PlayerPrefs.GetInt("moneyPlayTime");
@@ -295,10 +317,10 @@ public class SkillManager : MonoBehaviour
 
             if (Globals.speedCreatingCooldown >= speedRewPeriod && !Globals.isSpeedRewardCreated)
             {
-                //Globals.skillCooldown = 0;
-                //PlayerPrefs.SetInt("skillCooldown", Globals.skillCooldown);
-
-                SpeedRewardCreate();
+                if (PlayerPrefs.GetInt("purchasespeedboost") == 0)
+                {
+                    SpeedRewardCreate();
+                }
             }
             yield return new WaitForSeconds(1);
         }
@@ -319,10 +341,10 @@ public class SkillManager : MonoBehaviour
 
             if (Globals.capacityCreatingCooldown >= capacityRewPeriod && !Globals.isCapacityRewardCreated)
             {
-                //Globals.skillCooldown = 0;
-                //PlayerPrefs.SetInt("skillCooldown", Globals.skillCooldown);
-
-                CapacityRewardCreate();
+                if (PlayerPrefs.GetInt("purchasecapacityboost") == 0)
+                {
+                    CapacityRewardCreate();
+                }
             }
             yield return new WaitForSeconds(1);
         }
@@ -342,10 +364,10 @@ public class SkillManager : MonoBehaviour
 
             if (Globals.doubleCreatingCooldown >= doubleIncomeRewPeriod && !Globals.isDoubleIncomeRewardCreated)
             {
-                //Globals.skillCooldown = 0;
-                //PlayerPrefs.SetInt("skillCooldown", Globals.skillCooldown);
-
-                DoubleRewardCreate();
+                if (PlayerPrefs.GetInt("purchasedoubleincomeboost") == 0)
+                {
+                    DoubleRewardCreate();
+                }
             }
             yield return new WaitForSeconds(1);
         }
@@ -431,5 +453,21 @@ public class SkillManager : MonoBehaviour
             newReward.GetComponent<MoneySkill>().moneyValue = (Globals.collectableLevel * 300) + (Globals.openedCarSlotCount * 200) * (PlayerPrefs.GetInt("level") + 1);
                newReward.GetComponent<MoneySkill>().ValueInit();
         }
+    }
+
+    public void PurchaseSpeedBoostActive()
+    {
+        PlayerPrefs.SetInt("purchasespeedboost", 1);
+        PlayerController.Instance.HoverBoardActive();
+    }
+    public void PurchaseCapacityBoostActive()
+    {
+        PlayerPrefs.SetInt("purchasecapacityboost", 1);
+        Globals.extraStack = extraStack;
+    }
+    public void PurchaseDoubleIncomeBoostActive()
+    {
+        PlayerPrefs.SetInt("purchasedoubleincomeboost", 1);
+        Globals.doubleIncomeActive = true;
     }
 }

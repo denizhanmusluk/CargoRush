@@ -20,36 +20,36 @@ public class VibratoManager : MonoBehaviour
     // Update is called once per frame
     public void LightVibration()
     {
-        if (lightVibratoActive)
+        if (lightVibratoActive && PlayerPrefs.GetInt("vibrationclose") == 0)
         {
             Vibration.Vibrate(70, 85, true);
             //TapticManager.Impact(ImpactFeedback.Light);
-            StartCoroutine(lightVibratoActivator());
+            StartCoroutine(LightVibratoActivator());
         }
     }
     public void MediumVibration()
     {
-        if (mediumVibratoActive)
+        if (mediumVibratoActive && PlayerPrefs.GetInt("vibrationclose") == 0)
         {
             Vibration.Vibrate(70, 170, true);
             //TapticManager.Impact(ImpactFeedback.Medium);
-            StartCoroutine(mediumVibratoActivator());
+            StartCoroutine(MediumVibratoActivator());
         }
     }
     public void HeavyVibration()
     {
-        if (heavyVibratoActive)
+        if (heavyVibratoActive && PlayerPrefs.GetInt("vibrationclose") == 0)
         {
             Vibration.Vibrate(70, 255, true);
             //TapticManager.Impact(ImpactFeedback.Heavy);
-            StartCoroutine(heavyVibratoActivator());
+            StartCoroutine(HeavyVibratoActivator());
         }
     }
     public void MediumMultiVibration()
     {
-            StartCoroutine(_MediumMultiVibration());
+            StartCoroutine(MediumMultiVibrationActive());
     }
-    IEnumerator _MediumMultiVibration()
+    IEnumerator MediumMultiVibrationActive()
     {
         int counter = 0;
         while(counter < 3)
@@ -59,7 +59,7 @@ public class VibratoManager : MonoBehaviour
             yield return new WaitForSeconds(0.33f);
         }
     }
-    IEnumerator lightVibratoActivator()
+    IEnumerator LightVibratoActivator()
     {
         if (lightVibratoActive)
         {
@@ -68,7 +68,7 @@ public class VibratoManager : MonoBehaviour
             lightVibratoActive = true;
         }
     }
-    IEnumerator mediumVibratoActivator()
+    IEnumerator MediumVibratoActivator()
     {
         if (mediumVibratoActive)
         {
@@ -77,7 +77,7 @@ public class VibratoManager : MonoBehaviour
             mediumVibratoActive = true;
         }
     }
-    IEnumerator heavyVibratoActivator()
+    IEnumerator HeavyVibratoActivator()
     {
         if (heavyVibratoActive)
         {

@@ -141,10 +141,13 @@ public class HisseCompany : MonoBehaviour
         StartCoroutine(PosTranslate(targetPos));
         if (myCompany)
         {
-            if(PlayerPrefs.GetInt("mycompanylevel") < companyLevel)
+            Debug.Log("MY COMPANY LEVEL" + companyLevel);
+
+            if (PlayerPrefs.GetInt("mycompanylevel") < companyLevel)
             {
                 PlayerPrefs.SetInt("mycompanylevel", companyLevel);
-                ShareManager.Instance.CheckShareTutorialStart();
+                ShareManager.Instance.Share_LevelUp_TutorialStart(companyLevel);
+
             }
         }
     }

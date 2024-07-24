@@ -1,12 +1,15 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using TMPro;
 
 public class ShareManager : MonoBehaviour
 {
     private static ShareManager _instance = null;
     public static ShareManager Instance => _instance;
+    public event Action popUpEvent;
 
     public List<HisseCompany> hisseCompanies = new List<HisseCompany>();
     public List<Transform> hisseCompanyPosList = new List<Transform>();
@@ -20,6 +23,11 @@ public class ShareManager : MonoBehaviour
     public GameObject sharerisingTut_GO;
     public GameObject shareFallingTut_GO;
     public GameObject checkShareTut_GO;
+
+    public GameObject repairPopUp_GO;
+    public GameObject moneyPopUp_GO;
+    public TextMeshProUGUI moneyText;
+
     private void Awake()
     {
         _instance = this;
@@ -30,7 +38,7 @@ public class ShareManager : MonoBehaviour
     }
     IEnumerator CompaniesPosSet()
     {
-
+        yield return new WaitForSeconds(5f);
         while (true)
         {
 
@@ -38,7 +46,7 @@ public class ShareManager : MonoBehaviour
             hisseCompanies = sortedList;
             for(int i = 0; i < hisseCompanies.Count;i++)
             {
-                hisseCompanies[i].PosSet(hisseCompanyPosList[i] , i - (hisseCompanies.Count - 1));
+                hisseCompanies[i].PosSet(hisseCompanyPosList[i] , (hisseCompanies.Count - 1) - i);
             }
             yield return new WaitForSeconds(1f);
         }
@@ -65,6 +73,8 @@ public class ShareManager : MonoBehaviour
         ShareRisingTutorial_End();
         ShareFallingTutorial_End();
         CheckShareTutorial_End();
+        popUpEvent?.Invoke();
+        popUpEvent = null;
     }
 
     public bool shareRisingActive = false;
@@ -110,12 +120,24 @@ public class ShareManager : MonoBehaviour
         shareFallingTut_GO.SetActive(false);
     }
 
-    public void CheckShareTutorialStart()
+    public void Share_LevelUp_TutorialStart(int _companyLevel)
     {
         checkShareTut_GO.SetActive(true);
         exclamation_GO.SetActive(true);
         checkShareActive = true;
-
+        popUpEvent = null;
+        if (_companyLevel == 1)
+        {
+            popUpEvent += RepairPopUp_Open;
+        }
+        else if (_companyLevel == 2)
+        {
+            popUpEvent += MoneyPopUp_Open;
+        }
+        else
+        {
+            popUpEvent += RepairPopUp_Open;
+        }
     }
     void CheckShareTutorialStart_2()
     {
@@ -154,4 +176,30 @@ public class ShareManager : MonoBehaviour
             ShareFallingTutorialStart();
         }
     }
+
+
+
+    void MoneyPopUp_Open()
+    {
+        moneyPopUp_GO.SetActive(true);
+        moneyText.text = "$" + CoefficientTransformation.Converter((Globals.collectableLevel * 300) + (Globals.openedCarSlotCount * 200) * (PlayerPrefs.GetInt("level") + 1));
+    }
+    void RepairPopUp_Open()
+    {
+        repairPopUp_GO.SetActive(true);
+
+    }
+    public void RepairClick()
+    {
+        RepairManager.Instance.repairWorker.showBuyRapairReward.RepairImmediate();
+        repairPopUp_GO.SetActive(false);
+        PlayerController.Instance.PlayerControl_ReActive();
+    }
+    public void MoneyRewardClick()
+    {
+        GameManager.Instance.ui.FreeMoneyPopUp();
+        moneyPopUp_GO.SetActive(false);
+
+    }
+
 }

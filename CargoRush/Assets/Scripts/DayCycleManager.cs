@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DayCycleManager : MonoBehaviour
 {
@@ -12,19 +13,27 @@ public class DayCycleManager : MonoBehaviour
 
     [SerializeField] int dayCyclePeriod = 180;
     public int dayCycleCount = 0;
+    public GameObject dayPanel_GO;
+    public GameObject sun;
+    public GameObject moon;
+    public Image dayFill;
+
     private void Awake()
     {
         _instance = this;
     }
     void Start()
     {
-        if (PlayerPrefs.GetInt("firstInterstialTimeCompleted") == 0)
+        if (PlayerPrefs.GetInt("isbannerdisable") == 0)
         {
-            StartCoroutine(FirstQuarterCounter());
-        }
-        else
-        {
-            StartCoroutine(DayCycleCounter());
+            if (PlayerPrefs.GetInt("firstInterstialTimeCompleted") == 0)
+            {
+                StartCoroutine(FirstQuarterCounter());
+            }
+            else
+            {
+                StartCoroutine(DayCycleCounter());
+            }
         }
     }
     IEnumerator FirstQuarterCounter()
@@ -38,19 +47,46 @@ public class DayCycleManager : MonoBehaviour
             yield return new WaitForSeconds(1);
         }
         PlayerPrefs.SetInt("firstInterstialTimeCompleted", 1);
-        StartCoroutine(AdvShow());
+
+        if (PlayerPrefs.GetInt("isbannerdisable") == 0)
+        {
+            StartCoroutine(AdvShow());
+        }
+        else
+        {
+            DayCycleRestart();
+        }
     }
     IEnumerator DayCycleCounter()
     {
+        dayPanel_GO.SetActive(true);
         dayCycleCount = PlayerPrefs.GetInt("dayCycleCount");
 
         while (dayCycleCount < dayCyclePeriod)
         {
             dayCycleCount++;
             PlayerPrefs.SetInt("dayCycleCount", dayCycleCount);
+            dayFill.fillAmount = (float)dayCycleCount / (float)dayCyclePeriod;
+            if (dayCycleCount < dayCyclePeriod / 2)
+            {
+                sun.gameObject.SetActive(true);
+                moon.gameObject.SetActive(false);
+            }
+            else
+            {
+                sun.gameObject.SetActive(false);
+                moon.gameObject.SetActive(true);
+            }
             yield return new WaitForSeconds(1);
         }
-        StartCoroutine(AdvShow());
+        if (PlayerPrefs.GetInt("isbannerdisable") == 0)
+        {
+            StartCoroutine(AdvShow());
+        }
+        else
+        {
+            DayCycleRestart();
+        }
     }
 
     IEnumerator AdvShow()
@@ -67,5 +103,11 @@ public class DayCycleManager : MonoBehaviour
         PlayerPrefs.SetInt("dayCycleCount", dayCycleCount);
         StartCoroutine(DayCycleCounter());
         Fade.Instance.Show();
+    }
+    void DayCycleRestart()
+    {
+        dayCycleCount = 0;
+        PlayerPrefs.SetInt("dayCycleCount", dayCycleCount);
+        StartCoroutine(DayCycleCounter());
     }
 }

@@ -18,7 +18,7 @@ public class ShowBuyRapairReward : MonoBehaviour
         string adv_name = "";
         ADVManager.Instance.RewardedStart(RepairImmediate,adv_name);
     }
-    void RepairImmediate()
+    public void RepairImmediate()
     {
         //processMachine.repairTimeCounter = processMachine.repairTime - 1;
         string tag = "InstantRepairRewarded";

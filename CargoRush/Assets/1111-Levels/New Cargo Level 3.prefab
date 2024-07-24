@@ -14894,14 +14894,14 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1676575084866787157, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
   m_PrefabInstance: {fileID: 491606095857497918}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &3417995031392988854 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3007737682571434376, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+  m_PrefabInstance: {fileID: 491606095857497918}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7660112558553843323 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7826313779655536965, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
-  m_PrefabInstance: {fileID: 491606095857497918}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &9084369033392460417 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8701131099921327551, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
   m_PrefabInstance: {fileID: 491606095857497918}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &548260806389650943
@@ -30669,7 +30669,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2250318679921702754, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: buyAreas.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 2250318679921702754, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: specialVehicleOpener
@@ -30678,13 +30678,17 @@ PrefabInstance:
     - target: {fileID: 2250318679921702754, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: buyAreas.Array.data[0]
       value: 
-      objectReference: {fileID: 9084369033392460417}
+      objectReference: {fileID: 7216172051140651292}
     - target: {fileID: 2250318679921702754, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: buyAreas.Array.data[1]
       value: 
       objectReference: {fileID: 1946687208751683688}
     - target: {fileID: 2250318679921702754, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: buyAreas.Array.data[2]
+      value: 
+      objectReference: {fileID: 2376531913846745811}
+    - target: {fileID: 2250318679921702754, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: buyAreas.Array.data[3]
       value: 
       objectReference: {fileID: 5397788669254993172}
     - target: {fileID: 2346388960549888790, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
@@ -36917,6 +36921,80 @@ GameObject:
 Transform:
   m_CorrespondingSourceObject: {fileID: 5561983029819858338, guid: 051f1401a2b8b11408309ccc185e3551, type: 3}
   m_PrefabInstance: {fileID: 8157346612438760420}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &8170043796127140543
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 7660112558553843323}
+    m_Modifications:
+    - target: {fileID: 1532681502962082722, guid: 4c5640f3bcca3c04f9a475a19b57d440, type: 3}
+      propertyPath: m_RootOrder
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1532681502962082722, guid: 4c5640f3bcca3c04f9a475a19b57d440, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -2.1899989
+      objectReference: {fileID: 0}
+    - target: {fileID: 1532681502962082722, guid: 4c5640f3bcca3c04f9a475a19b57d440, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1532681502962082722, guid: 4c5640f3bcca3c04f9a475a19b57d440, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -7.049999
+      objectReference: {fileID: 0}
+    - target: {fileID: 1532681502962082722, guid: 4c5640f3bcca3c04f9a475a19b57d440, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 1532681502962082722, guid: 4c5640f3bcca3c04f9a475a19b57d440, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1532681502962082722, guid: 4c5640f3bcca3c04f9a475a19b57d440, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 1532681502962082722, guid: 4c5640f3bcca3c04f9a475a19b57d440, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1532681502962082722, guid: 4c5640f3bcca3c04f9a475a19b57d440, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1532681502962082722, guid: 4c5640f3bcca3c04f9a475a19b57d440, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 1532681502962082722, guid: 4c5640f3bcca3c04f9a475a19b57d440, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1532681502962082723, guid: 4c5640f3bcca3c04f9a475a19b57d440, type: 3}
+      propertyPath: m_Name
+      value: Buy - FishCar ADV
+      objectReference: {fileID: 0}
+    - target: {fileID: 1532681502962082723, guid: 4c5640f3bcca3c04f9a475a19b57d440, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6796764444096269619, guid: 4c5640f3bcca3c04f9a475a19b57d440, type: 3}
+      propertyPath: buildPrefab
+      value: 
+      objectReference: {fileID: 3417995031392988854}
+    - target: {fileID: 6796764444096269619, guid: 4c5640f3bcca3c04f9a475a19b57d440, type: 3}
+      propertyPath: buyAreas.Array.data[0]
+      value: 
+      objectReference: {fileID: 1267460979298525291}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4c5640f3bcca3c04f9a475a19b57d440, type: 3}
+--- !u!1 &7216172051140651292 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1532681502962082723, guid: 4c5640f3bcca3c04f9a475a19b57d440, type: 3}
+  m_PrefabInstance: {fileID: 8170043796127140543}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8224212580696836816
 PrefabInstance:

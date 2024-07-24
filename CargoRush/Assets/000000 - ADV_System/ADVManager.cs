@@ -17,6 +17,17 @@ public class ADVManager : MonoBehaviour
     {
         _instance = this;
     }
+    private void Start()
+    {
+        if(PlayerPrefs.GetInt("isbannerdisable") == 0)
+        {
+            BannerShow();
+        }
+        else
+        {
+            BannerHide();
+        }
+    }
     public void RewardedStart(Action fnct, string rewardedName)
     {
         rewardedFunction = null;
@@ -62,6 +73,14 @@ public class ADVManager : MonoBehaviour
     }
 
 
+    void BannerShow()
+    {
+        HomaBelly.Instance.ShowBanner();
+    }
 
-
+    public void BannerHide()
+    {
+        PlayerPrefs.SetInt("purchasebanneris", 1);
+        HomaBelly.Instance.HideBanner();
+    }
 }

@@ -562,15 +562,28 @@ public class UIManager : Subject
     {
         Globals.isMoneyRewardCreated = false;
 
-        GameManager.Instance.MoneyUpdate(PopUpManager.Instance.freeMoneyValue);
-    }
+        //GameManager.Instance.MoneyUpdate(PopUpManager.Instance.freeMoneyValue);
+        MoneyCreate(PopUpManager.Instance.freeMoneyValue);
 
+    }
+   
     public void FreeMoneySkillClickCancel()
     {
         Globals.isMoneyRewardCreated = false;
 
         PlayerController.Instance.PlayerControl_ReActive();
+    }
+
+
+
+    public void FreeMoneyPopUp()
+    {
+        Globals.isMoneyRewardCreated = false;
+
+        //GameManager.Instance.MoneyUpdate(PopUpManager.Instance.freeMoneyValue);
+        MoneyCreate((Globals.collectableLevel * 300) + (Globals.openedCarSlotCount * 200) * (PlayerPrefs.GetInt("level") + 1));
 
     }
+
 }
 

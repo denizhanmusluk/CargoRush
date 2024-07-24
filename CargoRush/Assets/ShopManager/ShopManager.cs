@@ -50,8 +50,6 @@ public class ShopManager : MonoBehaviour
         StartCoroutine(ChildColorAlphaSet());
         shopProgresGO.SetActive(false);
         StartCoroutine(StartDelay());
-  
-
     }
     IEnumerator StartDelay()
     {

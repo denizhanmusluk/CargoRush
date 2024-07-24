@@ -156,7 +156,6 @@ public class WorkArea : MonoBehaviour
             float time = CoefficientTransformation.FormatSaniye(Globals.speedPlayTime);
             string productTag = productName + "Full";
             //GameAnalytics.NewDesignEvent(productTag, time);
-            Debug.Log(productTag +" "+ time);
         }
     }
 }
