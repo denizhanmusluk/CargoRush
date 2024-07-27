@@ -249,7 +249,7 @@ PlayerSettings:
   AndroidTargetDevices: 0
   AndroidSplashScreenScale: 0
   androidSplashScreen: {fileID: 0}
-  AndroidKeystoreName: '{dedicated}: user.keystore'
+  AndroidKeystoreName: '{dedicated}: newKeystore/user.keystore'
   AndroidKeyaliasName: skebstudios
   AndroidBuildApkPerCpuArchitecture: 0
   AndroidTVCompatibility: 0
@@ -642,9 +642,9 @@ PlayerSettings:
   webGLDecompressionFallback: 0
   webGLPowerPreference: 2
   scriptingDefineSymbols:
-    Android: DREAMTECK_SPLINES;HOMA_BELLY;gameanalytics_max_enabled
+    Android: DREAMTECK_SPLINES;HOMA_BELLY;gameanalytics_max_enabled;HOMA_STORE
     Standalone: DREAMTECK_SPLINES
-    iPhone: HOMA_BELLY;gameanalytics_max_enabled
+    iPhone: HOMA_BELLY;gameanalytics_max_enabled;HOMA_STORE
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend:

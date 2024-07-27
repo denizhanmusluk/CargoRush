@@ -63,10 +63,12 @@ public class SettingsManager : MonoBehaviour
     {
         settingsPanelGO.SetActive(true);
         settingsButtonGO.SetActive(false);
+        PlayerController.Instance.PlayerControlDeActive();
     }
     void ClosePanel()
     {
         StartCoroutine(CloseDelay());
+        PlayerController.Instance.PlayerControl_ReActive();
     }
     IEnumerator CloseDelay()
     {

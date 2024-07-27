@@ -77,11 +77,14 @@ public class SkillManager : MonoBehaviour
         //}
         //PlayerPrefs.SetInt("hoverboardskill", PlayerPrefs.GetInt("hoverboardskill") + 1);
     }
-
+    bool speedCoroutineActive;
     IEnumerator Hoverboard_Reset(int rewardTime)
     {
+        speedCoroutineActive = false;
+        yield return new WaitForSeconds(1);
+        speedCoroutineActive = true;
         int counter = rewardTime;
-        while (counter > 0)
+        while (counter > 0 && speedCoroutineActive)
         {
             int minute = Mathf.FloorToInt(counter / 60);
             int second = Mathf.FloorToInt(counter % 60);
@@ -113,11 +116,13 @@ public class SkillManager : MonoBehaviour
                 RewardPanel.Instance.hoverboardPanelGO.SetActive(true);
             }
         }
-        hoverboardCounterText.text = "00:00";
-        PlayerController.Instance.NoneVehicle();
-        RewardPanel.Instance.hoverboardPanelGO.SetActive(false);
-        Globals.isSpeedRewardCreated = false;
-
+        if (counter <= 0)
+        {
+            hoverboardCounterText.text = "00:00";
+            PlayerController.Instance.NoneVehicle();
+            RewardPanel.Instance.hoverboardPanelGO.SetActive(false);
+            Globals.isSpeedRewardCreated = false;
+        }
     }
 
 
@@ -130,12 +135,15 @@ public class SkillManager : MonoBehaviour
 
 
     }
-
+    bool capacityCoroutineActive;
     IEnumerator Capacity_Reset(int rewardTime)
     {
+        capacityCoroutineActive = false;
+        yield return new WaitForSeconds(1);
+        capacityCoroutineActive = true;
         int counter = rewardTime;
 
-        while (counter > 0)
+        while (counter > 0 && capacityCoroutineActive)
         {
             int minute = Mathf.FloorToInt(counter / 60);
             int second = Mathf.FloorToInt(counter % 60);
@@ -167,13 +175,14 @@ public class SkillManager : MonoBehaviour
                 RewardPanel.Instance.capacityPanelGO.SetActive(true);
             }
         }
-
-        capacityCounterText.text = "00:00";
-        RewardPanel.Instance.capacityPanelGO.SetActive(false);
-        Globals.extraStack = 0;
-        PlayerController.Instance.CapacityReset();
-        Globals.isCapacityRewardCreated = false;
-
+        if (counter <= 0)
+        {
+            capacityCounterText.text = "00:00";
+            RewardPanel.Instance.capacityPanelGO.SetActive(false);
+            Globals.extraStack = 0;
+            PlayerController.Instance.CapacityReset();
+            Globals.isCapacityRewardCreated = false;
+        }
     }
 
     public void DoubleIncomeActive()
@@ -183,12 +192,15 @@ public class SkillManager : MonoBehaviour
         Globals.doubleIncomeActive = true;
 
     }
-
+    bool doubleIncomeCoroutineActive;
     IEnumerator DoubleIncome_Reset(int rewardTime)
     {
+        doubleIncomeCoroutineActive = false;
+        yield return new WaitForSeconds(1);
+        doubleIncomeCoroutineActive = true;
         int counter = rewardTime;
 
-        while (counter > 0)
+        while (counter > 0 && doubleIncomeCoroutineActive)
         {
             int minute = Mathf.FloorToInt(counter / 60);
             int second = Mathf.FloorToInt(counter % 60);
@@ -221,11 +233,13 @@ public class SkillManager : MonoBehaviour
             }
         }
 
-        doubleIncomeCounterText.text = "00:00";
-        RewardPanel.Instance.doubleIncomePanelGO.SetActive(false);
-        Globals.doubleIncomeActive = false;
-        Globals.isDoubleIncomeRewardCreated = false;
-
+        if (counter <= 0)
+        {
+            doubleIncomeCounterText.text = "00:00";
+            RewardPanel.Instance.doubleIncomePanelGO.SetActive(false);
+            Globals.doubleIncomeActive = false;
+            Globals.isDoubleIncomeRewardCreated = false;
+        }
 
     }
     IEnumerator CounterTextColorSet(TextMeshProUGUI txt)
@@ -300,6 +314,15 @@ public class SkillManager : MonoBehaviour
 
         capacityCounterText = RewardPanel.Instance.capacityCounterText;
         doubleIncomeCounterText = RewardPanel.Instance.doubleIncomeCounterText;
+
+
+        if (PlayerPrefs.GetInt("purchaserepairboost") == 0)
+        {
+        }
+        else
+        {
+            PurchaseRepairImmediateActive();
+        }
     }
 
     IEnumerator SpeedTimeCounter()
@@ -469,5 +492,12 @@ public class SkillManager : MonoBehaviour
     {
         PlayerPrefs.SetInt("purchasedoubleincomeboost", 1);
         Globals.doubleIncomeActive = true;
+    }
+
+    public void PurchaseRepairImmediateActive()
+    {
+        PlayerPrefs.SetInt("purchaserepairboost", 1);
+        RepairManager.Instance.repairWorker.showBuyRapairReward.RepairImmediate();
+        RepairManager.Instance.repairWorker.showBuyRapairReward.Canvas.SetActive(false);
     }
 }

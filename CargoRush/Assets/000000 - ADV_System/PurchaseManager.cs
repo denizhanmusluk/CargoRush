@@ -6,6 +6,14 @@ public class PurchaseManager : MonoBehaviour
 {
     private static PurchaseManager _instance = null;
     public static PurchaseManager Instance => _instance;
+    public GameObject purchasePanel_GO;
+    public GameObject purchaseButton_GO;
+
+    public GameObject ticketPanel_GO;
+    public GameObject moneyPanel_GO;
+    public GameObject boosterPanel_GO;
+    public GameObject bundlesPanel_GO;
+
     private void Awake()
     {
         _instance = this;
@@ -14,24 +22,71 @@ public class PurchaseManager : MonoBehaviour
     {
         
     }
+    public void PurchasePanelOpen()
+    {
+        purchasePanel_GO.SetActive(true);
+        purchaseButton_GO.SetActive(false);
+    }
+    public void PurchasePanelClose()
+    {
+        purchasePanel_GO.SetActive(false);
+        purchaseButton_GO.SetActive(true);
+
+    }
     public void BuyBannerDisable()
     {
-        ADVManager.Instance.BannerHide();
+        ADVManager.Instance.NoAds();
     }
     public void BuyTicket()
     {
 
     }
-    public void BuySpeedBoost()
+    //public void BuySpeedBoost()
+    //{
+    //    SkillManager.Instance.PurchaseSpeedBoostActive();
+    //}
+    //public void BuyFullCapacityBoost()
+    //{
+    //    SkillManager.Instance.PurchaseCapacityBoostActive();
+    //}
+    //public void BuyDoubleIncomeBoost()
+    //{
+    //    SkillManager.Instance.PurchaseDoubleIncomeBoostActive();
+    //}
+
+
+
+
+
+
+
+    public void OpenTicketPanel()
     {
-        SkillManager.Instance.PurchaseSpeedBoostActive();
+        ticketPanel_GO.SetActive(true);
+        moneyPanel_GO.SetActive(false);
+        boosterPanel_GO.SetActive(false);
+        bundlesPanel_GO.SetActive(false);
     }
-    public void BuyFullCapacityBoost()
+
+    public void OpenMoneyPanel()
     {
-        SkillManager.Instance.PurchaseCapacityBoostActive();
+        moneyPanel_GO.SetActive(true);
+        ticketPanel_GO.SetActive(false);
+        boosterPanel_GO.SetActive(false);
+        bundlesPanel_GO.SetActive(false);
     }
-    public void BuyDoubleIncomeBoost()
+    public void OpenBoosterPanel()
     {
-        SkillManager.Instance.PurchaseDoubleIncomeBoostActive();
+        boosterPanel_GO.SetActive(true);
+        moneyPanel_GO.SetActive(false);
+        ticketPanel_GO.SetActive(false);
+        bundlesPanel_GO.SetActive(false);
+    }
+    public void OpenBundlesPanel()
+    {
+        bundlesPanel_GO.SetActive(true);
+        boosterPanel_GO.SetActive(false);
+        moneyPanel_GO.SetActive(false);
+        ticketPanel_GO.SetActive(false);
     }
 }

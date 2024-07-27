@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,13 +19,16 @@ public class DayCycleManager : MonoBehaviour
     public GameObject moon;
     public Image dayFill;
 
+    public string SavedDateKey = "SavedDate";
+
     private void Awake()
     {
         _instance = this;
+        CheckIf24HoursPassed();
     }
     void Start()
     {
-        if (PlayerPrefs.GetInt("isbannerdisable") == 0)
+        //if (PlayerPrefs.GetInt("bundlesnoads") == 0 && PlayerPrefs.GetInt("bundlesnoadslimited") == 0)
         {
             if (PlayerPrefs.GetInt("firstInterstialTimeCompleted") == 0)
             {
@@ -35,6 +39,7 @@ public class DayCycleManager : MonoBehaviour
                 StartCoroutine(DayCycleCounter());
             }
         }
+        StartCoroutine(TimeLapsCheck_24HoursPassed());
     }
     IEnumerator FirstQuarterCounter()
     {
@@ -48,7 +53,7 @@ public class DayCycleManager : MonoBehaviour
         }
         PlayerPrefs.SetInt("firstInterstialTimeCompleted", 1);
 
-        if (PlayerPrefs.GetInt("isbannerdisable") == 0)
+        if (PlayerPrefs.GetInt("bundlesnoads") == 0 && PlayerPrefs.GetInt("bundlesnoadslimited") == 0)
         {
             StartCoroutine(AdvShow());
         }
@@ -79,7 +84,7 @@ public class DayCycleManager : MonoBehaviour
             }
             yield return new WaitForSeconds(1);
         }
-        if (PlayerPrefs.GetInt("isbannerdisable") == 0)
+        if (PlayerPrefs.GetInt("bundlesnoads") == 0 && PlayerPrefs.GetInt("bundlesnoadslimited") == 0)
         {
             StartCoroutine(AdvShow());
         }
@@ -109,5 +114,48 @@ public class DayCycleManager : MonoBehaviour
         dayCycleCount = 0;
         PlayerPrefs.SetInt("dayCycleCount", dayCycleCount);
         StartCoroutine(DayCycleCounter());
+    }
+
+
+
+
+
+    IEnumerator TimeLapsCheck_24HoursPassed()
+    {
+        while (true)
+        {
+            CheckIf24HoursPassed();
+            yield return new WaitForSeconds(10);
+        }
+    }
+    public void CheckIf24HoursPassed()
+    {
+        // Kaydedilen tarihi al
+        if (PlayerPrefs.HasKey(SavedDateKey))
+        {
+            string savedDateString = PlayerPrefs.GetString(SavedDateKey);
+            DateTime savedDate = DateTime.Parse(savedDateString);
+
+            DateTime currentDate = DateTime.Now;
+
+            TimeSpan timeDifference = currentDate - savedDate;
+
+            if (timeDifference.TotalHours >= 24)
+            {
+                Debug.Log("24 saat geçti!");
+                PlayerPrefs.SetInt("bundlesnoadslimited", 0);
+                PlayerPrefs.DeleteKey(SavedDateKey);
+                PlayerPrefs.Save();
+                ADVManager.Instance.Check_NoAds_Bundle_Active();
+            }
+            else
+            {
+                Debug.Log("24 saat geçmedi.");
+            }
+        }
+        else
+        {
+            Debug.Log("Kayýtlý tarih bulunamadý.");
+        }
     }
 }

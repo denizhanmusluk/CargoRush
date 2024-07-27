@@ -8,14 +8,14 @@ public class PurchaseMoneyManager : MonoBehaviour
     private static PurchaseMoneyManager _instance = null;
     public static PurchaseMoneyManager Instance => _instance;
     int moneyAmount;
-    int cost;
+    float cost;
     Button buyButton;
     private void Awake()
     {
         _instance = this;
     }
 
-    public void MoneyBuy(int _moneyAmount, int _cost, Button _buyButton)
+    public void MoneyBuy(int _moneyAmount, float _cost, Button _buyButton)
     {
         moneyAmount = _moneyAmount;
         cost = _cost;

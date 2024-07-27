@@ -10,6 +10,7 @@ public class ShareManager : MonoBehaviour
     private static ShareManager _instance = null;
     public static ShareManager Instance => _instance;
     public event Action popUpEvent;
+    public event Action shareValueRewardPopUp;
 
     public List<HisseCompany> hisseCompanies = new List<HisseCompany>();
     public List<Transform> hisseCompanyPosList = new List<Transform>();
@@ -26,8 +27,15 @@ public class ShareManager : MonoBehaviour
 
     public GameObject repairPopUp_GO;
     public GameObject moneyPopUp_GO;
+
+    public GameObject capacityPopUp_GO;
+    public GameObject doubleIncomePopUp_GO;
+    public GameObject speedPopUp_GO;
     public TextMeshProUGUI moneyText;
 
+
+    //public List<GameObject> rewardPool = new List<GameObject>();
+    public int risingPerValue = 2500;
     private void Awake()
     {
         _instance = this;
@@ -75,6 +83,10 @@ public class ShareManager : MonoBehaviour
         CheckShareTutorial_End();
         popUpEvent?.Invoke();
         popUpEvent = null;
+
+        shareValueRewardPopUp?.Invoke();
+        shareValueRewardPopUp = null;
+        exclamation_GO.SetActive(false);
     }
 
     public bool shareRisingActive = false;
@@ -128,7 +140,14 @@ public class ShareManager : MonoBehaviour
         popUpEvent = null;
         if (_companyLevel == 1)
         {
-            popUpEvent += RepairPopUp_Open;
+            if (PlayerPrefs.GetInt("purchaserepairboost") == 0)
+            {
+                popUpEvent += RepairPopUp_Open;
+            }
+            else
+            {
+                popUpEvent += MoneyPopUp_Open;
+            }
         }
         else if (_companyLevel == 2)
         {
@@ -136,7 +155,14 @@ public class ShareManager : MonoBehaviour
         }
         else
         {
-            popUpEvent += RepairPopUp_Open;
+            if (PlayerPrefs.GetInt("purchaserepairboost") == 0)
+            {
+                popUpEvent += RepairPopUp_Open;
+            }
+            else
+            {
+                popUpEvent += MoneyPopUp_Open;
+            }
         }
     }
     void CheckShareTutorialStart_2()
@@ -150,6 +176,55 @@ public class ShareManager : MonoBehaviour
     {
         checkShareActive = false;
         checkShareTut_GO.SetActive(false);
+    }
+
+    int shareValueLevel = 0;
+    public void ShareValueReward(int _shareValueLevel)
+    {
+        exclamation_GO.SetActive(true);
+        shareValueLevel = _shareValueLevel;
+        if (shareValueLevel % 5 == 0)
+        {
+            if (PlayerPrefs.GetInt("purchasecapacityboost") == 0)
+            {
+                shareValueRewardPopUp += CapacityPopUpOpen;
+            }
+            else
+            {
+                shareValueRewardPopUp += MoneyPopUp_Open;
+            }
+        }
+        if (shareValueLevel % 5 == 1)
+        {
+            shareValueRewardPopUp += MoneyPopUp_Open;
+        }
+        if (shareValueLevel % 5 == 2)
+        {
+            if (PlayerPrefs.GetInt("purchasedoubleincomeboost") == 0)
+            {
+                shareValueRewardPopUp += DoubleIncomePopUpOpen;
+            }
+            else
+            {
+                shareValueRewardPopUp += MoneyPopUp_Open;
+            }
+        }
+        if (shareValueLevel % 5 == 3)
+        {
+            shareValueRewardPopUp += MoneyPopUp_Open;
+        }
+        if (shareValueLevel % 5 == 4)
+        {
+            if (PlayerPrefs.GetInt("purchasespeedboost") == 0)
+            {
+                shareValueRewardPopUp += SpeedPopUpOpen;
+            }
+            else
+            {
+                shareValueRewardPopUp += MoneyPopUp_Open;
+            }
+        }
+
     }
 
     int orderCount = 0;
@@ -177,13 +252,51 @@ public class ShareManager : MonoBehaviour
         }
     }
 
-
-
+    void CapacityPopUpOpen()
+    {
+        capacityPopUp_GO.SetActive(true);
+        PlayerController.Instance.PlayerControlDeActive();
+    }
+    public void CapacityRewardClick()
+    {
+        SkillManager.Instance.CapacityActive();
+        PlayerController.Instance.PlayerControl_ReActive();
+        capacityPopUp_GO.SetActive(false);
+    }
+    void DoubleIncomePopUpOpen()
+    {
+        doubleIncomePopUp_GO.SetActive(true);
+        PlayerController.Instance.PlayerControlDeActive();
+    }
+    public void DoubleIncomeRewardClick()
+    {
+        SkillManager.Instance.DoubleIncomeActive();
+        PlayerController.Instance.PlayerControl_ReActive();
+        doubleIncomePopUp_GO.SetActive(false);
+    }
+    void SpeedPopUpOpen()
+    {
+        speedPopUp_GO.SetActive(true);
+        PlayerController.Instance.PlayerControlDeActive();
+    }
+    public void SpeedRewardClick()
+    {
+        SkillManager.Instance.HoverboardActive();
+        PlayerController.Instance.PlayerControl_ReActive();
+        speedPopUp_GO.SetActive(false);
+    }
     void MoneyPopUp_Open()
     {
         moneyPopUp_GO.SetActive(true);
         moneyText.text = "$" + CoefficientTransformation.Converter((Globals.collectableLevel * 300) + (Globals.openedCarSlotCount * 200) * (PlayerPrefs.GetInt("level") + 1));
     }
+    public void MoneyRewardClick()
+    {
+        GameManager.Instance.ui.FreeMoneyPopUp();
+        moneyPopUp_GO.SetActive(false);
+
+    }
+
     void RepairPopUp_Open()
     {
         repairPopUp_GO.SetActive(true);
@@ -195,11 +308,6 @@ public class ShareManager : MonoBehaviour
         repairPopUp_GO.SetActive(false);
         PlayerController.Instance.PlayerControl_ReActive();
     }
-    public void MoneyRewardClick()
-    {
-        GameManager.Instance.ui.FreeMoneyPopUp();
-        moneyPopUp_GO.SetActive(false);
-
-    }
+ 
 
 }

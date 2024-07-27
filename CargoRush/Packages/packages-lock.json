@@ -113,7 +113,8 @@
         "com.homagames.analytics.homa-analytics": "1.4.0",
         "com.homagames.analytics.gameanalytics": "8.0.0",
         "com.homagames.analytics.facebook": "16.0.4",
-        "com.homagames.debug-console": "3.0.2"
+        "com.homagames.debug-console": "3.0.2",
+        "com.homagames.purchases": "2.0.1"
       }
     },
     "com.homagames.jeffcampbellmakesgames.semver": {
@@ -129,6 +130,17 @@
       "source": "registry",
       "dependencies": {
         "com.unity.nuget.newtonsoft-json": "3.2.0"
+      },
+      "url": "https://homagames.jfrog.io/artifactory/api/npm/unity-public-sdk"
+    },
+    "com.homagames.purchases": {
+      "version": "2.0.1",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {
+        "com.homagames.sdk-core": "2.0.0",
+        "com.revenuecat.purchases-unity": "6.9.2",
+        "com.homagames.homa-lab-bridge": "2.1.1"
       },
       "url": "https://homagames.jfrog.io/artifactory/api/npm/unity-public-sdk"
     },
@@ -156,6 +168,13 @@
     },
     "com.homagames.usercentrics-sdk": {
       "version": "2.13.1",
+      "depth": 2,
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://homagames.jfrog.io/artifactory/api/npm/unity-public-sdk"
+    },
+    "com.revenuecat.purchases-unity": {
+      "version": "6.9.2",
       "depth": 2,
       "source": "registry",
       "dependencies": {},

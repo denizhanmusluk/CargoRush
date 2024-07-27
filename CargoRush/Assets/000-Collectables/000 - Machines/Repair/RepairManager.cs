@@ -28,7 +28,7 @@ public class RepairManager : MonoBehaviour
     IEnumerator StartDelay()
     {
         yield return new WaitForSeconds(5f);
-        if (repairWorkerTimeCounter > 0)
+        if (repairWorkerTimeCounter > 0 && PlayerPrefs.GetInt("purchaserepairboost") == 0)
         {
             RepairWorkerStart();
         }
@@ -36,21 +36,21 @@ public class RepairManager : MonoBehaviour
     public void OpenRepairWorker()
     {
         repairWorker.gameObject.SetActive(true);
-        if (PlayerPrefs.GetInt("machineerrorcount") == 2)
+        if (PlayerPrefs.GetInt("machineerrorcount") == 2 && PlayerPrefs.GetInt("purchaserepairboost") == 0)
         {
             RepairWorkerStart();
         }
     }
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            RepairWorkerStart();
-        }
-        if (Input.GetKeyDown(KeyCode.O))
-        {
-            RepairEnd();
-        }
+        //if (Input.GetKeyDown(KeyCode.P))
+        //{
+        //    RepairWorkerStart();
+        //}
+        //if (Input.GetKeyDown(KeyCode.O))
+        //{
+        //    RepairEnd();
+        //}
     }
     public void RepairWorkerStart()
     {
@@ -71,7 +71,10 @@ public class RepairManager : MonoBehaviour
             PlayerPrefs.SetInt("repairWorkerTimeCounter", repairWorkerTimeCounter);
             yield return new WaitForSeconds(1);
         }
-        RepairEnd();
+        if (PlayerPrefs.GetInt("purchaserepairboost") == 0)
+        {
+            RepairEnd();
+        }
     }
     public void RepairEnd()
     {

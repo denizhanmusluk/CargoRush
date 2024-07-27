@@ -8,22 +8,22 @@ public class PurchaseTicketManager : MonoBehaviour
     private static PurchaseTicketManager _instance = null;
     public static PurchaseTicketManager Instance => _instance;
     int ticketAmount;
-    int cost;
-    Button buyButton;
+    float cost;
+   [SerializeField] BuyTicketButton buyTicketButton;
     private void Awake()
     {
         _instance = this;
     }
-    public void TicketBuy(int _ticketAmount, int _cost, Button _buyButton)
+    public void TicketBuy(int _ticketAmount, float _cost, BuyTicketButton _buyTicketButton)
     {
         ticketAmount = _ticketAmount;
         cost = _cost;
-        buyButton = _buyButton;
+        buyTicketButton = _buyTicketButton;
         PayingCompleted();
     }
     void PayingCompleted()
     {
-        buyButton.interactable = true;
+        buyTicketButton.buyButton.interactable = true;
         GameManager.Instance.ui.GemUpdate(ticketAmount);
     }
 

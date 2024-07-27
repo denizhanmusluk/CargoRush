@@ -19,13 +19,24 @@ public class ADVManager : MonoBehaviour
     }
     private void Start()
     {
-        if(PlayerPrefs.GetInt("isbannerdisable") == 0)
+        Check_NoAds_Bundle_Active();
+    }
+    public void Check_NoAds_Bundle_Active()
+    {
+        if (PlayerPrefs.GetInt("bundlesnoads") == 0 && PlayerPrefs.GetInt("bundlesnoadslimited") == 0)
         {
             BannerShow();
         }
         else
         {
-            BannerHide();
+            if (PlayerPrefs.GetInt("bundlesnoads") == 1)
+            {
+                NoAds();
+            }
+            if (PlayerPrefs.GetInt("bundlesnoadslimited") == 1)
+            {
+                NoAdsLimited();
+            }
         }
     }
     public void RewardedStart(Action fnct, string rewardedName)
@@ -78,9 +89,14 @@ public class ADVManager : MonoBehaviour
         HomaBelly.Instance.ShowBanner();
     }
 
-    public void BannerHide()
+    public void NoAds()
     {
-        PlayerPrefs.SetInt("purchasebanneris", 1);
+        PlayerPrefs.SetInt("bundlesnoads", 1);
+        HomaBelly.Instance.HideBanner();
+    }
+    public void NoAdsLimited()
+    {
+        PlayerPrefs.SetInt("bundlesnoadslimited", 1);
         HomaBelly.Instance.HideBanner();
     }
 }

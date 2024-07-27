@@ -131,6 +131,11 @@ public class HisseCompany : MonoBehaviour
             TextInit(shareText, currentCompanyShare);
             shareValues[shareValues.Count - 1] = currentCompanyShare / 100;
 
+            if(currentCompanyShare > ShareManager.Instance.risingPerValue * (PlayerPrefs.GetInt("sharevaluelevel") + 1))
+            {
+                ShareManager.Instance.ShareValueReward(PlayerPrefs.GetInt("sharevaluelevel"));
+                PlayerPrefs.SetInt("sharevaluelevel", PlayerPrefs.GetInt("sharevaluelevel") + 1);
+            }
             yield return new WaitForSeconds(1f);
         }
     }

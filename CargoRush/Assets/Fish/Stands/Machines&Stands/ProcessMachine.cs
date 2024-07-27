@@ -79,6 +79,9 @@ public class ProcessMachine : Stand, IStandUpgrade, IMachineActive
 
     public Transform repairWorkerWaitingPos_TR;
     public bool errorActive { get; set; }
+
+    public GameObject machineDurable_GO;
+    public GameObject machineError_GO;
     private void Awake()
     {
         errorActive = false;
@@ -110,7 +113,9 @@ public class ProcessMachine : Stand, IStandUpgrade, IMachineActive
         CollectProgressManager.Instance.dirtyActiveImgGO.SetActive(true);
         Globals.machineErrorActive = true;
         ShareManager.Instance.ErrorCounter();
-    }
+        machineDurable_GO.SetActive(false);
+        machineError_GO.SetActive(true);
+}
     public void MachineRepaired()
     {
         if (errorActive)
@@ -126,7 +131,15 @@ public class ProcessMachine : Stand, IStandUpgrade, IMachineActive
                 repairs.gameObject.SetActive(false);
             }
             machineRepairArea.gameObject.SetActive(false);
+            StartCoroutine(RepairAnimation());
         }
+    }
+    IEnumerator RepairAnimation()
+    {
+        machineError_GO.GetComponent<Animator>().SetTrigger("repair");
+        yield return new WaitForSeconds(2f);
+        machineDurable_GO.SetActive(true);
+        machineError_GO.SetActive(false);
     }
     void CollectProducts_CollectActivator(bool active)
     {
