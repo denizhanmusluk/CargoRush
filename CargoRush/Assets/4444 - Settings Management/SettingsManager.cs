@@ -113,11 +113,13 @@ public class SettingsManager : MonoBehaviour
         PlayerPrefs.SetInt("musicclose", 0);
         musicButtonOpener.SetActive(false);
         musicButtonCloser.SetActive(true);
+        AudioManager.Instance.MusicOn();
     }
     public void MusicCloser_Click()
     {
         PlayerPrefs.SetInt("musicclose", 1);
         musicButtonOpener.SetActive(true);
         musicButtonCloser.SetActive(false);
+        AudioManager.Instance.MusicOff();
     }
 }

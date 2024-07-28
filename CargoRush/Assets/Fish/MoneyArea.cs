@@ -54,6 +54,8 @@ public class MoneyArea : MonoBehaviour
         for (int i = tempMoneyList.Count-1; i >= 0; i--)
         {
             VibratoManager.Instance.LightVibration();
+            AudioManager.Instance.MoneyCollectSound();
+
             tempMoneyList[i].MovingMoneyUI(tempMoneyList[i].transform.position, GameManager.Instance.ui.moneyTarget);
             stepNo++;
             if (stepNo % 50 == 0)

@@ -141,6 +141,7 @@ public class UpgradeArea : MonoBehaviour, BuyCamera
     IEnumerator buy()
     {
         VibratoManager.Instance.LightVibration();
+        AudioManager.Instance.PaymentSound();
         isbuy = false;
         currentAmount -= deltaCost;
         outline.fillAmount = 1 - (float)currentAmount / (float)cost;
@@ -185,6 +186,7 @@ public class UpgradeArea : MonoBehaviour, BuyCamera
         StartCoroutine(buildScaling());
         GetComponent<Collider>().enabled = false;
         _StandFishCar.LevelUp();
+        AudioManager.Instance.UpgradeSound();
     }
     IEnumerator BuyActivator()
     {

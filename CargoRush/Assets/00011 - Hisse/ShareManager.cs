@@ -70,6 +70,7 @@ public class ShareManager : MonoBehaviour
         ShareRisingTutorialStart_2();
         ShareFallingTutorialStart_2();
         CheckShareTutorialStart_2();
+        AudioManager.Instance.ButtonSound();
     }
     public void CloseGraph()
     {

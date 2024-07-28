@@ -280,7 +280,7 @@ public class BuyArea : MonoBehaviour, BuyCamera
         {
             currentAmount -= deltaCost;
             VibratoManager.Instance.LightVibration();
-
+            AudioManager.Instance.PaymentSound();
         }
         else
         {
@@ -331,6 +331,11 @@ public class BuyArea : MonoBehaviour, BuyCamera
         {
             string _tag = "M" + (PlayerPrefs.GetInt("level") + 1).ToString() + "-" + gaTag;
             GameManager.Instance.GameAnalyticsTag(_tag);
+            AudioManager.Instance.UpgradeSound();
+        }
+        else
+        {
+            AudioManager.Instance.OpenNewAreaSound();
         }
         if (hrBuy)
         {
@@ -381,6 +386,7 @@ public class BuyArea : MonoBehaviour, BuyCamera
             PlayerPrefs.SetInt("vipActive", 1);
             //MarketCustomerManager.Instance.currentCustomerCount = 125;
         }
+
     }
     IEnumerator BuyActivator()
     {

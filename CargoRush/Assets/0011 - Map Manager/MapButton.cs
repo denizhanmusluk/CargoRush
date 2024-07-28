@@ -8,5 +8,6 @@ public class MapButton : MonoBehaviour
     public void MapButtonClick()
     {
         MapManager.Instance.NewLevelSelect(levelIndex);
+        AudioManager.Instance.ButtonSound();
     }
 }

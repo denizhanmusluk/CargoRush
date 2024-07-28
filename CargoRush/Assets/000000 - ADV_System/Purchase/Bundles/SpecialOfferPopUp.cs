@@ -24,6 +24,12 @@ public class SpecialOfferPopUp : MonoBehaviour
     {
         buyButton.interactable = false;
         PurchaseBundlesManager.Instance.SpecialOffer_Buy(cost, buyButton);
+        StartCoroutine(CloseDelay());
+    }
+    IEnumerator CloseDelay()
+    {
+        yield return new WaitForSeconds(0.1f);
+        gameObject.SetActive(false);
     }
 
     public void CheckPurchased()

@@ -121,6 +121,8 @@ public class PlayerController : MonoBehaviour
         //ModelSelect();
         ModelSelector.Instance.CreatePlayer();
         ModelSelector.Instance.FirstOpenPlayerUI();
+        AudioManager.Instance.transform.parent = transform;
+        AudioManager.Instance.transform.localPosition = Vector3.zero;
     }
     public void SkateBoardActive()
     {

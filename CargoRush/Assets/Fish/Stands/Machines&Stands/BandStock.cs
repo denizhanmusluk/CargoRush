@@ -22,7 +22,7 @@ public class BandStock : Stand
             TutorialManager.Instance.bandTut_1.SetActive(false);
             TutorialManager.Instance.bandTut_2.SetActive(true);
         }
-        if (PlayerPrefs.GetInt("bandstocktutorial") == 1 && productCollectionList.Count == 5)
+        if (PlayerPrefs.GetInt("bandstocktutorial") == 1 && productCollectionList.Count == 0)
         {
             PlayerPrefs.SetInt("bandstocktutorial", 2);
             TutorialManager.Instance.bandTut_2.SetActive(false);
@@ -30,14 +30,14 @@ public class BandStock : Stand
 
             IndicatorManager.Instance.IndicaorActive(standRaw.transform);
         }
-        if (PlayerPrefs.GetInt("bandstocktutorial") == 3 && productCollectionList.Count == 0)
-        {
-            PlayerPrefs.SetInt("bandstocktutorial", 4);
-            TutorialManager.Instance.bandTut_2.SetActive(false);
-            TutorialManager.Instance.bandTut_3.SetActive(true);
+        //if (PlayerPrefs.GetInt("bandstocktutorial") == 3 && productCollectionList.Count == 0)
+        //{
+        //    PlayerPrefs.SetInt("bandstocktutorial", 4);
+        //    TutorialManager.Instance.bandTut_2.SetActive(false);
+        //    TutorialManager.Instance.bandTut_3.SetActive(true);
 
-            IndicatorManager.Instance.IndicaorActive(standRaw.transform);
-        }
+        //    IndicatorManager.Instance.IndicaorActive(standRaw.transform);
+        //}
     }
 
     public override void DropCollection(int collectAmount, StackCollect _stackCollect)
@@ -67,7 +67,8 @@ public class BandStock : Stand
 
     IEnumerator ManuealRawCreator()
     {
-        for (int i = 0; i < 10; i++)
+        yield return new WaitForSeconds(1f);
+        for (int i = 0; i < PlayerController.Instance._characterUpgradeSettings.stackCapacity[Globals.stackCapacityLevel]; i++)
         {
             GameObject newProduct = Instantiate(productPrefabs[0].gameObject);
             newProduct.GetComponent<Collectable>().collectActive = false;

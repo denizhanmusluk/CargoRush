@@ -26,7 +26,6 @@ public class BuyCapacity : MonoBehaviour
         PurchaseBoostManager.Instance.CapacityBuy(cost, buyButton);
         buyButton.interactable = false;
     }
-
     public void CheckPurchased()
     {
         if (PlayerPrefs.GetInt("purchasecapacityboost") == 0)

@@ -109,7 +109,8 @@ public class HRUpgradeManager : MonoBehaviour
                         _upgradeAreaWorkers.workerList[i].GetComponent<AIGarbageWorker>().MoveSpeedInit();
                     }
                 }
-                
+                AudioManager.Instance.UpgradeSound();
+
                 //PlayerController.Instance.GetComponent<BoingScale>().ScaleEffectTR(PlayerController.Instance.transform, 0.8f, 1f, 0.5f, Ease.OutElastic);
                 //PlayerController.Instance.UpgradeTextSpawn("+Magnet");
             }
@@ -131,6 +132,7 @@ public class HRUpgradeManager : MonoBehaviour
                 GameManager.Instance.GameAnalyticsTag(tag);
                 //PlayerController.Instance.GetComponent<BoingScale>().ScaleEffectTR(PlayerController.Instance.transform, 0.8f, 1f, 0.5f, Ease.OutElastic);
                 //PlayerController.Instance.UpgradeTextSpawn("+Speed");
+                AudioManager.Instance.UpgradeSound();
             }
         }
     }
@@ -160,6 +162,7 @@ public class HRUpgradeManager : MonoBehaviour
 
                 //PlayerController.Instance.GetComponent<BoingScale>().ScaleEffectTR(PlayerController.Instance.transform, 0.8f, 1f, 0.5f, Ease.OutElastic);
                 //PlayerController.Instance.UpgradeTextSpawn("+Capacity");
+                AudioManager.Instance.UpgradeSound();
             }
 
         }
@@ -240,6 +243,7 @@ public class HRUpgradeManager : MonoBehaviour
             PlayerController.Instance.PlayerControlDeActive();
             upgradeButton.SetActive(false);
             TutorialManager.Instance.clickUpgradeButtonGO.SetActive(false);
+            AudioManager.Instance.ButtonSound();
         }
     }
     public void CharacterUpgradeClose()
@@ -273,13 +277,11 @@ public class HRUpgradeManager : MonoBehaviour
     {
         string adv_name = "";
         ADVManager.Instance.RewardedStart(WorkerCapacityUpgradeFree, adv_name);
-
     }
     public void WorkerNoUpgrade_ADV_Click()
     {
         string adv_name = "";
         ADVManager.Instance.RewardedStart(WorkerNoUpgradeFree, adv_name);
-
     }
 
 

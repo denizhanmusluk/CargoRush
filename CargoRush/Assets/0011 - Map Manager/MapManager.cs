@@ -62,7 +62,7 @@ public class MapManager : MonoBehaviour
     public void MapButtonClick()
     {
         OpenMap();
-
+        AudioManager.Instance.ButtonSound();
     }
     public void OpenMap()
     {

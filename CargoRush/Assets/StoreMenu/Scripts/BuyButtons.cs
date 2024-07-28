@@ -46,6 +46,7 @@ public class BuyButtons : MonoBehaviour
             GameManager.Instance.GameAnalyticsTag(skinName);
         }
         //GameAnalytics.NewDesignEvent(skinName);
+        AudioManager.Instance.ButtonSound();
     }
     public void CostTextInit(int costAmount)
     {

@@ -46,6 +46,8 @@ public class ProcessMachine : Stand, IStandUpgrade, IMachineActive
     public int[] capacitiesRaw;
     public int[] capacitiesProduct;
     public float[] speedFactors;
+    //public int[] bandPerPackCount;
+    //public int[] bandCapacity;
 
     float speedFactor = 1f;
     public AIPath aiPath;
@@ -82,6 +84,8 @@ public class ProcessMachine : Stand, IStandUpgrade, IMachineActive
 
     public GameObject machineDurable_GO;
     public GameObject machineError_GO;
+
+    public AudioSource bandSoundAS;
     private void Awake()
     {
         errorActive = false;
@@ -612,6 +616,10 @@ public class ProcessMachine : Stand, IStandUpgrade, IMachineActive
 
         machineAnimator.SetFloat("speed", speedFactor * _speedFactor);
         machineAnimator.SetTrigger("band");
+        if (PlayerPrefs.GetInt("soundclose") == 0)
+        {
+            bandSoundAS.Play();
+        }
         // converting
         Destroy(raws.gameObject, 0f);
 
@@ -905,22 +913,23 @@ public class ProcessMachine : Stand, IStandUpgrade, IMachineActive
         _stackCollect.collectionTrs.Remove(deletedCollect);
 
 
-        
-            droppedCollectionList.Add(droppingCollection);
+
+        droppedCollectionList.Add(droppingCollection);
         PlayerPrefs.SetInt(machineName + "rawcount" + PlayerPrefs.GetInt("level"), droppedCollectionList.Count);
 
         yield return null;
-            droppingCollection.collectActive = false;
-            float deltaY = 0;
-            deltaY = (droppedCollectionList.Count - 1) / fishPosTR.Length;
-            Transform targetTR = fishPosTR[(droppedCollectionList.Count - 1) % fishPosTR.Length];
-            Vector3 dropPos = targetTR.position + new Vector3(0, deltaY * 1.25f, 0);
-            StartCoroutine(Drop(targetTR, dropPos, droppingCollection, Time.deltaTime));
-            if (_stackCollect.player)
-            {
-                VibratoManager.Instance.LightVibration();
-            }
-        
+        droppingCollection.collectActive = false;
+        float deltaY = 0;
+        deltaY = (droppedCollectionList.Count - 1) / fishPosTR.Length;
+        Transform targetTR = fishPosTR[(droppedCollectionList.Count - 1) % fishPosTR.Length];
+        Vector3 dropPos = targetTR.position + new Vector3(0, deltaY * 1.25f, 0);
+        StartCoroutine(Drop(targetTR, dropPos, droppingCollection, Time.deltaTime));
+        if (_stackCollect.player)
+        {
+            VibratoManager.Instance.LightVibration();
+            AudioManager.Instance.StackDropSound();
+        }
+
 
         if (_stackCollect.collectionTrs.Count == 0)
         {
@@ -1142,6 +1151,14 @@ public class ProcessMachine : Stand, IStandUpgrade, IMachineActive
         productCountTotal = capacitiesProduct[standLevel];
         fishCountCurrent = capacitiesRaw[standLevel] - droppedCollectionList.Count;
         speedFactor = speedFactors[standLevel];
+
+        if (otherRawStand != null)
+        {
+            //bandPerPackageCount = bandPerPackCount[standLevel];
+            otherRawStand.maxBandCapacity = PlayerController.Instance._characterUpgradeSettings.stackCapacity[Globals.stackCapacityLevel];
+            otherRawStand.bandStock.fishCountTotal = PlayerController.Instance._characterUpgradeSettings.stackCapacity[Globals.stackCapacityLevel];
+            otherRawStand.bandStock.productCountTotal = PlayerController.Instance._characterUpgradeSettings.stackCapacity[Globals.stackCapacityLevel];
+        }
         fishCountText.text = (fishCountTotal - fishCountCurrent).ToString() + "/" + (fishCountTotal).ToString();
 
     }

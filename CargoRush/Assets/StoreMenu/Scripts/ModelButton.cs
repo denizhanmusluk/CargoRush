@@ -32,6 +32,7 @@ public class ModelButton : MonoBehaviour
     public void SelectClick()
     {
         StarPanelManager.Instance.SelectClick(buttonId);
+        AudioManager.Instance.ButtonSound();
     }
     public void SelectedButtonClick()
     {
@@ -117,6 +118,7 @@ public class ModelButton : MonoBehaviour
     {
         string adv_name = "";
         ADVManager.Instance.RewardedStart(AdvEnd, adv_name);
+        AudioManager.Instance.ButtonSound();
     }
 
     void AdvEnd()

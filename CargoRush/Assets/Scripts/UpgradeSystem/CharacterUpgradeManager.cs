@@ -108,6 +108,8 @@ public class CharacterUpgradeManager : MonoBehaviour
                 GameManager.Instance.GameAnalyticsTag(tag);
 
                 float time = CoefficientTransformation.FormatSaniye(Globals.speedPlayTime);
+
+                AudioManager.Instance.UpgradeSound();
             }
         }
     }
@@ -129,6 +131,7 @@ public class CharacterUpgradeManager : MonoBehaviour
                 GameManager.Instance.GameAnalyticsTag(tag);
                 float time = CoefficientTransformation.FormatSaniye(Globals.speedPlayTime);
                 //GameAnalytics.NewDesignEvent(tag, time);
+                AudioManager.Instance.UpgradeSound();
             }
 
         }

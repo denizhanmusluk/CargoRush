@@ -48,6 +48,7 @@ public class StoreManager : MonoBehaviour
         //MissionManager.Instance.SkinMissionStart();
         storeButtonTapTutorialGO.SetActive(false);
         PlayerController.Instance.PlayerControlDeActive();
+        AudioManager.Instance.ButtonSound();
     }
 
     public void newButton()

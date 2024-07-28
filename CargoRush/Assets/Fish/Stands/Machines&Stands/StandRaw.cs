@@ -103,6 +103,7 @@ public class StandRaw : Stand
         if (_stackCollect.player)
         {
             VibratoManager.Instance.LightVibration();
+            AudioManager.Instance.StackDropSound();
         }
 
 
@@ -120,17 +121,17 @@ public class StandRaw : Stand
         if (PlayerPrefs.GetInt("bandstocktutorial") == 2)
         {
             PlayerPrefs.SetInt("bandstocktutorial", 3);
-            TutorialManager.Instance.bandTut_2.SetActive(true);
-            TutorialManager.Instance.bandTut_3.SetActive(false);
-            IndicatorManager.Instance.IndicaorActive(bandStock._CollectProducts.transform);
-        }
-        if (PlayerPrefs.GetInt("bandstocktutorial") == 4)
-        {
-            PlayerPrefs.SetInt("bandstocktutorial", 5);
             TutorialManager.Instance.bandTut_2.SetActive(false);
             TutorialManager.Instance.bandTut_3.SetActive(false);
             IndicatorManager.Instance.IndicaorDeActive();
         }
+        //if (PlayerPrefs.GetInt("bandstocktutorial") == 4)
+        //{
+        //    PlayerPrefs.SetInt("bandstocktutorial", 5);
+        //    TutorialManager.Instance.bandTut_2.SetActive(false);
+        //    TutorialManager.Instance.bandTut_3.SetActive(false);
+        //    IndicatorManager.Instance.IndicaorDeActive();
+        //}
     }
 
     IEnumerator Drop(Transform dropPosTR, Vector3 dropPos, Collectable collectable, float waitTime)

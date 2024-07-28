@@ -23,8 +23,13 @@ public class NoAdsLimitedPopUp : MonoBehaviour
     {
         buyButton.interactable = false;
         PurchaseBundlesManager.Instance.NoAdsLimitedBuy(cost, buyButton);
+        StartCoroutine(CloseDelay());
     }
-
+    IEnumerator CloseDelay()
+    {
+        yield return new WaitForSeconds(0.1f);
+        gameObject.SetActive(false);
+    }
     public void CheckPurchased()
     {
         if (PlayerPrefs.GetInt("bundlesnoadslimited") == 0)

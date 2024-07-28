@@ -37,6 +37,7 @@ public class StandFishCar : Stand,IMoneyArea
 
     public bool specialVehicle = false;
     public Animator goatAnim;
+    public AudioSource carSoundAS;
     void TextInitCheck()
     {
         for (int i = 0; i < productTypeCount.Length; i++)
@@ -426,6 +427,7 @@ public class StandFishCar : Stand,IMoneyArea
             if (_stackCollect.player)
             {
                 VibratoManager.Instance.LightVibration();
+                AudioManager.Instance.StackDropSound();
             }
 
             fishCountCurrent -= 1;
@@ -647,8 +649,17 @@ public class StandFishCar : Stand,IMoneyArea
     {
         StartCoroutine(ResetDelay());
     }
+    IEnumerator CarSoundPlay()
+    {
+        yield return new WaitForSeconds(1);
+        if (PlayerPrefs.GetInt("soundclose") == 0)
+        {
+            carSoundAS.Play();
+        }
+    }
     IEnumerator ResetDelay()
     {
+        StartCoroutine(CarSoundPlay());
          //DropMoney();
          StandActive = false;
         GetComponent<Collider>().enabled = false;

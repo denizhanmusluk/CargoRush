@@ -275,6 +275,8 @@ public class MissionManager : MonoBehaviour
         }
 
         buttonClick?.Invoke();
+        AudioManager.Instance.ButtonSound();
+
     }
     private void OnDisable()
     {

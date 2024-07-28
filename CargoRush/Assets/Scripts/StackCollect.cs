@@ -489,6 +489,7 @@ public abstract class StackCollect : MonoBehaviour
         if (player)
         {
             VibratoManager.Instance.LightVibration();
+            AudioManager.Instance.StackTakeSound();
         }
 
 

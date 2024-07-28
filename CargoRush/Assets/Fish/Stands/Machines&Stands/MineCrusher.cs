@@ -944,11 +944,12 @@ public class MineCrusher : Stand, IStandUpgrade
         Transform targetTR = fishPosTR[(posNo) % fishPosTR.Length];
         Vector3 dropPos = targetTR.position + new Vector3(0, deltaY * 0.7f, 0);
         StartCoroutine(Drop(targetTR, dropPos, droppingCollection, Time.deltaTime));
+
         if (_stackCollect.player)
         {
             VibratoManager.Instance.LightVibration();
+            AudioManager.Instance.StackDropSound();
         }
-
 
         if (_stackCollect.collectionTrs.Count == 0)
         {

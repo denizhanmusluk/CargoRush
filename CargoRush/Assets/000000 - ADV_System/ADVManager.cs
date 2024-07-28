@@ -58,6 +58,7 @@ public class ADVManager : MonoBehaviour
 
             Events.onRewardedVideoAdRewardedEvent += RewardedEnd;
         }
+        AudioManager.Instance.UpgradeSound();
     }
     private void RewardedEnd(VideoAdReward videoAdReward, AdInfo adInfo)
     {
