@@ -21,6 +21,10 @@ public class PurchaseBundlesManager : MonoBehaviour
     public Bundle5 bundle5;
     public Bundle6 bundle6;
     public SpecialOffer specialOffer;
+
+
+    //public NoAdsPopUp noAdsPopUp;
+
     private void Awake()
     {
         _instance = this;
@@ -42,7 +46,10 @@ public class PurchaseBundlesManager : MonoBehaviour
         buyButton.interactable = true;
         ADVManager.Instance.NoAds();
         // // // // //
-        noAdsBundles.CheckPurchased();
+        if (noAdsBundles != null)
+        {
+            noAdsBundles.CheckPurchased();
+        }
     }
 
     public void NoAdsLimitedBuy(float _cost, Button _buyButton)
@@ -56,7 +63,10 @@ public class PurchaseBundlesManager : MonoBehaviour
         buyButton.interactable = true;
         ADVManager.Instance.NoAdsLimited();
         // // // // //
-        noAdsLimitedBundles.CheckPurchased();
+        if (noAdsLimitedBundles != null)
+        {
+            noAdsLimitedBundles.CheckPurchased();
+        }
         SaveCurrentDate();
     }
 
@@ -83,7 +93,10 @@ public class PurchaseBundlesManager : MonoBehaviour
         // // // // //
         GameManager.Instance.ui.MoneyUpdate(5000);
 
-        bundle1.CheckPurchased();
+        if (bundle1 != null)
+        {
+            bundle1.CheckPurchased();
+        }
     }
 
 
@@ -102,8 +115,10 @@ public class PurchaseBundlesManager : MonoBehaviour
         GameManager.Instance.ui.MoneyUpdate(5000);
         GameManager.Instance.ui.GemUpdate(20);
 
-
-        bundle2.CheckPurchased();
+        if (bundle2 != null)
+        {
+            bundle2.CheckPurchased();
+        }
     }
     public void Bundle_3_Buy(float _cost, Button _buyButton)
     {
@@ -119,8 +134,10 @@ public class PurchaseBundlesManager : MonoBehaviour
         // // // // //
         SkillManager.Instance.PurchaseCapacityBoostActive();
 
-
-        bundle3.CheckPurchased();
+        if (bundle3 != null)
+        {
+            bundle3.CheckPurchased();
+        }
     }
     public void Bundle_4_Buy(float _cost, Button _buyButton)
     {
@@ -140,8 +157,10 @@ public class PurchaseBundlesManager : MonoBehaviour
         SkillManager.Instance.PurchaseDoubleIncomeBoostActive();
         GameManager.Instance.ui.GemUpdate(50);
 
-
-        bundle4.CheckPurchased();
+        if (bundle4 != null)
+        {
+            bundle4.CheckPurchased();
+        }
     }
     public void Bundle_5_Buy(float _cost, Button _buyButton)
     {
@@ -161,8 +180,10 @@ public class PurchaseBundlesManager : MonoBehaviour
         SkillManager.Instance.PurchaseDoubleIncomeBoostActive();
         SkillManager.Instance.PurchaseRepairImmediateActive();
 
-
-        bundle5.CheckPurchased();
+        if (bundle5 != null)
+        {
+            bundle5.CheckPurchased();
+        }
     }
     public void Bundle_6_Buy(float _cost, Button _buyButton)
     {
@@ -182,8 +203,10 @@ public class PurchaseBundlesManager : MonoBehaviour
         SkillManager.Instance.PurchaseRepairImmediateActive();
 
 
-
-        bundle6.CheckPurchased();
+        if (bundle6 != null)
+        {
+            bundle6.CheckPurchased();
+        }
     }
 
 
@@ -204,7 +227,9 @@ public class PurchaseBundlesManager : MonoBehaviour
         SkillManager.Instance.PurchaseRepairImmediateActive();
 
 
-
-        specialOffer.CheckPurchased();
+        if (specialOffer != null)
+        {
+            specialOffer.CheckPurchased();
+        }
     }
 }

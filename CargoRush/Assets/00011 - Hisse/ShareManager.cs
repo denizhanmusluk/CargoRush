@@ -185,7 +185,7 @@ public class ShareManager : MonoBehaviour
         shareValueLevel = _shareValueLevel;
         if (shareValueLevel % 5 == 0)
         {
-            if (PlayerPrefs.GetInt("purchasecapacityboost") == 0)
+            if (Globals.extraStack == 0)
             {
                 shareValueRewardPopUp += CapacityPopUpOpen;
             }

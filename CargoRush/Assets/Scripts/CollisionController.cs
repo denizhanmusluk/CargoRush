@@ -26,7 +26,7 @@ public class CollisionController : MonoBehaviour
             }
             else
             {
-                if (stackCollect.collectionTrs.Count < _characterUpgradeSettings.stackCapacity[Globals.stackCapacityLevel] + Globals.extraStackSkin + Globals.extraStack)
+                if (stackCollect.collectionTrs.Count < Globals.stackFactor  * _characterUpgradeSettings.stackCapacity[Globals.stackCapacityLevel] + Globals.extraStackSkin + Globals.extraStack)
                 {
                     if(other.GetComponent<Collector>() != null)
                     {

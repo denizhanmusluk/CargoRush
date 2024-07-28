@@ -64,6 +64,7 @@ public static class Globals
 
     public static float extraSpeed = 1f;
     public static int extraStack;
+    public static int stackFactor = 1;
 
     public static float extraSpeedSkins = 1f;
     public static int extraStackSkin = 0;

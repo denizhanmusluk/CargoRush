@@ -620,7 +620,7 @@ public abstract class StackCollect : MonoBehaviour
     {
         if (player == true)
         {
-            if (collectionTrs.Count > 0 && collectionTrs[0].collectID != 20 && PlayerController.Instance._characterUpgradeSettings.stackCapacity[Globals.stackCapacityLevel] + Globals.extraStack + Globals.extraStackSkin == collectionTrs.Count)
+            if (collectionTrs.Count > 0 && collectionTrs[0].collectID != 20 && Globals.stackFactor * PlayerController.Instance._characterUpgradeSettings.stackCapacity[Globals.stackCapacityLevel] + Globals.extraStack + Globals.extraStackSkin == collectionTrs.Count)
             {
                 PlayerController.Instance.fullTextGO.SetActive(true);
             }

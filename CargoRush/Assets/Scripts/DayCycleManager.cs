@@ -40,6 +40,13 @@ public class DayCycleManager : MonoBehaviour
             }
         }
         StartCoroutine(TimeLapsCheck_24HoursPassed());
+        if(PlayerPrefs.GetInt("level") > 0)
+        {
+            if (PlayerPrefs.GetInt("bundlesnoads") == 0 && PlayerPrefs.GetInt("bundlesnoadslimited") == 0)
+            {
+                PurchaseManager.Instance.NoAdsLimited_PopUp_Open();
+            }
+        }
     }
     IEnumerator FirstQuarterCounter()
     {
@@ -56,6 +63,7 @@ public class DayCycleManager : MonoBehaviour
         if (PlayerPrefs.GetInt("bundlesnoads") == 0 && PlayerPrefs.GetInt("bundlesnoadslimited") == 0)
         {
             StartCoroutine(AdvShow());
+            PurchaseManager.Instance.NoAds_PopUp_Open();
         }
         else
         {
@@ -87,6 +95,13 @@ public class DayCycleManager : MonoBehaviour
         if (PlayerPrefs.GetInt("bundlesnoads") == 0 && PlayerPrefs.GetInt("bundlesnoadslimited") == 0)
         {
             StartCoroutine(AdvShow());
+
+
+            PlayerPrefs.SetInt("iscount", PlayerPrefs.GetInt("iscount") + 1);
+            if (PlayerPrefs.GetInt("iscount") % 10 == 0)
+            {
+                PurchaseManager.Instance.NoAds_PopUp_Open();
+            }
         }
         else
         {

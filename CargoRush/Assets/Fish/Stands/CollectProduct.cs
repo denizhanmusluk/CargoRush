@@ -75,7 +75,7 @@ public class CollectProduct : MonoBehaviour
                 {
                     if (other.GetComponent<PlayerController>() != null && collectables.Count > 0)
                     {
-                        if (Globals.playerStackActive && collectables[collectables.Count - 1].productCollectActive && other.GetComponent<PlayerController>()._stackCollect.collectionTrs.Count < (other.GetComponent<PlayerController>()._characterUpgradeSettings.stackCapacity[Globals.stackCapacityLevel] + Globals.extraStackSkin + Globals.extraStack))
+                        if (Globals.playerStackActive && collectables[collectables.Count - 1].productCollectActive && other.GetComponent<PlayerController>()._stackCollect.collectionTrs.Count < (Globals.stackFactor  * other.GetComponent<PlayerController>()._characterUpgradeSettings.stackCapacity[Globals.stackCapacityLevel] + Globals.extraStackSkin + Globals.extraStack))
                         {
                             if(noneCollectGO != null)
                             {
@@ -141,7 +141,7 @@ public class CollectProduct : MonoBehaviour
                                 }
                             }
                         }
-                        if(other.GetComponent<PlayerController>()._stackCollect.collectionTrs.Count >= (other.GetComponent<PlayerController>()._characterUpgradeSettings.stackCapacity[Globals.stackCapacityLevel] + Globals.extraStackSkin + Globals.extraStack))
+                        if(other.GetComponent<PlayerController>()._stackCollect.collectionTrs.Count >= (Globals.stackFactor * other.GetComponent<PlayerController>()._characterUpgradeSettings.stackCapacity[Globals.stackCapacityLevel] + Globals.extraStackSkin + Globals.extraStack))
                         {
                             //StartCoroutine(FullCapacity());
                         }

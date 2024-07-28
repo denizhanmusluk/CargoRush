@@ -14,6 +14,13 @@ public class PurchaseManager : MonoBehaviour
     public GameObject boosterPanel_GO;
     public GameObject bundlesPanel_GO;
 
+
+    public GameObject noAdsPopUp_GO;
+    public GameObject noAdsLimitedPopUp_GO;
+    public GameObject specialOfferPopUp_GO;
+    public GameObject speedPopUp_GO;
+    public GameObject doubleCapacityPopUp_GO;
+    public GameObject doubleIncomePopUp_GO;
     private void Awake()
     {
         _instance = this;
@@ -88,5 +95,37 @@ public class PurchaseManager : MonoBehaviour
         boosterPanel_GO.SetActive(false);
         moneyPanel_GO.SetActive(false);
         ticketPanel_GO.SetActive(false);
+    }
+
+
+    // // // // // // // // // //
+
+    public void NoAds_PopUp_Open()
+    {
+        if (PlayerPrefs.GetInt("noadspopupcount") < 3)
+        {
+            noAdsPopUp_GO.SetActive(true);
+            PlayerPrefs.SetInt("noadspopupcount", PlayerPrefs.GetInt("noadspopupcount") + 1);
+        }
+    }
+    public void NoAdsLimited_PopUp_Open()
+    {
+        noAdsLimitedPopUp_GO.SetActive(true);
+    }
+    public void SpecialOffer_PopUp_Open()
+    {
+        specialOfferPopUp_GO.SetActive(true);
+    }
+    public void Speed_PopUp_Open()
+    {
+        speedPopUp_GO.SetActive(true);
+    }
+    public void DoubleIncome_PopUp_Open()
+    {
+        doubleIncomePopUp_GO.SetActive(true);
+    }
+    public void DoubleCapacity_PopUp_Open()
+    {
+        doubleCapacityPopUp_GO.SetActive(true);
     }
 }

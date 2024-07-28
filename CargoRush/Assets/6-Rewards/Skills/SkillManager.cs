@@ -122,6 +122,13 @@ public class SkillManager : MonoBehaviour
             PlayerController.Instance.NoneVehicle();
             RewardPanel.Instance.hoverboardPanelGO.SetActive(false);
             Globals.isSpeedRewardCreated = false;
+
+            if (PlayerPrefs.GetInt("firstusagespeedboost") == 0)
+            {
+                PlayerPrefs.SetInt("firstusagespeedboost", 1);
+                PurchaseManager.Instance.Speed_PopUp_Open();
+            }
+
         }
     }
 
@@ -182,6 +189,11 @@ public class SkillManager : MonoBehaviour
             Globals.extraStack = 0;
             PlayerController.Instance.CapacityReset();
             Globals.isCapacityRewardCreated = false;
+            if (PlayerPrefs.GetInt("firstusagecapacityboost") == 0)
+            {
+                PlayerPrefs.SetInt("firstusagecapacityboost", 1);
+                PurchaseManager.Instance.DoubleCapacity_PopUp_Open();
+            }
         }
     }
 
@@ -239,6 +251,11 @@ public class SkillManager : MonoBehaviour
             RewardPanel.Instance.doubleIncomePanelGO.SetActive(false);
             Globals.doubleIncomeActive = false;
             Globals.isDoubleIncomeRewardCreated = false;
+            if (PlayerPrefs.GetInt("firstusageincomeboost") == 0)
+            {
+                PlayerPrefs.SetInt("firstusageincomeboost", 1);
+                PurchaseManager.Instance.DoubleIncome_PopUp_Open();
+            }
         }
 
     }
@@ -364,7 +381,7 @@ public class SkillManager : MonoBehaviour
 
             if (Globals.capacityCreatingCooldown >= capacityRewPeriod && !Globals.isCapacityRewardCreated)
             {
-                if (PlayerPrefs.GetInt("purchasecapacityboost") == 0)
+                //if (PlayerPrefs.GetInt("purchasecapacityboost") == 0)
                 {
                     CapacityRewardCreate();
                 }
@@ -486,7 +503,8 @@ public class SkillManager : MonoBehaviour
     public void PurchaseCapacityBoostActive()
     {
         PlayerPrefs.SetInt("purchasecapacityboost", 1);
-        Globals.extraStack = extraStack;
+        Globals.stackFactor = 2;
+        //Globals.extraStack = extraStack;
     }
     public void PurchaseDoubleIncomeBoostActive()
     {
