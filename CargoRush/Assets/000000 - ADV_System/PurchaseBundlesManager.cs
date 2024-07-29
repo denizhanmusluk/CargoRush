@@ -224,7 +224,7 @@ public class PurchaseBundlesManager : MonoBehaviour
         GameManager.Instance.ui.MoneyUpdate(1000);
         GameManager.Instance.ui.GemUpdate(6);
 
-        SkillManager.Instance.PurchaseRepairImmediateActive();
+        //SkillManager.Instance.PurchaseRepairImmediateActive();
 
 
         if (specialOffer != null)

@@ -24,6 +24,8 @@ public class MachineRepair : MonoBehaviour
     {
         if (other.GetComponent<PlayerController>() != null && !repairStarted)
         {
+            PlayerController.Instance.PlayerControlDeActive();
+            PlayerController.Instance.animator.SetBool("repair", true);
             upgradeOpenActive = true;
             StartCoroutine(CooldownActive(2f));
         }
@@ -32,6 +34,8 @@ public class MachineRepair : MonoBehaviour
     {
         if (other.GetComponent<PlayerController>() != null && !repairStarted)
         {
+            PlayerController.Instance.PlayerControl_ReActive();
+            PlayerController.Instance.animator.SetBool("repair", false);
             upgradeOpenActive = false;
         }
     }
@@ -71,6 +75,8 @@ public class MachineRepair : MonoBehaviour
     void RepairStarted()
     {
         StartCoroutine(RepairStartedDelay());
+        PlayerController.Instance.PlayerControl_ReActive();
+        PlayerController.Instance.animator.SetBool("repair", false);
     }
     IEnumerator RepairStartedDelay()
     {
