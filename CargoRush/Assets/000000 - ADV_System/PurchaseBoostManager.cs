@@ -29,7 +29,10 @@ public class PurchaseBoostManager : MonoBehaviour
     {
         buyButton.interactable = true;
         SkillManager.Instance.PurchaseDoubleIncomeBoostActive();
-        buyDoubleIncome.CheckPurchased();
+        if (buyDoubleIncome != null)
+        {
+            buyDoubleIncome.CheckPurchased();
+        }
     }
 
     public void CapacityBuy(float _cost, Button _buyButton)
@@ -42,7 +45,10 @@ public class PurchaseBoostManager : MonoBehaviour
     {
         buyButton.interactable = true;
         SkillManager.Instance.PurchaseCapacityBoostActive();
-        buyCapacity.CheckPurchased();
+        if (buyCapacity != null)
+        {
+            buyCapacity.CheckPurchased();
+        }
     }
 
     public void RepairBuy(float _cost, Button _buyButton)
@@ -55,7 +61,10 @@ public class PurchaseBoostManager : MonoBehaviour
     {
         buyButton.interactable = true;
         SkillManager.Instance.PurchaseRepairImmediateActive();
-        buyRepair.CheckPurchased();
+        if (buyRepair != null)
+        {
+            buyRepair.CheckPurchased();
+        }
     }
 
     public void SpeedBuy(float _cost, Button _buyButton)
@@ -68,6 +77,9 @@ public class PurchaseBoostManager : MonoBehaviour
     {
         buyButton.interactable = true;
         SkillManager.Instance.PurchaseSpeedBoostActive();
-        buySpeed.CheckPurchased();
+        if (buySpeed != null)
+        {
+            buySpeed.CheckPurchased();
+        }
     }
 }

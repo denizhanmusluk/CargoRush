@@ -34,6 +34,8 @@ public class AIGarbageWorker : MonoBehaviour, IWorkerModelSelect
     public Board _board;
     public List<GameObject> modelList = new List<GameObject>();
     Vector3 magnetFirstSize;
+
+    public GameObject workerWaiting_GO;
     public void LevelInit()
     {
         workerLevel = PlayerPrefs.GetInt(workerLevelName);
@@ -272,7 +274,26 @@ public class AIGarbageWorker : MonoBehaviour, IWorkerModelSelect
     }
     void GoToCollect()
     {
-        if(currentCollectable == null || currentCollectable.grindActive)
+        if (!Globals.productCollectWorkerActive)
+        {
+            if (workerWaiting_GO != null)
+            {
+                workerWaiting_GO.SetActive(true);
+            }
+            isStayHoldActive = false;
+
+            following = null;
+            following += StopPositionGo;
+            return;
+        }
+        else
+        {
+            if (workerWaiting_GO != null)
+            {
+                workerWaiting_GO.SetActive(false);
+            }
+        }
+        if (currentCollectable == null || currentCollectable.grindActive)
         {
             isStayHoldActive = false;
 

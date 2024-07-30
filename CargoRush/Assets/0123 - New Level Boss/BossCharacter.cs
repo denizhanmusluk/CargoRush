@@ -13,7 +13,7 @@ public class BossCharacter : MonoBehaviour
     }
     void SelfDestroy()
     {
-        PlayerPrefs.GetInt(newLevelBoss.bossName, 1);
+        PlayerPrefs.SetInt(newLevelBoss.bossName, 1);
         Destroy(gameObject, 1);
     }
 }

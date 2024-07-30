@@ -127,4 +127,6 @@ public static class Globals
     public static bool goToCeoActive = false;
     public static bool repairManActive = false;
 
+
+    public static bool productCollectWorkerActive = true;
 }

@@ -11,6 +11,7 @@ public class ShareManager : MonoBehaviour
     public static ShareManager Instance => _instance;
     public event Action popUpEvent;
     public event Action shareValueRewardPopUp;
+    public event Action goToCeo;
 
     public List<HisseCompany> hisseCompanies = new List<HisseCompany>();
     public List<Transform> hisseCompanyPosList = new List<Transform>();
@@ -82,12 +83,15 @@ public class ShareManager : MonoBehaviour
         ShareRisingTutorial_End();
         ShareFallingTutorial_End();
         CheckShareTutorial_End();
-        popUpEvent?.Invoke();
-        popUpEvent = null;
+        //popUpEvent?.Invoke();
+        //popUpEvent = null;
+        goToCeo?.Invoke();
+        goToCeo = null;
 
         shareValueRewardPopUp?.Invoke();
         shareValueRewardPopUp = null;
         exclamation_GO.SetActive(false);
+
     }
 
     public bool shareRisingActive = false;
@@ -132,9 +136,10 @@ public class ShareManager : MonoBehaviour
         shareFallingActive = false;
         shareFallingTut_GO.SetActive(false);
     }
-
+    int companyLevel = 0;
     public void Share_LevelUp_TutorialStart(int _companyLevel)
     {
+        companyLevel = _companyLevel;
         checkShareTut_GO.SetActive(true);
         exclamation_GO.SetActive(true);
         checkShareActive = true;
@@ -165,6 +170,18 @@ public class ShareManager : MonoBehaviour
                 popUpEvent += MoneyPopUp_Open;
             }
         }
+
+        goToCeo = null;
+        goToCeo += GoToCeoNear;
+    }
+    void GoToCeoNear()
+    {
+        ShareCeo.Instance.CeoActive();
+    }
+    public void ShareLevelUp_PopUp()
+    {
+        popUpEvent?.Invoke();
+        popUpEvent = null;
     }
     void CheckShareTutorialStart_2()
     {

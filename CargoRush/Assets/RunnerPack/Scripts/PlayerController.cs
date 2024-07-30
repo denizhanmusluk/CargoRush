@@ -836,6 +836,57 @@ public class PlayerController : MonoBehaviour
 
     }
     public NewLevelBoss newLevelBoss;
+    public void FollowShareCeo()
+    {
+        PlayerCamZoomIn.Priority = 0;
+        isStayHoldActive = false;
+        followActive = true;
+        OnUpdate = null;
+        GoToCeo_Update = null;
+        GoToCeo_Update += GoToShareCeo;
+    }
+    void GoToShareCeo()
+    {
+        _stackCollect.RemoveAll();
+        if (Vector3.Distance(new Vector2(transform.position.x, transform.position.z), new Vector2(ShareCeo.Instance.playerTargetPosTR.position.x, ShareCeo.Instance.playerTargetPosTR.position.z)) > 0.25f)
+        {
+            if (OnUpdate != null)
+            {
+                OnUpdate = null;
+            }
+            characterStayActive = false;
+
+            Vector3 targetPos = new Vector3(ShareCeo.Instance.playerTargetPosTR.position.x, transform.position.y, ShareCeo.Instance.playerTargetPosTR.position.z);
+            animator.SetBool("walk", true);
+
+
+            navMeshAgent.SetDestination(targetPos);
+        }
+        else
+        {
+
+            if (!characterStayActive)
+            {
+                characterStayActive = true;
+            }
+            animator.SetBool("walk", false);
+            if (!isStayHoldActive)
+            {
+                isStayHoldActive = true;
+
+                navMeshAgent.ResetPath();
+                //navMeshAgent.obstacleAvoidanceType = ObstacleAvoidanceType.HighQualityObstacleAvoidance;
+                GoToCeo_Update = null;
+
+                StartCoroutine(RotSetTarget(ShareCeo.Instance.playerTargetPosTR));
+                ShareCeo.Instance.CharacterArrivedCeo();
+                //OnUpdate = null;
+                //PlayerRotReset();
+                PlayerControl_ReActive();
+                Globals.goToCeoActive = false;
+            }
+        }
+    }
     public void FollowCeo()
     {
         //PlayerCamZoomIn.LookAt = null;

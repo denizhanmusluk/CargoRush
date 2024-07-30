@@ -61847,7 +61847,6 @@ GameObject:
   - component: {fileID: 1856786603}
   - component: {fileID: 1856786606}
   - component: {fileID: 1856786605}
-  - component: {fileID: 1856786604}
   m_Layer: 5
   m_Name: Purchase Boost Manager
   m_TagString: Untagged
@@ -61877,22 +61876,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1856786604
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1856786602}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 951525d2301ea0d43b1c19d83ecc0d34, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  buyCapacity: {fileID: 0}
-  buyRepair: {fileID: 0}
-  buySpeed: {fileID: 0}
-  buyDoubleIncome: {fileID: 0}
 --- !u!114 &1856786605
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -63944,6 +63927,7 @@ GameObject:
   - component: {fileID: 1918203347}
   - component: {fileID: 1918203346}
   - component: {fileID: 1918203349}
+  - component: {fileID: 1918203350}
   m_Layer: 5
   m_Name: Purchase Manager
   m_TagString: Untagged
@@ -64055,6 +64039,22 @@ MonoBehaviour:
   bundle5: {fileID: 0}
   bundle6: {fileID: 0}
   specialOffer: {fileID: 0}
+--- !u!114 &1918203350
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1918203344}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 951525d2301ea0d43b1c19d83ecc0d34, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buyCapacity: {fileID: 0}
+  buyRepair: {fileID: 0}
+  buySpeed: {fileID: 0}
+  buyDoubleIncome: {fileID: 0}
 --- !u!222 &1921891760
 CanvasRenderer:
   m_ObjectHideFlags: 0

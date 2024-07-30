@@ -130,8 +130,10 @@ public class FishDropArea : MonoBehaviour
                 while ((float)(Globals.collectableLevel + 1) * (float)totalProductCapacity * reactiveRateCurrent + 1 < collectableList.Count)
                 {
                     createTime = 0.1f;
-                    yield return new WaitForSeconds(1f);
 
+                    Globals.productCollectWorkerActive = true;
+
+                    yield return new WaitForSeconds(1f);
                 }
 
                 yield return new WaitForSeconds(1f);
@@ -140,6 +142,7 @@ public class FishDropArea : MonoBehaviour
             int garbageSelect = LeastIdCheck();
             if (productDropActive[garbageSelect])
             {
+                Globals.productCollectWorkerActive = false;
                 GarbageCreate(garbageSelect);
             }
             yield return new WaitForSeconds(createTime);
