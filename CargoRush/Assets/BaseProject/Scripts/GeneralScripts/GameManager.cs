@@ -98,7 +98,6 @@ public class GameManager : Observer
     {
         ui.startCanvas.SetActive(false);
         //ui.ingameCanvas.SetActive(true);
-        HoleController.Instance.FirstClick();
         ui.joyStick.GetComponent<FloatingJoystick>().FirstClick();
     }
     void OnNextLevel()
@@ -262,14 +261,5 @@ public class GameManager : Observer
                 break;
        
         }
-    }
-    public void RunnerStarter()
-    {
-        CarManager.Instance.RaceStart();
-        //CollectProgressManager.Instance.RaceActive();
-    }
-    public void GearShiftClick()
-    {
-        CarManager.Instance.IncreaseGear();
     }
 }

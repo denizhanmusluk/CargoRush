@@ -513,6 +513,10 @@ public class ProcessMachine : Stand, IStandUpgrade, IMachineActive
                 yield return new WaitForSeconds((waitTime / Globals.repairSpeedSkin) / speedFactor);
                 workAreaList[0].StnadFullCheck();
                 MissionManager.Instance.TapeBoxMissionStart();
+                if (MissionManager.Instance.tapeBoxMission.mission_Active)
+                {
+                    MissionManager.Instance.tapeBoxMission.gameObject.SetActive(true);
+                }
                 MissionManager.Instance.tapeBoxMission.MissionUpdate();
 
                 if (PlayerPrefs.GetInt("level") == 0)

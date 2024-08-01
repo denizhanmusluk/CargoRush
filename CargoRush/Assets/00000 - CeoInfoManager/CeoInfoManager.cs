@@ -42,7 +42,12 @@ public class CeoInfoManager : MonoBehaviour
         infoTimeCounter = PlayerPrefs.GetInt("infocounter" + PlayerPrefs.GetInt("level"));
         while (infoTimeCounter < totalInfoTime)
         {
-            infoTimeCounter++;
+
+            if (PlayerPrefs.GetInt("tutorialcompleted") == 1)
+            {
+                infoTimeCounter++;
+            }
+
             PlayerPrefs.SetInt("infocounter" + PlayerPrefs.GetInt("level"), infoTimeCounter);
             yield return new WaitForSeconds(1f);
         }

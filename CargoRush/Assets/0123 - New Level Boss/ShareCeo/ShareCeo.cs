@@ -12,6 +12,10 @@ public class ShareCeo : MonoBehaviour
     public Transform exitPosTR;
 
     public GameObject popUp1_GO;
+    public GameObject bag_GO;
+
+    public Transform bagFirstPos_TR;
+    public Transform bagLastPos_TR;
 
     private void Awake()
     {
@@ -25,6 +29,10 @@ public class ShareCeo : MonoBehaviour
         PlayerController.Instance.PlayerRotReset();
         PlayerController.Instance.PlayerControlDeActive();
         PlayerController.Instance.FollowShareCeo();
+
+        bag_GO.SetActive(true);
+        bag_GO.transform.position = bagFirstPos_TR.position;
+        bag_GO.transform.rotation = bagFirstPos_TR.rotation;
     }
     public void CharacterArrivedCeo()
     {
@@ -34,13 +42,28 @@ public class ShareCeo : MonoBehaviour
 
     IEnumerator PopUpReward_Open()
     {
+        bag_GO.GetComponent<Animator>().SetTrigger("open");
+        //bag_GO.SetActive(true);
+        //bag_GO.transform.position = bagFirstPos_TR.position;
+        float counter = 0f;
+        while(counter < 1f)
+        {
+            counter += 2f * Time.deltaTime;
+            bag_GO.transform.position = Vector3.Lerp(bagFirstPos_TR.position, bagLastPos_TR.position, counter);
+            bag_GO.transform.rotation = Quaternion.Lerp(bagFirstPos_TR.rotation, bagLastPos_TR.rotation, counter);
+           yield return null;
+        }
+        bag_GO.transform.position = bagLastPos_TR.position;
+        bag_GO.transform.rotation = bagLastPos_TR.rotation;
 
-        yield return new WaitForSeconds(2f);
+
+        yield return new WaitForSeconds(1f);
         popUp1_GO.SetActive(false);
         ShareManager.Instance.ShareLevelUp_PopUp();
 
 
         PlayerController.Instance.PlayerControl_ReActive();
         shareCeoCharacter.GoExit(exitPosTR);
+        bag_GO.SetActive(false);
     }
 }

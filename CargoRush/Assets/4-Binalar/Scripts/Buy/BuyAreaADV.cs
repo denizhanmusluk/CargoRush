@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class BuyAreaADV : MonoBehaviour
@@ -13,6 +14,10 @@ public class BuyAreaADV : MonoBehaviour
     public TextMeshProUGUI standShowText;
     [SerializeField] GameObject buildPrefab;
     [SerializeField] GameObject[] buyAreas;
+
+
+    [SerializeField] Image imageFill;
+    bool upgradeOpenActive = false;
 
     public void Start()
     {
@@ -64,6 +69,15 @@ public class BuyAreaADV : MonoBehaviour
     {
         FirstOpenArea();
     }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.GetComponent<PlayerController>() != null)
+        {
+ 
+            upgradeOpenActive = true;
+            StartCoroutine(CooldownActive(2f));
+        }
+    }
     private void OnTriggerStay(Collider other)
     {
         if (other.GetComponent<PlayerController>() != null)
@@ -77,6 +91,41 @@ public class BuyAreaADV : MonoBehaviour
         if (other.GetComponent<PlayerController>() != null)
         {
             GameManager.Instance.ui.joyStick.SetActive(true);
+            upgradeOpenActive = false;
+        }
+    }
+
+    IEnumerator CooldownActive(float time)
+    {
+        float counter = 0f;
+        while (counter < time && upgradeOpenActive)
+        {
+            counter += Time.deltaTime;
+            imageFill.fillAmount = counter / time;
+            yield return null;
+        }
+        if (counter >= time)
+        {
+            upgradeOpenActive = false;
+            BuyAdv_CLick();
+            //StartCoroutine(CooldownPasive());
+        }
+        else
+        {
+            StartCoroutine(CooldownPasive());
+        }
+    }
+
+    IEnumerator CooldownPasive()
+    {
+        float lastValue = imageFill.fillAmount;
+        float counter = 0f;
+        while (counter < 1f)
+        {
+            counter += 4 * Time.deltaTime;
+            imageFill.fillAmount = Mathf.Lerp(lastValue, 0, counter);
+
+            yield return null;
         }
     }
 }

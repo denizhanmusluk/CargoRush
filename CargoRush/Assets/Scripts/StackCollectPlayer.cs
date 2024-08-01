@@ -53,7 +53,7 @@ public class StackCollectPlayer : StackCollect
         float counter = 0f;
         while (counter < 1f)
         {
-            counter += Time.deltaTime;
+            counter += 4 * Time.deltaTime;
             ikHandTR.position = Vector3.Lerp(ikHandTR.position, targetTR.position, 2f * Time.deltaTime);
             ikHandTR.rotation = Quaternion.Lerp(ikHandTR.rotation, targetTR.rotation, 2f * Time.deltaTime);
             yield return null;

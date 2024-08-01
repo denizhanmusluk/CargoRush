@@ -15,13 +15,8 @@ public class LevelManager : Singleton<LevelManager>
     [SerializeField] private List<CharacterUpgradeSettings> _CharacterUpgradeSettings;
      public CharacterUpgradeSettings _currnetCharacterUpgradeSettings;
 
-    //public HoleUpgradeSettings _holeUpgradeSettings;
-    //[SerializeField] public List<CollectableArrangement> requirementList;
 
-    //[SerializeField] List<GameObject> levels;
-    //[SerializeField] public int LevelCount;
-    public TextMeshProUGUI levelText;
-    public TextMeshProUGUI levelText2;
+
 
    public void levelInit()
     {
@@ -36,8 +31,7 @@ public class LevelManager : Singleton<LevelManager>
         if (PlayerPrefs.GetInt("levelIndex") != 0)
         {
             Globals.currentLevel = PlayerPrefs.GetInt("levelIndex");
-            levelText.text = Globals.currentLevel.ToString();
-            levelText2.text = Globals.currentLevel.ToString();
+
         }
         else
         {

@@ -13,6 +13,8 @@ public class OnlineWorker : MonoBehaviour
     public Transform boxCollectPos;
     public Transform boxDropPos;
     public Transform boxPos;
+
+    public Animator tableAnim;
     bool collectCheckActive = true;
     private void Start()
     {
@@ -66,6 +68,7 @@ public class OnlineWorker : MonoBehaviour
 
     IEnumerator Drop(Transform dropPosTR, Collectable collectable)
     {
+        tableAnim.SetTrigger("open");
         collectable.isCollected = false;
 
         //yield return new WaitForSeconds(waitTime);

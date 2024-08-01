@@ -7,7 +7,7 @@ public class StoreManager : MonoBehaviour
 {
     public static StoreManager Instance;
     public GameObject storePanel, storeButton;
-    [SerializeField] GameObject newPanel, popularPanel, starPanel, exclusivePanel;
+    [SerializeField] GameObject   starPanel;
     //[SerializeField] GameObject LevelTXTPanel;
     [SerializeField] List<RectTransform> Buttons;
     public GameObject closeAndNextLevel;
@@ -24,10 +24,7 @@ public class StoreManager : MonoBehaviour
     void Start()
     {
         //LevelTXTPanel.SetActive(true);
-        newPanel.SetActive(false);
-        popularPanel.SetActive(false);
         starPanel.SetActive(false);
-        exclusivePanel.SetActive(false);
         if (PlayerPrefs.GetInt("skinactive") == 1)
         {
             storeButton.SetActive(true);
@@ -42,7 +39,6 @@ public class StoreManager : MonoBehaviour
         storePanel.SetActive(true);
         StarButton();
         storeButton.SetActive(false);
-        NewPanelManager.Instance.NewPanelActive();
         StarPanelManager.Instance.StarPAnelActive();
         //PopularPanelManager.Instance.popularPAnelActive();
         //MissionManager.Instance.SkinMissionStart();
@@ -53,39 +49,27 @@ public class StoreManager : MonoBehaviour
 
     public void newButton()
     {
-        newPanel.SetActive(true);
-        popularPanel.SetActive(false);
         starPanel.SetActive(false);
-        exclusivePanel.SetActive(false);
         buttonSetPos(Buttons[0]);
     }
 
     public void popularButton()
     {
-        newPanel.SetActive(false);
-        popularPanel.SetActive(true);
         starPanel.SetActive(false);
-        exclusivePanel.SetActive(false);
         buttonSetPos(Buttons[1]);
 
     }
 
     public void StarButton()
     {
-        newPanel.SetActive(false);
-        popularPanel.SetActive(false);
         starPanel.SetActive(true);
-        exclusivePanel.SetActive(false);
         buttonSetPos(Buttons[2]);
 
     }
 
     public void exclusiveButton()
     {
-        newPanel.SetActive(false);
-        popularPanel.SetActive(false);
         starPanel.SetActive(false);
-        exclusivePanel.SetActive(true);
         buttonSetPos(Buttons[3]);
 
     }
@@ -93,10 +77,7 @@ public class StoreManager : MonoBehaviour
     {
         //LevelTXTPanel.SetActive(true);
         storePanel.SetActive(false);
-        newPanel.SetActive(false);
-        popularPanel.SetActive(false);
         starPanel.SetActive(false);
-        exclusivePanel.SetActive(false);
         storeButton.SetActive(true);
         PlayerController.Instance.PlayerControl_ReActive();
 

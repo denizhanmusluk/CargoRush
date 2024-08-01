@@ -6,9 +6,11 @@ using UnityEngine.UI;
 public class MachineRepair : MonoBehaviour
 {
     [SerializeField] Image imageFill;
+    [SerializeField] Image imageRepairFill;
     bool upgradeOpenActive = false;
     public bool repairStarted = false;
     public MachineRepairArea machineRepairArea;
+    public Transform characterRepairPosTR;
     private void OnEnable()
     {
         imageFill.fillAmount = 0;
@@ -24,18 +26,17 @@ public class MachineRepair : MonoBehaviour
     {
         if (other.GetComponent<PlayerController>() != null && !repairStarted)
         {
-            PlayerController.Instance.PlayerControlDeActive();
-            PlayerController.Instance.animator.SetBool("repair", true);
+
             upgradeOpenActive = true;
-            StartCoroutine(CooldownActive(2f));
+            StartCoroutine(CooldownActive(1f));
         }
     }
     private void OnTriggerExit(Collider other)
     {
         if (other.GetComponent<PlayerController>() != null && !repairStarted)
         {
-            PlayerController.Instance.PlayerControl_ReActive();
-            PlayerController.Instance.animator.SetBool("repair", false);
+            //PlayerController.Instance.PlayerControl_ReActive();
+            //PlayerController.Instance.animator.SetBool("repair", false);
             upgradeOpenActive = false;
         }
     }
@@ -75,23 +76,30 @@ public class MachineRepair : MonoBehaviour
     void RepairStarted()
     {
         StartCoroutine(RepairStartedDelay());
-        PlayerController.Instance.PlayerControl_ReActive();
-        PlayerController.Instance.animator.SetBool("repair", false);
+ 
     }
     IEnumerator RepairStartedDelay()
     {
-        //if (PlayerPrefs.GetInt("firsterrormachine") == 0)
-        //{
-        //    PlayerPrefs.SetInt("firsterrormachine", 1);
-        //    TutorialManager.Instance.repairMachineGO.SetActive(false);
-        //    IndicatorManager.Instance.IndicaorDeActive();
-        //}
+        PlayerController.Instance.PlayerControlDeActive();
+        PlayerController.Instance.animator.SetBool("repair", true);
+        PlayerController.Instance.CharacterRepairPosSet(characterRepairPosTR);
+
+        float counter = 0f;
+        while (counter < 1f)
+        {
+            counter += 0.5f * Time.deltaTime;
+            imageRepairFill.fillAmount = Mathf.Lerp(0, 1, counter);
+
+            yield return null;
+        }
         repairStarted = true;
 
         machineRepairArea.RepairingCheck();
 
-
+        PlayerController.Instance.PlayerControl_ReActive();
+        PlayerController.Instance.animator.SetBool("repair", false);
         yield return new WaitForSeconds(0.5f);
+        imageRepairFill.fillAmount = 0;
         imageFill.fillAmount = 0;
         gameObject.SetActive(false);
     }

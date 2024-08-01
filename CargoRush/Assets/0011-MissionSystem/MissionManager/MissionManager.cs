@@ -13,6 +13,7 @@ public class MissionManager : MonoBehaviour
     public GameObject tapTutorialGO;
     public bool missionOpenPanelActive = false;
     public Animator missionAnimator;
+    public Animator missionAnimatorSingleOpener;
     public MissionSettings missionSettings;
     public ShopSettings shopSettings;
 
@@ -24,6 +25,7 @@ public class MissionManager : MonoBehaviour
 
 
     public Transform missionListTR;
+    public Transform missionListParentTR;
     public int activeMissionCount = 0;
     public GameObject startParticleGO;
     public Button panelOpenButton;

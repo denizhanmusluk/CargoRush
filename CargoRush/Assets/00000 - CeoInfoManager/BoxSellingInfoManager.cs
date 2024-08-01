@@ -133,6 +133,7 @@ public class BoxSellingInfoManager : MonoBehaviour
         priceText.text = priceValue.ToString();
 
         claimButtonGO.SetActive(true);
+        yield return new WaitForSeconds(0.5f);
         advButtonGO.SetActive(true);
     }
 }

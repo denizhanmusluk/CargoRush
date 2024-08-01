@@ -14,11 +14,7 @@ public class RewardPanel : MonoBehaviour
         _instance = this;
     }
 
-    public GameObject biggerPanelGO;
-    public TextMeshProUGUI biggerCounterText;
 
-    public GameObject fasterPanelGO;
-    public TextMeshProUGUI fasterCounterText;
 
 
     public GameObject hoverboardPanelGO;
@@ -35,4 +31,14 @@ public class RewardPanel : MonoBehaviour
 
     public Image vipImg;
 
+    public StandFishCar standFishCar;
+    public Button vipViewButton;
+    public void VipViewClick()
+    {
+        if(standFishCar != null)
+        {
+            standFishCar.VipViewCamera();
+            vipViewButton.interactable = false;
+        }
+    }
 }

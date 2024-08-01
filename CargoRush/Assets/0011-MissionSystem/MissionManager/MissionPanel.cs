@@ -25,6 +25,7 @@ public class MissionPanel : MonoBehaviour
     public string missionTag;
     public string missionNameString;
 
+    public GameObject completeText_GO;
     public void MissionStart(int _currentCount, int _maxCount , int _price, string _missionName)
     {
         missionNameString = _missionName;
@@ -125,7 +126,7 @@ public class MissionPanel : MonoBehaviour
             PlayerPrefs.SetInt("firstmissioncompleted", 1);
             MissionManager.Instance.tapTutorialGO.SetActive(true);
         }
-        MissionManager.Instance.MissionCompPopUpOpen(missionNameString);
+        //MissionManager.Instance.MissionCompPopUpOpen(missionNameString);
     }
     IEnumerator MissionCompleteDelay()
     {
@@ -143,8 +144,8 @@ public class MissionPanel : MonoBehaviour
             yield return new WaitForSeconds(1f);
             MissionManager.Instance.completeMission.SetActive(true);
             MissionManager.Instance.missionAnimator.SetTrigger("shake");
-
-            MissionManager.Instance.buttonClick += ButtonClick;
+            ButtonAutoOpen();
+            //MissionManager.Instance.buttonClick += ButtonClick;
         }
         else
         {
@@ -153,6 +154,43 @@ public class MissionPanel : MonoBehaviour
         //MissionManager.Instance.MissionOpen();
         //yield return new WaitForSeconds(1f);
         //ButtonClick();
+    }
+    void ButtonAutoOpen()
+    {
+        StartCoroutine(ButtonDelay());
+        StartCoroutine(MissionEndClosePanel_Auto());
+
+    }
+    IEnumerator MissionEndClosePanel_Auto()
+    {
+        MissionManager.Instance.panelOpenButton.gameObject.SetActive(false);
+        transform.parent = MissionManager.Instance.missionListParentTR;
+        transform.localScale = Vector3.one;
+        MissionManager.Instance.missionAnimatorSingleOpener.SetBool("openactive", true);
+        yield return new WaitForSeconds(4f);
+        float counter = 0f;
+        //while (counter < 1f)
+        //{
+        //    counter += 4 * Time.deltaTime;
+        //    transform.localScale = Vector3.Lerp(Vector3.one, new Vector3(1, 0, 1), counter);
+        //    yield return null;
+        //}
+        mission_Active = false;
+        //transform.localScale = Vector3.one;
+        //if (MissionManager.Instance.activeMissionCount == 0)
+        //{
+        //    MissionManager.Instance.MissionClose();
+        //    yield return new WaitForSeconds(0.5f);
+        //    MissionManager.Instance.panelOpenButton.gameObject.SetActive(false);
+        //}
+        MissionManager.Instance.missionAnimatorSingleOpener.SetBool("openactive", false);
+        yield return new WaitForSeconds(1f);
+
+        transform.parent = MissionManager.Instance.missionListTR;
+        transform.localScale = Vector3.one;
+        MissionManager.Instance.panelOpenButton.gameObject.SetActive(true);
+        completeText_GO.gameObject.SetActive(false);
+        gameObject.SetActive(false);
     }
     public void ButtonClick()
     {
@@ -187,6 +225,7 @@ public class MissionPanel : MonoBehaviour
         MissionManager.Instance.completeMission.SetActive(false);
         yield return new WaitForSeconds(1f);
         moneyButton.gameObject.SetActive(false);
+        completeText_GO.gameObject.SetActive(true);
     }
     IEnumerator MissionEndClosePanel()
     {
@@ -209,6 +248,7 @@ public class MissionPanel : MonoBehaviour
             yield return new WaitForSeconds(0.5f);
             MissionManager.Instance.panelOpenButton.gameObject.SetActive(false);
         }
+        completeText_GO.gameObject.SetActive(false);
         gameObject.SetActive(false);
     }
 }

@@ -545,10 +545,39 @@ public class AIWorker : MonoBehaviour, IWorkerModelSelect
             }
             if(destroyActive == true)
             {
+                if(dstCol.puffEffectPrefab != null)
+                {
+                    GameObject puffEffect = Instantiate(dstCol.puffEffectPrefab, dstCol.transform.position, dstCol.transform.rotation);
+                }
                 aiStackCollect.collectionTrs.Remove(dstCol);
                 aiStackCollect.CollectedListReset();
-                Destroy(dstCol.gameObject);
+                //Destroy(dstCol.gameObject);
+                StartCoroutine(BoxScaleDown(dstCol.transform));
             }
         }
+    }
+
+    IEnumerator BoxScaleDown(Transform boxTR)
+    {
+        Vector3 boxFirstScale = boxTR.localScale;
+        float counter = 0f;
+        float angleValue = 0f;
+        while(counter < Mathf.PI)
+        {
+            counter += 8 * Time.deltaTime;
+            angleValue = Mathf.Sin(counter * Mathf.PI);
+            angleValue *= 0.4f;
+            boxTR.localScale = Vector3.Lerp(boxFirstScale, boxFirstScale * (1 + angleValue), counter);
+            yield return null;
+        }
+        counter = 0f;
+        while (counter < Mathf.PI)
+        {
+            counter += 8 * Time.deltaTime;
+            boxTR.localScale = Vector3.Lerp(boxFirstScale, Vector3.zero, counter);
+            yield return null;
+        }
+
+        Destroy(boxTR.gameObject);
     }
 }

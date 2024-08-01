@@ -13,6 +13,7 @@ public class MoneySkill : MonoBehaviour
     bool collectActive = true;
     [SerializeField] GameObject cicrcle;
     [SerializeField] GameObject particleGO;
+    public Animator moneyBagAnimator;
     private void OnTriggerEnter(Collider other)
     {
         if (other.GetComponent<PlayerController>() != null && collectActive)

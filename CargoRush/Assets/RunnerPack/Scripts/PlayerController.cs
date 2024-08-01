@@ -1,10 +1,10 @@
-﻿using System.Collections;
+﻿using Cinemachine;
+using DG.Tweening;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-using System;
-using Cinemachine;
-using DG.Tweening;
 public class PlayerController : MonoBehaviour
 {
     private static PlayerController _instance = null;
@@ -97,7 +97,7 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         _characterUpgradeSettings = LevelManager.Instance._currnetCharacterUpgradeSettings;
-       _FloatingJoystick = FindObjectOfType<FloatingJoystick>();
+        _FloatingJoystick = FindObjectOfType<FloatingJoystick>();
         Init();
 
         //moneyTarget = GameObject.Find("MoneyTarget");
@@ -109,7 +109,7 @@ public class PlayerController : MonoBehaviour
         //    GameStart();
         //}
         StartCoroutine(StartDelay());
-        if(PlayerPrefs.GetInt("gamefirstopen") == 0)
+        if (PlayerPrefs.GetInt("gamefirstopen") == 0)
         {
             PlayerPrefs.SetInt("gamefirstopen", 1);
             PlayerSetPos();
@@ -446,9 +446,10 @@ public class PlayerController : MonoBehaviour
         navmeshAgent.isStopped = true;
         animator.SetBool("working", true);
     }
+    public bool pressActive = true;
     private void generalControl()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && pressActive)
         {
             preX = Input.mousePosition.x;
             preY = Input.mousePosition.y;
@@ -473,7 +474,7 @@ public class PlayerController : MonoBehaviour
         }
 
 
-        if (pressJoystick)
+        if (pressJoystick && pressActive)
         {
             dX = (Input.mousePosition.x - preX) / 10f;
             dY = (Input.mousePosition.y - preY) / 10f;
@@ -903,7 +904,7 @@ public class PlayerController : MonoBehaviour
         _stackCollect.RemoveAll();
         if (Vector3.Distance(new Vector2(transform.position.x, transform.position.z), new Vector2(newLevelBoss.playerTargetPosTR.position.x, newLevelBoss.playerTargetPosTR.position.z)) > 0.25f)
         {
-            if(OnUpdate != null)
+            if (OnUpdate != null)
             {
                 OnUpdate = null;
             }
@@ -949,7 +950,7 @@ public class PlayerController : MonoBehaviour
     public void CapacityUp()
     {
         SkinnedMeshRenderer skin = null;
-        foreach(var skn in GetComponentsInChildren<SkinnedMeshRenderer>())
+        foreach (var skn in GetComponentsInChildren<SkinnedMeshRenderer>())
         {
             skin = skn;
         }
@@ -1043,7 +1044,7 @@ public class PlayerController : MonoBehaviour
         {
             PlayerPrefs.SetInt("viptutorial", 1);
         }
-            yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(1f);
         StartCoroutine(RotReset2());
         yield return new WaitForSeconds(1f);
         //MarketCustomerManager.Instance.currentVipCustomer.vipStackActive = true;
@@ -1051,5 +1052,25 @@ public class PlayerController : MonoBehaviour
         PlayerCamZoomInVip.Priority = 0;
         //IndicatorManager.Instance.IndicaorActive(MarketCustomerManager.Instance.phoneMachine._CollectProducts.transform);
 
+    }
+
+    public void CharacterRepairPosSet(Transform repairPosTR)
+    {
+        StartCoroutine(RepairPosSet(repairPosTR));
+    }
+    IEnumerator RepairPosSet(Transform repairPosTR)
+    {
+        Vector3 firstPos = transform.parent.position;
+        Quaternion firstRot = transform.rotation;
+        float counter = 0f;
+        while (counter < 1f)
+        {
+            counter += Time.deltaTime;
+            transform.parent.position = Vector3.Lerp(firstPos, repairPosTR.position, counter);
+            transform.rotation = Quaternion.Lerp(firstRot, repairPosTR.rotation, counter);
+            yield return null;
+        }
+        transform.parent.position = repairPosTR.position;
+        transform.rotation = repairPosTR.rotation;
     }
 }

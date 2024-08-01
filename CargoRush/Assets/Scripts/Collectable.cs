@@ -40,6 +40,7 @@ public class Collectable : MonoBehaviour
     public Animator anim;
     public bool isGem = false;
     public GameObject bantGO;
+    public GameObject puffEffectPrefab;
     public void Start()
     {
         firstSize = transform.localScale;

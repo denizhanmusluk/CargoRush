@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-
+using Cinemachine;
 public class StandFishCar : Stand,IMoneyArea
 {
     [SerializeField] GameObject canvasProductGO, canvasDeliveringGO;
@@ -38,6 +38,8 @@ public class StandFishCar : Stand,IMoneyArea
     public bool specialVehicle = false;
     public Animator goatAnim;
     public AudioSource carSoundAS;
+
+    public CinemachineVirtualCamera vipCarCamera;
     void TextInitCheck()
     {
         for (int i = 0; i < productTypeCount.Length; i++)
@@ -188,6 +190,10 @@ public class StandFishCar : Stand,IMoneyArea
         }
         else
         {
+            if (MissionManager.Instance.orderMission.mission_Active)
+            {
+                MissionManager.Instance.orderMission.gameObject.SetActive(true);
+            }
             MissionManager.Instance.orderMission.MissionUpdate();
 
             if (PlayerPrefs.GetInt("level") == 0)
@@ -717,6 +723,7 @@ public class StandFishCar : Stand,IMoneyArea
 
     public void VipActive()
     {
+        RewardPanel.Instance.standFishCar = this;
         Globals.carCustomerCount = 1;
         Globals.isThereVip = true;
         thisVip = true;
@@ -799,5 +806,16 @@ public class StandFishCar : Stand,IMoneyArea
             IndicatorManager.Instance.IndicaorActive(StandFishTezgah.Instance.tutorialPosTR.transform);
             TutorialManager.Instance.rceycleTutorialGO.SetActive(true);
         }
+    }
+    public void VipViewCamera()
+    {
+        StartCoroutine(VipView());
+    }
+    IEnumerator VipView()
+    {
+        vipCarCamera.Priority = 10;
+        yield return new WaitForSeconds(4f);
+        vipCarCamera.Priority = 0;
+        RewardPanel.Instance.vipViewButton.interactable = true;
     }
 }

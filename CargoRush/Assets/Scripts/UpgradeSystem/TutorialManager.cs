@@ -43,6 +43,9 @@ public class TutorialManager : MonoBehaviour
             MapManager.Instance.mapButton.gameObject.SetActive(true);
             HRUpgradeManager.Instance.upgradeButton.SetActive(true);
             ShareManager.Instance.graphButton.SetActive(true);
+            PurchaseManager.Instance.purchaseButton_GO.SetActive(true);
+            SettingsManager.Instance.settingsButtonGO.SetActive(true);
+            CollectProgressManager.Instance.dirtyProgressPanelGo.SetActive(true);
             if (PlayerPrefs.GetInt("upgradeclicktutorial") == 0)
             {
                 PlayerPrefs.SetInt("upgradeclicktutorial", 1);
