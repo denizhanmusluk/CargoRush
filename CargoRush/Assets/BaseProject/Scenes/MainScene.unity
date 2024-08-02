@@ -1418,6 +1418,7 @@ GameObject:
   - component: {fileID: 45041512}
   - component: {fileID: 45041511}
   - component: {fileID: 45041514}
+  - component: {fileID: 45041515}
   m_Layer: 5
   m_Name: Image - NoAds Limited PopUp
   m_TagString: Untagged
@@ -1512,6 +1513,52 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 243995359c0e549429fafc64cb0c65b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &45041515
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 45041509}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9ea4200c8cf2420292ae378c9f7efb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  showFullscreenLoadingUi: 0
+  priceTextComponent: {fileID: 0}
+  priceTextMeshProComponent: {fileID: 0}
+  titleTextComponent: {fileID: 0}
+  titleTextMeshProComponent: {fileID: 0}
+  descriptionTextComponent: {fileID: 0}
+  descriptionTextMeshProComponent: {fileID: 0}
+  OnProductFetched:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPurchaseSucceded:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 45041511}
+        m_TargetAssemblyTypeName: NoAdsLimitedPopUp, Assembly-CSharp
+        m_MethodName: BuyNoAdsLimitedBundles_Click
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnPurchaseFailed:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPurchaseRestored:
+    m_PersistentCalls:
+      m_Calls: []
+  IsPurchasing: 0
+  androidProductId: cargorush_skip1
+  appleProductId: cargorush_skip1
 --- !u!1 &47053679
 GameObject:
   m_ObjectHideFlags: 0
@@ -2027,6 +2074,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 325531302}
     m_Modifications:
+    - target: {fileID: 1844222392165221700, guid: b6b0f329f6a40f148823f034d0b9567c, type: 3}
+      propertyPath: appleProductId
+      value: cargorush_skip6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1844222392165221700, guid: b6b0f329f6a40f148823f034d0b9567c, type: 3}
+      propertyPath: androidProductId
+      value: cargorush_skip6
+      objectReference: {fileID: 0}
     - target: {fileID: 7143787630893211990, guid: b6b0f329f6a40f148823f034d0b9567c, type: 3}
       propertyPath: cost
       value: 34.99
@@ -7720,9 +7775,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 910079400}
-        m_TargetAssemblyTypeName: SpecialOffer, Assembly-CSharp
-        m_MethodName: BuyNoAdsBundles_Click
+      - m_Target: {fileID: 910079403}
+        m_TargetAssemblyTypeName: HomaGames.HomaBelly.IAP.ProductButtonHelperBase,
+          HomaGames.HomaBelly.Purchases
+        m_MethodName: InitiatePurchase
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8133,9 +8189,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 45041511}
-        m_TargetAssemblyTypeName: NoAdsLimitedPopUp, Assembly-CSharp
-        m_MethodName: BuyNoAdsLimitedBundles_Click
+      - m_Target: {fileID: 45041515}
+        m_TargetAssemblyTypeName: HomaGames.HomaBelly.IAP.ProductButtonHelperBase,
+          HomaGames.HomaBelly.Purchases
+        m_MethodName: InitiatePurchase
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -11438,6 +11495,7 @@ GameObject:
   - component: {fileID: 363524145}
   - component: {fileID: 363524144}
   - component: {fileID: 363524143}
+  - component: {fileID: 363524146}
   m_Layer: 5
   m_Name: Image - NoAds Limited
   m_TagString: Untagged
@@ -11519,6 +11577,52 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 363524141}
   m_CullTransparentMesh: 1
+--- !u!114 &363524146
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 363524141}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9ea4200c8cf2420292ae378c9f7efb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  showFullscreenLoadingUi: 0
+  priceTextComponent: {fileID: 0}
+  priceTextMeshProComponent: {fileID: 0}
+  titleTextComponent: {fileID: 0}
+  titleTextMeshProComponent: {fileID: 0}
+  descriptionTextComponent: {fileID: 0}
+  descriptionTextMeshProComponent: {fileID: 0}
+  OnProductFetched:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPurchaseSucceded:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 363524143}
+        m_TargetAssemblyTypeName: NoAdsLimitedBundles, Assembly-CSharp
+        m_MethodName: BuyNoAdsLimitedBundles_Click
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnPurchaseFailed:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPurchaseRestored:
+    m_PersistentCalls:
+      m_Calls: []
+  IsPurchasing: 0
+  androidProductId: cargorush_skip1
+  appleProductId: cargorush_skip1
 --- !u!1 &364679797
 GameObject:
   m_ObjectHideFlags: 0
@@ -12653,9 +12757,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1793381344}
-        m_TargetAssemblyTypeName: Bundle4, Assembly-CSharp
-        m_MethodName: BuyNoAdsBundles_Click
+      - m_Target: {fileID: 1793381347}
+        m_TargetAssemblyTypeName: HomaGames.HomaBelly.IAP.ProductButtonHelperBase,
+          HomaGames.HomaBelly.Purchases
+        m_MethodName: InitiatePurchase
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -13223,13 +13328,29 @@ PrefabInstance:
     - target: {fileID: 2287211015880742714, guid: 471007c724d527049a5a3bff5e619baf, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 399299935}
+      objectReference: {fileID: 399299931}
     - target: {fileID: 2287211015880742714, guid: 471007c724d527049a5a3bff5e619baf, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: BuyCapacityPurchase_Click
+      value: InitiatePurchase
       objectReference: {fileID: 0}
     - target: {fileID: 2287211015880742714, guid: 471007c724d527049a5a3bff5e619baf, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: HomaGames.HomaBelly.IAP.ProductButtonHelperBase, HomaGames.HomaBelly.Purchases
+      objectReference: {fileID: 0}
+    - target: {fileID: 3388472003324825771, guid: 471007c724d527049a5a3bff5e619baf, type: 3}
+      propertyPath: appleProductId
+      value: cargorush_skip1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3388472003324825771, guid: 471007c724d527049a5a3bff5e619baf, type: 3}
+      propertyPath: androidProductId
+      value: cargorush_skip1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3388472003324825771, guid: 471007c724d527049a5a3bff5e619baf, type: 3}
+      propertyPath: OnPurchaseSucceded.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 399299935}
+    - target: {fileID: 3388472003324825771, guid: 471007c724d527049a5a3bff5e619baf, type: 3}
+      propertyPath: OnPurchaseSucceded.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: CapacityPopUp, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 4913773293573509455, guid: 471007c724d527049a5a3bff5e619baf, type: 3}
@@ -13319,6 +13440,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 8391701157803367462, guid: 471007c724d527049a5a3bff5e619baf, type: 3}
   m_PrefabInstance: {fileID: 399299928}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &399299931 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3388472003324825771, guid: 471007c724d527049a5a3bff5e619baf, type: 3}
+  m_PrefabInstance: {fileID: 399299928}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 399299930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9ea4200c8cf2420292ae378c9f7efb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &399299935
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14286,9 +14418,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 490558627}
-        m_TargetAssemblyTypeName: Bundle2, Assembly-CSharp
-        m_MethodName: BuyNoAdsBundles_Click
+      - m_Target: {fileID: 490558630}
+        m_TargetAssemblyTypeName: HomaGames.HomaBelly.IAP.ProductButtonHelperBase,
+          HomaGames.HomaBelly.Purchases
+        m_MethodName: InitiatePurchase
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -14706,6 +14839,7 @@ GameObject:
   - component: {fileID: 439289636}
   - component: {fileID: 439289635}
   - component: {fileID: 439289634}
+  - component: {fileID: 439289637}
   m_Layer: 5
   m_Name: Image - Bundle 3
   m_TagString: Untagged
@@ -14787,6 +14921,52 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 439289632}
   m_CullTransparentMesh: 1
+--- !u!114 &439289637
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 439289632}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9ea4200c8cf2420292ae378c9f7efb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  showFullscreenLoadingUi: 0
+  priceTextComponent: {fileID: 0}
+  priceTextMeshProComponent: {fileID: 0}
+  titleTextComponent: {fileID: 0}
+  titleTextMeshProComponent: {fileID: 0}
+  descriptionTextComponent: {fileID: 0}
+  descriptionTextMeshProComponent: {fileID: 0}
+  OnProductFetched:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPurchaseSucceded:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 439289634}
+        m_TargetAssemblyTypeName: Bundle3, Assembly-CSharp
+        m_MethodName: BuyNoAdsBundles_Click
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnPurchaseFailed:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPurchaseRestored:
+    m_PersistentCalls:
+      m_Calls: []
+  IsPurchasing: 0
+  androidProductId: cargorush_skip1
+  appleProductId: cargorush_skip1
 --- !u!1 &440371415
 GameObject:
   m_ObjectHideFlags: 0
@@ -16171,6 +16351,7 @@ GameObject:
   - component: {fileID: 490558629}
   - component: {fileID: 490558628}
   - component: {fileID: 490558627}
+  - component: {fileID: 490558630}
   m_Layer: 5
   m_Name: Image - Bundle 2
   m_TagString: Untagged
@@ -16252,6 +16433,52 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 490558625}
   m_CullTransparentMesh: 1
+--- !u!114 &490558630
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 490558625}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9ea4200c8cf2420292ae378c9f7efb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  showFullscreenLoadingUi: 0
+  priceTextComponent: {fileID: 0}
+  priceTextMeshProComponent: {fileID: 0}
+  titleTextComponent: {fileID: 0}
+  titleTextMeshProComponent: {fileID: 0}
+  descriptionTextComponent: {fileID: 0}
+  descriptionTextMeshProComponent: {fileID: 0}
+  OnProductFetched:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPurchaseSucceded:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 490558627}
+        m_TargetAssemblyTypeName: Bundle2, Assembly-CSharp
+        m_MethodName: BuyNoAdsBundles_Click
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnPurchaseFailed:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPurchaseRestored:
+    m_PersistentCalls:
+      m_Calls: []
+  IsPurchasing: 0
+  androidProductId: cargorush_skip1
+  appleProductId: cargorush_skip1
 --- !u!224 &492945100 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1856179852050552327, guid: 2a60d703aa7b7bb42b72e9a12bf34135, type: 3}
@@ -20241,9 +20468,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 363524143}
-        m_TargetAssemblyTypeName: NoAdsLimitedBundles, Assembly-CSharp
-        m_MethodName: BuyNoAdsLimitedBundles_Click
+      - m_Target: {fileID: 363524146}
+        m_TargetAssemblyTypeName: HomaGames.HomaBelly.IAP.ProductButtonHelperBase,
+          HomaGames.HomaBelly.Purchases
+        m_MethodName: InitiatePurchase
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -24528,6 +24756,7 @@ GameObject:
   - component: {fileID: 738684123}
   - component: {fileID: 738684122}
   - component: {fileID: 738684121}
+  - component: {fileID: 738684124}
   m_Layer: 5
   m_Name: Image - Bundle 5
   m_TagString: Untagged
@@ -24609,6 +24838,52 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 738684119}
   m_CullTransparentMesh: 1
+--- !u!114 &738684124
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 738684119}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9ea4200c8cf2420292ae378c9f7efb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  showFullscreenLoadingUi: 0
+  priceTextComponent: {fileID: 0}
+  priceTextMeshProComponent: {fileID: 0}
+  titleTextComponent: {fileID: 0}
+  titleTextMeshProComponent: {fileID: 0}
+  descriptionTextComponent: {fileID: 0}
+  descriptionTextMeshProComponent: {fileID: 0}
+  OnProductFetched:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPurchaseSucceded:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 738684121}
+        m_TargetAssemblyTypeName: Bundle5, Assembly-CSharp
+        m_MethodName: BuyNoAdsBundles_Click
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnPurchaseFailed:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPurchaseRestored:
+    m_PersistentCalls:
+      m_Calls: []
+  IsPurchasing: 0
+  androidProductId: cargorush_skip1
+  appleProductId: cargorush_skip1
 --- !u!114 &739210668 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3218221185896053657, guid: aa5e09c1df54da443ab324b919376fda, type: 3}
@@ -25442,6 +25717,7 @@ GameObject:
   - component: {fileID: 754107221}
   - component: {fileID: 754107220}
   - component: {fileID: 754107219}
+  - component: {fileID: 754107222}
   m_Layer: 5
   m_Name: Image - Bundle 1
   m_TagString: Untagged
@@ -25523,6 +25799,52 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 754107217}
   m_CullTransparentMesh: 1
+--- !u!114 &754107222
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 754107217}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9ea4200c8cf2420292ae378c9f7efb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  showFullscreenLoadingUi: 0
+  priceTextComponent: {fileID: 0}
+  priceTextMeshProComponent: {fileID: 0}
+  titleTextComponent: {fileID: 0}
+  titleTextMeshProComponent: {fileID: 0}
+  descriptionTextComponent: {fileID: 0}
+  descriptionTextMeshProComponent: {fileID: 0}
+  OnProductFetched:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPurchaseSucceded:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 754107219}
+        m_TargetAssemblyTypeName: Bundle1, Assembly-CSharp
+        m_MethodName: BuyNoAdsBundles_Click
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnPurchaseFailed:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPurchaseRestored:
+    m_PersistentCalls:
+      m_Calls: []
+  IsPurchasing: 0
+  androidProductId: cargorush_skip1
+  appleProductId: cargorush_skip1
 --- !u!1 &754912379
 GameObject:
   m_ObjectHideFlags: 0
@@ -27579,6 +27901,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 325531302}
     m_Modifications:
+    - target: {fileID: 1844222392165221700, guid: b6b0f329f6a40f148823f034d0b9567c, type: 3}
+      propertyPath: appleProductId
+      value: cargorush_skip5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1844222392165221700, guid: b6b0f329f6a40f148823f034d0b9567c, type: 3}
+      propertyPath: androidProductId
+      value: cargorush_skip5
+      objectReference: {fileID: 0}
     - target: {fileID: 7143787630893211990, guid: b6b0f329f6a40f148823f034d0b9567c, type: 3}
       propertyPath: cost
       value: 19.99
@@ -28549,6 +28879,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 325531302}
     m_Modifications:
+    - target: {fileID: 1844222392165221700, guid: b6b0f329f6a40f148823f034d0b9567c, type: 3}
+      propertyPath: appleProductId
+      value: cargorush_skip3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1844222392165221700, guid: b6b0f329f6a40f148823f034d0b9567c, type: 3}
+      propertyPath: androidProductId
+      value: cargorush_skip3
+      objectReference: {fileID: 0}
     - target: {fileID: 7143787630893211990, guid: b6b0f329f6a40f148823f034d0b9567c, type: 3}
       propertyPath: cost
       value: 4.99
@@ -30225,6 +30563,7 @@ GameObject:
   - component: {fileID: 910079402}
   - component: {fileID: 910079401}
   - component: {fileID: 910079400}
+  - component: {fileID: 910079403}
   m_Layer: 5
   m_Name: Image - Special Offer
   m_TagString: Untagged
@@ -30306,6 +30645,52 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 910079398}
   m_CullTransparentMesh: 1
+--- !u!114 &910079403
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 910079398}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9ea4200c8cf2420292ae378c9f7efb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  showFullscreenLoadingUi: 0
+  priceTextComponent: {fileID: 0}
+  priceTextMeshProComponent: {fileID: 0}
+  titleTextComponent: {fileID: 0}
+  titleTextMeshProComponent: {fileID: 0}
+  descriptionTextComponent: {fileID: 0}
+  descriptionTextMeshProComponent: {fileID: 0}
+  OnProductFetched:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPurchaseSucceded:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 910079400}
+        m_TargetAssemblyTypeName: SpecialOffer, Assembly-CSharp
+        m_MethodName: BuyNoAdsBundles_Click
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnPurchaseFailed:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPurchaseRestored:
+    m_PersistentCalls:
+      m_Calls: []
+  IsPurchasing: 0
+  androidProductId: cargorush_skip1
+  appleProductId: cargorush_skip1
 --- !u!1001 &914591534
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -32488,6 +32873,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 325531302}
     m_Modifications:
+    - target: {fileID: 1844222392165221700, guid: b6b0f329f6a40f148823f034d0b9567c, type: 3}
+      propertyPath: appleProductId
+      value: cargorush_skip2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1844222392165221700, guid: b6b0f329f6a40f148823f034d0b9567c, type: 3}
+      propertyPath: androidProductId
+      value: cargorush_skip2
+      objectReference: {fileID: 0}
     - target: {fileID: 7143787630893211990, guid: b6b0f329f6a40f148823f034d0b9567c, type: 3}
       propertyPath: cost
       value: 1.99
@@ -34384,9 +34777,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 439289634}
-        m_TargetAssemblyTypeName: Bundle3, Assembly-CSharp
-        m_MethodName: BuyNoAdsBundles_Click
+      - m_Target: {fileID: 439289637}
+        m_TargetAssemblyTypeName: HomaGames.HomaBelly.IAP.ProductButtonHelperBase,
+          HomaGames.HomaBelly.Purchases
+        m_MethodName: InitiatePurchase
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -39898,9 +40292,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1530465173}
-        m_TargetAssemblyTypeName: SpecialOfferPopUp, Assembly-CSharp
-        m_MethodName: BuyNoAdsBundles_Click
+      - m_Target: {fileID: 1530465178}
+        m_TargetAssemblyTypeName: HomaGames.HomaBelly.IAP.ProductButtonHelperBase,
+          HomaGames.HomaBelly.Purchases
+        m_MethodName: InitiatePurchase
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -46323,6 +46718,7 @@ GameObject:
   - component: {fileID: 1408202749}
   - component: {fileID: 1408202748}
   - component: {fileID: 1408202751}
+  - component: {fileID: 1408202752}
   m_Layer: 5
   m_Name: Image - NoAds PopUp
   m_TagString: Untagged
@@ -46417,6 +46813,52 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 243995359c0e549429fafc64cb0c65b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1408202752
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1408202746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9ea4200c8cf2420292ae378c9f7efb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  showFullscreenLoadingUi: 0
+  priceTextComponent: {fileID: 0}
+  priceTextMeshProComponent: {fileID: 0}
+  titleTextComponent: {fileID: 0}
+  titleTextMeshProComponent: {fileID: 0}
+  descriptionTextComponent: {fileID: 0}
+  descriptionTextMeshProComponent: {fileID: 0}
+  OnProductFetched:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPurchaseSucceded:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1408202748}
+        m_TargetAssemblyTypeName: NoAdsPopUp, Assembly-CSharp
+        m_MethodName: BuyNoAdsBundles_Click
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnPurchaseFailed:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPurchaseRestored:
+    m_PersistentCalls:
+      m_Calls: []
+  IsPurchasing: 0
+  androidProductId: cargorush_skip1
+  appleProductId: cargorush_skip1
 --- !u!1 &1410993559
 GameObject:
   m_ObjectHideFlags: 0
@@ -48622,9 +49064,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1875041247}
-        m_TargetAssemblyTypeName: Bundle6, Assembly-CSharp
-        m_MethodName: BuyNoAdsBundles_Click
+      - m_Target: {fileID: 1875041250}
+        m_TargetAssemblyTypeName: HomaGames.HomaBelly.IAP.ProductButtonHelperBase,
+          HomaGames.HomaBelly.Purchases
+        m_MethodName: InitiatePurchase
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -51332,6 +51775,7 @@ GameObject:
   - component: {fileID: 1530465175}
   - component: {fileID: 1530465173}
   - component: {fileID: 1530465177}
+  - component: {fileID: 1530465178}
   m_Layer: 5
   m_Name: Image - Special PopUp
   m_TagString: Untagged
@@ -51426,6 +51870,52 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 243995359c0e549429fafc64cb0c65b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1530465178
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1530465171}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9ea4200c8cf2420292ae378c9f7efb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  showFullscreenLoadingUi: 0
+  priceTextComponent: {fileID: 0}
+  priceTextMeshProComponent: {fileID: 0}
+  titleTextComponent: {fileID: 0}
+  titleTextMeshProComponent: {fileID: 0}
+  descriptionTextComponent: {fileID: 0}
+  descriptionTextMeshProComponent: {fileID: 0}
+  OnProductFetched:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPurchaseSucceded:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1530465173}
+        m_TargetAssemblyTypeName: SpecialOfferPopUp, Assembly-CSharp
+        m_MethodName: BuyNoAdsBundles_Click
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnPurchaseFailed:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPurchaseRestored:
+    m_PersistentCalls:
+      m_Calls: []
+  IsPurchasing: 0
+  androidProductId: cargorush_skip1
+  appleProductId: cargorush_skip1
 --- !u!1 &1538326306
 GameObject:
   m_ObjectHideFlags: 0
@@ -53107,6 +53597,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 325531302}
     m_Modifications:
+    - target: {fileID: 1844222392165221700, guid: b6b0f329f6a40f148823f034d0b9567c, type: 3}
+      propertyPath: appleProductId
+      value: cargorush_skip4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1844222392165221700, guid: b6b0f329f6a40f148823f034d0b9567c, type: 3}
+      propertyPath: androidProductId
+      value: cargorush_skip4
+      objectReference: {fileID: 0}
     - target: {fileID: 7143787630893211990, guid: b6b0f329f6a40f148823f034d0b9567c, type: 3}
       propertyPath: cost
       value: 9.99
@@ -53300,9 +53798,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 754107219}
-        m_TargetAssemblyTypeName: Bundle1, Assembly-CSharp
-        m_MethodName: BuyNoAdsBundles_Click
+      - m_Target: {fileID: 754107222}
+        m_TargetAssemblyTypeName: HomaGames.HomaBelly.IAP.ProductButtonHelperBase,
+          HomaGames.HomaBelly.Purchases
+        m_MethodName: InitiatePurchase
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -54622,6 +55121,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 392787550}
     m_Modifications:
+    - target: {fileID: 3054514007559447638, guid: ff6220b6620ae7b428e112d1632acf38, type: 3}
+      propertyPath: appleProductId
+      value: cargorush_money2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3054514007559447638, guid: ff6220b6620ae7b428e112d1632acf38, type: 3}
+      propertyPath: androidProductId
+      value: cargorush_money2
+      objectReference: {fileID: 0}
     - target: {fileID: 8936021279611361841, guid: ff6220b6620ae7b428e112d1632acf38, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -54815,9 +55322,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 738684121}
-        m_TargetAssemblyTypeName: Bundle5, Assembly-CSharp
-        m_MethodName: BuyNoAdsBundles_Click
+      - m_Target: {fileID: 738684124}
+        m_TargetAssemblyTypeName: HomaGames.HomaBelly.IAP.ProductButtonHelperBase,
+          HomaGames.HomaBelly.Purchases
+        m_MethodName: InitiatePurchase
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -58397,6 +58905,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 392787550}
     m_Modifications:
+    - target: {fileID: 3054514007559447638, guid: ff6220b6620ae7b428e112d1632acf38, type: 3}
+      propertyPath: appleProductId
+      value: cargorush_money6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3054514007559447638, guid: ff6220b6620ae7b428e112d1632acf38, type: 3}
+      propertyPath: androidProductId
+      value: cargorush_money6
+      objectReference: {fileID: 0}
     - target: {fileID: 8936021279611361841, guid: ff6220b6620ae7b428e112d1632acf38, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -58965,6 +59481,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 392787550}
     m_Modifications:
+    - target: {fileID: 3054514007559447638, guid: ff6220b6620ae7b428e112d1632acf38, type: 3}
+      propertyPath: appleProductId
+      value: cargorush_money4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3054514007559447638, guid: ff6220b6620ae7b428e112d1632acf38, type: 3}
+      propertyPath: androidProductId
+      value: cargorush_money4
+      objectReference: {fileID: 0}
     - target: {fileID: 8936021279611361841, guid: ff6220b6620ae7b428e112d1632acf38, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -60615,6 +61139,7 @@ GameObject:
   - component: {fileID: 1793381346}
   - component: {fileID: 1793381345}
   - component: {fileID: 1793381344}
+  - component: {fileID: 1793381347}
   m_Layer: 5
   m_Name: Image - Bundle 4
   m_TagString: Untagged
@@ -60696,6 +61221,52 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1793381342}
   m_CullTransparentMesh: 1
+--- !u!114 &1793381347
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1793381342}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9ea4200c8cf2420292ae378c9f7efb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  showFullscreenLoadingUi: 0
+  priceTextComponent: {fileID: 0}
+  priceTextMeshProComponent: {fileID: 0}
+  titleTextComponent: {fileID: 0}
+  titleTextMeshProComponent: {fileID: 0}
+  descriptionTextComponent: {fileID: 0}
+  descriptionTextMeshProComponent: {fileID: 0}
+  OnProductFetched:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPurchaseSucceded:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1793381344}
+        m_TargetAssemblyTypeName: Bundle4, Assembly-CSharp
+        m_MethodName: BuyNoAdsBundles_Click
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnPurchaseFailed:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPurchaseRestored:
+    m_PersistentCalls:
+      m_Calls: []
+  IsPurchasing: 0
+  androidProductId: cargorush_skip1
+  appleProductId: cargorush_skip1
 --- !u!1 &1794680400
 GameObject:
   m_ObjectHideFlags: 0
@@ -63908,6 +64479,7 @@ GameObject:
   - component: {fileID: 1875041249}
   - component: {fileID: 1875041248}
   - component: {fileID: 1875041247}
+  - component: {fileID: 1875041250}
   m_Layer: 5
   m_Name: Image - Bundle 6
   m_TagString: Untagged
@@ -63989,6 +64561,52 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1875041245}
   m_CullTransparentMesh: 1
+--- !u!114 &1875041250
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1875041245}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9ea4200c8cf2420292ae378c9f7efb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  showFullscreenLoadingUi: 0
+  priceTextComponent: {fileID: 0}
+  priceTextMeshProComponent: {fileID: 0}
+  titleTextComponent: {fileID: 0}
+  titleTextMeshProComponent: {fileID: 0}
+  descriptionTextComponent: {fileID: 0}
+  descriptionTextMeshProComponent: {fileID: 0}
+  OnProductFetched:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPurchaseSucceded:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1875041247}
+        m_TargetAssemblyTypeName: Bundle6, Assembly-CSharp
+        m_MethodName: BuyNoAdsBundles_Click
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnPurchaseFailed:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPurchaseRestored:
+    m_PersistentCalls:
+      m_Calls: []
+  IsPurchasing: 0
+  androidProductId: cargorush_skip1
+  appleProductId: cargorush_skip1
 --- !u!114 &1876638015 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6845460978869440522, guid: 7dc53b2b43290744e895ad6f7b759ade, type: 3}
@@ -65202,6 +65820,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 392787550}
     m_Modifications:
+    - target: {fileID: 3054514007559447638, guid: ff6220b6620ae7b428e112d1632acf38, type: 3}
+      propertyPath: appleProductId
+      value: cargorush_money5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3054514007559447638, guid: ff6220b6620ae7b428e112d1632acf38, type: 3}
+      propertyPath: androidProductId
+      value: cargorush_money5
+      objectReference: {fileID: 0}
     - target: {fileID: 8936021279611361841, guid: ff6220b6620ae7b428e112d1632acf38, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -65612,9 +66238,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1408202748}
-        m_TargetAssemblyTypeName: NoAdsPopUp, Assembly-CSharp
-        m_MethodName: BuyNoAdsBundles_Click
+      - m_Target: {fileID: 1408202752}
+        m_TargetAssemblyTypeName: HomaGames.HomaBelly.IAP.ProductButtonHelperBase,
+          HomaGames.HomaBelly.Purchases
+        m_MethodName: InitiatePurchase
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -66313,6 +66940,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1369873883}
     m_Modifications:
+    - target: {fileID: -2387490945762400831, guid: aa5e09c1df54da443ab324b919376fda, type: 3}
+      propertyPath: appleProductId
+      value: cargorush_skip1
+      objectReference: {fileID: 0}
+    - target: {fileID: -2387490945762400831, guid: aa5e09c1df54da443ab324b919376fda, type: 3}
+      propertyPath: androidProductId
+      value: cargorush_skip1
+      objectReference: {fileID: 0}
+    - target: {fileID: -2387490945762400831, guid: aa5e09c1df54da443ab324b919376fda, type: 3}
+      propertyPath: OnPurchaseSucceded.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1940852029}
+    - target: {fileID: -2387490945762400831, guid: aa5e09c1df54da443ab324b919376fda, type: 3}
+      propertyPath: OnPurchaseSucceded.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: DoubleIncomePopUp, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 2798161794299119218, guid: aa5e09c1df54da443ab324b919376fda, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -66400,14 +67043,14 @@ PrefabInstance:
     - target: {fileID: 3218221185896053657, guid: aa5e09c1df54da443ab324b919376fda, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1940852029}
+      objectReference: {fileID: 1940852025}
     - target: {fileID: 3218221185896053657, guid: aa5e09c1df54da443ab324b919376fda, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: BuyDoubleIncomePurchase_Click
+      value: InitiatePurchase
       objectReference: {fileID: 0}
     - target: {fileID: 3218221185896053657, guid: aa5e09c1df54da443ab324b919376fda, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: DoubleIncomePopUp, Assembly-CSharp
+      value: HomaGames.HomaBelly.IAP.ProductButtonHelperBase, HomaGames.HomaBelly.Purchases
       objectReference: {fileID: 0}
     - target: {fileID: 5143650562491576453, guid: aa5e09c1df54da443ab324b919376fda, type: 3}
       propertyPath: m_Name
@@ -66488,6 +67131,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5143650562491576453, guid: aa5e09c1df54da443ab324b919376fda, type: 3}
   m_PrefabInstance: {fileID: 1940852022}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1940852025 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -2387490945762400831, guid: aa5e09c1df54da443ab324b919376fda, type: 3}
+  m_PrefabInstance: {fileID: 1940852022}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1940852024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9ea4200c8cf2420292ae378c9f7efb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1940852029
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -71917,6 +72571,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 392787550}
     m_Modifications:
+    - target: {fileID: 3054514007559447638, guid: ff6220b6620ae7b428e112d1632acf38, type: 3}
+      propertyPath: appleProductId
+      value: cargorush_money3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3054514007559447638, guid: ff6220b6620ae7b428e112d1632acf38, type: 3}
+      propertyPath: androidProductId
+      value: cargorush_money3
+      objectReference: {fileID: 0}
     - target: {fileID: 8936021279611361841, guid: ff6220b6620ae7b428e112d1632acf38, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -72328,17 +72990,33 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1369873883}
     m_Modifications:
+    - target: {fileID: -7120061450938424572, guid: 8e78427aca7c92d4b97389459ead174f, type: 3}
+      propertyPath: appleProductId
+      value: cargorush_skip1
+      objectReference: {fileID: 0}
+    - target: {fileID: -7120061450938424572, guid: 8e78427aca7c92d4b97389459ead174f, type: 3}
+      propertyPath: androidProductId
+      value: cargorush_skip1
+      objectReference: {fileID: 0}
+    - target: {fileID: -7120061450938424572, guid: 8e78427aca7c92d4b97389459ead174f, type: 3}
+      propertyPath: OnPurchaseSucceded.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2107636253}
+    - target: {fileID: -7120061450938424572, guid: 8e78427aca7c92d4b97389459ead174f, type: 3}
+      propertyPath: OnPurchaseSucceded.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: SpeedPopUp, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 253262314456305572, guid: 8e78427aca7c92d4b97389459ead174f, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 2107636253}
+      objectReference: {fileID: 2107636249}
     - target: {fileID: 253262314456305572, guid: 8e78427aca7c92d4b97389459ead174f, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: BuySpeedPurchase_Click
+      value: InitiatePurchase
       objectReference: {fileID: 0}
     - target: {fileID: 253262314456305572, guid: 8e78427aca7c92d4b97389459ead174f, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: SpeedPopUp, Assembly-CSharp
+      value: HomaGames.HomaBelly.IAP.ProductButtonHelperBase, HomaGames.HomaBelly.Purchases
       objectReference: {fileID: 0}
     - target: {fileID: 720504429384954447, guid: 8e78427aca7c92d4b97389459ead174f, type: 3}
       propertyPath: m_Pivot.x
@@ -72497,6 +73175,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7515176590076888248, guid: 8e78427aca7c92d4b97389459ead174f, type: 3}
   m_PrefabInstance: {fileID: 2107636246}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2107636249 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -7120061450938424572, guid: 8e78427aca7c92d4b97389459ead174f, type: 3}
+  m_PrefabInstance: {fileID: 2107636246}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2107636248}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9ea4200c8cf2420292ae378c9f7efb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &2107636253
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -81648,6 +82337,7 @@ GameObject:
   - component: {fileID: 2732640635950162116}
   - component: {fileID: 8819251015854757616}
   - component: {fileID: 8819251015854757617}
+  - component: {fileID: 8819251015854757618}
   m_Layer: 5
   m_Name: Image - NoAds
   m_TagString: Untagged
@@ -95425,9 +96115,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8819251015854757617}
-        m_TargetAssemblyTypeName: NoAdsBundles, Assembly-CSharp
-        m_MethodName: BuyNoAdsBundles_Click
+      - m_Target: {fileID: 8819251015854757618}
+        m_TargetAssemblyTypeName: HomaGames.HomaBelly.IAP.ProductButtonHelperBase,
+          HomaGames.HomaBelly.Purchases
+        m_MethodName: InitiatePurchase
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -102540,6 +103231,52 @@ MonoBehaviour:
   purchasedGO: {fileID: 7533511558604912546}
   cost: 4.99
   costText: {fileID: 3929335306974061658}
+--- !u!114 &8819251015854757618
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4014907831298075548}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9ea4200c8cf2420292ae378c9f7efb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  showFullscreenLoadingUi: 0
+  priceTextComponent: {fileID: 0}
+  priceTextMeshProComponent: {fileID: 0}
+  titleTextComponent: {fileID: 0}
+  titleTextMeshProComponent: {fileID: 0}
+  descriptionTextComponent: {fileID: 0}
+  descriptionTextMeshProComponent: {fileID: 0}
+  OnProductFetched:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPurchaseSucceded:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8819251015854757617}
+        m_TargetAssemblyTypeName: NoAdsBundles, Assembly-CSharp
+        m_MethodName: BuyNoAdsBundles_Click
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnPurchaseFailed:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPurchaseRestored:
+    m_PersistentCalls:
+      m_Calls: []
+  IsPurchasing: 0
+  androidProductId: cargorush_skip1
+  appleProductId: cargorush_skip1
 --- !u!1001 &8936021279234175303
 PrefabInstance:
   m_ObjectHideFlags: 0
