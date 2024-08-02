@@ -89,6 +89,11 @@ public class StoreManager : MonoBehaviour
         starPanel.SetActive(false);
         storeButton.SetActive(true);
         PlayerController.Instance.PlayerControl_ReActive();
+        if (PlayerPrefs.GetInt("tickettutorial") == 3)
+        {
+            PurchaseManager.Instance.SpecialOffer_PopUp_Open();
+            PlayerPrefs.SetInt("tickettutorial", 4);
+        }
 
     }
 

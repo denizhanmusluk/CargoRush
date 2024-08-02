@@ -36,8 +36,11 @@ public class MachineRepairArea : MonoBehaviour
 
         if (PlayerPrefs.GetInt("firsterrormachine") == 0)
         {
+            List<MachineRepair> tempMachineRepair = new List<MachineRepair>();
+            tempMachineRepair = selectedMachineRepairList;
+            tempMachineRepair = GetSortedElementsByValue(tempMachineRepair);
             TutorialManager.Instance.repairMachineGO.SetActive(true);
-            IndicatorManager.Instance.IndicaorActive(selectedMachineRepairList[0].transform);
+            IndicatorManager.Instance.IndicaorActive(tempMachineRepair[0].transform);
         }
     }
     public void RepairingCheck()
@@ -64,7 +67,7 @@ public class MachineRepairArea : MonoBehaviour
 
             if (tempMachineRepair.Count > 0)
             {
-                GetSortedElementsByValue(tempMachineRepair);
+                tempMachineRepair = GetSortedElementsByValue(tempMachineRepair);
                 TutorialManager.Instance.repairMachineGO.SetActive(true);
                 IndicatorManager.Instance.IndicaorActive(tempMachineRepair[0].transform);
             }
@@ -95,9 +98,10 @@ public class MachineRepairArea : MonoBehaviour
         return list.OrderBy(x => random.Next()).Take(count).ToList();
     }
 
-    void GetSortedElementsByValue(List<MachineRepair> list)
+    List<MachineRepair> GetSortedElementsByValue(List<MachineRepair> list)
     {
         List<MachineRepair> sortedList = list.OrderBy(x => x.id).ToList();
         list = sortedList;
+        return sortedList;
     }
 }

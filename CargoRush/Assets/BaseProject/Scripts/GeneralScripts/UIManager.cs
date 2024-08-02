@@ -217,7 +217,7 @@ public class UIManager : Subject
         if(miktar < 0 && PlayerPrefs.GetInt("firstusageticket") == 0)
         {
             PlayerPrefs.SetInt("firstusageticket", 1);
-            PurchaseManager.Instance.SpecialOffer_PopUp_Open();
+            //PurchaseManager.Instance.SpecialOffer_PopUp_Open();
         }
     }
     bool gemSetActive;
