@@ -12,11 +12,6 @@ public class MachineRepairArea : MonoBehaviour
 
     private void OnEnable()
     {
-        if(PlayerPrefs.GetInt("firsterrormachine") == 0)
-        {
-            TutorialManager.Instance.repairMachineGO.SetActive(true);
-            IndicatorManager.Instance.IndicaorActive(machineRepairListAll[0].transform);
-        }
         RepairListOpen();
     }
     void RepairListOpen()
@@ -37,6 +32,12 @@ public class MachineRepairArea : MonoBehaviour
         foreach (var rpr in selectedMachineRepairList)
         {
             rpr.gameObject.SetActive(true);
+        }
+
+        if (PlayerPrefs.GetInt("firsterrormachine") == 0)
+        {
+            TutorialManager.Instance.repairMachineGO.SetActive(true);
+            IndicatorManager.Instance.IndicaorActive(selectedMachineRepairList[0].transform);
         }
     }
     public void RepairingCheck()
@@ -63,6 +64,7 @@ public class MachineRepairArea : MonoBehaviour
 
             if (tempMachineRepair.Count > 0)
             {
+                GetSortedElementsByValue(tempMachineRepair);
                 TutorialManager.Instance.repairMachineGO.SetActive(true);
                 IndicatorManager.Instance.IndicaorActive(tempMachineRepair[0].transform);
             }
@@ -91,5 +93,11 @@ public class MachineRepairArea : MonoBehaviour
 
         // Listeyi rastgele sýraya diziyoruz ve istediðimiz sayýda elemaný alýyoruz
         return list.OrderBy(x => random.Next()).Take(count).ToList();
+    }
+
+    void GetSortedElementsByValue(List<MachineRepair> list)
+    {
+        List<MachineRepair> sortedList = list.OrderBy(x => x.id).ToList();
+        list = sortedList;
     }
 }

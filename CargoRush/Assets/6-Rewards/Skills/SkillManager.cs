@@ -46,7 +46,7 @@ public class SkillManager : MonoBehaviour
     public void HoverboardActive()
     {
         int rewardSelect = PlayerPrefs.GetInt("speedskil") % 3;
-
+        Globals.hoverboardActive = true;
         RewardPanel.Instance.hoverboardPanelGO.SetActive(true);
         StartCoroutine(Hoverboard_Reset(hoverboardRewardTime));
 
@@ -130,6 +130,7 @@ public class SkillManager : MonoBehaviour
             }
 
         }
+        Globals.hoverboardActive = false;
     }
 
 
@@ -498,7 +499,7 @@ public class SkillManager : MonoBehaviour
     public void PurchaseSpeedBoostActive()
     {
         PlayerPrefs.SetInt("purchasespeedboost", 1);
-        PlayerController.Instance.HoverBoardActive();
+        PlayerController.Instance.BandBoardActive();
     }
     public void PurchaseCapacityBoostActive()
     {

@@ -11,6 +11,7 @@ public class MachineRepair : MonoBehaviour
     public bool repairStarted = false;
     public MachineRepairArea machineRepairArea;
     public Transform characterRepairPosTR;
+    public int id = 0;
     private void OnEnable()
     {
         imageFill.fillAmount = 0;

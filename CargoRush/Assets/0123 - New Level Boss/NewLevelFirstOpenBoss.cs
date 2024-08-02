@@ -24,6 +24,8 @@ public class NewLevelFirstOpenBoss : MonoBehaviour
     }
     IEnumerator GoOut()
     {
+        yield return new WaitForSeconds(5f);
+        popUp1_GO.SetActive(true);
         yield return new WaitForSeconds(10f);
         popUp1_GO.SetActive(false);
         bossCharacterSecond.GoExit(exitPosTR);

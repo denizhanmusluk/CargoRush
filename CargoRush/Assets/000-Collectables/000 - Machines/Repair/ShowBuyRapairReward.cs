@@ -50,6 +50,11 @@ public class ShowBuyRapairReward : MonoBehaviour
         {
             GameManager.Instance.ui.joyStick.GetComponent<FloatingJoystick>().PointerUpManuel();
             GameManager.Instance.ui.joyStick.SetActive(false);
+
+            if (PlayerPrefs.GetInt("machineerrorcount") == 2 && PlayerPrefs.GetInt("purchaserepairboost") == 0)
+            {
+                IndicatorManager.Instance.IndicaorDeActive();
+            }
         }
     }
 

@@ -11,6 +11,9 @@ public class RepairManager : MonoBehaviour
     public Transform repairWorkerFirstPosTR;
     public int repairTime = 300;
   [SerializeField]  int repairWorkerTimeCounter = 0;
+
+    public GameObject buttonFree_GO;
+    public GameObject buttonADV_GO;
     private void Awake()
     {
         _instance = this;
@@ -20,6 +23,8 @@ public class RepairManager : MonoBehaviour
         if (PlayerPrefs.GetInt("machineerrorcount") >= 2)
         {
             repairWorker.gameObject.SetActive(true);
+            buttonFree_GO.SetActive(false);
+            buttonADV_GO.SetActive(true);
         }
         repairWorkerTimeCounter = PlayerPrefs.GetInt("repairWorkerTimeCounter");
         StartCoroutine(StartDelay());
@@ -35,10 +40,17 @@ public class RepairManager : MonoBehaviour
     }
     public void OpenRepairWorker()
     {
+        buttonFree_GO.SetActive(false);
+        buttonADV_GO.SetActive(true);
+
         repairWorker.gameObject.SetActive(true);
         if (PlayerPrefs.GetInt("machineerrorcount") == 2 && PlayerPrefs.GetInt("purchaserepairboost") == 0)
         {
-            RepairWorkerStart();
+            TutorialManager.Instance.goToRepairMan_GO.SetActive(true);
+            IndicatorManager.Instance.IndicaorActive(repairWorkerFirstPosTR);
+            buttonFree_GO.SetActive(true);
+            buttonADV_GO.SetActive(false);
+            //RepairWorkerStart();
         }
     }
     private void Update()
@@ -61,6 +73,8 @@ public class RepairManager : MonoBehaviour
         FishDropArea.Instance.AllMachineRepair();
         repairWorker.showBuyRapairReward.gameObject.SetActive(false);
         StartCoroutine(RepairTimer());
+        buttonFree_GO.SetActive(false);
+        buttonADV_GO.SetActive(true);
     }
     IEnumerator RepairTimer()
     {

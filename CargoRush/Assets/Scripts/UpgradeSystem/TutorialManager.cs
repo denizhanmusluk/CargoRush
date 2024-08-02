@@ -22,6 +22,9 @@ public class TutorialManager : MonoBehaviour
     public GameObject bandTut_3;
     public GameObject lunch_Break;
     public GameObject click_skin_Tut_GO;
+
+    public GameObject goToRepairMan_GO;
+
     private void Awake()
     {
         _instance = this;
