@@ -17,7 +17,7 @@ public class BuyMoneyButton : MonoBehaviour
     }
     public void BuyMoneyPurchase_Click()
     {
-        PurchaseMoneyManager.Instance.MoneyBuy(moneyAmount, cost, buyButton);
         buyButton.interactable = false;
+        PurchaseMoneyManager.Instance.MoneyBuy(moneyAmount, cost, buyButton);
     }
 }
