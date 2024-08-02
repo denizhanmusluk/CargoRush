@@ -220,7 +220,7 @@ public class MissionPanel : MonoBehaviour
         }
         else
         {
-            GameManager.Instance.ui.GemCreate(price, moneyButton.transform);
+            //GameManager.Instance.ui.GemCreate(price, moneyButton.transform);
         }
         MissionManager.Instance.completeMission.SetActive(false);
         yield return new WaitForSeconds(1f);

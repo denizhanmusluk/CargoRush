@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BossCharacter : MonoBehaviour
+public class BossCharacterSecond : MonoBehaviour
 {
-    public NewLevelBoss newLevelBoss;
+    public NewLevelFirstOpenBoss newLevelFirstOpenBoss;
     public AIMoving aiMoving;
     public void GoExit(Transform targetExit)
     {
@@ -13,7 +13,7 @@ public class BossCharacter : MonoBehaviour
     }
     void SelfDestroy()
     {
-        PlayerPrefs.SetInt(newLevelBoss.bossName + PlayerPrefs.GetInt("level"), 1);
+        PlayerPrefs.SetInt(newLevelFirstOpenBoss.bossName + PlayerPrefs.GetInt("level"), 1);
         Destroy(gameObject, 1);
     }
 }

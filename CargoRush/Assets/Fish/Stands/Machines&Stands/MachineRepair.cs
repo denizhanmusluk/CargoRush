@@ -87,7 +87,7 @@ public class MachineRepair : MonoBehaviour
         float counter = 0f;
         while (counter < 1f)
         {
-            counter += 0.5f * Time.deltaTime;
+            counter += 0.2f * Time.deltaTime;
             imageRepairFill.fillAmount = Mathf.Lerp(0, 1, counter);
 
             yield return null;

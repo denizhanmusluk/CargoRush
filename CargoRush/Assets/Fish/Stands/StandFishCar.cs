@@ -40,6 +40,7 @@ public class StandFishCar : Stand,IMoneyArea
     public AudioSource carSoundAS;
 
     public CinemachineVirtualCamera vipCarCamera;
+    public StandFishTezgah standFishTezgah;
     void TextInitCheck()
     {
         for (int i = 0; i < productTypeCount.Length; i++)
@@ -102,7 +103,7 @@ public class StandFishCar : Stand,IMoneyArea
         {
             Globals.carCustomerCount++;
         }
-        if (Globals.carCustomerCount % (Globals.carSlotCount * 10) == 0)
+        if (Globals.carCustomerCount % (Globals.carSlotCount * 10) == 0 && !specialVehicle)
         {
             totalBoxCount = (int)boxCountTotal[carLevel].y;
             VipActive();
@@ -802,8 +803,11 @@ public class StandFishCar : Stand,IMoneyArea
         if (PlayerPrefs.GetInt("tutorialcompleted") == 1 && PlayerPrefs.GetInt("recycletutorial") == 1 && PlayerController.Instance._stackCollect.collectionTrs.Count > 0 && other.GetComponent<PlayerController>() != null)
         {
             PlayerPrefs.SetInt("recycletutorial", 2);
-            StandFishTezgah.Instance.tutorialPosTR.SetActive(true);
-            IndicatorManager.Instance.IndicaorActive(StandFishTezgah.Instance.tutorialPosTR.transform);
+            if (standFishTezgah != null)
+            {
+                standFishTezgah.tutorialPosTR.SetActive(true);
+                IndicatorManager.Instance.IndicaorActive(standFishTezgah.tutorialPosTR.transform);
+            }
             TutorialManager.Instance.rceycleTutorialGO.SetActive(true);
         }
     }

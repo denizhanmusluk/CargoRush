@@ -55,6 +55,8 @@ public class UIManager : Subject
 
     public GameObject hrBuyTextGO;
     public GameObject hrUpgradeTextGO;
+
+
     //public GameObject biggerPanelGO;
     //public TextMeshProUGUI biggerCounterText;
 
@@ -334,20 +336,20 @@ public class UIManager : Subject
     public GameObject gemPrefab;
     public Transform gemFirstPosTR;
     public Transform gemTargetTR;
-    public void GemCreate(int _moneyCount,Transform _gemFirstPos)
+    public void GemCreate(int _moneyCount )
     {
-        StartCoroutine(Gem_Create(_moneyCount, _gemFirstPos));
+        StartCoroutine(Gem_Create(_moneyCount));
     }
-    IEnumerator Gem_Create(int moneyCount, Transform _gemFirstPos)
+    IEnumerator Gem_Create(int moneyCount)
     {
-        int _moneyCount = moneyCount;
-        if (_moneyCount < 4)
+        //int _moneyCount = moneyCount;
+        //if (_moneyCount < 4)
+        //{
+        //    _moneyCount = 4;
+        //}
+        for (int i = 0; i < moneyCount; i++)
         {
-            _moneyCount = 4;
-        }
-        for (int i = 0; i < _moneyCount / 4; i++)
-        {
-            GameObject _gem = Instantiate(gemPrefab, _gemFirstPos.position, Quaternion.identity, transform);
+            GameObject _gem = Instantiate(gemPrefab, gemFirstPosTR.position, Quaternion.identity, transform);
             StartCoroutine(GemMoveUI(_gem.transform));
             //yield return new WaitForSeconds(0.01f);
         }
@@ -362,7 +364,9 @@ public class UIManager : Subject
     IEnumerator GemMoveUI(Transform gemTR)
     {
         Vector3 firstPos = gemTR.position;
-        Vector3 targetPos = gemTR.position + new Vector3(UnityEngine.Random.Range(-200, -500), UnityEngine.Random.Range(-300, 300), 0);
+        Vector3 targetPos = gemTR.position;
+        Vector3 ticketFirstSize = gemTR.localScale;
+        //Vector3 targetPos = gemTR.position + new Vector3(UnityEngine.Random.Range(-200, -500), UnityEngine.Random.Range(-300, 300), 0);
         float counter = 0;
 
         while (counter < 1f)
@@ -380,8 +384,15 @@ public class UIManager : Subject
         {
             counter += 3 * Time.deltaTime;
             gemTR.position = Vector3.Lerp(firstPos, gemTargetTR.position, counter);
+            gemTR.localScale = Vector3.Lerp(ticketFirstSize, Vector3.one, counter);
 
             yield return null;
+        }
+        if (PlayerPrefs.GetInt("tickettutorial") == 1)
+        {
+            TutorialManager.Instance.click_skin_Tut_GO.SetActive(true);
+            PlayerPrefs.SetInt("tickettutorial", 2);
+            StoreManager.Instance.storeButtonTapTutorialGO2.SetActive(true);
         }
         Destroy(gemTR.gameObject);
     }

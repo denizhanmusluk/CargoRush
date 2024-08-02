@@ -86,6 +86,8 @@ public class ProcessMachine : Stand, IStandUpgrade, IMachineActive
     public GameObject machineError_GO;
 
     public AudioSource bandSoundAS;
+    public GameObject cleanSparkleGO;
+
     private void Awake()
     {
         errorActive = false;
@@ -125,11 +127,9 @@ public class ProcessMachine : Stand, IStandUpgrade, IMachineActive
         if (errorActive)
         {
             errorActive = false;
-            machineErrored = false;
             PlayerPrefs.SetInt(machineName + "iserror" + PlayerPrefs.GetInt("level"), 0);
             CollectProgressManager.Instance.dirtyActiveImgGO.SetActive(false);
             FishDropArea.Instance.RepairProgressSet();
-            Globals.machineErrorActive = false;
             foreach (var repairs in machineRepairArea.machineRepairListAll)
             {
                 repairs.gameObject.SetActive(false);
@@ -140,10 +140,16 @@ public class ProcessMachine : Stand, IStandUpgrade, IMachineActive
     }
     IEnumerator RepairAnimation()
     {
+        cleanSparkleGO.SetActive(true);
         machineError_GO.GetComponent<Animator>().SetTrigger("repair");
         yield return new WaitForSeconds(2f);
         machineDurable_GO.SetActive(true);
         machineError_GO.SetActive(false);
+
+        machineErrored = false;
+        Globals.machineErrorActive = false;
+        cleanSparkleGO.SetActive(false);
+
     }
     void CollectProducts_CollectActivator(bool active)
     {
@@ -925,7 +931,16 @@ public class ProcessMachine : Stand, IStandUpgrade, IMachineActive
         droppingCollection.collectActive = false;
         float deltaY = 0;
         deltaY = (droppedCollectionList.Count - 1) / fishPosTR.Length;
-        Transform targetTR = fishPosTR[(droppedCollectionList.Count - 1) % fishPosTR.Length];
+
+        Transform targetTR;
+        if(droppedCollectionList.Count == 0)
+        {
+            targetTR = fishPosTR[0];
+        }
+        else
+        {
+            targetTR = fishPosTR[(droppedCollectionList.Count - 1) % fishPosTR.Length];
+        }
         Vector3 dropPos = targetTR.position + new Vector3(0, deltaY * 1.25f, 0);
         StartCoroutine(Drop(targetTR, dropPos, droppingCollection, Time.deltaTime));
         if (_stackCollect.player)

@@ -34,6 +34,7 @@ public class PurchaseManager : MonoBehaviour
         purchasePanel_GO.SetActive(true);
         purchaseButton_GO.SetActive(false);
         AudioManager.Instance.ButtonSound();
+        OpenBundlesPanel();
     }
     public void PurchasePanelClose()
     {

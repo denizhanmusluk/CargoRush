@@ -151,6 +151,15 @@ public class PopUpManager : MonoBehaviour
             }
             yield return null;
         }
+
+        foreach (var img in popUp.GetComponentsInChildren<Image>())
+        {
+            img.color = new Color(img.color.r, img.color.g, img.color.b, Mathf.Abs(1));
+        }
+        foreach (var txt in popUp.GetComponentsInChildren<TextMeshProUGUI>())
+        {
+            txt.color = new Color(txt.color.r, txt.color.g, txt.color.b, Mathf.Abs(1));
+        }
         popUp.SetActive(false);
     }
 }

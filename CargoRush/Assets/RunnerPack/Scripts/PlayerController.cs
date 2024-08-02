@@ -797,23 +797,31 @@ public class PlayerController : MonoBehaviour
     }
     IEnumerator RotSetTarget(Transform targetTR)
     {
+        navMeshAgent.enabled = false;
         float rotDelta = transform.parent.eulerAngles.y;
-        Quaternion firstRotParent = transform.parent.rotation;
-        Quaternion targetRotParent = Quaternion.Euler(0, 0, 0);
 
-        Quaternion firstRot = transform.localRotation;
+        //Quaternion firstRotParent = transform.parent.rotation;
+        Quaternion firstLocalRot = transform.localRotation;
+        Quaternion firstRot = transform.rotation;
+
+        transform.localRotation = Quaternion.Euler(0, firstLocalRot.eulerAngles.y - rotDelta, 0);
+        transform.parent.rotation = Quaternion.Euler(0, 0, 0);
+        //Quaternion targetRotParent = Quaternion.Euler(0, 0, 0);
+
         Quaternion targetRot = Quaternion.Euler(0, targetTR.eulerAngles.y, 0);
 
         float counter = 0f;
         while (counter < 1f)
         {
             counter += 2 * Time.deltaTime;
-            transform.parent.rotation = Quaternion.Lerp(firstRotParent, targetRotParent, counter);
-            transform.rotation = Quaternion.Lerp(firstRot, targetRot, 1.5f * counter);
+            //transform.parent.rotation = Quaternion.Lerp(firstRotParent, targetRotParent, counter);
+            transform.rotation = Quaternion.Lerp(firstRot, targetRot, counter);
             yield return null;
         }
-        transform.parent.rotation = targetRotParent;
-        transform.rotation = targetRot;
+        navMeshAgent.enabled = true;
+
+        //transform.parent.rotation = targetRotParent;
+        //transform.rotation = targetRot;
     }
     IEnumerator RotReset2()
     {

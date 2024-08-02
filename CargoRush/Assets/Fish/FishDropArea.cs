@@ -321,11 +321,11 @@ public class FishDropArea : MonoBehaviour
         else
         {
             PlayerPrefs.SetInt("totalboxpackagecount", PlayerPrefs.GetInt("totalboxpackagecount") + 1);
-            if (Globals.machineErrorActive)
-            {
-                errorFill.fillAmount = 1f;
-            }
-            else
+            //if (Globals.machineErrorActive)
+            //{
+            //    errorFill.fillAmount = 1f;
+            //}
+            //else
             {
                 errorFill.fillAmount = (float)(PlayerPrefs.GetInt("totalboxpackagecount") % ((Globals.collectableLevel + 1) * 125)) / (float)((Globals.collectableLevel + 1) * 125);
             }

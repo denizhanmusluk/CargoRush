@@ -75,6 +75,7 @@ public class BuyArea : MonoBehaviour, BuyCamera
     public bool machineErrorActivator = false;
 
     public bool specialVehicleOpener = false;
+    public bool ticketTutorialActivator = false;
     void Awake()
     {
         if (cost >= 20)
@@ -380,6 +381,14 @@ public class BuyArea : MonoBehaviour, BuyCamera
         {
             //SkillManager.Instance.SkillCreate();
             PlayerPrefs.SetInt("skillActive", 1);
+        }
+        if (ticketTutorialActivator)
+        {
+            if (PlayerPrefs.GetInt("tickettutorial") == 0)
+            {
+                GameManager.Instance.ui.GemCreate(1);
+                PlayerPrefs.SetInt("tickettutorial", 1);
+            }
         }
         if (vipActivator)
         {

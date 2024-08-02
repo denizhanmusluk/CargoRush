@@ -63,7 +63,6 @@ public class DayCycleManager : MonoBehaviour
         if (PlayerPrefs.GetInt("bundlesnoads") == 0 && PlayerPrefs.GetInt("bundlesnoadslimited") == 0)
         {
             StartCoroutine(AdvShow());
-            PurchaseManager.Instance.NoAds_PopUp_Open();
         }
         else
         {
@@ -97,11 +96,7 @@ public class DayCycleManager : MonoBehaviour
             StartCoroutine(AdvShow());
 
 
-            PlayerPrefs.SetInt("iscount", PlayerPrefs.GetInt("iscount") + 1);
-            if (PlayerPrefs.GetInt("iscount") % 10 == 0)
-            {
-                PurchaseManager.Instance.NoAds_PopUp_Open();
-            }
+          
         }
         else
         {
@@ -112,7 +107,7 @@ public class DayCycleManager : MonoBehaviour
     IEnumerator AdvShow()
     {
         TutorialManager.Instance.lunch_Break.SetActive(true);
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(3f);
         Fade.Instance.Hide();
         yield return new WaitForSeconds(0.5f);
         ADVManager.Instance.InterstialStart(AdvCompleted, "interstial");
@@ -123,6 +118,11 @@ public class DayCycleManager : MonoBehaviour
         PlayerPrefs.SetInt("dayCycleCount", dayCycleCount);
         StartCoroutine(DayCycleCounter());
         Fade.Instance.Show();
+        if (PlayerPrefs.GetInt("iscount") % 10 == 0)
+        {
+            PurchaseManager.Instance.NoAds_PopUp_Open();
+        }
+        PlayerPrefs.SetInt("iscount", PlayerPrefs.GetInt("iscount") + 1);
     }
     void DayCycleRestart()
     {

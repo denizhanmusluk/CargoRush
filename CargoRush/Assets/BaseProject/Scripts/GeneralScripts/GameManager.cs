@@ -94,6 +94,10 @@ public class GameManager : Observer
     {
         MoneyUpdate(createMoney2);
     }
+    public void GetTicket()
+    {
+        GemUpdate(createTicket);
+    }
     void OnLevelStart()
     {
         ui.startCanvas.SetActive(false);

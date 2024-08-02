@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class StandFishTezgah : Stand, IMoneyArea
 {
-    private static StandFishTezgah _instance = null;
-    public static StandFishTezgah Instance => _instance;
+
     public CollectProduct _CollectProduct;
 
     public Transform[] productPosTR;
@@ -15,7 +14,7 @@ public class StandFishTezgah : Stand, IMoneyArea
     public GameObject tutorialPosTR;
     private void Awake()
     {
-        _instance = this;
+        //_instance = this;
 
         GetComponent<Collider>().enabled = false;
     }

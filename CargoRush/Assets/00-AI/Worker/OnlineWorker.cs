@@ -16,6 +16,7 @@ public class OnlineWorker : MonoBehaviour
 
     public Animator tableAnim;
     bool collectCheckActive = true;
+    public GameObject fireGO;
     private void Start()
     {
         StartCoroutine(CheckStandCollection());
@@ -68,6 +69,7 @@ public class OnlineWorker : MonoBehaviour
 
     IEnumerator Drop(Transform dropPosTR, Collectable collectable)
     {
+        fireGO.SetActive(true);
         tableAnim.SetTrigger("open");
         collectable.isCollected = false;
 
@@ -115,6 +117,7 @@ public class OnlineWorker : MonoBehaviour
         stackCollect.CollectedListReset();
         GoToWaitPos();
         yield return new WaitForSeconds(1f);
+        fireGO.SetActive(false);
         Destroy(collectable.gameObject);
     }
 

@@ -13,7 +13,10 @@ public class StoreManager : MonoBehaviour
     public GameObject closeAndNextLevel;
     public GameObject storeButtonGlimmerGO;
     public GameObject storeButtonTapTutorialGO;
+    public GameObject storeButtonTapTutorialGO2;
 
+    public GameObject selectSkinTicketTut_Tap;
+    public GameObject buySkinTicketTut_Tap;
     void Awake()
     {
         if (Instance == null)
@@ -45,6 +48,12 @@ public class StoreManager : MonoBehaviour
         storeButtonTapTutorialGO.SetActive(false);
         PlayerController.Instance.PlayerControlDeActive();
         AudioManager.Instance.ButtonSound();
+        if (PlayerPrefs.GetInt("tickettutorial") == 2)
+        {
+            PlayerPrefs.SetInt("tickettutorial", 3);
+            selectSkinTicketTut_Tap.SetActive(true);
+            buySkinTicketTut_Tap.SetActive(true);
+        }
     }
 
     public void newButton()
