@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using HomaGames.HomaBelly.IAP;
 
 public class PurchaseManager : MonoBehaviour
 {
@@ -27,7 +28,7 @@ public class PurchaseManager : MonoBehaviour
     }
     private void Start()
     {
-        
+        HomaStore.Initialize();
     }
     public void PurchasePanelOpen()
     {

@@ -779,6 +779,7 @@ GameObject:
   - component: {fileID: 8297077603119164776}
   - component: {fileID: 4358843996299608331}
   - component: {fileID: 2287211015880742714}
+  - component: {fileID: 736518448716917863}
   m_Layer: 5
   m_Name: Button - Buy Money
   m_TagString: Untagged
@@ -888,7 +889,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3388472003324825771}
+      - m_Target: {fileID: 736518448716917863}
         m_TargetAssemblyTypeName: HomaGames.HomaBelly.IAP.ProductButtonHelperBase,
           HomaGames.HomaBelly.Purchases
         m_MethodName: InitiatePurchase
@@ -901,6 +902,52 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &736518448716917863
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7671132529922528768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9ea4200c8cf2420292ae378c9f7efb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  showFullscreenLoadingUi: 0
+  priceTextComponent: {fileID: 0}
+  priceTextMeshProComponent: {fileID: 0}
+  titleTextComponent: {fileID: 0}
+  titleTextMeshProComponent: {fileID: 0}
+  descriptionTextComponent: {fileID: 0}
+  descriptionTextMeshProComponent: {fileID: 0}
+  OnProductFetched:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPurchaseSucceded:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4913773293573509455}
+        m_TargetAssemblyTypeName: BuyCapacity, Assembly-CSharp
+        m_MethodName: BuyCapacityPurchase_Click
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnPurchaseFailed:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPurchaseRestored:
+    m_PersistentCalls:
+      m_Calls: []
+  IsPurchasing: 0
+  androidProductId: cargorush_doublecapacity
+  appleProductId: cargorush_doublecapacity
 --- !u!1 &8391701157803367462
 GameObject:
   m_ObjectHideFlags: 0
@@ -913,7 +960,6 @@ GameObject:
   - component: {fileID: 7363056591055443838}
   - component: {fileID: 4154246068112499018}
   - component: {fileID: 4913773293573509455}
-  - component: {fileID: 3388472003324825771}
   m_Layer: 5
   m_Name: Image - Booster Double Capacity
   m_TagString: Untagged
@@ -995,49 +1041,3 @@ MonoBehaviour:
   purchasedGO: {fileID: 6880353331888574271}
   cost: 1
   costText: {fileID: 8450252084413518816}
---- !u!114 &3388472003324825771
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8391701157803367462}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f9ea4200c8cf2420292ae378c9f7efb8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  showFullscreenLoadingUi: 0
-  priceTextComponent: {fileID: 0}
-  priceTextMeshProComponent: {fileID: 0}
-  titleTextComponent: {fileID: 0}
-  titleTextMeshProComponent: {fileID: 0}
-  descriptionTextComponent: {fileID: 0}
-  descriptionTextMeshProComponent: {fileID: 0}
-  OnProductFetched:
-    m_PersistentCalls:
-      m_Calls: []
-  OnPurchaseSucceded:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 4913773293573509455}
-        m_TargetAssemblyTypeName: BuyCapacity, Assembly-CSharp
-        m_MethodName: BuyCapacityPurchase_Click
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  OnPurchaseFailed:
-    m_PersistentCalls:
-      m_Calls: []
-  OnPurchaseRestored:
-    m_PersistentCalls:
-      m_Calls: []
-  IsPurchasing: 0
-  androidProductId: cargorush_doublecapacity
-  appleProductId: cargorush_doublecapacity
