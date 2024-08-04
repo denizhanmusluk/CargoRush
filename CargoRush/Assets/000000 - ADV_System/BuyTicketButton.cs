@@ -18,7 +18,7 @@ public class BuyTicketButton : MonoBehaviour
     }
     public void BuyTickedPurchase_Click()
     {
-        buyButton.interactable = false;
+        //buyButton.interactable = false;
         PurchaseTicketManager.Instance.TicketBuy(ticketAmount, cost, this);
     }
 }

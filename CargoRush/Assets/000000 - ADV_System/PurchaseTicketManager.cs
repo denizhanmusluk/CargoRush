@@ -23,7 +23,7 @@ public class PurchaseTicketManager : MonoBehaviour
     }
     void PayingCompleted()
     {
-        buyTicketButton.buyButton.interactable = true;
+        //buyTicketButton.buyButton.interactable = true;
         GameManager.Instance.ui.GemUpdate(ticketAmount);
     }
 
