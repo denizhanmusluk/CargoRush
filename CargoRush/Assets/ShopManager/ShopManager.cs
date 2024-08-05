@@ -47,8 +47,8 @@ public class ShopManager : MonoBehaviour
         shopProgresGO = CollectProgressManager.Instance.shopProgresGO;
         shopProgresFill = CollectProgressManager.Instance.shopProgresFill;
         shopProgresFillBG = CollectProgressManager.Instance.shopProgresFillBG;
-        StartCoroutine(ChildColorAlphaSet());
-        shopProgresGO.SetActive(false);
+        //StartCoroutine(ChildColorAlphaSet());
+        //shopProgresGO.SetActive(false);
         StartCoroutine(StartDelay());
     }
     IEnumerator StartDelay()
@@ -119,7 +119,7 @@ public class ShopManager : MonoBehaviour
         shopProgresGO.gameObject.SetActive(true);
         shopProgresFill.fillAmount = (float)(preVal) / (float)shopCountTotal[shopId];
         shopProgresFillBG.fillAmount = (float)(shopCountCurrent[shopId]) / (float)shopCountTotal[shopId];
-        StartCoroutine(ChildColorAlphaSet());
+        //StartCoroutine(ChildColorAlphaSet());
         //GameManager.Instance.ui.Panel_Down();
         yield return new WaitForSeconds(1f);
 
@@ -130,7 +130,7 @@ public class ShopManager : MonoBehaviour
 
 
         yield return new WaitForSeconds(1f);
-        shopProgresGO.gameObject.SetActive(false);
+        //shopProgresGO.gameObject.SetActive(false);
     }
     IEnumerator ChildColorAlphaSet()
     {
@@ -176,12 +176,10 @@ public class ShopManager : MonoBehaviour
             {
                 img.color = Color.Lerp(img.color, new Color(img.color.r, img.color.g, img.color.b, 0), counter);
 
-                //img.color = new Color(img.color.r, img.color.g, img.color.b, 1f - counter);
             }
             foreach (var txt in shopProgresGO.GetComponentsInChildren<TextMeshProUGUI>())
             {
                 txt.color = Color.Lerp(txt.color, new Color(txt.color.r, txt.color.g, txt.color.b, 0), counter);
-                //txt.color = new Color(txt.color.r, txt.color.g, txt.color.b, 1f - counter);
             }
             yield return null;
         }

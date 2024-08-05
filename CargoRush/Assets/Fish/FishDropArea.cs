@@ -327,7 +327,7 @@ public class FishDropArea : MonoBehaviour
             //}
             //else
             {
-                errorFill.fillAmount = (float)(PlayerPrefs.GetInt("totalboxpackagecount") % ((Globals.collectableLevel + 1) * 75)) / (float)((Globals.collectableLevel + 1) * 75);
+                errorFill.fillAmount = (float)(PlayerPrefs.GetInt("totalboxpackagecount") % ((Globals.collectableLevel + 1) * 95)) / (float)((Globals.collectableLevel + 1) * 95);
             }
             if (PlayerPrefs.GetInt("totalboxpackagecount") % ((Globals.collectableLevel + 1) * 75) == 0)
             {
@@ -363,7 +363,7 @@ public class FishDropArea : MonoBehaviour
     IEnumerator StartDelay()
     {
         yield return new WaitForSeconds(4f);
-        errorFill.fillAmount = (float)(PlayerPrefs.GetInt("totalboxpackagecount") % ((Globals.collectableLevel + 1) * 75)) / (float)((Globals.collectableLevel + 1) * 75);
+        errorFill.fillAmount = (float)(PlayerPrefs.GetInt("totalboxpackagecount") % ((Globals.collectableLevel + 1) * 95)) / (float)((Globals.collectableLevel + 1) * 95);
     }
     public void RepairProgressSet()
     {
