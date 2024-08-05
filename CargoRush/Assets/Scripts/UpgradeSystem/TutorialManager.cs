@@ -60,7 +60,7 @@ public class TutorialManager : MonoBehaviour
     }
     IEnumerator TutorialCompletedCheckDelay()
     {
-        if (Globals.loadingPanelActive)
+        if (PlayerPrefs.GetInt("upgradeclicktutorial") == 1)
         {
             yield return new WaitForSeconds(2);
         }
