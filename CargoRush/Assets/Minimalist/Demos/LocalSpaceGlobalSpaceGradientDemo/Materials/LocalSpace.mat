@@ -9,6 +9,8 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: LocalSpace
   m_Shader: {fileID: 4800000, guid: dd71abba2dbe683468cb262da3893f4a, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - BACKGRADIENT
   m_InvalidKeywords:
@@ -40,6 +42,7 @@ Material:
     DisableBatching: true
     RenderType: Opaque
   disabledShaderPasses: []
+  m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -150,19 +153,19 @@ Material:
     - _Shading_T: 0
     - _ShadowBlend: 0.5
     - _ShadowInfluence: 0.5
-    - _ShowAO: 0
-    - _ShowAmbientSettings: 0
-    - _ShowBack: 1
+    - _ShowAO: 1
+    - _ShowAmbientSettings: 1
+    - _ShowBack: 0
     - _ShowBottom: 0
-    - _ShowColorCorrection: 0
+    - _ShowColorCorrection: 1
     - _ShowCustomShading: 1
-    - _ShowFog: 0
+    - _ShowFog: 1
     - _ShowFront: 1
-    - _ShowGlobalGradientSettings: 0
-    - _ShowLMap: 0
+    - _ShowGlobalGradientSettings: 1
+    - _ShowLMap: 1
     - _ShowLeft: 0
     - _ShowRight: 0
-    - _ShowTexture: 0
+    - _ShowTexture: 1
     - _ShowTop: 0
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1

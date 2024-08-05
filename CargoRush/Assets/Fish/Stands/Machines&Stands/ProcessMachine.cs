@@ -1162,6 +1162,7 @@ public class ProcessMachine : Stand, IStandUpgrade, IMachineActive
 
     public void UpgradeValueInit()
     {
+        UpgradeTextSpawn();
         CapacityInit();
     }
     void CapacityInit()
@@ -1205,5 +1206,23 @@ public class ProcessMachine : Stand, IStandUpgrade, IMachineActive
         //{
         //    trayList[i].SetActive(true);
         //}
+    }
+    [SerializeField] GameObject pointText;
+    [SerializeField] GameObject confettiParticles;
+    [SerializeField] Transform textSpawnPos;
+    [SerializeField] Transform confettiSpawnPos;
+
+    public void UpgradeTextSpawn()
+    {
+        string[] upgradeNames = { "+Capacity", "+Speed" };
+        int upgradeNameSelect = 0;
+
+        upgradeNameSelect = Random.Range(0, upgradeNames.Length);
+
+        Text3D pnt = Instantiate(pointText, textSpawnPos.position, textSpawnPos.rotation).GetComponent<Text3D>();
+        pnt.transform.localScale *= 1.5f;
+        pnt.PointInit(upgradeNames[upgradeNameSelect]);
+        GameObject confetti = Instantiate(confettiParticles, confettiSpawnPos.position, confettiSpawnPos.rotation);
+        Destroy(confetti, 5f);
     }
 }
