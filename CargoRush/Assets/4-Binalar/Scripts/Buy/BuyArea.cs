@@ -496,7 +496,8 @@ public class BuyArea : MonoBehaviour, BuyCamera
             {
                 if (PlayerPrefs.GetInt("tickettutorial") == 0)
                 {
-                    GameManager.Instance.ui.GemCreate(1);
+                    //GameManager.Instance.ui.GemCreate(1);
+                    TutorialManager.Instance.SkinTutorialStart();
                     PlayerPrefs.SetInt("tickettutorial", 1);
                 }
             }

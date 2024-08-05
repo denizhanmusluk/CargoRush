@@ -329,7 +329,7 @@ public class StandFishTezgah : Stand, IMoneyArea
         PlayerPrefs.SetInt(standNameLevel + "banknotcount", PlayerPrefs.GetInt(standNameLevel + "banknotcount") + (int)totalMoney);
 
         yield return new WaitForSeconds(0.1f);
-        StartCoroutine(ColliderReset());
+        //StartCoroutine(ColliderReset());
 
     }
     IEnumerator ColliderReset()

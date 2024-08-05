@@ -73,6 +73,7 @@ public class TutorialManager : MonoBehaviour
         {
             PlayerPrefs.SetInt("upgradeclicktutorial", 1);
             clickUpgradeButtonGO.SetActive(true);
+            PlayerController.Instance.PlayerControlDeActive();
         }
     }
     void StarterMissions()
@@ -88,5 +89,22 @@ public class TutorialManager : MonoBehaviour
             //PlayerPrefs.SetInt("skinactive", 1);
         }
     }
- 
+    
+    public void SkinTutorialStart()
+    {
+        if (PlayerPrefs.GetInt("skintuto") == 0)
+        {
+            PlayerPrefs.SetInt("skintuto", 1);
+
+            PlayerPrefs.SetInt("skinactive", 1);
+            StoreManager.Instance.storeButton.SetActive(true);
+        }
+        else if (PlayerPrefs.GetInt("skintuto") == 1)
+        {
+            PlayerPrefs.SetInt("skintuto", 2);
+            GameManager.Instance.ui.GemCreate(1);
+
+        }
+
+    }
 }
