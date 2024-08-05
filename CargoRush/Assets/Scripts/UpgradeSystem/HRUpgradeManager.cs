@@ -19,6 +19,7 @@ public class HRUpgradeManager : MonoBehaviour
     public GameObject HRWorkerGO;
 
     public GameObject upgradeButton;
+    public GameObject exitTapTutorial_GO;
     private void Awake()
     {
         _instance = this;
@@ -163,6 +164,11 @@ public class HRUpgradeManager : MonoBehaviour
                 //PlayerController.Instance.GetComponent<BoingScale>().ScaleEffectTR(PlayerController.Instance.transform, 0.8f, 1f, 0.5f, Ease.OutElastic);
                 //PlayerController.Instance.UpgradeTextSpawn("+Capacity");
                 AudioManager.Instance.UpgradeSound();
+
+                if (Globals.workerNoLevel == 1)
+                {
+                    exitTapTutorial_GO.SetActive(true);
+                }
             }
 
         }
@@ -253,6 +259,7 @@ public class HRUpgradeManager : MonoBehaviour
             opened = false;
             PlayerController.Instance.PlayerControl_ReActive();
             upgradeButton.SetActive(true);
+            exitTapTutorial_GO.SetActive(false);
         }
     }
     //public void CharacterUpgradeClose()

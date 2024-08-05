@@ -40,7 +40,7 @@ public class DayCycleManager : MonoBehaviour
             }
         }
         StartCoroutine(TimeLapsCheck_24HoursPassed());
-        if(PlayerPrefs.GetInt("level") > 0)
+        if(PlayerPrefs.GetInt("level") > 0 && Globals.loadingPanelActive)
         {
             if (PlayerPrefs.GetInt("bundlesnoads") == 0 && PlayerPrefs.GetInt("bundlesnoadslimited") == 0)
             {

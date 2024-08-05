@@ -382,14 +382,7 @@ public class BuyArea : MonoBehaviour, BuyCamera
             //SkillManager.Instance.SkillCreate();
             PlayerPrefs.SetInt("skillActive", 1);
         }
-        if (ticketTutorialActivator)
-        {
-            if (PlayerPrefs.GetInt("tickettutorial") == 0)
-            {
-                GameManager.Instance.ui.GemCreate(1);
-                PlayerPrefs.SetInt("tickettutorial", 1);
-            }
-        }
+       
         if (vipActivator)
         {
             PlayerPrefs.SetInt("vipActive", 1);
@@ -487,6 +480,7 @@ public class BuyArea : MonoBehaviour, BuyCamera
             if (!Globals.goToCeoActive)
             {
                 PlayerController.Instance.PlayerControl_ReActive();
+            
             }
 
             for (int i = 0; i < buyAreas.Length; i++)
@@ -494,6 +488,16 @@ public class BuyArea : MonoBehaviour, BuyCamera
                 if (buyAreas[i].GetComponent<BuyCamera>() != null)
                 {
                     buyAreas[i].GetComponent<BuyCamera>().buyCamera.Priority = 0;
+                }
+            }
+
+            yield return new WaitForSeconds(1f);
+            if (ticketTutorialActivator)
+            {
+                if (PlayerPrefs.GetInt("tickettutorial") == 0)
+                {
+                    GameManager.Instance.ui.GemCreate(1);
+                    PlayerPrefs.SetInt("tickettutorial", 1);
                 }
             }
         }

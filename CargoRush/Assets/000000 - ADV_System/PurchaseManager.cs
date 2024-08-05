@@ -28,6 +28,11 @@ public class PurchaseManager : MonoBehaviour
     }
     private void Start()
     {
+        StartCoroutine(StartDelay());
+    }
+    IEnumerator StartDelay()
+    {
+        yield return new WaitForSeconds(1);
         HomaStore.Initialize();
     }
     public void PurchasePanelOpen()

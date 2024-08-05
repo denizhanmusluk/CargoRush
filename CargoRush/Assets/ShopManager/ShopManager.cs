@@ -120,13 +120,13 @@ public class ShopManager : MonoBehaviour
         shopProgresFill.fillAmount = (float)(preVal) / (float)shopCountTotal[shopId];
         shopProgresFillBG.fillAmount = (float)(shopCountCurrent[shopId]) / (float)shopCountTotal[shopId];
         StartCoroutine(ChildColorAlphaSet());
-        GameManager.Instance.ui.Panel_Down();
+        //GameManager.Instance.ui.Panel_Down();
         yield return new WaitForSeconds(1f);
 
         StartCoroutine(SliderFillAmountSet(shopId, preVal));
         yield return new WaitForSeconds(8f);
         //StartCoroutine(ChildColorAlphaSet(true));
-        GameManager.Instance.ui.Panel_Up();
+        //GameManager.Instance.ui.Panel_Up();
 
 
         yield return new WaitForSeconds(1f);

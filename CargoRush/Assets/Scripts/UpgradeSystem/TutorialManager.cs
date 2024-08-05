@@ -44,21 +44,35 @@ public class TutorialManager : MonoBehaviour
         {
             PlayerPrefs.SetInt("missionactivator" + PlayerPrefs.GetInt("level"), 1);
             StarterMissions();
+            StartCoroutine(TutorialCompletedCheckDelay());
+
             MapManager.Instance.mapButton.gameObject.SetActive(true);
-            HRUpgradeManager.Instance.upgradeButton.SetActive(true);
             ShareManager.Instance.graphButton.SetActive(true);
             PurchaseManager.Instance.purchaseButton_GO.SetActive(true);
             SettingsManager.Instance.settingsButtonGO.SetActive(true);
             CollectProgressManager.Instance.dirtyProgressPanelGo.SetActive(true);
-            if (PlayerPrefs.GetInt("upgradeclicktutorial") == 0)
-            {
-                PlayerPrefs.SetInt("upgradeclicktutorial", 1);
-                clickUpgradeButtonGO.SetActive(true);
-            }
+           
            if( ShopManager.Instance.standOnlineGO != null)
             {
                 ShopManager.Instance.standOnlineGO.SetActive(true);
             }
+        }
+    }
+    IEnumerator TutorialCompletedCheckDelay()
+    {
+        if (Globals.loadingPanelActive)
+        {
+            yield return new WaitForSeconds(2);
+        }
+        else
+        {
+            yield return new WaitForSeconds(10);
+        }
+        HRUpgradeManager.Instance.upgradeButton.SetActive(true);
+        if (PlayerPrefs.GetInt("upgradeclicktutorial") == 0)
+        {
+            PlayerPrefs.SetInt("upgradeclicktutorial", 1);
+            clickUpgradeButtonGO.SetActive(true);
         }
     }
     void StarterMissions()

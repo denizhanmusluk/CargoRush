@@ -146,7 +146,7 @@ public class HisseCompany : MonoBehaviour
         StartCoroutine(PosTranslate(targetPos));
         if (myCompany)
         {
-            Debug.Log("MY COMPANY LEVEL" + companyLevel);
+            //Debug.Log("MY COMPANY LEVEL" + companyLevel);
 
             if (PlayerPrefs.GetInt("mycompanylevel") < companyLevel)
             {

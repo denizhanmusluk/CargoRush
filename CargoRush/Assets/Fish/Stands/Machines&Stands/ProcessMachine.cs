@@ -246,8 +246,8 @@ public class ProcessMachine : Stand, IStandUpgrade, IMachineActive
     {
         if (skinActivator)
         {
-            PlayerPrefs.SetInt("skinactive", 1);
-            StoreManager.Instance.storeButton.SetActive(true);
+            //PlayerPrefs.SetInt("skinactive", 1);
+            //StoreManager.Instance.storeButton.SetActive(true);
 
         }
         if (isVipActivator)

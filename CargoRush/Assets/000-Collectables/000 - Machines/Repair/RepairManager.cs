@@ -68,13 +68,27 @@ public class RepairManager : MonoBehaviour
     {
         Globals.repairManActive = true;
         repairWorker.repairActive = true;
-        repairWorker.SelectGoMachine();
-        FishDropArea.Instance.RepairProgressSet();
+
+        //repairWorker.SelectGoMachine();
+
+        //FishDropArea.Instance.RepairProgressSet();
+        StartCoroutine(RepairWorkerStart_Delay());
+
         FishDropArea.Instance.AllMachineRepair();
         repairWorker.showBuyRapairReward.gameObject.SetActive(false);
         StartCoroutine(RepairTimer());
         buttonFree_GO.SetActive(false);
         buttonADV_GO.SetActive(true);
+        StartCoroutine(RepairWorkerStart_Delay());
+    }
+    IEnumerator RepairWorkerStart_Delay()
+    {
+        yield return new WaitForSeconds(1);
+        FishDropArea.Instance.RepairProgressSet();
+
+        yield return new WaitForSeconds(1);
+        repairWorker.SelectGoMachine();
+
     }
     IEnumerator RepairTimer()
     {
