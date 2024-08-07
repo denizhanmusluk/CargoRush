@@ -50,6 +50,16 @@ public class MapManager : MonoBehaviour
         }
         Globals.moneyAmount = PlayerPrefs.GetInt("money");
         MapButtonActive();
+
+        if (PlayerPrefs.GetInt("mapbuttonopen") == 1)
+        {
+            MapButtonOpen();
+        }
+    }
+    public void MapButtonOpen()
+    {
+        PlayerPrefs.SetInt("mapbuttonopen", 1);
+        mapButton.SetActive(true);
     }
     public void MapButtonActive()
     {

@@ -65,6 +65,12 @@ MonoBehaviour:
   isGem: 0
   bantGO: {fileID: 0}
   puffEffectPrefab: {fileID: 0}
+  meshList:
+  - {fileID: 2971239913229893391}
+  - {fileID: 6595752023474622802}
+  - {fileID: 6327526995539826214}
+  normalMaterial: {fileID: 2100000, guid: 2efc41d26d08e134c99a679bd1f63b3c, type: 2}
+  instancedMaterial: {fileID: 2100000, guid: a586ec169d5bfd445ad126f1f442ba33, type: 2}
 --- !u!1001 &5029468485774474544
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -132,6 +138,11 @@ PrefabInstance:
 --- !u!95 &1849618619429852478 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 6658405633756981262, guid: b72512b5b588d594391cda69dc0ad3b2, type: 3}
+  m_PrefabInstance: {fileID: 5029468485774474544}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &2971239913229893391 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 7851942411950113343, guid: b72512b5b588d594391cda69dc0ad3b2, type: 3}
   m_PrefabInstance: {fileID: 5029468485774474544}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &3126139589573974311 stripped
@@ -207,8 +218,18 @@ MonoBehaviour:
     - {x: -0.57735026, y: 0.57735026, z: -0.57735026}
     - {x: 0.57735026, y: 0.57735026, z: -0.57735026}
     - {x: 0.57735026, y: 0.57735026, z: 0.57735026}
+--- !u!23 &6327526995539826214 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 1298064426217466646, guid: b72512b5b588d594391cda69dc0ad3b2, type: 3}
+  m_PrefabInstance: {fileID: 5029468485774474544}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6351312242393759529 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2155014365120807449, guid: b72512b5b588d594391cda69dc0ad3b2, type: 3}
+  m_PrefabInstance: {fileID: 5029468485774474544}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &6595752023474622802 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 2181030253602745442, guid: b72512b5b588d594391cda69dc0ad3b2, type: 3}
   m_PrefabInstance: {fileID: 5029468485774474544}
   m_PrefabAsset: {fileID: 0}

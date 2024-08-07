@@ -22,13 +22,37 @@ public class PurchaseManager : MonoBehaviour
     public GameObject speedPopUp_GO;
     public GameObject doubleCapacityPopUp_GO;
     public GameObject doubleIncomePopUp_GO;
+
+    public Transform bundleButtonTR;
+    public Transform boosterButtonTR;
+    public Transform ticketButtonTR;
+    public Transform moneyButtonTR;
+
+    Vector3 bundleButtonFirstPos;
+    Vector3 boosterButtonFirstPos;
+    Vector3 ticketButtonFirstPos;
+    Vector3 moneyButtonFirstPos;
     private void Awake()
     {
         _instance = this;
     }
+    public void ButtonOpen()
+    {
+        purchaseButton_GO.SetActive(true);
+        PlayerPrefs.SetInt("shopbuttonopen", 1);
+    }
     private void Start()
     {
         StartCoroutine(StartDelay());
+        if(PlayerPrefs.GetInt("shopbuttonopen") == 1)
+        {
+            ButtonOpen();
+        }
+
+        bundleButtonFirstPos = bundleButtonTR.position;
+        boosterButtonFirstPos = boosterButtonTR.position;
+        ticketButtonFirstPos = ticketButtonTR.position;
+        moneyButtonFirstPos = moneyButtonTR.position;
     }
     IEnumerator StartDelay()
     {
@@ -81,6 +105,11 @@ public class PurchaseManager : MonoBehaviour
         moneyPanel_GO.SetActive(false);
         boosterPanel_GO.SetActive(false);
         bundlesPanel_GO.SetActive(false);
+
+        StartCoroutine(ButtonDown(ticketButtonTR, ticketButtonFirstPos));
+        StartCoroutine(ButtonUp(boosterButtonTR, boosterButtonFirstPos));
+        StartCoroutine(ButtonUp(bundleButtonTR, bundleButtonFirstPos));
+        StartCoroutine(ButtonUp(moneyButtonTR, moneyButtonFirstPos));
     }
 
     public void OpenMoneyPanel()
@@ -89,6 +118,11 @@ public class PurchaseManager : MonoBehaviour
         ticketPanel_GO.SetActive(false);
         boosterPanel_GO.SetActive(false);
         bundlesPanel_GO.SetActive(false);
+
+        StartCoroutine(ButtonDown(moneyButtonTR, moneyButtonFirstPos));
+        StartCoroutine(ButtonUp(boosterButtonTR, boosterButtonFirstPos));
+        StartCoroutine(ButtonUp(ticketButtonTR, ticketButtonFirstPos));
+        StartCoroutine(ButtonUp(bundleButtonTR, bundleButtonFirstPos));
     }
     public void OpenBoosterPanel()
     {
@@ -96,6 +130,11 @@ public class PurchaseManager : MonoBehaviour
         moneyPanel_GO.SetActive(false);
         ticketPanel_GO.SetActive(false);
         bundlesPanel_GO.SetActive(false);
+
+        StartCoroutine(ButtonDown(boosterButtonTR, boosterButtonFirstPos));
+        StartCoroutine(ButtonUp(bundleButtonTR, bundleButtonFirstPos));
+        StartCoroutine(ButtonUp(ticketButtonTR, ticketButtonFirstPos));
+        StartCoroutine(ButtonUp(moneyButtonTR, moneyButtonFirstPos));
     }
     public void OpenBundlesPanel()
     {
@@ -103,6 +142,11 @@ public class PurchaseManager : MonoBehaviour
         boosterPanel_GO.SetActive(false);
         moneyPanel_GO.SetActive(false);
         ticketPanel_GO.SetActive(false);
+
+        StartCoroutine(ButtonDown(bundleButtonTR, bundleButtonFirstPos));
+        StartCoroutine(ButtonUp(boosterButtonTR, boosterButtonFirstPos));
+        StartCoroutine(ButtonUp(ticketButtonTR, ticketButtonFirstPos));
+        StartCoroutine(ButtonUp(moneyButtonTR, moneyButtonFirstPos));
     }
 
 
@@ -135,5 +179,29 @@ public class PurchaseManager : MonoBehaviour
     public void DoubleCapacity_PopUp_Open()
     {
         doubleCapacityPopUp_GO.SetActive(true);
+    }
+
+    IEnumerator ButtonUp(Transform buttonTR, Vector3 firstPos)
+    {
+        float counter = 0;
+
+        while(counter < 1f)
+        {
+            counter += 2 * Time.deltaTime;
+            buttonTR.position = Vector3.Lerp(buttonTR.position, new Vector3(buttonTR.position.x, firstPos.y , buttonTR.position.z), Time.deltaTime * 8);
+            yield return null;
+        }
+    }
+
+    IEnumerator ButtonDown(Transform buttonTR, Vector3 firstPos)
+    {
+        float counter = 0;
+
+        while (counter < 1f)
+        {
+            counter += 2 * Time.deltaTime;
+            buttonTR.position = Vector3.Lerp(buttonTR.position, new Vector3(buttonTR.position.x, firstPos.y - 60, buttonTR.position.z), Time.deltaTime * 8);
+            yield return null;
+        }
     }
 }

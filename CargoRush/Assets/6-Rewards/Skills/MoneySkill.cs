@@ -55,7 +55,7 @@ public class MoneySkill : MonoBehaviour
             viewCounterText.text = ConvertSecondToMinSec.Converter(viewTime - viewTimeCounter);
             yield return new WaitForSeconds(1f);
         }
-        Globals.isCapacityRewardCreated = false;
+        Globals.isMoneyRewardCreated = false;
         Destroy(gameObject);
     }
 }

@@ -9,11 +9,12 @@ public class SkillManager : MonoBehaviour
     public static SkillManager Instance => _instance;
     [SerializeField] Color targetColor;
     Color firstColor;
+    public int extraStack = 5;
+
     public int hoverboardRewardTime;
     TextMeshProUGUI hoverboardCounterText;
 
 
-    public int extraStack = 5;
     public int capacityRewardTime;
     TextMeshProUGUI capacityCounterText;
 

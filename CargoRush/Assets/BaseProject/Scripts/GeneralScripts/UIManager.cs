@@ -388,12 +388,13 @@ public class UIManager : Subject
 
             yield return null;
         }
-        if (PlayerPrefs.GetInt("tickettutorial") == 1)
-        {
-            TutorialManager.Instance.click_skin_Tut_GO.SetActive(true);
-            PlayerPrefs.SetInt("tickettutorial", 2);
-            StoreManager.Instance.storeButtonTapTutorialGO2.SetActive(true);
-        }
+        // skin tutorial with ticket
+        //if (PlayerPrefs.GetInt("tickettutorial") == 1)
+        //{
+        //    TutorialManager.Instance.click_skin_Tut_GO.SetActive(true);
+        //    PlayerPrefs.SetInt("tickettutorial", 2);
+        //    StoreManager.Instance.storeButtonTapTutorialGO2.SetActive(true);
+        //}
         Destroy(gemTR.gameObject);
     }
 

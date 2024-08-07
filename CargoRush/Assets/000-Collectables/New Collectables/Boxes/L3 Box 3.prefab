@@ -65,6 +65,12 @@ MonoBehaviour:
   isGem: 0
   bantGO: {fileID: 0}
   puffEffectPrefab: {fileID: 0}
+  meshList:
+  - {fileID: 134845573618762121}
+  - {fileID: 103037604985788220}
+  - {fileID: 4020053830224498163}
+  normalMaterial: {fileID: 2100000, guid: 2efc41d26d08e134c99a679bd1f63b3c, type: 2}
+  instancedMaterial: {fileID: 2100000, guid: a586ec169d5bfd445ad126f1f442ba33, type: 2}
 --- !u!1001 &2134403082066773832
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -169,6 +175,16 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 8250536421995288544}
   m_SourcePrefab: {fileID: 100100000, guid: b34d795966e8c6f48b85392c1aa62679, type: 3}
+--- !u!23 &103037604985788220 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 2085444170569846900, guid: b34d795966e8c6f48b85392c1aa62679, type: 3}
+  m_PrefabInstance: {fileID: 2134403082066773832}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &134845573618762121 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 2036186815479826113, guid: b34d795966e8c6f48b85392c1aa62679, type: 3}
+  m_PrefabInstance: {fileID: 2134403082066773832}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2721425642646299938 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4060732283978818154, guid: b34d795966e8c6f48b85392c1aa62679, type: 3}
@@ -242,6 +258,11 @@ MonoBehaviour:
     - {x: -0.57735026, y: 0.57735026, z: -0.57735026}
     - {x: 0.57735026, y: 0.57735026, z: -0.57735026}
     - {x: 0.57735026, y: 0.57735026, z: 0.57735026}
+--- !u!23 &4020053830224498163 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 3050333206070692539, guid: b34d795966e8c6f48b85392c1aa62679, type: 3}
+  m_PrefabInstance: {fileID: 2134403082066773832}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6613968145193607597 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5068630643577284325, guid: b34d795966e8c6f48b85392c1aa62679, type: 3}

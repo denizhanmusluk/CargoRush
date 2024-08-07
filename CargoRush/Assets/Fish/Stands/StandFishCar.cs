@@ -76,7 +76,10 @@ public class StandFishCar : Stand,IMoneyArea
     IEnumerator StartDelay()
     {
         yield return new WaitForSeconds(1f);
-        MissionManager.Instance.ShippingLineMissionStart();
+        if (missionActive)
+        {
+            MissionManager.Instance.ShippingLineMissionStart();
+        }
         StartCoroutine(MoneyCreate());
 
         if (PlayerPrefs.GetInt("firstindactive") == 0)
@@ -84,7 +87,7 @@ public class StandFishCar : Stand,IMoneyArea
             PlayerPrefs.SetInt("firstindactive", 1);
             IndicatorManager.Instance.IndicatorTargeterActive();
         }
-        if (!specialVehicle)
+        if (!specialVehicle && missionUpdateActive)
         {
             if (PlayerPrefs.GetInt(standNameLevel + "firstopen" + PlayerPrefs.GetInt("level")) == 0)
             {
@@ -313,7 +316,10 @@ public class StandFishCar : Stand,IMoneyArea
         {
             MissionManager.Instance.OrderMissionStart();
         }
-        MissionManager.Instance.ShippingLineMissionStart();
+        if (missionActive)
+        {
+            MissionManager.Instance.ShippingLineMissionStart();
+        }
     }
 
 
@@ -822,4 +828,8 @@ public class StandFishCar : Stand,IMoneyArea
         vipCarCamera.Priority = 0;
         RewardPanel.Instance.vipViewButton.interactable = true;
     }
+
+    public bool missionActive = true;
+    public bool missionUpdateActive = true;
+
 }

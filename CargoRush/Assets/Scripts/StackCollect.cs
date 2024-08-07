@@ -453,6 +453,7 @@ public abstract class StackCollect : MonoBehaviour
 
     private IEnumerator ComeToMe(Collectable collectable, Transform targetTR, float deltaY, bool parentActive)
     {
+        collectable.InitNormalMaterial();
         collectable.isCollected = true;
         //foreach (var anim in collectable.GetComponentsInChildren<Animator>())
         //{

@@ -18,6 +18,7 @@ public class BuyAreaADV : MonoBehaviour
 
     [SerializeField] Image imageFill;
     bool upgradeOpenActive = false;
+    public bool ticketTutorialActivator = false;
 
     public void Start()
     {
@@ -35,6 +36,15 @@ public class BuyAreaADV : MonoBehaviour
         StartCoroutine(CloseDelay());
         GetComponent<Collider>().enabled = false;
         PlayerPrefs.SetInt(buyName + PlayerPrefs.GetInt("level"), 1);
+        if (ticketTutorialActivator)
+        {
+            if (PlayerPrefs.GetInt("tickettutorial") == 0)
+            {
+                //GameManager.Instance.ui.GemCreate(1);
+                TutorialManager.Instance.SkinTutorialStart();
+                PlayerPrefs.SetInt("tickettutorial", 1);
+            }
+        }
     }
     void InstantiateBuild()
     {

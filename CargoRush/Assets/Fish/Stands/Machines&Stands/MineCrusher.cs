@@ -704,6 +704,7 @@ public class MineCrusher : Stand, IStandUpgrade
             {
                 newProduct.transform.position = dropPos;
                 newProduct.transform.rotation = targetRot;
+                //newProduct.InitInstancedMaterial();
             }
             yield return new WaitForSeconds(0.2f);
             newProduct.productCollectActive = true;
@@ -724,6 +725,7 @@ public class MineCrusher : Stand, IStandUpgrade
             newProduct.GetComponent<Collectable>().collectActive = false;
 
             newProduct.GetComponent<Collectable>().fishCollectable = ironCollectionList;
+            //newProduct.GetComponent<Collectable>().InitInstancedMaterial();
 
             ironCollectionList.Add(newProduct.GetComponent<Collectable>());
 
@@ -755,6 +757,7 @@ public class MineCrusher : Stand, IStandUpgrade
             newProduct.GetComponent<Collectable>().collectActive = false;
 
             newProduct.GetComponent<Collectable>().fishCollectable = plasticCollectionList;
+            //newProduct.GetComponent<Collectable>().InitInstancedMaterial();
 
             plasticCollectionList.Add(newProduct.GetComponent<Collectable>());
 
@@ -787,6 +790,7 @@ public class MineCrusher : Stand, IStandUpgrade
             newProduct.GetComponent<Collectable>().collectActive = false;
 
             newProduct.GetComponent<Collectable>().fishCollectable = yarnCollectionList;
+            //newProduct.GetComponent<Collectable>().InitInstancedMaterial();
 
             yarnCollectionList.Add(newProduct.GetComponent<Collectable>());
 
@@ -819,6 +823,7 @@ public class MineCrusher : Stand, IStandUpgrade
             newProduct.GetComponent<Collectable>().collectActive = false;
 
             newProduct.GetComponent<Collectable>().fishCollectable = woodCollectionList;
+            //newProduct.GetComponent<Collectable>().InitInstancedMaterial();
 
             woodCollectionList.Add(newProduct.GetComponent<Collectable>());
 

@@ -47,16 +47,35 @@ public class MissionPanel : MonoBehaviour
         {
             priceText.text = price.ToString();
             moneyImg.sprite = moneyIcon;
+            if(price == 0)
+            {
+                priceText.gameObject.SetActive(false);
+                moneyImg.gameObject.SetActive(false);
+            }
+            else
+            {
+                priceText.gameObject.SetActive(true);
+                moneyImg.gameObject.SetActive(true);
+            }
         }
         else
         {
             priceText.text = price.ToString();
             moneyImg.sprite = gemIcon;
+            if (price == 0)
+            {
+                priceText.gameObject.SetActive(false);
+                moneyImg.gameObject.SetActive(false);
+            }
+            else
+            {
+                priceText.gameObject.SetActive(true);
+                moneyImg.gameObject.SetActive(true);
+            }
         }
         moneyButton.interactable = false;
         missionRateSlider.fillAmount = (float)currentCount / (float)maxCount;
 
-        MissionManager.Instance.OpenPanelButton();
 
 
         if (currentCount == maxCount)
@@ -114,6 +133,8 @@ public class MissionPanel : MonoBehaviour
     }
     private void MissionComplete()
     {
+        MissionManager.Instance.OpenPanelButton();
+
         MissionManager.Instance.startParticleGO.SetActive(true);
         PlayerPrefs.SetInt(missionName + PlayerPrefs.GetInt("level"), PlayerPrefs.GetInt(missionName + PlayerPrefs.GetInt("level")) + 1);
         moneyButton.interactable = true;
@@ -216,7 +237,10 @@ public class MissionPanel : MonoBehaviour
         tickGO.SetActive(true);
         if (moneyType == MoneyType.Money)
         {
-            MissionManager.Instance.MoneyCreate(price, moneyButton.transform);
+            if (price > 0)
+            {
+                MissionManager.Instance.MoneyCreate(price, moneyButton.transform);
+            }
         }
         else
         {

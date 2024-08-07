@@ -227,7 +227,10 @@ public class ShopManager : MonoBehaviour
         {
             CollectProgressManager.Instance.shopTargetIcon.sprite = questionMark;
         }
-
+        if (0.55f <= shopProgresFill.fillAmount)
+        {
+            MapManager.Instance.MapButtonOpen();
+        }
         //if (PlayerPrefs.GetInt(shopName[shopID]) < shopSettings._shopData[shopID].shopRatio.Length)
         //{
         //    if (targetFill > shopSettings._shopData[shopID].shopRatio[PlayerPrefs.GetInt(shopName[shopID])])

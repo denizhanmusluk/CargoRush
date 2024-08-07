@@ -65,6 +65,12 @@ MonoBehaviour:
   isGem: 0
   bantGO: {fileID: 0}
   puffEffectPrefab: {fileID: 0}
+  meshList:
+  - {fileID: 8546813466468580187}
+  - {fileID: 8080924028374553427}
+  - {fileID: 1551029715503481988}
+  normalMaterial: {fileID: 2100000, guid: 2efc41d26d08e134c99a679bd1f63b3c, type: 2}
+  instancedMaterial: {fileID: 2100000, guid: a586ec169d5bfd445ad126f1f442ba33, type: 2}
 --- !u!1001 &1353173715766813575
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -129,6 +135,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1712976856514963881}
   m_SourcePrefab: {fileID: 100100000, guid: dc5eb0716aebbba4182aaa36b15e0573, type: 3}
+--- !u!23 &1551029715503481988 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 522748637735036675, guid: dc5eb0716aebbba4182aaa36b15e0573, type: 3}
+  m_PrefabInstance: {fileID: 1353173715766813575}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1922683223340564129 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 606242568136301862, guid: dc5eb0716aebbba4182aaa36b15e0573, type: 3}
@@ -210,5 +221,15 @@ MonoBehaviour:
 --- !u!95 &8051164175261593838 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 9042114771028824937, guid: dc5eb0716aebbba4182aaa36b15e0573, type: 3}
+  m_PrefabInstance: {fileID: 1353173715766813575}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &8080924028374553427 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 7125334276882706644, guid: dc5eb0716aebbba4182aaa36b15e0573, type: 3}
+  m_PrefabInstance: {fileID: 1353173715766813575}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &8546813466468580187 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 7231393158604478684, guid: dc5eb0716aebbba4182aaa36b15e0573, type: 3}
   m_PrefabInstance: {fileID: 1353173715766813575}
   m_PrefabAsset: {fileID: 0}

@@ -41,6 +41,25 @@ public class Collectable : MonoBehaviour
     public bool isGem = false;
     public GameObject bantGO;
     public GameObject puffEffectPrefab;
+
+    //public List<MeshRenderer> meshList;
+    //public Material normalMaterial;
+    //public Material instancedMaterial;
+    public void InitNormalMaterial()
+    {
+        //foreach (var msh in meshList)
+        //{
+        //    msh.material = normalMaterial;
+        //}
+    }
+    public void InitInstancedMaterial()
+    {
+        //foreach (var msh in meshList)
+        //{
+        //    msh.material = instancedMaterial;
+        //}
+    }
+
     public void Start()
     {
         firstSize = transform.localScale;

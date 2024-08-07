@@ -36,6 +36,7 @@ public class ProcessMachine : Stand, IStandUpgrade, IMachineActive
     public Collectable[] productPrefabs;
     //public int machineId;
     public bool missionActive = true;
+    public bool missionUpdateActive = true;
     public int machineLevel;
     public int collectableLevel;
     public bool machinePopUpActive = true;
@@ -246,6 +247,8 @@ public class ProcessMachine : Stand, IStandUpgrade, IMachineActive
     {
         if (skinActivator)
         {
+            TutorialManager.Instance.SkinTutorialStart();
+
             //PlayerPrefs.SetInt("skinactive", 1);
             //StoreManager.Instance.storeButton.SetActive(true);
 
@@ -359,14 +362,24 @@ public class ProcessMachine : Stand, IStandUpgrade, IMachineActive
     }
     IEnumerator StartDelay()
     {
-        MissionManager.Instance.TapingLineMissionStart();
-
+        if (missionActive)
+        {
+            MissionManager.Instance.TapingLineMissionStart();
+        }
         yield return new WaitForSeconds(1f);
 
         if (PlayerPrefs.GetInt(machineName + "firstopen" + PlayerPrefs.GetInt("level")) == 0)
         {
             PlayerPrefs.SetInt(machineName + "firstopen" + PlayerPrefs.GetInt("level"), 1);
-            MissionManager.Instance.tapingLineBuyMission.MissionUpdate();
+
+            if (MissionManager.Instance.tapingLineBuyMission.mission_Active)
+            {
+                MissionManager.Instance.tapingLineBuyMission.gameObject.SetActive(true);
+            }
+            if (missionUpdateActive)
+            {
+                MissionManager.Instance.tapingLineBuyMission.MissionUpdate();
+            }
             FishDropArea.Instance.NewProductActive(productName);
             FishDropArea.Instance.ReactiveActivator();
 
@@ -433,8 +446,10 @@ public class ProcessMachine : Stand, IStandUpgrade, IMachineActive
              
             }
             yield return new WaitForSeconds(0.1f);
-            MissionManager.Instance.TapingLineMissionStart();
-
+            if (missionActive)
+            {
+                MissionManager.Instance.TapingLineMissionStart();
+            }
         }
     }
 
@@ -1042,6 +1057,7 @@ public class ProcessMachine : Stand, IStandUpgrade, IMachineActive
             newProduct.GetComponent<Collectable>().collectActive = false;
 
             newProduct.GetComponent<Collectable>().fishCollectable = droppedCollectionList;
+            newProduct.GetComponent<Collectable>().InitInstancedMaterial();
 
             droppedCollectionList.Add(newProduct.GetComponent<Collectable>());
 
@@ -1084,6 +1100,7 @@ public class ProcessMachine : Stand, IStandUpgrade, IMachineActive
             newProduct.GetComponent<Collectable>().anim.SetFloat("speed" , 1);
             newProduct.GetComponent<Collectable>().bantGO.SetActive(true);
             newProduct.GetComponent<Collectable>().bantGO.GetComponent<Animator>().SetFloat("speed", 1);
+            newProduct.GetComponent<Collectable>().InitInstancedMaterial();
 
             productCollectionList.Add(newProduct.GetComponent<Collectable>());
 
@@ -1132,6 +1149,7 @@ public class ProcessMachine : Stand, IStandUpgrade, IMachineActive
 
             newProduct.GetComponent<Collectable>().bantGO.SetActive(true);
             newProduct.GetComponent<Collectable>().bantGO.GetComponent<Animator>().SetFloat("speed", 1);
+            newProduct.GetComponent<Collectable>().InitInstancedMaterial();
 
             productCollectionList.Add(newProduct.GetComponent<Collectable>());
 

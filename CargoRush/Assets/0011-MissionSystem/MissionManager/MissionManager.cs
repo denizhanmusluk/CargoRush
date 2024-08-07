@@ -59,6 +59,10 @@ public class MissionManager : MonoBehaviour
 
     private void Start()
     {
+        if (PlayerPrefs.GetInt("missionbuttonopen") == 1)
+        {
+            OpenPanelButton();
+        }
         missionSettings = LevelManager.Instance.currentMissionSettings;
         if (PlayerPrefs.GetInt(orderMission.missionName + "missionactive" + PlayerPrefs.GetInt("level")) == 1)
         {
@@ -516,6 +520,7 @@ public class MissionManager : MonoBehaviour
 
     public void OpenPanelButton()
     {
+        PlayerPrefs.SetInt("missionbuttonopen", 1);
         panelOpenButton.gameObject.SetActive(true);
     }
 

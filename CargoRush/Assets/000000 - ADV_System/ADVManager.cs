@@ -25,7 +25,10 @@ public class ADVManager : MonoBehaviour
     {
         if (PlayerPrefs.GetInt("bundlesnoads") == 0 && PlayerPrefs.GetInt("bundlesnoadslimited") == 0)
         {
-            BannerShow();
+            if (PlayerPrefs.GetInt("banneractive") == 1)
+            {
+                BannerShow();
+            }
         }
         else
         {
@@ -85,7 +88,7 @@ public class ADVManager : MonoBehaviour
     }
 
 
-    void BannerShow()
+    public void BannerShow()
     {
         HomaBelly.Instance.ShowBanner();
     }

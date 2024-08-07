@@ -37,7 +37,7 @@ public class DoubleIncomeSkill : MonoBehaviour
             viewCounterText.text = ConvertSecondToMinSec.Converter(viewTime - viewTimeCounter);
             yield return new WaitForSeconds(1f);
         }
-        Globals.isCapacityRewardCreated = false;
+        Globals.isDoubleIncomeRewardCreated = false;
         Destroy(gameObject);
     }
 }

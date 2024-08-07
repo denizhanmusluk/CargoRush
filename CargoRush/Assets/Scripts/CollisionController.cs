@@ -33,8 +33,11 @@ public class CollisionController : MonoBehaviour
                         //Destroy(other.GetComponent<Collector>().shadowGO);
                         other.GetComponent<Collector>().collectorActive = false;
                         other.GetComponent<Collector>().pushActive = false;
+
+                        int layer = LayerMask.NameToLayer("stackedproduct");
+                        other.gameObject.layer = layer;
                         //Destroy(other.GetComponent<Collector>());
-                        if(other.GetComponent<Collector>().shadowGO != null)
+                        if (other.GetComponent<Collector>().shadowGO != null)
                         {
                             Destroy(other.GetComponent<Collector>().shadowGO);
                         }

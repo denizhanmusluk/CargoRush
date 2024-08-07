@@ -58,6 +58,8 @@ public class FishDropArea : MonoBehaviour
 
     public Image errorFill;
 
+
+    public GameObject loadingAreaTextGO;
     private void Awake()
     {
         _instance = this;
@@ -327,9 +329,9 @@ public class FishDropArea : MonoBehaviour
             //}
             //else
             {
-                errorFill.fillAmount = (float)(PlayerPrefs.GetInt("totalboxpackagecount") % ((Globals.collectableLevel + 1) * 95)) / (float)((Globals.collectableLevel + 1) * 95);
+                errorFill.fillAmount = (float)(PlayerPrefs.GetInt("totalboxpackagecount") % ((Globals.collectableLevel + 1) * 125)) / (float)((Globals.collectableLevel + 1) * 125);
             }
-            if (PlayerPrefs.GetInt("totalboxpackagecount") % ((Globals.collectableLevel + 1) * 75) == 0)
+            if (PlayerPrefs.GetInt("totalboxpackagecount") % ((Globals.collectableLevel + 1) * 125) == 0)
             {
 
                 List<IMachineActive> packMachinesTemp = new List<IMachineActive>();
@@ -363,7 +365,7 @@ public class FishDropArea : MonoBehaviour
     IEnumerator StartDelay()
     {
         yield return new WaitForSeconds(4f);
-        errorFill.fillAmount = (float)(PlayerPrefs.GetInt("totalboxpackagecount") % ((Globals.collectableLevel + 1) * 95)) / (float)((Globals.collectableLevel + 1) * 95);
+        errorFill.fillAmount = (float)(PlayerPrefs.GetInt("totalboxpackagecount") % ((Globals.collectableLevel + 1) * 125)) / (float)((Globals.collectableLevel + 1) * 125);
     }
     public void RepairProgressSet()
     {

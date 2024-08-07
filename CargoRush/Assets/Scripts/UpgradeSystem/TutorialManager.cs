@@ -46,9 +46,9 @@ public class TutorialManager : MonoBehaviour
             StarterMissions();
             StartCoroutine(TutorialCompletedCheckDelay());
 
-            MapManager.Instance.mapButton.gameObject.SetActive(true);
-            ShareManager.Instance.graphButton.SetActive(true);
-            PurchaseManager.Instance.purchaseButton_GO.SetActive(true);
+            //MapManager.Instance.mapButton.gameObject.SetActive(true);
+            //ShareManager.Instance.graphButton.SetActive(true);
+            //PurchaseManager.Instance.purchaseButton_GO.SetActive(true);
             SettingsManager.Instance.settingsButtonGO.SetActive(true);
             CollectProgressManager.Instance.dirtyProgressPanelGo.SetActive(true);
            
@@ -80,8 +80,8 @@ public class TutorialManager : MonoBehaviour
     {
         MissionManager.Instance.OrderMissionStart();
         MissionManager.Instance.TapeBoxMissionStart();
-        MissionManager.Instance.ShippingLineMissionStart();
-        MissionManager.Instance.TapingLineMissionStart();
+        //MissionManager.Instance.ShippingLineMissionStart();
+        //MissionManager.Instance.TapingLineMissionStart();
         if (PlayerPrefs.GetInt("skinactive") == 1)
         {
             StoreManager.Instance.storeButton.SetActive(true);

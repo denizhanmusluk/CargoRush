@@ -41,9 +41,19 @@ public class ShareManager : MonoBehaviour
     {
         _instance = this;
     }
+    public void ShareButtonOpen()
+    {
+        PlayerPrefs.SetInt("sharebuttonopen", 1);
+        graphButton.SetActive(true);
+    }
     private void Start()
     {
         StartCoroutine(CompaniesPosSet());
+
+        if (PlayerPrefs.GetInt("sharebuttonopen") == 1)
+        {
+            ShareButtonOpen();
+        }
     }
     IEnumerator CompaniesPosSet()
     {
@@ -139,6 +149,7 @@ public class ShareManager : MonoBehaviour
     int companyLevel = 0;
     public void Share_LevelUp_TutorialStart(int _companyLevel)
     {
+        ShareButtonOpen();
         companyLevel = _companyLevel;
         checkShareTut_GO.SetActive(true);
         exclamation_GO.SetActive(true);

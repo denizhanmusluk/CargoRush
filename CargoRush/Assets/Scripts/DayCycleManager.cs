@@ -50,12 +50,21 @@ public class DayCycleManager : MonoBehaviour
     }
     IEnumerator FirstQuarterCounter()
     {
+        FishDropArea.Instance.loadingAreaTextGO.SetActive(true);
+
         firstInterstialTimeCounter = PlayerPrefs.GetInt("firstInterstialTimeCounter");
 
         while (firstInterstialTimeCounter < firstInterstialTime)
         {
             firstInterstialTimeCounter++;
             PlayerPrefs.SetInt("firstInterstialTimeCounter", firstInterstialTimeCounter);
+
+            if ( PlayerPrefs.GetInt("banneractive") == 0 && firstInterstialTimeCounter >= 180 && PlayerPrefs.GetInt("bundlesnoads") == 0 && PlayerPrefs.GetInt("bundlesnoadslimited") == 0)
+            {
+                ADVManager.Instance.BannerShow();
+                PlayerPrefs.SetInt("banneractive", 1);
+            }
+
             yield return new WaitForSeconds(1);
         }
         PlayerPrefs.SetInt("firstInterstialTimeCompleted", 1);
@@ -71,6 +80,8 @@ public class DayCycleManager : MonoBehaviour
     }
     IEnumerator DayCycleCounter()
     {
+        FishDropArea.Instance.loadingAreaTextGO.SetActive(false);
+
         dayPanel_GO.SetActive(true);
         dayCycleCount = PlayerPrefs.GetInt("dayCycleCount");
 

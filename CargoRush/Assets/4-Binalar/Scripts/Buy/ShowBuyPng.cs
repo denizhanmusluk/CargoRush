@@ -11,7 +11,7 @@ public class ShowBuyPng : MonoBehaviour
     private void Start()
     {
         firstSize = Canvas.transform.localScale;
-        if (firstOpenCloseCanvas)
+        //if (firstOpenCloseCanvas)
         {
             Canvas.transform.localScale = Vector3.zero;
         }

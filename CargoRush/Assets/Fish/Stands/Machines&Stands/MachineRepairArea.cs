@@ -23,8 +23,18 @@ public class MachineRepairArea : MonoBehaviour
         }
         int numberOfElementsToSelect = Random.Range(minElementCount, machineRepairListAll.Count);
         selectedMachineRepairList.Clear();
-        selectedMachineRepairList = GetRandomElements(machineRepairListAll, numberOfElementsToSelect);
-
+        if (PlayerPrefs.GetInt("firsterrortutorial") == 0)
+        {
+            PlayerPrefs.SetInt("firsterrortutorial", 1);
+            for(int i = 0; i < 3; i++)
+            {
+                selectedMachineRepairList.Add(machineRepairListAll[i]);
+            }
+        }
+        else
+        {
+            selectedMachineRepairList = GetRandomElements(machineRepairListAll, numberOfElementsToSelect);
+        }
         foreach (var rpr in machineRepairListAll)
         {
             rpr.machineRepairArea = this;
