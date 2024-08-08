@@ -13,7 +13,22 @@ public class DoubleIncomeSkill : MonoBehaviour
     [SerializeField] GameObject particleGO;
     private void OnTriggerEnter(Collider other)
     {
-        if (other.GetComponent<PlayerController>() != null && collectActive)
+        //if (other.GetComponent<PlayerController>() != null && collectActive)
+        //{
+        //    cicrcle.SetActive(false);
+        //    collectActive = false;
+        //    particleGO.SetActive(true);
+        //    particleGO.transform.parent = null;
+        //    PopUpManager.Instance.BoostPopUpOpen(2);
+        //    PopUpManager.Instance.BoosterInvoke();
+        //    gameObject.SetActive(false);
+        //    PlayerController.Instance.PlayerControlDeActive();
+        //}
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.GetComponent<PlayerController>() != null && collectActive && !other.GetComponent<PlayerController>().pressJoystick)
         {
             cicrcle.SetActive(false);
             collectActive = false;

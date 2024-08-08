@@ -37,6 +37,7 @@ public class ShopManager : MonoBehaviour
     public float nextLevelShowRatio;
 
     public GameObject standOnlineGO;
+    public TextMeshProUGUI ratioText;
 
     void Awake()
     {
@@ -47,6 +48,7 @@ public class ShopManager : MonoBehaviour
         shopProgresGO = CollectProgressManager.Instance.shopProgresGO;
         shopProgresFill = CollectProgressManager.Instance.shopProgresFill;
         shopProgresFillBG = CollectProgressManager.Instance.shopProgresFillBG;
+        ratioText = CollectProgressManager.Instance.ratioText;
         //StartCoroutine(ChildColorAlphaSet());
         //shopProgresGO.SetActive(false);
         StartCoroutine(StartDelay());
@@ -65,7 +67,13 @@ public class ShopManager : MonoBehaviour
         if (PlayerPrefs.GetInt("tutorialseq1") == 1)
         {
             buyOthersGO.SetActive(true);
-        }    
+        }
+
+        shopProgresFill.fillAmount = PlayerPrefs.GetFloat("shopprogressfill");
+        ratioText.text = ((int)(PlayerPrefs.GetFloat("shopprogressfill") * 100)).ToString() + "/100";
+
+        
+
     }
     private void Update()
     {
@@ -204,9 +212,10 @@ public class ShopManager : MonoBehaviour
         {
             counter += Time.deltaTime;
             shopProgresFill.fillAmount = Mathf.Lerp(currentFill, targetFill, counter);
+            ratioText.text = ((int)(shopProgresFill.fillAmount * 100)).ToString() + "/100";
             yield return null;
         }
-
+        PlayerPrefs.SetFloat("shopprogressfill", targetFill);
         if(targetFill >= shopRatio[shopID])
         {
             //CollectProgressManager.Instance.shopTargetIcon.sprite = shopSpriteList[shopID + 1];

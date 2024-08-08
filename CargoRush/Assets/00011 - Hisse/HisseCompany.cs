@@ -135,6 +135,8 @@ public class HisseCompany : MonoBehaviour
             {
                 ShareManager.Instance.ShareValueReward(PlayerPrefs.GetInt("sharevaluelevel"));
                 PlayerPrefs.SetInt("sharevaluelevel", PlayerPrefs.GetInt("sharevaluelevel") + 1);
+                ShareManager.Instance.ShareButtonOpen();
+
             }
             yield return new WaitForSeconds(1f);
         }

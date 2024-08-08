@@ -247,7 +247,7 @@ public class ProcessMachine : Stand, IStandUpgrade, IMachineActive
     {
         if (skinActivator)
         {
-            TutorialManager.Instance.SkinTutorialStart();
+            //TutorialManager.Instance.SkinTutorialStart();
 
             //PlayerPrefs.SetInt("skinactive", 1);
             //StoreManager.Instance.storeButton.SetActive(true);
@@ -376,13 +376,15 @@ public class ProcessMachine : Stand, IStandUpgrade, IMachineActive
             {
                 MissionManager.Instance.tapingLineBuyMission.gameObject.SetActive(true);
             }
+          
+            FishDropArea.Instance.NewProductActive(productName);
+            FishDropArea.Instance.ReactiveActivator();
+
+            yield return new WaitForSeconds(5);
             if (missionUpdateActive)
             {
                 MissionManager.Instance.tapingLineBuyMission.MissionUpdate();
             }
-            FishDropArea.Instance.NewProductActive(productName);
-            FishDropArea.Instance.ReactiveActivator();
-
         }
 
 

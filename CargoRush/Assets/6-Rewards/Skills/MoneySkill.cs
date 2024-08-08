@@ -16,14 +16,31 @@ public class MoneySkill : MonoBehaviour
     public Animator moneyBagAnimator;
     private void OnTriggerEnter(Collider other)
     {
-        if (other.GetComponent<PlayerController>() != null && collectActive)
+        //if (other.GetComponent<PlayerController>() != null && collectActive)
+        //{
+        //    moneyBagAnimator.SetTrigger("open");
+        //    cicrcle.SetActive(false);
+        //    collectActive = false;
+        //    particleGO.SetActive(true);
+        //    particleGO.transform.parent = null;
+       
+        //    PlayerController.Instance.PlayerControlDeActive();
+        //    PopUpManager.Instance.freeMoneyValue = moneyValue;
+        //    PopUpManager.Instance.moneyText.text = "$" + CoefficientTransformation.Converter(moneyValue);
+        //    StartCoroutine(OpenBag());
+
+        //}
+    }
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.GetComponent<PlayerController>() != null && collectActive && !other.GetComponent<PlayerController>().pressJoystick)
         {
             moneyBagAnimator.SetTrigger("open");
             cicrcle.SetActive(false);
             collectActive = false;
             particleGO.SetActive(true);
             particleGO.transform.parent = null;
-       
+
             PlayerController.Instance.PlayerControlDeActive();
             PopUpManager.Instance.freeMoneyValue = moneyValue;
             PopUpManager.Instance.moneyText.text = "$" + CoefficientTransformation.Converter(moneyValue);

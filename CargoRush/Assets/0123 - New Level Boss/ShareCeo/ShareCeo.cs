@@ -16,7 +16,7 @@ public class ShareCeo : MonoBehaviour
 
     public Transform bagFirstPos_TR;
     public Transform bagLastPos_TR;
-
+    bool ceoActive = false;
     private void Awake()
     {
         _instance = this;
@@ -25,6 +25,7 @@ public class ShareCeo : MonoBehaviour
     public void CeoActive()
     {
         Globals.goToCeoActive = true;
+        ceoActive = true;
         shareCeoCharacter.gameObject.SetActive(true);
         PlayerController.Instance.PlayerRotReset();
         PlayerController.Instance.PlayerControlDeActive();
@@ -57,13 +58,20 @@ public class ShareCeo : MonoBehaviour
         bag_GO.transform.rotation = bagLastPos_TR.rotation;
 
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(3f);
         popUp1_GO.SetActive(false);
         ShareManager.Instance.ShareLevelUp_PopUp();
 
 
         PlayerController.Instance.PlayerControl_ReActive();
-        shareCeoCharacter.GoExit(exitPosTR);
         bag_GO.SetActive(false);
+    }
+    public void BossGoExit()
+    {
+        if (ceoActive)
+        {
+            shareCeoCharacter.GoExit(exitPosTR);
+            ceoActive = false;
+        }
     }
 }

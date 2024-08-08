@@ -37,6 +37,14 @@ public class ShareManager : MonoBehaviour
 
     //public List<GameObject> rewardPool = new List<GameObject>();
     public int risingPerValue = 2500;
+
+    public List<GameObject> shareLevelUpInfo_List;
+    public GameObject shareValueGift_info_GO;
+
+    public GameObject clickCancelTap_Tutorial;
+
+    public GameObject confettiParticle_GO;
+
     private void Awake()
     {
         _instance = this;
@@ -73,6 +81,8 @@ public class ShareManager : MonoBehaviour
     }
     public void OpenGraph()
     {
+        CheckShareTutorial_End();
+
         graphButton.SetActive(false);
         cancelButton.SetActive(true);
         graphAnim.SetBool("openactive", true);
@@ -82,6 +92,22 @@ public class ShareManager : MonoBehaviour
         ShareFallingTutorialStart_2();
         CheckShareTutorialStart_2();
         AudioManager.Instance.ButtonSound();
+
+        if (conpanyLevelUp_Active)
+        {
+            shareLevelUpInfo_List[companyLevel - 1].SetActive(true);
+            StartCoroutine(ClosePanelTutorial());
+
+            confettiParticle_GO.SetActive(true);
+        }
+    }
+    IEnumerator ClosePanelTutorial()
+    {
+        yield return new WaitForSeconds(2);
+        clickCancelTap_Tutorial.SetActive(true);
+
+        yield return new WaitForSeconds(2);
+        confettiParticle_GO.SetActive(false);
     }
     public void CloseGraph()
     {
@@ -90,9 +116,8 @@ public class ShareManager : MonoBehaviour
         graphAnim.SetBool("openactive", false);
         PlayerController.Instance.PlayerControl_ReActive();
         graphManager.openedShareUI = false;
-        ShareRisingTutorial_End();
-        ShareFallingTutorial_End();
-        CheckShareTutorial_End();
+        //ShareRisingTutorial_End();
+        //ShareFallingTutorial_End();
         //popUpEvent?.Invoke();
         //popUpEvent = null;
         goToCeo?.Invoke();
@@ -147,9 +172,10 @@ public class ShareManager : MonoBehaviour
         shareFallingTut_GO.SetActive(false);
     }
     int companyLevel = 0;
+    bool conpanyLevelUp_Active = false;
     public void Share_LevelUp_TutorialStart(int _companyLevel)
     {
-        ShareButtonOpen();
+        conpanyLevelUp_Active = true;
         companyLevel = _companyLevel;
         checkShareTut_GO.SetActive(true);
         exclamation_GO.SetActive(true);
@@ -193,6 +219,8 @@ public class ShareManager : MonoBehaviour
     {
         popUpEvent?.Invoke();
         popUpEvent = null;
+        conpanyLevelUp_Active = false;
+        shareValueGift_info_GO.SetActive(true);
     }
     void CheckShareTutorialStart_2()
     {
@@ -210,6 +238,8 @@ public class ShareManager : MonoBehaviour
     int shareValueLevel = 0;
     public void ShareValueReward(int _shareValueLevel)
     {
+        sharerisingTut_GO.SetActive(true);
+
         exclamation_GO.SetActive(true);
         shareValueLevel = _shareValueLevel;
         if (shareValueLevel % 5 == 0)
@@ -263,22 +293,22 @@ public class ShareManager : MonoBehaviour
     [SerializeField] int fallingTutPerError = 10;
     public void VehicleOrderComplete()
     {
-        orderCount++;
-        if(orderCount % risingTutPerOrder == 0)
-        {
-            ShareRisingTutorialStart();
-        }
+        //orderCount++;
+        //if(orderCount % risingTutPerOrder == 0)
+        //{
+        //    ShareRisingTutorialStart();
+        //}
     }
 
    
 
     public void ErrorCounter()
     {
-        errorCount++;
-        if(errorCount % fallingTutPerError == 0)
-        {
-            ShareFallingTutorialStart();
-        }
+        //errorCount++;
+        //if(errorCount % fallingTutPerError == 0)
+        //{
+        //    ShareFallingTutorialStart();
+        //}
     }
 
     void CapacityPopUpOpen()
@@ -323,7 +353,7 @@ public class ShareManager : MonoBehaviour
     {
         GameManager.Instance.ui.FreeMoneyPopUp();
         moneyPopUp_GO.SetActive(false);
-
+        ShareCeo.Instance.BossGoExit();
     }
 
     void RepairPopUp_Open()
@@ -336,6 +366,7 @@ public class ShareManager : MonoBehaviour
         RepairManager.Instance.repairWorker.showBuyRapairReward.RepairImmediate();
         repairPopUp_GO.SetActive(false);
         PlayerController.Instance.PlayerControl_ReActive();
+        ShareCeo.Instance.BossGoExit();
     }
  
 

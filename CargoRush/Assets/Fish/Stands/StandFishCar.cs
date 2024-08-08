@@ -92,6 +92,8 @@ public class StandFishCar : Stand,IMoneyArea
             if (PlayerPrefs.GetInt(standNameLevel + "firstopen" + PlayerPrefs.GetInt("level")) == 0)
             {
                 PlayerPrefs.SetInt(standNameLevel + "firstopen" + PlayerPrefs.GetInt("level"), 1);
+
+                yield return new WaitForSeconds(4);
                 MissionManager.Instance.shippingBuyMission.MissionUpdate();
             }
         }

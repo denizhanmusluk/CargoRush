@@ -36,15 +36,7 @@ public class BuyAreaADV : MonoBehaviour
         StartCoroutine(CloseDelay());
         GetComponent<Collider>().enabled = false;
         PlayerPrefs.SetInt(buyName + PlayerPrefs.GetInt("level"), 1);
-        if (ticketTutorialActivator)
-        {
-            if (PlayerPrefs.GetInt("tickettutorial") == 0)
-            {
-                //GameManager.Instance.ui.GemCreate(1);
-                TutorialManager.Instance.SkinTutorialStart();
-                PlayerPrefs.SetInt("tickettutorial", 1);
-            }
-        }
+    
     }
     void InstantiateBuild()
     {
@@ -68,6 +60,17 @@ public class BuyAreaADV : MonoBehaviour
         for (int i = 0; i < buildChildCount; i++)
         {
             transform.GetChild(i).gameObject.SetActive(false);
+        }
+        if (ticketTutorialActivator)
+        {
+            yield return new WaitForSeconds(10);
+            TutorialManager.Instance.SkinTutorialStart();
+
+            //if (PlayerPrefs.GetInt("tickettutorial") == 0)
+            //{
+            //    TutorialManager.Instance.SkinTutorialStart();
+            //    PlayerPrefs.SetInt("tickettutorial", 1);
+            //}
         }
     }
 

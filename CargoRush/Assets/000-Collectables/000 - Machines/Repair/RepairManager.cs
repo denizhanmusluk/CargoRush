@@ -20,12 +20,7 @@ public class RepairManager : MonoBehaviour
     }
     private void Start()
     {
-        if (PlayerPrefs.GetInt("machineerrorcount") >= 2)
-        {
-            repairWorker.gameObject.SetActive(true);
-            buttonFree_GO.SetActive(false);
-            buttonADV_GO.SetActive(true);
-        }
+       
         repairWorkerTimeCounter = PlayerPrefs.GetInt("repairWorkerTimeCounter");
         StartCoroutine(StartDelay());
 
@@ -36,6 +31,20 @@ public class RepairManager : MonoBehaviour
         if (repairWorkerTimeCounter > 0 && PlayerPrefs.GetInt("purchaserepairboost") == 0)
         {
             RepairWorkerStart();
+        }
+        if (Globals.loadingPanelActive)
+        {
+
+        }
+        else
+        {
+            yield return new WaitForSeconds(60);
+        }
+        if (PlayerPrefs.GetInt("machineerrorcount") >= 2)
+        {
+            repairWorker.gameObject.SetActive(true);
+            buttonFree_GO.SetActive(false);
+            buttonADV_GO.SetActive(true);
         }
     }
     public void OpenRepairWorker()

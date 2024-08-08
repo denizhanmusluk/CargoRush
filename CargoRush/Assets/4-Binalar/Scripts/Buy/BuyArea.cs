@@ -492,18 +492,9 @@ public class BuyArea : MonoBehaviour, BuyCamera
             }
 
             yield return new WaitForSeconds(1f);
-            if (ticketTutorialActivator)
-            {
-                if (PlayerPrefs.GetInt("tickettutorial") == 0)
-                {
-                    //GameManager.Instance.ui.GemCreate(1);
-                    yield return new WaitForSeconds(5f);
-                    TutorialManager.Instance.SkinTutorialStart();
-                    PlayerPrefs.SetInt("tickettutorial", 1);
-                }
-            }
+           
         }
-
+    
         if (shopBayArea)
         {
             if (isNewOpen)
@@ -522,6 +513,17 @@ public class BuyArea : MonoBehaviour, BuyCamera
         if (machineErrorActivator)
         {
             Globals.machineErrorActivator = true;
+        }
+        if (ticketTutorialActivator)
+        {
+            yield return new WaitForSeconds(10);
+            TutorialManager.Instance.SkinTutorialStart();
+            //if (PlayerPrefs.GetInt("tickettutorial") == 0)
+            //{
+            //    yield return new WaitForSeconds(5f);
+            //    TutorialManager.Instance.SkinTutorialStart();
+            //    PlayerPrefs.SetInt("tickettutorial", 1);
+            //}
         }
     }
     void ClosedAreas()

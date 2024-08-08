@@ -58,11 +58,16 @@ public class BandStock : Stand
     public void ManuelRawCreate()
     {
         StartCoroutine(ManuealRawCreator());
-        if(PlayerPrefs.GetInt("bandstocktutorial") == 0)
+        if (PlayerPrefs.GetInt("bandstocktutorial") == 0)
         {
-            TutorialManager.Instance.bandTut_1.SetActive(true);
-            IndicatorManager.Instance.IndicaorActive(_CollectProducts.transform);
+            StartCoroutine(BantTutorial());
         }
+    }
+    IEnumerator BantTutorial()
+    {
+        yield return new WaitForSeconds(5f);
+        TutorialManager.Instance.bandTut_1.SetActive(true);
+        IndicatorManager.Instance.IndicaorActive(_CollectProducts.transform);
     }
 
     IEnumerator ManuealRawCreator()

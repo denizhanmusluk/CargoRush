@@ -31,7 +31,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2771038118502224628}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 33.9, y: 45.188, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -103,8 +102,7 @@ MonoBehaviour:
   m_text: +Capacity
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6ecbe1defc55a463ba1172f67f84844b, type: 2}
-  m_sharedMaterial: {fileID: 5568139486216784236, guid: 6ecbe1defc55a463ba1172f67f84844b,
-    type: 2}
+  m_sharedMaterial: {fileID: 5568139486216784236, guid: 6ecbe1defc55a463ba1172f67f84844b, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -206,7 +204,6 @@ RectTransform:
   m_Children:
   - {fileID: 2771038119144825819}
   m_Father: {fileID: 2771038118502224628}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -230,7 +227,9 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
+  m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -298,6 +297,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2771038118502224631}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -306,7 +306,6 @@ Transform:
   - {fileID: 2771038117624156285}
   - {fileID: 9219274087753183369}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5780932222913088389
 MonoBehaviour:
@@ -323,7 +322,7 @@ MonoBehaviour:
   _color: {r: 1, g: 1, b: 1, a: 1}
   alpha: 1
   UpwardSpeed: 3
-  SimulationSpeed: 1.8
+  SimulationSpeed: 0.5
   PointText: {fileID: 7138023841045288845}
   pointValue: 0
 --- !u!1 &2771038119144825818
@@ -357,7 +356,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2771038117624156285}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -395,8 +393,7 @@ MonoBehaviour:
   m_text: 1$
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0f653a8aa45b6c94fafe1d36e755753d, type: 2}
-  m_sharedMaterial: {fileID: -7083103767658072, guid: 0f653a8aa45b6c94fafe1d36e755753d,
-    type: 2}
+  m_sharedMaterial: {fileID: -7083103767658072, guid: 0f653a8aa45b6c94fafe1d36e755753d, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

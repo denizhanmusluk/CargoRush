@@ -18,9 +18,14 @@ public class NewWorldActive : MonoBehaviour
         if (nextLevelIndex > PlayerPrefs.GetInt("mapindexmax"))
         {
             PlayerPrefs.SetInt("mapindexmax", nextLevelIndex);
-            MissionManager.Instance.newMapMission.MissionUpdate();
-            MapManager.Instance.mapTapTut_GO.SetActive(true);
+            StartCoroutine(StartDelay());
         }
+    }
+    IEnumerator StartDelay()
+    {
+        yield return new WaitForSeconds(1);
+        MissionManager.Instance.newMapMission.MissionUpdate();
+        MapManager.Instance.mapTapTut_GO.SetActive(true);
     }
     private void OnTriggerEnter(Collider other)
     {

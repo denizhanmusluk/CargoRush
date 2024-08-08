@@ -9,7 +9,7 @@ public class CollectProgressManager : MonoBehaviour
     public static CollectProgressManager Instance => _instance;
 
 
-
+    public TextMeshProUGUI ratioText;
 
     public GameObject shopProgresGO;
     public Image shopProgresFill;

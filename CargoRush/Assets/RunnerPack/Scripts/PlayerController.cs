@@ -944,7 +944,7 @@ public class PlayerController : MonoBehaviour
                 BossTutorialPanel.Instance.newLevelBoss.CharacterArrivedBoss();
                 //OnUpdate = null;
                 //PlayerRotReset();
-                PlayerControl_ReActive();
+                //PlayerControl_ReActive();
                 Globals.goToCeoActive = false;
             }
         }

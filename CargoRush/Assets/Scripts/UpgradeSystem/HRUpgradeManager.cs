@@ -260,6 +260,7 @@ public class HRUpgradeManager : MonoBehaviour
             PlayerController.Instance.PlayerControl_ReActive();
             upgradeButton.SetActive(true);
             exitTapTutorial_GO.SetActive(false);
+            IndicatorManager.Instance.KeepCollectTutorial();
         }
     }
     //public void CharacterUpgradeClose()

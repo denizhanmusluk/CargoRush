@@ -59,9 +59,12 @@ public class LoadingGame : MonoBehaviour
             yield return null;
         }
         loadingText.enabled = false;
-        Globals.loadingPanelActive = false;
         GameStart();
         StartCoroutine(PanelClose());
+
+        yield return new WaitForSeconds(10);
+        Globals.loadingPanelActive = false;
+
     }
     public void Tutorial_PanelClose()
     {

@@ -4104,6 +4104,7 @@ MonoBehaviour:
   productPrefabs:
   - {fileID: 16055050559771011, guid: 47664b858274e714fa9c93f4a9945020, type: 3}
   missionActive: 1
+  missionUpdateActive: 1
   machineLevel: 6
   collectableLevel: 1
   machinePopUpActive: 1
@@ -8453,17 +8454,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8311893039635701451}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.06}
+  m_LocalRotation: {x: 0.00000016391276, y: 0.2705978, z: 0.27059722, w: 0.9238798}
+  m_LocalPosition: {x: 0, y: 0, z: -2.11}
   m_LocalScale: {x: 0.75953, y: 0.75953, z: 0.75953}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8094383493664304856}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -8.421, y: 30.361, z: 30.361}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 3.34, y: 7.46}
-  m_SizeDelta: {x: 35, y: 2.61}
+  m_AnchoredPosition: {x: -23.39, y: 23.11}
+  m_SizeDelta: {x: 50, y: 2.61}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5296755653546534281
 CanvasRenderer:
@@ -8493,9 +8494,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Need
-
-    Packing Tape'
+  m_text: Need Tape
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 11ef92c716cd4ba42ace616e174f62f5, type: 2}
   m_sharedMaterial: {fileID: 1340421909093535988, guid: 11ef92c716cd4ba42ace616e174f62f5, type: 2}
@@ -8522,8 +8521,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 4
-  m_fontSizeBase: 4
+  m_fontSize: 6
+  m_fontSizeBase: 6
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -10360,6 +10359,10 @@ PrefabInstance:
     - target: {fileID: 4087090126565245307, guid: 506f4afa938d134419173291630f40c5, type: 3}
       propertyPath: m_text
       value: MAX
+      objectReference: {fileID: 0}
+    - target: {fileID: 4087090126565245307, guid: 506f4afa938d134419173291630f40c5, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4087090126565245307, guid: 506f4afa938d134419173291630f40c5, type: 3}
       propertyPath: m_fontSize
@@ -14757,15 +14760,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1524672405419994152, guid: 506f4afa938d134419173291630f40c5, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.18661392
+      value: 0.232
       objectReference: {fileID: 0}
     - target: {fileID: 1524672405419994152, guid: 506f4afa938d134419173291630f40c5, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.1866139
+      value: 0.232139
       objectReference: {fileID: 0}
     - target: {fileID: 1524672405419994152, guid: 506f4afa938d134419173291630f40c5, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.1866139
+      value: 0.232
       objectReference: {fileID: 0}
     - target: {fileID: 1524672405419994152, guid: 506f4afa938d134419173291630f40c5, type: 3}
       propertyPath: m_LocalPosition.x
