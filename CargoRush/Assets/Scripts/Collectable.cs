@@ -45,6 +45,8 @@ public class Collectable : MonoBehaviour
     //public List<MeshRenderer> meshList;
     //public Material normalMaterial;
     //public Material instancedMaterial;
+    public GameObject box;
+    public GameObject boxSinglePart;
     public void InitNormalMaterial()
     {
         //foreach (var msh in meshList)

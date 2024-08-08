@@ -672,7 +672,8 @@ public class MineCrusher : Stand, IStandUpgrade
     }
     IEnumerator GoCannedPos(Collectable newProduct, Transform targetTR, Vector3 dropPos,bool selfDestroy)
     {
-
+        newProduct.box.SetActive(false);
+        newProduct.boxSinglePart.SetActive(true);
         Vector3 firstPos = newProduct.transform.position;
         Quaternion firstRot = newProduct.transform.rotation;
 
@@ -726,6 +727,8 @@ public class MineCrusher : Stand, IStandUpgrade
 
             newProduct.GetComponent<Collectable>().fishCollectable = ironCollectionList;
             //newProduct.GetComponent<Collectable>().InitInstancedMaterial();
+            newProduct.GetComponent<Collectable>().box.SetActive(false);
+            newProduct.GetComponent<Collectable>().boxSinglePart.SetActive(true);
 
             ironCollectionList.Add(newProduct.GetComponent<Collectable>());
 
@@ -758,6 +761,9 @@ public class MineCrusher : Stand, IStandUpgrade
 
             newProduct.GetComponent<Collectable>().fishCollectable = plasticCollectionList;
             //newProduct.GetComponent<Collectable>().InitInstancedMaterial();
+
+            newProduct.GetComponent<Collectable>().box.SetActive(false);
+            newProduct.GetComponent<Collectable>().boxSinglePart.SetActive(true);
 
             plasticCollectionList.Add(newProduct.GetComponent<Collectable>());
 
@@ -792,6 +798,9 @@ public class MineCrusher : Stand, IStandUpgrade
             newProduct.GetComponent<Collectable>().fishCollectable = yarnCollectionList;
             //newProduct.GetComponent<Collectable>().InitInstancedMaterial();
 
+            newProduct.GetComponent<Collectable>().box.SetActive(false);
+            newProduct.GetComponent<Collectable>().boxSinglePart.SetActive(true);
+
             yarnCollectionList.Add(newProduct.GetComponent<Collectable>());
 
 
@@ -824,6 +833,9 @@ public class MineCrusher : Stand, IStandUpgrade
 
             newProduct.GetComponent<Collectable>().fishCollectable = woodCollectionList;
             //newProduct.GetComponent<Collectable>().InitInstancedMaterial();
+
+            newProduct.GetComponent<Collectable>().box.SetActive(false);
+            newProduct.GetComponent<Collectable>().boxSinglePart.SetActive(true);
 
             woodCollectionList.Add(newProduct.GetComponent<Collectable>());
 

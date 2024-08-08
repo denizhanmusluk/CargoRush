@@ -266,4 +266,27 @@ public class GameManager : Observer
        
         }
     }
+    public Material mat1;
+    public Material mat2;
+    public Texture normalTexture1;
+    public Texture outlineTexture1;
+
+    public Texture normalTextureTaped;
+    public Texture outlineTextureTaped;
+    bool outline = false;
+    public void SwitchTexture()
+    {
+        if (!outline)
+        {
+            outline = true;
+            mat1.SetTexture("_BaseMap", outlineTexture1);
+            mat2.SetTexture("_BaseMap", outlineTextureTaped);
+        }
+        else
+        {
+            outline = false;
+            mat1.SetTexture("_BaseMap", normalTexture1);
+            mat2.SetTexture("_BaseMap", normalTextureTaped);
+        }
+    }
 }

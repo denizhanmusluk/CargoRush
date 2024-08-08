@@ -686,12 +686,17 @@ public class ProcessMachine : Stand, IStandUpgrade, IMachineActive
         }
         // converting finish
 
+
+   
+
+
         StartCoroutine(GoBand(newProduct.GetComponent<Collectable>()));
 
 
 
-
-
+        yield return new WaitForSeconds(1);
+        newProduct.GetComponent<Collectable>().box.SetActive(false);
+        newProduct.GetComponent<Collectable>().boxSinglePart.SetActive(true);
         //productCollectionList.Add(newProduct.GetComponent<Collectable>());
         //PlayerPrefs.SetInt(machineName + "col", productCollectionList.Count);
         //float deltaY = 0;
@@ -1061,6 +1066,9 @@ public class ProcessMachine : Stand, IStandUpgrade, IMachineActive
             newProduct.GetComponent<Collectable>().fishCollectable = droppedCollectionList;
             newProduct.GetComponent<Collectable>().InitInstancedMaterial();
 
+            newProduct.GetComponent<Collectable>().box.SetActive(false);
+            newProduct.GetComponent<Collectable>().boxSinglePart.SetActive(true);
+
             droppedCollectionList.Add(newProduct.GetComponent<Collectable>());
 
 
@@ -1103,6 +1111,9 @@ public class ProcessMachine : Stand, IStandUpgrade, IMachineActive
             newProduct.GetComponent<Collectable>().bantGO.SetActive(true);
             newProduct.GetComponent<Collectable>().bantGO.GetComponent<Animator>().SetFloat("speed", 1);
             newProduct.GetComponent<Collectable>().InitInstancedMaterial();
+
+            newProduct.GetComponent<Collectable>().box.SetActive(false);
+            newProduct.GetComponent<Collectable>().boxSinglePart.SetActive(true);
 
             productCollectionList.Add(newProduct.GetComponent<Collectable>());
 
