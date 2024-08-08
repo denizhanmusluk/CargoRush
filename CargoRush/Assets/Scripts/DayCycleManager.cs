@@ -8,6 +8,7 @@ public class DayCycleManager : MonoBehaviour
 {
     private static DayCycleManager _instance = null;
     public static DayCycleManager Instance => _instance;
+    public bool IS_Active = true;
     // Start is called before the first frame update
     [SerializeField] int firstInterstialTime = 900;
     [SerializeField] int firstInterstialTimeCounter = 0;
@@ -69,7 +70,7 @@ public class DayCycleManager : MonoBehaviour
         }
         PlayerPrefs.SetInt("firstInterstialTimeCompleted", 1);
 
-        if (PlayerPrefs.GetInt("bundlesnoads") == 0 && PlayerPrefs.GetInt("bundlesnoadslimited") == 0)
+        if (PlayerPrefs.GetInt("bundlesnoads") == 0 && PlayerPrefs.GetInt("bundlesnoadslimited") == 0 && IS_Active)
         {
             StartCoroutine(AdvShow());
         }
@@ -102,12 +103,9 @@ public class DayCycleManager : MonoBehaviour
             }
             yield return new WaitForSeconds(1);
         }
-        if (PlayerPrefs.GetInt("bundlesnoads") == 0 && PlayerPrefs.GetInt("bundlesnoadslimited") == 0)
+        if (PlayerPrefs.GetInt("bundlesnoads") == 0 && PlayerPrefs.GetInt("bundlesnoadslimited") == 0 && IS_Active)
         {
             StartCoroutine(AdvShow());
-
-
-          
         }
         else
         {
