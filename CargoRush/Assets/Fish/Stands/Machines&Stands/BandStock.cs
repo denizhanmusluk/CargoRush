@@ -73,7 +73,7 @@ public class BandStock : Stand
     IEnumerator ManuealRawCreator()
     {
         yield return new WaitForSeconds(1f);
-        for (int i = 0; i < PlayerController.Instance._characterUpgradeSettings.stackCapacity[Globals.stackCapacityLevel]; i++)
+        for (int i = 0; i < (standRaw.processMachine.standLevel + 5); i++)
         {
             GameObject newProduct = Instantiate(productPrefabs[0].gameObject);
             newProduct.GetComponent<Collectable>().collectActive = false;

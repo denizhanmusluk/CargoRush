@@ -1206,9 +1206,9 @@ public class ProcessMachine : Stand, IStandUpgrade, IMachineActive
         if (otherRawStand != null)
         {
             //bandPerPackageCount = bandPerPackCount[standLevel];
-            otherRawStand.maxBandCapacity = PlayerController.Instance._characterUpgradeSettings.stackCapacity[Globals.stackCapacityLevel];
-            otherRawStand.bandStock.fishCountTotal = PlayerController.Instance._characterUpgradeSettings.stackCapacity[Globals.stackCapacityLevel];
-            otherRawStand.bandStock.productCountTotal = PlayerController.Instance._characterUpgradeSettings.stackCapacity[Globals.stackCapacityLevel];
+            otherRawStand.maxBandCapacity = standLevel + 5;
+            otherRawStand.bandStock.fishCountTotal = standLevel + 5;
+            otherRawStand.bandStock.productCountTotal = standLevel + 5;
         }
         fishCountText.text = (fishCountTotal - fishCountCurrent).ToString() + "/" + (fishCountTotal).ToString();
 
