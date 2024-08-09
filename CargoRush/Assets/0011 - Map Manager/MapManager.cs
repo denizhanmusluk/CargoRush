@@ -167,7 +167,7 @@ public class MapManager : MonoBehaviour
         Globals.isThereVip = false;
 
         Globals.openedCarSlotCount = 0;
-
+        ADVManager.Instance.HideBanner();
         GameManager.Instance.OnLevelRestart();
     }
     IEnumerator NeedleAnimation(int levelIndex)

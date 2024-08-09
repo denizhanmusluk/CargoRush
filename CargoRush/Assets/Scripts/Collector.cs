@@ -11,6 +11,7 @@ public class Collector : MonoBehaviour
     public GameObject shadowGO;
     public bool collectorActive = true;
 
+    public bool hitOutSd = true;
     public void FirstPush(Vector3 forceDir)
     {
         rb.isKinematic = false;

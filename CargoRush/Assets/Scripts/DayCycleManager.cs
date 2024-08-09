@@ -51,7 +51,7 @@ public class DayCycleManager : MonoBehaviour
     }
     IEnumerator FirstQuarterCounter()
     {
-        FishDropArea.Instance.loadingAreaTextGO.SetActive(true);
+        //FishDropArea.Instance.loadingAreaTextGO.SetActive(true);
 
         firstInterstialTimeCounter = PlayerPrefs.GetInt("firstInterstialTimeCounter");
 
@@ -81,7 +81,6 @@ public class DayCycleManager : MonoBehaviour
     }
     IEnumerator DayCycleCounter()
     {
-        FishDropArea.Instance.loadingAreaTextGO.SetActive(false);
 
         dayPanel_GO.SetActive(true);
         dayCycleCount = PlayerPrefs.GetInt("dayCycleCount");

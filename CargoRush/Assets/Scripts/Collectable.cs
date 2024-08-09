@@ -108,6 +108,10 @@ public class Collectable : MonoBehaviour
         {
             collider.isTrigger = false;
         }
+        if(GetComponent<Collector>() != null)
+        {
+            GetComponent<Collector>().hitOutSd = false;
+        }
     }
     IEnumerator CollectActivator()
     {

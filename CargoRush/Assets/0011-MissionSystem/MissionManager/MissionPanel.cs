@@ -133,7 +133,7 @@ public class MissionPanel : MonoBehaviour
     }
     private void MissionComplete()
     {
-        MissionManager.Instance.OpenPanelButton();
+        //MissionManager.Instance.OpenPanelButton();
 
         MissionManager.Instance.startParticleGO.SetActive(true);
         PlayerPrefs.SetInt(missionName + PlayerPrefs.GetInt("level"), PlayerPrefs.GetInt(missionName + PlayerPrefs.GetInt("level")) + 1);
@@ -151,6 +151,10 @@ public class MissionPanel : MonoBehaviour
     }
     IEnumerator MissionCompleteDelay()
     {
+        if (PlayerPrefs.GetInt("missionbuttonopen") == 1)
+        {
+            MissionManager.Instance.tapTutorialGO.SetActive(false);
+        }
 
         PlayerPrefs.SetInt(missionName + "missionactive" + PlayerPrefs.GetInt("level"), 0);
         PlayerPrefs.SetInt(missionName + "count" + PlayerPrefs.GetInt("level"), 0);
@@ -250,6 +254,11 @@ public class MissionPanel : MonoBehaviour
         yield return new WaitForSeconds(1f);
         moneyButton.gameObject.SetActive(false);
         completeText_GO.gameObject.SetActive(true);
+
+
+        yield return new WaitForSeconds(4f);
+
+        MissionManager.Instance.OpenPanelButton();
     }
     IEnumerator MissionEndClosePanel()
     {

@@ -56,6 +56,8 @@ public class TutorialManager : MonoBehaviour
             {
                 ShopManager.Instance.standOnlineGO.SetActive(true);
             }
+            FishDropArea.Instance.loadingAreaTextGO.SetActive(false);
+
         }
     }
     IEnumerator TutorialCompletedCheckDelay()

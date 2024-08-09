@@ -27,7 +27,7 @@ public class ADVManager : MonoBehaviour
         {
             if (PlayerPrefs.GetInt("banneractive") == 1)
             {
-                BannerShow();
+                StartCoroutine(BannerShowDelay());
             }
         }
         else
@@ -41,6 +41,11 @@ public class ADVManager : MonoBehaviour
                 NoAdsLimited();
             }
         }
+    }
+    IEnumerator BannerShowDelay()
+    {
+        yield return new WaitForSeconds(6);
+        BannerShow();
     }
     public void RewardedStart(Action fnct, string rewardedName)
     {
@@ -101,6 +106,11 @@ public class ADVManager : MonoBehaviour
     public void NoAdsLimited()
     {
         PlayerPrefs.SetInt("bundlesnoadslimited", 1);
+        HomaBelly.Instance.HideBanner();
+    }
+
+    public void HideBanner()
+    {
         HomaBelly.Instance.HideBanner();
     }
 }

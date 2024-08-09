@@ -97,7 +97,7 @@ public class FishDropArea : MonoBehaviour
         {
             wall.GetComponent<BoxCollider>().isTrigger = true;
         }
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f);
         foreach (GameObject wall in wallListGO)
         {
             wall.GetComponent<BoxCollider>().isTrigger = false;

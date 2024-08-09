@@ -447,7 +447,10 @@ public class BuyArea : MonoBehaviour, BuyCamera
         }
         for (int i = 0; i < buyAreas.Length; i++)
         {
-
+            if (standUpgradeActive)
+            {
+                yield return new WaitForSeconds(5);
+            }
             buyAreas[i].SetActive(true);
             if (buyAreas[i].GetComponent<BuyArea>() != null)
             {
