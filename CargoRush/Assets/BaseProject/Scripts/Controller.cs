@@ -6,21 +6,21 @@ public class Controller : Subject
 {
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.W))
-        {
-            Notify(NotificationType.Win);
-        }
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            Notify(NotificationType.Fail);
-        }
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            Notify(NotificationType.Start);
-        }
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            Notify(NotificationType.Fail);
-        }
+        //if (Input.GetKeyDown(KeyCode.W))
+        //{
+        //    Notify(NotificationType.Win);
+        //}
+        //if (Input.GetKeyDown(KeyCode.F))
+        //{
+        //    Notify(NotificationType.Fail);
+        //}
+        //if (Input.GetKeyDown(KeyCode.S))
+        //{
+        //    Notify(NotificationType.Start);
+        //}
+        //if (Input.GetKeyDown(KeyCode.E))
+        //{
+        //    Notify(NotificationType.Fail);
+        //}
     }
 }

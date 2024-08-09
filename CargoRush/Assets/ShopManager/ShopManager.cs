@@ -80,14 +80,15 @@ public class ShopManager : MonoBehaviour
     }
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            //SetProgress();
-        }
+        //if (Input.GetKeyDown(KeyCode.Alpha1))
+        //{
+        //    //SetProgress();
+        //}
     }
     int preCount;
     public void SetShopCount(int shopId,int shopValue, bool newOpen)
     {
+        Debug.Log("SetShopCount" + shopValue);
         //if (PlayerPrefs.GetInt("shopLevel") == shopId)
         {
             preCount = shopCountCurrent[shopId];
@@ -218,6 +219,7 @@ public class ShopManager : MonoBehaviour
             ratioText.text = ((int)(shopProgresFill.fillAmount * 100)).ToString() + "/100";
             yield return null;
         }
+        ratioText.text = ((int)(targetFill * 100)).ToString() + "/100";
         PlayerPrefs.SetFloat("shopprogressfill", targetFill);
         if(targetFill >= shopRatio[shopID])
         {

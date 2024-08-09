@@ -147,24 +147,24 @@ public class GameManager : Observer
     {
 
 
-        if (Input.GetKeyDown(KeyCode.X))
-        {
-            ObserverManager.Instance.RemoveObserver(this);//observer register
-        }
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            MoneyUpdate(createMoney);
-        }
-        if (Input.GetKeyDown(KeyCode.G))
-        {
-            GemUpdate(createTicket);
-        }
-        if (Input.GetKeyDown(KeyCode.H))
-        {
-            PlayerPrefs.SetInt("holeLevel", 0);
-            PlayerPrefs.SetInt("holeSpeedLevel", 0);
-            PlayerPrefs.SetInt("holeTimeLevel", 0);
-        }
+        //if (Input.GetKeyDown(KeyCode.X))
+        //{
+        //    ObserverManager.Instance.RemoveObserver(this);//observer register
+        //}
+        //if (Input.GetKeyDown(KeyCode.Space))
+        //{
+        //    MoneyUpdate(createMoney);
+        //}
+        //if (Input.GetKeyDown(KeyCode.G))
+        //{
+        //    GemUpdate(createTicket);
+        //}
+        //if (Input.GetKeyDown(KeyCode.H))
+        //{
+        //    PlayerPrefs.SetInt("holeLevel", 0);
+        //    PlayerPrefs.SetInt("holeSpeedLevel", 0);
+        //    PlayerPrefs.SetInt("holeTimeLevel", 0);
+        //}
     }
 
     //private void Update()

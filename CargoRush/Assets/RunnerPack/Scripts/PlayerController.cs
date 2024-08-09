@@ -369,26 +369,26 @@ public class PlayerController : MonoBehaviour
 
         OnUpdate?.Invoke();
         GoToCeo_Update?.Invoke();
-        if (Input.GetKeyDown(KeyCode.Alpha0))
-        {
-            NoneVehicle();
-            //PlayerPrefs.SetInt("modelselect", 0);
-            //ModelSelect();
-        }
+        //if (Input.GetKeyDown(KeyCode.Alpha0))
+        //{
+        //    NoneVehicle();
+        //    //PlayerPrefs.SetInt("modelselect", 0);
+        //    //ModelSelect();
+        //}
 
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            SkateBoardActive();
-            //PlayerPrefs.SetInt("modelselect", 1);
-            //ModelSelect();
-        }
+        //if (Input.GetKeyDown(KeyCode.Alpha1))
+        //{
+        //    SkateBoardActive();
+        //    //PlayerPrefs.SetInt("modelselect", 1);
+        //    //ModelSelect();
+        //}
 
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            BandBoardActive();
-            //PlayerPrefs.SetInt("modelselect", 2);
-            //ModelSelect();
-        }
+        //if (Input.GetKeyDown(KeyCode.Alpha2))
+        //{
+        //    BandBoardActive();
+        //    //PlayerPrefs.SetInt("modelselect", 2);
+        //    //ModelSelect();
+        //}
     }
     public void PlayerControlDeActive()
     {

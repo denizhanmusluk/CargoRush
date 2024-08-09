@@ -76,6 +76,8 @@ public class BuyArea : MonoBehaviour, BuyCamera
 
     public bool specialVehicleOpener = false;
     public bool ticketTutorialActivator = false;
+
+    bool shopValueAdded = false;
     void Awake()
     {
         if (cost >= 20)
@@ -502,11 +504,19 @@ public class BuyArea : MonoBehaviour, BuyCamera
         {
             if (isNewOpen)
             {
-                ShopManager.Instance.SetShopCount(shopId, ratioValue, true);
+                if (!shopValueAdded)
+                {
+                    shopValueAdded = true;
+                    ShopManager.Instance.SetShopCount(shopId, ratioValue, true);
+                }
             }
             else
             {
-                ShopManager.Instance.SetShopCount(shopId, ratioValue, false);
+                if (!shopValueAdded)
+                {
+                    shopValueAdded = true;
+                    ShopManager.Instance.SetShopCount(shopId, ratioValue, false);
+                }
             }
         }
 
