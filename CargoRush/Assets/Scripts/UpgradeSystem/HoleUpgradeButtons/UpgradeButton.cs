@@ -25,6 +25,14 @@ public abstract class UpgradeButton : MonoBehaviour
         {
             costText.text = "FREE";
         }
+        if (cost < 10000)
+        {
+            costText.fontSize = 55;
+        }
+        else
+        {
+            costText.fontSize = 50;
+        }
     }
     public void FullLevel()
     {

@@ -16,7 +16,7 @@ public class MachineRepairArea : MonoBehaviour
     }
     void RepairListOpen()
     {
-        int minElementCount = 6;
+        int minElementCount = 3;
         if(minElementCount > machineRepairListAll.Count - 1)
         {
             minElementCount = machineRepairListAll.Count - 1;

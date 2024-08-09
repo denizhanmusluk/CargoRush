@@ -300,7 +300,7 @@ public class StandFishTezgah : Stand, IMoneyArea
             totalMoney += droppingCollection.price / 3;
         }
 
-        totalMoney /= 2;
+        //totalMoney /= 2;
         totalMoney = (int)((float)totalMoney * moneyFactor);
         if (Globals.doubleIncomeActive)
         {
@@ -315,7 +315,7 @@ public class StandFishTezgah : Stand, IMoneyArea
             Vector3 dropPos = targetTR.position + new Vector3(0, deltaY * 0.2f, 0);
             BanknotMoney banknot = Instantiate(moneyArea.moneyPrefab, moneyArea.firstMoneyCreatePosTR.position, Quaternion.identity).GetComponent<BanknotMoney>();
             banknot.MovingMoney(moneyArea.firstMoneyCreatePosTR.position, dropPos, targetTR);
-            banknot.banknotValue = 2;
+            banknot.banknotValue = 1;
             moneyArea.moneyList.Add(banknot);
 
             stepNo++;
