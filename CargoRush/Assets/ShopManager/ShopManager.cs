@@ -38,6 +38,7 @@ public class ShopManager : MonoBehaviour
 
     public GameObject standOnlineGO;
     public TextMeshProUGUI ratioText;
+    public Slider shopQuestSlider;
 
     void Awake()
     {
@@ -49,6 +50,8 @@ public class ShopManager : MonoBehaviour
         shopProgresFill = CollectProgressManager.Instance.shopProgresFill;
         shopProgresFillBG = CollectProgressManager.Instance.shopProgresFillBG;
         ratioText = CollectProgressManager.Instance.ratioText;
+        shopQuestSlider = CollectProgressManager.Instance.shopQuestSlider;
+        shopQuestSlider.value = shopRatio[0];
         //StartCoroutine(ChildColorAlphaSet());
         //shopProgresGO.SetActive(false);
         StartCoroutine(StartDelay());

@@ -22,6 +22,8 @@ public class CollectProgressManager : MonoBehaviour
     public GameObject dirtyProgressPanelGo;
     public GameObject dirtyProgressPanelBGGo;
     public GameObject dirtyActiveImgGO;
+
+    public Slider shopQuestSlider;
     private void Awake()
     {
         _instance = this;
