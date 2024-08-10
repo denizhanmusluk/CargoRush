@@ -10785,7 +10785,10 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5389338568619444926, guid: ed2913ef31f9b574c91a29282243a5a9, type: 3}
       insertIndex: -1
       addedObject: {fileID: 332888237}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5389338568619444925, guid: ed2913ef31f9b574c91a29282243a5a9, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2017200688}
   m_SourcePrefab: {fileID: 100100000, guid: ed2913ef31f9b574c91a29282243a5a9, type: 3}
 --- !u!224 &280454546 stripped
 RectTransform:
@@ -46427,7 +46430,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5389338567496930908, guid: f8b7b4cf4626dd545bd9061db494a6c1, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5389338567496930910, guid: f8b7b4cf4626dd545bd9061db494a6c1, type: 3}
       propertyPath: m_RaycastTarget
@@ -81176,6 +81179,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2016840247}
   m_CullTransparentMesh: 1
+--- !u!1 &2017200683 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5389338568619444925, guid: ed2913ef31f9b574c91a29282243a5a9, type: 3}
+  m_PrefabInstance: {fileID: 280454545}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2017200688
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2017200683}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11c6c027c018cbc468b2ffc29ea73045, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _name: missiontaptutorial
 --- !u!1 &2025256197
 GameObject:
   m_ObjectHideFlags: 0
