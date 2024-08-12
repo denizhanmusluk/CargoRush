@@ -19,6 +19,9 @@ public class ADVManager : MonoBehaviour
     }
     private void Start()
     {
+        Events.onInitialized += LoadBanner;
+
+
         Check_NoAds_Bundle_Active();
     }
     public void Check_NoAds_Bundle_Active()
@@ -112,5 +115,12 @@ public class ADVManager : MonoBehaviour
     public void HideBanner()
     {
         HomaBelly.Instance.HideBanner();
+    }
+
+
+    private const string BannerPlacementId = "YOUR_PLACEMENT_ID";
+    private void LoadBanner()
+    {
+        HomaBelly.Instance.LoadBanner(BannerSize.BANNER, BannerPosition.BOTTOM);
     }
 }

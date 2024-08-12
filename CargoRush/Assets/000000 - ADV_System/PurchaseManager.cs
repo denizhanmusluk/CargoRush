@@ -53,6 +53,11 @@ public class PurchaseManager : MonoBehaviour
         boosterButtonFirstPos = boosterButtonTR.position;
         ticketButtonFirstPos = ticketButtonTR.position;
         moneyButtonFirstPos = moneyButtonTR.position;
+
+        if (PlayerPrefs.GetInt("specialOfferCounter") > 0)
+        {
+            SpecialOfferCounterStart();
+        }
     }
     IEnumerator StartDelay()
     {
@@ -202,6 +207,27 @@ public class PurchaseManager : MonoBehaviour
             counter += 2 * Time.deltaTime;
             buttonTR.position = Vector3.Lerp(buttonTR.position, new Vector3(buttonTR.position.x, firstPos.y - 60, buttonTR.position.z), Time.deltaTime * 8);
             yield return null;
+        }
+    }
+
+    int specialOfferCounter = 0;
+    public void SpecialOfferCounterStart()
+    {
+        StartCoroutine(SpecialOfferCounter());
+    }
+    IEnumerator SpecialOfferCounter()
+    {
+        specialOfferCounter = PlayerPrefs.GetInt("specialOfferCounter");
+
+        while (specialOfferCounter < 180)
+        {
+            specialOfferCounter++;
+            PlayerPrefs.SetInt("specialOfferCounter", specialOfferCounter);
+            if(specialOfferCounter == 180)
+            {
+                SpecialOffer_PopUp_Open();
+            }
+            yield return new WaitForSeconds(1);
         }
     }
 }

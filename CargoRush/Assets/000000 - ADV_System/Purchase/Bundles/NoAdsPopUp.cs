@@ -10,6 +10,7 @@ public class NoAdsPopUp : MonoBehaviour
     public float cost = 1;
     //public TextMeshProUGUI moneyText;
     public TextMeshProUGUI costText;
+    public PanelScaling panelScaling;
     private void Start()
     {
         //PurchaseBundlesManager.Instance.noAdsPopUp = this;
@@ -23,6 +24,9 @@ public class NoAdsPopUp : MonoBehaviour
     {
         buyButton.interactable = false;
         PurchaseBundlesManager.Instance.NoAdsBuy(cost, buyButton);
+        PurchaseManager.Instance.ButtonOpen();
+        PurchaseManager.Instance.SpecialOfferCounterStart();
+
         StartCoroutine(CloseDelay());
     }
     IEnumerator CloseDelay()
@@ -42,5 +46,11 @@ public class NoAdsPopUp : MonoBehaviour
             buyButton.gameObject.SetActive(false);
             purchasedGO.gameObject.SetActive(true);
         }
+    }
+    public void Cancel()
+    {
+        PurchaseManager.Instance.ButtonOpen();
+        PurchaseManager.Instance.SpecialOfferCounterStart();
+        panelScaling.PanelClose();
     }
 }

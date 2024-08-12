@@ -92,7 +92,7 @@ public class StoreManager : MonoBehaviour
         if (PlayerPrefs.GetInt("tickettutorial") == 3)
         {
             PurchaseManager.Instance.SpecialOffer_PopUp_Open();
-            PurchaseManager.Instance.ButtonOpen();
+            //PurchaseManager.Instance.ButtonOpen();
             PlayerPrefs.SetInt("tickettutorial", 4);
         }
 

@@ -62,8 +62,9 @@ public class DayCycleManager : MonoBehaviour
 
             if ( PlayerPrefs.GetInt("banneractive") == 0 && firstInterstialTimeCounter >= 180 && PlayerPrefs.GetInt("bundlesnoads") == 0 && PlayerPrefs.GetInt("bundlesnoadslimited") == 0)
             {
-                ADVManager.Instance.BannerShow();
                 PlayerPrefs.SetInt("banneractive", 1);
+
+                ADVManager.Instance.Check_NoAds_Bundle_Active();
             }
 
             yield return new WaitForSeconds(1);
