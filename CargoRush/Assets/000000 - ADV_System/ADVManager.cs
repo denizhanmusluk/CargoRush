@@ -48,7 +48,7 @@ public class ADVManager : MonoBehaviour
     IEnumerator BannerShowDelay()
     {
         yield return new WaitForSeconds(6);
-        BannerShow();
+        Events.onBannerAdLoadedEvent += BannerShow;
     }
     public void RewardedStart(Action fnct, string rewardedName)
     {
@@ -96,7 +96,7 @@ public class ADVManager : MonoBehaviour
     }
 
 
-    public void BannerShow()
+    public void BannerShow(AdInfo adInfo)
     {
         HomaBelly.Instance.ShowBanner();
     }
