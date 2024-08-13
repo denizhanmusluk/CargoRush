@@ -19,7 +19,7 @@ public class ADVManager : MonoBehaviour
     }
     private void Start()
     {
-        Events.onInitialized += LoadBanner;
+        //Events.onInitialized += LoadBanner;
 
 
         Check_NoAds_Bundle_Active();
@@ -48,7 +48,18 @@ public class ADVManager : MonoBehaviour
     IEnumerator BannerShowDelay()
     {
         yield return new WaitForSeconds(6);
+        LoadBanner();
         Events.onBannerAdLoadedEvent += BannerShow;
+    }
+    private void OnDisable()
+    {
+        if (PlayerPrefs.GetInt("bundlesnoads") == 0 && PlayerPrefs.GetInt("bundlesnoadslimited") == 0)
+        {
+            if (PlayerPrefs.GetInt("banneractive") == 1)
+            {
+                Events.onBannerAdLoadedEvent -= BannerShow;
+            }
+        }
     }
     public void RewardedStart(Action fnct, string rewardedName)
     {
