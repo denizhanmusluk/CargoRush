@@ -162,6 +162,7 @@ public class StandFishCar : Stand,IMoneyArea
         foreach (var wrkArea in workAreaList)
         {
             wrkArea.standList.Add(this);
+            wrkArea.standCourierList.Add(this);
             //wrkArea.CollectProductList.Add(_CollectProducts);
         }
     }

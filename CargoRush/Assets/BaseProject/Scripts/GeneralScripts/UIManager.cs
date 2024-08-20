@@ -493,9 +493,11 @@ public class UIManager : Subject
     public void HoverboardSkill_ADV_Click()
     {
         PlayerController.Instance.PlayerControl_ReActive();
-        string adv_name = "";
+
+        string tag = "SpeedBoost_REWARDED";
+        string adv_name = tag;
+
         ADVManager.Instance.RewardedStart(HoverboardSkillClick,adv_name);
-        string tag = "SpeedBoostRewarded";
         GameManager.Instance.GameAnalyticsTag(tag);
     }
     public void HoverboardSkillClick()
@@ -516,9 +518,10 @@ public class UIManager : Subject
     {
         PlayerController.Instance.PlayerControl_ReActive();
 
-        string adv_name = "";
+        string tag = "InfiniteCapacity_REWARDED";
+        string adv_name = tag;
+
         ADVManager.Instance.RewardedStart(CapacitySkillClick,adv_name);
-        string tag = "InfiniteCapacityRewarded";
         GameManager.Instance.GameAnalyticsTag(tag);
     }
     public void CapacitySkillClick()
@@ -539,10 +542,12 @@ public class UIManager : Subject
     public void DoubleIncomeSkill_ADV_Click()
     {
         PlayerController.Instance.PlayerControl_ReActive();
-        string adv_name = "";
+
+        string tag = "DoubleIncome_REWARDED";
+        string adv_name = tag;
+
         ADVManager.Instance.RewardedStart(DoubleIncomeSkillClick,adv_name);
 
-        string tag = "DoubleIncomeRewarded";
         GameManager.Instance.GameAnalyticsTag(tag);
     }
 
@@ -568,10 +573,12 @@ public class UIManager : Subject
     public void FreeMoneySkill_ADV_Click()
     {
         PlayerController.Instance.PlayerControl_ReActive();
-        string adv_name = "";
+
+        string tag = "MoneyBag_REWARDED";
+        string adv_name = tag;
+
         ADVManager.Instance.RewardedStart(FreeMoneySkill,adv_name);
 
-        string tag = "MoneyBagRewarded";
         GameManager.Instance.GameAnalyticsTag(tag);
     }
 

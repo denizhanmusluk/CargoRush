@@ -116,7 +116,7 @@ public class ModelButton : MonoBehaviour
 
     public void ClickADV_Button()
     {
-        string adv_name = "";
+        string adv_name = skinName + "_REWARDED";
         ADVManager.Instance.RewardedStart(AdvEnd, adv_name);
         AudioManager.Instance.ButtonSound();
     }

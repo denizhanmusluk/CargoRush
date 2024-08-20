@@ -23,11 +23,12 @@ public class BoxSellingInfoManager : MonoBehaviour
     }
     public void GetPriceButton_ADVClick()
     {
-        string adv_name = "";
+        string tag = "DeliveryPerformanceDouble_REWARDED";
+        string adv_name = tag;
+
         ADVManager.Instance.RewardedStart(GetPriceDouble,adv_name);
         priceButton.interactable = false;
         PlayerController.Instance.PlayerControl_ReActive();
-        string tag = "DeliveryPerformanceDoubleRewarded";
         GameManager.Instance.GameAnalyticsTag(tag);
     }
     void GetPriceDouble()

@@ -13,8 +13,6 @@ public class AIWorker : MonoBehaviour, IWorkerModelSelect
     public StackCollect aiStackCollect;
     public Animator animator;
 
-    //[SerializeField] Transform fishCollectPoint;
-    //[SerializeField] List<Transform> fishDropPointList;
 
     public bool characterStayActive = false;
     public bool isStayHoldActive = false;
@@ -37,10 +35,7 @@ public class AIWorker : MonoBehaviour, IWorkerModelSelect
         PlayerPrefs.SetInt(workerLevelName, lvl);
 
         workerLevel = PlayerPrefs.GetInt(workerLevelName);
-        //if (currentCar != null)
-        //{
-        //    currentCar.GetComponent<FishCar>().CarLevelCreate(carLevel);
-        //}
+
         LevelInit();
         if (gameObject.activeInHierarchy)
         {
@@ -69,7 +64,6 @@ public class AIWorker : MonoBehaviour, IWorkerModelSelect
             {
                 forklift.SetActive(true);
             }
-            //navMeshAgent.radius = 0.6f;
         }
 
     }
@@ -91,15 +85,10 @@ public class AIWorker : MonoBehaviour, IWorkerModelSelect
     }
     void Start()
     {
-        //WallManager.Instance.allWorker.Add(this);
-
         DnzEvents.aiWorkerStart += AIStart;
         DnzEvents.aiWorkerStop += AIStop;
         DnzEvents.aiWorkerListReset += ListReset;
         MoveSpeedInit();
-        //if (fishCollectArea.fishCollectable.Count > 0)
-
-        //AIStart();
 
         StartCoroutine(StartFirst());
     }
@@ -134,9 +123,7 @@ public class AIWorker : MonoBehaviour, IWorkerModelSelect
         Vector3 direction = (targetPos - transform.position).normalized;
         direction.y = 0;
         float RotY = Vector3.SignedAngle(direction, transform.forward, Vector3.up);
-        //float RotY = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
 
-        //animator.speed = 1 + 0.1f * Globals.characterSpeedLevel;
         if (animator != null)
         {
             animator.SetFloat("x", Mathf.Cos((RotY + 90) * Mathf.Deg2Rad));
@@ -167,13 +154,11 @@ public class AIWorker : MonoBehaviour, IWorkerModelSelect
     }
     public void AIStop()
     {
-        //playerStop();
         aiStackCollect.GetComponent<StackCollectWorker>().collectActive = false;
         isStayHoldActive = false;
         followActive = false;
         following = null;
         following += StopPositionGoEnd;
-        //navMeshAgent.SetDestination(transform.position);
     }
     void StopPositionGoEnd()
     {
@@ -189,9 +174,7 @@ public class AIWorker : MonoBehaviour, IWorkerModelSelect
             if (!characterStayActive)
             {
                 characterStayActive = true;
-                //StartCoroutine(RotateTarget());
             }
-            //animator.SetBool("Walk", false);
 
             if (!isStayHoldActive)
             {
@@ -200,8 +183,6 @@ public class AIWorker : MonoBehaviour, IWorkerModelSelect
                 playerStop();
                 following = null;
                 navMeshAgent.SetDestination(transform.position);
-                //navMeshAgent.obstacleAvoidanceType = ObstacleAvoidanceType.HighQualityObstacleAvoidance;
-                //StartCoroutine(StartDelay());
             }
         }
     }
@@ -219,9 +200,7 @@ public class AIWorker : MonoBehaviour, IWorkerModelSelect
             if (!characterStayActive)
             {
                 characterStayActive = true;
-                //StartCoroutine(RotateTarget());
             }
-            //animator.SetBool("Walk", false);
 
             if (!isStayHoldActive)
             {
@@ -230,8 +209,7 @@ public class AIWorker : MonoBehaviour, IWorkerModelSelect
                 playerStop();
                 following = null;
                 navMeshAgent.SetDestination(transform.position); 
-                //navMeshAgent.obstacleAvoidanceType = ObstacleAvoidanceType.HighQualityObstacleAvoidance;
-                //StartCoroutine(StartDelay());
+
                 AIStart();
             }
         }
@@ -254,8 +232,6 @@ public class AIWorker : MonoBehaviour, IWorkerModelSelect
     {
         fishCollectArea.ShuffleStandList();
 
-        //navMeshAgent.obstacleAvoidanceType = ObstacleAvoidanceType.MedQualityObstacleAvoidance;
-
         isStayHoldActive = false;
 
         List<CollectProduct> tempCollectArea = new List<CollectProduct>();
@@ -272,7 +248,6 @@ public class AIWorker : MonoBehaviour, IWorkerModelSelect
                         if ((fishCollectArea.standList[fishCollectArea.standList.Count - 1 - i].collectType == CollectType.All || env.collectables[env.collectables.Count - 1].collectType == fishCollectArea.standList[fishCollectArea.standList.Count - 1 - i].collectType || fishCollectArea.standList[fishCollectArea.standList.Count - 1 - i].collectType2 == CollectType.All || env.collectables[env.collectables.Count - 1].collectType == fishCollectArea.standList[fishCollectArea.standList.Count - 1 - i].collectType2) && cltId == env.CollectId && fishCollectArea.standList[fishCollectArea.standList.Count - 1 - i].fishCountCurrent > 0)
                         {
                             StartCoroutine(AiStackCountInit(i));
-                            //aiStackCollect.GetComponent<StackCollectWorker>().currentCapacity = aiStackCollect.GetComponent<StackCollectWorker>().collectionTrs.Count + fishCollectArea.standList[fishCollectArea.standList.Count - 1 - i].fishCountCurrent;
                             tempCollectArea.Add(env);
                             targetStand = fishCollectArea.standList[fishCollectArea.standList.Count - 1 - i];
 
@@ -285,21 +260,14 @@ public class AIWorker : MonoBehaviour, IWorkerModelSelect
                             break;
                         }
                     }
-                    //Debug.Log("_targetStand.fishCountCurrent  " + _targetStand.fishCountCurrent);
-
                 }
             }
 
 
         }
-        //fishCollectArea.ShuffleStandList();
-        //fishCollectArea.ShuffleCollectProductList();
+
         if (tempCollectArea.Count != 0)
         {
-
-            //int randomTargetSelect = UnityEngine.Random.Range(0, tempCollectArea.Count);
-            //aiStackCollect.GetComponent<StackCollectWorker>().aiCollectActive = true;
-
             collectAreaTarget = tempCollectArea[0];
             targetCollectId = collectAreaTarget.CollectId;
             aiStackCollect.GetComponent<StackCollectWorker>().targetId = targetCollectId;
@@ -341,11 +309,9 @@ public class AIWorker : MonoBehaviour, IWorkerModelSelect
         {
             characterStayActive = false;
 
-            //animator.SetBool("Walk", true);
             Vector3 targetPos = new Vector3(collectAreaTarget.aiCollectTargetTR[targetCollectPointSelect].position.x + fishCollectOffset.x, collectAreaTarget.aiCollectTargetTR[targetCollectPointSelect].position.y, collectAreaTarget.aiCollectTargetTR[targetCollectPointSelect].position.z + fishCollectOffset.y);
             PlayerMovingDirection(targetPos);
 
-            //transform.position = Vector3.MoveTowards(transform.position, targetPlayer.position, Time.deltaTime * moveSpeed);
             if (!collectAreaTarget.gameObject.activeInHierarchy)
             {
                 TargetFishAreaSelect();
@@ -358,9 +324,7 @@ public class AIWorker : MonoBehaviour, IWorkerModelSelect
             if (!characterStayActive)
             {
                 characterStayActive = true;
-                //StartCoroutine(RotateTarget());
             }
-            //animator.SetBool("Walk", false);
             if (!isStayHoldActive)
             {
                 aiStackActive = true;
@@ -372,16 +336,6 @@ public class AIWorker : MonoBehaviour, IWorkerModelSelect
                 playerStop();
                 aiStackCollect.GetComponent<StackCollectWorker>().collectActive = true;
                 fishCollectArea.TargetArrived(this);
-                //navMeshAgent.obstacleAvoidanceType = ObstacleAvoidanceType.HighQualityObstacleAvoidance;
-
-                //if (fishCollectArea.fishCollectable.Count > 0)
-                //{
-                //    fishCollectArea.TargetArrived(this);
-                //}
-                //else
-                //{
-                //    AIStop();
-                //}
             }
         }
     }
@@ -420,28 +374,46 @@ public class AIWorker : MonoBehaviour, IWorkerModelSelect
         return targetChanged;
     }
 
+    public bool NewSameTargetCourierStand()
+    {
+        bool targetChanged = false;
+        for (int i = 0; i < fishCollectArea.standCourierList.Count; i++)
+        {
+            bool breakActive = false;
+            foreach (Collectable clt in aiStackCollect.collectionTrs)
+            {
+                foreach (int cltId2 in fishCollectArea.standCourierList[fishCollectArea.standCourierList.Count - 1 - i].collectIDList)
+                {
+                    if ((fishCollectArea.standCourierList[fishCollectArea.standCourierList.Count - 1 - i].collectType == CollectType.All || clt.collectType == fishCollectArea.standCourierList[fishCollectArea.standCourierList.Count - 1 - i].collectType || fishCollectArea.standCourierList[fishCollectArea.standCourierList.Count - 1 - i].collectType2 == CollectType.All || clt.collectType == fishCollectArea.standCourierList[fishCollectArea.standCourierList.Count - 1 - i].collectType2) && clt.collectID == cltId2 && fishCollectArea.standCourierList[fishCollectArea.standCourierList.Count - 1 - i].fishCountCurrent > 0)
+                    {
+                        targetChanged = true;
+                        targetStand = fishCollectArea.standCourierList[fishCollectArea.standCourierList.Count - 1 - i];
+                        TargetFishStandSelect();
+                        breakActive = true;
+                        break;
+                    }
+                }
+                if (breakActive)
+                {
+                    break;
+                }
+            }
+            if (breakActive)
+            {
+                break;
+            }
+        }
+
+        return targetChanged;
+    }
+
     public void TargetFishStandSelect()
     {
         aiStackCollect.GetComponent<StackCollectWorker>().aiCollectActive = false;
-        //navMeshAgent.obstacleAvoidanceType = ObstacleAvoidanceType.MedQualityObstacleAvoidance;
+
         isStayHoldActive = false;
-        //List<Stand> tempDropArea = new List<Stand>();
-        //foreach (var env in fishCollectArea.standList)
-        //{
-        //    if (env.collectID == targetCollectId)
-        //    {
-        //        tempDropArea.Add(env);
-        //    }
-        //}
 
-        //if (tempDropArea.Count != 0)
         {
-            //int randomTargetSelect = UnityEngine.Random.Range(0, tempDropArea.Count);
-
-            //targetStand = tempDropArea[randomTargetSelect];
-
-            //targetDropPointSelect = UnityEngine.Random.Range(0, targetStand.aiTargetPosList.Length);
-
             targetStand.aiTargetPosListCheck[targetDropPointSelect] = 0;
 
             targetDropPointSelect = UnityEngine.Random.Range(0, targetStand.aiTargetPosList.Length);
@@ -461,10 +433,6 @@ public class AIWorker : MonoBehaviour, IWorkerModelSelect
             following = null;
             following += GoToStandArea;
         }
-        //else
-        //{
-        //    StartCoroutine(StartDelay());
-        //}
     }
     void GoToStandArea()
     {
@@ -472,10 +440,8 @@ public class AIWorker : MonoBehaviour, IWorkerModelSelect
         {
             characterStayActive = false;
 
-            //animator.SetBool("Walk", true);
             PlayerMovingDirection(targetStand.aiTargetPosList[targetDropPointSelect].position);
 
-            //transform.position = Vector3.MoveTowards(transform.position, targetPlayer.position, Time.deltaTime * moveSpeed);
             if (!targetStand.gameObject.activeInHierarchy)
             {
                 TargetFishAreaSelect();
@@ -488,23 +454,27 @@ public class AIWorker : MonoBehaviour, IWorkerModelSelect
             if (!characterStayActive)
             {
                 characterStayActive = true;
-                //StartCoroutine(RotateTarget());
             }
-            //animator.SetBool("Walk", false);
 
             if (!isStayHoldActive)
             {
                 aiStackActive = true;
                 isStayHoldActive = true;
-                if (!targetStand.gameObject.activeInHierarchy)
-                {
-                    TargetFishAreaSelect();
-                }
+                //if (!targetStand.gameObject.activeInHierarchy)
+                //{
+                //    TargetFishAreaSelect();
+                //}
                 playerStop();
 
-           
-                targetStand.TargetArrived(this);
-                //navMeshAgent.obstacleAvoidanceType = ObstacleAvoidanceType.HighQualityObstacleAvoidance;
+                if (sellingWorker)
+                {
+                    targetStand.TargetCourierArrived(this);
+                }
+                else
+                {
+                    targetStand.TargetArrived(this);
+                }
+
                 if (sellingWorker)
                 {
                     DestroyBoxChack();

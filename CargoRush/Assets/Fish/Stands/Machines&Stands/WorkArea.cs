@@ -15,6 +15,7 @@ public class WorkArea : MonoBehaviour
     public int collectLevel;
     [SerializeField] CollectProduct _CollectProduct;
     public List<Stand> standList;
+    public List<Stand> standCourierList;
     public List<CollectProduct> CollectProductList;
     public List<int> CollectProductID = new List<int>();
 

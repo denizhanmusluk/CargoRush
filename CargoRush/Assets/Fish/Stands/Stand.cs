@@ -285,7 +285,62 @@ public abstract class Stand : MonoBehaviour
         yield return new WaitForSeconds(0.2f);
     }
 
+    public void TargetCourierArrived(AIWorker aiWorker)
+    {
+        Debug.Log("TargetCourierArrived");
+        StartCoroutine(StayingArriveCourier(aiWorker));
+    }
+    IEnumerator StayingArriveCourier(AIWorker character)
+    {
+        bool newTargetSelected = false;
+        yield return new WaitForSeconds(2f);
+        bool goOut = false;
 
+
+        //while (!goOut)
+        //{
+        //    goOut = true;
+        //    foreach (var sk in character.aiStackCollect.collectionTrs)
+        //    {
+        //        goOut = true;
+        //        foreach (var clListId in collectIDList)
+        //        {
+        //            if (sk.collectID == clListId)
+        //            {
+        //                goOut = false;
+        //                if (character.NewSameTargetCourierStand())
+        //                {
+        //                    newTargetSelected = true;
+        //                    goOut = true;
+        //                }
+        //                break;
+        //            }
+        //        }
+        //        if (newTargetSelected)
+        //        {
+        //            break;
+        //        }
+        //    }
+        //    yield return null;
+        //}
+
+
+        //if (character.followActive && !newTargetSelected)
+        //{
+        //    character.TargetFishAreaSelect();
+        //}
+
+        if (character.NewSameTargetCourierStand())
+        {
+
+        }
+        else
+        {
+            character.TargetFishAreaSelect();
+        }
+
+        yield return new WaitForSeconds(0.2f);
+    }
     public void TargetCustomerArrived(AIMarketCustomer aiCustomer)
     {
         aiCustomer.Customer_Staying(collectIDList);

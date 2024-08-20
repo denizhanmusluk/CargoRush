@@ -277,18 +277,18 @@ public class HRUpgradeManager : MonoBehaviour
 
     public void WorkerMoveSpeedUpgrade_ADV_Click()
     {
-        string adv_name = "";
+        string adv_name = "M" + (PlayerPrefs.GetInt("level") + 1).ToString() + "-WorkerSpeedUpgrade" + Globals.workerMoveSpeedLevel.ToString() + "_REWARDED";
         ADVManager.Instance.RewardedStart(WorkerMoveSpeedUpgradeFree, adv_name);
 
     }
     public void WorkerCapacityUpgrade_ADV_Click()
     {
-        string adv_name = "";
+        string adv_name = "M" + (PlayerPrefs.GetInt("level") + 1).ToString() + "-WorkerCapacityUpgrade" + Globals.workerCapacityLevel.ToString() + "_REWARDED";
         ADVManager.Instance.RewardedStart(WorkerCapacityUpgradeFree, adv_name);
     }
     public void WorkerNoUpgrade_ADV_Click()
     {
-        string adv_name = "";
+        string adv_name = "M" + (PlayerPrefs.GetInt("level") + 1).ToString() + "-BuyWorker" + Globals.workerNoLevel.ToString() + "_REWARDED";
         ADVManager.Instance.RewardedStart(WorkerNoUpgradeFree, adv_name);
     }
 

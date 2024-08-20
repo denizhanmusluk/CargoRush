@@ -175,12 +175,12 @@ public class CharacterUpgradeManager : MonoBehaviour
 
     public void MoveSpeedUpgrade_ADV_Click()
     {
-        string adv_name = "";
+        string adv_name = "M" + (PlayerPrefs.GetInt("level") + 1).ToString() + "-CharacterSpeedUpgrade" + Globals.characterSpeedLevel.ToString() + "_REWARDED";
         ADVManager.Instance.RewardedStart(MoveSpeedUpgradeFree, adv_name);
     }
     public void StackCapacityUpgrade_ADV_Click()
     {
-        string adv_name = "";
+        string adv_name = "M" + (PlayerPrefs.GetInt("level") + 1).ToString() + "-CharacterCapacityUpgrade" + Globals.stackCapacityLevel.ToString() + "_REWARDED";
         ADVManager.Instance.RewardedStart(StackCapacityUpgradeFree, adv_name);
     }
     public void MoveSpeedUpgradeFree()
