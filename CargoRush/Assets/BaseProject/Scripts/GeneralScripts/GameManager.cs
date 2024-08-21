@@ -22,7 +22,9 @@ public class GameManager : Observer
     [SerializeField] int createTicket;
     public void GameAnalyticsTag(string tag)
     {
-        GameAnalytics.NewDesignEvent(tag);
+        //GameAnalytics.NewDesignEvent(tag);
+        Analytics.DesignEvent(tag);
+        //Analytics.DesignEvent("start_flying_section", new DesignDimensions($"level_{levelId}", character_name, score: level_playtime));
         Debug.Log(tag);
     }
     void Awake()
