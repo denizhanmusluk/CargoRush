@@ -74,6 +74,7 @@ public class CeoInfoManager : MonoBehaviour
     public void BoxUIOpen()
     {
         BoxSellingInfoManager.Instance.infoPanelGO.SetActive(true);
+        BoxSellingInfoManager.Instance.priceText.text = "";
         BoxSellingInfoManager.Instance.priceButton.interactable = true;
         BoxValueInitialize();
         PlayerController.Instance.PlayerControlDeActive();
@@ -82,21 +83,25 @@ public class CeoInfoManager : MonoBehaviour
     void BoxValueInitialize()
     {
         int priceValue = 0;
+        int totalBoxCount = 0;
         for (int i = 0; i < Globals.collectableLevel + 1; i++)
         {
 
             int boxCount = PlayerPrefs.GetInt((i + 1) + "boxcounter" + PlayerPrefs.GetInt("level"));
             Debug.Log("boxcount" + PlayerPrefs.GetInt((i + 1) + "boxcounter" + PlayerPrefs.GetInt("level")));
 
-            BoxSellingInfoManager.Instance.boxSellingInfos[i].gameObject.SetActive(true);
-            BoxSellingInfoManager.Instance.boxSellingInfos[i].sellingBoxCount = boxCount;
-            BoxSellingInfoManager.Instance.boxSellingInfos[i].productName = productNameList[i];
-            BoxSellingInfoManager.Instance.boxSellingInfos[i].TextSet();
-            //BoxSellingInfoManager.Instance.boxSellingInfos[i].boxCountText.text = productNameList[i] + " x" + PlayerPrefs.GetInt("box" + (i + 1).ToString() + "counter" + PlayerPrefs.GetInt("level")).ToString();
+            //BoxSellingInfoManager.Instance.boxSellingInfos[i].gameObject.SetActive(true);
+            //BoxSellingInfoManager.Instance.boxSellingInfos[i].sellingBoxCount = boxCount;
+            //BoxSellingInfoManager.Instance.boxSellingInfos[i].productName = productNameList[i];
+            //BoxSellingInfoManager.Instance.boxSellingInfos[i].TextSet();
 
             priceValue += boxCount * priceList[i];
+            totalBoxCount += boxCount;
         }
-        
+        BoxSellingInfoManager.Instance.box_SellingInfos.gameObject.SetActive(true);
+        BoxSellingInfoManager.Instance.box_SellingInfos.sellingBoxCount = totalBoxCount;
+        BoxSellingInfoManager.Instance.box_SellingInfos.TextSet2();
+
         BoxSellingInfoManager.Instance.priceValue = priceValue;
         BoxSellingInfoManager.Instance.SetBonusText();
         //BoxSellingInfoManager.Instance.priceText.text = priceValue.ToString();

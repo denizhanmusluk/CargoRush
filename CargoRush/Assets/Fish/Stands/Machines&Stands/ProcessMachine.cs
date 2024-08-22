@@ -376,8 +376,10 @@ public class ProcessMachine : Stand, IStandUpgrade, IMachineActive
             {
                 MissionManager.Instance.tapingLineBuyMission.gameObject.SetActive(true);
             }
-          
-            FishDropArea.Instance.NewProductActive(productName);
+            if (collectableLevel == 1 && PlayerPrefs.GetInt("level") == 0)
+            {
+                FishDropArea.Instance.NewProductActive(productName);
+            }
             FishDropArea.Instance.ReactiveActivator();
 
             yield return new WaitForSeconds(5);

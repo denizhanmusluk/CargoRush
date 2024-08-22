@@ -14,7 +14,10 @@ public class BoxSellingInfo : MonoBehaviour
     public Image boxImg;
     private void OnEnable()
     {
-        boxImg.sprite = spriteList[PlayerPrefs.GetInt("level")];
+        if (boxImg != null)
+        {
+            boxImg.sprite = spriteList[PlayerPrefs.GetInt("level")];
+        }
     }
     public void TextSet()
     {
@@ -36,4 +39,25 @@ public class BoxSellingInfo : MonoBehaviour
         boxCountText.text = productName + " x" + sellingBoxCount.ToString();
 
     }
+
+    public void TextSet2()
+    {
+        StartCoroutine(TextLerp2());
+    }
+    IEnumerator TextLerp2()
+    {
+        yield return new WaitForSeconds(openDelayTime);
+        float sellingCounter = 0;
+        float counter = 0f;
+        while (counter < 1f)
+        {
+            counter += Time.deltaTime;
+            sellingCounter = Mathf.Lerp(0, sellingBoxCount, counter);
+            boxCountText.text = ((int)sellingCounter).ToString();
+            yield return null;
+        }
+        boxCountText.text = sellingBoxCount.ToString();
+
+    }
+
 }

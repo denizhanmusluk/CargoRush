@@ -125,6 +125,8 @@ public class StandRaw : Stand
             TutorialManager.Instance.bandTut_3.SetActive(false);
             IndicatorManager.Instance.IndicaorDeActive();
 
+            TutorialManager.Instance.SkinTutorialStart();
+
             //PlayerPrefs.SetInt("skinactive", 1);
             //StoreManager.Instance.storeButton.SetActive(true);
             //TutorialManager.Instance.SkinTutorialStart();

@@ -709,6 +709,8 @@ public class MineCrusher : Stand, IStandUpgrade
             }
             yield return new WaitForSeconds(0.2f);
             newProduct.productCollectActive = true;
+            newProduct.box.SetActive(false);
+            newProduct.boxSinglePart.SetActive(true);
         }
         //icedFish.collectActive = true;
 

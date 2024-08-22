@@ -225,10 +225,10 @@ public class StandFishCar : Stand,IMoneyArea
 
         PlayerPrefs.SetInt("completerodercount", PlayerPrefs.GetInt("completerodercount") + 1);
 
-        if (PlayerPrefs.GetInt("completerodercount") == 3)
-        {
-            HRUpgradeManager.Instance.UpgradeButtonOpener();
-        }
+        //if (PlayerPrefs.GetInt("completerodercount") == 3)
+        //{
+        //    HRUpgradeManager.Instance.UpgradeButtonOpener();
+        //}
         if (PlayerPrefs.GetInt("completerodercount") == 1)
         {
             FishDropArea.Instance.GarbageDroppingAfterTutorial();
@@ -459,6 +459,10 @@ public class StandFishCar : Stand,IMoneyArea
             Transform targetTR = currentCar.GetComponent<FishCar>().fishPosTR[(droppedCollectionList.Count - 1) % currentCar.GetComponent<FishCar>().fishPosTR.Length];
             Vector3 dropPos = targetTR.position + new Vector3(0, deltaY * 0.3f, 0);
             StartCoroutine(Drop(targetTR, dropPos, droppingCollection, Time.deltaTime));
+            if (PlayerPrefs.GetInt("completerodercount") == 2)
+            {
+                HRUpgradeManager.Instance.UpgradeButtonOpener();
+            }
             if (_stackCollect.player)
             {
                 VibratoManager.Instance.LightVibration();
@@ -551,6 +555,7 @@ public class StandFishCar : Stand,IMoneyArea
             collectable.transform.parent = currentCar.GetComponent<FishCar>().fishPosParent;
 
         }
+    
     }
 
     void DropMoney(List<Collectable> droppingCollectionList)

@@ -22,7 +22,7 @@ public class VibratoManager : MonoBehaviour
     {
         if (lightVibratoActive && PlayerPrefs.GetInt("vibrationclose") == 0)
         {
-            Vibration.Vibrate(70, 85, true);
+            Vibration.Vibrate(30, 95, true);
             //TapticManager.Impact(ImpactFeedback.Light);
             StartCoroutine(LightVibratoActivator());
         }
@@ -31,7 +31,7 @@ public class VibratoManager : MonoBehaviour
     {
         if (mediumVibratoActive && PlayerPrefs.GetInt("vibrationclose") == 0)
         {
-            Vibration.Vibrate(70, 170, true);
+            Vibration.Vibrate(50, 150, true);
             //TapticManager.Impact(ImpactFeedback.Medium);
             StartCoroutine(MediumVibratoActivator());
         }

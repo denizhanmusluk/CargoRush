@@ -332,12 +332,12 @@ public class FishDropArea : MonoBehaviour
     }
     IEnumerator ViewCamera(string newProductName)
     {
-        TutorialManager.Instance.newProductTutorialGO.SetActive(true);
-        TutorialManager.Instance.newProducttext.text = newProductName;
+        //TutorialManager.Instance.newProductTutorialGO.SetActive(true);
+        //TutorialManager.Instance.newProducttext.text = newProductName;
         productViewCamera.Priority = 2;
         yield return new WaitForSeconds(5f);
         productViewCamera.Priority = 0;
-        TutorialManager.Instance.newProductTutorialGO.SetActive(false);
+        //TutorialManager.Instance.newProductTutorialGO.SetActive(false);
     }
 
 

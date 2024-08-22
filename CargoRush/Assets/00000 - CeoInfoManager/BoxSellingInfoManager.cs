@@ -9,6 +9,7 @@ public class BoxSellingInfoManager : MonoBehaviour
     private static BoxSellingInfoManager _instance = null;
     public static BoxSellingInfoManager Instance => _instance;
     public List<BoxSellingInfo> boxSellingInfos = new List<BoxSellingInfo>();
+    public BoxSellingInfo box_SellingInfos;
     public GameObject infoPanelGO;
     public int priceValue = 0;
     public Button priceButton;
