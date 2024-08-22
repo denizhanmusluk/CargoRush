@@ -11,6 +11,8 @@ public class HoverboardSkill : MonoBehaviour
     bool collectActive = true;
     [SerializeField] GameObject cicrcle;
     [SerializeField] GameObject particleGO;
+    int rewardSelect = 0;
+    public List<GameObject> speedModelList = new List<GameObject>();
     private void OnTriggerEnter(Collider other)
     {
         //if (other.GetComponent<PlayerController>() != null && collectActive)
@@ -42,6 +44,8 @@ public class HoverboardSkill : MonoBehaviour
     private void Start()
     {
         StartCoroutine(ViewCounter());
+        rewardSelect = PlayerPrefs.GetInt("speedskil") % 3;
+        speedModelList[rewardSelect].SetActive(true);
     }
     IEnumerator ViewCounter()
     {
