@@ -80,6 +80,11 @@ public class TutorialManager : MonoBehaviour
         //    clickUpgradeButtonGO.SetActive(true);
         //    PlayerController.Instance.PlayerControlDeActive();
         //}
+
+        if (ShopManager.Instance.standOnlineGO2 != null)
+        {
+            ShopManager.Instance.standOnlineGO2.SetActive(true);
+        }
     }
     void StarterMissions()
     {

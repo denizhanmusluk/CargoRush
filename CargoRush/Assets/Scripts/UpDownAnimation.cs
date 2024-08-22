@@ -9,7 +9,7 @@ public class UpDownAnimation : MonoBehaviour
     Vector3 firstPos;
     void Start()
     {
-        firstPos = transform.position;
+        firstPos = transform.localPosition;
         StartCoroutine(UpDownAnim());
 
     }
@@ -24,7 +24,7 @@ public class UpDownAnimation : MonoBehaviour
             counter += positionSpeed * Time.deltaTime;
             value = Mathf.Abs(Mathf.Sin(counter));
             value *= 0.05f * positionFactor;
-            transform.position = firstPos + Vector3.up * value;
+            transform.localPosition = firstPos + Vector3.up * value;
 
             yield return null;
 

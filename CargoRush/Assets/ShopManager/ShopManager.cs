@@ -37,6 +37,7 @@ public class ShopManager : MonoBehaviour
     public float nextLevelShowRatio;
 
     public GameObject standOnlineGO;
+    public GameObject standOnlineGO2;
     public TextMeshProUGUI ratioText;
     public Slider shopQuestSlider;
 
