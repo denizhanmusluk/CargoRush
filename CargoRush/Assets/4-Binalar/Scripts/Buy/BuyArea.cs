@@ -6,6 +6,18 @@ using TMPro;
 using Cinemachine;
 public class BuyArea : MonoBehaviour, BuyCamera
 {
+    public int cost;
+    [SerializeField] bool cameraPassive;
+
+    [SerializeField] bool thisBuyViewActive;
+
+    public bool viewThisCamera
+    {
+        get { return thisBuyViewActive; }
+        set { thisBuyViewActive = value; }
+    }
+
+
     public string gaTag;
 
     public bool standUpgradeActive = false;
@@ -14,7 +26,6 @@ public class BuyArea : MonoBehaviour, BuyCamera
     public bool shopBayArea = false;
     public int shopId;
     public int ratioValue;
-    [SerializeField] bool cameraPassive;
     public bool IndicatorActive;
     public bool checkMoneyActive;
 
@@ -30,7 +41,7 @@ public class BuyArea : MonoBehaviour, BuyCamera
     [SerializeField] GameObject[] closeAreas;
     //[SerializeField] Transform buildPosTR;
 
-    public int cost;
+
     public int currentAmount;
     int deltaCost = 50;
     [SerializeField] public Image outline;
@@ -44,7 +55,6 @@ public class BuyArea : MonoBehaviour, BuyCamera
 
     float counterTime = 0;
     [SerializeField] bool sellActive = true;
-    [SerializeField] bool thisBuyViewActive;
 
     [SerializeField] bool tipUpActive = false;
     [SerializeField] int tipId;
@@ -54,6 +64,8 @@ public class BuyArea : MonoBehaviour, BuyCamera
         get { return thisBuyViewCamera; }
         set { thisBuyViewCamera = value; }
     }
+  
+
     public GameObject transparentModel_GO;
     public GameObject showBuyPNG_GO;
     public GameObject lockedPNG_GO;
@@ -332,8 +344,9 @@ public class BuyArea : MonoBehaviour, BuyCamera
         }
         if (standUpgradeActive)
         {
-            string _tag = "M" + (PlayerPrefs.GetInt("level") + 1).ToString() + "-" + gaTag;
-            GameManager.Instance.GameAnalyticsTag(_tag);
+            //string _tag = "M" + (PlayerPrefs.GetInt("level") + 1).ToString() + "-" + gaTag;
+            //GameManager.Instance.GameAnalyticsTag(_tag);
+            GameManager.Instance.HomaAnalyticsTag(gaTag, PlayerPrefs.GetInt("level") + 1,standUpgradeLevel);
             AudioManager.Instance.UpgradeSound();
         }
         else
@@ -469,7 +482,7 @@ public class BuyArea : MonoBehaviour, BuyCamera
             {
                 yield return new WaitForSeconds(0.5f);
 
-                if (buyAreas[i].GetComponent<BuyCamera>() != null)
+                if (buyAreas[i].GetComponent<BuyCamera>() != null && buyAreas[i].GetComponent<BuyCamera>().viewThisCamera)
                 {
                     buyAreas[i].GetComponent<BuyCamera>().buyCamera.Priority = ((i + 1) * 10);
                     if (buyAreas[i].GetComponent<BuyArea>() != null)

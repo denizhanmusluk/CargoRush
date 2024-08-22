@@ -25,6 +25,8 @@ public class HRWorkerArea : MonoBehaviour, BuyCamera
         get { return thisBuyViewCamera; }
         set { thisBuyViewCamera = value; }
     }
+    public bool viewThisCamera { get; set; }
+
     void Start()
     {
         workerUpgradePanel = HRUpgradeManager.Instance.workerUpgradePanel;

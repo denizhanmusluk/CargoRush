@@ -498,7 +498,9 @@ public class UIManager : Subject
         string adv_name = tag;
 
         ADVManager.Instance.RewardedStart(HoverboardSkillClick,adv_name);
-        GameManager.Instance.GameAnalyticsTag(tag);
+        //GameManager.Instance.GameAnalyticsTag(tag);
+        GameManager.Instance.HomaAnalyticsTag(tag, PlayerPrefs.GetInt("level") + 1);
+
     }
     public void HoverboardSkillClick()
     {
@@ -522,7 +524,9 @@ public class UIManager : Subject
         string adv_name = tag;
 
         ADVManager.Instance.RewardedStart(CapacitySkillClick,adv_name);
-        GameManager.Instance.GameAnalyticsTag(tag);
+        //GameManager.Instance.GameAnalyticsTag(tag);
+        GameManager.Instance.HomaAnalyticsTag(tag, PlayerPrefs.GetInt("level") + 1);
+
     }
     public void CapacitySkillClick()
     {
@@ -548,7 +552,9 @@ public class UIManager : Subject
 
         ADVManager.Instance.RewardedStart(DoubleIncomeSkillClick,adv_name);
 
-        GameManager.Instance.GameAnalyticsTag(tag);
+        //GameManager.Instance.GameAnalyticsTag(tag);
+        GameManager.Instance.HomaAnalyticsTag(tag, PlayerPrefs.GetInt("level") + 1);
+
     }
 
     public void DoubleIncomeSkillClick()
@@ -579,7 +585,9 @@ public class UIManager : Subject
 
         ADVManager.Instance.RewardedStart(FreeMoneySkill,adv_name);
 
-        GameManager.Instance.GameAnalyticsTag(tag);
+        //GameManager.Instance.GameAnalyticsTag(tag);
+        GameManager.Instance.HomaAnalyticsTag(tag, PlayerPrefs.GetInt("level") + 1);
+
     }
 
     public void FreeMoneySkill()

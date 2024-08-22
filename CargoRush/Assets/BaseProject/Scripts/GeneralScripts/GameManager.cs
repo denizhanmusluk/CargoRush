@@ -20,12 +20,28 @@ public class GameManager : Observer
     [SerializeField] int createMoney;
     [SerializeField] int createMoney2;
     [SerializeField] int createTicket;
-    public void GameAnalyticsTag(string tag)
+    public void GameAnalyticsTag(string tagTitle)
     {
         //GameAnalytics.NewDesignEvent(tag);
-        Analytics.DesignEvent(tag);
+        Analytics.DesignEvent(tagTitle);
         //Analytics.DesignEvent("start_flying_section", new DesignDimensions($"level_{levelId}", character_name, score: level_playtime));
-        Debug.Log(tag);
+        Debug.Log(tagTitle);
+    }
+    public void HomaAnalyticsTag(string tagTitle,int levelId)
+    {
+        Analytics.DesignEvent(tagTitle, new DesignDimensions($"level_{levelId}"));
+    }
+    public void HomaAnalyticsTag(string tagTitle, int levelId,int upgradeLevel)
+    {
+        Analytics.DesignEvent(tagTitle, new DesignDimensions($"level_{levelId}" , $"upgradeLevel_{upgradeLevel}"));
+    }
+    public void CourierLevelStartedAnalytic(int lvlId)
+    {
+        Analytics.LevelStarted(lvlId);
+    }
+    public void CourierLevelCompleted()
+    {
+        Analytics.LevelCompleted();
     }
     void Awake()
     {

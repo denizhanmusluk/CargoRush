@@ -62,21 +62,24 @@ public class TutorialManager : MonoBehaviour
     }
     IEnumerator TutorialCompletedCheckDelay()
     {
-        if (PlayerPrefs.GetInt("upgradeclicktutorial") == 1)
-        {
-            yield return new WaitForSeconds(2);
-        }
-        else
-        {
-            yield return new WaitForSeconds(10);
-        }
-        HRUpgradeManager.Instance.upgradeButton.SetActive(true);
-        if (PlayerPrefs.GetInt("upgradeclicktutorial") == 0)
-        {
-            PlayerPrefs.SetInt("upgradeclicktutorial", 1);
-            clickUpgradeButtonGO.SetActive(true);
-            PlayerController.Instance.PlayerControlDeActive();
-        }
+        yield return new WaitForSeconds(1);
+        IndicatorManager.Instance.KeepCollectTutorial();
+
+        //if (PlayerPrefs.GetInt("upgradeclicktutorial") == 1)
+        //{
+        //    yield return new WaitForSeconds(2);
+        //}
+        //else
+        //{
+        //    yield return new WaitForSeconds(10);
+        //}
+        //HRUpgradeManager.Instance.upgradeButton.SetActive(true);
+        //if (PlayerPrefs.GetInt("upgradeclicktutorial") == 0)
+        //{
+        //    PlayerPrefs.SetInt("upgradeclicktutorial", 1);
+        //    clickUpgradeButtonGO.SetActive(true);
+        //    PlayerController.Instance.PlayerControlDeActive();
+        //}
     }
     void StarterMissions()
     {

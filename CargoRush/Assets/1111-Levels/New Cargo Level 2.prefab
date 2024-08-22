@@ -8909,6 +8909,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3085283472667433881, guid: 78bad3fa895233b488dbc34b60fa998e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3085283472667605973, guid: 78bad3fa895233b488dbc34b60fa998e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.2
@@ -11690,7 +11694,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 959860251286046510, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: gaTag
-      value: NewDeliverySlot1-Upgrade4
+      value: NewDeliverySlot1-Upgrade
       objectReference: {fileID: 0}
     - target: {fileID: 959860251286046510, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: buyName
@@ -11703,6 +11707,10 @@ PrefabInstance:
     - target: {fileID: 959860251286046510, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: shopBayArea
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 959860251286046510, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: upgradeLevel
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 959860251286046510, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: currentCostBuild
@@ -11782,7 +11790,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3603617195142099203, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: gaTag
-      value: NewDeliverySlot1-Upgrade1
+      value: NewDeliverySlot1-Upgrade
       objectReference: {fileID: 0}
     - target: {fileID: 3603617195142099203, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: buyName
@@ -11794,6 +11802,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3603617195142099203, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: shopBayArea
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3603617195142099203, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: upgradeLevel
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3603617195142099203, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
@@ -11970,7 +11982,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8270834417077037967, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: gaTag
-      value: NewDeliverySlot1-Upgrade3
+      value: NewDeliverySlot1-Upgrade
       objectReference: {fileID: 0}
     - target: {fileID: 8270834417077037967, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: buyName
@@ -11983,6 +11995,10 @@ PrefabInstance:
     - target: {fileID: 8270834417077037967, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: shopBayArea
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8270834417077037967, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: upgradeLevel
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8270834417077037967, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: currentCostBuild
@@ -12006,7 +12022,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8986497473841602079, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: gaTag
-      value: NewDeliverySlot1-Upgrade2
+      value: NewDeliverySlot1-Upgrade
       objectReference: {fileID: 0}
     - target: {fileID: 8986497473841602079, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: buyName
@@ -12019,6 +12035,10 @@ PrefabInstance:
     - target: {fileID: 8986497473841602079, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: shopBayArea
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8986497473841602079, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: upgradeLevel
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8986497473841602079, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: currentCostBuild
@@ -12439,43 +12459,43 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: boxCountTotal.Array.data[0].x
-      value: 48
+      value: 36
       objectReference: {fileID: 0}
     - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: boxCountTotal.Array.data[0].y
-      value: 68
+      value: 56
       objectReference: {fileID: 0}
     - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: boxCountTotal.Array.data[1].x
-      value: 68
+      value: 56
       objectReference: {fileID: 0}
     - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: boxCountTotal.Array.data[1].y
-      value: 88
+      value: 76
       objectReference: {fileID: 0}
     - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: boxCountTotal.Array.data[2].x
-      value: 88
+      value: 76
       objectReference: {fileID: 0}
     - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: boxCountTotal.Array.data[2].y
-      value: 108
+      value: 96
       objectReference: {fileID: 0}
     - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: boxCountTotal.Array.data[3].x
-      value: 108
+      value: 96
       objectReference: {fileID: 0}
     - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: boxCountTotal.Array.data[3].y
-      value: 130
+      value: 118
       objectReference: {fileID: 0}
     - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: boxCountTotal.Array.data[4].x
-      value: 130
+      value: 118
       objectReference: {fileID: 0}
     - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: boxCountTotal.Array.data[4].y
-      value: 150
+      value: 138
       objectReference: {fileID: 0}
     - target: {fileID: 959860251286046510, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: cost
@@ -12483,7 +12503,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 959860251286046510, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: gaTag
-      value: SeaShippingLine-Upgrade4
+      value: SeaShippingLine-Upgrade
       objectReference: {fileID: 0}
     - target: {fileID: 959860251286046510, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: buyName
@@ -12496,6 +12516,10 @@ PrefabInstance:
     - target: {fileID: 959860251286046510, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: shopBayArea
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 959860251286046510, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: upgradeLevel
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 959860251286046510, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: currentCostBuild
@@ -12699,11 +12723,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3603617195142099203, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: gaTag
-      value: SeaShippingLine-Upgrade1
+      value: SeaShippingLine-Upgrade
       objectReference: {fileID: 0}
     - target: {fileID: 3603617195142099203, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: buyName
       value: courier6upgrade1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3603617195142099203, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: upgradeLevel
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3603617195142099203, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: currentCostBuild
@@ -13067,11 +13095,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8270834417077037967, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: gaTag
-      value: SeaShippingLine-Upgrade3
+      value: SeaShippingLine-Upgrade
       objectReference: {fileID: 0}
     - target: {fileID: 8270834417077037967, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: buyName
       value: courier6upgrade3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8270834417077037967, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: upgradeLevel
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8270834417077037967, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: currentCostBuild
@@ -13083,7 +13115,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8635433451661696968, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -16.7
+      value: -33.2
       objectReference: {fileID: 0}
     - target: {fileID: 8701131099921327550, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: m_LocalPosition.x
@@ -13107,11 +13139,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8986497473841602079, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: gaTag
-      value: SeaShippingLine-Upgrade2
+      value: SeaShippingLine-Upgrade
       objectReference: {fileID: 0}
     - target: {fileID: 8986497473841602079, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: buyName
       value: courier6upgrade2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8986497473841602079, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: upgradeLevel
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8986497473841602079, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: currentCostBuild
@@ -13365,7 +13401,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 959860251286046510, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: gaTag
-      value: NewDeliverySlot5-Upgrade4
+      value: NewDeliverySlot5-Upgrade
       objectReference: {fileID: 0}
     - target: {fileID: 959860251286046510, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: buyName
@@ -13378,6 +13414,10 @@ PrefabInstance:
     - target: {fileID: 959860251286046510, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: shopBayArea
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 959860251286046510, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: upgradeLevel
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 959860251286046510, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: currentCostBuild
@@ -13469,7 +13509,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3603617195142099203, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: gaTag
-      value: NewDeliverySlot5-Upgrade1
+      value: NewDeliverySlot5-Upgrade
       objectReference: {fileID: 0}
     - target: {fileID: 3603617195142099203, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: buyName
@@ -13481,6 +13521,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3603617195142099203, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: shopBayArea
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3603617195142099203, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: upgradeLevel
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3603617195142099203, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
@@ -13649,7 +13693,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8270834417077037967, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: gaTag
-      value: NewDeliverySlot5-Upgrade3
+      value: NewDeliverySlot5-Upgrade
       objectReference: {fileID: 0}
     - target: {fileID: 8270834417077037967, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: buyName
@@ -13662,6 +13706,10 @@ PrefabInstance:
     - target: {fileID: 8270834417077037967, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: shopBayArea
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8270834417077037967, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: upgradeLevel
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8270834417077037967, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: currentCostBuild
@@ -13685,7 +13733,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8986497473841602079, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: gaTag
-      value: NewDeliverySlot5-Upgrade2
+      value: NewDeliverySlot5-Upgrade
       objectReference: {fileID: 0}
     - target: {fileID: 8986497473841602079, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: buyName
@@ -13698,6 +13746,10 @@ PrefabInstance:
     - target: {fileID: 8986497473841602079, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: shopBayArea
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8986497473841602079, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: upgradeLevel
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8986497473841602079, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: currentCostBuild
@@ -18446,7 +18498,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 959860251286046510, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: gaTag
-      value: NewDeliverySlot2-Upgrade4
+      value: NewDeliverySlot2-Upgrade
       objectReference: {fileID: 0}
     - target: {fileID: 959860251286046510, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: buyName
@@ -18459,6 +18511,10 @@ PrefabInstance:
     - target: {fileID: 959860251286046510, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: shopBayArea
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 959860251286046510, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: upgradeLevel
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 959860251286046510, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: currentCostBuild
@@ -18566,7 +18622,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3603617195142099203, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: gaTag
-      value: NewDeliverySlot2-Upgrade1
+      value: NewDeliverySlot2-Upgrade
       objectReference: {fileID: 0}
     - target: {fileID: 3603617195142099203, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: buyName
@@ -18578,6 +18634,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3603617195142099203, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: shopBayArea
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3603617195142099203, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: upgradeLevel
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3603617195142099203, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
@@ -18758,7 +18818,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8270834417077037967, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: gaTag
-      value: NewDeliverySlot2-Upgrade3
+      value: NewDeliverySlot2-Upgrade
       objectReference: {fileID: 0}
     - target: {fileID: 8270834417077037967, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: buyName
@@ -18771,6 +18831,10 @@ PrefabInstance:
     - target: {fileID: 8270834417077037967, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: shopBayArea
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8270834417077037967, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: upgradeLevel
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8270834417077037967, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: currentCostBuild
@@ -18794,7 +18858,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8986497473841602079, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: gaTag
-      value: NewDeliverySlot2-Upgrade2
+      value: NewDeliverySlot2-Upgrade
       objectReference: {fileID: 0}
     - target: {fileID: 8986497473841602079, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: buyName
@@ -18807,6 +18871,10 @@ PrefabInstance:
     - target: {fileID: 8986497473841602079, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: shopBayArea
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8986497473841602079, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: upgradeLevel
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8986497473841602079, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: currentCostBuild
@@ -18974,7 +19042,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 959860251286046510, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: gaTag
-      value: NewDeliverySlot4-Upgrade4
+      value: NewDeliverySlot4-Upgrade
       objectReference: {fileID: 0}
     - target: {fileID: 959860251286046510, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: buyName
@@ -18987,6 +19055,10 @@ PrefabInstance:
     - target: {fileID: 959860251286046510, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: shopBayArea
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 959860251286046510, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: upgradeLevel
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 959860251286046510, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: currentCostBuild
@@ -19078,7 +19150,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3603617195142099203, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: gaTag
-      value: NewDeliverySlot4-Upgrade1
+      value: NewDeliverySlot4-Upgrade
       objectReference: {fileID: 0}
     - target: {fileID: 3603617195142099203, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: buyName
@@ -19090,6 +19162,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3603617195142099203, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: shopBayArea
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3603617195142099203, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: upgradeLevel
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3603617195142099203, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
@@ -19258,7 +19334,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8270834417077037967, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: gaTag
-      value: NewDeliverySlot4-Upgrade3
+      value: NewDeliverySlot4-Upgrade
       objectReference: {fileID: 0}
     - target: {fileID: 8270834417077037967, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: buyName
@@ -19271,6 +19347,10 @@ PrefabInstance:
     - target: {fileID: 8270834417077037967, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: shopBayArea
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8270834417077037967, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: upgradeLevel
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8270834417077037967, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: currentCostBuild
@@ -19294,7 +19374,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8986497473841602079, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: gaTag
-      value: NewDeliverySlot4-Upgrade2
+      value: NewDeliverySlot4-Upgrade
       objectReference: {fileID: 0}
     - target: {fileID: 8986497473841602079, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: buyName
@@ -19307,6 +19387,10 @@ PrefabInstance:
     - target: {fileID: 8986497473841602079, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: shopBayArea
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8986497473841602079, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: upgradeLevel
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8986497473841602079, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: currentCostBuild
@@ -29735,7 +29819,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 959860251286046510, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: gaTag
-      value: NewDeliverySlot3-Upgrade4
+      value: NewDeliverySlot3-Upgrade
       objectReference: {fileID: 0}
     - target: {fileID: 959860251286046510, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: buyName
@@ -29748,6 +29832,10 @@ PrefabInstance:
     - target: {fileID: 959860251286046510, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: shopBayArea
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 959860251286046510, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: upgradeLevel
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 959860251286046510, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: currentCostBuild
@@ -29839,7 +29927,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3603617195142099203, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: gaTag
-      value: NewDeliverySlot3-Upgrade1
+      value: NewDeliverySlot3-Upgrade
       objectReference: {fileID: 0}
     - target: {fileID: 3603617195142099203, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: buyName
@@ -29851,6 +29939,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3603617195142099203, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: shopBayArea
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3603617195142099203, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: upgradeLevel
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3603617195142099203, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
@@ -30023,7 +30115,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8270834417077037967, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: gaTag
-      value: NewDeliverySlot3-Upgrade3
+      value: NewDeliverySlot3-Upgrade
       objectReference: {fileID: 0}
     - target: {fileID: 8270834417077037967, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: buyName
@@ -30036,6 +30128,10 @@ PrefabInstance:
     - target: {fileID: 8270834417077037967, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: shopBayArea
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8270834417077037967, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: upgradeLevel
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8270834417077037967, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: currentCostBuild
@@ -30059,7 +30155,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8986497473841602079, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: gaTag
-      value: NewDeliverySlot3-Upgrade2
+      value: NewDeliverySlot3-Upgrade
       objectReference: {fileID: 0}
     - target: {fileID: 8986497473841602079, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: buyName
@@ -30072,6 +30168,10 @@ PrefabInstance:
     - target: {fileID: 8986497473841602079, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: shopBayArea
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8986497473841602079, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: upgradeLevel
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8986497473841602079, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: currentCostBuild

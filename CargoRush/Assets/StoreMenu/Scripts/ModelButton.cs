@@ -127,7 +127,8 @@ public class ModelButton : MonoBehaviour
         advCountText.text = PlayerPrefs.GetInt("adv" + buyButton.id).ToString() + "/" + totalADV_Count.ToString();
 
         string tag = skinName + PlayerPrefs.GetInt("adv" + buyButton.id).ToString();
-        GameManager.Instance.GameAnalyticsTag(tag);
+        //GameManager.Instance.GameAnalyticsTag(tag);
+        GameManager.Instance.HomaAnalyticsTag(tag, PlayerPrefs.GetInt("level") + 1);
 
         OpenedCheck();
     }

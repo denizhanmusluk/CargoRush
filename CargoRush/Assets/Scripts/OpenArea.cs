@@ -11,8 +11,11 @@ public class OpenArea : MonoBehaviour
         if (PlayerPrefs.GetInt(areaName + (PlayerPrefs.GetInt("level") + 1).ToString()) == 0)
         {
             PlayerPrefs.SetInt(areaName + (PlayerPrefs.GetInt("level") + 1).ToString(), 1);
-            string _tag = "M" + (PlayerPrefs.GetInt("level") + 1).ToString() + "-" + areaName;
-            GameManager.Instance.GameAnalyticsTag(_tag);
+            //string _tag = "M" + (PlayerPrefs.GetInt("level") + 1).ToString() + "-" + areaName;
+            //GameManager.Instance.GameAnalyticsTag(_tag);
+            GameManager.Instance.HomaAnalyticsTag(areaName, PlayerPrefs.GetInt("level") + 1);
+
+
             //GameAnalytics.NewDesignEvent(str);
         }
     }

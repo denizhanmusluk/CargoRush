@@ -40,6 +40,7 @@ public class FishDropArea : MonoBehaviour
 
     public Transform createPos, forceDirPos;
     public List<Transform> createPosList = new List<Transform>();
+    public List<Transform> firstCreatePosList = new List<Transform>();
 
     public int totalProductCapacity = 50;
 
@@ -114,11 +115,27 @@ public class FishDropArea : MonoBehaviour
         //IndicatorManager.Instance._FishDropAreaList.Add(this);
         CollectProductList.Add(_CollectProduct);
         //_CollectProduct._FishDropArea = this;
-        StartCoroutine(GarbageDropping());
+
+        if (PlayerPrefs.GetInt("firstcreateproduct") == 0)
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                GarbageCreate(0);
+            }
+            PlayerPrefs.SetInt("firstcreateproduct", 1);
+        }
+        else
+        {
+            StartCoroutine(GarbageDropping());
+        }
         //CarSlotsReset();
         StartCoroutine(StartDelay());
     }
    [SerializeField] float createTime;
+    public void GarbageDroppingAfterTutorial()
+    {
+        StartCoroutine(GarbageDropping());
+    }
     IEnumerator GarbageDropping()
     {
         while (true)
@@ -172,8 +189,21 @@ public class FishDropArea : MonoBehaviour
     {
         dropCount++;
         int createPosSelect = Random.Range(0, createPosList.Count);
+        //if (PlayerPrefs.GetInt("firstcreateproduct") == 0)
+        //{
+        //    createPosSelect = createPosList.Count - 1;
+        //}
         Collectable _fishCollect;
-        GameObject fsh = Instantiate(garbagePrefabs[id], createPosList[createPosSelect].position, Quaternion.identity);
+        GameObject fsh;
+
+        if (PlayerPrefs.GetInt("firstcreateproduct") == 0)
+        {
+            fsh = Instantiate(garbagePrefabs[id], firstCreatePosList[dropCount % firstCreatePosList.Count].position, Quaternion.identity);
+        }
+        else 
+        {
+            fsh = Instantiate(garbagePrefabs[id], createPosList[createPosSelect].position, Quaternion.identity);
+        }
         //GameObject fsh = Instantiate(garbagePrefabs[id], fishPosTR[posNo % fishPosTR.Length].position, Quaternion.identity);
         fsh.transform.rotation = Quaternion.Euler(0, Random.Range(-180, 180), 0);
         posNo++;

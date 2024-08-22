@@ -34,6 +34,8 @@ public class UpgradeWorker : MonoBehaviour, BuyCamera
         set { thisBuyViewCamera = value; }
     }
 
+    public bool viewThisCamera { get; set; }
+
     //Vector3 firstPos;
     //Quaternion firstRot;
     void Awake()

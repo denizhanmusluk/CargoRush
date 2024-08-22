@@ -22,7 +22,9 @@ public class ShowBuyRapairReward : MonoBehaviour
     {
         //processMachine.repairTimeCounter = processMachine.repairTime - 1;
         string tag = "InstantRepairRewarded";
-        GameManager.Instance.GameAnalyticsTag(tag);
+        //GameManager.Instance.GameAnalyticsTag(tag);
+        GameManager.Instance.HomaAnalyticsTag(tag, PlayerPrefs.GetInt("level") + 1);
+
         RepairManager.Instance.RepairWorkerStart();
         Canvas.SetActive(true);
         GameManager.Instance.ui.joyStick.SetActive(true);

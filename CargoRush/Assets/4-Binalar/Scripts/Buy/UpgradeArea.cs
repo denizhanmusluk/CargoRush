@@ -7,6 +7,7 @@ using Cinemachine;
 public class UpgradeArea : MonoBehaviour, BuyCamera
 {
     public string gaTag;
+    public int upgradeLevel;
     public int ratioValue;
     public bool shopBayArea = false;
 
@@ -36,6 +37,8 @@ public class UpgradeArea : MonoBehaviour, BuyCamera
         get { return thisBuyViewCamera; }
         set { thisBuyViewCamera = value; }
     }
+    public bool viewThisCamera { get; set; }
+
     //Vector3 firstPos;
     //Quaternion firstRot;
     void Awake()
@@ -175,8 +178,10 @@ public class UpgradeArea : MonoBehaviour, BuyCamera
     }
     void FirstOpenArea()
     {
-        string _tag = "M" + (PlayerPrefs.GetInt("level") + 1).ToString() + "-" + gaTag;
-        GameManager.Instance.GameAnalyticsTag(_tag);
+        //string _tag = "M" + (PlayerPrefs.GetInt("level") + 1).ToString() + "-" + gaTag;
+        //GameManager.Instance.GameAnalyticsTag(_tag);
+
+        GameManager.Instance.HomaAnalyticsTag(gaTag, PlayerPrefs.GetInt("level") + 1, upgradeLevel);
 
         StartCoroutine(BuyActivator());
 

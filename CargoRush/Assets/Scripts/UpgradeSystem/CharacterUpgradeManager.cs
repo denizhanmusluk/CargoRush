@@ -104,8 +104,9 @@ public class CharacterUpgradeManager : MonoBehaviour
                 PlayerController.Instance.GetComponent<BoingScale>().ScaleEffectTR(PlayerController.Instance.transform, 0.8f, 1f, 0.5f, Ease.OutElastic);
                 PlayerController.Instance.UpgradeTextSpawn("+Speed");
 
-                string tag = "M" + (PlayerPrefs.GetInt("level") + 1).ToString() + "-CharacterSpeedUpgrade" + Globals.characterSpeedLevel.ToString();
-                GameManager.Instance.GameAnalyticsTag(tag);
+                //string tag = "M" + (PlayerPrefs.GetInt("level") + 1).ToString() + "-CharacterSpeedUpgrade" + Globals.characterSpeedLevel.ToString();
+                //GameManager.Instance.GameAnalyticsTag(tag);
+                GameManager.Instance.HomaAnalyticsTag("CharacterSpeedUpgrade", PlayerPrefs.GetInt("level") + 1 , Globals.characterSpeedLevel);
 
                 float time = CoefficientTransformation.FormatSaniye(Globals.speedPlayTime);
 
@@ -127,8 +128,10 @@ public class CharacterUpgradeManager : MonoBehaviour
                 PlayerController.Instance.GetComponent<BoingScale>().ScaleEffectTR(PlayerController.Instance.transform, 0.8f, 1f, 0.5f, Ease.OutElastic);
                 PlayerController.Instance.UpgradeTextSpawn("+Capacity");
 
-                string tag = "M" + (PlayerPrefs.GetInt("level") + 1).ToString() + "-CharacterCapacityUpgrade" + Globals.stackCapacityLevel.ToString();
-                GameManager.Instance.GameAnalyticsTag(tag);
+                //string tag = "M" + (PlayerPrefs.GetInt("level") + 1).ToString() + "-CharacterCapacityUpgrade" + Globals.stackCapacityLevel.ToString();
+                //GameManager.Instance.GameAnalyticsTag(tag);
+                GameManager.Instance.HomaAnalyticsTag("CharacterCapacityUpgrade", PlayerPrefs.GetInt("level") + 1, Globals.stackCapacityLevel);
+
                 float time = CoefficientTransformation.FormatSaniye(Globals.speedPlayTime);
                 //GameAnalytics.NewDesignEvent(tag, time);
                 AudioManager.Instance.UpgradeSound();
@@ -195,8 +198,9 @@ public class CharacterUpgradeManager : MonoBehaviour
                 PlayerController.Instance.GetComponent<BoingScale>().ScaleEffectTR(PlayerController.Instance.transform, 0.8f, 1f, 0.5f, Ease.OutElastic);
                 PlayerController.Instance.UpgradeTextSpawn("+Speed");
 
-            string tag = "M" + (PlayerPrefs.GetInt("level") + 1).ToString() + "-CharacterSpeedUpgrade" + Globals.characterSpeedLevel.ToString() + "-REWARDED";
-            GameManager.Instance.GameAnalyticsTag(tag);
+            //string tag = "M" + (PlayerPrefs.GetInt("level") + 1).ToString() + "-CharacterSpeedUpgrade" + Globals.characterSpeedLevel.ToString() + "-REWARDED";
+            //GameManager.Instance.GameAnalyticsTag(tag);
+            GameManager.Instance.HomaAnalyticsTag("CharacterSpeedUpgrade", PlayerPrefs.GetInt("level") + 1, Globals.characterSpeedLevel);
 
 
         }
@@ -212,8 +216,10 @@ public class CharacterUpgradeManager : MonoBehaviour
             PlayerController.Instance.GetComponent<BoingScale>().ScaleEffectTR(PlayerController.Instance.transform, 0.8f, 1f, 0.5f, Ease.OutElastic);
             PlayerController.Instance.UpgradeTextSpawn("+Capacity");
 
-            string tag = "M" + (PlayerPrefs.GetInt("level") + 1).ToString() + "-CharacterCapacityUpgrade" + Globals.stackCapacityLevel.ToString() + "-REWARDED";
-            GameManager.Instance.GameAnalyticsTag(tag);
+            //string tag = "M" + (PlayerPrefs.GetInt("level") + 1).ToString() + "-CharacterCapacityUpgrade" + Globals.stackCapacityLevel.ToString() + "-REWARDED";
+            //GameManager.Instance.GameAnalyticsTag(tag);
+            GameManager.Instance.HomaAnalyticsTag("CharacterCapacityUpgrade", PlayerPrefs.GetInt("level") + 1, Globals.stackCapacityLevel);
+
         }
     }
 }

@@ -47,7 +47,7 @@ public class StandFishTezgah : Stand, IMoneyArea
     {
         yield return new WaitForSeconds(1.5f);
         GetComponent<Collider>().enabled = true;
-        StandReActive();
+        //StandReActive();
     }
     void FishCountInit()
     {

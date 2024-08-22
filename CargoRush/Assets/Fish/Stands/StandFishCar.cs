@@ -117,6 +117,7 @@ public class StandFishCar : Stand,IMoneyArea
         {
             totalBoxCount = (int)Random.Range(boxCountTotal[carLevel].x, boxCountTotal[carLevel].y + 1);
         }
+        
         if (PlayerPrefs.GetInt("tutorialseq1") == 0)
         {
             fishCountTotal = 3;
@@ -124,6 +125,10 @@ public class StandFishCar : Stand,IMoneyArea
         else
         {
             fishCountTotal = totalBoxCount;
+        }
+        if (PlayerPrefs.GetInt("completerodercount") == 1)
+        {
+            fishCountTotal = 4;
         }
     }
     public void LevelUp()
@@ -218,7 +223,18 @@ public class StandFishCar : Stand,IMoneyArea
         }
         ResetStand();
 
-  
+        PlayerPrefs.SetInt("completerodercount", PlayerPrefs.GetInt("completerodercount") + 1);
+
+        if (PlayerPrefs.GetInt("completerodercount") == 3)
+        {
+            HRUpgradeManager.Instance.UpgradeButtonOpener();
+        }
+        if (PlayerPrefs.GetInt("completerodercount") == 1)
+        {
+            FishDropArea.Instance.GarbageDroppingAfterTutorial();
+        }
+        GameManager.Instance.CourierLevelCompleted();
+
     }
 
 
@@ -323,6 +339,9 @@ public class StandFishCar : Stand,IMoneyArea
         {
             MissionManager.Instance.ShippingLineMissionStart();
         }
+
+
+        GameManager.Instance.CourierLevelStartedAnalytic(PlayerPrefs.GetInt("completerodercount"));
     }
 
 
@@ -789,7 +808,7 @@ public class StandFishCar : Stand,IMoneyArea
         {
             ResetStand();
         }
-            vipWaiting = false;
+        vipWaiting = false;
 
     }
     IEnumerator CounterTextColorSet(TextMeshProUGUI txt)
@@ -809,7 +828,7 @@ public class StandFishCar : Stand,IMoneyArea
 
     private void OnTriggerExit(Collider other)
     {
-        if (PlayerPrefs.GetInt("tutorialcompleted") == 1 && PlayerPrefs.GetInt("recycletutorial") == 1 && PlayerController.Instance._stackCollect.collectionTrs.Count > 0 && other.GetComponent<PlayerController>() != null)
+        if (PlayerPrefs.GetInt("tutorialcompleted") == 1 && PlayerPrefs.GetInt("recycletutorial") == 1 && PlayerController.Instance._stackCollect.collectionTrs.Count > 0 && other.GetComponent<PlayerController>() != null && resetActive)
         {
             PlayerPrefs.SetInt("recycletutorial", 2);
             if (standFishTezgah != null)

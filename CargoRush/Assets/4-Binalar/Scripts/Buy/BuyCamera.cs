@@ -5,4 +5,7 @@ using Cinemachine;
 public interface BuyCamera
 {
     CinemachineVirtualCamera buyCamera { get; set; }
+
+     bool viewThisCamera { get; set; }
+
 }

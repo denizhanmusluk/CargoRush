@@ -32,6 +32,8 @@ public class UpgradeAquaCar : MonoBehaviour, BuyCamera
         get { return thisBuyViewCamera; }
         set { thisBuyViewCamera = value; }
     }
+    public bool viewThisCamera { get; set; }
+
     //Vector3 firstPos;
     //Quaternion firstRot;
     void Awake()

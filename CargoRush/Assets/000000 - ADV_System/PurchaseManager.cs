@@ -219,11 +219,11 @@ public class PurchaseManager : MonoBehaviour
     {
         specialOfferCounter = PlayerPrefs.GetInt("specialOfferCounter");
 
-        while (specialOfferCounter < 180)
+        while (specialOfferCounter < 240)
         {
             specialOfferCounter++;
             PlayerPrefs.SetInt("specialOfferCounter", specialOfferCounter);
-            if(specialOfferCounter == 180)
+            if(specialOfferCounter == 240)
             {
                 SpecialOffer_PopUp_Open();
             }

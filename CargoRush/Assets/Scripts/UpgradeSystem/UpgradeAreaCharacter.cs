@@ -19,6 +19,8 @@ public class UpgradeAreaCharacter : MonoBehaviour,BuyCamera
         get { return thisBuyViewCamera; }
         set { thisBuyViewCamera = value; }
     }
+    public bool viewThisCamera { get; set; }
+
     void Start()
     {
         characterUpgradePanel = CharacterUpgradeManager.Instance.characterUpgradePanel;

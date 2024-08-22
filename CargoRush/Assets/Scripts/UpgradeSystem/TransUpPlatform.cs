@@ -23,6 +23,8 @@ public class TransUpPlatform : MonoBehaviour, BuyCamera
         get { return thisBuyViewCamera; }
         set { thisBuyViewCamera = value; }
     }
+    public bool viewThisCamera { get; set; }
+
     void Start()
     {
         IndicatorManager.Instance._TransUpPlatform = this;
