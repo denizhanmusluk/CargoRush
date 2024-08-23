@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using Cinemachine;
-public class BuyArea : MonoBehaviour, BuyCamera
+public class BuyArea : MonoBehaviour, BuyCamera, IBuyCost
 {
     public int cost;
     [SerializeField] bool cameraPassive;
@@ -16,7 +16,11 @@ public class BuyArea : MonoBehaviour, BuyCamera
         get { return thisBuyViewActive; }
         set { thisBuyViewActive = value; }
     }
-
+    public int buyCost
+    {
+        get;
+        set;
+    }
 
     public string gaTag;
 
@@ -112,7 +116,7 @@ public class BuyArea : MonoBehaviour, BuyCamera
         {
             PlayerPrefs.SetInt(buyName + PlayerPrefs.GetInt("level"), 1);
             IndicatorActive = false;
-            instantiateBuild(Time.deltaTime, true);
+            InstantiateBuild(Time.deltaTime, true);
 
             GetComponent<Collider>().enabled = false;
 
@@ -129,7 +133,7 @@ public class BuyArea : MonoBehaviour, BuyCamera
         {
             checkMoneyActive = false;
             IndicatorActive = false;
-            instantiateBuild(Time.deltaTime, false);
+            InstantiateBuild(Time.deltaTime, false);
 
             GetComponent<Collider>().enabled = false;
 
@@ -183,6 +187,8 @@ public class BuyArea : MonoBehaviour, BuyCamera
         {
             outline.fillAmount = 1 - (float)currentAmount / (float)cost;
         }
+
+        buyCost = currentAmount;
         yield return new WaitForSeconds(0.1f);
 
   
@@ -231,7 +237,7 @@ public class BuyArea : MonoBehaviour, BuyCamera
     {
         if (other.GetComponent<PlayerController>() != null && Globals.buyActive)
         {
-            StartCoroutine(CooldownActive(0.5f));
+            StartCoroutine(CooldownActive(1f));
         }
     }
     private void OnTriggerExit(Collider other)
@@ -334,6 +340,7 @@ public class BuyArea : MonoBehaviour, BuyCamera
         yield return null;
         isbuy = true;
 
+        buyCost = currentAmount;
     }
     public bool indTutorialActive;
     void FirstOpenArea()
@@ -404,6 +411,8 @@ public class BuyArea : MonoBehaviour, BuyCamera
             //MarketCustomerManager.Instance.currentCustomerCount = 125;
         }
 
+
+        SkillManager.Instance.buyAreaList.Remove(this);
     }
     IEnumerator BuyActivator()
     {
@@ -413,7 +422,7 @@ public class BuyArea : MonoBehaviour, BuyCamera
     }
     IEnumerator buildScaling()
     {
-        instantiateBuild(0.2f,true);
+        InstantiateBuild(0.2f,true);
         yield return null;
 
         int buildChildCount = transform.childCount;
@@ -438,7 +447,7 @@ public class BuyArea : MonoBehaviour, BuyCamera
         }
         bld.localScale = new Vector3(lastSize, lastSize, lastSize);
     }
-    void instantiateBuild(float waitTime, bool cameraActive)
+    void InstantiateBuild(float waitTime, bool cameraActive)
     {
         if (standUpgradeActive && buildPrefab.GetComponent<IStandUpgrade>() != null)
         {
@@ -618,6 +627,7 @@ public class BuyArea : MonoBehaviour, BuyCamera
                 GameManager.Instance.ui.hrBuyTextGO.SetActive(true);
             }
         }
+        SkillManager.Instance.buyAreaList.Add(this);
 
     }
     public void OpenButDeactive()

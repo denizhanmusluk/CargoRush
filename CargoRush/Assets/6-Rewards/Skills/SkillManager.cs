@@ -39,6 +39,8 @@ public class SkillManager : MonoBehaviour
     public List<Transform> moneyRewardPos = new List<Transform>();
     [SerializeField] GameObject[] moneyRewards;
 
+
+    public List<IBuyCost> buyAreaList = new List<IBuyCost>();
     private void Awake()
     {
         _instance = this;
@@ -492,11 +494,32 @@ public class SkillManager : MonoBehaviour
 
         if(newReward.GetComponent<MoneySkill>() != null)
         {
-            newReward.GetComponent<MoneySkill>().moneyValue = (Globals.collectableLevel * 300) + (Globals.openedCarSlotCount * 200) * (PlayerPrefs.GetInt("level") + 1);
-               newReward.GetComponent<MoneySkill>().ValueInit();
+            //newReward.GetComponent<MoneySkill>().moneyValue = (Globals.collectableLevel * 300) + (Globals.openedCarSlotCount * 200) * (PlayerPrefs.GetInt("level") + 1);
+            newReward.GetComponent<MoneySkill>().moneyValue = (int)(CheckExpensiveCost() * expensiveCostFactor);
+            newReward.GetComponent<MoneySkill>().ValueInit();
         }
     }
+    float expensiveCostFactor = 0.5f;
+    private int CheckExpensiveCost()
+    {
+        int expensiveCost = 0;
+        if(buyAreaList.Count > 0)
+        {
+            for(int i = 0; i < buyAreaList.Count;i++)
+            {
+                if(expensiveCost < buyAreaList[i].buyCost)
+                {
+                    expensiveCost = buyAreaList[i].buyCost;
+                }
+            }
+        }
+        else
+        {
 
+            expensiveCost = (Globals.collectableLevel * 300) + (Globals.openedCarSlotCount * 200) * (PlayerPrefs.GetInt("level") + 1);
+        }
+        return expensiveCost;
+    }
     public void PurchaseSpeedBoostActive()
     {
         PlayerPrefs.SetInt("purchasespeedboost", 1);

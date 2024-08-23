@@ -45,7 +45,7 @@ public class HoverboardSkill : MonoBehaviour
     {
         StartCoroutine(ViewCounter());
         rewardSelect = PlayerPrefs.GetInt("speedskil") % 3;
-        speedModelList[rewardSelect].SetActive(true);
+        //speedModelList[rewardSelect].SetActive(true);
     }
     IEnumerator ViewCounter()
     {

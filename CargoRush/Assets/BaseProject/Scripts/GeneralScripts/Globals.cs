@@ -130,4 +130,5 @@ public static class Globals
 
     public static bool productCollectWorkerActive = true;
     public static bool hoverboardActive = false;
+    public static int moneyRewardedValue = 0;
 }

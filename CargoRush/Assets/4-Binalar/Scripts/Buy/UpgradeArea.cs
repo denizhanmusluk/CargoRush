@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using Cinemachine;
-public class UpgradeArea : MonoBehaviour, BuyCamera
+public class UpgradeArea : MonoBehaviour, BuyCamera , IBuyCost
 {
     public string gaTag;
     public int upgradeLevel;
@@ -38,7 +38,11 @@ public class UpgradeArea : MonoBehaviour, BuyCamera
         set { thisBuyViewCamera = value; }
     }
     public bool viewThisCamera { get; set; }
-
+    public int buyCost
+    {
+        get;
+        set;
+    }
     //Vector3 firstPos;
     //Quaternion firstRot;
     void Awake()
@@ -67,7 +71,10 @@ public class UpgradeArea : MonoBehaviour, BuyCamera
 
             StartCoroutine(CloseDelay());
         }
-
+        else
+        {
+            SkillManager.Instance.buyAreaList.Add(this);
+        }
 
         if (PlayerPrefs.GetInt(currentCostBuild + PlayerPrefs.GetInt("level")) == 0)
         {
@@ -80,6 +87,8 @@ public class UpgradeArea : MonoBehaviour, BuyCamera
             costText.text = CoefficientTransformation.Converter(currentAmount);
         }
         outline.fillAmount = 1 - (float)currentAmount / (float)cost;
+
+        buyCost = currentAmount;
         yield return new WaitForSeconds(0.1f);
     }
 
@@ -98,7 +107,7 @@ public class UpgradeArea : MonoBehaviour, BuyCamera
     {
         if (other.GetComponent<PlayerController>() != null && Globals.buyActive)
         {
-            StartCoroutine(CooldownActive(0.9f));
+            StartCoroutine(CooldownActive(1f));
         }
     }
     private void OnTriggerExit(Collider other)
@@ -175,6 +184,7 @@ public class UpgradeArea : MonoBehaviour, BuyCamera
         yield return null;
         isbuy = true;
 
+        buyCost = currentAmount;
     }
     void FirstOpenArea()
     {
@@ -192,6 +202,8 @@ public class UpgradeArea : MonoBehaviour, BuyCamera
         GetComponent<Collider>().enabled = false;
         _StandFishCar.LevelUp();
         AudioManager.Instance.UpgradeSound();
+
+        SkillManager.Instance.buyAreaList.Remove(this);
     }
     IEnumerator BuyActivator()
     {
