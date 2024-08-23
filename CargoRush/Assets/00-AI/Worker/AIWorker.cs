@@ -434,6 +434,7 @@ public class AIWorker : MonoBehaviour, IWorkerModelSelect
             following += GoToStandArea;
         }
     }
+    float stepCounter = 0;
     void GoToStandArea()
     {
         if (Vector3.Distance(new Vector2(transform.position.x, transform.position.z), new Vector2(targetStand.aiTargetPosList[targetDropPointSelect].position.x, targetStand.aiTargetPosList[targetDropPointSelect].position.z)) > 0.25f)
@@ -446,6 +447,19 @@ public class AIWorker : MonoBehaviour, IWorkerModelSelect
             {
                 TargetFishAreaSelect();
             }
+
+            stepCounter += Time.deltaTime;
+            if (NewSameTargetCourierStand() && stepCounter > 1f)
+            {
+                stepCounter = 0f;
+                //if (!isStayHoldActive)
+                //{
+                //    aiStackActive = true;
+                //    isStayHoldActive = true;
+                //    playerStop();
+                //}
+            }
+
             navMeshAgent.SetDestination(targetStand.aiTargetPosList[targetDropPointSelect].position);
         }
         else
