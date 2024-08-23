@@ -136,7 +136,8 @@ public abstract class StackCollect : MonoBehaviour
                         IndicatorManager.Instance.IndicatorTargeterActive();
                     }
                 }
-
+                collectable.box.SetActive(false);
+                collectable.boxSinglePart.SetActive(true);
             }
 
             if (collectable.collectID == 11)
