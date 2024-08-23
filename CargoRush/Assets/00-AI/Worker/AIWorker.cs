@@ -448,18 +448,21 @@ public class AIWorker : MonoBehaviour, IWorkerModelSelect
                 TargetFishAreaSelect();
             }
 
-            stepCounter += Time.deltaTime;
-            if (NewSameTargetCourierStand() && stepCounter > 1f)
+            if (sellingWorker)
             {
-                stepCounter = 0f;
-                //if (!isStayHoldActive)
-                //{
-                //    aiStackActive = true;
-                //    isStayHoldActive = true;
-                //    playerStop();
-                //}
+                stepCounter += Time.deltaTime;
+                if (stepCounter > 1f)
+                {
+                    stepCounter = 0f;
+                    NewSameTargetCourierStand();
+                    //if (!isStayHoldActive)
+                    //{
+                    //    aiStackActive = true;
+                    //    isStayHoldActive = true;
+                    //    playerStop();
+                    //}
+                }
             }
-
             navMeshAgent.SetDestination(targetStand.aiTargetPosList[targetDropPointSelect].position);
         }
         else
