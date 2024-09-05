@@ -28,7 +28,7 @@ public class MachineRepairArea : MonoBehaviour
             PlayerPrefs.SetInt("firsterrortutorial", 1);
             //for(int i = 0; i < 3; i++)
             {
-                selectedMachineRepairList.Add(machineRepairListAll[1]);
+                selectedMachineRepairList.Add(machineRepairListAll[0]);
             }
         }
         else

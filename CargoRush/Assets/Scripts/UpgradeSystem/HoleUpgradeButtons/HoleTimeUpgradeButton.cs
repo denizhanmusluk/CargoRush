@@ -15,7 +15,7 @@ public class HoleTimeUpgradeButton : UpgradeButton
     }
     public List<GameObject> barList;
 
-    public override void ButtonLevel(int currentLvl)
+    public override void ButtonLevel(int currentLvl, int maxLevel)
     {
         levelText.text = "Lv. " + (currentLvl + 1).ToString();
         //if (currentLvl > 0)

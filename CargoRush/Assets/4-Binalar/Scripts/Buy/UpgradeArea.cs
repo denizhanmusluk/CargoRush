@@ -191,7 +191,8 @@ public class UpgradeArea : MonoBehaviour, BuyCamera , IBuyCost
         //string _tag = "M" + (PlayerPrefs.GetInt("level") + 1).ToString() + "-" + gaTag;
         //GameManager.Instance.GameAnalyticsTag(_tag);
 
-        GameManager.Instance.HomaAnalyticsTag(gaTag, PlayerPrefs.GetInt("level") + 1, upgradeLevel);
+        //GameManager.Instance.HomaAnalyticsTag(gaTag, PlayerPrefs.GetInt("level") + 1, upgradeLevel);
+        GameManager.Instance.HomaAnalyticsTag(gaTag);
 
         StartCoroutine(BuyActivator());
 

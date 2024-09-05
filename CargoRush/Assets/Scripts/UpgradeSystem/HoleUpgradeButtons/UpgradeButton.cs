@@ -12,10 +12,10 @@ public abstract class UpgradeButton : MonoBehaviour
     public Image moneyIMG;
     public GameObject tutorialGO;
 
-    public TextMeshProUGUI levelText, costText, upgradeValue;
+    public TextMeshProUGUI levelText, costText, upgradeValue, levelMaxText;
     public abstract void UpgradeValueTextInit(float currentValue, float upValue);
     public abstract void UpgradeValueFull(float currentValue);
-    public abstract void ButtonLevel(int currentLvl);
+    public abstract void ButtonLevel(int currentLvl , int maxLevel);
 
     public void TextInit(int level,int cost)
     {

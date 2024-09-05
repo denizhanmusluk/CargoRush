@@ -260,6 +260,7 @@ public class ProcessMachine : Stand, IStandUpgrade, IMachineActive
         if (Globals.collectableLevel < collectableLevel)
         {
             Globals.collectableLevel = collectableLevel;
+            SkillManager.Instance.ResetRewardedPos();
         }
         IndicatorManager.Instance.machines.Add(this);
 

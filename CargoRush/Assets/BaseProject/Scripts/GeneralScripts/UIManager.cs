@@ -284,6 +284,23 @@ public class UIManager : Subject
     public GameObject moneyPrefab;
     public Transform moneyFirstPosTR;
     public Transform moneyTargetTR;
+    public void MoneyCreateDailyRewarded(int moneyCount, Vector3 moneyCreatePos)
+    {
+        StartCoroutine(Money_CreateRewDaily(moneyCount, moneyCreatePos));
+    }
+    IEnumerator Money_CreateRewDaily(int moneyCount, Vector3 moneyCreatePos)
+    {
+        for (int i = 0; i < moneyCount; i++)
+        {
+            GameObject mny = Instantiate(moneyPrefab, moneyCreatePos, Quaternion.identity, transform);
+            StartCoroutine(MoneyMoveUI(mny.transform));
+            //yield return new WaitForSeconds(0.01f);
+        }
+        yield return new WaitForSeconds(0.4f);
+
+        GameManager.Instance.MoneyUpdate(moneyCount);
+    }
+
     public void MoneyCreate(int _moneyCount)
     {
         StartCoroutine(Money_Create(_moneyCount));
@@ -317,13 +334,13 @@ public class UIManager : Subject
 
             yield return null;
         }
-        yield return new WaitForSeconds(0.01f);
+        yield return new WaitForSeconds(0.2f);
         //yield return new WaitForSeconds(UnityEngine.Random.Range(0.1f, 0.4f));
         firstPos = moneyTR.position;
         counter = 0;
         while (counter < 1f)
         {
-            counter += 3 * Time.deltaTime;
+            counter += 2 * Time.deltaTime;
             moneyTR.position = Vector3.Lerp(firstPos, moneyTargetTR.position, counter);
 
             yield return null;

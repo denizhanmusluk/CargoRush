@@ -3,7 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using TMPro;
-
+public enum IndType
+{
+    ind1,
+    ind2
+}
 public class IndicatorManager : MonoBehaviour
 {
     public static Action<Transform> OnUpdate, OnUpdate2;
@@ -12,6 +16,7 @@ public class IndicatorManager : MonoBehaviour
     public static IndicatorManager Instance => _instance;
     [SerializeField] Transform indicator;
     public MeshRenderer indicatorMesh;
+    [SerializeField] Transform indicator2;
     Transform targetPos;
     Transform targetPosTrnUp;
     public List<WorkArea> _FishDropAreaList = new List<WorkArea>();
@@ -20,6 +25,7 @@ public class IndicatorManager : MonoBehaviour
     public List<IndTargeter> targeterList;
     public List<IndTargeter> targeterActiveList;
     public List<Stand> machines = new List<Stand>();
+    public IndType _indType;
     private void Awake()
     {
         _instance = this;
@@ -65,22 +71,51 @@ public class IndicatorManager : MonoBehaviour
     public void IndicaorActive(Transform _targetPos)
     {
         //transUpIndActive = false;
-        indicator.gameObject.SetActive(true);
         targetPos = _targetPos;
-        OnUpdate = null;
-        OnUpdate += ShowIndicator;
+
+        switch (_indType)
+        {
+            case IndType.ind1:
+                {
+                    OnUpdate = null;
+                    OnUpdate += ShowIndicator;
+                    indicator.gameObject.SetActive(true);
+                }
+                break;
+            case IndType.ind2:
+                {
+                    OnUpdate2 = null;
+                    OnUpdate2 += ShowIndicator2;
+                    indicator2.gameObject.SetActive(true);
+                }
+                break;
+        }
+    
     }
     public void IndicaorDeActive()
     {
-        //transUpIndActive = true;
-        OnUpdate = null;
-        indicator.gameObject.SetActive(false);
+        switch (_indType)
+        {
+            case IndType.ind1:
+                {
+                    OnUpdate = null;
+                    indicator.gameObject.SetActive(false);
+
+                }
+                break;
+            case IndType.ind2:
+                {
+                    OnUpdate2 = null;
+                    indicator2.gameObject.SetActive(false);
+                }
+                break;
+        }
     }
 
     private void Update()
     {
         OnUpdate?.Invoke(targetPos);
-        OnUpdate2?.Invoke(targetPosTrnUp);
+        OnUpdate2?.Invoke(targetPos);
     }
     private void ShowIndicator(Transform targetPos)
     {
@@ -101,6 +136,18 @@ public class IndicatorManager : MonoBehaviour
         {
             indicator.transform.localScale = new Vector3(indicator.transform.localScale.x, indicator.transform.localScale.y, 0);
         }
+    }
+    private void ShowIndicator2(Transform targetPos)
+    {
+        if (targetPos == null)
+        {
+            IndicaorDeActive();
+            return;
+        }
+        Vector3 direction = targetPos.position - indicator2.transform.position;
+
+        transform.rotation = Quaternion.LookRotation(direction);
+     
     }
     float offset = 0f;
     void IndicatorScaleSet(float distance)
@@ -169,35 +216,6 @@ public class IndicatorManager : MonoBehaviour
         }
     }
 
-    public void TrnsUpIndicaorActive(Transform _targetPos)
-    {
-        indicator.gameObject.SetActive(true);
-        targetPosTrnUp = _targetPos;
-        OnUpdate2 = null;
-        OnUpdate2 += ShowIndicatorTrnsUp;
-    }
-    public void TrnsUpIndicaorDeActive()
-    {
-        OnUpdate2 = null;
-        indicator.gameObject.SetActive(false);
-    }
-
-    private void ShowIndicatorTrnsUp(Transform targetPos)
-    {
-        Vector3 direction = targetPos.position - indicator.transform.position;
-        float distance = Vector3.Distance(targetPos.position, indicator.transform.position);
-
-        transform.rotation = Quaternion.LookRotation(direction);
-        if (distance > 1f)
-        {
-            IndicatorScaleSet(distance);
-        }
-        else
-        {
-            indicator.transform.localScale = new Vector3(indicator.transform.localScale.x, indicator.transform.localScale.y, 0);
-        }
-    }
-
 
     public TextMeshProUGUI gemCounter;
     public TextMeshProUGUI gemCounter2;
@@ -205,10 +223,6 @@ public class IndicatorManager : MonoBehaviour
     public int productCountForTutorial = 3;
     public int boxCountForTutorial = 3;
     public int boxpackCountForTutorial = 3;
-    //public void StoneCounter(int stoneCount)
-    //{
-    //    digStoneCounter.text = stoneCount.ToString() + "/5";
-    //}
 
     public void GemCounter(int gemCount)
     {

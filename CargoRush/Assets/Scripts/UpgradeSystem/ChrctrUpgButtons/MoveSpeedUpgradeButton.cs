@@ -18,9 +18,10 @@ public class MoveSpeedUpgradeButton : UpgradeButton
     }
     public List<GameObject> barList;
 
-    public override void ButtonLevel(int currentLvl)
+    public override void ButtonLevel(int currentLvl , int maxLevel)
     {
         levelText.text = currentLvl.ToString();
+        levelMaxText.text = "/" + maxLevel.ToString();
 
         //if (currentLvl > 0)
         //{

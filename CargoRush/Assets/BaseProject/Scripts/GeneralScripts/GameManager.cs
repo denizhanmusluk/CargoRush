@@ -27,6 +27,10 @@ public class GameManager : Observer
         //Analytics.DesignEvent("start_flying_section", new DesignDimensions($"level_{levelId}", character_name, score: level_playtime));
         Debug.Log(tagTitle);
     }
+    public void HomaAnalyticsTag(string tagTitle)
+    {
+        Analytics.DesignEvent(tagTitle);
+    }
     public void HomaAnalyticsTag(string tagTitle,int levelId)
     {
         Analytics.DesignEvent(tagTitle, new DesignDimensions($"level_{levelId}"));
@@ -104,14 +108,14 @@ public class GameManager : Observer
         yield return new WaitForSeconds(0.2f);
         ui.startCanvas.SetActive(true);
     }
-    public void GetMoney()
+    public void GetMoney(int moneyAmount)
     {
-        MoneyUpdate(createMoney);
+        MoneyUpdate(moneyAmount);
     }
-    public void GetMoney2()
-    {
-        MoneyUpdate(createMoney2);
-    }
+    //public void GetMoney2()
+    //{
+    //    MoneyUpdate(createMoney2);
+    //}
     public void GetTicket()
     {
         GemUpdate(createTicket);
@@ -306,5 +310,17 @@ public class GameManager : Observer
             mat1.SetTexture("_BaseMap", normalTexture1);
             mat2.SetTexture("_BaseMap", normalTextureTaped);
         }
+    }
+
+    public void CheatIS()
+    {
+        DayCycleManager.Instance.firstInterstialTimeCounter = 900;
+    }
+    public void CheatRewarded()
+    {
+        SkillManager.Instance.SpeedRewardCreate();
+        SkillManager.Instance.CapacityRewardCreate();
+        SkillManager.Instance.DoubleRewardCreate();
+        SkillManager.Instance.MoneyRewardCreate();
     }
 }

@@ -11,7 +11,7 @@ public class DayCycleManager : MonoBehaviour
     public bool IS_Active = true;
     // Start is called before the first frame update
     [SerializeField] int firstInterstialTime = 900;
-    [SerializeField] int firstInterstialTimeCounter = 0;
+    public int firstInterstialTimeCounter = 0;
 
     [SerializeField] int dayCyclePeriod = 180;
     public int dayCycleCount = 0;

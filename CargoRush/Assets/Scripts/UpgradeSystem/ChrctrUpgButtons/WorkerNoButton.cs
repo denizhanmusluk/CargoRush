@@ -16,9 +16,11 @@ public class WorkerNoButton : WorkerUpgradeButton
     public List<GameObject> barList;
     public List<GameObject> infoList;
 
-    public override void ButtonLevel(int currentLvl)
+    public override void ButtonLevel(int currentLvl, int maxLevel)
     {
         levelText.text = currentLvl.ToString();
+        levelMaxText.text = "/" + maxLevel.ToString();
+
         //Debug.Log("Globals.machineLevel  " + PlayerPrefs.GetInt("machineLevel") + "  " + currentLvl);
         for (int i = 0; i < currentLvl; i++)
         {

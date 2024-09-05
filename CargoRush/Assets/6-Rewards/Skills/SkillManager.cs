@@ -27,20 +27,26 @@ public class SkillManager : MonoBehaviour
     [SerializeField] int doubleIncomeRewPeriod;
     [SerializeField] int moneyRewPeriod;
 
-    public List<Transform> speedRewardPos = new List<Transform>();
+    public List<RewardPos> speedRewardPos = new List<RewardPos>();
     [SerializeField] GameObject[] speedRewards;
 
-    public List<Transform> capacityRewardPos = new List<Transform>();
+    public List<RewardPos> capacityRewardPos = new List<RewardPos>();
     [SerializeField] GameObject[] capacityRewards;
 
-    public List<Transform> doubleIncomeRewardPos = new List<Transform>();
+    public List<RewardPos> doubleIncomeRewardPos = new List<RewardPos>();
     [SerializeField] GameObject[] doubleIncomeRewards;
 
-    public List<Transform> moneyRewardPos = new List<Transform>();
+    public List<RewardPos> moneyRewardPos = new List<RewardPos>();
     [SerializeField] GameObject[] moneyRewards;
+    [SerializeField] float expensiveCostFactor = 0.6f;
 
 
     public List<IBuyCost> buyAreaList = new List<IBuyCost>();
+
+    Transform currentSpeedReward_TR;
+    Transform currentCapacityReward_TR;
+    Transform currentDoubleIncomeReward_TR;
+    Transform currentMoneyReward_TR;
     private void Awake()
     {
         _instance = this;
@@ -359,11 +365,19 @@ public class SkillManager : MonoBehaviour
                 PlayerPrefs.SetInt("speedCreatingCooldown", Globals.speedCreatingCooldown);
             }
 
-            if (Globals.speedCreatingCooldown >= speedRewPeriod && !Globals.isSpeedRewardCreated)
+            int _speedRewPeriod = speedRewPeriod;
+            if (PlayerPrefs.GetInt("speedRewCount") == 0)
+            {
+                _speedRewPeriod = 180;
+            }
+
+            if (Globals.speedCreatingCooldown >= _speedRewPeriod && !Globals.isSpeedRewardCreated)
             {
                 if (PlayerPrefs.GetInt("purchasespeedboost") == 0)
                 {
                     SpeedRewardCreate();
+
+                    PlayerPrefs.SetInt("speedRewCount", PlayerPrefs.GetInt("speedRewCount") + 1);
                 }
             }
             yield return new WaitForSeconds(1);
@@ -383,11 +397,19 @@ public class SkillManager : MonoBehaviour
                 PlayerPrefs.SetInt("capacityCreatingCooldown", Globals.capacityCreatingCooldown);
             }
 
-            if (Globals.capacityCreatingCooldown >= capacityRewPeriod && !Globals.isCapacityRewardCreated)
+            int _capacityRewPeriod = capacityRewPeriod;
+            if (PlayerPrefs.GetInt("capacityRewCount") == 0)
+            {
+                _capacityRewPeriod = 180;
+            }
+
+            if (Globals.capacityCreatingCooldown >= _capacityRewPeriod && !Globals.isCapacityRewardCreated)
             {
                 //if (PlayerPrefs.GetInt("purchasecapacityboost") == 0)
                 {
                     CapacityRewardCreate();
+
+                    PlayerPrefs.SetInt("capacityRewCount", PlayerPrefs.GetInt("capacityRewCount") + 1);
                 }
             }
             yield return new WaitForSeconds(1);
@@ -406,11 +428,19 @@ public class SkillManager : MonoBehaviour
                 PlayerPrefs.SetInt("doubleCreatingCooldown", Globals.doubleCreatingCooldown);
             }
 
-            if (Globals.doubleCreatingCooldown >= doubleIncomeRewPeriod && !Globals.isDoubleIncomeRewardCreated)
+            int _doubleIncomeRewPeriod = doubleIncomeRewPeriod;
+            if (PlayerPrefs.GetInt("doubleRewCount") == 0)
+            {
+                _doubleIncomeRewPeriod = 180;
+            }
+
+            if (Globals.doubleCreatingCooldown >= _doubleIncomeRewPeriod && !Globals.isDoubleIncomeRewardCreated)
             {
                 if (PlayerPrefs.GetInt("purchasedoubleincomeboost") == 0)
                 {
                     DoubleRewardCreate();
+
+                    PlayerPrefs.SetInt("doubleRewCount", PlayerPrefs.GetInt("doubleRewCount") + 1);
                 }
             }
             yield return new WaitForSeconds(1);
@@ -429,12 +459,21 @@ public class SkillManager : MonoBehaviour
                 PlayerPrefs.SetInt("moneyCreatingCooldown", Globals.moneyCreatingCooldown);
             }
 
-            if (Globals.moneyCreatingCooldown >= moneyRewPeriod && !Globals.isMoneyRewardCreated)
+            int _moneyRewPeriod = moneyRewPeriod;
+            if (PlayerPrefs.GetInt("moneyRewCount") == 0)
+            {
+                _moneyRewPeriod = 180;
+            }
+
+            if (Globals.moneyCreatingCooldown >= _moneyRewPeriod && !Globals.isMoneyRewardCreated)
             {
                 //Globals.skillCooldown = 0;
                 //PlayerPrefs.SetInt("skillCooldown", Globals.skillCooldown);
 
                 MoneyRewardCreate();
+
+
+                PlayerPrefs.SetInt("moneyRewCount", PlayerPrefs.GetInt("moneyRewCount") + 1);
             }
             yield return new WaitForSeconds(1);
         }
@@ -445,12 +484,29 @@ public class SkillManager : MonoBehaviour
         Globals.speedCreatingCooldown = 0;
         PlayerPrefs.SetInt("speedCreatingCooldown", Globals.speedCreatingCooldown);
 
-
-        int rewPosRandomSelcet = Random.Range(0, speedRewardPos.Count);
+        List<RewardPos> currnetLevelRewPosList = new List<RewardPos>();
+        foreach(var spdrewpos in speedRewardPos)
+        {
+            if(spdrewpos.levelID == Globals.collectableLevel)
+            {
+                currnetLevelRewPosList.Add(spdrewpos);
+            }
+        }
+        int rewPosRandomSelcet = Random.Range(0, currnetLevelRewPosList.Count);
         int rewardSelect = Random.Range(0, speedRewards.Length);
 
-        GameObject newReward = Instantiate(speedRewards[rewardSelect], speedRewardPos[rewPosRandomSelcet].transform.position, Quaternion.identity);
+        GameObject currentSpeedReward;
 
+        if (PlayerPrefs.GetInt("firstspeedcreate") == 0)
+        {
+            PlayerPrefs.SetInt("firstspeedcreate", 1);
+            currentSpeedReward = Instantiate(speedRewards[rewardSelect], currnetLevelRewPosList[0].transform.position, Quaternion.identity);
+        }
+        else
+        {
+            currentSpeedReward = Instantiate(speedRewards[rewardSelect], currnetLevelRewPosList[rewPosRandomSelcet].transform.position, Quaternion.identity);
+        }
+        currentSpeedReward_TR = currentSpeedReward.transform;
 
         //int rewardSelect = PlayerPrefs.GetInt("skill") % rewards.Length;
         //PlayerPrefs.SetInt("skill", PlayerPrefs.GetInt("skill") + 1);
@@ -462,10 +518,30 @@ public class SkillManager : MonoBehaviour
         Globals.capacityCreatingCooldown = 0;
         PlayerPrefs.SetInt("capacityCreatingCooldown", Globals.capacityCreatingCooldown);
 
-        int rewPosRandomSelcet = Random.Range(0, capacityRewardPos.Count);
+        List<RewardPos> currnetLevelRewPosList = new List<RewardPos>();
+        foreach (var capctyrewpos in capacityRewardPos)
+        {
+            if (capctyrewpos.levelID == Globals.collectableLevel)
+            {
+                currnetLevelRewPosList.Add(capctyrewpos);
+            }
+        }
+
+        int rewPosRandomSelcet = Random.Range(0, currnetLevelRewPosList.Count);
         int rewardSelect = Random.Range(0, capacityRewards.Length);
 
-        GameObject newReward = Instantiate(capacityRewards[rewardSelect], capacityRewardPos[rewPosRandomSelcet].transform.position, Quaternion.identity);
+        GameObject currentCapacityReward;
+        if (PlayerPrefs.GetInt("firstcapacitycreate") == 0)
+        {
+            PlayerPrefs.SetInt("firstcapacitycreate", 1);
+            currentCapacityReward = Instantiate(capacityRewards[rewardSelect], currnetLevelRewPosList[0].transform.position, Quaternion.identity);
+        }
+        else
+        {
+            currentCapacityReward = Instantiate(capacityRewards[rewardSelect], currnetLevelRewPosList[rewPosRandomSelcet].transform.position, Quaternion.identity);
+        }
+        currentCapacityReward_TR = currentCapacityReward.transform;
+
     }
 
 
@@ -475,10 +551,30 @@ public class SkillManager : MonoBehaviour
         Globals.doubleCreatingCooldown = 0;
         PlayerPrefs.SetInt("doubleCreatingCooldown", Globals.doubleCreatingCooldown);
 
-        int rewPosRandomSelcet = Random.Range(0, doubleIncomeRewardPos.Count);
+        List<RewardPos> currnetLevelRewPosList = new List<RewardPos>();
+        foreach (var dblIncomeRewpos in doubleIncomeRewardPos)
+        {
+            if (dblIncomeRewpos.levelID == Globals.collectableLevel)
+            {
+                currnetLevelRewPosList.Add(dblIncomeRewpos);
+            }
+        }
+
+        int rewPosRandomSelcet = Random.Range(0, currnetLevelRewPosList.Count);
         int rewardSelect = Random.Range(0, doubleIncomeRewards.Length);
 
-        GameObject newReward = Instantiate(doubleIncomeRewards[rewardSelect], doubleIncomeRewardPos[rewPosRandomSelcet].transform.position, Quaternion.identity);
+        GameObject currentDoubleIncomeReward;
+        if (PlayerPrefs.GetInt("firstdoubleincomecreate") == 0)
+        {
+            PlayerPrefs.SetInt("firstdoubleincomecreate", 1);
+            currentDoubleIncomeReward = Instantiate(doubleIncomeRewards[rewardSelect], currnetLevelRewPosList[0].transform.position, Quaternion.identity);
+        }
+        else
+        {
+            currentDoubleIncomeReward = Instantiate(doubleIncomeRewards[rewardSelect], currnetLevelRewPosList[rewPosRandomSelcet].transform.position, Quaternion.identity);
+        }
+        currentDoubleIncomeReward_TR = currentDoubleIncomeReward.transform;
+
     }
 
     public void MoneyRewardCreate()
@@ -487,19 +583,99 @@ public class SkillManager : MonoBehaviour
         Globals.moneyCreatingCooldown = 0;
         PlayerPrefs.SetInt("moneyCreatingCooldown", Globals.moneyCreatingCooldown);
 
-        int rewPosRandomSelcet = Random.Range(0, moneyRewardPos.Count);
+        List<RewardPos> currnetLevelRewPosList = new List<RewardPos>();
+        foreach (var mnyRewpos in moneyRewardPos)
+        {
+            if (mnyRewpos.levelID == Globals.collectableLevel)
+            {
+                currnetLevelRewPosList.Add(mnyRewpos);
+            }
+        }
+
+        int rewPosRandomSelcet = Random.Range(0, currnetLevelRewPosList.Count);
         int rewardSelect = Random.Range(0, moneyRewards.Length);
 
-        GameObject newReward = Instantiate(moneyRewards[rewardSelect], moneyRewardPos[rewPosRandomSelcet].transform.position, Quaternion.identity);
+        GameObject currentMoneyReward;
+        if (PlayerPrefs.GetInt("firstmoneycreate") == 0)
+        {
+            PlayerPrefs.SetInt("firstmoneycreate", 1);
+            currentMoneyReward = Instantiate(moneyRewards[rewardSelect], currnetLevelRewPosList[0].transform.position, Quaternion.identity);
+        }
+        else
+        {
+            currentMoneyReward = Instantiate(moneyRewards[rewardSelect], currnetLevelRewPosList[rewPosRandomSelcet].transform.position, Quaternion.identity);
+        }
+        currentMoneyReward_TR = currentMoneyReward.transform;
 
-        if(newReward.GetComponent<MoneySkill>() != null)
+        if (currentMoneyReward.GetComponent<MoneySkill>() != null)
         {
             //newReward.GetComponent<MoneySkill>().moneyValue = (Globals.collectableLevel * 300) + (Globals.openedCarSlotCount * 200) * (PlayerPrefs.GetInt("level") + 1);
-            newReward.GetComponent<MoneySkill>().moneyValue = (int)(CheckExpensiveCost() * expensiveCostFactor);
-            newReward.GetComponent<MoneySkill>().ValueInit();
+            currentMoneyReward.GetComponent<MoneySkill>().moneyValue = (int)(CheckExpensiveCost() * expensiveCostFactor);
+            currentMoneyReward.GetComponent<MoneySkill>().ValueInit();
         }
     }
-    float expensiveCostFactor = 0.5f;
+    public void ResetRewardedPos()
+    {
+        if(currentSpeedReward_TR != null)
+        {
+            List<RewardPos> currnetLevelRewPosList = new List<RewardPos>();
+            foreach (var spdRewpos in speedRewardPos)
+            {
+                if (spdRewpos.levelID == Globals.collectableLevel)
+                {
+                    currnetLevelRewPosList.Add(spdRewpos);
+                }
+            }
+
+            int rewPosRandomSelcet = Random.Range(0, currnetLevelRewPosList.Count);
+            currentSpeedReward_TR.position = currnetLevelRewPosList[rewPosRandomSelcet].transform.position;
+        }
+
+        if (currentCapacityReward_TR != null)
+        {
+            List<RewardPos> currnetLevelRewPosList = new List<RewardPos>();
+            foreach (var cptyRewpos in capacityRewardPos)
+            {
+                if (cptyRewpos.levelID == Globals.collectableLevel)
+                {
+                    currnetLevelRewPosList.Add(cptyRewpos);
+                }
+            }
+
+            int rewPosRandomSelcet = Random.Range(0, currnetLevelRewPosList.Count);
+            currentCapacityReward_TR.position = currnetLevelRewPosList[rewPosRandomSelcet].transform.position;
+        }
+
+        if (currentDoubleIncomeReward_TR != null)
+        {
+            List<RewardPos> currnetLevelRewPosList = new List<RewardPos>();
+            foreach (var dblIncRewpos in doubleIncomeRewardPos)
+            {
+                if (dblIncRewpos.levelID == Globals.collectableLevel)
+                {
+                    currnetLevelRewPosList.Add(dblIncRewpos);
+                }
+            }
+
+            int rewPosRandomSelcet = Random.Range(0, currnetLevelRewPosList.Count);
+            currentDoubleIncomeReward_TR.position = currnetLevelRewPosList[rewPosRandomSelcet].transform.position;
+        }
+
+        if (currentMoneyReward_TR != null)
+        {
+            List<RewardPos> currnetLevelRewPosList = new List<RewardPos>();
+            foreach (var mnyRewpos in moneyRewardPos)
+            {
+                if (mnyRewpos.levelID == Globals.collectableLevel)
+                {
+                    currnetLevelRewPosList.Add(mnyRewpos);
+                }
+            }
+
+            int rewPosRandomSelcet = Random.Range(0, currnetLevelRewPosList.Count);
+            currentMoneyReward_TR.position = currnetLevelRewPosList[rewPosRandomSelcet].transform.position;
+        }
+    }
     private int CheckExpensiveCost()
     {
         int expensiveCost = 0;

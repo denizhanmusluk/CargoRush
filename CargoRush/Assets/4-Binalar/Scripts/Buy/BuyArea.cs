@@ -353,7 +353,8 @@ public class BuyArea : MonoBehaviour, BuyCamera, IBuyCost
         {
             //string _tag = "M" + (PlayerPrefs.GetInt("level") + 1).ToString() + "-" + gaTag;
             //GameManager.Instance.GameAnalyticsTag(_tag);
-            GameManager.Instance.HomaAnalyticsTag(gaTag, PlayerPrefs.GetInt("level") + 1,standUpgradeLevel);
+            //GameManager.Instance.HomaAnalyticsTag(gaTag, PlayerPrefs.GetInt("level") + 1,standUpgradeLevel);
+            GameManager.Instance.HomaAnalyticsTag(gaTag);
             AudioManager.Instance.UpgradeSound();
         }
         else

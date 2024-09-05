@@ -11,7 +11,7 @@ public class CharacterUpgradeManager : MonoBehaviour
     private static CharacterUpgradeManager _instance = null;
     public static CharacterUpgradeManager Instance => _instance;
 
-    [SerializeField] CharacterUpgradeSettings _characterUpgradeSettings;
+    public CharacterUpgradeSettings _characterUpgradeSettings;
     [SerializeField] UpgradeButton button_CharacterSpeedLevel, button_StackCapacityLevel;
     public GameObject characterUpgradePanel;
     public UpgradeAreaCharacter _upgradeAreaCharacter;
@@ -46,13 +46,13 @@ public class CharacterUpgradeManager : MonoBehaviour
         {
             button_StackCapacityLevel.TextInit(Globals.stackCapacityLevel, _characterUpgradeSettings.stackCapacityCost[Globals.stackCapacityLevel + 1]);
             button_StackCapacityLevel.UpgradeValueTextInit(_characterUpgradeSettings.stackCapacity[Globals.stackCapacityLevel], _characterUpgradeSettings.stackCapacity[Globals.stackCapacityLevel + 1]);
-            button_StackCapacityLevel.ButtonLevel(Globals.stackCapacityLevel);
+            button_StackCapacityLevel.ButtonLevel(Globals.stackCapacityLevel, _characterUpgradeSettings.stackCapacity.Length - 1);
         }
         else
         {
             button_StackCapacityLevel.FullLevel();
             button_StackCapacityLevel.UpgradeValueFull(_characterUpgradeSettings.stackCapacity[Globals.stackCapacityLevel]);
-            button_StackCapacityLevel.ButtonLevel(Globals.stackCapacityLevel);
+            button_StackCapacityLevel.ButtonLevel(Globals.stackCapacityLevel , _characterUpgradeSettings.stackCapacity.Length - 1);
         }
 
 
@@ -60,14 +60,14 @@ public class CharacterUpgradeManager : MonoBehaviour
         {
             button_CharacterSpeedLevel.TextInit(Globals.characterSpeedLevel, _characterUpgradeSettings.characterSpeedCost[Globals.characterSpeedLevel + 1]);
             button_CharacterSpeedLevel.UpgradeValueTextInit(_characterUpgradeSettings.characterSpeed[Globals.characterSpeedLevel], _characterUpgradeSettings.characterSpeed[Globals.characterSpeedLevel + 1]);
-            button_CharacterSpeedLevel.ButtonLevel(Globals.characterSpeedLevel);
+            button_CharacterSpeedLevel.ButtonLevel(Globals.characterSpeedLevel, _characterUpgradeSettings.characterSpeed.Length - 1);
 
         }
         else
         {
             button_CharacterSpeedLevel.FullLevel();
             button_CharacterSpeedLevel.UpgradeValueFull(_characterUpgradeSettings.characterSpeed[Globals.characterSpeedLevel]);
-            button_CharacterSpeedLevel.ButtonLevel(Globals.characterSpeedLevel);
+            button_CharacterSpeedLevel.ButtonLevel(Globals.characterSpeedLevel, _characterUpgradeSettings.characterSpeed.Length - 1);
         }
         VibratoManager.Instance.MediumVibration();
     }
@@ -106,7 +106,7 @@ public class CharacterUpgradeManager : MonoBehaviour
 
                 //string tag = "M" + (PlayerPrefs.GetInt("level") + 1).ToString() + "-CharacterSpeedUpgrade" + Globals.characterSpeedLevel.ToString();
                 //GameManager.Instance.GameAnalyticsTag(tag);
-                GameManager.Instance.HomaAnalyticsTag("CharacterSpeedUpgrade", PlayerPrefs.GetInt("level") + 1 , Globals.characterSpeedLevel);
+                GameManager.Instance.HomaAnalyticsTag("CharacterSpeedUpgrade");
 
                 float time = CoefficientTransformation.FormatSaniye(Globals.speedPlayTime);
 
@@ -130,7 +130,7 @@ public class CharacterUpgradeManager : MonoBehaviour
 
                 //string tag = "M" + (PlayerPrefs.GetInt("level") + 1).ToString() + "-CharacterCapacityUpgrade" + Globals.stackCapacityLevel.ToString();
                 //GameManager.Instance.GameAnalyticsTag(tag);
-                GameManager.Instance.HomaAnalyticsTag("CharacterCapacityUpgrade", PlayerPrefs.GetInt("level") + 1, Globals.stackCapacityLevel);
+                GameManager.Instance.HomaAnalyticsTag("CharacterCapacityUpgrade");
 
                 float time = CoefficientTransformation.FormatSaniye(Globals.speedPlayTime);
                 //GameAnalytics.NewDesignEvent(tag, time);
@@ -200,7 +200,7 @@ public class CharacterUpgradeManager : MonoBehaviour
 
             //string tag = "M" + (PlayerPrefs.GetInt("level") + 1).ToString() + "-CharacterSpeedUpgrade" + Globals.characterSpeedLevel.ToString() + "-REWARDED";
             //GameManager.Instance.GameAnalyticsTag(tag);
-            GameManager.Instance.HomaAnalyticsTag("CharacterSpeedUpgrade", PlayerPrefs.GetInt("level") + 1, Globals.characterSpeedLevel);
+            GameManager.Instance.HomaAnalyticsTag("CharacterSpeedUpgrade");
 
 
         }
@@ -218,7 +218,7 @@ public class CharacterUpgradeManager : MonoBehaviour
 
             //string tag = "M" + (PlayerPrefs.GetInt("level") + 1).ToString() + "-CharacterCapacityUpgrade" + Globals.stackCapacityLevel.ToString() + "-REWARDED";
             //GameManager.Instance.GameAnalyticsTag(tag);
-            GameManager.Instance.HomaAnalyticsTag("CharacterCapacityUpgrade", PlayerPrefs.GetInt("level") + 1, Globals.stackCapacityLevel);
+            GameManager.Instance.HomaAnalyticsTag("CharacterCapacityUpgrade");
 
         }
     }

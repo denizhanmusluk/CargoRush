@@ -16,7 +16,7 @@ public class MagnetRadiusUpgradeButton : UpgradeButton
     }
     public List<GameObject> barList;
 
-    public override void ButtonLevel(int currentLvl)
+    public override void ButtonLevel(int currentLvl , int maxLevel)
     {
         if(currentLvl > 0)
         {

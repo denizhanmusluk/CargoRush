@@ -61,6 +61,9 @@ public class FishDropArea : MonoBehaviour
 
 
     public GameObject loadingAreaTextGO;
+
+    [SerializeField] int boxAmount_ForErrorRank = 35;
+    [SerializeField] int boxCount_Error = 125;
     private void Awake()
     {
         _instance = this;
@@ -348,21 +351,30 @@ public class FishDropArea : MonoBehaviour
     {
         if (Globals.repairManActive)
         {
-            PlayerPrefs.SetInt("totalboxpackagecount", 1);
+            PlayerPrefs.SetInt("totalboxpackagecount", 0);
         }
         else
         {
             PlayerPrefs.SetInt("totalboxpackagecount", PlayerPrefs.GetInt("totalboxpackagecount") + 1);
+
+            int _boxCountError = boxCount_Error;
+            if (PlayerPrefs.GetInt("machineerrorcount") == 0)
+            {
+                _boxCountError = 90;
+            }
+
             //if (Globals.machineErrorActive)
             //{
             //    errorFill.fillAmount = 1f;
             //}
             //else
+            Debug.Log((float)PlayerPrefs.GetInt("totalboxpackagecount"));
             {
-                errorFill.fillAmount = (float)(PlayerPrefs.GetInt("totalboxpackagecount") % ((Globals.collectableLevel + 1) * 125)) / (float)((Globals.collectableLevel + 1) * 125);
+                errorFill.fillAmount = (float)(PlayerPrefs.GetInt("totalboxpackagecount") % ((Globals.collectableLevel) * boxAmount_ForErrorRank + _boxCountError)) / (float)((Globals.collectableLevel) * boxAmount_ForErrorRank + _boxCountError);
             }
-            if (PlayerPrefs.GetInt("totalboxpackagecount") % ((Globals.collectableLevel + 1) * 125) == 0)
+            if (PlayerPrefs.GetInt("totalboxpackagecount") % ((Globals.collectableLevel) * boxAmount_ForErrorRank + _boxCountError) == 0)
             {
+                PlayerPrefs.SetInt("totalboxpackagecount", 0);
 
                 List<IMachineActive> packMachinesTemp = new List<IMachineActive>();
 
@@ -395,7 +407,14 @@ public class FishDropArea : MonoBehaviour
     IEnumerator StartDelay()
     {
         yield return new WaitForSeconds(4f);
-        errorFill.fillAmount = (float)(PlayerPrefs.GetInt("totalboxpackagecount") % ((Globals.collectableLevel + 1) * 125)) / (float)((Globals.collectableLevel + 1) * 125);
+
+        int _boxCountError = boxCount_Error;
+        if (PlayerPrefs.GetInt("machineerrorcount") == 0)
+        {
+            _boxCountError = 90;
+        }
+
+        errorFill.fillAmount = (float)(PlayerPrefs.GetInt("totalboxpackagecount") % ((Globals.collectableLevel) * boxAmount_ForErrorRank + _boxCountError)) / (float)((Globals.collectableLevel) * boxAmount_ForErrorRank + _boxCountError);
     }
     public void RepairProgressSet()
     {

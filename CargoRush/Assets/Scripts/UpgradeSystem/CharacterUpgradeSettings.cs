@@ -27,4 +27,5 @@ public class CharacterUpgradeSettings : ScriptableObject
     [Header("       WORKER NO")]
     public int[] workerNo;
     public int[] workerNoCost;
+
 }

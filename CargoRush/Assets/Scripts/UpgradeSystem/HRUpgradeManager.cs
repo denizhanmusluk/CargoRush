@@ -47,14 +47,14 @@ public class HRUpgradeManager : MonoBehaviour
         {
             button_Speed.TextInit(Globals.workerMoveSpeedLevel, _characterUpgradeSettings.workerMoveSpeedCost[Globals.workerMoveSpeedLevel + 1]);
             button_Speed.UpgradeValueTextInit(_characterUpgradeSettings.workerMoveSpeed[Globals.workerMoveSpeedLevel], _characterUpgradeSettings.workerMoveSpeed[Globals.workerMoveSpeedLevel + 1]);
-            button_Speed.ButtonLevel(Globals.workerMoveSpeedLevel);
+            button_Speed.ButtonLevel(Globals.workerMoveSpeedLevel, _characterUpgradeSettings.workerMoveSpeed.Length - 1);
 
         }
         else
         {
             button_Speed.FullLevel();
             button_Speed.UpgradeValueFull(_characterUpgradeSettings.workerMoveSpeed[Globals.workerMoveSpeedLevel]);
-            button_Speed.ButtonLevel(Globals.workerMoveSpeedLevel);
+            button_Speed.ButtonLevel(Globals.workerMoveSpeedLevel, _characterUpgradeSettings.workerMoveSpeed.Length - 1);
         }
 
 
@@ -62,14 +62,14 @@ public class HRUpgradeManager : MonoBehaviour
         {
             button_WorkerNo.TextInit(Globals.workerNoLevel, _characterUpgradeSettings.workerNoCost[Globals.workerNoLevel + 1]);
             button_WorkerNo.UpgradeValueTextInit(_characterUpgradeSettings.workerNo[Globals.workerNoLevel], _characterUpgradeSettings.workerNo[Globals.workerNoLevel + 1]);
-            button_WorkerNo.ButtonLevel(Globals.workerNoLevel);
+            button_WorkerNo.ButtonLevel(Globals.workerNoLevel, _characterUpgradeSettings.workerNo.Length - 1);
 
         }
         else
         {
             button_WorkerNo.FullLevel();
             button_WorkerNo.UpgradeValueFull(_characterUpgradeSettings.workerNo[Globals.workerNoLevel]);
-            button_WorkerNo.ButtonLevel(Globals.workerNoLevel);
+            button_WorkerNo.ButtonLevel(Globals.workerNoLevel, _characterUpgradeSettings.workerNo.Length - 1);
         }
 
 
@@ -77,13 +77,13 @@ public class HRUpgradeManager : MonoBehaviour
         {
             button_Capacity.TextInit(Globals.workerCapacityLevel, _characterUpgradeSettings.workerCapacityCost[Globals.workerCapacityLevel + 1]);
             button_Capacity.UpgradeValueTextInit(_characterUpgradeSettings.workerCapacity[Globals.workerCapacityLevel], _characterUpgradeSettings.workerCapacity[Globals.workerCapacityLevel + 1]);
-            button_Capacity.ButtonLevel(Globals.workerCapacityLevel);
+            button_Capacity.ButtonLevel(Globals.workerCapacityLevel, _characterUpgradeSettings.workerCapacity.Length - 1);
         }
         else
         {
             button_Capacity.FullLevel();
             button_Capacity.UpgradeValueFull(_characterUpgradeSettings.workerCapacity[Globals.workerCapacityLevel]);
-            button_Capacity.ButtonLevel(Globals.workerCapacityLevel);
+            button_Capacity.ButtonLevel(Globals.workerCapacityLevel, _characterUpgradeSettings.workerCapacity.Length - 1);
         }
         VibratoManager.Instance.MediumVibration();
     }
@@ -100,7 +100,7 @@ public class HRUpgradeManager : MonoBehaviour
 
                 //string tag = "M" + (PlayerPrefs.GetInt("level") + 1).ToString() + "-WorkerSpeedUpgrade" + Globals.workerMoveSpeedLevel.ToString();
                 //GameManager.Instance.GameAnalyticsTag(tag);
-                GameManager.Instance.HomaAnalyticsTag("CharacterCapacityUpgrade", PlayerPrefs.GetInt("level") + 1, Globals.workerMoveSpeedLevel);
+                GameManager.Instance.HomaAnalyticsTag("CharacterCapacityUpgrade");
 
                 //PlayerBehaviour.Instance.playerController.CharacterUpgrade(Globals.holeRadiusLevel);
                 isEnoughMoney();
@@ -138,7 +138,7 @@ public class HRUpgradeManager : MonoBehaviour
                 InitButtonValues();
                 //string tag = "M" + (PlayerPrefs.GetInt("level") + 1).ToString() + "-WorkerCapacityUpgrade" + Globals.workerCapacityLevel.ToString();
                 //GameManager.Instance.GameAnalyticsTag(tag);
-                GameManager.Instance.HomaAnalyticsTag("WorkerCapacityUpgrade", PlayerPrefs.GetInt("level") + 1, Globals.workerCapacityLevel);
+                GameManager.Instance.HomaAnalyticsTag("WorkerCapacityUpgrade");
 
                 //PlayerController.Instance.GetComponent<BoingScale>().ScaleEffectTR(PlayerController.Instance.transform, 0.8f, 1f, 0.5f, Ease.OutElastic);
                 //PlayerController.Instance.UpgradeTextSpawn("+Speed");
@@ -168,7 +168,7 @@ public class HRUpgradeManager : MonoBehaviour
 
                 //string tag = "M" + (PlayerPrefs.GetInt("level") + 1).ToString() + "-BuyWorker" + Globals.workerNoLevel.ToString() + "-REWARDED";
                 //GameManager.Instance.GameAnalyticsTag(tag);
-                GameManager.Instance.HomaAnalyticsTag("BuyWorker", PlayerPrefs.GetInt("level") + 1, Globals.workerNoLevel);
+                GameManager.Instance.HomaAnalyticsTag("BuyWorker");
 
                 //HRWorkerGO.SetActive(false);
 
@@ -321,7 +321,7 @@ public class HRUpgradeManager : MonoBehaviour
 
             //string tag = "M" + (PlayerPrefs.GetInt("level") + 1).ToString() + "-WorkerSpeedUpgrade" + Globals.workerMoveSpeedLevel.ToString() + "-REWARDED";
             //GameManager.Instance.GameAnalyticsTag(tag);
-            GameManager.Instance.HomaAnalyticsTag("WorkerSpeedUpgrade", PlayerPrefs.GetInt("level") + 1, Globals.workerMoveSpeedLevel);
+            GameManager.Instance.HomaAnalyticsTag("WorkerSpeedUpgrade");
 
             isEnoughMoney();
             InitButtonValues();
@@ -350,7 +350,7 @@ public class HRUpgradeManager : MonoBehaviour
                 InitButtonValues();
             //    string tag = "M" + (PlayerPrefs.GetInt("level") + 1).ToString() + "-WorkerCapacityUpgrade" + Globals.workerCapacityLevel.ToString() + "-REWARDED";
             //GameManager.Instance.GameAnalyticsTag(tag);
-            GameManager.Instance.HomaAnalyticsTag("WorkerCapacityUpgrade", PlayerPrefs.GetInt("level") + 1, Globals.workerCapacityLevel);
+            GameManager.Instance.HomaAnalyticsTag("WorkerCapacityUpgrade");
 
         }
     }
@@ -369,7 +369,7 @@ public class HRUpgradeManager : MonoBehaviour
 
             //string tag = "M" + (PlayerPrefs.GetInt("level") + 1).ToString() + "-BuyWorker" + Globals.workerNoLevel.ToString() + "-REWARDED";
             //GameManager.Instance.GameAnalyticsTag(tag);
-            GameManager.Instance.HomaAnalyticsTag("BuyWorker", PlayerPrefs.GetInt("level") + 1, Globals.workerNoLevel);
+            GameManager.Instance.HomaAnalyticsTag("BuyWorker");
 
         }
     }
