@@ -368,7 +368,7 @@ public class FishDropArea : MonoBehaviour
             //    errorFill.fillAmount = 1f;
             //}
             //else
-            Debug.Log((float)PlayerPrefs.GetInt("totalboxpackagecount"));
+            //Debug.Log((float)PlayerPrefs.GetInt("totalboxpackagecount"));
             {
                 errorFill.fillAmount = (float)(PlayerPrefs.GetInt("totalboxpackagecount") % ((Globals.collectableLevel) * boxAmount_ForErrorRank + _boxCountError)) / (float)((Globals.collectableLevel) * boxAmount_ForErrorRank + _boxCountError);
             }

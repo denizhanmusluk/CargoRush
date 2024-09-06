@@ -647,7 +647,7 @@ public class MineCrusher : Stand, IStandUpgrade
             Vector3 dropPos = targetTR.position + new Vector3(0, deltaY * 1.25f, 0);
             firstPos = oldProduct.transform.position;
             counter = 0f;
-            while (counter < 1f && !_newProduct.GetComponent<Collectable>().isCollected)
+            while (counter < 1f && !_newProduct.GetComponent<Collectable>().isCollected && oldProduct != null)
             {
                 counter += 2 * Time.deltaTime;
                 oldProduct.transform.position = Vector3.Lerp(firstPos, _CollectProducts[prefabSelect].boxPosTR.position, counter);
@@ -658,15 +658,17 @@ public class MineCrusher : Stand, IStandUpgrade
             if (!_newProduct.GetComponent<Collectable>().isCollected)
             {
                 _newProduct.transform.parent = targetTR.parent;
+                if(oldProduct != null)
                 oldProduct.transform.parent = _newProduct.transform;
             }
             _newProduct.GetComponent<Collectable>().anim.SetTrigger("close");
             yield return new WaitForSeconds(0.25f);
 
 
-            
-            Destroy(oldProduct.gameObject);
-
+            if (oldProduct != null)
+            {
+                Destroy(oldProduct.gameObject);
+            }
             StartCoroutine(GoCannedPos(_newProduct.GetComponent<Collectable>(), targetTR, dropPos, selfDestroyActive));
         }
     }
