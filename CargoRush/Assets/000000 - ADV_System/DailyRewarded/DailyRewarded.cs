@@ -3,9 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-
+public enum DailyType
+{
+    Money,
+    Ticket
+}
 public class DailyRewarded : MonoBehaviour
 {
+    public DailyType _dailyType;
     public string dailyRewardedTag;
     public string dailyRewardedName;
     public int maxRewardedCount = 5;
@@ -16,6 +21,20 @@ public class DailyRewarded : MonoBehaviour
     [SerializeField] GameObject free_GO;
     private void OnEnable()
     {
+        switch (_dailyType)
+        {
+            case DailyType.Money:
+                {
+
+                }
+                break;
+            case DailyType.Ticket:
+                {
+
+                }
+                break;
+        }
+
         CheckAndSaveDate();
         RemainingCheck();
     }
@@ -24,11 +43,11 @@ public class DailyRewarded : MonoBehaviour
         System.DateTime date = System.DateTime.Now;
         string tarih = date.ToString("dd/MM/yyyy");
 
-        Debug.Log("kayitliTarih " + PlayerPrefs.GetString("kayitliTarih") + "  " + tarih);
+        //Debug.Log("kayitliTarih " + PlayerPrefs.GetString("kayitliTarih") + "  " + tarih);
 
-        if (PlayerPrefs.GetString("kayitliTarih") != tarih)
+        if (PlayerPrefs.GetString("kayitliTarih" + dailyRewardedName) != tarih + dailyRewardedName)
         {
-            PlayerPrefs.SetString("kayitliTarih", tarih);
+            PlayerPrefs.SetString("kayitliTarih" + dailyRewardedName, tarih + dailyRewardedName);
             PlayerPrefs.SetInt(dailyRewardedName, 0);
         }
 
@@ -51,16 +70,30 @@ public class DailyRewarded : MonoBehaviour
         advButton.interactable = true;
         advCountText.text = (maxRewardedCount - PlayerPrefs.GetInt(dailyRewardedName)).ToString() + "/" + maxRewardedCount.ToString();
 
-        if (PlayerPrefs.GetInt("firstdailyrewarded") == 0)
+        switch (_dailyType)
         {
-            advImage_GO.SetActive(false);
-            free_GO.SetActive(true);
+            case DailyType.Money:
+                {
+                    if (PlayerPrefs.GetInt("firstdailyrewarded") == 0)
+                    {
+                        advImage_GO.SetActive(false);
+                        free_GO.SetActive(true);
+                    }
+                    else
+                    {
+                        advImage_GO.SetActive(true);
+                        free_GO.SetActive(false);
+                    }
+                }
+                break;
+            case DailyType.Ticket:
+                {
+                    advImage_GO.SetActive(true);
+                    free_GO.SetActive(false);
+                }
+                break;
         }
-        else
-        {
-            advImage_GO.SetActive(true);
-            free_GO.SetActive(false);
-        }
+  
     }
     void AdvButtonPassive()
     {
@@ -69,26 +102,60 @@ public class DailyRewarded : MonoBehaviour
     }
     public void ClickADV_Button()
     {
-        string adv_name = dailyRewardedTag + "_REWARDED";
+        string adv_name = dailyRewardedTag + "_OFFER";
         AudioManager.Instance.ButtonSound();
         AdvButtonPassive();
 
-        if (PlayerPrefs.GetInt("firstdailyrewarded") == 0)
+
+        switch (_dailyType)
         {
-            AdvEnd();
+            case DailyType.Money:
+                {
+                    if (PlayerPrefs.GetInt("firstdailyrewarded") == 0)
+                    {
+                        AdvEnd();
+                    }
+                    else
+                    {
+                        ADVManager.Instance.RewardedStart(AdvEnd, adv_name,false);
+                    }
+                }
+                break;
+            case DailyType.Ticket:
+                {
+                    ADVManager.Instance.RewardedStart(AdvEnd, adv_name , false);
+                }
+                break;
         }
-        else
-        {
-            ADVManager.Instance.RewardedStart(AdvEnd, adv_name);
-        }
+
+
+
     }
     void AdvEnd()
     {
-        PlayerPrefs.SetInt("firstdailyrewarded", 1);
+        switch (_dailyType)
+        {
+            case DailyType.Money:
+                {
+                    PlayerPrefs.SetInt("firstdailyrewarded", 1);
+                    GameManager.Instance.ui.MoneyCreateDailyRewarded(moneyRewardedAmounts[PlayerPrefs.GetInt("level")], transform.position);
+
+                }
+                break;
+            case DailyType.Ticket:
+                {
+                    GameManager.Instance.ui.TicketCreateDailyRewarded(moneyRewardedAmounts[PlayerPrefs.GetInt("level")], transform.position);
+
+                }
+                break;
+        }
+
+
         PlayerPrefs.SetInt(dailyRewardedName, PlayerPrefs.GetInt(dailyRewardedName) + 1);
         advCountText.text = (maxRewardedCount - PlayerPrefs.GetInt(dailyRewardedName)).ToString() + "/" + maxRewardedCount.ToString();
-        GameManager.Instance.ui.MoneyCreateDailyRewarded(moneyRewardedAmounts[PlayerPrefs.GetInt("level")], transform.position);
         StartCoroutine(ButtonActivatorDelay());
+
+        PurchaseManager.Instance.PurchasePanelClose();
     }
     IEnumerator ButtonActivatorDelay()
     {

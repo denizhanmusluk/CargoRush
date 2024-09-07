@@ -61,12 +61,12 @@ public class ADVManager : MonoBehaviour
             }
         }
     }
-    public void RewardedStart(Action fnct, string rewardedName)
+    public void RewardedStart(Action fnct, string rewardedName, bool activeTicket)
     {
         rewardedFunction = null;
         rewardedFunction += fnct;
 
-        if (Globals.gemAmount > 0)
+        if (Globals.gemAmount > 0 && activeTicket)
         {
             GameManager.Instance.ui.GemUpdate(-1);
             rewardedFunction?.Invoke();

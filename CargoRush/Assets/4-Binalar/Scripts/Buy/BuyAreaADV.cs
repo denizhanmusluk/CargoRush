@@ -76,7 +76,7 @@ public class BuyAreaADV : MonoBehaviour
 
     public void BuyAdv_CLick()
     {
-        ADVManager.Instance.RewardedStart(AdvCompleteBuy, rewardedName);
+        ADVManager.Instance.RewardedStart(AdvCompleteBuy, rewardedName, true);
     }
     void AdvCompleteBuy()
     {

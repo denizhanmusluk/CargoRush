@@ -282,25 +282,44 @@ public class UIManager : Subject
 
 
     public GameObject moneyPrefab;
+    public GameObject moneyPrefabScaleEffect;
     public Transform moneyFirstPosTR;
     public Transform moneyTargetTR;
+
+    public GameObject ticketPrefab;
+
     public void MoneyCreateDailyRewarded(int moneyCount, Vector3 moneyCreatePos)
     {
         StartCoroutine(Money_CreateRewDaily(moneyCount, moneyCreatePos));
     }
     IEnumerator Money_CreateRewDaily(int moneyCount, Vector3 moneyCreatePos)
     {
+        for (int i = 0; i < moneyCount / 10; i++)
+        {
+            GameObject mny = Instantiate(moneyPrefabScaleEffect, moneyFirstPosTR.position, Quaternion.identity, transform);
+            StartCoroutine(MoneyMoveUI_ScaleEffect(mny.transform));
+            //yield return new WaitForSeconds(0.01f);
+        }
+        yield return new WaitForSeconds(2f);
+
+        GameManager.Instance.MoneyUpdate(moneyCount);
+    }
+    public void TicketCreateDailyRewarded(int moneyCount, Vector3 moneyCreatePos)
+    {
+        StartCoroutine(Ticket_CreateRewDaily(moneyCount, moneyCreatePos));
+    }
+    IEnumerator Ticket_CreateRewDaily(int moneyCount, Vector3 moneyCreatePos)
+    {
         for (int i = 0; i < moneyCount; i++)
         {
-            GameObject mny = Instantiate(moneyPrefab, moneyCreatePos, Quaternion.identity, transform);
-            StartCoroutine(MoneyMoveUI(mny.transform));
+            GameObject mny = Instantiate(ticketPrefab, gemFirstPosTR.position, Quaternion.identity, transform);
+            StartCoroutine(GemMoveUI(mny.transform, moneyCount - i - 1, moneyCount));
             //yield return new WaitForSeconds(0.01f);
         }
         yield return new WaitForSeconds(0.4f);
 
-        GameManager.Instance.MoneyUpdate(moneyCount);
+        GameManager.Instance.GemUpdate(moneyCount);
     }
-
     public void MoneyCreate(int _moneyCount)
     {
         StartCoroutine(Money_Create(_moneyCount));
@@ -347,7 +366,36 @@ public class UIManager : Subject
         }
         Destroy(moneyTR.gameObject);
     }
+    IEnumerator MoneyMoveUI_ScaleEffect(Transform moneyTR)
+    {
+        Vector3 firstPos = moneyTR.position;
+        Vector3 targetPos = moneyTR.position + new Vector3(UnityEngine.Random.Range(-500, 500), UnityEngine.Random.Range(-300, 300), 0);
+        float counter = 0;
 
+        while (counter < 1f)
+        {
+            counter += 3 * Time.deltaTime;
+            moneyTR.position = Vector3.Lerp(firstPos, targetPos, counter);
+
+            yield return null;
+        }
+        float randomWaitTime = UnityEngine.Random.Range(0f, 2f);
+        yield return new WaitForSeconds(randomWaitTime);
+        moneyTR.GetComponent<OpenElasticTrigger>().ScaleEffect();
+        yield return new WaitForSeconds(1f);
+
+        //yield return new WaitForSeconds(UnityEngine.Random.Range(0.1f, 0.4f));
+        firstPos = moneyTR.position;
+        counter = 0;
+        while (counter < 1f)
+        {
+            counter += 2 * Time.deltaTime;
+            moneyTR.position = Vector3.Lerp(firstPos, moneyTargetTR.position, counter);
+
+            yield return null;
+        }
+        Destroy(moneyTR.gameObject);
+    }
 
 
     public GameObject gemPrefab;
@@ -367,7 +415,7 @@ public class UIManager : Subject
         for (int i = 0; i < moneyCount; i++)
         {
             GameObject _gem = Instantiate(gemPrefab, gemFirstPosTR.position, Quaternion.identity, transform);
-            StartCoroutine(GemMoveUI(_gem.transform));
+            StartCoroutine(GemMoveUI(_gem.transform, i, moneyCount));
             //yield return new WaitForSeconds(0.01f);
         }
         yield return new WaitForSeconds(2f);
@@ -378,11 +426,18 @@ public class UIManager : Subject
     }
 
 
-    IEnumerator GemMoveUI(Transform gemTR)
+    IEnumerator GemMoveUI(Transform gemTR , int index, int totalCount)
     {
+        float maxAngle = 25f;
         Vector3 firstPos = gemTR.position;
         Vector3 targetPos = gemTR.position;
         Vector3 ticketFirstSize = gemTR.localScale;
+        float zRot = 1.5f * maxAngle * (float)index / (float)totalCount;
+        float xPos = maxAngle * 3 * (float)index / (float)totalCount;
+        float yPos = -5 * maxAngle * (float)index / (float)totalCount;
+        targetPos = new Vector3(targetPos.x + xPos, targetPos.y + yPos, targetPos.z);
+        Quaternion targetRot = Quaternion.Euler(0, 0, zRot);
+
         //Vector3 targetPos = gemTR.position + new Vector3(UnityEngine.Random.Range(-200, -500), UnityEngine.Random.Range(-300, 300), 0);
         float counter = 0;
 
@@ -390,7 +445,7 @@ public class UIManager : Subject
         {
             counter += 3 * Time.deltaTime;
             gemTR.position = Vector3.Lerp(firstPos, targetPos, counter);
-
+            gemTR.rotation = Quaternion.Lerp(Quaternion.identity, targetRot, counter);
             yield return null;
         }
         yield return new WaitForSeconds(UnityEngine.Random.Range(1f, 1.5f));
@@ -514,7 +569,7 @@ public class UIManager : Subject
         string tag = "SpeedBoost_REWARDED";
         string adv_name = tag;
 
-        ADVManager.Instance.RewardedStart(HoverboardSkillClick,adv_name);
+        ADVManager.Instance.RewardedStart(HoverboardSkillClick,adv_name, true);
         //GameManager.Instance.GameAnalyticsTag(tag);
         GameManager.Instance.HomaAnalyticsTag(tag, PlayerPrefs.GetInt("level") + 1);
 
@@ -540,7 +595,7 @@ public class UIManager : Subject
         string tag = "InfiniteCapacity_REWARDED";
         string adv_name = tag;
 
-        ADVManager.Instance.RewardedStart(CapacitySkillClick,adv_name);
+        ADVManager.Instance.RewardedStart(CapacitySkillClick,adv_name, true);
         //GameManager.Instance.GameAnalyticsTag(tag);
         GameManager.Instance.HomaAnalyticsTag(tag, PlayerPrefs.GetInt("level") + 1);
 
@@ -567,7 +622,7 @@ public class UIManager : Subject
         string tag = "DoubleIncome_REWARDED";
         string adv_name = tag;
 
-        ADVManager.Instance.RewardedStart(DoubleIncomeSkillClick,adv_name);
+        ADVManager.Instance.RewardedStart(DoubleIncomeSkillClick,adv_name, true);
 
         //GameManager.Instance.GameAnalyticsTag(tag);
         GameManager.Instance.HomaAnalyticsTag(tag, PlayerPrefs.GetInt("level") + 1);
@@ -600,7 +655,7 @@ public class UIManager : Subject
         string tag = "MoneyBag_REWARDED";
         string adv_name = tag;
 
-        ADVManager.Instance.RewardedStart(FreeMoneySkill,adv_name);
+        ADVManager.Instance.RewardedStart(FreeMoneySkill,adv_name , true);
 
         //GameManager.Instance.GameAnalyticsTag(tag);
         GameManager.Instance.HomaAnalyticsTag(tag, PlayerPrefs.GetInt("level") + 1);
