@@ -8,6 +8,7 @@ public abstract class StackCollect : MonoBehaviour
 {
     [Range(1.0f, 100.0f)]
     [SerializeField] float oscillationHalfLife = 10f;
+    [SerializeField] float elasticRatio = 0.1f;
     [SerializeField] float turnSpeed = 100f;
 
     [SerializeField] public List<Collectable> collectionTrs = new List<Collectable>();
@@ -556,6 +557,49 @@ public abstract class StackCollect : MonoBehaviour
     Vector3 distance = Vector3.zero;
 
     void followObj(Transform obj1, Transform obj2, float multiply)
+    {
+        float angleFactor;
+        if ((int)multiply % 2 == 0)
+        {
+            angleFactor = 10f;
+        }
+        else
+        {
+            angleFactor = -10f;
+        }
+        Vector3 targetPos = stackLevel_1_PosList[0].position;
+
+        if (PlayerController.Instance.pressJoystick)
+        {
+            targetPos = stackLevel_1_PosList[0].position - transform.forward * elasticRatio * multiply * multiply;
+        }
+        //Vector3 targetPos = obj1.position;
+        float followSpeed = (1f * Vector3.Distance(obj2.position, obj1.position) + 1.5f) * StackFollowSpeed();
+
+
+
+        float extraSpeed = 1f;
+        Vector3 factor = Vector3.zero;
+        distance = -(obj2.position - obj1.position).normalized;
+        counter = 0.5f;
+
+        Vector3 followPosition = new Vector3(targetPos.x, obj2.position.y, targetPos.z) + factor;
+
+        obj2.position = Vector3.MoveTowards(obj2.position, followPosition, followSpeed * oscillationHalfLife * 0.1f * Time.deltaTime * extraSpeed);
+        //obj2.position = Vector3.MoveTowards(obj2.position, followPosition, (followSpeed - (0.1f * multiply)) * oscillationHalfLife * 0.1f * Time.deltaTime * extraSpeed - multiply * elasticRatio);
+
+        float deltaRotY = Quaternion.Angle(obj2.rotation, obj1.rotation);
+
+        if (deltaRotY > 10)
+        {
+            deltaRotY *= 2;
+        }
+        Quaternion targetRot = Quaternion.Euler(obj1.eulerAngles.x, obj1.eulerAngles.y + angleFactor, obj1.eulerAngles.z);
+        obj2.rotation = Quaternion.RotateTowards(obj2.rotation, targetRot, Mathf.Abs(deltaRotY) * turnSpeed * Time.deltaTime);
+        //obj2.LookAt(Camera.main.transform);
+    }
+
+    void followObjYedek(Transform obj1, Transform obj2, float multiply)
     {
         float angleFactor;
         if((int)multiply % 2 == 0)
