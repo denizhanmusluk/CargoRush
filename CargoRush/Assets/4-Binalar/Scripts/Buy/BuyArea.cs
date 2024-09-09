@@ -472,7 +472,7 @@ public class BuyArea : MonoBehaviour, BuyCamera, IBuyCost
         }
         for (int i = 0; i < buyAreas.Length; i++)
         {
-            if (standUpgradeActive)
+            if (standUpgradeActive && isNewOpen)
             {
                 yield return new WaitForSeconds(5);
             }

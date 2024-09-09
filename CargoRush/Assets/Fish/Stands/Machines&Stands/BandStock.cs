@@ -72,8 +72,8 @@ public class BandStock : Stand
 
     IEnumerator ManuealRawCreator()
     {
-        yield return new WaitForSeconds(1f);
-        for (int i = 0; i < (standRaw.processMachine.standLevel + 5); i++)
+        yield return new WaitForSeconds(2f);
+        for (int i = 0; i < (standRaw.maxBandCapacity); i++)
         {
             GameObject newProduct = Instantiate(productPrefabs[0].gameObject);
             newProduct.GetComponent<Collectable>().collectActive = false;
@@ -87,8 +87,13 @@ public class BandStock : Stand
             float deltaY = 0;
             Transform targetTR;
 
-            deltaY = (productCollectionList.Count - 1) / productPosTR.Length;
-            targetTR = productPosTR[(productCollectionList.Count - 1) % productPosTR.Length];
+            targetTR = productPosTR[0];
+
+            if (productCollectionList.Count > 0)
+            {
+                deltaY = (productCollectionList.Count - 1) / productPosTR.Length;
+                targetTR = productPosTR[(productCollectionList.Count - 1) % productPosTR.Length];
+            }
 
             Vector3 dropPos = targetTR.position + new Vector3(0, deltaY * 1.4f, 0);
             Quaternion targetRot = targetTR.transform.rotation;
