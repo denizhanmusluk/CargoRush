@@ -25,6 +25,8 @@ public class MissionPanel : MonoBehaviour
     public string missionTag;
     public string missionNameString;
 
+    public GameObject bg, bgSingle;
+
     public GameObject completeText_GO;
     public void MissionStart(int _currentCount, int _maxCount , int _price, string _missionName)
     {
@@ -192,6 +194,8 @@ public class MissionPanel : MonoBehaviour
         transform.parent = MissionManager.Instance.missionListParentTR;
         transform.localScale = Vector3.one;
         MissionManager.Instance.missionAnimatorSingleOpener.SetBool("openactive", true);
+        bg.SetActive(false);
+        bgSingle.SetActive(true);
         yield return new WaitForSeconds(4f);
         float counter = 0f;
         //while (counter < 1f)
@@ -210,6 +214,9 @@ public class MissionPanel : MonoBehaviour
         //}
         MissionManager.Instance.missionAnimatorSingleOpener.SetBool("openactive", false);
         yield return new WaitForSeconds(1f);
+
+        bg.SetActive(true);
+        bgSingle.SetActive(false);
 
         transform.parent = MissionManager.Instance.missionListTR;
         transform.localScale = Vector3.one;

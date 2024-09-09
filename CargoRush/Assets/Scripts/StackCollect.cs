@@ -568,10 +568,12 @@ public abstract class StackCollect : MonoBehaviour
             angleFactor = -10f;
         }
         Vector3 targetPos = stackLevel_1_PosList[0].position;
-
-        if (PlayerController.Instance.pressJoystick)
+        if (player == true)
         {
-            targetPos = stackLevel_1_PosList[0].position - transform.forward * elasticRatio * multiply * multiply;
+            if (PlayerController.Instance.pressJoystick)
+            {
+                targetPos = stackLevel_1_PosList[0].position - transform.forward * elasticRatio * multiply * multiply;
+            }
         }
         //Vector3 targetPos = obj1.position;
         float followSpeed = (1f * Vector3.Distance(obj2.position, obj1.position) + 1.5f) * StackFollowSpeed();
