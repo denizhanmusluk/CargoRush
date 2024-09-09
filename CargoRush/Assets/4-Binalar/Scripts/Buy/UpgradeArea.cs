@@ -253,7 +253,10 @@ public class UpgradeArea : MonoBehaviour, BuyCamera , IBuyCost
         }
         for (int i = 0; i < buyAreas.Length; i++)
         {
-            yield return new WaitForSeconds(10f);
+            if (isNewOpen)
+            {
+                yield return new WaitForSeconds(10f);
+            }
             buyAreas[i].SetActive(true);
             if (cameraActive)
             {

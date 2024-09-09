@@ -100,6 +100,7 @@ public class ShopManager : MonoBehaviour
 
             if (shopId + 1 == PlayerPrefs.GetInt("shopLevel" + PlayerPrefs.GetInt("level")))
             {
+                
                 //CollectProgressManager.Instance.shopTargetIcon.sprite = shopSpriteList[shopId + 1];
                 //CollectProgressManager.Instance.questMarkImgGO.SetActive(false);
             }
@@ -115,9 +116,12 @@ public class ShopManager : MonoBehaviour
             }
             else
             {
+                shopProgresFill.fillAmount = (float)(shopCountCurrent[shopId]) / (float)shopCountTotal[shopId];
+                shopProgresFillBG.fillAmount = (float)(shopCountCurrent[shopId]) / (float)shopCountTotal[shopId];
+                ratioText.text = ((int)(shopProgresFill.fillAmount * 100)).ToString() + "/100";
 
             }
-    
+
         }
     }
     public void SetProgress(int shopId , int preValue)
