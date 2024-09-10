@@ -674,6 +674,8 @@ public class MineCrusher : Stand, IStandUpgrade
     }
     IEnumerator GoCannedPos(Collectable newProduct, Transform targetTR, Vector3 dropPos,bool selfDestroy)
     {
+        newProduct.productCollectActive = true;
+
         newProduct.box.SetActive(false);
         newProduct.boxSinglePart.SetActive(true);
         Vector3 firstPos = newProduct.transform.position;
@@ -710,7 +712,7 @@ public class MineCrusher : Stand, IStandUpgrade
                 //newProduct.InitInstancedMaterial();
             }
             yield return new WaitForSeconds(0.2f);
-            newProduct.productCollectActive = true;
+            //newProduct.productCollectActive = true;
             newProduct.box.SetActive(false);
             newProduct.boxSinglePart.SetActive(true);
         }

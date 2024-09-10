@@ -875,6 +875,7 @@ public class ProcessMachine : Stand, IStandUpgrade, IMachineActive
     //}
     IEnumerator GoCannedPos(Collectable newProduct, Transform targetTR, Vector3 dropPos)
     {
+        newProduct.productCollectActive = true;
 
         Vector3 firstPos = newProduct.transform.position;
         Quaternion firstRot = newProduct.transform.rotation;
@@ -903,7 +904,7 @@ public class ProcessMachine : Stand, IStandUpgrade, IMachineActive
             newProduct.transform.rotation = targetRot;
         }
         yield return new WaitForSeconds(0.2f);
-        newProduct.productCollectActive = true;
+        //newProduct.productCollectActive = true;
         TraySet();
 
         //icedFish.collectActive = true;
