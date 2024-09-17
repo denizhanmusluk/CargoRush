@@ -31,7 +31,7 @@ public class BoxSellingInfoManager : MonoBehaviour
         priceButton.interactable = false;
         PlayerController.Instance.PlayerControl_ReActive();
         //GameManager.Instance.GameAnalyticsTag(tag);
-        GameManager.Instance.HomaAnalyticsTag(tag, PlayerPrefs.GetInt("level") + 1);
+        GameManager.Instance.HomaAnalyticsTag(tag);
 
     }
     void GetPriceDouble()

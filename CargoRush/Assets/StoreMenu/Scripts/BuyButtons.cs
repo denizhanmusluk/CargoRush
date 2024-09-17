@@ -44,7 +44,7 @@ public class BuyButtons : MonoBehaviour
         if (id != 0)
         {
             //GameManager.Instance.GameAnalyticsTag(skinName);
-            GameManager.Instance.HomaAnalyticsTag(skinName, PlayerPrefs.GetInt("level") + 1);
+            GameManager.Instance.HomaAnalyticsTag(skinName);
         }
         //GameAnalytics.NewDesignEvent(skinName);
         AudioManager.Instance.ButtonSound();

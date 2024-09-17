@@ -102,7 +102,7 @@ public class DailyRewarded : MonoBehaviour
     }
     public void ClickADV_Button()
     {
-        string adv_name = dailyRewardedTag + "_OFFER";
+        string adv_name = dailyRewardedTag;
         AudioManager.Instance.ButtonSound();
         AdvButtonPassive();
 

@@ -23,7 +23,7 @@ public class ShowBuyRapairReward : MonoBehaviour
         //processMachine.repairTimeCounter = processMachine.repairTime - 1;
         string tag = "InstantRepairRewarded";
         //GameManager.Instance.GameAnalyticsTag(tag);
-        GameManager.Instance.HomaAnalyticsTag(tag, PlayerPrefs.GetInt("level") + 1);
+        GameManager.Instance.HomaAnalyticsTag(tag);
 
         RepairManager.Instance.RepairWorkerStart();
         Canvas.SetActive(true);

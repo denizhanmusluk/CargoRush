@@ -116,7 +116,7 @@ public class ModelButton : MonoBehaviour
 
     public void ClickADV_Button()
     {
-        string adv_name = skinName + "_REWARDED";
+        string adv_name = skinName;
         ADVManager.Instance.RewardedStart(AdvEnd, adv_name, true);
         AudioManager.Instance.ButtonSound();
     }
@@ -128,7 +128,7 @@ public class ModelButton : MonoBehaviour
 
         string tag = skinName + PlayerPrefs.GetInt("adv" + buyButton.id).ToString();
         //GameManager.Instance.GameAnalyticsTag(tag);
-        GameManager.Instance.HomaAnalyticsTag(tag, PlayerPrefs.GetInt("level") + 1);
+        GameManager.Instance.HomaAnalyticsTag(tag);
 
         OpenedCheck();
     }
