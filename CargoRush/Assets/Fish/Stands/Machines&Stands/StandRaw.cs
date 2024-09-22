@@ -127,6 +127,9 @@ public class StandRaw : Stand
 
             TutorialManager.Instance.SkinTutorialStart();
 
+            IndicatorManager.Instance.TutorialStepCompleted();
+
+
             //PlayerPrefs.SetInt("skinactive", 1);
             //StoreManager.Instance.storeButton.SetActive(true);
             //TutorialManager.Instance.SkinTutorialStart();

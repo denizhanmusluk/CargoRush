@@ -358,9 +358,9 @@ public class FishDropArea : MonoBehaviour
             PlayerPrefs.SetInt("totalboxpackagecount", PlayerPrefs.GetInt("totalboxpackagecount") + 1);
 
             int _boxCountError = boxCount_Error;
-            if (PlayerPrefs.GetInt("machineerrorcount") == 0)
+            if (PlayerPrefs.GetInt("machineerrorcount") < 2)
             {
-                _boxCountError = 90;
+                _boxCountError = 60;
             }
 
             //if (Globals.machineErrorActive)
@@ -409,9 +409,9 @@ public class FishDropArea : MonoBehaviour
         yield return new WaitForSeconds(4f);
 
         int _boxCountError = boxCount_Error;
-        if (PlayerPrefs.GetInt("machineerrorcount") == 0)
+        if (PlayerPrefs.GetInt("machineerrorcount") < 2)
         {
-            _boxCountError = 90;
+            _boxCountError = 60;
         }
 
         errorFill.fillAmount = (float)(PlayerPrefs.GetInt("totalboxpackagecount") % ((Globals.collectableLevel) * boxAmount_ForErrorRank + _boxCountError)) / (float)((Globals.collectableLevel) * boxAmount_ForErrorRank + _boxCountError);

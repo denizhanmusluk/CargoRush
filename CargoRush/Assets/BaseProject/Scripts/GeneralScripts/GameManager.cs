@@ -20,6 +20,12 @@ public class GameManager : Observer
     [SerializeField] int createMoney;
     [SerializeField] int createMoney2;
     [SerializeField] int createTicket;
+
+    //public void ItemUpgraded(ItemType itemType, string itemID, int itemLevel, Reason reason, string reference)
+    //{
+
+    //}
+
     public void GameAnalyticsTag(string tagTitle)
     {
         //GameAnalytics.NewDesignEvent(tag);
@@ -41,11 +47,31 @@ public class GameManager : Observer
     }
     public void CourierLevelStartedAnalytic(int lvlId)
     {
-        Analytics.LevelStarted(lvlId);
+        //Analytics.LevelStarted(lvlId);
     }
-    public void CourierLevelCompleted()
+    public List<int> attemptNumber = new List<int>();
+    public void CourierLevelCompleted(int orderId)
     {
-        Analytics.LevelCompleted();
+        //Analytics.LevelCompleted();
+        int deliveryCompCount = PlayerPrefs.GetInt("deliverycompletedcount");
+        int deliveryComp_Rank = PlayerPrefs.GetInt("deliverycompletedrank");
+
+        deliveryCompCount++;
+        PlayerPrefs.SetInt("deliverycompletedcount", deliveryCompCount);
+
+        if(deliveryCompCount == attemptNumber[deliveryComp_Rank])
+        {
+            deliveryComp_Rank++;
+            PlayerPrefs.SetInt("deliverycompletedrank", deliveryComp_Rank);
+
+
+            int levelId = PlayerPrefs.GetInt("level") + 1;
+            Analytics.DesignEvent(orderId.ToString() + " DeliveryCompleted", new DesignDimensions($"level_{levelId}"));
+
+            Debug.Log(orderId.ToString() + " DeliveryCompleted");
+        }
+
+
     }
     void Awake()
     {
@@ -84,6 +110,8 @@ public class GameManager : Observer
 
     void Start()
     {
+        Analytics.GameplayStarted();
+
         UnityEngine.Rendering.GraphicsSettings.useScriptableRenderPipelineBatching = true;
         //DefaultAnalytics.GameplayStarted();
         Application.targetFrameRate = 60;

@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using Cinemachine;
+using HomaGames.HomaBelly;
+
 public class UpgradeArea : MonoBehaviour, BuyCamera , IBuyCost
 {
     public string gaTag;
@@ -192,7 +194,9 @@ public class UpgradeArea : MonoBehaviour, BuyCamera , IBuyCost
         //GameManager.Instance.GameAnalyticsTag(_tag);
 
         //GameManager.Instance.HomaAnalyticsTag(gaTag, PlayerPrefs.GetInt("level") + 1, upgradeLevel);
-        GameManager.Instance.HomaAnalyticsTag(gaTag);
+
+        //GameManager.Instance.HomaAnalyticsTag(gaTag);
+        Analytics.ItemUpgraded(ItemUpgradeType.Item, "Zone " + (PlayerPrefs.GetInt("level") + 1) + " " + gaTag, upgradeLevel, ItemFlowReason.Progression);
 
         StartCoroutine(BuyActivator());
 

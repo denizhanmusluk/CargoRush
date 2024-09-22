@@ -6,6 +6,7 @@ using TMPro;
 using ObserverSystem;
 using UnityEngine.UI;
 using DG.Tweening;
+using HomaGames.HomaBelly;
 
 public class UIManager : Subject
 {
@@ -571,13 +572,16 @@ public class UIManager : Subject
 
         ADVManager.Instance.RewardedStart(HoverboardSkillClick,adv_name, true);
         //GameManager.Instance.GameAnalyticsTag(tag);
-        GameManager.Instance.HomaAnalyticsTag(tag);
+
+        //GameManager.Instance.HomaAnalyticsTag(tag);
 
     }
     public void HoverboardSkillClick()
     {
         SkillManager.Instance.HoverboardActive();
         PlayerController.Instance.PlayerControl_ReActive();
+        Analytics.ItemObtained("Zone " + (PlayerPrefs.GetInt("level") + 1) + " " + tag, 0, ItemFlowReason.RewardedVideoAd);
+        Analytics.ItemConsumed("Zone " + (PlayerPrefs.GetInt("level") + 1) + " " + tag, 0, ItemFlowReason.RewardedVideoAd);
     }
     public void HoverboardSkillClick_Cancel()
     {
@@ -597,13 +601,16 @@ public class UIManager : Subject
 
         ADVManager.Instance.RewardedStart(CapacitySkillClick,adv_name, true);
         //GameManager.Instance.GameAnalyticsTag(tag);
-        GameManager.Instance.HomaAnalyticsTag(tag);
+        //GameManager.Instance.HomaAnalyticsTag(tag);
+
 
     }
     public void CapacitySkillClick()
     {
         SkillManager.Instance.CapacityActive();
         PlayerController.Instance.PlayerControl_ReActive();
+        Analytics.ItemObtained("Zone " + (PlayerPrefs.GetInt("level") + 1) + " " + tag, 0, ItemFlowReason.RewardedVideoAd);
+        Analytics.ItemConsumed("Zone " + (PlayerPrefs.GetInt("level") + 1) + " " + tag, 0, ItemFlowReason.RewardedVideoAd);
     }
 
     public void CapacitySkillClick_Cancel()
@@ -625,7 +632,8 @@ public class UIManager : Subject
         ADVManager.Instance.RewardedStart(DoubleIncomeSkillClick,adv_name, true);
 
         //GameManager.Instance.GameAnalyticsTag(tag);
-        GameManager.Instance.HomaAnalyticsTag(tag);
+        //GameManager.Instance.HomaAnalyticsTag(tag);
+
 
     }
 
@@ -633,6 +641,8 @@ public class UIManager : Subject
     {
         SkillManager.Instance.DoubleIncomeActive();
         PlayerController.Instance.PlayerControl_ReActive();
+        Analytics.ItemObtained("Zone " + (PlayerPrefs.GetInt("level") + 1) + " " + tag, 0, ItemFlowReason.RewardedVideoAd);
+        Analytics.ItemConsumed("Zone " + (PlayerPrefs.GetInt("level") + 1) + " " + tag, 0, ItemFlowReason.RewardedVideoAd);
     }
     public void DoubleIncomeSkillClick_Cancel()
     {
@@ -658,7 +668,8 @@ public class UIManager : Subject
         ADVManager.Instance.RewardedStart(FreeMoneySkill,adv_name , true);
 
         //GameManager.Instance.GameAnalyticsTag(tag);
-        GameManager.Instance.HomaAnalyticsTag(tag);
+        //GameManager.Instance.HomaAnalyticsTag(tag);
+
 
     }
 
@@ -668,7 +679,8 @@ public class UIManager : Subject
 
         //GameManager.Instance.MoneyUpdate(PopUpManager.Instance.freeMoneyValue);
         MoneyCreate(PopUpManager.Instance.freeMoneyValue);
-
+        Analytics.ItemObtained("Zone " + (PlayerPrefs.GetInt("level") + 1) + " " + tag, 0, ItemFlowReason.RewardedVideoAd);
+        Analytics.ItemConsumed("Zone " + (PlayerPrefs.GetInt("level") + 1) + " " + tag, 0, ItemFlowReason.RewardedVideoAd);
     }
    
     public void FreeMoneySkillClickCancel()

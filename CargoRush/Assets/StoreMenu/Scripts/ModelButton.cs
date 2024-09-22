@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using HomaGames.HomaBelly;
 
 public class ModelButton : MonoBehaviour
 {
@@ -33,13 +34,23 @@ public class ModelButton : MonoBehaviour
     {
         StarPanelManager.Instance.SelectClick(buttonId);
         AudioManager.Instance.ButtonSound();
+        if(buttonId == 1 && PlayerPrefs.GetInt("skinfirstselect") == 0)
+        {
+            PlayerPrefs.SetInt("skinfirstselect", 1);
+            IndicatorManager.Instance.TutorialStepCompleted();
+            IndicatorManager.Instance.TutorialStepStart(63);
+        }
     }
     public void SelectedButtonClick()
     {
         StarPanelManager.Instance.SelectedButtonClick(buttonId);
         StarPanelManager.Instance.StarPAnelActive();
         selectButton.gameObject.SetActive(false);
-
+        if (buttonId == 1 && PlayerPrefs.GetInt("skinfirstselect") == 1)
+        {
+            PlayerPrefs.SetInt("skinfirstselect", 2);
+            IndicatorManager.Instance.TutorialStepCompleted();
+        }
     }
     public void OpenedCheck()
     {
@@ -116,7 +127,7 @@ public class ModelButton : MonoBehaviour
 
     public void ClickADV_Button()
     {
-        string adv_name = skinName;
+        string adv_name = "Skin_Rewarded";
         ADVManager.Instance.RewardedStart(AdvEnd, adv_name, true);
         AudioManager.Instance.ButtonSound();
     }
@@ -127,8 +138,11 @@ public class ModelButton : MonoBehaviour
         advCountText.text = PlayerPrefs.GetInt("adv" + buyButton.id).ToString() + "/" + totalADV_Count.ToString();
 
         string tag = skinName + PlayerPrefs.GetInt("adv" + buyButton.id).ToString();
-        //GameManager.Instance.GameAnalyticsTag(tag);
-        GameManager.Instance.HomaAnalyticsTag(tag);
+
+
+        Analytics.ItemObtained("Zone " + (PlayerPrefs.GetInt("level") + 1) + " Skin_RV", buyButton.id, ItemFlowReason.RewardedVideoAd);
+
+        //GameManager.Instance.HomaAnalyticsTag(tag);
 
         OpenedCheck();
     }

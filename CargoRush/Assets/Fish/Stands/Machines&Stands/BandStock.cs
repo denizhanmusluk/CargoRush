@@ -21,6 +21,10 @@ public class BandStock : Stand
             PlayerPrefs.SetInt("bandstocktutorial", 1);
             TutorialManager.Instance.bandTut_1.SetActive(false);
             TutorialManager.Instance.bandTut_2.SetActive(true);
+
+            IndicatorManager.Instance.TutorialStepCompleted();
+            IndicatorManager.Instance.TutorialStepStart(52);
+
         }
         if (PlayerPrefs.GetInt("bandstocktutorial") == 1 && productCollectionList.Count == 0)
         {
@@ -68,6 +72,9 @@ public class BandStock : Stand
         yield return new WaitForSeconds(5f);
         TutorialManager.Instance.bandTut_1.SetActive(true);
         IndicatorManager.Instance.IndicaorActive(_CollectProducts.transform);
+
+        IndicatorManager.Instance.TutorialStepStart(51);
+
     }
 
     IEnumerator ManuealRawCreator()

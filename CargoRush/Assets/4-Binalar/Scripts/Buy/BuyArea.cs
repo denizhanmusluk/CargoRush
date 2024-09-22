@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using Cinemachine;
+using HomaGames.HomaBelly;
+
 public class BuyArea : MonoBehaviour, BuyCamera, IBuyCost
 {
     public int cost;
@@ -354,7 +356,10 @@ public class BuyArea : MonoBehaviour, BuyCamera, IBuyCost
             //string _tag = "M" + (PlayerPrefs.GetInt("level") + 1).ToString() + "-" + gaTag;
             //GameManager.Instance.GameAnalyticsTag(_tag);
             //GameManager.Instance.HomaAnalyticsTag(gaTag, PlayerPrefs.GetInt("level") + 1,standUpgradeLevel);
-            GameManager.Instance.HomaAnalyticsTag(gaTag);
+
+            //////GameManager.Instance.HomaAnalyticsTag(gaTag);
+            Analytics.ItemUpgraded(ItemUpgradeType.Item, "Zone " + (PlayerPrefs.GetInt("level") + 1) + " " + gaTag, standUpgradeLevel, ItemFlowReason.Progression);
+
             AudioManager.Instance.UpgradeSound();
         }
         else

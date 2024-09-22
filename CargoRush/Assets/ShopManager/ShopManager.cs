@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using HomaGames.HomaBelly;
 
 public class ShopManager : MonoBehaviour
 {
@@ -20,6 +21,9 @@ public class ShopManager : MonoBehaviour
 
     //public int toysTotalCount;
     //public int toysCurrentCount;
+    public int[] shopLevelUpRatio;
+    public int[] shopLevelIndex;
+
 
     [Range(0.0f, 1.0f)]
 
@@ -113,6 +117,32 @@ public class ShopManager : MonoBehaviour
             if (newOpen)
             {
                 SetProgress(shopId , preCount);
+
+                //if ( shopCountCurrent[shopId] <= shopLevelUpRatio[0])
+                //{
+                //    Analytics.LevelStarted(shopLevelIndex[0]);
+                //}
+
+                if (shopLevelUpRatio[PlayerPrefs.GetInt("shoprank" + PlayerPrefs.GetInt("level"))] <= shopCountCurrent[shopId])
+                {
+                    int shopRank = PlayerPrefs.GetInt("shoprank" + PlayerPrefs.GetInt("level"));
+                    shopRank++;
+                    PlayerPrefs.SetInt("shoprank" + PlayerPrefs.GetInt("level") , shopRank);
+
+                    if (PlayerPrefs.GetInt("shoprank" + PlayerPrefs.GetInt("level")) > 1)
+                    {
+                        Analytics.LevelCompleted();
+                        Debug.Log("level completed");
+                    }
+                    if (PlayerPrefs.GetInt("shoprank" + PlayerPrefs.GetInt("level")) < shopLevelIndex.Length)
+                    {
+                        int levelId = shopLevelIndex[PlayerPrefs.GetInt("shoprank" + PlayerPrefs.GetInt("level"))] + PlayerPrefs.GetInt("level") * 8;
+                        Analytics.LevelStarted(levelId);
+
+                        Debug.Log("level started : " + (shopLevelIndex[PlayerPrefs.GetInt("shoprank" + PlayerPrefs.GetInt("level"))] + PlayerPrefs.GetInt("level") * 8).ToString());
+                    }
+                }
+                //if(PlayerPrefs.GetInt("shoprank") < shopCountCurrent[shopId])
             }
             else
             {

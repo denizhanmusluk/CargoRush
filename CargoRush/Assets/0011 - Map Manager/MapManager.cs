@@ -67,12 +67,22 @@ public class MapManager : MonoBehaviour
         {
             mapButton.SetActive(true);
             textTutorial_GO.SetActive(true);
+            IndicatorManager.Instance.TutorialStepStart(71);
+
         }
     }
     public void MapButtonClick()
     {
         OpenMap();
         AudioManager.Instance.ButtonSound();
+        if (PlayerPrefs.GetInt("mapbuttonfirstclck") == 0)
+        {
+            PlayerPrefs.SetInt("mapbuttonfirstclck", 1);
+            IndicatorManager.Instance.TutorialStepCompleted();
+            IndicatorManager.Instance.TutorialStepStart(71);
+
+        }
+
     }
     public void OpenMap()
     {
@@ -130,6 +140,11 @@ public class MapManager : MonoBehaviour
     {
         nextButton.GetComponent<Button>().interactable = false;
         StartCoroutine(New_Level_Select());
+        if (PlayerPrefs.GetInt("mapbuttonfirstclck") == 2)
+        {
+            PlayerPrefs.SetInt("mapbuttonfirstclck", 3);
+            IndicatorManager.Instance.TutorialStepCompleted();
+        }
     }
     IEnumerator New_Level_Select()
     {

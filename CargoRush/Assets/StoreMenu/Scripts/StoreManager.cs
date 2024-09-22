@@ -54,6 +54,14 @@ public class StoreManager : MonoBehaviour
             selectSkinTicketTut_Tap.SetActive(true);
             buySkinTicketTut_Tap.SetActive(true);
         }
+
+        if(PlayerPrefs.GetInt("firstclickskinbutton") == 0)
+        {
+            IndicatorManager.Instance.TutorialStepCompleted();
+            IndicatorManager.Instance.TutorialStepStart(62);
+            PlayerPrefs.SetInt("firstclickskinbutton", 1);
+
+        }
     }
 
     public void newButton()

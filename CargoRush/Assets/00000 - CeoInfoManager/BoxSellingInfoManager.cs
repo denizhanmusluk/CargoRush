@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using HomaGames.HomaBelly;
 
 public class BoxSellingInfoManager : MonoBehaviour
 {
@@ -31,7 +32,8 @@ public class BoxSellingInfoManager : MonoBehaviour
         priceButton.interactable = false;
         PlayerController.Instance.PlayerControl_ReActive();
         //GameManager.Instance.GameAnalyticsTag(tag);
-        GameManager.Instance.HomaAnalyticsTag(tag);
+        //GameManager.Instance.HomaAnalyticsTag(tag);
+
 
     }
     void GetPriceDouble()
@@ -39,6 +41,8 @@ public class BoxSellingInfoManager : MonoBehaviour
         MoneyCreate(priceValue * 2, priceButton.transform);
         priceButton.interactable = false;
         StartCoroutine(ButtonClickDelay());
+        Analytics.ItemObtained("Zone " + (PlayerPrefs.GetInt("level") + 1) + " " + tag, 0, ItemFlowReason.RewardedVideoAd);
+        Analytics.ItemConsumed("Zone " + (PlayerPrefs.GetInt("level") + 1) + " " + tag, 0, ItemFlowReason.RewardedVideoAd);
     }
     public void GetPriceButtonClick()
     {

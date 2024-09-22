@@ -208,6 +208,8 @@ public class StandFishTezgah : Stand, IMoneyArea
             tutorialPosTR.SetActive(false);
             IndicatorManager.Instance.IndicaorDeActive();
             TutorialManager.Instance.rceycleTutorialGO.SetActive(false);
+            IndicatorManager.Instance.TutorialStepCompleted();
+
         }
     }
 

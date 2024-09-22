@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using HomaGames.HomaBelly;
 
 public class OpenArea : MonoBehaviour
 {
@@ -11,12 +12,14 @@ public class OpenArea : MonoBehaviour
         if (PlayerPrefs.GetInt(areaName + (PlayerPrefs.GetInt("level") + 1).ToString()) == 0)
         {
             PlayerPrefs.SetInt(areaName + (PlayerPrefs.GetInt("level") + 1).ToString(), 1);
-            //string _tag = "M" + (PlayerPrefs.GetInt("level") + 1).ToString() + "-" + areaName;
-            //GameManager.Instance.GameAnalyticsTag(_tag);
-            GameManager.Instance.HomaAnalyticsTag(areaName);
+
+            int levelId = (PlayerPrefs.GetInt("level") + 1);
 
 
-            //GameAnalytics.NewDesignEvent(str);
+
+
+            string tag = "Zone " + levelId.ToString() + " " + areaName;
+            Analytics.Checkpoint(tag);
         }
     }
 }

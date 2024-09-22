@@ -108,6 +108,9 @@ public class TutorialManager : MonoBehaviour
 
             PlayerPrefs.SetInt("skinactive", 1);
             StoreManager.Instance.storeButton.SetActive(true);
+
+            IndicatorManager.Instance.TutorialStepStart(61);
+
         }
         else if (PlayerPrefs.GetInt("skintuto") == 1)
         {

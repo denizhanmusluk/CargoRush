@@ -5,6 +5,7 @@ using UnityEngine.AI;
 using UnityEngine.UI;
 using TMPro;
 using DG.Tweening;
+using HomaGames.HomaBelly;
 
 public class HRUpgradeManager : MonoBehaviour
 {
@@ -100,7 +101,11 @@ public class HRUpgradeManager : MonoBehaviour
 
                 //string tag = "M" + (PlayerPrefs.GetInt("level") + 1).ToString() + "-WorkerSpeedUpgrade" + Globals.workerMoveSpeedLevel.ToString();
                 //GameManager.Instance.GameAnalyticsTag(tag);
-                GameManager.Instance.HomaAnalyticsTag("CharacterCapacityUpgrade");
+
+                //GameManager.Instance.HomaAnalyticsTag("CharacterCapacityUpgrade");
+
+                Analytics.ItemUpgraded(ItemUpgradeType.Upgrade, "Zone " + (PlayerPrefs.GetInt("level") + 1) + " WorkerSpeedUpgrade", Globals.workerMoveSpeedLevel, ItemFlowReason.Progression);
+
 
                 //PlayerBehaviour.Instance.playerController.CharacterUpgrade(Globals.holeRadiusLevel);
                 isEnoughMoney();
@@ -138,7 +143,12 @@ public class HRUpgradeManager : MonoBehaviour
                 InitButtonValues();
                 //string tag = "M" + (PlayerPrefs.GetInt("level") + 1).ToString() + "-WorkerCapacityUpgrade" + Globals.workerCapacityLevel.ToString();
                 //GameManager.Instance.GameAnalyticsTag(tag);
-                GameManager.Instance.HomaAnalyticsTag("WorkerCapacityUpgrade");
+
+
+                //GameManager.Instance.HomaAnalyticsTag("WorkerCapacityUpgrade");
+                int levelId = (PlayerPrefs.GetInt("level") + 1);
+                Analytics.ItemUpgraded(ItemUpgradeType.Upgrade, "Zone " + levelId.ToString() + " WorkerCapacityUpgrade", Globals.workerCapacityLevel, ItemFlowReason.Progression);
+
 
                 //PlayerController.Instance.GetComponent<BoingScale>().ScaleEffectTR(PlayerController.Instance.transform, 0.8f, 1f, 0.5f, Ease.OutElastic);
                 //PlayerController.Instance.UpgradeTextSpawn("+Speed");
@@ -152,6 +162,11 @@ public class HRUpgradeManager : MonoBehaviour
         {
             if (Globals.moneyAmount >= _characterUpgradeSettings.workerNoCost[Globals.workerNoLevel + 1])
             {
+                if (Globals.workerNoLevel == 0)
+                {
+                    IndicatorManager.Instance.TutorialStepCompleted();
+                }
+
                 int rebuyAmount = 0;
 
                 //if (_upgradeAreaWorkers.workerBuyAreaList[PlayerPrefs.GetInt("workerNoLevel")].gameObject.activeInHierarchy)
@@ -168,7 +183,11 @@ public class HRUpgradeManager : MonoBehaviour
 
                 //string tag = "M" + (PlayerPrefs.GetInt("level") + 1).ToString() + "-BuyWorker" + Globals.workerNoLevel.ToString() + "-REWARDED";
                 //GameManager.Instance.GameAnalyticsTag(tag);
-                GameManager.Instance.HomaAnalyticsTag("BuyWorker");
+
+
+                //GameManager.Instance.HomaAnalyticsTag("BuyWorker");
+                Analytics.ItemObtained("Zone " + (PlayerPrefs.GetInt("level") + 1) + " BuyWorker", Globals.workerNoLevel, ItemFlowReason.Progression);
+
 
                 //HRWorkerGO.SetActive(false);
 
@@ -262,6 +281,13 @@ public class HRUpgradeManager : MonoBehaviour
             TutorialManager.Instance.clickUpgradeButtonGO.SetActive(false);
             AudioManager.Instance.ButtonSound();
         }
+
+        if(PlayerPrefs.GetInt("firstclickupgradebutton") == 0)
+        {
+            PlayerPrefs.SetInt("firstclickupgradebutton", 1);
+            IndicatorManager.Instance.TutorialStepCompleted();
+            IndicatorManager.Instance.TutorialStepStart(22);
+        }
     }
     public void CharacterUpgradeClose()
     {
@@ -321,7 +347,11 @@ public class HRUpgradeManager : MonoBehaviour
 
             //string tag = "M" + (PlayerPrefs.GetInt("level") + 1).ToString() + "-WorkerSpeedUpgrade" + Globals.workerMoveSpeedLevel.ToString() + "-REWARDED";
             //GameManager.Instance.GameAnalyticsTag(tag);
-            GameManager.Instance.HomaAnalyticsTag("WorkerSpeedUpgrade");
+
+
+            //GameManager.Instance.HomaAnalyticsTag("WorkerSpeedUpgrade");
+            Analytics.ItemUpgraded(ItemUpgradeType.Upgrade, "Zone " + (PlayerPrefs.GetInt("level") + 1) + " WorkerSpeedUpgrade", Globals.workerMoveSpeedLevel, ItemFlowReason.RewardedVideoAd);
+
 
             isEnoughMoney();
             InitButtonValues();
@@ -350,7 +380,11 @@ public class HRUpgradeManager : MonoBehaviour
                 InitButtonValues();
             //    string tag = "M" + (PlayerPrefs.GetInt("level") + 1).ToString() + "-WorkerCapacityUpgrade" + Globals.workerCapacityLevel.ToString() + "-REWARDED";
             //GameManager.Instance.GameAnalyticsTag(tag);
-            GameManager.Instance.HomaAnalyticsTag("WorkerCapacityUpgrade");
+
+
+            //GameManager.Instance.HomaAnalyticsTag("WorkerCapacityUpgrade");
+            Analytics.ItemUpgraded(ItemUpgradeType.Upgrade, "Zone " + (PlayerPrefs.GetInt("level") + 1) + " WorkerCapacityUpgrade", Globals.workerCapacityLevel, ItemFlowReason.RewardedVideoAd);
+
 
         }
     }
@@ -358,7 +392,6 @@ public class HRUpgradeManager : MonoBehaviour
     {
         if (Globals.workerNoLevel < _characterUpgradeSettings.workerNo.Length - 1)
         {
-
             int rebuyAmount = 0;
             Globals.workerNoLevel++;
             PlayerPrefs.SetInt("workerNoLevel" + PlayerPrefs.GetInt("level"), Globals.workerNoLevel);
@@ -366,10 +399,11 @@ public class HRUpgradeManager : MonoBehaviour
             InitButtonValues();
             WorkerCreate();
 
-
             //string tag = "M" + (PlayerPrefs.GetInt("level") + 1).ToString() + "-BuyWorker" + Globals.workerNoLevel.ToString() + "-REWARDED";
             //GameManager.Instance.GameAnalyticsTag(tag);
-            GameManager.Instance.HomaAnalyticsTag("BuyWorker");
+
+            //GameManager.Instance.HomaAnalyticsTag("BuyWorker");
+            Analytics.ItemObtained("Zone " + (PlayerPrefs.GetInt("level") + 1) + " BuyWorker", Globals.workerNoLevel, ItemFlowReason.RewardedVideoAd);
 
         }
     }
@@ -385,6 +419,8 @@ public class HRUpgradeManager : MonoBehaviour
             PlayerPrefs.SetInt("upgradeclicktutorial", 1);
             TutorialManager.Instance.clickUpgradeButtonGO.SetActive(true);
             PlayerController.Instance.PlayerControlDeActive();
+
+            IndicatorManager.Instance.TutorialStepStart(21);
         }
     }
 }

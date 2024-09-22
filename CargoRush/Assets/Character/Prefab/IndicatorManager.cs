@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using TMPro;
+using HomaGames.HomaBelly;
+
 public enum IndType
 {
     ind1,
@@ -271,5 +273,16 @@ public class IndicatorManager : MonoBehaviour
 
             }
         }
+    }
+
+    public void TutorialStepStart(int tutorialStepIndex)
+    {
+        Analytics.TutorialStepStarted(tutorialStepIndex);
+        Debug.Log("Tutorial Step: " + tutorialStepIndex);
+    }
+    public void TutorialStepCompleted()
+    {
+        Analytics.TutorialStepCompleted();
+        Debug.Log("Tutorial Completed");
     }
 }

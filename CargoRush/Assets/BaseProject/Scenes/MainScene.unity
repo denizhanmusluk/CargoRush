@@ -2034,6 +2034,7 @@ GameObject:
   - component: {fileID: 45041512}
   - component: {fileID: 45041511}
   - component: {fileID: 45041514}
+  - component: {fileID: 45041515}
   m_Layer: 5
   m_Name: Image - NoAds Limited PopUp
   m_TagString: Untagged
@@ -2128,6 +2129,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 243995359c0e549429fafc64cb0c65b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &45041515
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 45041509}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee059aba70d5a0348bec01ee9d4ada12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  popupName: Limited_NoAds_IAP_PopUp
+  productId: 
 --- !u!1 &47053679
 GameObject:
   m_ObjectHideFlags: 0
@@ -17530,6 +17545,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8391701157803367462, guid: 471007c724d527049a5a3bff5e619baf, type: 3}
       insertIndex: -1
       addedObject: {fileID: 399299938}
+    - targetCorrespondingSourceObject: {fileID: 8391701157803367462, guid: 471007c724d527049a5a3bff5e619baf, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 399299939}
   m_SourcePrefab: {fileID: 100100000, guid: 471007c724d527049a5a3bff5e619baf, type: 3}
 --- !u!224 &399299929 stripped
 RectTransform:
@@ -17580,6 +17598,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 243995359c0e549429fafc64cb0c65b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &399299939
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 399299930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee059aba70d5a0348bec01ee9d4ada12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  popupName: Permenent_DoubleCapacity_IAP_PopUp
+  productId: 
 --- !u!1 &403663355
 GameObject:
   m_ObjectHideFlags: 0
@@ -33351,7 +33383,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8199324252830805998, guid: 7dc53b2b43290744e895ad6f7b759ade, type: 3}
       propertyPath: skinName
-      value: CaptainSkinOwned
+      value: CaptainSkin
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -33616,6 +33648,7 @@ MonoBehaviour:
   createMoney: 100
   createMoney2: 500
   createTicket: 10
+  attemptNumber: 050000000f00000019000000320000006400000096000000c80000002c010000f4010000
   mat1: {fileID: 2100000, guid: 95ff41a2307c45146a1568ea2fb45244, type: 2}
   mat2: {fileID: 2100000, guid: 714182b8714d2464486995c35d7a04a9, type: 2}
   normalTexture1: {fileID: 2800000, guid: 90ed079d3ef5402438dc40ae4a8b52bb, type: 3}
@@ -43096,7 +43129,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8199324252830805998, guid: 7dc53b2b43290744e895ad6f7b759ade, type: 3}
       propertyPath: skinName
-      value: VikingSkinOwned
+      value: VikingSkin
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -59279,6 +59312,7 @@ GameObject:
   - component: {fileID: 1408202749}
   - component: {fileID: 1408202748}
   - component: {fileID: 1408202751}
+  - component: {fileID: 1408202752}
   m_Layer: 5
   m_Name: Image - NoAds PopUp
   m_TagString: Untagged
@@ -59374,6 +59408,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 243995359c0e549429fafc64cb0c65b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1408202752
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1408202746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee059aba70d5a0348bec01ee9d4ada12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  popupName: NoAds_Forever_IAP_PopUp
+  productId: 
 --- !u!1 &1410993559
 GameObject:
   m_ObjectHideFlags: 0
@@ -64889,6 +64937,7 @@ GameObject:
   - component: {fileID: 1530465175}
   - component: {fileID: 1530465173}
   - component: {fileID: 1530465177}
+  - component: {fileID: 1530465178}
   m_Layer: 5
   m_Name: Image - Special PopUp
   m_TagString: Untagged
@@ -64983,6 +65032,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 243995359c0e549429fafc64cb0c65b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1530465178
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1530465171}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee059aba70d5a0348bec01ee9d4ada12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  popupName: SpecialOffer_IAP_PopUp
+  productId: 
 --- !u!1001 &1531404333
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -66181,7 +66244,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8199324252830805998, guid: 7dc53b2b43290744e895ad6f7b759ade, type: 3}
       propertyPath: skinName
-      value: DuckHeadSkinOwned
+      value: DuckHeadSkin
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -75047,7 +75110,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8199324252830805998, guid: 7dc53b2b43290744e895ad6f7b759ade, type: 3}
       propertyPath: skinName
-      value: PropellerHatSkinOwned
+      value: PropellerHatSkin
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -77378,7 +77441,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8199324252830805998, guid: 7dc53b2b43290744e895ad6f7b759ade, type: 3}
       propertyPath: skinName
-      value: IronManSkinOwned
+      value: IronManSkin
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -83720,6 +83783,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5143650562491576453, guid: aa5e09c1df54da443ab324b919376fda, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1940852032}
+    - targetCorrespondingSourceObject: {fileID: 5143650562491576453, guid: aa5e09c1df54da443ab324b919376fda, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1940852033}
   m_SourcePrefab: {fileID: 100100000, guid: aa5e09c1df54da443ab324b919376fda, type: 3}
 --- !u!224 &1940852023 stripped
 RectTransform:
@@ -83770,6 +83836,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 243995359c0e549429fafc64cb0c65b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1940852033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1940852024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee059aba70d5a0348bec01ee9d4ada12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  popupName: Permenent_DoubleIncome_IAP_PopUp
+  productId: 
 --- !u!1 &1942550352
 GameObject:
   m_ObjectHideFlags: 0
@@ -84671,7 +84751,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8199324252830805998, guid: 7dc53b2b43290744e895ad6f7b759ade, type: 3}
       propertyPath: skinName
-      value: AlienSkinOwned
+      value: AlienSkin
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -91747,6 +91827,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7515176590076888248, guid: 8e78427aca7c92d4b97389459ead174f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2107636256}
+    - targetCorrespondingSourceObject: {fileID: 7515176590076888248, guid: 8e78427aca7c92d4b97389459ead174f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2107636257}
   m_SourcePrefab: {fileID: 100100000, guid: 8e78427aca7c92d4b97389459ead174f, type: 3}
 --- !u!224 &2107636247 stripped
 RectTransform:
@@ -91797,6 +91880,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 243995359c0e549429fafc64cb0c65b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2107636257
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2107636248}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee059aba70d5a0348bec01ee9d4ada12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  popupName: Permenent_Speed_IAP_PopUp
+  productId: 
 --- !u!1 &2107934162
 GameObject:
   m_ObjectHideFlags: 0
@@ -94305,7 +94402,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 818427948535215667, guid: 324731cd6a0289b43bee254c4cf025a3, type: 3}
       propertyPath: skinName
-      value: AlienSkinRewarded
+      value: AlienSkin
       objectReference: {fileID: 0}
     - target: {fileID: 818427948535215667, guid: 324731cd6a0289b43bee254c4cf025a3, type: 3}
       propertyPath: advButton
@@ -120485,7 +120582,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 818427948535215667, guid: 324731cd6a0289b43bee254c4cf025a3, type: 3}
       propertyPath: skinName
-      value: CaptainSkinRewarded
+      value: CaptainSkin
       objectReference: {fileID: 0}
     - target: {fileID: 818427948535215667, guid: 324731cd6a0289b43bee254c4cf025a3, type: 3}
       propertyPath: advButton
@@ -121096,7 +121193,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 818427948535215667, guid: 324731cd6a0289b43bee254c4cf025a3, type: 3}
       propertyPath: skinName
-      value: IronManSkinRewarded
+      value: IronManSkin
       objectReference: {fileID: 0}
     - target: {fileID: 818427948535215667, guid: 324731cd6a0289b43bee254c4cf025a3, type: 3}
       propertyPath: advButton
@@ -123394,7 +123491,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 818427948535215667, guid: 324731cd6a0289b43bee254c4cf025a3, type: 3}
       propertyPath: skinName
-      value: DuckHeadSkinRewarded
+      value: DuckHeadSkin
       objectReference: {fileID: 0}
     - target: {fileID: 818427948535215667, guid: 324731cd6a0289b43bee254c4cf025a3, type: 3}
       propertyPath: advButton
@@ -126184,7 +126281,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 818427948535215667, guid: 324731cd6a0289b43bee254c4cf025a3, type: 3}
       propertyPath: skinName
-      value: PropellerHatSkinRewarded
+      value: PropellerHatSkin
       objectReference: {fileID: 0}
     - target: {fileID: 818427948535215667, guid: 324731cd6a0289b43bee254c4cf025a3, type: 3}
       propertyPath: advButton
@@ -129078,7 +129175,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 818427948535215667, guid: 324731cd6a0289b43bee254c4cf025a3, type: 3}
       propertyPath: skinName
-      value: VikingSkinRewarded
+      value: VikingSkin
       objectReference: {fileID: 0}
     - target: {fileID: 818427948535215667, guid: 324731cd6a0289b43bee254c4cf025a3, type: 3}
       propertyPath: advButton

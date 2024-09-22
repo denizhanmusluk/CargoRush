@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
+using HomaGames.HomaBelly;
+
 public class LoadingGame : MonoBehaviour
 {
     [SerializeField] List<Image> images = new List<Image>();
@@ -120,6 +122,8 @@ public class LoadingGame : MonoBehaviour
     }
     void GameStart()
     {
+        Analytics.MainMenuLoaded();
+
         //if (PlayerPrefs.GetInt("firstopengame") > 0)
         //{
         //    PlatformSwitchManager.Instance.SwitchToUp();

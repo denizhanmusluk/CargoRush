@@ -8,6 +8,7 @@ public class StandFishCar : Stand,IMoneyArea
 {
     [SerializeField] GameObject canvasProductGO, canvasDeliveringGO;
     [SerializeField] Image imageFill;
+    [SerializeField] List<int> cooldownTimeList = new List<int>();
     [SerializeField] float cooldownTime;
     [SerializeField] MoneyArea moneyArea;
 
@@ -103,7 +104,7 @@ public class StandFishCar : Stand,IMoneyArea
     public void LevelInit()
     {
         carLevel = PlayerPrefs.GetInt(standNameLevel + PlayerPrefs.GetInt("level"));
-
+        cooldownTime = cooldownTimeList[carLevel];
         if (Globals.vipCreateActive && !Globals.isThereVip)
         {
             Globals.carCustomerCount++;
@@ -233,7 +234,7 @@ public class StandFishCar : Stand,IMoneyArea
         {
             FishDropArea.Instance.GarbageDroppingAfterTutorial();
         }
-        GameManager.Instance.CourierLevelCompleted();
+        GameManager.Instance.CourierLevelCompleted(PlayerPrefs.GetInt("completerodercount"));
 
     }
 
@@ -842,6 +843,8 @@ public class StandFishCar : Stand,IMoneyArea
                 IndicatorManager.Instance.IndicaorActive(standFishTezgah.tutorialPosTR.transform);
             }
             TutorialManager.Instance.rceycleTutorialGO.SetActive(true);
+            IndicatorManager.Instance.TutorialStepStart(31);
+
         }
     }
     public void VipViewCamera()

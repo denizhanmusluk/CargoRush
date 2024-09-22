@@ -9,5 +9,13 @@ public class MapButton : MonoBehaviour
     {
         MapManager.Instance.NewLevelSelect(levelIndex);
         AudioManager.Instance.ButtonSound();
+
+        if (PlayerPrefs.GetInt("mapbuttonfirstclck") == 1)
+        {
+            PlayerPrefs.SetInt("mapbuttonfirstclck", 2);
+            IndicatorManager.Instance.TutorialStepCompleted();
+            IndicatorManager.Instance.TutorialStepStart(72);
+
+        }
     }
 }

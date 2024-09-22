@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using HomaGames.HomaBelly;
+
 public enum DailyType
 {
     Money,
@@ -156,6 +158,14 @@ public class DailyRewarded : MonoBehaviour
         StartCoroutine(ButtonActivatorDelay());
 
         PurchaseManager.Instance.PurchasePanelClose();
+
+        if(PlayerPrefs.GetInt("firstclickdailyrew") > 0)
+        {
+            Analytics.ItemObtained("Zone " + (PlayerPrefs.GetInt("level") + 1) + " DailyRewarded", 0, ItemFlowReason.RewardedVideoAd);
+            Analytics.ItemConsumed("Zone " + (PlayerPrefs.GetInt("level") + 1) + " DailyRewarded", 0, ItemFlowReason.RewardedVideoAd);
+        }
+
+        PlayerPrefs.SetInt("firstclickdailyrew", 1);
     }
     IEnumerator ButtonActivatorDelay()
     {

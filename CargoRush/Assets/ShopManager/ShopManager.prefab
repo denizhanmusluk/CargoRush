@@ -25,13 +25,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9086230962594016972}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!222 &9086230962594016968
 CanvasRenderer:
@@ -56,6 +56,8 @@ MonoBehaviour:
   shopProgresGO: {fileID: 0}
   shopProgresFill: {fileID: 0}
   shopProgresFillBG: {fileID: 0}
+  shopLevelUpRatio: 140000001e00000028000000320000003c00000046000000500000005a00000064000000
+  shopLevelIndex: 000000000100000002000000030000000400000005000000060000000700000008000000
   shopRatio:
   - 0.8
   - 0.8
@@ -76,3 +78,9 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 7f28a55f1124d4d488c51ec6ab695c96, type: 3}
   - {fileID: 21300000, guid: 4ea6d3bc4144b4e40854eed5c1736710, type: 3}
   questionMark: {fileID: 0}
+  buyOthersGO: {fileID: 0}
+  nextLevelShowRatio: 0
+  standOnlineGO: {fileID: 0}
+  standOnlineGO2: {fileID: 0}
+  ratioText: {fileID: 0}
+  shopQuestSlider: {fileID: 0}

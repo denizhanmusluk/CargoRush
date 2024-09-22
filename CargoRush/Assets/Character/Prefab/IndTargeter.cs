@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using HomaGames.HomaBelly;
 
 public class IndTargeter : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class IndTargeter : MonoBehaviour
     [SerializeField] float delayTime;
     [SerializeField] bool indicatorActivatorActive;
     [SerializeField] bool tutorialCompleter = false;
+    [SerializeField] int tutorialStepIndex;
     private void OnTriggerEnter(Collider other)
     {
         if(other.GetComponent<PlayerController>() != null)
@@ -43,4 +45,16 @@ public class IndTargeter : MonoBehaviour
             gameObject.SetActive(false);
         }
     }
+    private void OnEnable()
+    {
+        if (PlayerPrefs.GetInt(targeterName) == 0)
+        {
+            IndicatorManager.Instance.TutorialStepStart(tutorialStepIndex);
+        }
+    }
+    private void OnDisable()
+    {
+        IndicatorManager.Instance.TutorialStepCompleted();
+    }
+
 }

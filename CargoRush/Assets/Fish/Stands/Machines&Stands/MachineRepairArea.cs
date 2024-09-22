@@ -51,6 +51,8 @@ public class MachineRepairArea : MonoBehaviour
             tempMachineRepair = GetSortedElementsByValue(tempMachineRepair);
             TutorialManager.Instance.repairMachineGO.SetActive(true);
             IndicatorManager.Instance.IndicaorActive(tempMachineRepair[0].transform);
+            IndicatorManager.Instance.TutorialStepStart(41);
+
         }
     }
     public void RepairingCheck()
@@ -89,6 +91,8 @@ public class MachineRepairArea : MonoBehaviour
                 PlayerPrefs.SetInt("firsterrormachine", 1);
                 TutorialManager.Instance.repairMachineGO.SetActive(false);
                 IndicatorManager.Instance.IndicaorDeActive();
+                IndicatorManager.Instance.TutorialStepCompleted();
+
             }
             if (processMachine.GetComponent<IMachineActive>() != null)
             {

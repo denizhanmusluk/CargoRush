@@ -61,6 +61,10 @@ public class ADVManager : MonoBehaviour
             }
         }
     }
+    //public void RewardedSuggested(string rewardedName)
+    //{
+    //    Analytics.RewardedAdSuggested(rewardedName);
+    //}
     public void RewardedStart(Action fnct, string rewardedName, bool activeTicket)
     {
         rewardedFunction = null;
@@ -76,6 +80,7 @@ public class ADVManager : MonoBehaviour
             if (HomaBelly.Instance.IsRewardedVideoAdAvailable())
             {
                 HomaBelly.Instance.ShowRewardedVideoAd(rewardedName);
+                Analytics.RewardedAdSuggested(rewardedName);
             }
 
             Events.onRewardedVideoAdRewardedEvent += RewardedEnd;

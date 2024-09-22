@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using HomaGames.HomaBelly;
 
 public class ShowBuyRapairReward : MonoBehaviour
 {
@@ -17,17 +18,29 @@ public class ShowBuyRapairReward : MonoBehaviour
         Canvas.SetActive(false);
         string adv_name = "Repairman_REWARDED";
         ADVManager.Instance.RewardedStart(RepairImmediate,adv_name, true);
+
+
+
     }
     public void RepairImmediate()
     {
         //processMachine.repairTimeCounter = processMachine.repairTime - 1;
-        string tag = "InstantRepairRewarded";
+        string tag = "Repairman_REWARDED";
         //GameManager.Instance.GameAnalyticsTag(tag);
-        GameManager.Instance.HomaAnalyticsTag(tag);
+        //GameManager.Instance.HomaAnalyticsTag(tag);
 
         RepairManager.Instance.RepairWorkerStart();
         Canvas.SetActive(true);
         GameManager.Instance.ui.joyStick.SetActive(true);
+
+
+        if (PlayerPrefs.GetInt("firstclickrepairrew") > 0)
+        {
+            Analytics.ItemObtained("Zone " + (PlayerPrefs.GetInt("level") + 1) + " " + tag, 0, ItemFlowReason.RewardedVideoAd);
+            Analytics.ItemConsumed("Zone " + (PlayerPrefs.GetInt("level") + 1) + " " + tag, 0, ItemFlowReason.RewardedVideoAd);
+        }
+        PlayerPrefs.SetInt("firstclickrepairrew", 1);
+
     }
     private void Start()
     {

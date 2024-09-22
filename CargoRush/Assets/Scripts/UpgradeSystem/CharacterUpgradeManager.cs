@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using DG.Tweening;
-
+using HomaGames.HomaBelly;
 public class CharacterUpgradeManager : MonoBehaviour
 {
     private static CharacterUpgradeManager _instance = null;
@@ -106,7 +106,10 @@ public class CharacterUpgradeManager : MonoBehaviour
 
                 //string tag = "M" + (PlayerPrefs.GetInt("level") + 1).ToString() + "-CharacterSpeedUpgrade" + Globals.characterSpeedLevel.ToString();
                 //GameManager.Instance.GameAnalyticsTag(tag);
-                GameManager.Instance.HomaAnalyticsTag("CharacterSpeedUpgrade");
+
+
+                //GameManager.Instance.HomaAnalyticsTag("CharacterSpeedUpgrade");
+                Analytics.ItemUpgraded(ItemUpgradeType.Upgrade, "Zone " + (PlayerPrefs.GetInt("level") + 1) + " CharacterSpeedUpgrade", Globals.characterSpeedLevel, ItemFlowReason.Progression);
 
                 float time = CoefficientTransformation.FormatSaniye(Globals.speedPlayTime);
 
@@ -130,7 +133,11 @@ public class CharacterUpgradeManager : MonoBehaviour
 
                 //string tag = "M" + (PlayerPrefs.GetInt("level") + 1).ToString() + "-CharacterCapacityUpgrade" + Globals.stackCapacityLevel.ToString();
                 //GameManager.Instance.GameAnalyticsTag(tag);
-                GameManager.Instance.HomaAnalyticsTag("CharacterCapacityUpgrade");
+
+
+                //GameManager.Instance.HomaAnalyticsTag("CharacterCapacityUpgrade");
+
+                Analytics.ItemUpgraded(ItemUpgradeType.Upgrade, "Zone " + (PlayerPrefs.GetInt("level") + 1) + " CharacterCapacityUpgrade", Globals.stackCapacityLevel, ItemFlowReason.Progression);
 
                 float time = CoefficientTransformation.FormatSaniye(Globals.speedPlayTime);
                 //GameAnalytics.NewDesignEvent(tag, time);
@@ -200,7 +207,10 @@ public class CharacterUpgradeManager : MonoBehaviour
 
             //string tag = "M" + (PlayerPrefs.GetInt("level") + 1).ToString() + "-CharacterSpeedUpgrade" + Globals.characterSpeedLevel.ToString() + "-REWARDED";
             //GameManager.Instance.GameAnalyticsTag(tag);
-            GameManager.Instance.HomaAnalyticsTag("CharacterSpeedUpgrade");
+
+
+            //GameManager.Instance.HomaAnalyticsTag("CharacterSpeedUpgrade");
+            Analytics.ItemUpgraded(ItemUpgradeType.Upgrade, "Zone " + (PlayerPrefs.GetInt("level") + 1) + " CharacterSpeedUpgrade", Globals.characterSpeedLevel, ItemFlowReason.RewardedVideoAd);
 
 
         }
@@ -218,7 +228,11 @@ public class CharacterUpgradeManager : MonoBehaviour
 
             //string tag = "M" + (PlayerPrefs.GetInt("level") + 1).ToString() + "-CharacterCapacityUpgrade" + Globals.stackCapacityLevel.ToString() + "-REWARDED";
             //GameManager.Instance.GameAnalyticsTag(tag);
-            GameManager.Instance.HomaAnalyticsTag("CharacterCapacityUpgrade");
+
+
+            //GameManager.Instance.HomaAnalyticsTag("CharacterCapacityUpgrade");
+
+            Analytics.ItemUpgraded(ItemUpgradeType.Upgrade, "Zone " + (PlayerPrefs.GetInt("level") + 1) + " CharacterCapacityUpgrade", Globals.stackCapacityLevel, ItemFlowReason.RewardedVideoAd);
 
         }
     }

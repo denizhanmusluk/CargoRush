@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using HomaGames.HomaBelly;
+
 public enum MoneyType
 {
     Money,
@@ -44,7 +46,10 @@ public class BuyButtons : MonoBehaviour
         if (id != 0)
         {
             //GameManager.Instance.GameAnalyticsTag(skinName);
-            GameManager.Instance.HomaAnalyticsTag(skinName);
+            //GameManager.Instance.HomaAnalyticsTag(skinName);
+
+            Analytics.ItemObtained("Zone " + (PlayerPrefs.GetInt("level") + 1) + " Skin", id, ItemFlowReason.Progression);
+
         }
         //GameAnalytics.NewDesignEvent(skinName);
         AudioManager.Instance.ButtonSound();
