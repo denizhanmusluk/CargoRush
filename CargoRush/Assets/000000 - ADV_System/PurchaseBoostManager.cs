@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using HomaGames.HomaBelly;
 public class PurchaseBoostManager : MonoBehaviour
 {
     private static PurchaseBoostManager _instance = null;
@@ -33,6 +34,7 @@ public class PurchaseBoostManager : MonoBehaviour
         {
             buyDoubleIncome.CheckPurchased();
         }
+        Analytics.ItemConsumed("Permanent_DoubleIncome", 0, ItemFlowReason.InAppPurchase);
     }
 
     public void CapacityBuy(float _cost, Button _buyButton)
@@ -49,6 +51,7 @@ public class PurchaseBoostManager : MonoBehaviour
         {
             buyCapacity.CheckPurchased();
         }
+        Analytics.ItemConsumed("Permanent_DoubleCapacity", 0, ItemFlowReason.InAppPurchase);
     }
 
     public void RepairBuy(float _cost, Button _buyButton)
@@ -65,6 +68,7 @@ public class PurchaseBoostManager : MonoBehaviour
         {
             buyRepair.CheckPurchased();
         }
+        Analytics.ItemConsumed("Permanent_RepairMan", 0, ItemFlowReason.InAppPurchase);
     }
 
     public void SpeedBuy(float _cost, Button _buyButton)
@@ -81,5 +85,6 @@ public class PurchaseBoostManager : MonoBehaviour
         {
             buySpeed.CheckPurchased();
         }
+        Analytics.ItemConsumed("Permanent_SpeedBoost", 0, ItemFlowReason.InAppPurchase);
     }
 }

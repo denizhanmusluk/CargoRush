@@ -570,7 +570,7 @@ public class ProcessMachine : Stand, IStandUpgrade, IMachineActive
             StartCoroutine(CreatorChecking());
         }
     }
-  
+    [SerializeField] float converToGoSpeed = 2f;
     IEnumerator CreateCanned(Collectable raws)
     {
 
@@ -618,7 +618,7 @@ public class ProcessMachine : Stand, IStandUpgrade, IMachineActive
             counter = 0f;
             while (counter < 1f)
             {
-                counter += 2 * Time.deltaTime;
+                counter += 1f * Time.deltaTime;
 
                 raws.transform.position = Vector3.Lerp(firstPoss, fishInTR_Second.transform.position, counter);
                 raws.transform.rotation = Quaternion.Lerp(firstRots, fishInTR_Second.rotation, counter);
@@ -634,7 +634,7 @@ public class ProcessMachine : Stand, IStandUpgrade, IMachineActive
         counter = 0f;
         while (counter < 1f)
         {
-            counter += 2 * Time.deltaTime;
+            counter += converToGoSpeed * Time.deltaTime;
 
             raws.transform.position = Vector3.Lerp(firstPoss, converFishtoCannedTR.transform.position, counter);
 
@@ -714,7 +714,7 @@ public class ProcessMachine : Stand, IStandUpgrade, IMachineActive
 
     IEnumerator GoBand(Collectable box)
     {
-        float moveSpeed = 6f;
+        float moveSpeed = 4f;
         float rotSpeed = 8f;
         for(int i = 0; i < aiPath.aiNodes.Count; i++)
         {

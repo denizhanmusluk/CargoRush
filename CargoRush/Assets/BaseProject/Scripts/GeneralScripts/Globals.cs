@@ -4,6 +4,7 @@ using UnityEngine;
 
 public static class Globals 
 {
+    public static bool gamePlayStarting;
     public static int currentLevel = 1;
     public static int currentLevelIndex = 0, LevelCount;
     public static int moneyAmount = 0;

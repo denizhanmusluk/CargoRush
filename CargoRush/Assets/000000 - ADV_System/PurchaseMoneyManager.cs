@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using HomaGames.HomaBelly;
 
 public class PurchaseMoneyManager : MonoBehaviour
 {
@@ -15,16 +16,19 @@ public class PurchaseMoneyManager : MonoBehaviour
         _instance = this;
     }
 
-    public void MoneyBuy(int _moneyAmount, float _cost, Button _buyButton)
+    public void MoneyBuy(int _moneyAmount, float _cost, Button _buyButton, int buttonID)
     {
         moneyAmount = _moneyAmount;
         cost = _cost;
         buyButton = _buyButton;
-        PayingCompleted();
+        PayingCompleted(buttonID);
     }
-    void PayingCompleted()
+    void PayingCompleted(int buttonID)
     {
         buyButton.interactable = true;
-        GameManager.Instance.ui.MoneyUpdate(moneyAmount);
+        GameManager.Instance.MoneyUpdate(moneyAmount);
+        Analytics.ResourceFlowEvent(ResourceFlowType.Source, "Money", (float)5000, (float)Globals.moneyAmount, null, $"MoneyBundle{buttonID}", ResourceFlowReason.InAppPurchase);
+        Analytics.ItemConsumed($"MoneyBundle{buttonID}", 0, ItemFlowReason.InAppPurchase);
+
     }
 }

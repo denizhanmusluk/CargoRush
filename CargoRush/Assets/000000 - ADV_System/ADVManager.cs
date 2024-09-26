@@ -9,7 +9,9 @@ public class ADVManager : MonoBehaviour
     private static ADVManager _instance = null;
     public static ADVManager Instance => _instance;
 
-    public event Action rewardedFunction;
+    public delegate void RW_Function(bool ticketActive);
+
+    public event RW_Function rewardedFunction;
     public event Action interstialFunction;
 
     public List<RewardedButton> allRewardedButtons = new List<RewardedButton>();
@@ -65,15 +67,16 @@ public class ADVManager : MonoBehaviour
     //{
     //    Analytics.RewardedAdSuggested(rewardedName);
     //}
-    public void RewardedStart(Action fnct, string rewardedName, bool activeTicket)
+    public void RewardedStart(RW_Function fnct, string rewardedName, bool activeTicket)
     {
         rewardedFunction = null;
-        rewardedFunction += fnct;
 
         if (Globals.gemAmount > 0 && activeTicket)
         {
-            GameManager.Instance.ui.GemUpdate(-1);
-            rewardedFunction?.Invoke();
+            rewardedFunction += (_tcktAct) => fnct(true);
+
+            GameManager.Instance.GemUpdate(-1);
+            rewardedFunction?.Invoke(true);
         }
         else
         {
@@ -83,13 +86,14 @@ public class ADVManager : MonoBehaviour
                 Analytics.RewardedAdSuggested(rewardedName);
             }
 
+            rewardedFunction += (_tcktAct) => fnct(false);
             Events.onRewardedVideoAdRewardedEvent += RewardedEnd;
         }
         AudioManager.Instance.UpgradeSound();
     }
     private void RewardedEnd(VideoAdReward videoAdReward, AdInfo adInfo)
     {
-        rewardedFunction?.Invoke();
+        rewardedFunction?.Invoke(false);
         Events.onRewardedVideoAdRewardedEvent -= RewardedEnd;
         DayCycleManager.Instance.dayCycleCount = 0;
     }

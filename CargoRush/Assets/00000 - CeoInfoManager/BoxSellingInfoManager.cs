@@ -25,8 +25,8 @@ public class BoxSellingInfoManager : MonoBehaviour
     }
     public void GetPriceButton_ADVClick()
     {
-        string tag = "DeliveryPerformanceDouble_REWARDED";
-        string adv_name = tag;
+        string _tag = "DeliveryPerformanceDouble_RV";
+        string adv_name = _tag;
 
         ADVManager.Instance.RewardedStart(GetPriceDouble,adv_name, true);
         priceButton.interactable = false;
@@ -36,18 +36,30 @@ public class BoxSellingInfoManager : MonoBehaviour
 
 
     }
-    void GetPriceDouble()
+    void GetPriceDouble(bool ticketActive)
     {
-        MoneyCreate(priceValue * 2, priceButton.transform);
+        string _tag = "DeliveryPerformanceDouble_RV";
+
+        MoneyCreate(priceValue * 2, priceButton.transform, true);
         priceButton.interactable = false;
         StartCoroutine(ButtonClickDelay());
-        Analytics.ItemObtained("Zone " + (PlayerPrefs.GetInt("level") + 1) + " " + tag, 0, ItemFlowReason.RewardedVideoAd);
-        Analytics.ItemConsumed("Zone " + (PlayerPrefs.GetInt("level") + 1) + " " + tag, 0, ItemFlowReason.RewardedVideoAd);
+
+        if (ticketActive)
+        {
+            Analytics.ItemObtained(_tag, 0, ItemFlowReason.Progression);
+            Analytics.ItemConsumed(_tag, 0, ItemFlowReason.Progression);
+        }
+        else
+        {
+            Analytics.ItemObtained(_tag, 0, ItemFlowReason.RewardedVideoAd);
+            Analytics.ItemConsumed(_tag, 0, ItemFlowReason.RewardedVideoAd);
+        }
+
     }
     public void GetPriceButtonClick()
     {
         //GameManager.Instance.MoneyUpdate(priceValue);
-        MoneyCreate(priceValue, priceButton.transform);
+        MoneyCreate(priceValue, priceButton.transform, false);
         priceButton.interactable = false;
         StartCoroutine(ButtonClickDelay());
         PlayerController.Instance.PlayerControl_ReActive();
@@ -71,11 +83,11 @@ public class BoxSellingInfoManager : MonoBehaviour
     //////////////////////////////////////////
     public GameObject moneyPrefab;
     public Transform moneyTargetTR;
-    public void MoneyCreate(int _moneyCount, Transform moneyCreatePosTR)
+    public void MoneyCreate(int _moneyCount, Transform moneyCreatePosTR, bool RV_Active)
     {
-        StartCoroutine(Money_Create(_moneyCount, moneyCreatePosTR));
+        StartCoroutine(Money_Create(_moneyCount, moneyCreatePosTR , RV_Active));
     }
-    IEnumerator Money_Create(int moneyCount, Transform moneyCreatePosTR)
+    IEnumerator Money_Create(int moneyCount, Transform moneyCreatePosTR, bool RV_Active)
     {
         int _moneyCount = moneyCount;
         if (_moneyCount < 10)
@@ -91,6 +103,16 @@ public class BoxSellingInfoManager : MonoBehaviour
         yield return new WaitForSeconds(2f);
 
         GameManager.Instance.MoneyUpdate(moneyCount);
+
+        if (RV_Active)
+        {
+            Analytics.ResourceFlowEvent(ResourceFlowType.Source, "Money", (float)moneyCount, (float)Globals.moneyAmount, null, " ManagerBonusRV", ResourceFlowReason.RewardedVideoAd);
+        }
+        else
+        {
+            Analytics.ResourceFlowEvent(ResourceFlowType.Source, "Money", (float)moneyCount, (float)Globals.moneyAmount, null, " ManagerBonus", ResourceFlowReason.Progression);
+        }
+
     }
     IEnumerator MoneyMoveUI(Transform moneyTR)
     {

@@ -115,7 +115,7 @@ public class DailyRewarded : MonoBehaviour
                 {
                     if (PlayerPrefs.GetInt("firstdailyrewarded") == 0)
                     {
-                        AdvEnd();
+                        AdvEnd(true);
                     }
                     else
                     {
@@ -133,20 +133,39 @@ public class DailyRewarded : MonoBehaviour
 
 
     }
-    void AdvEnd()
+    void AdvEnd(bool ticketActive)
     {
+        bool rewardedActive = false;
+        if (PlayerPrefs.GetInt("firstclickdailyrew") > 0)
+        {
+            rewardedActive = true;
+            if (ticketActive)
+            {
+                Analytics.ItemObtained(" DailyRewarded", 0, ItemFlowReason.Progression);
+                Analytics.ItemConsumed(" DailyRewarded", 0, ItemFlowReason.Progression);
+            }
+            else
+            {
+                Analytics.ItemObtained(" DailyRewarded", 0, ItemFlowReason.RewardedVideoAd);
+                Analytics.ItemConsumed(" DailyRewarded", 0, ItemFlowReason.RewardedVideoAd);
+            }
+
+        }
+
+        PlayerPrefs.SetInt("firstclickdailyrew", 1);
+
         switch (_dailyType)
         {
             case DailyType.Money:
                 {
                     PlayerPrefs.SetInt("firstdailyrewarded", 1);
-                    GameManager.Instance.ui.MoneyCreateDailyRewarded(moneyRewardedAmounts[PlayerPrefs.GetInt("level")], transform.position);
+                    GameManager.Instance.ui.MoneyCreateDailyRewarded(moneyRewardedAmounts[PlayerPrefs.GetInt("level")], transform.position, rewardedActive);
 
                 }
                 break;
             case DailyType.Ticket:
                 {
-                    GameManager.Instance.ui.TicketCreateDailyRewarded(moneyRewardedAmounts[PlayerPrefs.GetInt("level")], transform.position);
+                    GameManager.Instance.ui.TicketCreateDailyRewarded(moneyRewardedAmounts[PlayerPrefs.GetInt("level")], transform.position, rewardedActive);
 
                 }
                 break;
@@ -159,13 +178,6 @@ public class DailyRewarded : MonoBehaviour
 
         PurchaseManager.Instance.PurchasePanelClose();
 
-        if(PlayerPrefs.GetInt("firstclickdailyrew") > 0)
-        {
-            Analytics.ItemObtained("Zone " + (PlayerPrefs.GetInt("level") + 1) + " DailyRewarded", 0, ItemFlowReason.RewardedVideoAd);
-            Analytics.ItemConsumed("Zone " + (PlayerPrefs.GetInt("level") + 1) + " DailyRewarded", 0, ItemFlowReason.RewardedVideoAd);
-        }
-
-        PlayerPrefs.SetInt("firstclickdailyrew", 1);
     }
     IEnumerator ButtonActivatorDelay()
     {

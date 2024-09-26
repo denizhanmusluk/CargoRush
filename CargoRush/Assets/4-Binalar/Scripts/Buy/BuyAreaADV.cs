@@ -78,7 +78,7 @@ public class BuyAreaADV : MonoBehaviour
     {
         ADVManager.Instance.RewardedStart(AdvCompleteBuy, rewardedName, true);
     }
-    void AdvCompleteBuy()
+    void AdvCompleteBuy(bool ticketActive)
     {
         FirstOpenArea();
     }

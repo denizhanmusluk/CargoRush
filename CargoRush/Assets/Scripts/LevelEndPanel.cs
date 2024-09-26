@@ -51,7 +51,7 @@ public class LevelEndPanel : MonoBehaviour
     IEnumerator LevelEndPanelOpenDelay()
     {
         yield return new WaitForSeconds(2f);
-        GameManager.Instance.MoneyUpdate((int)Globals.inLevelMoneyCount);
+        //GameManager.Instance.MoneyUpdate((int)Globals.inLevelMoneyCount);
         StartCoroutine(SetMoneyValue((int)Globals.inLevelMoneyCount));
         StartCoroutine(SetMoneyUI());
     }

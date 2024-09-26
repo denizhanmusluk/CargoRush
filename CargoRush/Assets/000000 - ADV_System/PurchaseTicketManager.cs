@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using HomaGames.HomaBelly;
 
 public class PurchaseTicketManager : MonoBehaviour
 {
@@ -14,17 +15,18 @@ public class PurchaseTicketManager : MonoBehaviour
     {
         _instance = this;
     }
-    public void TicketBuy(int _ticketAmount, float _cost, BuyTicketButton _buyTicketButton)
+    public void TicketBuy(int _ticketAmount, float _cost, BuyTicketButton _buyTicketButton, int buttonID)
     {
         ticketAmount = _ticketAmount;
         cost = _cost;
         buyTicketButton = _buyTicketButton;
-        PayingCompleted();
+        PayingCompleted(buttonID);
     }
-    void PayingCompleted()
+    void PayingCompleted(int buttonID)
     {
         //buyTicketButton.buyButton.interactable = true;
-        GameManager.Instance.ui.GemUpdate(ticketAmount);
+        GameManager.Instance.GemUpdate(ticketAmount);
+        Analytics.ItemConsumed($"TicketBundle{buttonID}", 0, ItemFlowReason.InAppPurchase);
     }
 
 }

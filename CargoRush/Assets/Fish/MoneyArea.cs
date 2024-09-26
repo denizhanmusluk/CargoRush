@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using HomaGames.HomaBelly;
 
 public class MoneyArea : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class MoneyArea : MonoBehaviour
     public List<BanknotMoney> moneyList = new List<BanknotMoney>();
     bool moneyCollectActive = false;
     public GameObject caseArea;
+    public string moneyEarningTag;
     private void OnTriggerEnter(Collider other)
     {
         if(other.GetComponent<PlayerController>() != null && !moneyCollectActive)
@@ -64,7 +66,11 @@ public class MoneyArea : MonoBehaviour
             }
         }
 
-        yield return null;
+        yield return new WaitForSeconds(0.5f);
+        GameManager.Instance.MoneyUpdate(totalEarn);
+
+        Analytics.ResourceFlowEvent(ResourceFlowType.Source, "Money", totalEarn, (float)Globals.moneyAmount, null, moneyEarningTag, ResourceFlowReason.Progression);
+
 
     }
 }

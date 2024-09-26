@@ -289,11 +289,11 @@ public class UIManager : Subject
 
     public GameObject ticketPrefab;
 
-    public void MoneyCreateDailyRewarded(int moneyCount, Vector3 moneyCreatePos)
+    public void MoneyCreateDailyRewarded(int moneyCount, Vector3 moneyCreatePos, bool rewardedActive)
     {
-        StartCoroutine(Money_CreateRewDaily(moneyCount, moneyCreatePos));
+        StartCoroutine(Money_CreateRewDaily(moneyCount, moneyCreatePos, rewardedActive));
     }
-    IEnumerator Money_CreateRewDaily(int moneyCount, Vector3 moneyCreatePos)
+    IEnumerator Money_CreateRewDaily(int moneyCount, Vector3 moneyCreatePos, bool rewardedActive)
     {
         for (int i = 0; i < moneyCount / 10; i++)
         {
@@ -304,8 +304,18 @@ public class UIManager : Subject
         yield return new WaitForSeconds(2f);
 
         GameManager.Instance.MoneyUpdate(moneyCount);
+
+        if (rewardedActive)
+        {
+            Analytics.ResourceFlowEvent(ResourceFlowType.Source, "Money", (float)moneyCount, (float)Globals.moneyAmount, null, "DailyBonusRV", ResourceFlowReason.RewardedVideoAd);
+        }
+        else
+        {
+            Analytics.ResourceFlowEvent(ResourceFlowType.Source, "Money", (float)moneyCount, (float)Globals.moneyAmount, null, "DailyBonus", ResourceFlowReason.Progression);
+        }
+
     }
-    public void TicketCreateDailyRewarded(int moneyCount, Vector3 moneyCreatePos)
+    public void TicketCreateDailyRewarded(int moneyCount, Vector3 moneyCreatePos, bool rewardedActive)
     {
         StartCoroutine(Ticket_CreateRewDaily(moneyCount, moneyCreatePos));
     }
@@ -321,11 +331,11 @@ public class UIManager : Subject
 
         GameManager.Instance.GemUpdate(moneyCount);
     }
-    public void MoneyCreate(int _moneyCount)
+    public void MoneyCreate(int _moneyCount,string itemID, bool rewardedAdvActive)
     {
-        StartCoroutine(Money_Create(_moneyCount));
+        StartCoroutine(Money_Create(_moneyCount, itemID, rewardedAdvActive));
     }
-    IEnumerator Money_Create(int moneyCount)
+    IEnumerator Money_Create(int moneyCount, string itemID, bool rewardedAdvActive)
     {
         for (int i = 0; i < moneyCount; i++)
         {
@@ -337,6 +347,14 @@ public class UIManager : Subject
 
 
         GameManager.Instance.MoneyUpdate(moneyCount);
+        if (rewardedAdvActive)
+        {
+            Analytics.ResourceFlowEvent(ResourceFlowType.Source, "Money", (float)moneyCount, (float)Globals.moneyAmount, null, itemID, ResourceFlowReason.RewardedVideoAd);
+        }
+        else
+        {
+            Analytics.ResourceFlowEvent(ResourceFlowType.Source, "Money", (float)moneyCount, (float)Globals.moneyAmount, null, itemID, ResourceFlowReason.Progression);
+        }
 
     }
 
@@ -567,8 +585,8 @@ public class UIManager : Subject
     {
         PlayerController.Instance.PlayerControl_ReActive();
 
-        string tag = "SpeedBoost_REWARDED";
-        string adv_name = tag;
+        string _tag = "SpeedBoost_RV";
+        string adv_name = _tag;
 
         ADVManager.Instance.RewardedStart(HoverboardSkillClick,adv_name, true);
         //GameManager.Instance.GameAnalyticsTag(tag);
@@ -576,12 +594,23 @@ public class UIManager : Subject
         //GameManager.Instance.HomaAnalyticsTag(tag);
 
     }
-    public void HoverboardSkillClick()
+    public void HoverboardSkillClick(bool ticketActive)
     {
+        string _tag = "SpeedBoost_RV";
         SkillManager.Instance.HoverboardActive();
         PlayerController.Instance.PlayerControl_ReActive();
-        Analytics.ItemObtained("Zone " + (PlayerPrefs.GetInt("level") + 1) + " " + tag, 0, ItemFlowReason.RewardedVideoAd);
-        Analytics.ItemConsumed("Zone " + (PlayerPrefs.GetInt("level") + 1) + " " + tag, 0, ItemFlowReason.RewardedVideoAd);
+
+        if (ticketActive)
+        {
+            Analytics.ItemObtained(_tag, 0, ItemFlowReason.Progression);
+            Analytics.ItemConsumed(_tag, 0, ItemFlowReason.Progression);
+        }
+        else
+        {
+            Analytics.ItemObtained(_tag, 0, ItemFlowReason.RewardedVideoAd);
+            Analytics.ItemConsumed(_tag, 0, ItemFlowReason.RewardedVideoAd);
+        }
+
     }
     public void HoverboardSkillClick_Cancel()
     {
@@ -596,8 +625,8 @@ public class UIManager : Subject
     {
         PlayerController.Instance.PlayerControl_ReActive();
 
-        string tag = "InfiniteCapacity_REWARDED";
-        string adv_name = tag;
+        string _tag = "InfiniteCapacity_RV";
+        string adv_name = _tag;
 
         ADVManager.Instance.RewardedStart(CapacitySkillClick,adv_name, true);
         //GameManager.Instance.GameAnalyticsTag(tag);
@@ -605,12 +634,24 @@ public class UIManager : Subject
 
 
     }
-    public void CapacitySkillClick()
+    public void CapacitySkillClick(bool ticketActive)
     {
+        string _tag = "InfiniteCapacity_RV";
+
         SkillManager.Instance.CapacityActive();
         PlayerController.Instance.PlayerControl_ReActive();
-        Analytics.ItemObtained("Zone " + (PlayerPrefs.GetInt("level") + 1) + " " + tag, 0, ItemFlowReason.RewardedVideoAd);
-        Analytics.ItemConsumed("Zone " + (PlayerPrefs.GetInt("level") + 1) + " " + tag, 0, ItemFlowReason.RewardedVideoAd);
+
+        if (ticketActive)
+        {
+            Analytics.ItemObtained(_tag, 999, ItemFlowReason.Progression);
+            Analytics.ItemConsumed(_tag, 999, ItemFlowReason.Progression);
+        }
+        else
+        {
+            Analytics.ItemObtained(_tag, 999, ItemFlowReason.RewardedVideoAd);
+            Analytics.ItemConsumed(_tag, 999, ItemFlowReason.RewardedVideoAd);
+        }
+
     }
 
     public void CapacitySkillClick_Cancel()
@@ -626,8 +667,8 @@ public class UIManager : Subject
     {
         PlayerController.Instance.PlayerControl_ReActive();
 
-        string tag = "DoubleIncome_REWARDED";
-        string adv_name = tag;
+        string _tag = "DoubleIncome_RV";
+        string adv_name = _tag;
 
         ADVManager.Instance.RewardedStart(DoubleIncomeSkillClick,adv_name, true);
 
@@ -637,12 +678,25 @@ public class UIManager : Subject
 
     }
 
-    public void DoubleIncomeSkillClick()
+    public void DoubleIncomeSkillClick(bool ticketActive)
     {
+        string _tag = "DoubleIncome_RV";
+
+
         SkillManager.Instance.DoubleIncomeActive();
         PlayerController.Instance.PlayerControl_ReActive();
-        Analytics.ItemObtained("Zone " + (PlayerPrefs.GetInt("level") + 1) + " " + tag, 0, ItemFlowReason.RewardedVideoAd);
-        Analytics.ItemConsumed("Zone " + (PlayerPrefs.GetInt("level") + 1) + " " + tag, 0, ItemFlowReason.RewardedVideoAd);
+
+        if (ticketActive)
+        {
+            Analytics.ItemObtained(_tag, 0, ItemFlowReason.Progression);
+            Analytics.ItemConsumed(_tag, 0, ItemFlowReason.Progression);
+        }
+        else
+        {
+            Analytics.ItemObtained(_tag, 0, ItemFlowReason.RewardedVideoAd);
+            Analytics.ItemConsumed(_tag, 0, ItemFlowReason.RewardedVideoAd);
+        }
+
     }
     public void DoubleIncomeSkillClick_Cancel()
     {
@@ -662,8 +716,8 @@ public class UIManager : Subject
     {
         PlayerController.Instance.PlayerControl_ReActive();
 
-        string tag = "MoneyBag_REWARDED";
-        string adv_name = tag;
+        string _tag = "MoneyBag_RV";
+        string adv_name = _tag;
 
         ADVManager.Instance.RewardedStart(FreeMoneySkill,adv_name , true);
 
@@ -673,14 +727,25 @@ public class UIManager : Subject
 
     }
 
-    public void FreeMoneySkill()
+    public void FreeMoneySkill(bool ticketActive)
     {
         Globals.isMoneyRewardCreated = false;
+        string _tag = "MoneyBag_RV";
 
         //GameManager.Instance.MoneyUpdate(PopUpManager.Instance.freeMoneyValue);
-        MoneyCreate(PopUpManager.Instance.freeMoneyValue);
-        Analytics.ItemObtained("Zone " + (PlayerPrefs.GetInt("level") + 1) + " " + tag, 0, ItemFlowReason.RewardedVideoAd);
-        Analytics.ItemConsumed("Zone " + (PlayerPrefs.GetInt("level") + 1) + " " + tag, 0, ItemFlowReason.RewardedVideoAd);
+        MoneyCreate(PopUpManager.Instance.freeMoneyValue, _tag , true);
+
+        if(ticketActive)
+        {
+            Analytics.ItemObtained(_tag, 0, ItemFlowReason.Progression);
+            Analytics.ItemConsumed(_tag, 0, ItemFlowReason.Progression);
+        }
+        else
+        {
+            Analytics.ItemObtained(_tag, 0, ItemFlowReason.RewardedVideoAd);
+            Analytics.ItemConsumed(_tag, 0, ItemFlowReason.RewardedVideoAd);
+        }
+
     }
    
     public void FreeMoneySkillClickCancel()
@@ -697,7 +762,7 @@ public class UIManager : Subject
         Globals.isMoneyRewardCreated = false;
 
         //GameManager.Instance.MoneyUpdate(PopUpManager.Instance.freeMoneyValue);
-        MoneyCreate((Globals.collectableLevel * 300) + (Globals.openedCarSlotCount * 200) * (PlayerPrefs.GetInt("level") + 1));
+        MoneyCreate((Globals.collectableLevel * 300) + (Globals.openedCarSlotCount * 200) * (PlayerPrefs.GetInt("level") + 1) , "ShareValueBonus" , false);
 
     }
 

@@ -363,7 +363,7 @@ public class ShareManager : MonoBehaviour
     }
     public void RepairClick()
     {
-        RepairManager.Instance.repairWorker.showBuyRapairReward.RepairImmediate();
+        RepairManager.Instance.repairWorker.showBuyRapairReward.RepairImmediate(true);
         repairPopUp_GO.SetActive(false);
         PlayerController.Instance.PlayerControl_ReActive();
         ShareCeo.Instance.BossGoExit();

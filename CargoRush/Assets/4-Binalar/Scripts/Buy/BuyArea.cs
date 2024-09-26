@@ -96,6 +96,7 @@ public class BuyArea : MonoBehaviour, BuyCamera, IBuyCost
     public bool ticketTutorialActivator = false;
 
     bool shopValueAdded = false;
+    public string buyNameForResource;
     void Awake()
     {
         if (cost >= 20)
@@ -234,7 +235,7 @@ public class BuyArea : MonoBehaviour, BuyCamera, IBuyCost
     bool cooldown = true;
     [SerializeField] bool paymentActive = false;
 
-
+    int buyCounter = 0;
     private void OnTriggerEnter(Collider other)
     {
         if (other.GetComponent<PlayerController>() != null && Globals.buyActive)
@@ -247,7 +248,24 @@ public class BuyArea : MonoBehaviour, BuyCamera, IBuyCost
         if (other.GetComponent<PlayerController>() != null)
         {
             paymentActive = false;
+            if(buyCounter > 0)
+            {
+                SendAnalyticResource(buyCounter);
+                buyCounter = 0;
+            }
         }
+    }
+    void SendAnalyticResource(int sendMoneyAmount)
+    {
+        if (standUpgradeActive)
+        {
+            Analytics.ResourceFlowEvent(ResourceFlowType.Sink, "Money", (float)sendMoneyAmount, (float)Globals.moneyAmount, standUpgradeLevel.ToString(), buyNameForResource, ResourceFlowReason.Progression);
+        }
+        else
+        {
+            Analytics.ResourceFlowEvent(ResourceFlowType.Sink, "Money", (float)sendMoneyAmount, (float)Globals.moneyAmount, "", buyNameForResource, ResourceFlowReason.Progression);
+        }
+        Debug.Log("sendMoneyAmount" + sendMoneyAmount);
     }
     IEnumerator CooldownActive(float time)
     {
@@ -301,6 +319,12 @@ public class BuyArea : MonoBehaviour, BuyCamera, IBuyCost
         isbuy = false;
         if (delta_cost_active)
         {
+            if(currentAmount < deltaCost)
+            {
+                deltaCost = currentAmount;
+            }
+ 
+
             currentAmount -= deltaCost;
             VibratoManager.Instance.LightVibration();
             AudioManager.Instance.PaymentSound();
@@ -319,10 +343,12 @@ public class BuyArea : MonoBehaviour, BuyCamera, IBuyCost
         if (delta_cost_active)
         {
             GameManager.Instance.MoneyUpdate(-deltaCost);
+            buyCounter += deltaCost;
         }
         else
         {
             GameManager.Instance.MoneyUpdate(-PlayerPrefs.GetInt("money"));
+            buyCounter += PlayerPrefs.GetInt("money");
         }
 
         PlayerPrefs.SetInt(currentCostBuild + PlayerPrefs.GetInt("level"), currentAmount);
@@ -347,6 +373,10 @@ public class BuyArea : MonoBehaviour, BuyCamera, IBuyCost
     public bool indTutorialActive;
     void FirstOpenArea()
     {
+        if(buyCounter > 0)
+        {
+            SendAnalyticResource(buyCounter);
+        }
         if (specialVehicleOpener)
         {
             MissionManager.Instance.SpecialShippingLineMissionStart();

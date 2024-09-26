@@ -135,7 +135,9 @@ public class BanknotMoney : MonoBehaviour
         transform.position = _targetTR.position;
         //transform.rotation = targetRot;
         //transform.localScale = firstScale;
-        GameManager.Instance.MoneyUpdate(banknotValue);
+
+
+        //GameManager.Instance.MoneyUpdate(banknotValue);
         Destroy(gameObject);
     }
 }

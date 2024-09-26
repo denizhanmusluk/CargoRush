@@ -492,7 +492,7 @@ public class MineCrusher : Stand, IStandUpgrade
         yield return null;
 
 
-        float moveSpeed = 6f;
+        float moveSpeed = 4.8f;
         float rotSpeed = 5f;
         for (int i = 0; i < _CollectProducts[prefabSelect].bandPosList.Count; i++)
         {

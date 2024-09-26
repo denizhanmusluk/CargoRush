@@ -716,7 +716,7 @@ public class SkillManager : MonoBehaviour
     public void PurchaseRepairImmediateActive()
     {
         PlayerPrefs.SetInt("purchaserepairboost", 1);
-        RepairManager.Instance.repairWorker.showBuyRapairReward.RepairImmediate();
+        RepairManager.Instance.repairWorker.showBuyRapairReward.RepairImmediate(false);
         RepairManager.Instance.repairWorker.showBuyRapairReward.Canvas.SetActive(false);
     }
 }

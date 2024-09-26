@@ -2031,6 +2031,7 @@ MonoBehaviour:
   canvasProductGO: {fileID: 191729449677102979}
   canvasDeliveringGO: {fileID: 2415796883872321576}
   imageFill: {fileID: 7231334269182592776}
+  cooldownTimeList: 
   cooldownTime: 5
   moneyArea: {fileID: 1766930727826017532}
   carCreateTR: {fileID: 3281923454709472920}
@@ -2074,6 +2075,8 @@ MonoBehaviour:
   vipCarCamera: {fileID: 1408027527913938170}
   standFishTezgah: {fileID: 0}
   vipCounter: 0
+  missionActive: 1
+  missionUpdateActive: 1
 --- !u!114 &3651397926022339220
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4271,6 +4274,10 @@ PrefabInstance:
     - target: {fileID: 1670912154311324034, guid: 9f8b418ffc0eddd458c3640d936fc951, type: 3}
       propertyPath: m_Name
       value: DropMoneyPositions
+      objectReference: {fileID: 0}
+    - target: {fileID: 8459306040719960641, guid: 9f8b418ffc0eddd458c3640d936fc951, type: 3}
+      propertyPath: moneyEarningTag
+      value: Delivery
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

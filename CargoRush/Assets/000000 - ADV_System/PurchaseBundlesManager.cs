@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using UnityEngine.UI;
+using HomaGames.HomaBelly;
 
 public class PurchaseBundlesManager : MonoBehaviour
 {
@@ -50,6 +51,8 @@ public class PurchaseBundlesManager : MonoBehaviour
         {
             noAdsBundles.CheckPurchased();
         }
+
+        Analytics.ItemConsumed("NoAds", 0, ItemFlowReason.InAppPurchase);
     }
 
     public void NoAdsLimitedBuy(float _cost, Button _buyButton)
@@ -68,6 +71,7 @@ public class PurchaseBundlesManager : MonoBehaviour
             noAdsLimitedBundles.CheckPurchased();
         }
         SaveCurrentDate();
+        Analytics.ItemConsumed("1DayNoAds", 0, ItemFlowReason.InAppPurchase);
     }
 
 
@@ -91,12 +95,15 @@ public class PurchaseBundlesManager : MonoBehaviour
         buyButton.interactable = true;
         ADVManager.Instance.NoAds();
         // // // // //
-        GameManager.Instance.ui.MoneyUpdate(5000);
+        GameManager.Instance.MoneyUpdate(5000);
+        Analytics.ResourceFlowEvent(ResourceFlowType.Source, "Money", (float)5000, (float)Globals.moneyAmount, null, "Bundle1", ResourceFlowReason.InAppPurchase);
 
         if (bundle1 != null)
         {
             bundle1.CheckPurchased();
         }
+
+        Analytics.ItemConsumed("Bundle1", 0, ItemFlowReason.InAppPurchase);
     }
 
 
@@ -112,13 +119,16 @@ public class PurchaseBundlesManager : MonoBehaviour
         buyButton.interactable = true;
         ADVManager.Instance.NoAds();
         // // // // //
-        GameManager.Instance.ui.MoneyUpdate(5000);
-        GameManager.Instance.ui.GemUpdate(20);
+        GameManager.Instance.MoneyUpdate(5000);
+        GameManager.Instance.GemUpdate(20);
+
+        Analytics.ResourceFlowEvent(ResourceFlowType.Source, "Money", (float)5000, (float)Globals.moneyAmount, null, "Bundle2", ResourceFlowReason.InAppPurchase);
 
         if (bundle2 != null)
         {
             bundle2.CheckPurchased();
         }
+        Analytics.ItemConsumed("Bundle2", 0, ItemFlowReason.InAppPurchase);
     }
     public void Bundle_3_Buy(float _cost, Button _buyButton)
     {
@@ -138,6 +148,7 @@ public class PurchaseBundlesManager : MonoBehaviour
         {
             bundle3.CheckPurchased();
         }
+        Analytics.ItemConsumed("Bundle3", 0, ItemFlowReason.InAppPurchase);
     }
     public void Bundle_4_Buy(float _cost, Button _buyButton)
     {
@@ -155,12 +166,13 @@ public class PurchaseBundlesManager : MonoBehaviour
         SkillManager.Instance.PurchaseCapacityBoostActive();
         SkillManager.Instance.PurchaseSpeedBoostActive();
         SkillManager.Instance.PurchaseDoubleIncomeBoostActive();
-        GameManager.Instance.ui.GemUpdate(50);
+        GameManager.Instance.GemUpdate(50);
 
         if (bundle4 != null)
         {
             bundle4.CheckPurchased();
         }
+        Analytics.ItemConsumed("Bundle4", 0, ItemFlowReason.InAppPurchase);
     }
     public void Bundle_5_Buy(float _cost, Button _buyButton)
     {
@@ -184,6 +196,7 @@ public class PurchaseBundlesManager : MonoBehaviour
         {
             bundle5.CheckPurchased();
         }
+        Analytics.ItemConsumed("Bundle5", 0, ItemFlowReason.InAppPurchase);
     }
     public void Bundle_6_Buy(float _cost, Button _buyButton)
     {
@@ -197,8 +210,10 @@ public class PurchaseBundlesManager : MonoBehaviour
         buyButton.interactable = true;
         ADVManager.Instance.NoAds();
         // // // // //
-        GameManager.Instance.ui.MoneyUpdate(50000);
-        GameManager.Instance.ui.GemUpdate(250);
+        GameManager.Instance.MoneyUpdate(50000);
+        GameManager.Instance.GemUpdate(250);
+
+        Analytics.ResourceFlowEvent(ResourceFlowType.Source, "Money", (float)50000, (float)Globals.moneyAmount, null, " Bundle6", ResourceFlowReason.InAppPurchase);
 
         SkillManager.Instance.PurchaseRepairImmediateActive();
 
@@ -207,6 +222,7 @@ public class PurchaseBundlesManager : MonoBehaviour
         {
             bundle6.CheckPurchased();
         }
+        Analytics.ItemConsumed("Bundle6", 0, ItemFlowReason.InAppPurchase);
     }
 
 
@@ -221,8 +237,10 @@ public class PurchaseBundlesManager : MonoBehaviour
         PlayerPrefs.SetInt("specialoffer", 1);
         buyButton.interactable = true;
         // // // // //
-        GameManager.Instance.ui.MoneyUpdate(1000);
-        GameManager.Instance.ui.GemUpdate(6);
+        GameManager.Instance.MoneyUpdate(1000);
+        GameManager.Instance.GemUpdate(6);
+
+        Analytics.ResourceFlowEvent(ResourceFlowType.Source, "Money", (float)1000, (float)Globals.moneyAmount, null, " SpecialOffer", ResourceFlowReason.InAppPurchase);
 
         //SkillManager.Instance.PurchaseRepairImmediateActive();
 
@@ -231,5 +249,6 @@ public class PurchaseBundlesManager : MonoBehaviour
         {
             specialOffer.CheckPurchased();
         }
+        Analytics.ItemConsumed("SpecialOffer", 0, ItemFlowReason.InAppPurchase);
     }
 }

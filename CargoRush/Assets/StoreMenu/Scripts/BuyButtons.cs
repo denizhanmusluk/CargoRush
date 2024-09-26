@@ -48,7 +48,7 @@ public class BuyButtons : MonoBehaviour
             //GameManager.Instance.GameAnalyticsTag(skinName);
             //GameManager.Instance.HomaAnalyticsTag(skinName);
 
-            Analytics.ItemObtained("Zone " + (PlayerPrefs.GetInt("level") + 1) + " Skin", id, ItemFlowReason.Progression);
+            Analytics.ItemObtained(" Skin", id, ItemFlowReason.Progression);
 
         }
         //GameAnalytics.NewDesignEvent(skinName);

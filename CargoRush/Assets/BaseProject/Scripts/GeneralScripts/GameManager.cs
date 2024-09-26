@@ -66,9 +66,9 @@ public class GameManager : Observer
 
 
             int levelId = PlayerPrefs.GetInt("level") + 1;
-            Analytics.DesignEvent(orderId.ToString() + " DeliveryCompleted", new DesignDimensions($"level_{levelId}"));
+            Analytics.DesignEvent(orderId.ToString() + "_Order_Complated ", new DesignDimensions($"Zone_{levelId}"));
 
-            Debug.Log(orderId.ToString() + " DeliveryCompleted");
+            Debug.Log(orderId.ToString() + "_Order_Complated");
         }
 
 
@@ -130,11 +130,13 @@ public class GameManager : Observer
         int levelIndex = PlayerPrefs.GetInt("levelIndex");
         string levelId = levelIndex.ToString();
         //DefaultAnalytics.LevelStarted(levelId);
+        StartCoroutine(StartDelayed());
     }
     IEnumerator StartDelayed()
     {
-        yield return new WaitForSeconds(0.2f);
-        ui.startCanvas.SetActive(true);
+        yield return new WaitForSeconds(10);
+        Globals.loadingPanelActive = false;
+        Globals.gamePlayStarting = true;
     }
     public void GetMoney(int moneyAmount)
     {
@@ -195,7 +197,7 @@ public class GameManager : Observer
 
     private void Update()
     {
-
+        Debug.Log(Globals.gamePlayStarting);
 
         //if (Input.GetKeyDown(KeyCode.X))
         //{

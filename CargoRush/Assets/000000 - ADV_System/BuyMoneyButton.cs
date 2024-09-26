@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 public class BuyMoneyButton : MonoBehaviour
 {
+    public int buttonID;
     public Button buyButton;
     public int moneyAmount = 1;
     public float cost = 1;
@@ -18,6 +19,6 @@ public class BuyMoneyButton : MonoBehaviour
     public void BuyMoneyPurchase_Click()
     {
         buyButton.interactable = false;
-        PurchaseMoneyManager.Instance.MoneyBuy(moneyAmount, cost, buyButton);
+        PurchaseMoneyManager.Instance.MoneyBuy(moneyAmount, cost, buyButton, buttonID);
     }
 }

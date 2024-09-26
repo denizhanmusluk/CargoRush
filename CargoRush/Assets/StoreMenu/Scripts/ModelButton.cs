@@ -132,15 +132,21 @@ public class ModelButton : MonoBehaviour
         AudioManager.Instance.ButtonSound();
     }
 
-    void AdvEnd()
+    void AdvEnd(bool ticketActive)
     {
         PlayerPrefs.SetInt("adv" + buyButton.id, PlayerPrefs.GetInt("adv" + buyButton.id) + 1);
         advCountText.text = PlayerPrefs.GetInt("adv" + buyButton.id).ToString() + "/" + totalADV_Count.ToString();
 
         string tag = skinName + PlayerPrefs.GetInt("adv" + buyButton.id).ToString();
 
-
-        Analytics.ItemObtained("Zone " + (PlayerPrefs.GetInt("level") + 1) + " Skin_RV", buyButton.id, ItemFlowReason.RewardedVideoAd);
+        if (ticketActive)
+        {
+            Analytics.ItemObtained(" Skin_RV", buyButton.id, ItemFlowReason.Progression);
+        }
+        else
+        {
+            Analytics.ItemObtained(" Skin_RV", buyButton.id, ItemFlowReason.RewardedVideoAd);
+        }
 
         //GameManager.Instance.HomaAnalyticsTag(tag);
 

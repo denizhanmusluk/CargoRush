@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using HomaGames.HomaBelly;
+
 //using Global;
 
 public class StarPanelManager : MonoBehaviour
@@ -170,12 +172,14 @@ public class StarPanelManager : MonoBehaviour
         {
             case MoneyType.Money:
                 {
-                    GameManager.Instance.ui.MoneyUpdate(-playerModels._starModelCost[buttonId]);
+                    GameManager.Instance.MoneyUpdate(-playerModels._starModelCost[buttonId]);
+                    Analytics.ResourceFlowEvent(ResourceFlowType.Sink, "Money", (float)playerModels._starModelCost[buttonId], (float)Globals.moneyAmount, buttonId.ToString(), "Skin", ResourceFlowReason.Progression);
+
                 }
                 break;
             case MoneyType.Gem:
                 {
-                    GameManager.Instance.ui.GemUpdate(-playerModels._starModelCost[buttonId]);
+                    GameManager.Instance.GemUpdate(-playerModels._starModelCost[buttonId]);
                 }
                 break;
         }

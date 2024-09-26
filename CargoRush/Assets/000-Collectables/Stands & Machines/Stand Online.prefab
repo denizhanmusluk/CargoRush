@@ -582,6 +582,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   oscillationHalfLife: 7
+  elasticRatio: 0.1
   turnSpeed: 100
   collectionTrs: []
   stackStepOffset: 0.25
@@ -10393,6 +10394,10 @@ PrefabInstance:
     - target: {fileID: 8459306040719960641, guid: 9f8b418ffc0eddd458c3640d936fc951, type: 3}
       propertyPath: caseArea
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8459306040719960641, guid: 9f8b418ffc0eddd458c3640d936fc951, type: 3}
+      propertyPath: moneyEarningTag
+      value: RecycleBonus
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

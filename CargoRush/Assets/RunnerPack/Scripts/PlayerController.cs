@@ -205,6 +205,11 @@ public class PlayerController : MonoBehaviour
         //model.transform.localScale = Vector3.one;
         model.transform.localRotation = Quaternion.Euler(0, 0, 0);
         animator = model.GetComponent<Animator>();
+
+        if (_stackCollect.collectionTrs.Count > 0)
+        {
+            _stackCollect.StackAnimation();
+        }
     }
     IEnumerator AnimationSet(string animationName)
     {

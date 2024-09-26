@@ -22,10 +22,10 @@ public class ShowBuyRapairReward : MonoBehaviour
 
 
     }
-    public void RepairImmediate()
+    public void RepairImmediate(bool ticketActive)
     {
         //processMachine.repairTimeCounter = processMachine.repairTime - 1;
-        string tag = "Repairman_REWARDED";
+        string _tag = "Repairman_REWARDED";
         //GameManager.Instance.GameAnalyticsTag(tag);
         //GameManager.Instance.HomaAnalyticsTag(tag);
 
@@ -36,8 +36,17 @@ public class ShowBuyRapairReward : MonoBehaviour
 
         if (PlayerPrefs.GetInt("firstclickrepairrew") > 0)
         {
-            Analytics.ItemObtained("Zone " + (PlayerPrefs.GetInt("level") + 1) + " " + tag, 0, ItemFlowReason.RewardedVideoAd);
-            Analytics.ItemConsumed("Zone " + (PlayerPrefs.GetInt("level") + 1) + " " + tag, 0, ItemFlowReason.RewardedVideoAd);
+            if (ticketActive)
+            {
+                Analytics.ItemObtained(_tag, 0, ItemFlowReason.Progression);
+                Analytics.ItemConsumed(_tag, 0, ItemFlowReason.Progression);
+            }
+            else
+            {
+                Analytics.ItemObtained(_tag, 0, ItemFlowReason.RewardedVideoAd);
+                Analytics.ItemConsumed(_tag, 0, ItemFlowReason.RewardedVideoAd);
+            }
+
         }
         PlayerPrefs.SetInt("firstclickrepairrew", 1);
 

@@ -96,7 +96,8 @@ public class CharacterUpgradeManager : MonoBehaviour
         {
             if (Globals.moneyAmount >= _characterUpgradeSettings.characterSpeedCost[Globals.characterSpeedLevel + 1])
             {
-                GameManager.Instance.MoneyUpdate(-_characterUpgradeSettings.characterSpeedCost[Globals.characterSpeedLevel + 1]);
+                int characterMoveSpeedCost = _characterUpgradeSettings.characterSpeedCost[Globals.characterSpeedLevel + 1];
+                GameManager.Instance.MoneyUpdate(-characterMoveSpeedCost);
                 Globals.characterSpeedLevel++;
                 PlayerPrefs.SetInt("characterSpeedLevel" + PlayerPrefs.GetInt("level"), Globals.characterSpeedLevel);
                 isEnoughMoney();
@@ -110,6 +111,7 @@ public class CharacterUpgradeManager : MonoBehaviour
 
                 //GameManager.Instance.HomaAnalyticsTag("CharacterSpeedUpgrade");
                 Analytics.ItemUpgraded(ItemUpgradeType.Upgrade, "Zone " + (PlayerPrefs.GetInt("level") + 1) + " CharacterSpeedUpgrade", Globals.characterSpeedLevel, ItemFlowReason.Progression);
+                Analytics.ResourceFlowEvent(ResourceFlowType.Sink, "Money", (float)characterMoveSpeedCost, (float)Globals.moneyAmount, Globals.characterSpeedLevel.ToString(), "CharacterSpeedUpgrade", ResourceFlowReason.Progression);
 
                 float time = CoefficientTransformation.FormatSaniye(Globals.speedPlayTime);
 
@@ -123,7 +125,8 @@ public class CharacterUpgradeManager : MonoBehaviour
         {
             if (Globals.moneyAmount >= _characterUpgradeSettings.stackCapacityCost[Globals.stackCapacityLevel + 1])
             {
-                GameManager.Instance.MoneyUpdate(-_characterUpgradeSettings.stackCapacityCost[Globals.stackCapacityLevel + 1]);
+                int characterStackCapacityCost = _characterUpgradeSettings.stackCapacityCost[Globals.stackCapacityLevel + 1];
+                GameManager.Instance.MoneyUpdate(-characterStackCapacityCost);
                 Globals.stackCapacityLevel++;
                 PlayerPrefs.SetInt("stackCapacityLevel" + PlayerPrefs.GetInt("level"), Globals.stackCapacityLevel);
                 isEnoughMoney();
@@ -138,6 +141,7 @@ public class CharacterUpgradeManager : MonoBehaviour
                 //GameManager.Instance.HomaAnalyticsTag("CharacterCapacityUpgrade");
 
                 Analytics.ItemUpgraded(ItemUpgradeType.Upgrade, "Zone " + (PlayerPrefs.GetInt("level") + 1) + " CharacterCapacityUpgrade", Globals.stackCapacityLevel, ItemFlowReason.Progression);
+                Analytics.ResourceFlowEvent(ResourceFlowType.Sink, "Money", (float)characterStackCapacityCost, (float)Globals.moneyAmount, Globals.stackCapacityLevel.ToString(), "CharacterCapacityUpgrade", ResourceFlowReason.Progression);
 
                 float time = CoefficientTransformation.FormatSaniye(Globals.speedPlayTime);
                 //GameAnalytics.NewDesignEvent(tag, time);
@@ -193,7 +197,7 @@ public class CharacterUpgradeManager : MonoBehaviour
         string adv_name = "CharacterCapacityUpgradeREWARDED";
         ADVManager.Instance.RewardedStart(StackCapacityUpgradeFree, adv_name , true);
     }
-    public void MoveSpeedUpgradeFree()
+    public void MoveSpeedUpgradeFree(bool ticketActive)
     {
         if (Globals.characterSpeedLevel < _characterUpgradeSettings.characterSpeed.Length - 1)
         {
@@ -210,12 +214,19 @@ public class CharacterUpgradeManager : MonoBehaviour
 
 
             //GameManager.Instance.HomaAnalyticsTag("CharacterSpeedUpgrade");
-            Analytics.ItemUpgraded(ItemUpgradeType.Upgrade, "Zone " + (PlayerPrefs.GetInt("level") + 1) + " CharacterSpeedUpgrade", Globals.characterSpeedLevel, ItemFlowReason.RewardedVideoAd);
+            if (ticketActive)
+            {
+                Analytics.ItemUpgraded(ItemUpgradeType.Upgrade, "Zone " + (PlayerPrefs.GetInt("level") + 1) + " CharacterSpeedUpgrade", Globals.characterSpeedLevel, ItemFlowReason.Progression);
+            }
+            else
+            {
+                Analytics.ItemUpgraded(ItemUpgradeType.Upgrade, "Zone " + (PlayerPrefs.GetInt("level") + 1) + " CharacterSpeedUpgrade", Globals.characterSpeedLevel, ItemFlowReason.RewardedVideoAd);
+            }
 
 
         }
     }
-   public void StackCapacityUpgradeFree()
+   public void StackCapacityUpgradeFree(bool ticketActive)
     {
         if (Globals.stackCapacityLevel < _characterUpgradeSettings.stackCapacity.Length - 1)
         {
@@ -231,8 +242,14 @@ public class CharacterUpgradeManager : MonoBehaviour
 
 
             //GameManager.Instance.HomaAnalyticsTag("CharacterCapacityUpgrade");
-
-            Analytics.ItemUpgraded(ItemUpgradeType.Upgrade, "Zone " + (PlayerPrefs.GetInt("level") + 1) + " CharacterCapacityUpgrade", Globals.stackCapacityLevel, ItemFlowReason.RewardedVideoAd);
+            if (ticketActive)
+            {
+                Analytics.ItemUpgraded(ItemUpgradeType.Upgrade, "Zone " + (PlayerPrefs.GetInt("level") + 1) + " CharacterCapacityUpgrade", Globals.stackCapacityLevel, ItemFlowReason.Progression);
+            }
+            else
+            {
+                Analytics.ItemUpgraded(ItemUpgradeType.Upgrade, "Zone " + (PlayerPrefs.GetInt("level") + 1) + " CharacterCapacityUpgrade", Globals.stackCapacityLevel, ItemFlowReason.RewardedVideoAd);
+            }
 
         }
     }

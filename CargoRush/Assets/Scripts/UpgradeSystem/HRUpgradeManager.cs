@@ -94,7 +94,8 @@ public class HRUpgradeManager : MonoBehaviour
         {
             if (Globals.moneyAmount >= _characterUpgradeSettings.workerMoveSpeedCost[Globals.workerMoveSpeedLevel + 1])
             {
-                GameManager.Instance.MoneyUpdate(-_characterUpgradeSettings.workerMoveSpeedCost[Globals.workerMoveSpeedLevel + 1]);
+                int workerMoveSpeedCost = _characterUpgradeSettings.workerMoveSpeedCost[Globals.workerMoveSpeedLevel + 1];
+                GameManager.Instance.MoneyUpdate(-workerMoveSpeedCost);
                 Globals.workerMoveSpeedLevel++;
                 PlayerPrefs.SetInt("workerMoveSpeedLevel" + PlayerPrefs.GetInt("level"), Globals.workerMoveSpeedLevel);
                 PlayerController.Instance.magnet.MagnetLevelUp();
@@ -105,6 +106,7 @@ public class HRUpgradeManager : MonoBehaviour
                 //GameManager.Instance.HomaAnalyticsTag("CharacterCapacityUpgrade");
 
                 Analytics.ItemUpgraded(ItemUpgradeType.Upgrade, "Zone " + (PlayerPrefs.GetInt("level") + 1) + " WorkerSpeedUpgrade", Globals.workerMoveSpeedLevel, ItemFlowReason.Progression);
+                Analytics.ResourceFlowEvent(ResourceFlowType.Sink, "Money", (float)workerMoveSpeedCost, (float)Globals.moneyAmount, Globals.workerMoveSpeedLevel.ToString(), "WorkerSpeedUpgrade", ResourceFlowReason.Progression);
 
 
                 //PlayerBehaviour.Instance.playerController.CharacterUpgrade(Globals.holeRadiusLevel);
@@ -136,7 +138,8 @@ public class HRUpgradeManager : MonoBehaviour
         {
             if (Globals.moneyAmount >= _characterUpgradeSettings.workerCapacityCost[Globals.workerCapacityLevel + 1])
             {
-                GameManager.Instance.MoneyUpdate(-_characterUpgradeSettings.workerCapacityCost[Globals.workerCapacityLevel + 1]);
+                int workerCapacityCost = _characterUpgradeSettings.workerCapacityCost[Globals.workerCapacityLevel + 1];
+                GameManager.Instance.MoneyUpdate(-workerCapacityCost);
                 Globals.workerCapacityLevel++;
                 PlayerPrefs.SetInt("workerCapacityLevel" + PlayerPrefs.GetInt("level"), Globals.workerCapacityLevel);
                 isEnoughMoney();
@@ -148,6 +151,7 @@ public class HRUpgradeManager : MonoBehaviour
                 //GameManager.Instance.HomaAnalyticsTag("WorkerCapacityUpgrade");
                 int levelId = (PlayerPrefs.GetInt("level") + 1);
                 Analytics.ItemUpgraded(ItemUpgradeType.Upgrade, "Zone " + levelId.ToString() + " WorkerCapacityUpgrade", Globals.workerCapacityLevel, ItemFlowReason.Progression);
+                Analytics.ResourceFlowEvent(ResourceFlowType.Sink, "Money", (float)workerCapacityCost, (float)Globals.moneyAmount, Globals.workerCapacityLevel.ToString(), "WorkerCapacityUpgrade", ResourceFlowReason.Progression);
 
 
                 //PlayerController.Instance.GetComponent<BoingScale>().ScaleEffectTR(PlayerController.Instance.transform, 0.8f, 1f, 0.5f, Ease.OutElastic);
@@ -173,8 +177,8 @@ public class HRUpgradeManager : MonoBehaviour
                 //{
                 //    rebuyAmount = _upgradeAreaWorkers.workerBuyAreaList[PlayerPrefs.GetInt("workerNoLevel")].cost - _upgradeAreaWorkers.workerBuyAreaList[PlayerPrefs.GetInt("workerNoLevel")].currentAmount;
                 //}
-
-                GameManager.Instance.MoneyUpdate(-_characterUpgradeSettings.workerNoCost[Globals.workerNoLevel + 1] + rebuyAmount);
+                int workerCost = _characterUpgradeSettings.workerNoCost[Globals.workerNoLevel + 1];
+                GameManager.Instance.MoneyUpdate(-workerCost);
                 Globals.workerNoLevel++;
                 PlayerPrefs.SetInt("workerNoLevel" + PlayerPrefs.GetInt("level"), Globals.workerNoLevel);
                 isEnoughMoney();
@@ -186,8 +190,11 @@ public class HRUpgradeManager : MonoBehaviour
 
 
                 //GameManager.Instance.HomaAnalyticsTag("BuyWorker");
-                Analytics.ItemObtained("Zone " + (PlayerPrefs.GetInt("level") + 1) + " BuyWorker", Globals.workerNoLevel, ItemFlowReason.Progression);
 
+                Analytics.ItemUpgraded(ItemUpgradeType.Upgrade, "Zone " + (PlayerPrefs.GetInt("level") + 1) + " BuyWorker", Globals.workerNoLevel, ItemFlowReason.Progression);
+                Analytics.ItemObtained(" BuyWorker", Globals.workerNoLevel, ItemFlowReason.Progression);
+
+                Analytics.ResourceFlowEvent(ResourceFlowType.Sink, "Money", (float)workerCost, (float)Globals.moneyAmount, Globals.workerNoLevel.ToString(), "BuyWorker", ResourceFlowReason.Progression);
 
                 //HRWorkerGO.SetActive(false);
 
@@ -337,7 +344,7 @@ public class HRUpgradeManager : MonoBehaviour
 
 
 
-    public void WorkerMoveSpeedUpgradeFree()
+    public void WorkerMoveSpeedUpgradeFree(bool ticketActive)
     {
         if (Globals.workerMoveSpeedLevel < _characterUpgradeSettings.workerMoveSpeed.Length - 1)
         {
@@ -350,7 +357,16 @@ public class HRUpgradeManager : MonoBehaviour
 
 
             //GameManager.Instance.HomaAnalyticsTag("WorkerSpeedUpgrade");
-            Analytics.ItemUpgraded(ItemUpgradeType.Upgrade, "Zone " + (PlayerPrefs.GetInt("level") + 1) + " WorkerSpeedUpgrade", Globals.workerMoveSpeedLevel, ItemFlowReason.RewardedVideoAd);
+
+
+            if (ticketActive)
+            {
+                Analytics.ItemUpgraded(ItemUpgradeType.Upgrade, "Zone " + (PlayerPrefs.GetInt("level") + 1) + " WorkerSpeedUpgrade", Globals.workerMoveSpeedLevel, ItemFlowReason.Progression);
+            }
+            else
+            {
+                Analytics.ItemUpgraded(ItemUpgradeType.Upgrade, "Zone " + (PlayerPrefs.GetInt("level") + 1) + " WorkerSpeedUpgrade", Globals.workerMoveSpeedLevel, ItemFlowReason.RewardedVideoAd);
+            }
 
 
             isEnoughMoney();
@@ -370,7 +386,7 @@ public class HRUpgradeManager : MonoBehaviour
         }
     }
 
-    public void WorkerCapacityUpgradeFree()
+    public void WorkerCapacityUpgradeFree(bool ticketActive)
     {
         if (Globals.workerCapacityLevel < _characterUpgradeSettings.workerCapacity.Length - 1)
         {
@@ -383,12 +399,22 @@ public class HRUpgradeManager : MonoBehaviour
 
 
             //GameManager.Instance.HomaAnalyticsTag("WorkerCapacityUpgrade");
-            Analytics.ItemUpgraded(ItemUpgradeType.Upgrade, "Zone " + (PlayerPrefs.GetInt("level") + 1) + " WorkerCapacityUpgrade", Globals.workerCapacityLevel, ItemFlowReason.RewardedVideoAd);
+
+            if (ticketActive)
+            {
+                Analytics.ItemUpgraded(ItemUpgradeType.Upgrade, "Zone " + (PlayerPrefs.GetInt("level") + 1) + " WorkerCapacityUpgrade", Globals.workerCapacityLevel, ItemFlowReason.Progression);
+
+            }
+            else
+            {
+                Analytics.ItemUpgraded(ItemUpgradeType.Upgrade, "Zone " + (PlayerPrefs.GetInt("level") + 1) + " WorkerCapacityUpgrade", Globals.workerCapacityLevel, ItemFlowReason.RewardedVideoAd);
+
+            }
 
 
         }
     }
-    public void WorkerNoUpgradeFree()
+    public void WorkerNoUpgradeFree(bool ticketActive)
     {
         if (Globals.workerNoLevel < _characterUpgradeSettings.workerNo.Length - 1)
         {
@@ -403,7 +429,21 @@ public class HRUpgradeManager : MonoBehaviour
             //GameManager.Instance.GameAnalyticsTag(tag);
 
             //GameManager.Instance.HomaAnalyticsTag("BuyWorker");
-            Analytics.ItemObtained("Zone " + (PlayerPrefs.GetInt("level") + 1) + " BuyWorker", Globals.workerNoLevel, ItemFlowReason.RewardedVideoAd);
+
+
+            string _tag = " BuyWorker";
+            if (ticketActive)
+            {
+                Analytics.ItemObtained(_tag, Globals.workerNoLevel, ItemFlowReason.Progression);
+                Analytics.ItemUpgraded(ItemUpgradeType.Upgrade, "Zone " + (PlayerPrefs.GetInt("level") + 1) + _tag, Globals.workerNoLevel, ItemFlowReason.Progression);
+            }
+            else
+            {
+                Analytics.ItemObtained(_tag, Globals.workerNoLevel, ItemFlowReason.RewardedVideoAd);
+                Analytics.ItemUpgraded(ItemUpgradeType.Upgrade, "Zone " + (PlayerPrefs.GetInt("level") + 1) + _tag, Globals.workerNoLevel, ItemFlowReason.RewardedVideoAd);
+
+            }
+
 
         }
     }

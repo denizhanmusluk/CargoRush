@@ -45,7 +45,10 @@ public class DayCycleManager : MonoBehaviour
         {
             if (PlayerPrefs.GetInt("bundlesnoads") == 0 && PlayerPrefs.GetInt("bundlesnoadslimited") == 0)
             {
-                PurchaseManager.Instance.NoAdsLimited_PopUp_Open();
+                if (!Globals.gamePlayStarting)
+                {
+                    PurchaseManager.Instance.NoAdsLimited_PopUp_Open();
+                }
             }
         }
     }

@@ -437,7 +437,7 @@ public class AIWorker : MonoBehaviour, IWorkerModelSelect
     float stepCounter = 0;
     void GoToStandArea()
     {
-        if (Vector3.Distance(new Vector2(transform.position.x, transform.position.z), new Vector2(targetStand.aiTargetPosList[targetDropPointSelect].position.x, targetStand.aiTargetPosList[targetDropPointSelect].position.z)) > 0.25f)
+        if (Vector3.Distance(new Vector2(transform.position.x, transform.position.z), new Vector2(targetStand.aiTargetPosList[targetDropPointSelect].position.x, targetStand.aiTargetPosList[targetDropPointSelect].position.z)) > 0.75f)
         {
             characterStayActive = false;
 

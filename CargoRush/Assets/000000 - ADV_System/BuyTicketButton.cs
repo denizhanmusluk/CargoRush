@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 public class BuyTicketButton : MonoBehaviour
 {
+    public int buttonID;
     public Button buyButton;
     public int ticketAmount = 1;
     public float cost = 1;
@@ -19,6 +20,6 @@ public class BuyTicketButton : MonoBehaviour
     public void BuyTickedPurchase_Click()
     {
         //buyButton.interactable = false;
-        PurchaseTicketManager.Instance.TicketBuy(ticketAmount, cost, this);
+        PurchaseTicketManager.Instance.TicketBuy(ticketAmount, cost, this, buttonID);
     }
 }

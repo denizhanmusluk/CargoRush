@@ -40,9 +40,14 @@ public class LoadingGame : MonoBehaviour
         }
         else
         {
-            gameObject.SetActive(false);
-            //MapManager.Instance.OpenMap();
-            PlatformSwitchManager.Instance.SwitchToBottom();
+            loadTime = 2;
+            loadBar.fillAmount = 0f;
+            loadBar2.value = 0f;
+            StartCoroutine(LoadinBar());
+            StartCoroutine(LoadingText());
+
+            //gameObject.SetActive(false);
+            //PlatformSwitchManager.Instance.SwitchToBottom();
         }
     }
     ////IEnumerator StartDelay()
@@ -64,8 +69,7 @@ public class LoadingGame : MonoBehaviour
         GameStart();
         StartCoroutine(PanelClose());
 
-        yield return new WaitForSeconds(10);
-        Globals.loadingPanelActive = false;
+   
 
     }
     public void Tutorial_PanelClose()

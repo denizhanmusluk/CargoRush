@@ -45,6 +45,8 @@ public class UpgradeArea : MonoBehaviour, BuyCamera , IBuyCost
         get;
         set;
     }
+    public string buyNameForResource;
+
     //Vector3 firstPos;
     //Quaternion firstRot;
     void Awake()
@@ -105,6 +107,9 @@ public class UpgradeArea : MonoBehaviour, BuyCamera , IBuyCost
     }
     bool cooldown = true;
     bool paymentActive = false;
+
+    int buyCounter = 0;
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.GetComponent<PlayerController>() != null && Globals.buyActive)
@@ -117,7 +122,17 @@ public class UpgradeArea : MonoBehaviour, BuyCamera , IBuyCost
         if (other.GetComponent<PlayerController>() != null)
         {
             paymentActive = false;
+            if (buyCounter > 0)
+            {
+                SendAnalyticResource(buyCounter);
+                buyCounter = 0;
+            }
         }
+    }
+    void SendAnalyticResource(int sendMoneyAmount)
+    {
+        Analytics.ResourceFlowEvent(ResourceFlowType.Sink, "Money", (float)sendMoneyAmount, (float)Globals.moneyAmount, upgradeLevel.ToString(), buyNameForResource, ResourceFlowReason.Progression);
+        Debug.Log("sendMoneyAmount" + sendMoneyAmount);
     }
     IEnumerator CooldownActive(float time)
     {
@@ -157,6 +172,12 @@ public class UpgradeArea : MonoBehaviour, BuyCamera , IBuyCost
         VibratoManager.Instance.LightVibration();
         AudioManager.Instance.PaymentSound();
         isbuy = false;
+
+        if (currentAmount < deltaCost)
+        {
+            deltaCost = currentAmount;
+        }
+
         currentAmount -= deltaCost;
         outline.fillAmount = 1 - (float)currentAmount / (float)cost;
 
@@ -168,6 +189,7 @@ public class UpgradeArea : MonoBehaviour, BuyCamera , IBuyCost
 
         costText.text = CoefficientTransformation.Converter(currentAmount);
         GameManager.Instance.MoneyUpdate(-deltaCost);
+        buyCounter += deltaCost;
 
         PlayerPrefs.SetInt(currentCostBuild + PlayerPrefs.GetInt("level"), currentAmount);
         if (currentAmount == 0)
@@ -190,6 +212,10 @@ public class UpgradeArea : MonoBehaviour, BuyCamera , IBuyCost
     }
     void FirstOpenArea()
     {
+        if (buyCounter > 0)
+        {
+            SendAnalyticResource(buyCounter);
+        }
         //string _tag = "M" + (PlayerPrefs.GetInt("level") + 1).ToString() + "-" + gaTag;
         //GameManager.Instance.GameAnalyticsTag(_tag);
 

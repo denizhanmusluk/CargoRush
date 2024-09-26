@@ -244,6 +244,7 @@ MonoBehaviour:
   thisBuyViewActive: 0
   _StandFishCar: {fileID: 920661261634048179}
   thisBuyViewCamera: {fileID: 1236619708253136769}
+  buyNameForResource: CarSlotUpgrade
 --- !u!1 &525513849776799551
 GameObject:
   m_ObjectHideFlags: 0
@@ -5621,6 +5622,7 @@ MonoBehaviour:
   thisBuyViewActive: 0
   _StandFishCar: {fileID: 920661261634048179}
   thisBuyViewCamera: {fileID: 5298141147898435053}
+  buyNameForResource: CarSlotUpgrade
 --- !u!1 &1949002332690016828
 GameObject:
   m_ObjectHideFlags: 0
@@ -10825,6 +10827,7 @@ MonoBehaviour:
   thisBuyViewActive: 0
   _StandFishCar: {fileID: 920661261634048179}
   thisBuyViewCamera: {fileID: 2047435983215229505}
+  buyNameForResource: CarSlotUpgrade
 --- !u!1 &2471085598640910042
 GameObject:
   m_ObjectHideFlags: 0
@@ -51159,6 +51162,7 @@ MonoBehaviour:
   thisBuyViewActive: 0
   _StandFishCar: {fileID: 920661261634048179}
   thisBuyViewCamera: {fileID: 6659794264788403855}
+  buyNameForResource: CarSlotUpgrade
 --- !u!1 &6334248780565251261
 GameObject:
   m_ObjectHideFlags: 0
@@ -101236,23 +101240,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1266063924017681060, guid: 67416f03e0702ab48bd18beb79f8bcad, type: 3}
       propertyPath: cooldownTimeList.Array.data[0]
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1266063924017681060, guid: 67416f03e0702ab48bd18beb79f8bcad, type: 3}
       propertyPath: cooldownTimeList.Array.data[1]
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 1266063924017681060, guid: 67416f03e0702ab48bd18beb79f8bcad, type: 3}
-      propertyPath: cooldownTimeList.Array.data[2]
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1266063924017681060, guid: 67416f03e0702ab48bd18beb79f8bcad, type: 3}
+      propertyPath: cooldownTimeList.Array.data[2]
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1266063924017681060, guid: 67416f03e0702ab48bd18beb79f8bcad, type: 3}
       propertyPath: cooldownTimeList.Array.data[3]
-      value: 14
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 1266063924017681060, guid: 67416f03e0702ab48bd18beb79f8bcad, type: 3}
       propertyPath: cooldownTimeList.Array.data[4]
-      value: 20
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 1359497343260495157, guid: 67416f03e0702ab48bd18beb79f8bcad, type: 3}
       propertyPath: m_AnchorMax.y
@@ -102785,6 +102789,10 @@ PrefabInstance:
     - target: {fileID: 4639062407298058662, guid: 8beecf8a24bb82e46bc3a03973785c5f, type: 3}
       propertyPath: currentCostBuild
       value: buyfishcar1cost
+      objectReference: {fileID: 0}
+    - target: {fileID: 4639062407298058662, guid: 8beecf8a24bb82e46bc3a03973785c5f, type: 3}
+      propertyPath: buyNameForResource
+      value: CarSlot
       objectReference: {fileID: 0}
     - target: {fileID: 4639062407298058662, guid: 8beecf8a24bb82e46bc3a03973785c5f, type: 3}
       propertyPath: buyAreas.Array.size

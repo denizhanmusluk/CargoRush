@@ -147,7 +147,7 @@ public class UpgradeAquaCar : MonoBehaviour, BuyCamera
 
 
         costText.text = currentAmount.ToString();
-        GameManager.Instance.MoneyUpdate(-deltaCost);
+        //GameManager.Instance.MoneyUpdate(-deltaCost);
 
         PlayerPrefs.SetInt(currentCostBuild, currentAmount);
         if (currentAmount == 0)
