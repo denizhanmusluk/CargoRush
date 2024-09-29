@@ -25,13 +25,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4266061121595009103}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7946710901412953768}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &3823432301056432735
 MeshFilter:
@@ -109,13 +109,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6272503667733450501}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7946710901412953768}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &1451640354349228100
 MeshFilter:
@@ -193,13 +193,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6694886303104048537}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7946710901412953768}
-  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &9164412906252683915
 MeshFilter:
@@ -277,6 +277,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7278859173822014482}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.301, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 2}
@@ -287,7 +288,6 @@ Transform:
   - {fileID: 5351328434876966899}
   - {fileID: 2479645845340531439}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &796601397220270209
 MonoBehaviour:
@@ -325,8 +325,49 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 7946710901412953768}
     m_Modifications:
+    - target: {fileID: 2603279263012304329, guid: 07bcd5fef59cab84e8f503ff6f455b11, type: 3}
+      propertyPath: m_Time
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2603279263012304329, guid: 07bcd5fef59cab84e8f503ff6f455b11, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2603279263012304329, guid: 07bcd5fef59cab84e8f503ff6f455b11, type: 3}
+      propertyPath: m_Parameters.widthMultiplier
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2603279263012304329, guid: 07bcd5fef59cab84e8f503ff6f455b11, type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[1].value
+      value: 0.2666632
+      objectReference: {fileID: 0}
+    - target: {fileID: 2603279263012304329, guid: 07bcd5fef59cab84e8f503ff6f455b11, type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].inSlope
+      value: -0.74118966
+      objectReference: {fileID: 0}
+    - target: {fileID: 2603279263012304329, guid: 07bcd5fef59cab84e8f503ff6f455b11, type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[1].inSlope
+      value: -0.7391876
+      objectReference: {fileID: 0}
+    - target: {fileID: 2603279263012304329, guid: 07bcd5fef59cab84e8f503ff6f455b11, type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].outSlope
+      value: -0.74118966
+      objectReference: {fileID: 0}
+    - target: {fileID: 2603279263012304329, guid: 07bcd5fef59cab84e8f503ff6f455b11, type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[1].inWeight
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2603279263012304329, guid: 07bcd5fef59cab84e8f503ff6f455b11, type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[1].outSlope
+      value: -0.7391876
+      objectReference: {fileID: 0}
+    - target: {fileID: 2603279263012304329, guid: 07bcd5fef59cab84e8f503ff6f455b11, type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].outWeight
+      value: 0.9986595
+      objectReference: {fileID: 0}
     - target: {fileID: 6816599643055742697, guid: 07bcd5fef59cab84e8f503ff6f455b11, type: 3}
       propertyPath: m_Name
       value: Trail
@@ -376,6 +417,9 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 07bcd5fef59cab84e8f503ff6f455b11, type: 3}
 --- !u!4 &2479645845340531439 stripped
 Transform:

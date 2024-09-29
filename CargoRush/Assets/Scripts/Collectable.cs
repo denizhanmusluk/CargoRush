@@ -38,7 +38,7 @@ public class Collectable : MonoBehaviour
 
     public List<Collectable> collectableList;
     public Animator anim;
-    public bool isGem = false;
+    public bool isTrash = false;
     public GameObject bantGO;
     public GameObject puffEffectPrefab;
 
@@ -47,6 +47,9 @@ public class Collectable : MonoBehaviour
     //public Material instancedMaterial;
     public GameObject box;
     public GameObject boxSinglePart;
+
+    public bool stackFollowingActive = false;
+
     public void InitNormalMaterial()
     {
         //foreach (var msh in meshList)

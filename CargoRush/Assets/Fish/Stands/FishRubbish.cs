@@ -9,6 +9,12 @@ public class FishRubbish : MonoBehaviour
     public bool dropActive = true;
     public bool StandActive = false;
     public Transform fishPosTR;
+
+
+
+
+
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.GetComponent<PlayerController>() != null && StandActive)
@@ -194,12 +200,6 @@ public class FishRubbish : MonoBehaviour
         collectable.transform.position = dropPos;
 
         Destroy(collectable.gameObject);
-    }
-    IEnumerator AnimatorSetter()
-    {
-        animator.SetBool("trashactive", true);
-        yield return new WaitForSeconds(1f);
-        animator.SetBool("trashactive", false);
     }
 
 

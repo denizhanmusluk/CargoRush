@@ -414,7 +414,7 @@ public class AIWorker : MonoBehaviour, IWorkerModelSelect
         isStayHoldActive = false;
 
         {
-            targetStand.aiTargetPosListCheck[targetDropPointSelect] = 0;
+            //targetStand.aiTargetPosListCheck[targetDropPointSelect] = 0;
 
             targetDropPointSelect = UnityEngine.Random.Range(0, targetStand.aiTargetPosList.Length);
             for (int i = 0; i < 50; i++)
@@ -486,6 +486,7 @@ public class AIWorker : MonoBehaviour, IWorkerModelSelect
                 if (sellingWorker)
                 {
                     targetStand.TargetCourierArrived(this);
+                    targetStand.aiTargetPosListCheck[targetDropPointSelect] = 0;
                 }
                 else
                 {

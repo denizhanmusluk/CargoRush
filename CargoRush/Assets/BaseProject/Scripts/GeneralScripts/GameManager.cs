@@ -197,7 +197,7 @@ public class GameManager : Observer
 
     private void Update()
     {
-        Debug.Log(Globals.gamePlayStarting);
+        //Debug.Log(Globals.gamePlayStarting);
 
         //if (Input.GetKeyDown(KeyCode.X))
         //{

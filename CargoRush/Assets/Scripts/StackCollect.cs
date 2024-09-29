@@ -455,6 +455,8 @@ public abstract class StackCollect : MonoBehaviour
 
     private IEnumerator ComeToMe(Collectable collectable, Transform targetTR, float deltaY, bool parentActive)
     {
+        collectable.stackFollowingActive = false;
+
         collectable.InitNormalMaterial();
         collectable.isCollected = true;
         //foreach (var anim in collectable.GetComponentsInChildren<Animator>())
@@ -523,6 +525,7 @@ public abstract class StackCollect : MonoBehaviour
             collectable.transform.localPosition = Vector3.zero;
         }
         collectable.transform.localRotation = targetAngle;
+        collectable.stackFollowingActive = true;
 
 
     }
@@ -537,7 +540,10 @@ public abstract class StackCollect : MonoBehaviour
                 {
                     collectionTrs.Remove(collectionTrs[0]);
                 }
-                followObj(stackLevel_1_PosList[0], collectionTrs[0].transform, 0f);
+                if (collectionTrs[0].stackFollowingActive)
+                {
+                    followObj(stackLevel_1_PosList[0], collectionTrs[0].transform, 0f);
+                }
             }
             for (int i = 0; i < collectionTrs.Count - 1; i++)
             {
@@ -549,7 +555,10 @@ public abstract class StackCollect : MonoBehaviour
                 {
                     collectionTrs.Remove(collectionTrs[i + 1]);
                 }
-                followObj(collectionTrs[i].transform, collectionTrs[i + 1].transform, i);
+                if (collectionTrs[i].stackFollowingActive)
+                {
+                    followObj(collectionTrs[i].transform, collectionTrs[i + 1].transform, i);
+                }
             }
         }
     }

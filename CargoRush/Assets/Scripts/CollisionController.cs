@@ -19,10 +19,21 @@ public class CollisionController : MonoBehaviour
     {
         if (playerActive && Globals.playerStackActive && other.GetComponent<Collectable>() != null && other.GetComponent<Collectable>().collectActive)
         {
-            if (other.GetComponent<Collectable>().isGem)
+            Debug.Log("collector");
+            if (other.GetComponent<Collectable>().isTrash)
             {
-                other.GetComponent<Collectable>().CollectGem();
-                VibratoManager.Instance.MediumVibration();
+                if (stackCollect.collectionTrs.Count < Globals.stackFactor * _characterUpgradeSettings.stackCapacity[Globals.stackCapacityLevel] + Globals.extraStackSkin + Globals.extraStack)
+                {
+                    if (other.GetComponent<Rigidbody>() != null)
+                    {
+                        Destroy(other.GetComponent<Rigidbody>());
+                    }
+
+                    stackCollect.Collecting(other.GetComponent<Collectable>());
+                    other.GetComponent<Collectable>().collectableList.Remove(other.GetComponent<Collectable>());
+
+                    PlayerController.Instance._stackCollect.StackFullCheck();
+                }
             }
             else
             {
@@ -65,7 +76,7 @@ public class CollisionController : MonoBehaviour
 
         if (!playerActive && Globals.stackActive && other.GetComponent<Collectable>() != null && other.GetComponent<Collectable>().collectActive)
         {
-            if (!other.GetComponent<Collectable>().isGem && stackCollect.collectionTrs.Count < stackCollect.GetComponent<StackCollectWorker>().baseStackCapacity + _characterUpgradeSettings.workerCapacity[Globals.workerCapacityLevel])
+            if (!other.GetComponent<Collectable>().isTrash && stackCollect.collectionTrs.Count < stackCollect.GetComponent<StackCollectWorker>().baseStackCapacity + _characterUpgradeSettings.workerCapacity[Globals.workerCapacityLevel])
             {
                 if (other.GetComponent<Collector>() != null)
                 {

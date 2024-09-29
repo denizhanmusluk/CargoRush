@@ -31,13 +31,13 @@ public class RewardPanel : MonoBehaviour
 
     public Image vipImg;
 
-    public StandFishCar standFishCar;
+    public VipCustomerSlot vipCar;
     public Button vipViewButton;
     public void VipViewClick()
     {
-        if(standFishCar != null)
+        if(vipCar != null)
         {
-            standFishCar.VipViewCamera();
+            vipCar.VipViewCamera();
             vipViewButton.interactable = false;
         }
     }
