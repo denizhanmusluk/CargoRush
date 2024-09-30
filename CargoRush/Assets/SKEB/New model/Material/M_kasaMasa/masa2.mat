@@ -9,8 +9,9 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: masa2
   m_Shader: {fileID: 4800000, guid: 7ffc1bc2bbb1ef64f84b552b2d2f0619, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
-  - TCP2_MATCAP
   - TCP2_OCCLUSION
   - TCP2_REFLECTIONS_FRESNEL
   - TCP2_RIM_LIGHTING_LIGHTMASK
@@ -25,6 +26,7 @@ Material:
   m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
+  m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -148,8 +150,8 @@ Material:
     - _RampBandsSmoothing: 0.1
     - _RampOffset: 0
     - _RampScale: 1
-    - _RampSmoothing: 0.1
-    - _RampThreshold: 0.75
+    - _RampSmoothing: 0.11
+    - _RampThreshold: 0.71
     - _RampType: 0
     - _ReceiveShadows: 1
     - _ReceiveShadowsOff: 1
@@ -165,7 +167,7 @@ Material:
     - _SpecularHighlights: 1
     - _SpecularMapType: 0
     - _SpecularRoughness: 0.5
-    - _SpecularToonSize: 0.26
+    - _SpecularToonSize: 0.51
     - _SpecularToonSmoothness: 0.29
     - _SpecularType: 1
     - _SrcBlend: 1
@@ -174,7 +176,7 @@ Material:
     - _UseAlphaTest: 0
     - _UseEmission: 0
     - _UseFresnelReflections: 1
-    - _UseMatCap: 1
+    - _UseMatCap: 0
     - _UseMatCapMask: 0
     - _UseMobileMode: 0
     - _UseNormalMap: 0
@@ -188,7 +190,7 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - _BaseColor: {r: 0.3773585, g: 0.3773585, b: 0.3773585, a: 1}
+    - _BaseColor: {r: 0.12156863, g: 0.53333336, b: 0.5137255, a: 1}
     - _Color: {r: 0.90636307, g: 0.614681, b: 0.34080836, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 0}
     - _HColor: {r: 1, g: 1, b: 1, a: 1}
