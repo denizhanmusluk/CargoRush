@@ -25,7 +25,7 @@ public class CharacterUpgradeManager : MonoBehaviour
     private void Start()
     {
         _characterUpgradeSettings = LevelManager.Instance._currnetCharacterUpgradeSettings;
-        isEnoughMoney();
+        IsEnoughMoney();
         InitButtonValues();
     }
     void InitButtonValues()
@@ -100,7 +100,7 @@ public class CharacterUpgradeManager : MonoBehaviour
                 GameManager.Instance.MoneyUpdate(-characterMoveSpeedCost);
                 Globals.characterSpeedLevel++;
                 PlayerPrefs.SetInt("characterSpeedLevel" + PlayerPrefs.GetInt("level"), Globals.characterSpeedLevel);
-                isEnoughMoney();
+                IsEnoughMoney();
                 InitButtonValues();
                 PlayerController.Instance.GetComponent<BoingScale>().ScaleEffectTR(PlayerController.Instance.transform, 0.8f, 1f, 0.5f, Ease.OutElastic);
                 PlayerController.Instance.UpgradeTextSpawn("+Speed");
@@ -116,6 +116,11 @@ public class CharacterUpgradeManager : MonoBehaviour
                 float time = CoefficientTransformation.FormatSaniye(Globals.speedPlayTime);
 
                 AudioManager.Instance.UpgradeSound();
+
+                if (QuestManager.Instance.upgradeQuest != null)
+                {
+                    QuestManager.Instance.upgradeQuest.QuestUpdate(1);
+                }
             }
         }
     }
@@ -129,7 +134,7 @@ public class CharacterUpgradeManager : MonoBehaviour
                 GameManager.Instance.MoneyUpdate(-characterStackCapacityCost);
                 Globals.stackCapacityLevel++;
                 PlayerPrefs.SetInt("stackCapacityLevel" + PlayerPrefs.GetInt("level"), Globals.stackCapacityLevel);
-                isEnoughMoney();
+                IsEnoughMoney();
                 InitButtonValues();
                 PlayerController.Instance.GetComponent<BoingScale>().ScaleEffectTR(PlayerController.Instance.transform, 0.8f, 1f, 0.5f, Ease.OutElastic);
                 PlayerController.Instance.UpgradeTextSpawn("+Capacity");
@@ -146,12 +151,16 @@ public class CharacterUpgradeManager : MonoBehaviour
                 float time = CoefficientTransformation.FormatSaniye(Globals.speedPlayTime);
                 //GameAnalytics.NewDesignEvent(tag, time);
                 AudioManager.Instance.UpgradeSound();
+                if (QuestManager.Instance.upgradeQuest != null)
+                {
+                    QuestManager.Instance.upgradeQuest.QuestUpdate(1);
+                }
             }
 
         }
 
     }
-    public void isEnoughMoney()
+    public void IsEnoughMoney()
     {
         //if (Globals.magnetRadiusLevel < _characterUpgradeSettings.magnetRadius.Length - 1 && Globals.moneyAmount >= _characterUpgradeSettings.magnetRadiusCost[Globals.magnetRadiusLevel + 1])
         //{
@@ -204,7 +213,7 @@ public class CharacterUpgradeManager : MonoBehaviour
             
                 Globals.characterSpeedLevel++;
                 PlayerPrefs.SetInt("characterSpeedLevel" + PlayerPrefs.GetInt("level"), Globals.characterSpeedLevel);
-                isEnoughMoney();
+                IsEnoughMoney();
                 InitButtonValues();
                 PlayerController.Instance.GetComponent<BoingScale>().ScaleEffectTR(PlayerController.Instance.transform, 0.8f, 1f, 0.5f, Ease.OutElastic);
                 PlayerController.Instance.UpgradeTextSpawn("+Speed");
@@ -224,6 +233,10 @@ public class CharacterUpgradeManager : MonoBehaviour
             }
 
 
+            if (QuestManager.Instance.upgradeQuest != null)
+            {
+                QuestManager.Instance.upgradeQuest.QuestUpdate(1);
+            }
         }
     }
    public void StackCapacityUpgradeFree(bool ticketActive)
@@ -232,7 +245,7 @@ public class CharacterUpgradeManager : MonoBehaviour
         {
             Globals.stackCapacityLevel++;
             PlayerPrefs.SetInt("stackCapacityLevel" + PlayerPrefs.GetInt("level"), Globals.stackCapacityLevel);
-            isEnoughMoney();
+            IsEnoughMoney();
             InitButtonValues();
             PlayerController.Instance.GetComponent<BoingScale>().ScaleEffectTR(PlayerController.Instance.transform, 0.8f, 1f, 0.5f, Ease.OutElastic);
             PlayerController.Instance.UpgradeTextSpawn("+Capacity");
@@ -251,6 +264,11 @@ public class CharacterUpgradeManager : MonoBehaviour
                 Analytics.ItemUpgraded(ItemUpgradeType.Upgrade, "Zone " + (PlayerPrefs.GetInt("level") + 1) + " CharacterCapacityUpgrade", Globals.stackCapacityLevel, ItemFlowReason.RewardedVideoAd);
             }
 
+
+            if (QuestManager.Instance.upgradeQuest != null)
+            {
+                QuestManager.Instance.upgradeQuest.QuestUpdate(1);
+            }
         }
     }
 }

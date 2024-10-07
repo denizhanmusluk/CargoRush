@@ -260,6 +260,8 @@ public class ProcessMachine : Stand, IStandUpgrade, IMachineActive
         if (Globals.collectableLevel < collectableLevel)
         {
             Globals.collectableLevel = collectableLevel;
+            PlayerPrefs.SetInt("collectablelevel" + PlayerPrefs.GetInt("level"), Globals.collectableLevel);
+
             SkillManager.Instance.ResetRewardedPos();
         }
         IndicatorManager.Instance.machines.Add(this);
@@ -363,20 +365,20 @@ public class ProcessMachine : Stand, IStandUpgrade, IMachineActive
     }
     IEnumerator StartDelay()
     {
-        if (missionActive)
-        {
-            MissionManager.Instance.TapingLineMissionStart();
-        }
+        //if (missionActive)
+        //{
+        //    MissionManager.Instance.TapingLineMissionStart();
+        //}
         yield return new WaitForSeconds(1f);
 
         if (PlayerPrefs.GetInt(machineName + "firstopen" + PlayerPrefs.GetInt("level")) == 0)
         {
             PlayerPrefs.SetInt(machineName + "firstopen" + PlayerPrefs.GetInt("level"), 1);
 
-            if (MissionManager.Instance.tapingLineBuyMission.mission_Active)
-            {
-                MissionManager.Instance.tapingLineBuyMission.gameObject.SetActive(true);
-            }
+            //if (MissionManager.Instance.tapingLineBuyMission.mission_Active)
+            //{
+            //    MissionManager.Instance.tapingLineBuyMission.gameObject.SetActive(true);
+            //}
             if (collectableLevel == 1 && PlayerPrefs.GetInt("level") == 0)
             {
                 FishDropArea.Instance.NewProductActive(productName);
@@ -384,10 +386,10 @@ public class ProcessMachine : Stand, IStandUpgrade, IMachineActive
             FishDropArea.Instance.ReactiveActivator();
 
             yield return new WaitForSeconds(5);
-            if (missionUpdateActive)
-            {
-                MissionManager.Instance.tapingLineBuyMission.MissionUpdate();
-            }
+            //if (missionUpdateActive)
+            //{
+            //    MissionManager.Instance.tapingLineBuyMission.MissionUpdate();
+            //}
         }
 
 
@@ -451,10 +453,10 @@ public class ProcessMachine : Stand, IStandUpgrade, IMachineActive
              
             }
             yield return new WaitForSeconds(0.1f);
-            if (missionActive)
-            {
-                MissionManager.Instance.TapingLineMissionStart();
-            }
+            //if (missionActive)
+            //{
+            //    MissionManager.Instance.TapingLineMissionStart();
+            //}
         }
     }
 
@@ -492,8 +494,8 @@ public class ProcessMachine : Stand, IStandUpgrade, IMachineActive
                 fishCountText.text = (fishCountTotal - fishCountCurrent).ToString() + "/" + (fishCountTotal).ToString();
                 yield return new WaitForSeconds((waitTime / Globals.repairSpeedSkin) / speedFactor);
                 workAreaList[0].StnadFullCheck();
-                MissionManager.Instance.TapeBoxMissionStart();
-                MissionManager.Instance.tapeBoxMission.MissionUpdate();
+                //MissionManager.Instance.TapeBoxMissionStart();
+                //MissionManager.Instance.tapeBoxMission.MissionUpdate();
 
                 if (PlayerPrefs.GetInt("level") == 0)
                 {
@@ -522,6 +524,11 @@ public class ProcessMachine : Stand, IStandUpgrade, IMachineActive
                         otherRawStand.EmptyBand();
                     }
                 }
+
+                if (QuestManager.Instance.tapeBoxQuest != null)
+                {
+                    QuestManager.Instance.tapeBoxQuest.QuestUpdate(1);
+                }
             }
         }
         else
@@ -538,12 +545,14 @@ public class ProcessMachine : Stand, IStandUpgrade, IMachineActive
                 fishCountText.text = (fishCountTotal - fishCountCurrent).ToString() + "/" + (fishCountTotal).ToString();
                 yield return new WaitForSeconds((waitTime / Globals.repairSpeedSkin) / speedFactor);
                 workAreaList[0].StnadFullCheck();
-                MissionManager.Instance.TapeBoxMissionStart();
-                if (MissionManager.Instance.tapeBoxMission.mission_Active)
-                {
-                    MissionManager.Instance.tapeBoxMission.gameObject.SetActive(true);
-                }
-                MissionManager.Instance.tapeBoxMission.MissionUpdate();
+
+
+                //MissionManager.Instance.TapeBoxMissionStart();
+                //if (MissionManager.Instance.tapeBoxMission.mission_Active)
+                //{
+                //    MissionManager.Instance.tapeBoxMission.gameObject.SetActive(true);
+                //}
+                //MissionManager.Instance.tapeBoxMission.MissionUpdate();
 
                 if (PlayerPrefs.GetInt("level") == 0)
                 {
@@ -559,6 +568,11 @@ public class ProcessMachine : Stand, IStandUpgrade, IMachineActive
                 }
                 PlayerPrefs.SetInt("myShareValue", Globals.myShareValue);
                 FishDropArea.Instance.BoxPackageCounter();
+
+                if (QuestManager.Instance.tapeBoxQuest != null)
+                {
+                    QuestManager.Instance.tapeBoxQuest.QuestUpdate(1);
+                }
             }
         }
 

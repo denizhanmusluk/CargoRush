@@ -11,6 +11,9 @@ using HomaGames.HomaBelly;
 public class UIManager : Subject
 {
     public event Action OnLevelStart, OnNextLevel, OnLevelRestart, OnGamePaused, OnGameResume;
+    public GameObject gameUiParentPanel_GO;
+    public GameObject mapUiParentPanel_GO;
+    public Animator mapPanelAnimation;
 
     [Header("Screens")]
     public GameObject moneyPanel;
@@ -31,6 +34,7 @@ public class UIManager : Subject
     //public LevelBarDisplay levelBarDisplay;
     public TextMeshProUGUI moneyText;
     public TextMeshProUGUI moneyTextShop;
+    public TextMeshProUGUI moneyTextMap;
     public TextMeshProUGUI gemText;
     public TextMeshProUGUI gemTextShop;
 
@@ -176,7 +180,7 @@ public class UIManager : Subject
 
         PlayerPrefs.SetInt("money", Globals.moneyAmount);
 
-        CharacterUpgradeManager.Instance.isEnoughMoney();
+        CharacterUpgradeManager.Instance.IsEnoughMoney();
         HRUpgradeManager.Instance.isEnoughMoney();
         //HoleUpgradeManager.Instance.isEnoughMoney();
         StarPanelManager.Instance.MoneyEnoughCheck();
@@ -265,6 +269,7 @@ public class UIManager : Subject
             float money = Mathf.Lerp(oldAmount, (float)Globals.moneyAmount, counter);
             moneyText.text =  CoefficientTransformation.Converter((int)money);
             moneyTextShop.text =  CoefficientTransformation.Converter((int)money);
+            moneyTextMap.text =  CoefficientTransformation.Converter((int)money);
             if (decimalCounter % 15 == 0 && oldAmount > 0)
             {
                 MoneyScale(0.9f, 1f, 0.25f, Ease.OutElastic);
@@ -273,6 +278,7 @@ public class UIManager : Subject
         }
         moneyText.text = CoefficientTransformation.Converter(Globals.moneyAmount);
         moneyTextShop.text = CoefficientTransformation.Converter(Globals.moneyAmount);
+        moneyTextMap.text = CoefficientTransformation.Converter(Globals.moneyAmount);
 
     }
     public void Fail()
@@ -288,6 +294,57 @@ public class UIManager : Subject
     public Transform moneyTargetTR;
 
     public GameObject ticketPrefab;
+    public void MoneyCreateVip(int moneyCount, bool rewardedActive)
+    {
+        StartCoroutine(Money_CreateVip(moneyCount, rewardedActive));
+    }
+    IEnumerator Money_CreateVip(int moneyCount,  bool rewardedActive)
+    {
+        for (int i = 0; i < moneyCount / 10; i++)
+        {
+            GameObject mny = Instantiate(moneyPrefabScaleEffect, moneyFirstPosTR.position, Quaternion.identity, transform);
+            StartCoroutine(MoneyMoveUI_ScaleEffect(mny.transform));
+        }
+        yield return new WaitForSeconds(2f);
+
+        GameManager.Instance.MoneyUpdate(moneyCount);
+
+        if (rewardedActive)
+        {
+            //Analytics.ResourceFlowEvent(ResourceFlowType.Source, "Money", (float)moneyCount, (float)Globals.moneyAmount, null, "DailyBonusRV", ResourceFlowReason.RewardedVideoAd);
+        }
+        else
+        {
+            //Analytics.ResourceFlowEvent(ResourceFlowType.Source, "Money", (float)moneyCount, (float)Globals.moneyAmount, null, "DailyBonus", ResourceFlowReason.Progression);
+        }
+    }
+
+    public void MoneyCreateQuestReward(int moneyCount, Vector3 moneyCreatePos)
+    {
+        StartCoroutine(Money_CreateQuestRew(moneyCount, moneyCreatePos));
+    }
+    IEnumerator Money_CreateQuestRew(int moneyCount, Vector3 moneyCreatePos)
+    {
+        for (int i = 0; i < moneyCount / 10; i++)
+        {
+            GameObject mny = Instantiate(moneyPrefabScaleEffect, moneyFirstPosTR.position, Quaternion.identity, transform);
+            StartCoroutine(MoneyMoveUI_ScaleEffect(mny.transform));
+            //yield return new WaitForSeconds(0.01f);
+        }
+        yield return new WaitForSeconds(2f);
+
+        GameManager.Instance.MoneyUpdate(moneyCount);
+
+        //if (rewardedActive)
+        //{
+        //    Analytics.ResourceFlowEvent(ResourceFlowType.Source, "Money", (float)moneyCount, (float)Globals.moneyAmount, null, "DailyBonusRV", ResourceFlowReason.RewardedVideoAd);
+        //}
+        //else
+        //{
+        //    Analytics.ResourceFlowEvent(ResourceFlowType.Source, "Money", (float)moneyCount, (float)Globals.moneyAmount, null, "DailyBonus", ResourceFlowReason.Progression);
+        //}
+
+    }
 
     public void MoneyCreateDailyRewarded(int moneyCount, Vector3 moneyCreatePos, bool rewardedActive)
     {
@@ -611,6 +668,12 @@ public class UIManager : Subject
             Analytics.ItemConsumed(_tag, 0, ItemFlowReason.RewardedVideoAd);
         }
 
+
+
+        if (QuestManager.Instance.boosterQuest != null)
+        {
+            QuestManager.Instance.boosterQuest.QuestUpdate(1);
+        }
     }
     public void HoverboardSkillClick_Cancel()
     {
@@ -652,6 +715,12 @@ public class UIManager : Subject
             Analytics.ItemConsumed(_tag, 999, ItemFlowReason.RewardedVideoAd);
         }
 
+
+
+        if (QuestManager.Instance.boosterQuest != null)
+        {
+            QuestManager.Instance.boosterQuest.QuestUpdate(1);
+        }
     }
 
     public void CapacitySkillClick_Cancel()
@@ -697,6 +766,12 @@ public class UIManager : Subject
             Analytics.ItemConsumed(_tag, 0, ItemFlowReason.RewardedVideoAd);
         }
 
+
+
+        if (QuestManager.Instance.boosterQuest != null)
+        {
+            QuestManager.Instance.boosterQuest.QuestUpdate(1);
+        }
     }
     public void DoubleIncomeSkillClick_Cancel()
     {
@@ -746,6 +821,12 @@ public class UIManager : Subject
             Analytics.ItemConsumed(_tag, 0, ItemFlowReason.RewardedVideoAd);
         }
 
+
+
+        if (QuestManager.Instance.boosterQuest != null)
+        {
+            QuestManager.Instance.boosterQuest.QuestUpdate(1);
+        }
     }
    
     public void FreeMoneySkillClickCancel()

@@ -14,7 +14,7 @@ public class OpenElasticManuel : MonoBehaviour
     }
     void OnEnable()
     {
-        OpenScale(firstSize, lastSize, duration, Ease.InElastic);
+        OpenScale(firstSize, lastSize, duration, Ease.OutElastic);
     }
 
     public Tween OpenScale(float value, float lastValue, float duration, DG.Tweening.Ease type)

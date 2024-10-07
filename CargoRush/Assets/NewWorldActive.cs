@@ -24,7 +24,13 @@ public class NewWorldActive : MonoBehaviour
     IEnumerator StartDelay()
     {
         yield return new WaitForSeconds(1);
-        MissionManager.Instance.newMapMission.MissionUpdate();
+
+        if (QuestManager.Instance.newMapQuest != null)
+        {
+            QuestManager.Instance.newMapQuest.QuestUpdate(1);
+        }
+
+        //MissionManager.Instance.newMapMission.MissionUpdate();
         MapManager.Instance.mapTapTut_GO.SetActive(true);
     }
     private void OnTriggerEnter(Collider other)

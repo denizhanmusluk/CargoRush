@@ -255,8 +255,10 @@ public class ShopManager : MonoBehaviour
             yield return null;
         }
         ratioText.text = ((int)(targetFill * 100)).ToString() + "/100";
-        PlayerPrefs.SetFloat("shopprogressfill", targetFill);
-        if(targetFill >= shopRatio[shopID])
+        PlayerPrefs.SetFloat("shopprogressfill" + PlayerPrefs.GetInt("level").ToString(), targetFill);
+
+
+        if (targetFill >= shopRatio[shopID])
         {
             //CollectProgressManager.Instance.shopTargetIcon.sprite = shopSpriteList[shopID + 1];
             //CollectProgressManager.Instance.questMarkImgGO.SetActive(false);

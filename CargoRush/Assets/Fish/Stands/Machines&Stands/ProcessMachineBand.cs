@@ -318,14 +318,14 @@ public class ProcessMachineBand : Stand, IStandUpgrade, IMachineActive
     }
     IEnumerator StartDelay()
     {
-        MissionManager.Instance.TapingLineMissionStart();
+        //MissionManager.Instance.TapingLineMissionStart();
 
         yield return new WaitForSeconds(1f);
 
         if (PlayerPrefs.GetInt(machineName + "firstopen" + PlayerPrefs.GetInt("level")) == 0)
         {
             PlayerPrefs.SetInt(machineName + "firstopen" + PlayerPrefs.GetInt("level"), 1);
-            MissionManager.Instance.tapingLineBuyMission.MissionUpdate();
+            //MissionManager.Instance.tapingLineBuyMission.MissionUpdate();
             FishDropArea.Instance.NewProductActive(productName);
             FishDropArea.Instance.ReactiveActivator();
 
@@ -392,7 +392,7 @@ public class ProcessMachineBand : Stand, IStandUpgrade, IMachineActive
 
             }
             yield return new WaitForSeconds(0.1f);
-            MissionManager.Instance.TapingLineMissionStart();
+            //MissionManager.Instance.TapingLineMissionStart();
 
         }
     }
@@ -430,8 +430,8 @@ public class ProcessMachineBand : Stand, IStandUpgrade, IMachineActive
             workAreaList[0].StnadFullCheck();
             //MissionManager.Instance.OrderMissionStart();
             //MissionManager.Instance.orderMission.MissionUpdate();
-            MissionManager.Instance.TapeBoxMissionStart();
-            MissionManager.Instance.tapeBoxMission.MissionUpdate();
+            //MissionManager.Instance.TapeBoxMissionStart();
+            //MissionManager.Instance.tapeBoxMission.MissionUpdate();
 
             if (PlayerPrefs.GetInt("level") == 0)
             {

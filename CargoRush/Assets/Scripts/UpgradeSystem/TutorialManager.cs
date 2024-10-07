@@ -88,8 +88,8 @@ public class TutorialManager : MonoBehaviour
     }
     void StarterMissions()
     {
-        MissionManager.Instance.OrderMissionStart();
-        MissionManager.Instance.TapeBoxMissionStart();
+        //MissionManager.Instance.OrderMissionStart();
+        //MissionManager.Instance.TapeBoxMissionStart();
         //MissionManager.Instance.ShippingLineMissionStart();
         //MissionManager.Instance.TapingLineMissionStart();
         if (PlayerPrefs.GetInt("skinactive") == 1)

@@ -15,6 +15,8 @@ public class MachineRepair : MonoBehaviour
     private void OnEnable()
     {
         imageFill.fillAmount = 0;
+        imageRepairFill.fillAmount = 0;
+
         repairStarted = false;
 
         //if (PlayerPrefs.GetInt("firsterrormachine") == 0)

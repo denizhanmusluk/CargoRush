@@ -11,8 +11,10 @@ public class HisseCompany : MonoBehaviour
     public bool myCompany = false;
     [SerializeField] TextMeshProUGUI shareText;
     [SerializeField] TextMeshProUGUI companyNameText;
+    [SerializeField] TextMeshProUGUI companyNameText2;
 
     public string companyName;
+    public string[] companyNameList;
     [SerializeField] int firstValue;
     [SerializeField] float increaseAmount;
     [SerializeField] int incPeriod;
@@ -47,7 +49,8 @@ public class HisseCompany : MonoBehaviour
             shareValues.Add((firstValue + increaseAmount * i) / 100);
         }
 
-        companyNameText.text = companyName;
+        companyNameText.text = companyNameList[PlayerPrefs.GetInt("level", 0) % companyNameList.Length];
+        companyNameText2.text = companyNameList[PlayerPrefs.GetInt("level", 0) % companyNameList.Length];
         if (myCompany)
         {
             Globals.myShareValue = PlayerPrefs.GetInt("myShareValue");
@@ -155,6 +158,10 @@ public class HisseCompany : MonoBehaviour
                 PlayerPrefs.SetInt("mycompanylevel", companyLevel);
                 ShareManager.Instance.Share_LevelUp_TutorialStart(companyLevel);
 
+                if (QuestManager.Instance.companySeqUpQuest != null)
+                {
+                    QuestManager.Instance.companySeqUpQuest.QuestUpdate(companyLevel);
+                }
             }
         }
     }

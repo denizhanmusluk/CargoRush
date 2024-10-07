@@ -126,6 +126,10 @@ public class HRUpgradeManager : MonoBehaviour
                 }
                 AudioManager.Instance.UpgradeSound();
 
+                if (QuestManager.Instance.upgradeQuest != null)
+                {
+                    QuestManager.Instance.upgradeQuest.QuestUpdate(1);
+                }
                 //PlayerController.Instance.GetComponent<BoingScale>().ScaleEffectTR(PlayerController.Instance.transform, 0.8f, 1f, 0.5f, Ease.OutElastic);
                 //PlayerController.Instance.UpgradeTextSpawn("+Magnet");
             }
@@ -157,6 +161,11 @@ public class HRUpgradeManager : MonoBehaviour
                 //PlayerController.Instance.GetComponent<BoingScale>().ScaleEffectTR(PlayerController.Instance.transform, 0.8f, 1f, 0.5f, Ease.OutElastic);
                 //PlayerController.Instance.UpgradeTextSpawn("+Speed");
                 AudioManager.Instance.UpgradeSound();
+
+                if (QuestManager.Instance.upgradeQuest != null)
+                {
+                    QuestManager.Instance.upgradeQuest.QuestUpdate(1);
+                }
             }
         }
     }
@@ -205,6 +214,11 @@ public class HRUpgradeManager : MonoBehaviour
                 if (Globals.workerNoLevel == 1)
                 {
                     exitTapTutorial_GO.SetActive(true);
+                }
+
+                if (QuestManager.Instance.buyWorkerQuest != null)
+                {
+                    QuestManager.Instance.buyWorkerQuest.QuestUpdate(1);
                 }
             }
 
@@ -383,6 +397,11 @@ public class HRUpgradeManager : MonoBehaviour
                     _upgradeAreaWorkers.workerList[i].GetComponent<AIGarbageWorker>().MoveSpeedInit();
                 }
             }
+
+            if (QuestManager.Instance.upgradeQuest != null)
+            {
+                QuestManager.Instance.upgradeQuest.QuestUpdate(1);
+            }
         }
     }
 
@@ -411,7 +430,10 @@ public class HRUpgradeManager : MonoBehaviour
 
             }
 
-
+            if (QuestManager.Instance.upgradeQuest != null)
+            {
+                QuestManager.Instance.upgradeQuest.QuestUpdate(1);
+            }
         }
     }
     public void WorkerNoUpgradeFree(bool ticketActive)
@@ -445,6 +467,10 @@ public class HRUpgradeManager : MonoBehaviour
             }
 
 
+            if (QuestManager.Instance.buyWorkerQuest != null)
+            {
+                QuestManager.Instance.buyWorkerQuest.QuestUpdate(1);
+            }
         }
     }
 

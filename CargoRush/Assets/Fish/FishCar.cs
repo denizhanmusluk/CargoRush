@@ -138,12 +138,12 @@ public class FishCar : MonoBehaviour
         //    }
         //}
     }
-    public void CarLevelCreate(int level)
-    {
-        foreach (var car in carLevelsGO)
-        {
-            car.SetActive(false);
-        }
-        carLevelsGO[level].SetActive(true);
-    }
+    //public void CarLevelCreate(int level)
+    //{
+    //    foreach (var car in carLevelsGO)
+    //    {
+    //        car.SetActive(false);
+    //    }
+    //    carLevelsGO[level].SetActive(true);
+    //}
 }

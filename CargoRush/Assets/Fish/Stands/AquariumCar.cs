@@ -52,7 +52,7 @@ public class AquariumCar : Stand
         carLevel = PlayerPrefs.GetInt(standNameLevel);
         if (currentCar != null)
         {
-            currentCar.GetComponent<FishCar>().CarLevelCreate(carLevel);
+            //currentCar.GetComponent<FishCar>().CarLevelCreate(carLevel);
         }
         fishCountCurrent += (_fishCountTotal[carLevel] - fishCountTotal);
         //_FishDropArea.requirementCount += (_fishCountTotal[carLevel] - fishCountTotal);
@@ -87,7 +87,7 @@ public class AquariumCar : Stand
     void CarCreate()
     {
         currentCar = Instantiate(carPrefab, carCreateTR.position, Quaternion.identity);
-        currentCar.GetComponent<FishCar>().CarLevelCreate(carLevel);
+        //currentCar.GetComponent<FishCar>().CarLevelCreate(carLevel);
         currentCar.GetComponent<FishCar>().stand = this;
         currentCar.GetComponent<FishCar>().standPos = carStandTR;
         currentCar.GetComponent<FishCar>().carGoPos = carGoTR;

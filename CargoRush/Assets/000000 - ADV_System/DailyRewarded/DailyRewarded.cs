@@ -18,6 +18,7 @@ public class DailyRewarded : MonoBehaviour
     public int maxRewardedCount = 5;
     public int[] moneyRewardedAmounts;
     public TextMeshProUGUI advCountText;
+    public TextMeshProUGUI moneyAmountText;
     public Button advButton;
     [SerializeField] GameObject advImage_GO;
     [SerializeField] GameObject free_GO;
@@ -27,7 +28,7 @@ public class DailyRewarded : MonoBehaviour
         {
             case DailyType.Money:
                 {
-
+                    moneyAmountText.text = "$" + moneyRewardedAmounts[PlayerPrefs.GetInt("level")].ToString();
                 }
                 break;
             case DailyType.Ticket:

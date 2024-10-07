@@ -377,10 +377,10 @@ public class BuyArea : MonoBehaviour, BuyCamera, IBuyCost
         {
             SendAnalyticResource(buyCounter);
         }
-        if (specialVehicleOpener)
-        {
-            MissionManager.Instance.SpecialShippingLineMissionStart();
-        }
+        //if (specialVehicleOpener)
+        //{
+        //    MissionManager.Instance.SpecialShippingLineMissionStart();
+        //}
         if (standUpgradeActive)
         {
             //string _tag = "M" + (PlayerPrefs.GetInt("level") + 1).ToString() + "-" + gaTag;
@@ -391,6 +391,11 @@ public class BuyArea : MonoBehaviour, BuyCamera, IBuyCost
             Analytics.ItemUpgraded(ItemUpgradeType.Item, "Zone " + (PlayerPrefs.GetInt("level") + 1) + " " + gaTag, standUpgradeLevel, ItemFlowReason.Progression);
 
             AudioManager.Instance.UpgradeSound();
+
+            if (QuestManager.Instance.upgradeQuest != null)
+            {
+                QuestManager.Instance.upgradeQuest.QuestUpdate(1);
+            }
         }
         else
         {

@@ -179,7 +179,6 @@ public class MapManager : MonoBehaviour
 
         Globals.carSlotCount = 0;
 
-        Globals.isThereVip = false;
 
         Globals.openedCarSlotCount = 0;
         ADVManager.Instance.HideBanner();

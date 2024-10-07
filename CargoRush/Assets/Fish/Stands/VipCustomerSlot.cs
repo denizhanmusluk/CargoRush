@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using Cinemachine;
+using HomaGames.HomaBelly;
+
 public class VipCustomerSlot : Stand, IMoneyArea
 {
     [SerializeField] GameObject canvasProductGO, canvasDeliveringGO;
@@ -50,6 +52,8 @@ public class VipCustomerSlot : Stand, IMoneyArea
 
     [SerializeField] int vipCyclePeriod = 180;
     public int vipCycleCount = 0;
+    [SerializeField] GameObject bonusGO;
+    [SerializeField] GameObject obstacleGO;
     void StartCounter()
     {
         if (PlayerPrefs.GetInt("vipactive") == 0)
@@ -157,9 +161,12 @@ public class VipCustomerSlot : Stand, IMoneyArea
         carLevel = PlayerPrefs.GetInt(standNameLevel + PlayerPrefs.GetInt("level"));
         cooldownTime = cooldownTimeList[carLevel];
 
-        totalBoxCount = (int)Random.Range(boxCountTotal[carLevel].x, boxCountTotal[carLevel].y + 1);
+        totalBoxCount = (int)Random.Range(boxCountTotal[carLevel].x, (Globals.collectableLevel + 1) * boxCountTotal[carLevel].y + 1);
         VipActive();
         canvasProductGO.SetActive(true);
+        Quaternion cameraRot = Camera.main.transform.rotation;
+        canvasProductGO.transform.rotation = Quaternion.Euler(cameraRot.eulerAngles.x, cameraRot.eulerAngles.y, cameraRot.eulerAngles.z);
+
     }
     public void LevelUp()
     {
@@ -183,11 +190,11 @@ public class VipCustomerSlot : Stand, IMoneyArea
         firstColliderOffset = moneyArea.GetComponent<BoxCollider>().center;
         StartCoroutine(SpecificStartDelay());
 
-        foreach (var wrkArea in workAreaList)
-        {
-            wrkArea.standList.Add(this);
-            wrkArea.standCourierList.Add(this);
-        }
+        //foreach (var wrkArea in workAreaList)
+        //{
+        //    wrkArea.standList.Add(this);
+        //    wrkArea.standCourierList.Add(this);
+        //}
 
 
     }
@@ -201,7 +208,7 @@ public class VipCustomerSlot : Stand, IMoneyArea
     {
         if (specialVehicle)
         {
-            MissionManager.Instance.specialOrderMission.MissionUpdate();
+            //MissionManager.Instance.specialOrderMission.MissionUpdate();
 
             if (PlayerPrefs.GetInt("level") == 0)
             {
@@ -219,11 +226,11 @@ public class VipCustomerSlot : Stand, IMoneyArea
         }
         else
         {
-            if (MissionManager.Instance.orderMission.mission_Active)
-            {
-                MissionManager.Instance.orderMission.gameObject.SetActive(true);
-            }
-            MissionManager.Instance.orderMission.MissionUpdate();
+            //if (MissionManager.Instance.orderMission.mission_Active)
+            //{
+            //    MissionManager.Instance.orderMission.gameObject.SetActive(true);
+            //}
+            //MissionManager.Instance.orderMission.MissionUpdate();
 
             if (PlayerPrefs.GetInt("level") == 0)
             {
@@ -251,6 +258,8 @@ public class VipCustomerSlot : Stand, IMoneyArea
 
     void CarCreate()
     {
+        obstacleGO.SetActive(true);
+        bonusGO.SetActive(false);
         if (goatAnim != null)
         {
             goatAnim.SetBool("openactive", true);
@@ -259,13 +268,14 @@ public class VipCustomerSlot : Stand, IMoneyArea
 
 
         currentCar = Instantiate(carPrefabList[carLevel], carCreateTR.position, Quaternion.identity);
-        currentCar.GetComponent<FishCar>().stand = this;
-        currentCar.GetComponent<FishCar>().standPos = carStandPosList[carLevel];
-        currentCar.GetComponent<FishCar>().carGoPos = carGoTR;
+        currentCar.GetComponent<VipDrone>().stand = this;
+        currentCar.GetComponent<VipDrone>().standPos = carStandPosList[carLevel];
+        currentCar.GetComponent<VipDrone>().carGoPos = carGoTR;
+        currentCar.GetComponent<VipDrone>().createPos = carCreateTR;
 
         //if (thisVip)
         {
-            currentCar.GetComponent<FishCar>().vipCanvasGo.SetActive(true);
+            currentCar.GetComponent<VipDrone>().vipCanvasGo.SetActive(true);
         }
 
         productTypeCount = new int[Globals.collectableLevel + 1];
@@ -451,8 +461,8 @@ public class VipCustomerSlot : Stand, IMoneyArea
             yield return null;
             droppingCollection.collectActive = false;
             float deltaY = 0;
-            deltaY = (droppedCollectionList.Count - 1) / currentCar.GetComponent<FishCar>().fishPosTR.Length;
-            Transform targetTR = currentCar.GetComponent<FishCar>().fishPosTR[(droppedCollectionList.Count - 1) % currentCar.GetComponent<FishCar>().fishPosTR.Length];
+            deltaY = (droppedCollectionList.Count - 1) / currentCar.GetComponent<VipDrone>().fishPosTR.Length;
+            Transform targetTR = currentCar.GetComponent<VipDrone>().fishPosTR[(droppedCollectionList.Count - 1) % currentCar.GetComponent<VipDrone>().fishPosTR.Length];
             Vector3 dropPos = targetTR.position + new Vector3(0, deltaY * 0.3f, 0);
             StartCoroutine(Drop(targetTR, dropPos, droppingCollection, Time.deltaTime));
             if (PlayerPrefs.GetInt("completerodercount") == 2)
@@ -528,7 +538,7 @@ public class VipCustomerSlot : Stand, IMoneyArea
         collectable.transform.position = dropPos;
         if (collectable.gameObject != null)
         {
-            collectable.transform.parent = currentCar.GetComponent<FishCar>().fishPosParent;
+            collectable.transform.parent = currentCar.GetComponent<VipDrone>().fishPosParent;
 
         }
 
@@ -542,17 +552,13 @@ public class VipCustomerSlot : Stand, IMoneyArea
     {
         int stepNo = 0;
 
-        float moneyFactor = 1f;
-        if (thisVip)
-        {
-            moneyFactor = 1.5f;
-        }
+    
 
         int moneyListCount = moneyArea.moneyList.Count;
         int totalMoney = 0;
         for (int i = 0; i < droppingCollectionList.Count; i++)
         {
-            totalMoney += droppingCollectionList[i].price + extraMoney[carLevel];
+            totalMoney += droppingCollectionList[i].price;
         }
 
         totalMoney /= 2;
@@ -626,6 +632,49 @@ public class VipCustomerSlot : Stand, IMoneyArea
         }
         moneyArea.GetComponent<BoxCollider>().center = firstColliderOffset;
     }
+    void NotCompleteOrder()
+    {
+        StartCoroutine(NotCompleteOrder_Delay());
+    }
+    IEnumerator NotCompleteOrder_Delay()
+    {
+
+        droppedCollectionList.Clear();
+
+        StartCoroutine(CarSoundPlay());
+        //DropMoney();
+        StandActive = false;
+        GetComponent<Collider>().enabled = false;
+
+        yield return new WaitForSeconds(0.11f);
+        if (vipWaiting)
+        {
+            vipWaiting = false;
+            //DropMoney(droppedCollectionList);
+            vipCounter = 0;
+        }
+ 
+
+
+        currentCar.GetComponent<VipDrone>().CarGoOut();
+        obstacleGO.SetActive(false);
+
+        if (thisVip)
+        {
+            thisVip = false;
+        }
+
+
+        canvasProductGO.SetActive(false);
+
+        imageFill.fillAmount = 1;
+        canvasDeliveringGO.SetActive(false);
+        TextInit();
+        DayCycleRestart();
+
+        yield return new WaitForSeconds(1f);
+        resetActive = false;
+    }
     public void ResetStand()
     {
         StartCoroutine(ResetDelay());
@@ -640,52 +689,60 @@ public class VipCustomerSlot : Stand, IMoneyArea
     }
     IEnumerator ResetDelay()
     {
+        int totalMoney = 0;
+        for (int i = 0; i < droppedCollectionList.Count; i++)
+        {
+            totalMoney += droppedCollectionList[i].price;
+        }
+
+        totalMoney = (int)((float)totalMoney * moneyFactor);
+        totalBonus = totalMoney;
+        totalBonusText.text = totalBonus.ToString();
+
+
         StartCoroutine(CarSoundPlay());
         //DropMoney();
         StandActive = false;
         GetComponent<Collider>().enabled = false;
 
         yield return new WaitForSeconds(0.11f);
-        if (!thisVip)
-        {
-            DropMoney(droppedCollectionList);
-        }
-        else if (vipWaiting)
+        if (vipWaiting)
         {
             vipWaiting = false;
-            DropMoney(droppedCollectionList);
+            //DropMoney(droppedCollectionList);
             vipCounter = 0;
         }
-        else
-        {
-            droppedCollectionList.Clear();
-        }
-        currentCar.GetComponent<FishCar>().CarGoOut();
+        //else
+        //{
+        //    droppedCollectionList.Clear();
+        //}
+        bonusGO.SetActive(true);
 
         yield return new WaitForSeconds(0.1f);
 
-        if (goatAnim != null)
-        {
-            goatAnim.SetBool("openactive", false);
-        }
-
         canvasDeliveringGO.SetActive(true);
-        canvasProductGO.SetActive(false);
+
         float counter = 0f;
-        while (counter < cooldownTime)
+        while (counter < cooldownTime && thisVip)
         {
             counter += Time.deltaTime;
             imageFill.fillAmount = counter / cooldownTime;
             yield return null;
         }
 
-  
+
+        currentCar.GetComponent<VipDrone>().CarGoOut();
+        obstacleGO.SetActive(false);
 
         if (thisVip)
         {
             thisVip = false;
-            Globals.isThereVip = false;
+            DropMoney(droppedCollectionList);
         }
+ 
+
+        canvasProductGO.SetActive(false);
+
         imageFill.fillAmount = 1;
         canvasDeliveringGO.SetActive(false);
         //LevelInit();
@@ -703,11 +760,10 @@ public class VipCustomerSlot : Stand, IMoneyArea
     public void VipActive()
     {
         RewardPanel.Instance.vipCar = this;
-        Globals.carCustomerCount = 1;
-        Globals.isThereVip = true;
+   
         thisVip = true;
 
-        StartCoroutine(DigitalCounter(150));
+        StartCoroutine(DigitalCounter(180));
 
     }
     bool thisVip = false;
@@ -756,7 +812,8 @@ public class VipCustomerSlot : Stand, IMoneyArea
         RewardPanel.Instance.vipPanelGO.SetActive(false);
         if (vipWaiting)
         {
-            ResetStand();
+            
+            NotCompleteOrder();
         }
         vipWaiting = false;
 
@@ -805,4 +862,43 @@ public class VipCustomerSlot : Stand, IMoneyArea
 
     public bool missionActive = true;
     public bool missionUpdateActive = true;
+
+    public float moneyFactor = 1.5f;
+
+    public int totalBonus = 0;
+    public TextMeshProUGUI totalBonusText;
+    public void ClaimButtonClick()
+    {
+        thisVip = false;
+        GameManager.Instance.ui.MoneyCreateVip(totalBonus, false);
+        bonusGO.SetActive(false);
+        droppedCollectionList.Clear();
+    }
+
+    public void DoubleRewardedClickButton()
+    {
+        string _tag = "";
+
+        ADVManager.Instance.RewardedStart(DoubleRewardedAdvEnd, _tag, false);
+    }
+    public void DoubleRewardedAdvEnd(bool ticketActive)
+    {
+        string _tag = "";
+
+        if (ticketActive)
+        {
+            //Analytics.ItemObtained(_tag, 0, ItemFlowReason.Progression);
+            //Analytics.ItemConsumed(_tag, 0, ItemFlowReason.Progression);
+        }
+        else
+        {
+            //Analytics.ItemObtained(_tag, 0, ItemFlowReason.RewardedVideoAd);
+            //Analytics.ItemConsumed(_tag, 0, ItemFlowReason.RewardedVideoAd);
+        }
+        thisVip = false;
+        GameManager.Instance.ui.MoneyCreateVip((int)(totalBonus * 1.5f), false);
+        bonusGO.SetActive(false);
+        droppedCollectionList.Clear();
+
+    }
 }

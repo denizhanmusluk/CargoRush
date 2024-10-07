@@ -235,6 +235,11 @@ public class UpgradeArea : MonoBehaviour, BuyCamera , IBuyCost
         AudioManager.Instance.UpgradeSound();
 
         SkillManager.Instance.buyAreaList.Remove(this);
+
+        if (QuestManager.Instance.upgradeQuest != null)
+        {
+            QuestManager.Instance.upgradeQuest.QuestUpdate(1);
+        }
     }
     IEnumerator BuyActivator()
     {

@@ -42,6 +42,8 @@ public class StandFishCar : Stand,IMoneyArea
 
     public CinemachineVirtualCamera vipCarCamera;
     public StandFishTezgah standFishTezgah;
+
+    public Transform characterBackPosTR;
     void TextInitCheck()
     {
         for (int i = 0; i < productTypeCount.Length; i++)
@@ -77,10 +79,10 @@ public class StandFishCar : Stand,IMoneyArea
     IEnumerator StartDelay()
     {
         yield return new WaitForSeconds(1f);
-        if (missionActive)
-        {
-            MissionManager.Instance.ShippingLineMissionStart();
-        }
+        //if (missionActive)
+        //{
+        //    MissionManager.Instance.ShippingLineMissionStart();
+        //}
         StartCoroutine(MoneyCreate());
 
         if (PlayerPrefs.GetInt("firstindactive") == 0)
@@ -95,7 +97,7 @@ public class StandFishCar : Stand,IMoneyArea
                 PlayerPrefs.SetInt(standNameLevel + "firstopen" + PlayerPrefs.GetInt("level"), 1);
 
                 yield return new WaitForSeconds(4);
-                MissionManager.Instance.shippingBuyMission.MissionUpdate();
+                //MissionManager.Instance.shippingBuyMission.MissionUpdate();
             }
         }
 
@@ -105,19 +107,11 @@ public class StandFishCar : Stand,IMoneyArea
     {
         carLevel = PlayerPrefs.GetInt(standNameLevel + PlayerPrefs.GetInt("level"));
         cooldownTime = cooldownTimeList[carLevel];
-        if (Globals.vipCreateActive && !Globals.isThereVip)
-        {
-            Globals.carCustomerCount++;
-        }
-        //if (Globals.carCustomerCount % (Globals.carSlotCount * 10) == 0 && !specialVehicle)
-        //{
-        //    totalBoxCount = (int)boxCountTotal[carLevel].y;
-        //    VipActive();
-        //}
-        //else
-        {
-            totalBoxCount = (int)Random.Range(boxCountTotal[carLevel].x, boxCountTotal[carLevel].y + 1);
-        }
+
+
+
+        totalBoxCount = (int)Random.Range(boxCountTotal[carLevel].x, boxCountTotal[carLevel].y + 1);
+        
         
         if (PlayerPrefs.GetInt("tutorialseq1") == 0)
         {
@@ -155,10 +149,10 @@ public class StandFishCar : Stand,IMoneyArea
     }
     public override void SpecificStart()
     {
-        if (specialVehicle)
-        {
-            MissionManager.Instance.specialShippingBuyMission.MissionUpdate();
-        }
+        //if (specialVehicle)
+        //{
+        //    MissionManager.Instance.specialShippingBuyMission.MissionUpdate();
+        //}
         Globals.openedCarSlotCount++;
         FishDropArea.Instance.carSlotList.Add(this);
         firstColliderOffset = moneyArea.GetComponent<BoxCollider>().center;
@@ -188,7 +182,7 @@ public class StandFishCar : Stand,IMoneyArea
     {
         if (specialVehicle)
         {
-            MissionManager.Instance.specialOrderMission.MissionUpdate();
+            //MissionManager.Instance.specialOrderMission.MissionUpdate();
 
             if (PlayerPrefs.GetInt("level") == 0)
             {
@@ -203,14 +197,19 @@ public class StandFishCar : Stand,IMoneyArea
                 Globals.myShareValue += 250;
             }
             PlayerPrefs.SetInt("myShareValue", Globals.myShareValue);
+
+            if (QuestManager.Instance.orderSpecialQuest != null)
+            {
+                QuestManager.Instance.orderSpecialQuest.QuestUpdate(1);
+            }
         }
         else
         {
-            if (MissionManager.Instance.orderMission.mission_Active)
-            {
-                MissionManager.Instance.orderMission.gameObject.SetActive(true);
-            }
-            MissionManager.Instance.orderMission.MissionUpdate();
+            //if (MissionManager.Instance.orderMission.mission_Active)
+            //{
+            //    MissionManager.Instance.orderMission.gameObject.SetActive(true);
+            //}
+            //MissionManager.Instance.orderMission.MissionUpdate();
 
             if (PlayerPrefs.GetInt("level") == 0)
             {
@@ -223,6 +222,12 @@ public class StandFishCar : Stand,IMoneyArea
             else
             {
                 Globals.myShareValue += 80;
+            }
+
+
+            if (QuestManager.Instance.orderQuest != null)
+            {
+                QuestManager.Instance.orderQuest.QuestUpdate(1);
             }
         }
         ResetStand();
@@ -332,18 +337,18 @@ public class StandFishCar : Stand,IMoneyArea
         TextInitCheck();
 
 
-        if (specialVehicle)
-        {
-            MissionManager.Instance.SpecialOrderMissionStart();
-        }
-        else
-        {
-            MissionManager.Instance.OrderMissionStart();
-        }
-        if (missionActive)
-        {
-            MissionManager.Instance.ShippingLineMissionStart();
-        }
+        //if (specialVehicle)
+        //{
+        //    MissionManager.Instance.SpecialOrderMissionStart();
+        //}
+        //else
+        //{
+        //    MissionManager.Instance.OrderMissionStart();
+        //}
+        //if (missionActive)
+        //{
+        //    MissionManager.Instance.ShippingLineMissionStart();
+        //}
 
 
         GameManager.Instance.CourierLevelStartedAnalytic(PlayerPrefs.GetInt("completerodercount"));
@@ -730,6 +735,7 @@ public class StandFishCar : Stand,IMoneyArea
         {
             StartCoroutine(TrashCreating());
             trashIcon_GO.SetActive(true);
+            triggerPlaneGO.SetActive(false);
         }
 
         yield return new WaitForSeconds(0.1f);
@@ -755,11 +761,11 @@ public class StandFishCar : Stand,IMoneyArea
         }
 
         trashIcon_GO.SetActive(false);
+        triggerPlaneGO.SetActive(true);
 
         if (thisVip)
         {
             thisVip = false;
-            Globals.isThereVip = false;
         }
         imageFill.fillAmount = 1;
         canvasDeliveringGO.SetActive(false);
@@ -778,8 +784,7 @@ public class StandFishCar : Stand,IMoneyArea
     public void VipActive()
     {
         //RewardPanel.Instance.vipCar = this;
-        Globals.carCustomerCount = 1;
-        Globals.isThereVip = true;
+
         thisVip = true;
 
         StartCoroutine(DigitalCounter(150));
@@ -881,14 +886,15 @@ public class StandFishCar : Stand,IMoneyArea
     public bool missionActive = true;
     public bool missionUpdateActive = true;
 
-
+    public GameObject triggerPlaneGO;
     IEnumerator TrashCreating()
     {
         for(int i = 0; i < trashCount; i++)
         {
             Vector3 firstPos = trashCreatePosTR.position;
             Quaternion firstRot = trashCreatePosTR.rotation;
-            GameObject newTrash = Instantiate(trashPrefab_GO, firstPos, firstRot);
+            int trashPrefabSelect = Random.Range(0, trashPrefabList_GO.Count);
+            GameObject newTrash = Instantiate(trashPrefabList_GO[trashPrefabSelect], firstPos, firstRot);
             Collectable trashCollectable = newTrash.GetComponent<Collectable>();
 
             trashCollectable.collectActive = false;
@@ -951,7 +957,7 @@ public class StandFishCar : Stand,IMoneyArea
     public CollectProduct _CollectProducts;
 
 
-    [SerializeField] GameObject trashPrefab_GO;
+    [SerializeField] List<GameObject> trashPrefabList_GO = new List<GameObject>();
     [SerializeField] int[] trashDropPerCustomer;
     [SerializeField] int trashCount;
     [SerializeField] List<Collectable> trashList = new List<Collectable>();

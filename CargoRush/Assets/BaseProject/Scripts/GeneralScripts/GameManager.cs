@@ -117,6 +117,7 @@ public class GameManager : Observer
         Application.targetFrameRate = 60;
         ui.moneyText.text = CoefficientTransformation.Converter(Globals.moneyAmount);
         ui.moneyTextShop.text = CoefficientTransformation.Converter(Globals.moneyAmount);
+        ui.moneyTextMap.text = CoefficientTransformation.Converter(Globals.moneyAmount);
         ui.gemText.text = CoefficientTransformation.Converter(Globals.gemAmount);
         ui.gemTextShop.text = CoefficientTransformation.Converter(Globals.gemAmount);
 
@@ -282,6 +283,11 @@ public class GameManager : Observer
     public void MoneyUpdate(int miktar)
     {
         ui.MoneyUpdate(miktar);
+
+        if (QuestManager.Instance.moneyEarningQuest != null)
+        {
+            QuestManager.Instance.moneyEarningQuest.QuestUpdate(miktar);
+        }
     }
     public void GemUpdate(int miktar)
     {
