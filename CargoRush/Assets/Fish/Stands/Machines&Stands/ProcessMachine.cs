@@ -51,6 +51,7 @@ public class ProcessMachine : Stand, IStandUpgrade, IMachineActive
     //public int[] bandCapacity;
 
     float speedFactor = 1f;
+    float speedFactor2 = 1f;
     public AIPath aiPath;
     [SerializeField] List<GameObject> trayList = new List<GameObject>();
     public bool isVipActivator = false;
@@ -390,6 +391,7 @@ public class ProcessMachine : Stand, IStandUpgrade, IMachineActive
             //{
             //    MissionManager.Instance.tapingLineBuyMission.MissionUpdate();
             //}
+           
         }
 
 
@@ -492,7 +494,7 @@ public class ProcessMachine : Stand, IStandUpgrade, IMachineActive
                 dropActive = false;
                 fishCountCurrent += rawCountPerProduct;
                 fishCountText.text = (fishCountTotal - fishCountCurrent).ToString() + "/" + (fishCountTotal).ToString();
-                yield return new WaitForSeconds((waitTime / Globals.repairSpeedSkin) / speedFactor);
+                yield return new WaitForSeconds((waitTime / Globals.repairSpeedSkin) / (speedFactor * speedFactor2));
                 workAreaList[0].StnadFullCheck();
                 //MissionManager.Instance.TapeBoxMissionStart();
                 //MissionManager.Instance.tapeBoxMission.MissionUpdate();
@@ -535,6 +537,15 @@ public class ProcessMachine : Stand, IStandUpgrade, IMachineActive
         {
             while (droppedCollectionList.Count > rawCountPerProduct - 1 && cannedCount < productCountTotal && !machineErrored)
             {
+                if (PlayerPrefs.GetInt("tutorialcompleted") == 0)
+                {
+                    speedFactor2 = 2f;
+                }
+                else
+                {
+                    speedFactor2 = 1f;
+                }
+
                 cannedCount++;
                 Collectable raws = droppedCollectionList[droppedCollectionList.Count - 1];
                 droppedCollectionList.Remove(droppedCollectionList[droppedCollectionList.Count - 1]);
@@ -543,7 +554,7 @@ public class ProcessMachine : Stand, IStandUpgrade, IMachineActive
                 dropActive = false;
                 fishCountCurrent += rawCountPerProduct;
                 fishCountText.text = (fishCountTotal - fishCountCurrent).ToString() + "/" + (fishCountTotal).ToString();
-                yield return new WaitForSeconds((waitTime / Globals.repairSpeedSkin) / speedFactor);
+                yield return new WaitForSeconds((waitTime / Globals.repairSpeedSkin) / (speedFactor * speedFactor2));
                 workAreaList[0].StnadFullCheck();
 
 
@@ -658,7 +669,7 @@ public class ProcessMachine : Stand, IStandUpgrade, IMachineActive
         int prefabSelect = 0;
         float _speedFactor = 1f;
 
-        machineAnimator.SetFloat("speed", speedFactor * _speedFactor);
+        machineAnimator.SetFloat("speed", speedFactor * _speedFactor * speedFactor2);
         machineAnimator.SetTrigger("band");
         if (PlayerPrefs.GetInt("soundclose") == 0)
         {
@@ -678,7 +689,7 @@ public class ProcessMachine : Stand, IStandUpgrade, IMachineActive
         newProduct.GetComponent<Collectable>().fishCollectable = productCollectionList;
 
         newProduct.GetComponent<Collectable>().anim.SetTrigger("etiket");
-        newProduct.GetComponent<Collectable>().anim.SetFloat("speed", speedFactor * _speedFactor);
+        newProduct.GetComponent<Collectable>().anim.SetFloat("speed", speedFactor * _speedFactor * speedFactor2);
 
         counter = 0f;
 
@@ -692,7 +703,7 @@ public class ProcessMachine : Stand, IStandUpgrade, IMachineActive
         firstPos = fishOutTR.position;
 
         newProduct.GetComponent<Collectable>().bantGO.SetActive(true);
-        newProduct.GetComponent<Collectable>().bantGO.GetComponent<Animator>().SetFloat("speed", speedFactor * _speedFactor);
+        newProduct.GetComponent<Collectable>().bantGO.GetComponent<Animator>().SetFloat("speed", speedFactor * _speedFactor * speedFactor2);
        counter = 0f;
         while (counter < 1f)
         {
@@ -728,6 +739,7 @@ public class ProcessMachine : Stand, IStandUpgrade, IMachineActive
 
     IEnumerator GoBand(Collectable box)
     {
+     
         float moveSpeed = 4f;
         float rotSpeed = 8f;
         for(int i = 0; i < aiPath.aiNodes.Count; i++)
@@ -743,9 +755,9 @@ public class ProcessMachine : Stand, IStandUpgrade, IMachineActive
 
 
                 Quaternion targetRotation = Quaternion.LookRotation(direction);
-                box.transform.rotation = Quaternion.Slerp(box.transform.rotation, targetRotation, speedFactor * rotSpeed * Time.deltaTime);
+                box.transform.rotation = Quaternion.Slerp(box.transform.rotation, targetRotation, speedFactor * rotSpeed * Time.deltaTime * speedFactor2);
 
-                box.transform.Translate(box.transform.forward * moveSpeed * speedFactor * Time.deltaTime, Space.World);
+                box.transform.Translate(box.transform.forward * moveSpeed * speedFactor * Time.deltaTime * speedFactor2, Space.World);
 
                 yield return null;
             }

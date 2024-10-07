@@ -23,7 +23,7 @@ public class CollectProduct : MonoBehaviour
     public AquariumCar aquariumCar;
     public bool collectActive = true;
 
-    public StandCabin standCabin;
+    public StandFishCar carSlot;
     public GameObject noneCollectGO;
 
     public float ratio;
@@ -92,14 +92,7 @@ public class CollectProduct : MonoBehaviour
                                             _stand.cannedCount--;
                                             _stand.CollectableCountSet();
                                         }
-                                        if (standCabin != null)
-                                        {
-                                            standCabin.hangerCountCurrent--;
-                                            standCabin.cabineCollectableFull = false;
-                                            standCabin.fullTextGO.SetActive(false);
-                                            standCabin.hangerCountText.text = (standCabin.hangerCountCurrent).ToString() + "/" + (standCabin.hangerCountTotal).ToString();
-
-                                        }
+                                      
 
                                     }
                                     //else
@@ -126,18 +119,9 @@ public class CollectProduct : MonoBehaviour
                                     _stand.cannedCount--;
                                     _stand.CollectableCountSet();
                                 }
-                                if (standCabin != null)
+                                if (carSlot != null)
                                 {
-                                    if (PlayerPrefs.GetInt("cabinetutorial") == 1 && standCabin.hangerTrash != null)
-                                    {
-                                        PlayerPrefs.SetInt("cabinetutorial", 2);
-                                        IndicatorManager.Instance.IndicaorActive(standCabin.hangerTrash);
-                                    }
-                                    standCabin.hangerCountCurrent--;
-                                    standCabin.cabineCollectableFull = false;
-                                    standCabin.fullTextGO.SetActive(false);
-                                    standCabin.hangerCountText.text = (standCabin.hangerCountCurrent).ToString() + "/" + (standCabin.hangerCountTotal).ToString();
-
+                                    carSlot.CollectTrash();
                                 }
                             }
                         }

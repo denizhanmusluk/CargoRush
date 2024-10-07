@@ -36,6 +36,11 @@ public class TrashStand : Stand
 
     IEnumerator DropSequantial(int collectAmount, StackCollect _stackCollect)
     {
+        if (PlayerPrefs.GetInt("trashtutorial") == 2)
+        {
+            PlayerPrefs.SetInt("trashtutorial", 3);
+            IndicatorManager.Instance.IndicaorDeActive();
+        }
         animator.SetBool("trashactive", true);
 
         yield return null;

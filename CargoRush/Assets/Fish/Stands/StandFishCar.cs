@@ -68,7 +68,18 @@ public class StandFishCar : Stand,IMoneyArea
     }
     public override void CollectableCountSet()
     {
-
+      
+    }
+    public void CollectTrash()
+    {
+        if (PlayerPrefs.GetInt("trashtutorial") == 1)
+        {
+            PlayerPrefs.SetInt("trashtutorial", 2);
+            if (trashStand != null)
+            {
+                IndicatorManager.Instance.IndicaorActive(trashStand.transform);
+            }
+        }
     }
     private void Awake()
     {
@@ -707,6 +718,7 @@ public class StandFishCar : Stand,IMoneyArea
             carSoundAS.Play();
         }
     }
+    public TrashStand trashStand;
     IEnumerator ResetDelay()
     {
         StartCoroutine(CarSoundPlay());
@@ -736,6 +748,15 @@ public class StandFishCar : Stand,IMoneyArea
             StartCoroutine(TrashCreating());
             trashIcon_GO.SetActive(true);
             triggerPlaneGO.SetActive(false);
+
+            if(PlayerPrefs.GetInt("trashtutorial", 0) == 0)
+            {
+                PlayerPrefs.SetInt("trashtutorial", 1);
+                PlayerController.Instance.transform.parent.position = characterBackPosTR.position;
+                IndicatorManager.Instance.IndicaorActive(transform);
+
+           
+            }
         }
 
         yield return new WaitForSeconds(0.1f);
