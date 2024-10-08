@@ -7,6 +7,10 @@ public class WorkerStackCapacityButton : WorkerUpgradeButton
     public override void UpgradeValueTextInit(float currentRange, float upRange)
     {
         //upgradeValue.text = ((int)currentRange).ToString() + "s" + " -> " + ((int)upRange).ToString() + "s";
+        if (PlayerPrefs.GetInt("upgradetutorial") != 0)
+        {
+            advButton.gameObject.SetActive(true);
+        }
     }
     public override void UpgradeValueFull(float currentRange)
     {

@@ -20,6 +20,10 @@ public class NewWorldActive : MonoBehaviour
             PlayerPrefs.SetInt("mapindexmax", nextLevelIndex);
             StartCoroutine(StartDelay());
         }
+        if (PlayerPrefs.GetInt("maptutorialseq") == 0)
+        {
+            PlayerPrefs.SetInt("maptutorialseq", 1);
+        }
     }
     IEnumerator StartDelay()
     {

@@ -179,6 +179,7 @@ public class HRUpgradeManager : MonoBehaviour
                 {
                     IndicatorManager.Instance.TutorialStepCompleted();
                 }
+                PlayerPrefs.SetInt("upgradetutorial", 1);
 
                 int rebuyAmount = 0;
 

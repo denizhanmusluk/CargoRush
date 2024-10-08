@@ -107,6 +107,8 @@ public class MapAreaManager : MonoBehaviour
     {
         StartCoroutine(TeleportToMapArea_Delay());
         MapAreaSet();
+
+    
     }
     IEnumerator TeleportToMapArea_Delay()
     {
@@ -132,7 +134,12 @@ public class MapAreaManager : MonoBehaviour
         GameManager.Instance.ui.mapPanelAnimation.SetBool("closeactive", false);
         PlayerController.Instance.navMeshAgent.enabled = true;
         PlayerController.Instance.PlayerControl_ReActive();
-
+        if (PlayerPrefs.GetInt("maptutorialseq") == 1)
+        {
+            PlayerPrefs.SetInt("maptutorialseq", 2);
+            IndicatorManager.Instance.indicatorMesh.enabled = true;
+            IndicatorManager.Instance.IndicaorActive(mapRoom_List[1].tutorialPosTR);
+        }
     }
     public void ReturnToFactoryArea()
     {

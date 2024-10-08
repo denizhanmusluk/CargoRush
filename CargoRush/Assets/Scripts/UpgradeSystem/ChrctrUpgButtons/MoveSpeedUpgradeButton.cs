@@ -8,7 +8,10 @@ public class MoveSpeedUpgradeButton : UpgradeButton
     {
         currentSpeed = MathF.Round(currentSpeed, 2, MidpointRounding.ToEven);
         upSpeed = MathF.Round(upSpeed, 2, MidpointRounding.ToEven);
-
+        if (PlayerPrefs.GetInt("upgradetutorial") != 0)
+        {
+            advButton.gameObject.SetActive(true);
+        }
         //upgradeValue.text = (currentSpeed).ToString() + " -> " + (upSpeed).ToString();
     }
     public override void UpgradeValueFull(float currentSpeed)

@@ -745,18 +745,18 @@ public class StandFishCar : Stand,IMoneyArea
 
         if (numberOfTrips % trashDropPerCustomer[carLevel] == 0)
         {
+            if (PlayerPrefs.GetInt("trashtutorial", 0) == 0)
+            {
+                yield return new WaitForSeconds(4);
+                PlayerPrefs.SetInt("trashtutorial", 1);
+                //PlayerController.Instance.transform.parent.position = characterBackPosTR.position;
+                IndicatorManager.Instance.IndicaorActive(transform);
+            }
             StartCoroutine(TrashCreating());
             trashIcon_GO.SetActive(true);
             triggerPlaneGO.SetActive(false);
 
-            if(PlayerPrefs.GetInt("trashtutorial", 0) == 0)
-            {
-                PlayerPrefs.SetInt("trashtutorial", 1);
-                PlayerController.Instance.transform.parent.position = characterBackPosTR.position;
-                IndicatorManager.Instance.IndicaorActive(transform);
-
-           
-            }
+          
         }
 
         yield return new WaitForSeconds(0.1f);

@@ -43,4 +43,11 @@ public abstract class WorkerUpgradeButton : MonoBehaviour
         costText.transform.localPosition = new Vector3(0, costText.transform.localPosition.y, costText.transform.localPosition.z);
         advButton.gameObject.SetActive(false);
     }
+    private void OnEnable()
+    {
+        if (PlayerPrefs.GetInt("upgradetutorial") == 0)
+        {
+            advButton.gameObject.SetActive(false);
+        }
+    }
 }

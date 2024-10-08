@@ -97,7 +97,7 @@ public class QuestManager : MonoBehaviour
     }
     public void ClickPanelClose()
     {
-        questPanel_GO.SetActive(false);
+        //questPanel_GO.SetActive(false);
         questButton.SetActive(true);
         questCloseButton.SetActive(false);
         PlayerController.Instance.PlayerControl_ReActive();

@@ -17,11 +17,19 @@ public class MapRoom : MonoBehaviour, IMoneyArea
     float openRatio = 0f;
 
     public MapRoomUI mapRoomUI;
+
+    public Transform tutorialPosTR;
     private void OnTriggerEnter(Collider other)
     {
         if (other.GetComponent<PlayerController>() != null)
         {
             MapAreaManager.Instance.mapPanelList[mapID].SetActive(true);
+            if (PlayerPrefs.GetInt("maptutorialseq") == 2 && mapID == 1)
+            {
+                PlayerPrefs.SetInt("maptutorialseq", 3);
+                IndicatorManager.Instance.IndicaorDeActive();
+                IndicatorManager.Instance.indicatorMesh.enabled = false;
+            }
         }
     }
     private void OnTriggerExit(Collider other)
@@ -42,7 +50,7 @@ public class MapRoom : MonoBehaviour, IMoneyArea
         mapRoomUI.shopRatio.fillAmount = openRatio;
         mapRoomUI.ratioText.text = ((int)(openRatio * 100)).ToString() + "/100";
         mapRoomUI.incomeText.text = "$" + totalIncome.ToString();
-        mapRoomUI.incomeText2.text = (pricePerPeriod * 60 / MapAreaManager.Instance.timePeriodMinute).ToString() + "/1h";
+        mapRoomUI.incomeText2.text = (pricePerPeriod * 60 / MapAreaManager.Instance.timePeriodMinute).ToString() + "/h";
 
 
         if(PlayerPrefs.GetInt("level") == mapID)

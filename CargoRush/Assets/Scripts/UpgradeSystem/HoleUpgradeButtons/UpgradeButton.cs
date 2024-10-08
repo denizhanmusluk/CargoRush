@@ -44,4 +44,11 @@ public abstract class UpgradeButton : MonoBehaviour
         advButton.gameObject.SetActive(false);
 
     }
+    private void OnEnable()
+    {
+        if (PlayerPrefs.GetInt("upgradetutorial") == 0)
+        {
+            advButton.gameObject.SetActive(false);
+        }
+    }
 }
