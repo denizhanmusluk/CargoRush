@@ -78,6 +78,9 @@ public class StandFishCar : Stand,IMoneyArea
             if (trashStand != null)
             {
                 IndicatorManager.Instance.IndicaorActive(trashStand.transform);
+                IndicatorManager.Instance.TutorialStepCompleted();
+                IndicatorManager.Instance.TutorialStepStart(82);
+
             }
         }
     }
@@ -751,6 +754,8 @@ public class StandFishCar : Stand,IMoneyArea
                 PlayerPrefs.SetInt("trashtutorial", 1);
                 //PlayerController.Instance.transform.parent.position = characterBackPosTR.position;
                 IndicatorManager.Instance.IndicaorActive(transform);
+                IndicatorManager.Instance.TutorialStepStart(81);
+
             }
             StartCoroutine(TrashCreating());
             trashIcon_GO.SetActive(true);

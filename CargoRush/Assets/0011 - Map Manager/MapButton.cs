@@ -13,8 +13,7 @@ public class MapButton : MonoBehaviour
         if (PlayerPrefs.GetInt("mapbuttonfirstclck") == 1)
         {
             PlayerPrefs.SetInt("mapbuttonfirstclck", 2);
-            IndicatorManager.Instance.TutorialStepCompleted();
-            IndicatorManager.Instance.TutorialStepStart(72);
+      
 
         }
     }

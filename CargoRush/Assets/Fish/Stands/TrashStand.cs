@@ -40,6 +40,7 @@ public class TrashStand : Stand
         {
             PlayerPrefs.SetInt("trashtutorial", 3);
             IndicatorManager.Instance.IndicaorDeActive();
+            IndicatorManager.Instance.TutorialStepCompleted();
         }
         animator.SetBool("trashactive", true);
 

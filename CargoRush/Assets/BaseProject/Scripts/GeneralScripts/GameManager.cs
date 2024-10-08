@@ -50,6 +50,7 @@ public class GameManager : Observer
         //Analytics.LevelStarted(lvlId);
     }
     public List<int> attemptNumber = new List<int>();
+    public List<int> attemptVipNumber = new List<int>();
     public void CourierLevelCompleted(int orderId)
     {
         //Analytics.LevelCompleted();
@@ -58,20 +59,59 @@ public class GameManager : Observer
 
         deliveryCompCount++;
         PlayerPrefs.SetInt("deliverycompletedcount", deliveryCompCount);
-
-        if(deliveryCompCount == attemptNumber[deliveryComp_Rank])
+        if (deliveryComp_Rank < attemptNumber.Count)
         {
-            deliveryComp_Rank++;
-            PlayerPrefs.SetInt("deliverycompletedrank", deliveryComp_Rank);
+            if (deliveryCompCount == attemptNumber[deliveryComp_Rank])
+            {
+                deliveryComp_Rank++;
+                PlayerPrefs.SetInt("deliverycompletedrank", deliveryComp_Rank);
 
 
+                int levelId = PlayerPrefs.GetInt("level") + 1;
+                Analytics.DesignEvent(orderId.ToString() + "_Order_Complated ", new DesignDimensions($"Zone_{levelId}"));
+
+                Debug.Log(orderId.ToString() + "_Order_Complated");
+            }
+        }
+        else
+        {
             int levelId = PlayerPrefs.GetInt("level") + 1;
             Analytics.DesignEvent(orderId.ToString() + "_Order_Complated ", new DesignDimensions($"Zone_{levelId}"));
 
             Debug.Log(orderId.ToString() + "_Order_Complated");
         }
+    }
+
+    public void VipCourierLevelCompleted(int orderId)
+    {
+        //Analytics.LevelCompleted();
+        int deliveryCompCount = PlayerPrefs.GetInt("vipdeliverycompletedcount");
+        int deliveryComp_Rank = PlayerPrefs.GetInt("vipdeliverycompletedrank");
+
+        deliveryCompCount++;
+        PlayerPrefs.SetInt("vipdeliverycompletedcount", deliveryCompCount);
+        if (deliveryComp_Rank < attemptVipNumber.Count)
+        {
+            if (deliveryCompCount == attemptVipNumber[deliveryComp_Rank])
+            {
+                deliveryComp_Rank++;
+                PlayerPrefs.SetInt("vipdeliverycompletedrank", deliveryComp_Rank);
 
 
+                int levelId = PlayerPrefs.GetInt("level") + 1;
+                Analytics.DesignEvent(orderId.ToString() + "Vip_Order_Complated ", new DesignDimensions($"Zone_{levelId}"));
+
+                Debug.Log(orderId.ToString() + "Vip_Order_Complated");
+            }
+        }
+        else
+        {
+            int levelId = PlayerPrefs.GetInt("level") + 1;
+            Analytics.DesignEvent(orderId.ToString() + "Vip_Order_Complated ", new DesignDimensions($"Zone_{levelId}"));
+
+            Debug.Log(orderId.ToString() + "Vip_Order_Complated");
+
+        }
     }
     void Awake()
     {

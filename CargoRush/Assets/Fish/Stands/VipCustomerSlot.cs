@@ -247,10 +247,10 @@ public class VipCustomerSlot : Stand, IMoneyArea
         }
         ResetStand();
 
-        PlayerPrefs.SetInt("completerodercount", PlayerPrefs.GetInt("completerodercount") + 1);
+        PlayerPrefs.SetInt("vipcompleterodercount", PlayerPrefs.GetInt("vipcompleterodercount") + 1);
 
 
-        GameManager.Instance.CourierLevelCompleted(PlayerPrefs.GetInt("completerodercount"));
+        GameManager.Instance.VipCourierLevelCompleted(PlayerPrefs.GetInt("vipcompleterodercount"));
 
     }
 
@@ -896,7 +896,7 @@ public class VipCustomerSlot : Stand, IMoneyArea
             //Analytics.ItemConsumed(_tag, 0, ItemFlowReason.RewardedVideoAd);
         }
         thisVip = false;
-        GameManager.Instance.ui.MoneyCreateVip((int)(totalBonus * 1.5f), false);
+        GameManager.Instance.ui.MoneyCreateVip((int)(totalBonus * 1.5f), true);
         bonusGO.SetActive(false);
         droppedCollectionList.Clear();
 

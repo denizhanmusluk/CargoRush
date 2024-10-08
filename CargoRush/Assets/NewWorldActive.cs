@@ -23,6 +23,7 @@ public class NewWorldActive : MonoBehaviour
         if (PlayerPrefs.GetInt("maptutorialseq") == 0)
         {
             PlayerPrefs.SetInt("maptutorialseq", 1);
+            asd
         }
     }
     IEnumerator StartDelay()
@@ -36,6 +37,8 @@ public class NewWorldActive : MonoBehaviour
 
         //MissionManager.Instance.newMapMission.MissionUpdate();
         MapManager.Instance.mapTapTut_GO.SetActive(true);
+        IndicatorManager.Instance.TutorialStepStart(71);
+
     }
     private void OnTriggerEnter(Collider other)
     {

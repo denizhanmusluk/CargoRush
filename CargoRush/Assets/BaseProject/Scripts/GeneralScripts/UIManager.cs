@@ -311,11 +311,11 @@ public class UIManager : Subject
 
         if (rewardedActive)
         {
-            //Analytics.ResourceFlowEvent(ResourceFlowType.Source, "Money", (float)moneyCount, (float)Globals.moneyAmount, null, "DailyBonusRV", ResourceFlowReason.RewardedVideoAd);
+            Analytics.ResourceFlowEvent(ResourceFlowType.Source, "Money", (float)moneyCount, (float)Globals.moneyAmount, null, "VipCustomerRV", ResourceFlowReason.RewardedVideoAd);
         }
         else
         {
-            //Analytics.ResourceFlowEvent(ResourceFlowType.Source, "Money", (float)moneyCount, (float)Globals.moneyAmount, null, "DailyBonus", ResourceFlowReason.Progression);
+            Analytics.ResourceFlowEvent(ResourceFlowType.Source, "Money", (float)moneyCount, (float)Globals.moneyAmount, null, "VipCustomer", ResourceFlowReason.RewardedVideoAd);
         }
     }
 

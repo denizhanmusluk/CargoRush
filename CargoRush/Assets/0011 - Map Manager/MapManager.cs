@@ -67,7 +67,6 @@ public class MapManager : MonoBehaviour
         {
             mapButton.SetActive(true);
             textTutorial_GO.SetActive(true);
-            IndicatorManager.Instance.TutorialStepStart(71);
 
         }
     }
@@ -78,9 +77,6 @@ public class MapManager : MonoBehaviour
         if (PlayerPrefs.GetInt("mapbuttonfirstclck") == 0)
         {
             PlayerPrefs.SetInt("mapbuttonfirstclck", 1);
-            IndicatorManager.Instance.TutorialStepCompleted();
-            IndicatorManager.Instance.TutorialStepStart(71);
-
         }
 
     }

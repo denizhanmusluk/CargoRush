@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using HomaGames.HomaBelly;
 public enum QuestType
 {
     MoneyEarnQuest,
@@ -75,6 +76,8 @@ public class QuestManager : MonoBehaviour
                 PlayerPrefs.Save();
 
                 UpdateDailyQuest();
+                string tag = $"DM_Day{dailyQuestLevel}Complated";
+                Analytics.DesignEvent(tag);
             }
 
             int countDownHour = timePeriodHour * 60 - (int)timeDifference.TotalMinutes;

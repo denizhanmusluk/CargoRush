@@ -139,6 +139,9 @@ public class MapAreaManager : MonoBehaviour
             PlayerPrefs.SetInt("maptutorialseq", 2);
             IndicatorManager.Instance.indicatorMesh.enabled = true;
             IndicatorManager.Instance.IndicaorActive(mapRoom_List[1].tutorialPosTR);
+
+            IndicatorManager.Instance.TutorialStepCompleted();
+            IndicatorManager.Instance.TutorialStepStart(72);
         }
     }
     public void ReturnToFactoryArea()
