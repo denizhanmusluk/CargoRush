@@ -12,7 +12,7 @@ public class CharacterUpgradeManager : MonoBehaviour
     public static CharacterUpgradeManager Instance => _instance;
 
     public CharacterUpgradeSettings _characterUpgradeSettings;
-    [SerializeField] UpgradeButton button_CharacterSpeedLevel, button_StackCapacityLevel;
+    public UpgradeButton button_CharacterSpeedLevel, button_StackCapacityLevel;
     public GameObject characterUpgradePanel;
     public UpgradeAreaCharacter _upgradeAreaCharacter;
     private void Awake()
@@ -28,7 +28,7 @@ public class CharacterUpgradeManager : MonoBehaviour
         IsEnoughMoney();
         InitButtonValues();
     }
-    void InitButtonValues()
+    public void InitButtonValues()
     {
         //if (Globals.magnetRadiusLevel < _characterUpgradeSettings.magnetRadius.Length - 1)
         //{

@@ -13,16 +13,16 @@ public class ShowVipPopUp : MonoBehaviour
     {
         firstSize = Canvas.transform.localScale;
         //if (firstOpenCloseCanvas)
-        {
-            Canvas.transform.localScale = Vector3.zero;
-        }
+        //{
+        //    Canvas.transform.localScale = Vector3.zero;
+        //}
     }
     private void OnTriggerEnter(Collider other)
     {
-        //if (other.GetComponent<PlayerController>() != null)
-        //{
-        //    StartCoroutine(OpenCanvas());
-        //}
+        if (other.GetComponent<PlayerController>() != null)
+        {
+            //StartCoroutine(OpenCanvas());
+        }
     }
 
     private void OnTriggerExit(Collider other)

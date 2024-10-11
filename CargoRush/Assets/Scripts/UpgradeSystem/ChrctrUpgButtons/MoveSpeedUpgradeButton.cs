@@ -8,10 +8,7 @@ public class MoveSpeedUpgradeButton : UpgradeButton
     {
         currentSpeed = MathF.Round(currentSpeed, 2, MidpointRounding.ToEven);
         upSpeed = MathF.Round(upSpeed, 2, MidpointRounding.ToEven);
-        if (PlayerPrefs.GetInt("upgradetutorial") != 0)
-        {
-            advButton.gameObject.SetActive(true);
-        }
+  
         //upgradeValue.text = (currentSpeed).ToString() + " -> " + (upSpeed).ToString();
     }
     public override void UpgradeValueFull(float currentSpeed)
@@ -25,6 +22,7 @@ public class MoveSpeedUpgradeButton : UpgradeButton
     {
         levelText.text = currentLvl.ToString();
         levelMaxText.text = "/" + maxLevel.ToString();
+        upgradeSlider.fillAmount = (float)currentLvl / (float)maxLevel;
 
         //if (currentLvl > 0)
         //{

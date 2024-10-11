@@ -55,6 +55,30 @@ public class Player : MonoBehaviour
 
             PlayerController.Instance._stackCollect.leftNullTarget = leftNullTarget;
             PlayerController.Instance._stackCollect.rightNullTarget = rightNullTarget;
+
+
+
+
+            if (Globals.hoverboardActive)
+            {
+                int rewardSelect = PlayerPrefs.GetInt("speedskil") % 3;
+                if (rewardSelect == 0)
+                {
+                    PlayerController.Instance.BandBoardActive();
+                }
+                else if (rewardSelect == 1)
+                {
+                    PlayerController.Instance.SkateBoardActive();
+                }
+                else
+                {
+                    PlayerController.Instance.HoverBoardActive();
+                }
+            }
+            if (PlayerPrefs.GetInt("purchasespeedboost") == 1)
+            {
+                SkillManager.Instance.PurchaseSpeedBoostActive();
+            }
         }
     }
 }

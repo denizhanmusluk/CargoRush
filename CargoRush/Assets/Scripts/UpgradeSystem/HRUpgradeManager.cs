@@ -181,6 +181,10 @@ public class HRUpgradeManager : MonoBehaviour
                 }
                 PlayerPrefs.SetInt("upgradetutorial", 1);
 
+                if (PlayerPrefs.GetInt("upgradeadvbutton") == 0)
+                {
+                    PlayerPrefs.SetInt("upgradeadvbutton", 1);
+                }
                 int rebuyAmount = 0;
 
                 //if (_upgradeAreaWorkers.workerBuyAreaList[PlayerPrefs.GetInt("workerNoLevel")].gameObject.activeInHierarchy)
@@ -193,6 +197,7 @@ public class HRUpgradeManager : MonoBehaviour
                 PlayerPrefs.SetInt("workerNoLevel" + PlayerPrefs.GetInt("level"), Globals.workerNoLevel);
                 isEnoughMoney();
                 InitButtonValues();
+                CharacterUpgradeManager.Instance.InitButtonValues();
                 WorkerCreate();
 
                 //string tag = "M" + (PlayerPrefs.GetInt("level") + 1).ToString() + "-BuyWorker" + Globals.workerNoLevel.ToString() + "-REWARDED";
@@ -320,6 +325,22 @@ public class HRUpgradeManager : MonoBehaviour
             upgradeButton.SetActive(true);
             exitTapTutorial_GO.SetActive(false);
             //IndicatorManager.Instance.KeepCollectTutorial();
+
+
+            StartCoroutine(AdvButtonActivator());
+        }
+    }
+    IEnumerator AdvButtonActivator()
+    {
+        yield return new WaitForSeconds(1f);
+        if (PlayerPrefs.GetInt("upgradeadvbutton") == 1)
+        {
+            PlayerPrefs.SetInt("upgradeadvbutton", 2);
+            button_Speed.ADVButtonOpen();
+            button_Capacity.ADVButtonOpen();
+            button_WorkerNo.ADVButtonOpen();
+            CharacterUpgradeManager.Instance.button_CharacterSpeedLevel.ADVButtonOpen();
+            CharacterUpgradeManager.Instance.button_StackCapacityLevel.ADVButtonOpen();
         }
     }
     //public void CharacterUpgradeClose()

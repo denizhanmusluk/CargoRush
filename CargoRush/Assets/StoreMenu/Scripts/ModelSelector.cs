@@ -68,14 +68,15 @@ public class ModelSelector : MonoBehaviour
                 trnsfrm.gameObject.layer = LayerMask.NameToLayer("UICamera");
             }
 
-            if (Globals.hoverboardActive)
-            {
-                PlayerController.Instance.HoverBoardActive();
-            }
-            if (PlayerPrefs.GetInt("purchasespeedboost") == 1)
-            {
-                SkillManager.Instance.PurchaseSpeedBoostActive();
-            }
+            //if (Globals.hoverboardActive)
+            //{
+            //    PlayerController.Instance.HoverBoardActive();
+            //    Debug.Log("open hoverboard");
+            //}
+            //if (PlayerPrefs.GetInt("purchasespeedboost") == 1)
+            //{
+            //    SkillManager.Instance.PurchaseSpeedBoostActive();
+            //}
 
         }
     }

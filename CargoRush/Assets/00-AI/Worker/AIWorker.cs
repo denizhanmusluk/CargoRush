@@ -454,7 +454,19 @@ public class AIWorker : MonoBehaviour, IWorkerModelSelect
                 if (stepCounter > 1f)
                 {
                     stepCounter = 0f;
-                    NewSameTargetCourierStand();
+                    bool trashActive = false;
+                    foreach (var clt in aiStackCollect.collectionTrs)
+                    {
+                        if (clt.collectID == 50)
+                        {
+                            trashActive = true;
+                        }
+                    }
+
+                    if (!trashActive)
+                    {
+                        NewSameTargetCourierStand();
+                    }
                     //if (!isStayHoldActive)
                     //{
                     //    aiStackActive = true;

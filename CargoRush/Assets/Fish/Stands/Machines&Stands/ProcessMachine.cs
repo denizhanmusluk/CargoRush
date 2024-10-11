@@ -1225,6 +1225,12 @@ public class ProcessMachine : Stand, IStandUpgrade, IMachineActive
     {
         UpgradeTextSpawn();
         CapacityInit();
+
+
+        if (otherRawStand != null && !bandActive)
+        {
+            otherRawStand.bandStock.ManuelRawCreateWithCount(1);
+        }
     }
     void CapacityInit()
     {

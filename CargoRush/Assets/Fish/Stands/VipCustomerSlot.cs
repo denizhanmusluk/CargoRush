@@ -161,7 +161,9 @@ public class VipCustomerSlot : Stand, IMoneyArea
         carLevel = PlayerPrefs.GetInt(standNameLevel + PlayerPrefs.GetInt("level"));
         cooldownTime = cooldownTimeList[carLevel];
 
-        totalBoxCount = (int)Random.Range(boxCountTotal[carLevel].x, (Globals.collectableLevel + 1) * boxCountTotal[carLevel].y + 1);
+        totalBoxCount = (int)Random.Range((int)boxCountTotal[carLevel].x, (Globals.collectableLevel + 1) * ((int)boxCountTotal[carLevel].y) + 1);
+        fishCountTotal = totalBoxCount;
+        TextInit();
         VipActive();
         canvasProductGO.SetActive(true);
         Quaternion cameraRot = Camera.main.transform.rotation;
@@ -863,7 +865,7 @@ public class VipCustomerSlot : Stand, IMoneyArea
     public bool missionActive = true;
     public bool missionUpdateActive = true;
 
-    public float moneyFactor = 1.5f;
+    public float moneyFactor = 2f;
 
     public int totalBonus = 0;
     public TextMeshProUGUI totalBonusText;

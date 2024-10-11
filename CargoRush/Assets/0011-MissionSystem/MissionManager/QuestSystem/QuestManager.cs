@@ -40,8 +40,17 @@ public class QuestManager : MonoBehaviour
     {
         StartCoroutine(CheckTime());
         DailyQuestStart();
-    }
 
+        if (PlayerPrefs.GetInt("missionbuttonopen") == 1)
+        {
+            OpenPanelButton();
+        }
+    }
+    public void OpenPanelButton()
+    {
+        PlayerPrefs.SetInt("missionbuttonopen", 1);
+        questButton.gameObject.SetActive(true);
+    }
     IEnumerator CheckTime()
     {
         yield return new WaitForSeconds(6);
@@ -90,13 +99,21 @@ public class QuestManager : MonoBehaviour
         }
         newQuestTime_Text.text = newQuestTimeString;
     }
-
+  
     public void ClickPanelOpen()
     {
         questPanel_GO.SetActive(true);
         questButton.SetActive(false);
         questCloseButton.SetActive(true);
         PlayerController.Instance.PlayerControlDeActive();
+        StartCoroutine(PanelDown());
+
+
+        if (PlayerPrefs.GetInt("missiontutorial") == 1)
+        {
+            IndicatorManager.Instance.TutorialStepCompleted();
+            IndicatorManager.Instance.TutorialStepStart(92);
+        }
     }
     public void ClickPanelClose()
     {
@@ -104,6 +121,32 @@ public class QuestManager : MonoBehaviour
         questButton.SetActive(true);
         questCloseButton.SetActive(false);
         PlayerController.Instance.PlayerControl_ReActive();
+        StartCoroutine(PanelUp());
+    }
+    IEnumerator PanelDown()
+    {
+        Vector3 downPos = new Vector3(questPanel_GO.transform.localPosition.x, 0, questPanel_GO.transform.localPosition.z);
+        Vector3 upPos = new Vector3(questPanel_GO.transform.localPosition.x, 2000, questPanel_GO.transform.localPosition.z);
+        float counter = 0f;
+        while(counter < 1f)
+        {
+            counter += 4 * Time.deltaTime;
+            questPanel_GO.transform.localPosition = Vector3.Lerp(upPos, downPos, counter);
+            yield return null;
+        }
+    }
+
+    IEnumerator PanelUp()
+    {
+        Vector3 downPos = new Vector3(questPanel_GO.transform.localPosition.x, 0, questPanel_GO.transform.localPosition.z);
+        Vector3 upPos = new Vector3(questPanel_GO.transform.localPosition.x, 2000, questPanel_GO.transform.localPosition.z);
+        float counter = 0f;
+        while (counter < 1f)
+        {
+            counter += 4 * Time.deltaTime;
+            questPanel_GO.transform.localPosition = Vector3.Lerp(downPos, upPos, counter);
+            yield return null;
+        }
     }
     void UpdateDailyQuest()
     {

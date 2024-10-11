@@ -23,7 +23,6 @@ public class NewWorldActive : MonoBehaviour
         if (PlayerPrefs.GetInt("maptutorialseq") == 0)
         {
             PlayerPrefs.SetInt("maptutorialseq", 1);
-            asd
         }
     }
     IEnumerator StartDelay()

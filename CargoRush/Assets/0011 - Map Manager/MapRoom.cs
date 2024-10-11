@@ -29,7 +29,6 @@ public class MapRoom : MonoBehaviour, IMoneyArea
                 PlayerPrefs.SetInt("maptutorialseq", 3);
                 IndicatorManager.Instance.IndicaorDeActive();
                 IndicatorManager.Instance.indicatorMesh.enabled = false;
-
                 IndicatorManager.Instance.TutorialStepCompleted();
             }
         }

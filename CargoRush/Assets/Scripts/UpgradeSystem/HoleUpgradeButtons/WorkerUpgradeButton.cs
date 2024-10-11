@@ -12,6 +12,7 @@ public abstract class WorkerUpgradeButton : MonoBehaviour
     public GameObject tutorialGO;
 
     public TextMeshProUGUI levelText, costText, upgradeValue, levelMaxText;
+    public Image upgradeSlider;
     public abstract void UpgradeValueTextInit(float currentValue, float upValue);
     public abstract void UpgradeValueFull(float currentValue);
     public abstract void ButtonLevel(int currentLvl, int maxLevel);
@@ -49,5 +50,9 @@ public abstract class WorkerUpgradeButton : MonoBehaviour
         {
             advButton.gameObject.SetActive(false);
         }
+    }
+    public void ADVButtonOpen()
+    {
+        advButton.gameObject.SetActive(true);
     }
 }

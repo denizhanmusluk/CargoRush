@@ -7,10 +7,6 @@ public class WorkerNoButton : WorkerUpgradeButton
     public override void UpgradeValueTextInit(float currentRange, float upRange)
     {
         //upgradeValue.text = ((int)currentRange).ToString() + "s" + " -> " + ((int)upRange).ToString() + "s";
-        if (PlayerPrefs.GetInt("upgradetutorial") != 0)
-        {
-            advButton.gameObject.SetActive(true);
-        }
     }
     public override void UpgradeValueFull(float currentRange)
     {
@@ -24,12 +20,12 @@ public class WorkerNoButton : WorkerUpgradeButton
     {
         levelText.text = currentLvl.ToString();
         levelMaxText.text = "/" + maxLevel.ToString();
-
+        upgradeSlider.fillAmount = (float)currentLvl / (float)maxLevel;
         //Debug.Log("Globals.machineLevel  " + PlayerPrefs.GetInt("machineLevel") + "  " + currentLvl);
         for (int i = 0; i < currentLvl; i++)
         {
             barList[i].SetActive(false);
-            infoList[i].SetActive(false);
+            //infoList[i].SetActive(false);
         }
         barList[currentLvl].SetActive(true);
 

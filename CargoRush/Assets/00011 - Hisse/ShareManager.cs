@@ -178,6 +178,7 @@ public class ShareManager : MonoBehaviour
         conpanyLevelUp_Active = true;
         companyLevel = _companyLevel;
         checkShareTut_GO.SetActive(true);
+        ShareButtonOpen();
         exclamation_GO.SetActive(true);
         checkShareActive = true;
         popUpEvent = null;

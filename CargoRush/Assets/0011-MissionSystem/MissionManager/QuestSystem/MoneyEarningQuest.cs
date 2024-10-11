@@ -14,6 +14,10 @@ public class MoneyEarningQuest : QuestPanel
             if (questCurrentCount >= questTotalCount)
             {
                 questCurrentCount = questTotalCount;
+
+                PlayerPrefs.SetInt(questName + "questCurrentCount" + PlayerPrefs.GetInt("dailyQuestNo", 0), questCurrentCount);
+                QuestInitialize();
+
                 PlayerPrefs.SetInt(questName + "missionactive" + PlayerPrefs.GetInt("dailyQuestNo", 0), 2);
                 QuestCompleted();
             }
