@@ -51,11 +51,11 @@ public class TutorialManager : MonoBehaviour
             //PurchaseManager.Instance.purchaseButton_GO.SetActive(true);
             SettingsManager.Instance.settingsButtonGO.SetActive(true);
             CollectProgressManager.Instance.dirtyProgressPanelGo.SetActive(true);
-           
-           if( ShopManager.Instance.standOnlineGO != null)
-            {
-                ShopManager.Instance.standOnlineGO.SetActive(true);
-            }
+
+            //if (ShopManager.Instance.standOnlineGO != null)
+            //{
+            //    ShopManager.Instance.standOnlineGO.SetActive(true);
+            //}
             FishDropArea.Instance.loadingAreaTextGO.SetActive(false);
 
         }
@@ -81,10 +81,10 @@ public class TutorialManager : MonoBehaviour
         //    PlayerController.Instance.PlayerControlDeActive();
         //}
 
-        if (ShopManager.Instance.standOnlineGO2 != null)
-        {
-            ShopManager.Instance.standOnlineGO2.SetActive(true);
-        }
+        //if (ShopManager.Instance.standOnlineGO2 != null)
+        //{
+        //    ShopManager.Instance.standOnlineGO2.SetActive(true);
+        //}
     }
     void StarterMissions()
     {

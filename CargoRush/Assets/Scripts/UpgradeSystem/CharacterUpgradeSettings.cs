@@ -28,4 +28,26 @@ public class CharacterUpgradeSettings : ScriptableObject
     public int[] workerNo;
     public int[] workerNoCost;
 
+
+    [Header("       MACHINE UPGRADE")]
+    public float[] machineSpeed;
+    public int[] machineSpeedCost;
+
+    public int[] machineErrorBoxCount;
+    public int[] machineErrorBoxCount_Cost;
+
+    [Header("       CUSTOMER UPGRADE")]
+    public int[] customerEarning;
+    public int[] customerEarningCost;
+
+    public int[] customerCooldown;
+    public int[] customerCooldownCost;
+
+    [Header("       REPAIR UPGRADE")]
+    public int[] repairRunTime;
+    public int[] repairRunTimeCost;
+
+    public int[] repairSpeed;
+    public int[] repairSpeedCost;
+
 }

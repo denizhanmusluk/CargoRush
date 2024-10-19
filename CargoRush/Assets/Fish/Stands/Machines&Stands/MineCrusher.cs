@@ -339,7 +339,7 @@ public class MineCrusher : Stand, IStandUpgrade
             //{
             //    _waitTime = Time.deltaTime;
             //}
-            yield return new WaitForSeconds(waitTime / speedFactor);
+            yield return new WaitForSeconds(waitTime / speedFactors[Globals.machineSpeedLevel]);
             CollectableCountSet();
         }
         MinesDropAreaCheck();
@@ -501,9 +501,9 @@ public class MineCrusher : Stand, IStandUpgrade
                 Vector3 direction = (_CollectProducts[prefabSelect].bandPosList[i].transform.position - oldProduct.transform.position).normalized;
 
                 Quaternion targetRotation = Quaternion.LookRotation(direction);
-                oldProduct.transform.rotation = Quaternion.Slerp(oldProduct.transform.rotation, targetRotation, speedFactor * rotSpeed * Time.deltaTime);
+                oldProduct.transform.rotation = Quaternion.Slerp(oldProduct.transform.rotation, targetRotation, speedFactors[Globals.machineSpeedLevel] * rotSpeed * Time.deltaTime);
 
-                oldProduct.transform.Translate(oldProduct.transform.forward * moveSpeed * speedFactor * Time.deltaTime, Space.World);
+                oldProduct.transform.Translate(oldProduct.transform.forward * moveSpeed * speedFactors[Globals.machineSpeedLevel] * Time.deltaTime, Space.World);
 
                 yield return null;
             }

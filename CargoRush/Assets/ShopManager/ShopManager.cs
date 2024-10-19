@@ -60,6 +60,8 @@ public class ShopManager : MonoBehaviour
         //StartCoroutine(ChildColorAlphaSet());
         //shopProgresGO.SetActive(false);
         StartCoroutine(StartDelay());
+        CollectProgressManager.Instance.shopTargetIcon.sprite = shopSpriteList[1];
+        CollectProgressManager.Instance.questMarkImgGO.SetActive(false);
     }
     IEnumerator StartDelay()
     {

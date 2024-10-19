@@ -24,6 +24,17 @@ public static class Globals
     public static int workerCapacityLevel = 0;
     public static int workerNoLevel = 0;
 
+
+
+    public static int machineSpeedLevel = 0;
+    public static int machineErrorFrequencyLevel = 0;
+
+    public static int customerEarningLevel = 0;
+    public static int customerCooldownLevel = 0;
+
+    public static int repairRunTimeLevel = 0;
+    public static int repairSpeedLevel = 0;
+
     public static int maxBuildLevel = 0;
 
 
@@ -67,6 +78,13 @@ public static class Globals
     public static int extraStack;
     public static int stackFactor = 1;
 
+    public static int workerStackFactor = 1;
+    public static float workerSpeedFactor = 1;
+
+    public static float machineSpeedFactor = 1;
+
+
+
     public static float extraSpeedSkins = 1f;
     public static int extraStackSkin = 0;
     public static float extraMoneySkin = 0;
@@ -102,6 +120,8 @@ public static class Globals
     public static bool isCapacityRewardCreated = false;
     public static bool isDoubleIncomeRewardCreated = false;
     public static bool isMoneyRewardCreated = false;
+    public static bool workerRewardCreated = false;
+    public static bool machineRewardCreated = false;
 
 
 
@@ -109,6 +129,8 @@ public static class Globals
     public static int capacityPlayTime = 0;
     public static int doubleIncomePlayTime = 0;
     public static int moneyPlayTime = 0;
+    public static int workerBoosterPlayTime = 0;
+    public static int machineBoosterPlayTime = 0;
 
 
 
@@ -116,6 +138,8 @@ public static class Globals
     public static int capacityCreatingCooldown = 0;
     public static int doubleCreatingCooldown = 0;
     public static int moneyCreatingCooldown = 0;
+    public static int workerBoostCreatingCooldown = 0;
+    public static int machineBoostCreatingCooldown = 0;
 
 
     public static int openedCarSlotCount = 0;

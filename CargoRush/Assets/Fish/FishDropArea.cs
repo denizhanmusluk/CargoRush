@@ -63,7 +63,7 @@ public class FishDropArea : MonoBehaviour
     public GameObject loadingAreaTextGO;
 
     [SerializeField] int boxAmount_ForErrorRank = 35;
-    [SerializeField] int boxCount_Error = 125;
+    //[SerializeField] int boxCount_Error = 125;
     private void Awake()
     {
         _instance = this;
@@ -349,15 +349,15 @@ public class FishDropArea : MonoBehaviour
     public List<IMachineActive> packMachines = new List<IMachineActive>();
     public void BoxPackageCounter()
     {
-        if (Globals.repairManActive)
-        {
-            PlayerPrefs.SetInt("totalboxpackagecount", 0);
-        }
-        else
+        //if (Globals.repairManActive)
+        //{
+        //    PlayerPrefs.SetInt("totalboxpackagecount", 0);
+        //}
+        //else
         {
             PlayerPrefs.SetInt("totalboxpackagecount", PlayerPrefs.GetInt("totalboxpackagecount") + 1);
 
-            int _boxCountError = boxCount_Error;
+            int _boxCountError = MRCUpgradeManager.Instance._characterUpgradeSettings.machineErrorBoxCount[Globals.machineErrorFrequencyLevel];
             if (PlayerPrefs.GetInt("machineerrorcount") < 2)
             {
                 _boxCountError = 60;
@@ -391,7 +391,7 @@ public class FishDropArea : MonoBehaviour
                     packMachinesTemp[randomSelectMach].MachineErrored();
                     PlayerPrefs.SetInt("machineerrorcount", PlayerPrefs.GetInt("machineerrorcount") + 1);
 
-                    if(PlayerPrefs.GetInt("machineerrorcount") == 2)
+                    if(PlayerPrefs.GetInt("machineerrorcount") == 1)
                     {
                         RepairManager.Instance.OpenRepairWorker();
                     }
@@ -408,7 +408,7 @@ public class FishDropArea : MonoBehaviour
     {
         yield return new WaitForSeconds(4f);
 
-        int _boxCountError = boxCount_Error;
+        int _boxCountError = MRCUpgradeManager.Instance._characterUpgradeSettings.machineErrorBoxCount[Globals.machineErrorFrequencyLevel];
         if (PlayerPrefs.GetInt("machineerrorcount") < 2)
         {
             _boxCountError = 60;

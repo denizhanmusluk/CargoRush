@@ -87,7 +87,15 @@ public class ADVManager : MonoBehaviour
             }
 
             rewardedFunction += (_tcktAct) => fnct(false);
-            Events.onRewardedVideoAdRewardedEvent += RewardedEnd;
+
+            if (Application.internetReachability == NetworkReachability.NotReachable)
+            {
+
+            }
+            else
+            {
+                Events.onRewardedVideoAdRewardedEvent += RewardedEnd;
+            }
         }
         AudioManager.Instance.UpgradeSound();
     }
@@ -107,7 +115,16 @@ public class ADVManager : MonoBehaviour
         {
             HomaBelly.Instance.ShowInterstitial(rewardedName);
         }
-        Events.onInterstitialAdClosedEvent += InterstialEnd;
+
+
+        if (Application.internetReachability == NetworkReachability.NotReachable)
+        {
+            interstialFunction?.Invoke();
+        }
+        else
+        {
+            Events.onInterstitialAdClosedEvent += InterstialEnd;
+        }
     }
     private void InterstialEnd(AdInfo adInfo)
     {

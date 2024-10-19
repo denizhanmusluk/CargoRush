@@ -14,7 +14,8 @@ public enum QuestType
     NewMapQuest,
     CompanySeqUpQuest,
     ShareValueIncreaseQuest,
-    TapeBox
+    TapeBox,
+    QuestCompleteQuest
 }
 public class QuestManager : MonoBehaviour
 {
@@ -26,6 +27,7 @@ public class QuestManager : MonoBehaviour
 
     [SerializeField] GameObject questPanel_GO;
     [SerializeField] GameObject questButton;
+    [SerializeField] GameObject questButton_TutorialGO;
     [SerializeField] GameObject questCloseButton;
     public Transform questContainer_TR;
 
@@ -50,6 +52,12 @@ public class QuestManager : MonoBehaviour
     {
         PlayerPrefs.SetInt("missionbuttonopen", 1);
         questButton.gameObject.SetActive(true);
+        StartCoroutine(ButtonTutorialOpener());
+    }
+    IEnumerator ButtonTutorialOpener()
+    {
+        yield return new WaitForSeconds(4f);
+        questButton_TutorialGO.SetActive(true);
     }
     IEnumerator CheckTime()
     {
@@ -114,6 +122,7 @@ public class QuestManager : MonoBehaviour
             IndicatorManager.Instance.TutorialStepCompleted();
             IndicatorManager.Instance.TutorialStepStart(92);
         }
+        questContainer_TR.localPosition = new Vector3(questContainer_TR.localPosition.x, -523f, questContainer_TR.localPosition.z);
     }
     public void ClickPanelClose()
     {
@@ -185,6 +194,7 @@ public class QuestManager : MonoBehaviour
     public QuestPanel companySeqUpQuest;//
     public QuestPanel shareValueIncreaseQuest;//
     public QuestPanel tapeBoxQuest;
+    public QuestPanel questCompleteQuest;
     public void QuestInit(QuestType questType,QuestPanel questPanel)
     {
         switch (questType)
@@ -241,12 +251,19 @@ public class QuestManager : MonoBehaviour
                     tapeBoxQuest = questPanel;
                 }
                 break;
+            case QuestType.QuestCompleteQuest:
+                {
+                    questCompleteQuest = questPanel;
+                }
+                break;
         }
     }
 
     public void TaskCompletePopUp()
     {
         StartCoroutine(TaskCompletePopUp_Delay());
+        questParticle_GO.SetActive(true);
+        questTick_GO.SetActive(true);
     }
     IEnumerator TaskCompletePopUp_Delay()
     {
@@ -258,4 +275,8 @@ public class QuestManager : MonoBehaviour
         yield return new WaitForSeconds(1f);
         taskCompleteAnim.gameObject.SetActive(false);
     }
+
+
+    public GameObject questParticle_GO;
+    public GameObject questTick_GO;
 }

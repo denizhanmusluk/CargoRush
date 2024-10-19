@@ -32,7 +32,7 @@ public abstract class UpgradeButton : MonoBehaviour
         }
         else
         {
-            costText.fontSize = 50;
+            costText.fontSize = 45;
         }
     }
     public void FullLevel()

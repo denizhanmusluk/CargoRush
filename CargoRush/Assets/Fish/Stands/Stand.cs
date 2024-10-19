@@ -197,6 +197,10 @@ public abstract class Stand : MonoBehaviour
                     StartCoroutine(SetFishAmount(-fishCountCurrent));
                 }
             }
+            else if(GetComponent<TrashStand>() != null)
+            {
+                DropCollection(collectedNo, _stackCollect);
+            }
         }
     }
 

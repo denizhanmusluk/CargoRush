@@ -18,6 +18,7 @@ public class TrashStand : Stand
             //VibratoManager.Instance.MediumMultiVibration();
             _stackCollect.collectActive = false;
         }
+        _stackCollect.collectActive = false;
         StartCoroutine(DropSequantial(collectAmount, _stackCollect));
     }
 
@@ -50,20 +51,30 @@ public class TrashStand : Stand
 
         int amount = collectAmount;
         int loopCount = _stackCollect.collectionTrs.Count;
-        for (int i = 0; i < loopCount; i++)
-        {
-            foreach (var clListId in collectIDList)
-            {
-                if (_stackCollect.collectionTrs[i].collectID == clListId && amount > 0)
-                {
-                    droppingCollectionList.Add(_stackCollect.collectionTrs[i]);
 
-                    amount--;
-                    break;
+        if (_stackCollect.GetComponent<StackCollectPlayer>() != null)
+        {
+            for (int i = 0; i < loopCount; i++)
+            {
+                droppingCollectionList.Add(_stackCollect.collectionTrs[i]);
+            }
+        }
+        else
+        {
+            for (int i = 0; i < loopCount; i++)
+            {
+                foreach (var clListId in collectIDList)
+                {
+                    if (_stackCollect.collectionTrs[i].collectID == clListId && amount > 0)
+                    {
+                        droppingCollectionList.Add(_stackCollect.collectionTrs[i]);
+
+                        amount--;
+                        break;
+                    }
                 }
             }
         }
-
 
         for (int i = 0; i < droppingCollectionList.Count; i++)
         {

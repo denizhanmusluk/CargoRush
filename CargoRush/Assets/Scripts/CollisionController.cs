@@ -20,6 +20,20 @@ public class CollisionController : MonoBehaviour
         if (playerActive && Globals.playerStackActive && other.GetComponent<Collectable>() != null && other.GetComponent<Collectable>().collectActive)
         {
             Debug.Log("collector");
+
+            int loopCount = stackCollect.collectionTrs.Count;
+
+
+            bool isThereTrash = false;
+            for (int i = 0; i < loopCount; i++)
+            {
+                if (stackCollect.collectionTrs[i].collectID == 50)
+                {
+                    isThereTrash = true;
+                }   
+            }
+
+
             if (other.GetComponent<Collectable>().isTrash)
             {
                 if (stackCollect.collectionTrs.Count < Globals.stackFactor * _characterUpgradeSettings.stackCapacity[Globals.stackCapacityLevel] + Globals.extraStackSkin + Globals.extraStack)
@@ -37,7 +51,7 @@ public class CollisionController : MonoBehaviour
             }
             else
             {
-                if (stackCollect.collectionTrs.Count < Globals.stackFactor  * _characterUpgradeSettings.stackCapacity[Globals.stackCapacityLevel] + Globals.extraStackSkin + Globals.extraStack)
+                if ((!isThereTrash) && stackCollect.collectionTrs.Count < Globals.stackFactor  * _characterUpgradeSettings.stackCapacity[Globals.stackCapacityLevel] + Globals.extraStackSkin + Globals.extraStack)
                 {
                     if(other.GetComponent<Collector>() != null)
                     {
@@ -76,7 +90,7 @@ public class CollisionController : MonoBehaviour
 
         if (!playerActive && Globals.stackActive && other.GetComponent<Collectable>() != null && other.GetComponent<Collectable>().collectActive)
         {
-            if (!other.GetComponent<Collectable>().isTrash && stackCollect.collectionTrs.Count < stackCollect.GetComponent<StackCollectWorker>().baseStackCapacity + _characterUpgradeSettings.workerCapacity[Globals.workerCapacityLevel])
+            if (!other.GetComponent<Collectable>().isTrash && stackCollect.collectionTrs.Count < stackCollect.GetComponent<StackCollectWorker>().baseStackCapacity + _characterUpgradeSettings.workerCapacity[Globals.workerCapacityLevel] * Globals.workerStackFactor)
             {
                 if (other.GetComponent<Collector>() != null)
                 {

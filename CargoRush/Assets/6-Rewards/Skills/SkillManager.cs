@@ -10,10 +10,13 @@ public class SkillManager : MonoBehaviour
     [SerializeField] Color targetColor;
     Color firstColor;
     public int extraStack = 5;
+    public int workerStackFactor = 2;
+    public float workerSpeedFactor = 2;
+    public float machineSpeedFactor = 2;
+
 
     public int hoverboardRewardTime;
     TextMeshProUGUI hoverboardCounterText;
-
 
     public int capacityRewardTime;
     TextMeshProUGUI capacityCounterText;
@@ -21,11 +24,18 @@ public class SkillManager : MonoBehaviour
     public int doubleIncomeRewardTime;
     TextMeshProUGUI doubleIncomeCounterText;
 
+    public int workerRewardTime;
+    TextMeshProUGUI workerCounterText;
+
+    public int machineRewardTime;
+    TextMeshProUGUI machineCounterText;
 
     [SerializeField] int speedRewPeriod;
     [SerializeField] int capacityRewPeriod;
     [SerializeField] int doubleIncomeRewPeriod;
     [SerializeField] int moneyRewPeriod;
+    [SerializeField] int workerRewPeriod;
+    [SerializeField] int machineRewPeriod;
 
     public List<RewardPos> speedRewardPos = new List<RewardPos>();
     [SerializeField] GameObject[] speedRewards;
@@ -41,12 +51,23 @@ public class SkillManager : MonoBehaviour
     [SerializeField] float expensiveCostFactor = 0.6f;
 
 
+    public List<RewardPos> workerRewardPos = new List<RewardPos>();
+    [SerializeField] GameObject[] workerRewards;
+
+    public List<RewardPos> machineRewardPos = new List<RewardPos>();
+    [SerializeField] GameObject[] machineRewards;
+
+
     public List<IBuyCost> buyAreaList = new List<IBuyCost>();
 
     Transform currentSpeedReward_TR;
     Transform currentCapacityReward_TR;
     Transform currentDoubleIncomeReward_TR;
     Transform currentMoneyReward_TR;
+
+    Transform currentWorkerReward_TR;
+    Transform currentMachineReward_TR;
+
     private void Awake()
     {
         _instance = this;
@@ -155,6 +176,7 @@ public class SkillManager : MonoBehaviour
     bool capacityCoroutineActive;
     IEnumerator Capacity_Reset(int rewardTime)
     {
+        GameManager.Instance.ui.capacityBoosterButton.interactable = false;
         capacityCoroutineActive = false;
         yield return new WaitForSeconds(1);
         capacityCoroutineActive = true;
@@ -204,9 +226,135 @@ public class SkillManager : MonoBehaviour
                 PlayerPrefs.SetInt("firstusagecapacityboost", 1);
                 PurchaseManager.Instance.DoubleCapacity_PopUp_Open();
             }
+            GameManager.Instance.ui.capacityBoosterButton.interactable = true;
         }
     }
+    bool workerBoostCoroutineActive;
+    public void WorkerBoostActive()
+    {
+        RewardPanel.Instance.workerRewardPanelGO.SetActive(true);
+        StartCoroutine(WorkerBoost_Reset(workerRewardTime));
+        Globals.workerStackFactor = workerStackFactor;
+        Globals.workerSpeedFactor = workerSpeedFactor;
+        HRUpgradeManager.Instance.AllWorkerMoveSpeedInit();
+    }
+    IEnumerator WorkerBoost_Reset(int rewardTime)
+    {
+        workerBoostCoroutineActive = false;
+        yield return new WaitForSeconds(1);
+        workerBoostCoroutineActive = true;
+        int counter = rewardTime;
 
+        while (counter > 0 && workerBoostCoroutineActive)
+        {
+            int minute = Mathf.FloorToInt(counter / 60);
+            int second = Mathf.FloorToInt(counter % 60);
+
+            workerCounterText.text = minute.ToString() + ":" + ($"{second}");
+            if (minute < 10)
+            {
+                workerCounterText.text = "0" + minute.ToString() + ":" + ($"{second}");
+
+            }
+            if (second < 10)
+            {
+                workerCounterText.text = minute.ToString() + ":0" + ($"{second}");
+                if (minute < 10)
+                {
+                    workerCounterText.text = "0" + minute.ToString() + ":0" + ($"{second}");
+
+                }
+                if (counter <= 3)
+                {
+                    StartCoroutine(CounterTextColorSet(workerCounterText));
+                    VibratoManager.Instance.LightVibration();
+                }
+            }
+            counter--;
+            yield return new WaitForSeconds(1);
+
+            RewardPanel.Instance.workerRewardPanelGO.SetActive(true);
+            
+        }
+
+        if (counter <= 0)
+        {
+            workerCounterText.text = "00:00";
+            RewardPanel.Instance.workerRewardPanelGO.SetActive(false);
+            Globals.workerRewardCreated = false;
+            Globals.workerStackFactor = 1;
+            Globals.workerSpeedFactor = 1;
+            HRUpgradeManager.Instance.AllWorkerMoveSpeedInit();
+            if (PlayerPrefs.GetInt("firstusageworkerboost") == 0)
+            {
+                PlayerPrefs.SetInt("firstusageworkerboost", 1);
+                //PurchaseManager.Instance.DoubleIncome_PopUp_Open();
+            }
+        }
+
+    }
+    bool machineBoostCoroutineActive;
+    public void MachineBoostActive()
+    {
+        RewardPanel.Instance.machineRewardPanelGO.SetActive(true);
+        StartCoroutine(MachineBoost_Reset(machineRewardTime));
+        Globals.machineSpeedFactor = machineSpeedFactor;
+    }
+
+    IEnumerator MachineBoost_Reset(int rewardTime)
+    {
+        machineBoostCoroutineActive = false;
+        yield return new WaitForSeconds(1);
+        machineBoostCoroutineActive = true;
+        int counter = rewardTime;
+
+        while (counter > 0 && machineBoostCoroutineActive)
+        {
+            int minute = Mathf.FloorToInt(counter / 60);
+            int second = Mathf.FloorToInt(counter % 60);
+
+            machineCounterText.text = minute.ToString() + ":" + ($"{second}");
+            if (minute < 10)
+            {
+                machineCounterText.text = "0" + minute.ToString() + ":" + ($"{second}");
+
+            }
+            if (second < 10)
+            {
+                machineCounterText.text = minute.ToString() + ":0" + ($"{second}");
+                if (minute < 10)
+                {
+                    machineCounterText.text = "0" + minute.ToString() + ":0" + ($"{second}");
+
+                }
+                if (counter <= 3)
+                {
+                    StartCoroutine(CounterTextColorSet(machineCounterText));
+                    VibratoManager.Instance.LightVibration();
+                }
+            }
+            counter--;
+            yield return new WaitForSeconds(1);
+
+            RewardPanel.Instance.machineRewardPanelGO.SetActive(true);
+
+        }
+
+        if (counter <= 0)
+        {
+            machineCounterText.text = "00:00";
+            RewardPanel.Instance.machineRewardPanelGO.SetActive(false);
+            Globals.machineRewardCreated = false;
+            Globals.machineSpeedFactor = 1;
+
+            if (PlayerPrefs.GetInt("firstusagemachineboost") == 0)
+            {
+                PlayerPrefs.SetInt("firstusagemachineboost", 1);
+                //PurchaseManager.Instance.DoubleIncome_PopUp_Open();
+            }
+        }
+
+    }
     public void DoubleIncomeActive()
     {
         RewardPanel.Instance.doubleIncomePanelGO.SetActive(true);
@@ -306,7 +454,8 @@ public class SkillManager : MonoBehaviour
             PurchaseSpeedBoostActive();
         }
 
-
+        /////////////////////////////////////
+        
         Globals.capacityPlayTime = PlayerPrefs.GetInt("capacityPlayTime");
         Globals.capacityCreatingCooldown = PlayerPrefs.GetInt("capacityCreatingCooldown");
         if (PlayerPrefs.GetInt("purchasecapacityboost") == 0)
@@ -317,6 +466,8 @@ public class SkillManager : MonoBehaviour
         {
             PurchaseCapacityBoostActive();
         }
+
+        /////////////////////////////////////
 
         Globals.doubleIncomePlayTime = PlayerPrefs.GetInt("doubleIncomePlayTime");
         Globals.doubleCreatingCooldown = PlayerPrefs.GetInt("doubleCreatingCooldown");
@@ -329,7 +480,34 @@ public class SkillManager : MonoBehaviour
             PurchaseDoubleIncomeBoostActive();
         }
 
+        /////////////////////////////////////
 
+        Globals.workerBoosterPlayTime = PlayerPrefs.GetInt("workerBoosterPlayTime");
+        Globals.workerBoostCreatingCooldown = PlayerPrefs.GetInt("workerBoostCreatingCooldown");
+        if (PlayerPrefs.GetInt("purchaseworkerboost") == 0)
+        {
+            StartCoroutine(WorkerBoostTimeCounter());
+        }
+        else
+        {
+            PurchaseWorkerBoostActive();
+        }
+
+        /////////////////////////////////////
+
+
+        Globals.machineBoosterPlayTime = PlayerPrefs.GetInt("machineBoosterPlayTime");
+        Globals.machineBoostCreatingCooldown = PlayerPrefs.GetInt("machineBoostCreatingCooldown");
+        if (PlayerPrefs.GetInt("purchasemachineboost") == 0)
+        {
+            StartCoroutine(MachineBoostTimeCounter());
+        }
+        else
+        {
+            PurchaseMachineBoostActive();
+        }
+
+        /////////////////////////////////////
 
         Globals.moneyPlayTime = PlayerPrefs.GetInt("moneyPlayTime");
         Globals.moneyCreatingCooldown = PlayerPrefs.GetInt("moneyCreatingCooldown");
@@ -338,11 +516,13 @@ public class SkillManager : MonoBehaviour
         firstColor = Color.white;
 
         hoverboardCounterText = RewardPanel.Instance.hoverboardCounterText;
-
         capacityCounterText = RewardPanel.Instance.capacityCounterText;
         doubleIncomeCounterText = RewardPanel.Instance.doubleIncomeCounterText;
+        workerCounterText = RewardPanel.Instance.workerCounterText;
+        machineCounterText = RewardPanel.Instance.machineCounterText;
 
-
+        
+            
         if (PlayerPrefs.GetInt("purchaserepairboost") == 0)
         {
         }
@@ -383,7 +563,68 @@ public class SkillManager : MonoBehaviour
             yield return new WaitForSeconds(1);
         }
     }
+    IEnumerator WorkerBoostTimeCounter()
+    {
+        while (true)
+        {
+            Globals.workerBoosterPlayTime++;
+            PlayerPrefs.SetInt("workerBoosterPlayTime", Globals.workerBoosterPlayTime);
 
+            if (PlayerPrefs.GetInt("skillActive") == 1)
+            {
+                Globals.workerBoostCreatingCooldown++;
+                PlayerPrefs.SetInt("workerBoostCreatingCooldown", Globals.workerBoostCreatingCooldown);
+            }
+
+            int _workerRewPeriod = workerRewPeriod;
+            //if (PlayerPrefs.GetInt("workerRewCount") == 0)
+            //{
+            //    _workerRewPeriod = 180;
+            //}
+
+            if (Globals.workerBoostCreatingCooldown >= _workerRewPeriod && !Globals.workerRewardCreated)
+            {
+                if (PlayerPrefs.GetInt("purchaseworkerboost") == 0)
+                {
+                    WorkerRewardCreate();
+
+                    PlayerPrefs.SetInt("workerRewCount", PlayerPrefs.GetInt("workerRewCount") + 1);
+                }
+            }
+            yield return new WaitForSeconds(1);
+        }
+    }
+    IEnumerator MachineBoostTimeCounter()
+    {
+        while (true)
+        {
+            Globals.machineBoosterPlayTime++;
+            PlayerPrefs.SetInt("machineBoosterPlayTime", Globals.machineBoosterPlayTime);
+
+            if (PlayerPrefs.GetInt("skillActive") == 1)
+            {
+                Globals.machineBoostCreatingCooldown++;
+                PlayerPrefs.SetInt("machineBoostCreatingCooldown", Globals.machineBoostCreatingCooldown);
+            }
+
+            int _machineRewPeriod = machineRewPeriod;
+            //if (PlayerPrefs.GetInt("workerRewCount") == 0)
+            //{
+            //    _workerRewPeriod = 180;
+            //}
+
+            if (Globals.machineBoostCreatingCooldown >= _machineRewPeriod && !Globals.machineRewardCreated)
+            {
+                if (PlayerPrefs.GetInt("purchasemachineboost") == 0)
+                {
+                    MachineRewardCreate();
+
+                    PlayerPrefs.SetInt("machineRewCount", PlayerPrefs.GetInt("machineRewCount") + 1);
+                }
+            }
+            yield return new WaitForSeconds(1);
+        }
+    }
     IEnumerator CapacityTimeCounter()
     {
         while (true)
@@ -512,6 +753,68 @@ public class SkillManager : MonoBehaviour
         //PlayerPrefs.SetInt("skill", PlayerPrefs.GetInt("skill") + 1);
     }
 
+    public void WorkerRewardCreate()
+    {
+        Globals.workerRewardCreated = true;
+        Globals.workerBoostCreatingCooldown = 0;
+        PlayerPrefs.SetInt("workerBoostCreatingCooldown", Globals.workerBoostCreatingCooldown);
+
+        List<RewardPos> currnetLevelRewPosList = new List<RewardPos>();
+        foreach (var workrewpos in workerRewardPos)
+        {
+            if (workrewpos.levelID == Globals.collectableLevel)
+            {
+                currnetLevelRewPosList.Add(workrewpos);
+            }
+        }
+        int rewPosRandomSelcet = Random.Range(0, currnetLevelRewPosList.Count);
+        int rewardSelect = Random.Range(0, workerRewards.Length);
+
+        GameObject currentWorkerReward;
+
+        if (PlayerPrefs.GetInt("firstworkercreate") == 0)
+        {
+            PlayerPrefs.SetInt("firstworkercreate", 1);
+            currentWorkerReward = Instantiate(workerRewards[rewardSelect], currnetLevelRewPosList[0].transform.position, Quaternion.identity);
+        }
+        else
+        {
+            currentWorkerReward = Instantiate(workerRewards[rewardSelect], currnetLevelRewPosList[rewPosRandomSelcet].transform.position, Quaternion.identity);
+        }
+        currentWorkerReward_TR = currentWorkerReward.transform;
+
+    }
+    public void MachineRewardCreate()
+    {
+        Globals.machineRewardCreated = true;
+        Globals.machineBoostCreatingCooldown = 0;
+        PlayerPrefs.SetInt("machineBoostCreatingCooldown", Globals.machineBoostCreatingCooldown);
+
+        List<RewardPos> currnetLevelRewPosList = new List<RewardPos>();
+        foreach (var machrewpos in machineRewardPos)
+        {
+            if (machrewpos.levelID == Globals.collectableLevel)
+            {
+                currnetLevelRewPosList.Add(machrewpos);
+            }
+        }
+        int rewPosRandomSelcet = Random.Range(0, currnetLevelRewPosList.Count);
+        int rewardSelect = Random.Range(0, machineRewards.Length);
+
+        GameObject currentMachineReward;
+
+        if (PlayerPrefs.GetInt("firstmachinecreate") == 0)
+        {
+            PlayerPrefs.SetInt("firstmachinecreate", 1);
+            currentMachineReward = Instantiate(machineRewards[rewardSelect], currnetLevelRewPosList[0].transform.position, Quaternion.identity);
+        }
+        else
+        {
+            currentMachineReward = Instantiate(machineRewards[rewardSelect], currnetLevelRewPosList[rewPosRandomSelcet].transform.position, Quaternion.identity);
+        }
+        currentMachineReward_TR = currentMachineReward.transform;
+
+    }
     public void CapacityRewardCreate()
     {
         Globals.isCapacityRewardCreated = true;
@@ -706,13 +1009,25 @@ public class SkillManager : MonoBehaviour
         PlayerPrefs.SetInt("purchasecapacityboost", 1);
         Globals.stackFactor = 2;
         //Globals.extraStack = extraStack;
+        GameManager.Instance.ui.capacityBoosterButton.gameObject.SetActive(false);
     }
     public void PurchaseDoubleIncomeBoostActive()
     {
         PlayerPrefs.SetInt("purchasedoubleincomeboost", 1);
         Globals.doubleIncomeActive = true;
     }
-
+    public void PurchaseWorkerBoostActive()
+    {
+        PlayerPrefs.SetInt("purchaseworkerboost", 1);
+        Globals.workerStackFactor = workerStackFactor;
+        Globals.workerSpeedFactor = workerSpeedFactor;
+        HRUpgradeManager.Instance.AllWorkerMoveSpeedInit();
+    }
+    public void PurchaseMachineBoostActive()
+    {
+        PlayerPrefs.SetInt("purchasemachineboost", 1);
+        Globals.machineSpeedFactor = machineSpeedFactor;
+    }
     public void PurchaseRepairImmediateActive()
     {
         PlayerPrefs.SetInt("purchaserepairboost", 1);

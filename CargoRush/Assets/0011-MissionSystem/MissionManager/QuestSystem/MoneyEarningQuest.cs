@@ -20,6 +20,10 @@ public class MoneyEarningQuest : QuestPanel
 
                 PlayerPrefs.SetInt(questName + "missionactive" + PlayerPrefs.GetInt("dailyQuestNo", 0), 2);
                 QuestCompleted();
+                if (QuestManager.Instance.questCompleteQuest != null)
+                {
+                    QuestManager.Instance.questCompleteQuest.QuestUpdate(1);
+                }
             }
         }
     }

@@ -124,20 +124,7 @@ public class ProcessMachineBand : Stand, IStandUpgrade, IMachineActive
 
         StartCoroutine(MachineRepairCounter());
     }
-    IEnumerator RepairManReactiveDelay()
-    {
-
-        //repairWorker.transform.position = machineRepairArea.repairCreatePos.position;
-        yield return new WaitForSeconds(0.1f);
-        repairWorker.gameObject.SetActive(true);
-        repairWorker.GoToMachine();
-
-        yield return new WaitForSeconds(0.5f);
-
-        repairWorker.showBuyRapairReward.showActive = true;
-        repairWorker.showBuyRapairReward.Canvas.SetActive(true);
-
-    }
+   
     IEnumerator MachineRepairCounter()
     {
         repairProgressGO.SetActive(true);

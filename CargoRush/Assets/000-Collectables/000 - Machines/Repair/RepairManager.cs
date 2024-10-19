@@ -9,8 +9,7 @@ public class RepairManager : MonoBehaviour
     public List<ProcessMachine> processMachines = new List<ProcessMachine>();
     public RepairWorker repairWorker;
     public Transform repairWorkerFirstPosTR;
-    public int repairTime = 300;
-  [SerializeField]  int repairWorkerTimeCounter = 0;
+    [SerializeField] int repairWorkerTimeCounter = 0;
 
     public GameObject buttonFree_GO;
     public GameObject buttonADV_GO;
@@ -53,7 +52,7 @@ public class RepairManager : MonoBehaviour
         buttonADV_GO.SetActive(true);
 
         repairWorker.gameObject.SetActive(true);
-        if (PlayerPrefs.GetInt("machineerrorcount") == 2 && PlayerPrefs.GetInt("purchaserepairboost") == 0)
+        if (PlayerPrefs.GetInt("machineerrorcount") == 1 && PlayerPrefs.GetInt("purchaserepairboost") == 0)
         {
             TutorialManager.Instance.goToRepairMan_GO.SetActive(true);
             IndicatorManager.Instance.IndicaorActive(repairWorkerFirstPosTR);
@@ -78,12 +77,9 @@ public class RepairManager : MonoBehaviour
         Globals.repairManActive = true;
         repairWorker.repairActive = true;
 
-        //repairWorker.SelectGoMachine();
 
-        //FishDropArea.Instance.RepairProgressSet();
-        StartCoroutine(RepairWorkerStart_Delay());
 
-        FishDropArea.Instance.AllMachineRepair();
+        //FishDropArea.Instance.AllMachineRepair();
         repairWorker.showBuyRapairReward.gameObject.SetActive(false);
         StartCoroutine(RepairTimer());
         buttonFree_GO.SetActive(false);
@@ -93,7 +89,7 @@ public class RepairManager : MonoBehaviour
     IEnumerator RepairWorkerStart_Delay()
     {
         yield return new WaitForSeconds(1);
-        FishDropArea.Instance.RepairProgressSet();
+        //FishDropArea.Instance.RepairProgressSet();
 
         yield return new WaitForSeconds(1);
         repairWorker.SelectGoMachine();
@@ -102,7 +98,7 @@ public class RepairManager : MonoBehaviour
     IEnumerator RepairTimer()
     {
         repairWorkerTimeCounter = PlayerPrefs.GetInt("repairWorkerTimeCounter");
-        while (repairWorkerTimeCounter < repairTime)
+        while (repairWorkerTimeCounter < MRCUpgradeManager.Instance._characterUpgradeSettings.repairRunTime[Globals.repairRunTimeLevel])
         {
             repairWorkerTimeCounter++;
             PlayerPrefs.SetInt("repairWorkerTimeCounter", repairWorkerTimeCounter);

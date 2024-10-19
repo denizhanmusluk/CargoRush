@@ -102,7 +102,7 @@ public class AIWorker : MonoBehaviour, IWorkerModelSelect
     }
     public void MoveSpeedInit()
     {
-        AImoveSpeed = aiStackCollect.GetComponent<StackCollectWorker>().characterUpgradeSettings.workerMoveSpeed[Globals.workerMoveSpeedLevel];
+        AImoveSpeed = aiStackCollect.GetComponent<StackCollectWorker>().characterUpgradeSettings.workerMoveSpeed[Globals.workerMoveSpeedLevel] * Globals.workerSpeedFactor;
         navMeshAgent.speed = AImoveSpeed;
     }
     public void ListReset()
@@ -117,7 +117,7 @@ public class AIWorker : MonoBehaviour, IWorkerModelSelect
     public void PlayerMovingDirection(Vector3 targetPos)
     {
         float speed = 0.75f + 0.05f * Globals.workerMoveSpeedLevel;
-        animator.SetFloat("Speed", speed);
+        animator.SetFloat("Speed", speed * Globals.workerSpeedFactor);
 
         animator.SetBool("walk", true);
         Vector3 direction = (targetPos - transform.position).normalized;

@@ -50,7 +50,7 @@ public class MoneySkill : MonoBehaviour
     }
     IEnumerator OpenBag()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(0.1f);
         PopUpManager.Instance.BoostPopUpOpen(3);
         PopUpManager.Instance.BoosterInvoke();
         gameObject.SetActive(false);

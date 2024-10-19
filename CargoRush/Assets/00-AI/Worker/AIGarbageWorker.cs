@@ -117,7 +117,7 @@ public class AIGarbageWorker : MonoBehaviour, IWorkerModelSelect
     }
     public void MoveSpeedInit()
     {
-        AImoveSpeed = aiStackCollect.GetComponent<StackCollectWorker>().characterUpgradeSettings.workerMoveSpeed[Globals.workerMoveSpeedLevel];
+        AImoveSpeed = aiStackCollect.GetComponent<StackCollectWorker>().characterUpgradeSettings.workerMoveSpeed[Globals.workerMoveSpeedLevel] * Globals.workerSpeedFactor;
         navMeshAgent.speed = AImoveSpeed;
     }
     public void ListReset()
@@ -132,7 +132,7 @@ public class AIGarbageWorker : MonoBehaviour, IWorkerModelSelect
     public void PlayerMovingDirection(Vector3 targetPos)
     {
         float speed = 0.75f + 0.05f * Globals.workerMoveSpeedLevel;
-        animator.SetFloat("Speed", speed);
+        animator.SetFloat("Speed", speed * Globals.workerSpeedFactor);
         animator.SetBool("walk", true);
         Vector3 direction = (targetPos - transform.position).normalized;
         direction.y = 0;
@@ -323,7 +323,7 @@ public class AIGarbageWorker : MonoBehaviour, IWorkerModelSelect
                 playerStop();
                 //navMeshAgent.obstacleAvoidanceType = ObstacleAvoidanceType.HighQualityObstacleAvoidance;
 
-                if (collisionController.stackCollect.collectionTrs.Count < aiStackCollect.GetComponent<StackCollectWorker>().baseStackCapacity + collisionController._characterUpgradeSettings.workerCapacity[Globals.workerCapacityLevel])
+                if (collisionController.stackCollect.collectionTrs.Count < aiStackCollect.GetComponent<StackCollectWorker>().baseStackCapacity + collisionController._characterUpgradeSettings.workerCapacity[Globals.workerCapacityLevel] * Globals.workerStackFactor)
                 {
                     TargetGarbageSelect();
                 }

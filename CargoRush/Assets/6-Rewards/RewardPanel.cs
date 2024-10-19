@@ -26,6 +26,12 @@ public class RewardPanel : MonoBehaviour
     public GameObject doubleIncomePanelGO;
     public TextMeshProUGUI doubleIncomeCounterText;
 
+    public GameObject workerRewardPanelGO;
+    public TextMeshProUGUI workerCounterText;
+
+    public GameObject machineRewardPanelGO;
+    public TextMeshProUGUI machineCounterText;
+
     public GameObject vipPanelGO;
     public TextMeshProUGUI vipCounterText;
 

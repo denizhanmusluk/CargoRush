@@ -107,5 +107,9 @@ public abstract class QuestPanel : MonoBehaviour
         {
             tutorialGO.SetActive(false);
         }
+
+        QuestManager.Instance.questParticle_GO.SetActive(false);
+        QuestManager.Instance.questTick_GO.SetActive(false);
+
     }
 }

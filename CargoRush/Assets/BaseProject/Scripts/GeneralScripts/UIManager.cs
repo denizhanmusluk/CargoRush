@@ -61,7 +61,7 @@ public class UIManager : Subject
     public GameObject hrBuyTextGO;
     public GameObject hrUpgradeTextGO;
 
-
+    public Button capacityBoosterButton;
     //public GameObject biggerPanelGO;
     //public TextMeshProUGUI biggerCounterText;
 
@@ -93,7 +93,10 @@ public class UIManager : Subject
     {
         firstSizeMoney = moneyPanel.transform.localScale;
         firstSizeGem = gemPanel.transform.localScale;
-
+        if (PlayerPrefs.GetInt("capacitybuttonopen") == 1)
+        {
+            CapacityBoosterButtonActivator();
+        }
     }
 
     #region Handler Functions
@@ -721,6 +724,7 @@ public class UIManager : Subject
         {
             QuestManager.Instance.boosterQuest.QuestUpdate(1);
         }
+        CapacityBoosterButtonActivator();
     }
 
     public void CapacitySkillClick_Cancel()
@@ -781,7 +785,109 @@ public class UIManager : Subject
     }
 
 
+    /// ///////////////
 
+    public void WorkerSkill_ADV_Click()
+    {
+        PlayerController.Instance.PlayerControl_ReActive();
+
+        string _tag = "WorkerBooster_RV";
+        string adv_name = _tag;
+
+        ADVManager.Instance.RewardedStart(WorkerSkillClick, adv_name, true);
+
+        //GameManager.Instance.GameAnalyticsTag(tag);
+        //GameManager.Instance.HomaAnalyticsTag(tag);
+
+
+    }
+    public void WorkerSkillClick(bool ticketActive)
+    {
+        string _tag = "WorkerBooster_RV";
+
+
+        SkillManager.Instance.WorkerBoostActive();
+        PlayerController.Instance.PlayerControl_ReActive();
+
+        if (ticketActive)
+        {
+            Analytics.ItemObtained(_tag, 0, ItemFlowReason.Progression);
+            Analytics.ItemConsumed(_tag, 0, ItemFlowReason.Progression);
+        }
+        else
+        {
+            Analytics.ItemObtained(_tag, 0, ItemFlowReason.RewardedVideoAd);
+            Analytics.ItemConsumed(_tag, 0, ItemFlowReason.RewardedVideoAd);
+        }
+
+
+
+        if (QuestManager.Instance.boosterQuest != null)
+        {
+            QuestManager.Instance.boosterQuest.QuestUpdate(1);
+        }
+    }
+
+    public void WorkerSkillClick_Cancel()
+    {
+        Globals.workerRewardCreated = false;
+        PlayerController.Instance.PlayerControl_ReActive();
+    }
+
+
+    /// ///////////////
+
+    public void MachineSkill_ADV_Click()
+    {
+        PlayerController.Instance.PlayerControl_ReActive();
+
+        string _tag = "MachineBooster_RV";
+        string adv_name = _tag;
+
+        ADVManager.Instance.RewardedStart(MachineSkillClick, adv_name, true);
+
+        //GameManager.Instance.GameAnalyticsTag(tag);
+        //GameManager.Instance.HomaAnalyticsTag(tag);
+
+
+    }
+    public void MachineSkillClick(bool ticketActive)
+    {
+        string _tag = "MachineBooster_RV";
+
+
+        SkillManager.Instance.MachineBoostActive();
+        PlayerController.Instance.PlayerControl_ReActive();
+
+        if (ticketActive)
+        {
+            Analytics.ItemObtained(_tag, 0, ItemFlowReason.Progression);
+            Analytics.ItemConsumed(_tag, 0, ItemFlowReason.Progression);
+        }
+        else
+        {
+            Analytics.ItemObtained(_tag, 0, ItemFlowReason.RewardedVideoAd);
+            Analytics.ItemConsumed(_tag, 0, ItemFlowReason.RewardedVideoAd);
+        }
+
+
+
+        if (QuestManager.Instance.boosterQuest != null)
+        {
+            QuestManager.Instance.boosterQuest.QuestUpdate(1);
+        }
+    }
+
+    public void MachineSkillClick_Cancel()
+    {
+        Globals.machineRewardCreated = false;
+        PlayerController.Instance.PlayerControl_ReActive();
+    }
+
+
+
+
+    /// ///////////////
 
 
 
@@ -847,5 +953,10 @@ public class UIManager : Subject
 
     }
 
+    public void CapacityBoosterButtonActivator()
+    {
+        PlayerPrefs.SetInt("capacitybuttonopen", 1);
+        capacityBoosterButton.gameObject.SetActive(true);
+    }
 }
 

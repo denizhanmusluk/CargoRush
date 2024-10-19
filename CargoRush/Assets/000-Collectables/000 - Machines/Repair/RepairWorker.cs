@@ -11,16 +11,79 @@ public class RepairWorker : MonoBehaviour
 
     Transform targetTR;
    public bool repairActive = false;
+    int randomSelect = 0;
+    ProcessMachine currentTargetMachine;
     public void SelectGoMachine()
     {
-        int randomSelect = Random.Range(0, RepairManager.Instance.processMachines.Count);
-        targetTR = RepairManager.Instance.processMachines[randomSelect].repairWorkerWaitingPos_TR;
+        randomSelect = Random.Range(0, RepairManager.Instance.processMachines.Count);
+
+        bool isThereErrorMachine = false;
+        foreach(var mchn in RepairManager.Instance.processMachines)
+        {
+            if (mchn.errorActive)
+            {
+                isThereErrorMachine = true;
+                targetTR = mchn.repairWorkerWaitingPos_TR;
+                currentTargetMachine = mchn;
+                break;
+            }
+        }
+        if (!isThereErrorMachine)
+        {
+            targetTR = RepairManager.Instance.processMachines[randomSelect].repairWorkerWaitingPos_TR;
+            currentTargetMachine = RepairManager.Instance.processMachines[randomSelect];
+        }
         GoToMachine();
     }
     public void GoToMachine()
     {
         aiMoving.GoTargetStart(targetTR);
-        aiMoving.BehaviourInit(StartRepairAnimation);
+        if (currentTargetMachine.errorActive)
+        {
+            aiMoving.BehaviourInit(StartErroredRepair);
+        }
+        else
+        {
+            aiMoving.BehaviourInit(StartRepairAnimation);
+        }
+    }
+    void StartErroredRepair()
+    {
+        StartCoroutine(SetPosRepairMachine());
+    }
+    IEnumerator SetPosRepairMachine()
+    {
+
+        Vector3 firstPos = transform.position;
+        Quaternion firstRot = transform.rotation;
+        float counter = 0f;
+
+        while (counter < 1f && repairActive)
+        {
+            counter += Time.deltaTime;
+            transform.position = Vector3.Lerp(firstPos, targetTR.position, counter);
+            transform.rotation = Quaternion.Lerp(firstRot, targetTR.rotation, counter);
+
+            yield return null;
+        }
+        if (repairActive)
+        {
+            transform.position = targetTR.position;
+            transform.rotation = targetTR.rotation;
+            animator.SetBool("repair", true);
+        }
+        counter = 0f;
+        while (counter < MRCUpgradeManager.Instance._characterUpgradeSettings.repairSpeed[Globals.repairSpeedLevel] && repairActive)
+        {
+            counter += Time.deltaTime;
+            yield return null;
+        }
+        if (repairActive)
+        {
+            currentTargetMachine.MachineRepaired();
+            animator.SetBool("repair", false);
+            SelectGoMachine();
+        }
     }
     void StartRepairAnimation()
     {
@@ -99,4 +162,57 @@ public class RepairWorker : MonoBehaviour
 
         gameObject.SetActive(false);
     }
+
+
+    public void GoToMachineForRepair(ProcessMachine targetMachine)
+    {
+        if (!repairActive)
+        {
+     
+            if (PlayerPrefs.GetInt("machineerrorcount") == 0)
+            {
+                targetTR = targetMachine.machineRepairArea.machineRepairListAll[0].workerRepairPosTR;
+                aiMoving.GoTargetStart(targetTR);
+                aiMoving.BehaviourInit(SetPos_Machine);
+                transform.position = targetTR.position;
+            }
+            else
+            {
+                targetTR = targetMachine.repairWorkerWaitingPos_TR;
+                aiMoving.GoTargetStart(targetMachine.repairWorkerWaitingPos_TR);
+                aiMoving.BehaviourInit(SetPos_Machine);
+            }
+        }
+    }
+    public void SetPos_Machine()
+    {
+        StartCoroutine(SetPosMachine());
+    }
+    IEnumerator SetPosMachine()
+    {
+
+        Vector3 firstPos = transform.position;
+        Quaternion firstRot = transform.rotation;
+        float counter = 0f;
+
+        while (counter < 1f)
+        {
+            counter += Time.deltaTime;
+            transform.position = Vector3.Lerp(firstPos, targetTR.position, counter);
+            transform.rotation = Quaternion.Lerp(firstRot, targetTR.rotation, counter);
+
+            yield return null;
+        }
+
+        transform.position = targetTR.position;
+        transform.rotation = targetTR.rotation;
+    }
+    public void RepairmanGoToWaitingPos()
+    {
+        if (!repairActive)
+        {
+            WorkerRepairEnd();
+        }
+    }
+
 }

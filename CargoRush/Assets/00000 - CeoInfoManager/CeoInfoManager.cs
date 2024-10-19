@@ -24,14 +24,14 @@ public class CeoInfoManager : MonoBehaviour
     }
     private void Start()
     {
-        if (PlayerPrefs.GetInt("boxcounteractive" + PlayerPrefs.GetInt("level")) == 0)
-        {
-            StartCoroutine(InfoCounter());
-        }
-        else
-        {
-            CeoActive();
-        }
+        //if (PlayerPrefs.GetInt("boxcounteractive" + PlayerPrefs.GetInt("level")) == 0)
+        //{
+        //    StartCoroutine(InfoCounter());
+        //}
+        //else
+        //{
+        //    CeoActive();
+        //}
     }
     public void InfoCounterStarter()
     {

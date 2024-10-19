@@ -75,7 +75,34 @@ public class CollectProduct : MonoBehaviour
                 {
                     if (other.GetComponent<PlayerController>() != null && collectables.Count > 0)
                     {
-                        if (Globals.playerStackActive && collectables[collectables.Count - 1].productCollectActive && other.GetComponent<PlayerController>()._stackCollect.collectionTrs.Count < (Globals.stackFactor  * other.GetComponent<PlayerController>()._characterUpgradeSettings.stackCapacity[Globals.stackCapacityLevel] + Globals.extraStackSkin + Globals.extraStack))
+                        int loopCount = other.GetComponent<PlayerController>()._stackCollect.collectionTrs.Count;
+
+                        bool collectingActive = false;
+
+                        bool isThereProduct = false;
+                        bool isThereTrash = false;
+                        for (int i = 0; i < loopCount; i++)
+                        {
+                            if (other.GetComponent<PlayerController>()._stackCollect.collectionTrs[i].collectID == 50)
+                            {
+                                isThereTrash = true;
+                            }
+                            else
+                            {
+                                isThereProduct = true;
+                            }
+                        }
+
+                        if (collectables[collectables.Count - 1].collectID == 50 && !isThereProduct)
+                        {
+                            collectingActive = true;
+                        }
+                        if (collectables[collectables.Count - 1].collectID != 50 && !isThereTrash)
+                        {
+                            collectingActive = true;
+                        }
+
+                        if ((collectingActive) && Globals.playerStackActive && collectables[collectables.Count - 1].productCollectActive && other.GetComponent<PlayerController>()._stackCollect.collectionTrs.Count < (Globals.stackFactor  * other.GetComponent<PlayerController>()._characterUpgradeSettings.stackCapacity[Globals.stackCapacityLevel] + Globals.extraStackSkin + Globals.extraStack))
                         {
                             if(noneCollectGO != null)
                             {
@@ -133,9 +160,38 @@ public class CollectProduct : MonoBehaviour
 
                     if (other.GetComponent<StackCollectWorker>() != null && collectables.Count > 0 && CollectId == other.GetComponent<StackCollectWorker>().targetId && collectableType == other.GetComponent<StackCollectWorker>().collectableType && other.GetComponent<StackCollectWorker>().collectActive)
                     {
-                        if (collectables[collectables.Count - 1].productCollectActive && other.GetComponent<StackCollectWorker>().collectionTrs.Count < (other.GetComponent<StackCollectWorker>().baseStackCapacity + other.GetComponent<StackCollectWorker>().characterUpgradeSettings.workerCapacity[Globals.workerCapacityLevel]))
+                        if (collectables[collectables.Count - 1].productCollectActive && other.GetComponent<StackCollectWorker>().collectionTrs.Count < (other.GetComponent<StackCollectWorker>().baseStackCapacity + other.GetComponent<StackCollectWorker>().characterUpgradeSettings.workerCapacity[Globals.workerCapacityLevel] * Globals.workerStackFactor))
                         {
-                            if (other.GetComponent<StackCollectWorker>().collectionTrs.Count < other.GetComponent<StackCollectWorker>().currentCapacity)
+
+                            int loopCount = other.GetComponent<StackCollectWorker>().collectionTrs.Count;
+
+                            bool collectingActive = false;
+
+                            bool isThereProduct = false;
+                            bool isThereTrash = false;
+                            //for (int i = 0; i < loopCount; i++)
+                            //{
+                            //    if (other.GetComponent<StackCollectWorker>().collectionTrs[i].collectID == 50)
+                            //    {
+                            //        isThereTrash = true;
+                            //    }
+                            //    else
+                            //    {
+                            //        isThereProduct = true;
+                            //    }
+                            //}
+
+                            if (collectables[collectables.Count - 1].collectID == 50 && !isThereProduct)
+                            {
+                                collectingActive = true;
+                            }
+                            if (collectables[collectables.Count - 1].collectID != 50 && !isThereTrash)
+                            {
+                                collectingActive = true;
+                            }
+
+
+                            if (collectingActive && other.GetComponent<StackCollectWorker>().collectionTrs.Count < other.GetComponent<StackCollectWorker>().currentCapacity)
                             {
                                 collectables[collectables.Count - 1].productCollectActive = false;
                                 other.GetComponent<StackCollectWorker>().Collecting(collectables[collectables.Count - 1]);

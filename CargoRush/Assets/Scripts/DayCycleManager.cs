@@ -87,7 +87,8 @@ public class DayCycleManager : MonoBehaviour
     {
 
         dayPanel_GO.SetActive(true);
-        dayCycleCount = PlayerPrefs.GetInt("dayCycleCount");
+        dayCycleCount = 0;
+        //dayCycleCount = PlayerPrefs.GetInt("dayCycleCount");
 
         while (dayCycleCount < dayCyclePeriod)
         {

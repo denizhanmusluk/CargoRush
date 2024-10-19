@@ -123,7 +123,9 @@ public class ProcessMachine : Stand, IStandUpgrade, IMachineActive
         ShareManager.Instance.ErrorCounter();
         machineDurable_GO.SetActive(false);
         machineError_GO.SetActive(true);
-}
+        RepairManager.Instance.repairWorker.GoToMachineForRepair(this);
+
+    }
     public void MachineRepaired()
     {
         if (errorActive)
@@ -138,6 +140,7 @@ public class ProcessMachine : Stand, IStandUpgrade, IMachineActive
             }
             machineRepairArea.gameObject.SetActive(false);
             StartCoroutine(RepairAnimation());
+            RepairManager.Instance.repairWorker.RepairmanGoToWaitingPos();
         }
     }
     IEnumerator RepairAnimation()
@@ -166,20 +169,7 @@ public class ProcessMachine : Stand, IStandUpgrade, IMachineActive
 
         StartCoroutine(MachineRepairCounter());
     }
-    IEnumerator RepairManReactiveDelay()
-    {
-       
-        //repairWorker.transform.position = machineRepairArea.repairCreatePos.position;
-        yield return new WaitForSeconds(0.1f);
-        repairWorker.gameObject.SetActive(true);
-        repairWorker.GoToMachine();
-
-        yield return new WaitForSeconds(0.5f);
-
-        repairWorker.showBuyRapairReward.showActive = true;
-        repairWorker.showBuyRapairReward.Canvas.SetActive(true);
-
-    }
+  
     IEnumerator MachineRepairCounter()
     {
         repairProgressGO.SetActive(true);
@@ -494,7 +484,7 @@ public class ProcessMachine : Stand, IStandUpgrade, IMachineActive
                 dropActive = false;
                 fishCountCurrent += rawCountPerProduct;
                 fishCountText.text = (fishCountTotal - fishCountCurrent).ToString() + "/" + (fishCountTotal).ToString();
-                yield return new WaitForSeconds((waitTime / Globals.repairSpeedSkin) / (speedFactor * speedFactor2));
+                yield return new WaitForSeconds((waitTime / Globals.repairSpeedSkin) / (Globals.machineSpeedFactor * MRCUpgradeManager.Instance._characterUpgradeSettings.machineSpeed[Globals.machineSpeedLevel] * speedFactor2));
                 workAreaList[0].StnadFullCheck();
                 //MissionManager.Instance.TapeBoxMissionStart();
                 //MissionManager.Instance.tapeBoxMission.MissionUpdate();
@@ -554,7 +544,7 @@ public class ProcessMachine : Stand, IStandUpgrade, IMachineActive
                 dropActive = false;
                 fishCountCurrent += rawCountPerProduct;
                 fishCountText.text = (fishCountTotal - fishCountCurrent).ToString() + "/" + (fishCountTotal).ToString();
-                yield return new WaitForSeconds((waitTime / Globals.repairSpeedSkin) / (speedFactor * speedFactor2));
+                yield return new WaitForSeconds((waitTime / Globals.repairSpeedSkin) / (Globals.machineSpeedFactor * MRCUpgradeManager.Instance._characterUpgradeSettings.machineSpeed[Globals.machineSpeedLevel] * speedFactor2));
                 workAreaList[0].StnadFullCheck();
 
 
@@ -669,7 +659,7 @@ public class ProcessMachine : Stand, IStandUpgrade, IMachineActive
         int prefabSelect = 0;
         float _speedFactor = 1f;
 
-        machineAnimator.SetFloat("speed", speedFactor * _speedFactor * speedFactor2);
+        machineAnimator.SetFloat("speed", Globals.machineSpeedFactor * MRCUpgradeManager.Instance._characterUpgradeSettings.machineSpeed[Globals.machineSpeedLevel] * _speedFactor * speedFactor2);
         machineAnimator.SetTrigger("band");
         if (PlayerPrefs.GetInt("soundclose") == 0)
         {
@@ -689,7 +679,7 @@ public class ProcessMachine : Stand, IStandUpgrade, IMachineActive
         newProduct.GetComponent<Collectable>().fishCollectable = productCollectionList;
 
         newProduct.GetComponent<Collectable>().anim.SetTrigger("etiket");
-        newProduct.GetComponent<Collectable>().anim.SetFloat("speed", speedFactor * _speedFactor * speedFactor2);
+        newProduct.GetComponent<Collectable>().anim.SetFloat("speed", Globals.machineSpeedFactor * MRCUpgradeManager.Instance._characterUpgradeSettings.machineSpeed[Globals.machineSpeedLevel] * _speedFactor * speedFactor2);
 
         counter = 0f;
 
@@ -703,7 +693,7 @@ public class ProcessMachine : Stand, IStandUpgrade, IMachineActive
         firstPos = fishOutTR.position;
 
         newProduct.GetComponent<Collectable>().bantGO.SetActive(true);
-        newProduct.GetComponent<Collectable>().bantGO.GetComponent<Animator>().SetFloat("speed", speedFactor * _speedFactor * speedFactor2);
+        newProduct.GetComponent<Collectable>().bantGO.GetComponent<Animator>().SetFloat("speed", Globals.machineSpeedFactor * MRCUpgradeManager.Instance._characterUpgradeSettings.machineSpeed[Globals.machineSpeedLevel] * _speedFactor * speedFactor2);
        counter = 0f;
         while (counter < 1f)
         {
@@ -755,9 +745,9 @@ public class ProcessMachine : Stand, IStandUpgrade, IMachineActive
 
 
                 Quaternion targetRotation = Quaternion.LookRotation(direction);
-                box.transform.rotation = Quaternion.Slerp(box.transform.rotation, targetRotation, speedFactor * rotSpeed * Time.deltaTime * speedFactor2);
+                box.transform.rotation = Quaternion.Slerp(box.transform.rotation, targetRotation, Globals.machineSpeedFactor * MRCUpgradeManager.Instance._characterUpgradeSettings.machineSpeed[Globals.machineSpeedLevel] * rotSpeed * Time.deltaTime * speedFactor2);
 
-                box.transform.Translate(box.transform.forward * moveSpeed * speedFactor * Time.deltaTime * speedFactor2, Space.World);
+                box.transform.Translate(box.transform.forward * moveSpeed * Globals.machineSpeedFactor * MRCUpgradeManager.Instance._characterUpgradeSettings.machineSpeed[Globals.machineSpeedLevel] * Time.deltaTime * speedFactor2, Space.World);
 
                 yield return null;
             }
@@ -1237,7 +1227,7 @@ public class ProcessMachine : Stand, IStandUpgrade, IMachineActive
         fishCountTotal = capacitiesRaw[standLevel];
         productCountTotal = capacitiesProduct[standLevel];
         fishCountCurrent = capacitiesRaw[standLevel] - droppedCollectionList.Count;
-        speedFactor = speedFactors[standLevel];
+        //speedFactor = speedFactors[standLevel];
 
         if (otherRawStand != null)
         {

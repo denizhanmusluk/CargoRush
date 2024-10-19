@@ -600,7 +600,7 @@ public class StandFishCar : Stand,IMoneyArea
         int totalMoney = 0;
         for (int i = 0; i < droppingCollectionList.Count; i++)
         {
-            totalMoney += droppingCollectionList[i].price + extraMoney[carLevel];
+            totalMoney += droppingCollectionList[i].price + extraMoney[carLevel] + MRCUpgradeManager.Instance._characterUpgradeSettings.customerEarning[Globals.customerEarningLevel];
         }
  
         totalMoney /= 2;
@@ -773,11 +773,12 @@ public class StandFishCar : Stand,IMoneyArea
 
         canvasDeliveringGO.SetActive(true);
         canvasProductGO.SetActive(false);
+        float _cooldownTime = (cooldownTime / MRCUpgradeManager.Instance._characterUpgradeSettings.customerCooldown[Globals.customerCooldownLevel]);
         float counter = 0f;
-        while(counter < cooldownTime)
+        while(counter < _cooldownTime)
         {
             counter += Time.deltaTime;
-            imageFill.fillAmount = counter / cooldownTime;
+            imageFill.fillAmount = counter / _cooldownTime;
             yield return null;
         }
 
@@ -882,21 +883,21 @@ public class StandFishCar : Stand,IMoneyArea
         txt.color = Color.white;
     }
 
-    private void OnTriggerExit(Collider other)
-    {
-        if (PlayerPrefs.GetInt("tutorialcompleted") == 1 && PlayerPrefs.GetInt("recycletutorial") == 1 && PlayerController.Instance._stackCollect.collectionTrs.Count > 0 && other.GetComponent<PlayerController>() != null && resetActive)
-        {
-            PlayerPrefs.SetInt("recycletutorial", 2);
-            if (standFishTezgah != null)
-            {
-                standFishTezgah.tutorialPosTR.SetActive(true);
-                IndicatorManager.Instance.IndicaorActive(standFishTezgah.tutorialPosTR.transform);
-            }
-            TutorialManager.Instance.rceycleTutorialGO.SetActive(true);
-            IndicatorManager.Instance.TutorialStepStart(31);
+    //private void OnTriggerExit(Collider other)
+    //{
+    //    if (PlayerPrefs.GetInt("tutorialcompleted") == 1 && PlayerPrefs.GetInt("recycletutorial") == 1 && PlayerController.Instance._stackCollect.collectionTrs.Count > 0 && other.GetComponent<PlayerController>() != null && resetActive)
+    //    {
+    //        PlayerPrefs.SetInt("recycletutorial", 2);
+    //        if (standFishTezgah != null)
+    //        {
+    //            standFishTezgah.tutorialPosTR.SetActive(true);
+    //            IndicatorManager.Instance.IndicaorActive(standFishTezgah.tutorialPosTR.transform);
+    //        }
+    //        TutorialManager.Instance.rceycleTutorialGO.SetActive(true);
+    //        IndicatorManager.Instance.TutorialStepStart(31);
 
-        }
-    }
+    //    }
+    //}
     public void VipViewCamera()
     {
         StartCoroutine(VipView());

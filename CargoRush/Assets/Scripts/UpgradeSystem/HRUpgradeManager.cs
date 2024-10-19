@@ -112,18 +112,9 @@ public class HRUpgradeManager : MonoBehaviour
                 //PlayerBehaviour.Instance.playerController.CharacterUpgrade(Globals.holeRadiusLevel);
                 isEnoughMoney();
                 InitButtonValues();
-                for (int i = 0; i < PlayerPrefs.GetInt("workerNoLevel" + PlayerPrefs.GetInt("level")); i++)
-                {
-                    if (_upgradeAreaWorkers.workerList[i].GetComponent<AIWorker>() != null)
-                    {
-                        _upgradeAreaWorkers.workerList[i].GetComponent<AIWorker>().MoveSpeedInit();
-                    }
 
-                    if (_upgradeAreaWorkers.workerList[i].GetComponent<AIGarbageWorker>() != null)
-                    {
-                        _upgradeAreaWorkers.workerList[i].GetComponent<AIGarbageWorker>().MoveSpeedInit();
-                    }
-                }
+                AllWorkerMoveSpeedInit();
+
                 AudioManager.Instance.UpgradeSound();
 
                 if (QuestManager.Instance.upgradeQuest != null)
@@ -132,6 +123,21 @@ public class HRUpgradeManager : MonoBehaviour
                 }
                 //PlayerController.Instance.GetComponent<BoingScale>().ScaleEffectTR(PlayerController.Instance.transform, 0.8f, 1f, 0.5f, Ease.OutElastic);
                 //PlayerController.Instance.UpgradeTextSpawn("+Magnet");
+            }
+        }
+    }
+    public void AllWorkerMoveSpeedInit()
+    {
+        for (int i = 0; i < PlayerPrefs.GetInt("workerNoLevel" + PlayerPrefs.GetInt("level")); i++)
+        {
+            if (_upgradeAreaWorkers.workerList[i].GetComponent<AIWorker>() != null)
+            {
+                _upgradeAreaWorkers.workerList[i].GetComponent<AIWorker>().MoveSpeedInit();
+            }
+
+            if (_upgradeAreaWorkers.workerList[i].GetComponent<AIGarbageWorker>() != null)
+            {
+                _upgradeAreaWorkers.workerList[i].GetComponent<AIGarbageWorker>().MoveSpeedInit();
             }
         }
     }
@@ -341,6 +347,13 @@ public class HRUpgradeManager : MonoBehaviour
             button_WorkerNo.ADVButtonOpen();
             CharacterUpgradeManager.Instance.button_CharacterSpeedLevel.ADVButtonOpen();
             CharacterUpgradeManager.Instance.button_StackCapacityLevel.ADVButtonOpen();
+
+            MRCUpgradeManager.Instance.button_machineSpeedLevel.ADVButtonOpen();
+            MRCUpgradeManager.Instance.button_errorFreqLevel.ADVButtonOpen();
+            MRCUpgradeManager.Instance.button_customerEarningLevel.ADVButtonOpen();
+            MRCUpgradeManager.Instance.button_customerCooldownLevel.ADVButtonOpen();
+            MRCUpgradeManager.Instance.button_repairRunTimeLevel.ADVButtonOpen();
+            MRCUpgradeManager.Instance.button_repairSpeedLevel.ADVButtonOpen();
         }
     }
     //public void CharacterUpgradeClose()
@@ -407,18 +420,8 @@ public class HRUpgradeManager : MonoBehaviour
 
             isEnoughMoney();
             InitButtonValues();
-            for (int i = 0; i < PlayerPrefs.GetInt("workerNoLevel" + PlayerPrefs.GetInt("level")); i++)
-            {
-                if (_upgradeAreaWorkers.workerList[i].GetComponent<AIWorker>() != null)
-                {
-                    _upgradeAreaWorkers.workerList[i].GetComponent<AIWorker>().MoveSpeedInit();
-                }
+            AllWorkerMoveSpeedInit();
 
-                if (_upgradeAreaWorkers.workerList[i].GetComponent<AIGarbageWorker>() != null)
-                {
-                    _upgradeAreaWorkers.workerList[i].GetComponent<AIGarbageWorker>().MoveSpeedInit();
-                }
-            }
 
             if (QuestManager.Instance.upgradeQuest != null)
             {
@@ -509,6 +512,7 @@ public class HRUpgradeManager : MonoBehaviour
             PlayerController.Instance.PlayerControlDeActive();
 
             IndicatorManager.Instance.TutorialStepStart(21);
+            UpgradePanel.Instance.OpenWorkerUpgradePanel();
         }
     }
 }

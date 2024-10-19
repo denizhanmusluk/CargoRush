@@ -105,15 +105,10 @@ public class CharacterUpgradeManager : MonoBehaviour
                 PlayerController.Instance.GetComponent<BoingScale>().ScaleEffectTR(PlayerController.Instance.transform, 0.8f, 1f, 0.5f, Ease.OutElastic);
                 PlayerController.Instance.UpgradeTextSpawn("+Speed");
 
-                //string tag = "M" + (PlayerPrefs.GetInt("level") + 1).ToString() + "-CharacterSpeedUpgrade" + Globals.characterSpeedLevel.ToString();
-                //GameManager.Instance.GameAnalyticsTag(tag);
 
-
-                //GameManager.Instance.HomaAnalyticsTag("CharacterSpeedUpgrade");
                 Analytics.ItemUpgraded(ItemUpgradeType.Upgrade, "Zone " + (PlayerPrefs.GetInt("level") + 1) + " CharacterSpeedUpgrade", Globals.characterSpeedLevel, ItemFlowReason.Progression);
                 Analytics.ResourceFlowEvent(ResourceFlowType.Sink, "Money", (float)characterMoveSpeedCost, (float)Globals.moneyAmount, Globals.characterSpeedLevel.ToString(), "CharacterSpeedUpgrade", ResourceFlowReason.Progression);
 
-                float time = CoefficientTransformation.FormatSaniye(Globals.speedPlayTime);
 
                 AudioManager.Instance.UpgradeSound();
 
