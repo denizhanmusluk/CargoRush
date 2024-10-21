@@ -746,7 +746,13 @@ public class StandFishCar : Stand,IMoneyArea
         }
         currentCar.GetComponent<FishCar>().CarGoOut();
 
-        if (numberOfTrips % trashDropPerCustomer[carLevel] == 0)
+        int _trashDropPerCustomer = trashDropPerCustomer[carLevel];
+        if (PlayerPrefs.GetInt("trashtutorial", 0) == 0)
+        {
+            _trashDropPerCustomer = 8;
+        }
+
+        if (numberOfTrips % _trashDropPerCustomer == 0)
         {
             if (PlayerPrefs.GetInt("trashtutorial", 0) == 0)
             {
@@ -760,8 +766,9 @@ public class StandFishCar : Stand,IMoneyArea
             StartCoroutine(TrashCreating());
             trashIcon_GO.SetActive(true);
             triggerPlaneGO.SetActive(false);
+            numberOfTrips = 0;
 
-          
+
         }
 
         yield return new WaitForSeconds(0.1f);

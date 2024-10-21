@@ -43,6 +43,7 @@ public class ShareCeo : MonoBehaviour
 
     IEnumerator PopUpReward_Open()
     {
+        yield return new WaitForSeconds(2f);
         bag_GO.GetComponent<Animator>().SetTrigger("open");
         //bag_GO.SetActive(true);
         //bag_GO.transform.position = bagFirstPos_TR.position;

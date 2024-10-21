@@ -184,7 +184,8 @@ public class UIManager : Subject
         PlayerPrefs.SetInt("money", Globals.moneyAmount);
 
         CharacterUpgradeManager.Instance.IsEnoughMoney();
-        HRUpgradeManager.Instance.isEnoughMoney();
+        HRUpgradeManager.Instance.IsEnoughMoney();
+        MRCUpgradeManager.Instance.IsEnoughMoney();
         //HoleUpgradeManager.Instance.isEnoughMoney();
         StarPanelManager.Instance.MoneyEnoughCheck();
 

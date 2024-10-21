@@ -33,6 +33,17 @@ public class TrashStand : Stand
         {
             wrkArea.standList.Add(this);
         }
+        if (PlayerPrefs.GetInt("trashtutorial") == 0)
+        {
+            collectType = CollectType.Type1;
+            collectType2 = CollectType.Type1;
+        }
+        else
+        {
+            collectType = CollectType.All;
+            collectType2 = CollectType.All;
+        }
+
     }
 
     IEnumerator DropSequantial(int collectAmount, StackCollect _stackCollect)
@@ -42,6 +53,8 @@ public class TrashStand : Stand
             PlayerPrefs.SetInt("trashtutorial", 3);
             IndicatorManager.Instance.IndicaorDeActive();
             IndicatorManager.Instance.TutorialStepCompleted();
+            collectType = CollectType.All;
+            collectType2 = CollectType.All;
         }
         animator.SetBool("trashactive", true);
 

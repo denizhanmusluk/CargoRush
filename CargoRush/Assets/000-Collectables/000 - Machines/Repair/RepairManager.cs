@@ -39,7 +39,7 @@ public class RepairManager : MonoBehaviour
         {
             yield return new WaitForSeconds(60);
         }
-        if (PlayerPrefs.GetInt("machineerrorcount") >= 2)
+        if (PlayerPrefs.GetInt("machineerrorcount") >= 1)
         {
             repairWorker.gameObject.SetActive(true);
             buttonFree_GO.SetActive(false);
@@ -55,7 +55,7 @@ public class RepairManager : MonoBehaviour
         if (PlayerPrefs.GetInt("machineerrorcount") == 1 && PlayerPrefs.GetInt("purchaserepairboost") == 0)
         {
             TutorialManager.Instance.goToRepairMan_GO.SetActive(true);
-            IndicatorManager.Instance.IndicaorActive(repairWorkerFirstPosTR);
+            //IndicatorManager.Instance.IndicaorActive(repairWorkerFirstPosTR);
             repairWorker.showBuyRapairReward.gameObject.SetActive(false);
 
             //buttonFree_GO.SetActive(true);

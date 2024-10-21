@@ -33,7 +33,7 @@ public class HRUpgradeManager : MonoBehaviour
     private void Start()
     {
         _characterUpgradeSettings = LevelManager.Instance._currnetCharacterUpgradeSettings;
-        isEnoughMoney();
+        IsEnoughMoney();
         InitButtonValues();
 
         if (PlayerPrefs.GetInt("upgradebuttonopen") == 1)
@@ -110,7 +110,7 @@ public class HRUpgradeManager : MonoBehaviour
 
 
                 //PlayerBehaviour.Instance.playerController.CharacterUpgrade(Globals.holeRadiusLevel);
-                isEnoughMoney();
+                IsEnoughMoney();
                 InitButtonValues();
 
                 AllWorkerMoveSpeedInit();
@@ -152,7 +152,7 @@ public class HRUpgradeManager : MonoBehaviour
                 GameManager.Instance.MoneyUpdate(-workerCapacityCost);
                 Globals.workerCapacityLevel++;
                 PlayerPrefs.SetInt("workerCapacityLevel" + PlayerPrefs.GetInt("level"), Globals.workerCapacityLevel);
-                isEnoughMoney();
+                IsEnoughMoney();
                 InitButtonValues();
                 //string tag = "M" + (PlayerPrefs.GetInt("level") + 1).ToString() + "-WorkerCapacityUpgrade" + Globals.workerCapacityLevel.ToString();
                 //GameManager.Instance.GameAnalyticsTag(tag);
@@ -201,7 +201,7 @@ public class HRUpgradeManager : MonoBehaviour
                 GameManager.Instance.MoneyUpdate(-workerCost);
                 Globals.workerNoLevel++;
                 PlayerPrefs.SetInt("workerNoLevel" + PlayerPrefs.GetInt("level"), Globals.workerNoLevel);
-                isEnoughMoney();
+                IsEnoughMoney();
                 InitButtonValues();
                 CharacterUpgradeManager.Instance.InitButtonValues();
                 WorkerCreate();
@@ -237,7 +237,7 @@ public class HRUpgradeManager : MonoBehaviour
         }
 
     }
-    public void isEnoughMoney()
+    public void IsEnoughMoney()
     {
         if (Globals.workerMoveSpeedLevel < _characterUpgradeSettings.workerMoveSpeed.Length - 1 && Globals.moneyAmount >= _characterUpgradeSettings.workerMoveSpeedCost[Globals.workerMoveSpeedLevel + 1])
         {
@@ -274,7 +274,7 @@ public class HRUpgradeManager : MonoBehaviour
     {
         Globals.workerNoLevel++;
         PlayerPrefs.SetInt("workerNoLevel" + PlayerPrefs.GetInt("level"), Globals.workerNoLevel);
-        isEnoughMoney();
+        IsEnoughMoney();
         InitButtonValues();
         //HRWorkerGO.SetActive(false);
     }
@@ -418,7 +418,7 @@ public class HRUpgradeManager : MonoBehaviour
             }
 
 
-            isEnoughMoney();
+            IsEnoughMoney();
             InitButtonValues();
             AllWorkerMoveSpeedInit();
 
@@ -436,7 +436,7 @@ public class HRUpgradeManager : MonoBehaviour
         {
                 Globals.workerCapacityLevel++;
                 PlayerPrefs.SetInt("workerCapacityLevel" + PlayerPrefs.GetInt("level"), Globals.workerCapacityLevel);
-                isEnoughMoney();
+                IsEnoughMoney();
                 InitButtonValues();
             //    string tag = "M" + (PlayerPrefs.GetInt("level") + 1).ToString() + "-WorkerCapacityUpgrade" + Globals.workerCapacityLevel.ToString() + "-REWARDED";
             //GameManager.Instance.GameAnalyticsTag(tag);
@@ -468,7 +468,7 @@ public class HRUpgradeManager : MonoBehaviour
             int rebuyAmount = 0;
             Globals.workerNoLevel++;
             PlayerPrefs.SetInt("workerNoLevel" + PlayerPrefs.GetInt("level"), Globals.workerNoLevel);
-            isEnoughMoney();
+            IsEnoughMoney();
             InitButtonValues();
             WorkerCreate();
 
