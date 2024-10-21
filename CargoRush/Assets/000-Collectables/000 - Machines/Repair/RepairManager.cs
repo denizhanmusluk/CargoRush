@@ -56,8 +56,10 @@ public class RepairManager : MonoBehaviour
         {
             TutorialManager.Instance.goToRepairMan_GO.SetActive(true);
             IndicatorManager.Instance.IndicaorActive(repairWorkerFirstPosTR);
-            buttonFree_GO.SetActive(true);
-            buttonADV_GO.SetActive(false);
+            repairWorker.showBuyRapairReward.gameObject.SetActive(false);
+
+            //buttonFree_GO.SetActive(true);
+            //buttonADV_GO.SetActive(false);
             //RepairWorkerStart();
         }
     }

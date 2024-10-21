@@ -12,7 +12,7 @@ public class BoostPopUp : MonoBehaviour
     }
     IEnumerator OpenDelay()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(1.5f);
         noThnks_GO.SetActive(true);
     }
 }

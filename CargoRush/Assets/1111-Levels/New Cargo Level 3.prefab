@@ -10154,7 +10154,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7639802138753879990, guid: 7f17c3e16525a904fbd2baaecf22010d, type: 3}
       propertyPath: gaTag
-      value: ProductionLine3-Upgrade
+      value: ProductionLine3-CapacityUpgrade
       objectReference: {fileID: 0}
     - target: {fileID: 7639802138753879990, guid: 7f17c3e16525a904fbd2baaecf22010d, type: 3}
       propertyPath: buyName
@@ -10182,7 +10182,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7639802138753879990, guid: 7f17c3e16525a904fbd2baaecf22010d, type: 3}
       propertyPath: standShowName
-      value: Sponge Line Upgrade
+      value: Line Capacity Upgrade
       objectReference: {fileID: 0}
     - target: {fileID: 7639802138753879990, guid: 7f17c3e16525a904fbd2baaecf22010d, type: 3}
       propertyPath: currentCostBuild
@@ -10198,7 +10198,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7639802138753879990, guid: 7f17c3e16525a904fbd2baaecf22010d, type: 3}
       propertyPath: buyNameForResource
-      value: ProductionLineUpgrade
+      value: ProductionLineCapacityUpgrade
       objectReference: {fileID: 0}
     - target: {fileID: 7639802138753879990, guid: 7f17c3e16525a904fbd2baaecf22010d, type: 3}
       propertyPath: standUpgradeActive
@@ -10630,11 +10630,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: typeCount.Array.size
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: extraMoney.Array.size
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: tempIdList.Array.size
@@ -10642,7 +10642,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: vipImgList.Array.size
-      value: 5
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: typeCount.Array.data[0]
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: typeCount.Array.data[1]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: typeCount.Array.data[2]
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: typeCount.Array.data[4]
@@ -10650,36 +10662,108 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: boxCountTotal.Array.size
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: carPrefabList.Array.size
-      value: 5
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: extraMoney.Array.data[0]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: extraMoney.Array.data[2]
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: extraMoney.Array.data[4]
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: vipImgList.Array.data[0]
+      value: 
+      objectReference: {fileID: 21300000, guid: a12ef1a9f8d79bb4086b6fec08ed2744, type: 3}
+    - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: vipImgList.Array.data[1]
+      value: 
+      objectReference: {fileID: 21300000, guid: 8a7a88506860ad34e9578137166c808c, type: 3}
+    - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: vipImgList.Array.data[2]
+      value: 
+      objectReference: {fileID: 21300000, guid: 91f48e4b35e1bdd41b0c6dbc04860d9a, type: 3}
+    - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: vipImgList.Array.data[3]
+      value: 
+      objectReference: {fileID: 21300000, guid: 4860f63a5bca8ea4aaf5c9779f66ad59, type: 3}
+    - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: vipImgList.Array.data[4]
       value: 
       objectReference: {fileID: 21300000, guid: 4860f63a5bca8ea4aaf5c9779f66ad59, type: 3}
+    - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: carStandPosList.Array.size
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: workAreaList.Array.data[0]
       value: 
       objectReference: {fileID: 6021431428857818008}
     - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
-      propertyPath: carPrefabList.Array.data[2]
+      propertyPath: carPrefabList.Array.data[0]
+      value: 
+      objectReference: {fileID: 3933041869959669995, guid: b3d57ee534eb9d342be4442809923a38, type: 3}
+    - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: carPrefabList.Array.data[1]
       value: 
       objectReference: {fileID: 7249812016189751342, guid: 2fd062e0eb271a242ad116e28c674017, type: 3}
     - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
-      propertyPath: carPrefabList.Array.data[3]
+      propertyPath: carPrefabList.Array.data[2]
       value: 
       objectReference: {fileID: 5920884603787467827, guid: 25440dd891ac25a4eb3f4c54592d5379, type: 3}
+    - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: carPrefabList.Array.data[3]
+      value: 
+      objectReference: {fileID: 1387288646096644963, guid: 58b89aa7dd6f6c34fad69c4e50da7bf7, type: 3}
     - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: carPrefabList.Array.data[4]
       value: 
       objectReference: {fileID: 1387288646096644963, guid: 58b89aa7dd6f6c34fad69c4e50da7bf7, type: 3}
+    - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: cooldownTimeList.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: boxCountTotal.Array.data[0].x
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: boxCountTotal.Array.data[0].y
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: boxCountTotal.Array.data[1].x
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: boxCountTotal.Array.data[1].y
+      value: 24
+      objectReference: {fileID: 0}
+    - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: boxCountTotal.Array.data[2].x
+      value: 24
+      objectReference: {fileID: 0}
+    - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: boxCountTotal.Array.data[2].y
+      value: 48
+      objectReference: {fileID: 0}
+    - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: boxCountTotal.Array.data[3].x
+      value: 36
+      objectReference: {fileID: 0}
+    - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: boxCountTotal.Array.data[3].y
+      value: 60
+      objectReference: {fileID: 0}
     - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: boxCountTotal.Array.data[4].x
       value: 36
@@ -10687,6 +10771,58 @@ PrefabInstance:
     - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: boxCountTotal.Array.data[4].y
       value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: carStandPosList.Array.data[0]
+      value: 
+      objectReference: {fileID: 5501614376118263208}
+    - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: carStandPosList.Array.data[1]
+      value: 
+      objectReference: {fileID: 3884105188114621298}
+    - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: carStandPosList.Array.data[2]
+      value: 
+      objectReference: {fileID: 6623563919917289784}
+    - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: carStandPosList.Array.data[3]
+      value: 
+      objectReference: {fileID: 8534030672900842896}
+    - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: cooldownTimeList.Array.data[0]
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: cooldownTimeList.Array.data[1]
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: cooldownTimeList.Array.data[2]
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: cooldownTimeList.Array.data[3]
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: trashDropPerCustomer.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: trashDropPerCustomer.Array.data[0]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: trashDropPerCustomer.Array.data[1]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: trashDropPerCustomer.Array.data[2]
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: trashDropPerCustomer.Array.data[3]
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 959860251286046510, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: cost
@@ -10760,6 +10896,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1833742546151014425, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 53677494e9a92a14a90fad3ae9468952, type: 3}
     - target: {fileID: 2238433986848109740, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: m_LocalPosition.x
       value: 4.630004
@@ -10806,7 +10946,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2250318679921702754, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: standShowName
-      value: New Delivery Slot
+      value: Delivery Slot
       objectReference: {fileID: 0}
     - target: {fileID: 2250318679921702754, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: currentCostBuild
@@ -10840,6 +10980,10 @@ PrefabInstance:
       propertyPath: areaName
       value: ShippingLine3
       objectReference: {fileID: 0}
+    - target: {fileID: 3590985885512939671, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 5af25d10540c65a46b3d28de4a4f401d, type: 3}
     - target: {fileID: 3603617195142099203, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: cost
       value: 2200
@@ -10924,6 +11068,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Car 1 (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 5150770868911528489, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 1e5ff538f8c422049b68a319533c844b, type: 3}
     - target: {fileID: 5371422181764278934, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: m_LocalPosition.x
       value: 35.4
@@ -10988,6 +11136,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 18.4
       objectReference: {fileID: 0}
+    - target: {fileID: 7768684994781897345, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: eda12460ae4bb7a4291de643bdd490d1, type: 3}
     - target: {fileID: 7826313779655536965, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -11096,6 +11248,10 @@ PrefabInstance:
       propertyPath: currentCostBuild
       value: courier3upgrade3cost
       objectReference: {fileID: 0}
+    - target: {fileID: 8270834417077037967, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: buyAreas.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8701131099921327550, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.1899972
@@ -11174,9 +11330,29 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 3007737682571434376, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
   m_PrefabInstance: {fileID: 491606095857497918}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &3884105188114621298 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3690018426376574028, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+  m_PrefabInstance: {fileID: 491606095857497918}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &5501614376118263208 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5371422181764278934, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+  m_PrefabInstance: {fileID: 491606095857497918}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &6623563919917289784 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6717445852174165510, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+  m_PrefabInstance: {fileID: 491606095857497918}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7660112558553843323 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7826313779655536965, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+  m_PrefabInstance: {fileID: 491606095857497918}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &8534030672900842896 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8123506972756169390, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
   m_PrefabInstance: {fileID: 491606095857497918}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &548260806389650943
@@ -11423,7 +11599,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7639802138753879990, guid: 7f17c3e16525a904fbd2baaecf22010d, type: 3}
       propertyPath: gaTag
-      value: ProductionLine2-Upgrade
+      value: ProductionLine2-CapacityUpgrade
       objectReference: {fileID: 0}
     - target: {fileID: 7639802138753879990, guid: 7f17c3e16525a904fbd2baaecf22010d, type: 3}
       propertyPath: buyName
@@ -11451,7 +11627,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7639802138753879990, guid: 7f17c3e16525a904fbd2baaecf22010d, type: 3}
       propertyPath: standShowName
-      value: Toilet Paper Line Upgrade
+      value: Line Capacity Upgrade
       objectReference: {fileID: 0}
     - target: {fileID: 7639802138753879990, guid: 7f17c3e16525a904fbd2baaecf22010d, type: 3}
       propertyPath: currentCostBuild
@@ -11467,7 +11643,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7639802138753879990, guid: 7f17c3e16525a904fbd2baaecf22010d, type: 3}
       propertyPath: buyNameForResource
-      value: ProductionLineUpgrade
+      value: ProductionLineCapacityUpgrade
       objectReference: {fileID: 0}
     - target: {fileID: 7639802138753879990, guid: 7f17c3e16525a904fbd2baaecf22010d, type: 3}
       propertyPath: standUpgradeActive
@@ -11976,7 +12152,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7639802138753879990, guid: 7f17c3e16525a904fbd2baaecf22010d, type: 3}
       propertyPath: gaTag
-      value: ProductionLine2-Upgrade
+      value: ProductionLine2-CapacityUpgrade
       objectReference: {fileID: 0}
     - target: {fileID: 7639802138753879990, guid: 7f17c3e16525a904fbd2baaecf22010d, type: 3}
       propertyPath: buyName
@@ -12004,7 +12180,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7639802138753879990, guid: 7f17c3e16525a904fbd2baaecf22010d, type: 3}
       propertyPath: standShowName
-      value: Toilet Paper Line Upgrade
+      value: Line Capacity Upgrade
       objectReference: {fileID: 0}
     - target: {fileID: 7639802138753879990, guid: 7f17c3e16525a904fbd2baaecf22010d, type: 3}
       propertyPath: currentCostBuild
@@ -12020,7 +12196,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7639802138753879990, guid: 7f17c3e16525a904fbd2baaecf22010d, type: 3}
       propertyPath: buyNameForResource
-      value: ProductionLineUpgrade
+      value: ProductionLineCapacityUpgrade
       objectReference: {fileID: 0}
     - target: {fileID: 7639802138753879990, guid: 7f17c3e16525a904fbd2baaecf22010d, type: 3}
       propertyPath: standUpgradeActive
@@ -17025,7 +17201,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7639802138753879990, guid: 7f17c3e16525a904fbd2baaecf22010d, type: 3}
       propertyPath: gaTag
-      value: ProductionLine1-Upgrade
+      value: ProductionLine1-CapacityUpgrade
       objectReference: {fileID: 0}
     - target: {fileID: 7639802138753879990, guid: 7f17c3e16525a904fbd2baaecf22010d, type: 3}
       propertyPath: buyName
@@ -17053,7 +17229,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7639802138753879990, guid: 7f17c3e16525a904fbd2baaecf22010d, type: 3}
       propertyPath: standShowName
-      value: BMO Line Upgrade
+      value: Line Capacity Upgrade
       objectReference: {fileID: 0}
     - target: {fileID: 7639802138753879990, guid: 7f17c3e16525a904fbd2baaecf22010d, type: 3}
       propertyPath: currentCostBuild
@@ -17069,7 +17245,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7639802138753879990, guid: 7f17c3e16525a904fbd2baaecf22010d, type: 3}
       propertyPath: buyNameForResource
-      value: ProductionLineUpgrade
+      value: ProductionLineCapacityUpgrade
       objectReference: {fileID: 0}
     - target: {fileID: 7639802138753879990, guid: 7f17c3e16525a904fbd2baaecf22010d, type: 3}
       propertyPath: standUpgradeActive
@@ -17855,7 +18031,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7639802138753879990, guid: 7f17c3e16525a904fbd2baaecf22010d, type: 3}
       propertyPath: gaTag
-      value: ProductionLine3-Upgrade
+      value: ProductionLine3-CapacityUpgrade
       objectReference: {fileID: 0}
     - target: {fileID: 7639802138753879990, guid: 7f17c3e16525a904fbd2baaecf22010d, type: 3}
       propertyPath: buyName
@@ -17883,7 +18059,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7639802138753879990, guid: 7f17c3e16525a904fbd2baaecf22010d, type: 3}
       propertyPath: standShowName
-      value: Sponge Line Upgrade
+      value: Line Capacity Upgrade
       objectReference: {fileID: 0}
     - target: {fileID: 7639802138753879990, guid: 7f17c3e16525a904fbd2baaecf22010d, type: 3}
       propertyPath: currentCostBuild
@@ -17899,7 +18075,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7639802138753879990, guid: 7f17c3e16525a904fbd2baaecf22010d, type: 3}
       propertyPath: buyNameForResource
-      value: ProductionLineUpgrade
+      value: ProductionLineCapacityUpgrade
       objectReference: {fileID: 0}
     - target: {fileID: 7639802138753879990, guid: 7f17c3e16525a904fbd2baaecf22010d, type: 3}
       propertyPath: standUpgradeActive
@@ -18711,7 +18887,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7639802138753879990, guid: 7f17c3e16525a904fbd2baaecf22010d, type: 3}
       propertyPath: gaTag
-      value: ProductionLine1-Upgrade
+      value: ProductionLine1-CapacityUpgrade
       objectReference: {fileID: 0}
     - target: {fileID: 7639802138753879990, guid: 7f17c3e16525a904fbd2baaecf22010d, type: 3}
       propertyPath: buyName
@@ -18739,7 +18915,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7639802138753879990, guid: 7f17c3e16525a904fbd2baaecf22010d, type: 3}
       propertyPath: standShowName
-      value: BMO Line Upgrade
+      value: Line Capacity Upgrade
       objectReference: {fileID: 0}
     - target: {fileID: 7639802138753879990, guid: 7f17c3e16525a904fbd2baaecf22010d, type: 3}
       propertyPath: currentCostBuild
@@ -18755,7 +18931,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7639802138753879990, guid: 7f17c3e16525a904fbd2baaecf22010d, type: 3}
       propertyPath: buyNameForResource
-      value: ProductionLineUpgrade
+      value: ProductionLineCapacityUpgrade
       objectReference: {fileID: 0}
     - target: {fileID: 7639802138753879990, guid: 7f17c3e16525a904fbd2baaecf22010d, type: 3}
       propertyPath: standUpgradeActive
@@ -21133,6 +21309,10 @@ PrefabInstance:
     - target: {fileID: 7137115091747826804, guid: 96879662db32419408267d6d1ff751c0, type: 3}
       propertyPath: m_Name
       value: NewLevel_First_Open_Boss
+      objectReference: {fileID: 0}
+    - target: {fileID: 7137115091747826804, guid: 96879662db32419408267d6d1ff751c0, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7428482837081986249, guid: 96879662db32419408267d6d1ff751c0, type: 3}
       propertyPath: m_LocalPosition.x
@@ -24183,7 +24363,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7639802138753879990, guid: 7f17c3e16525a904fbd2baaecf22010d, type: 3}
       propertyPath: gaTag
-      value: ProductionLine2-Upgrade
+      value: ProductionLine2-CapacityUpgrade
       objectReference: {fileID: 0}
     - target: {fileID: 7639802138753879990, guid: 7f17c3e16525a904fbd2baaecf22010d, type: 3}
       propertyPath: buyName
@@ -24211,7 +24391,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7639802138753879990, guid: 7f17c3e16525a904fbd2baaecf22010d, type: 3}
       propertyPath: standShowName
-      value: Toilet Paper Line Upgrade
+      value: Line Capacity Upgrade
       objectReference: {fileID: 0}
     - target: {fileID: 7639802138753879990, guid: 7f17c3e16525a904fbd2baaecf22010d, type: 3}
       propertyPath: currentCostBuild
@@ -24227,7 +24407,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7639802138753879990, guid: 7f17c3e16525a904fbd2baaecf22010d, type: 3}
       propertyPath: buyNameForResource
-      value: ProductionLineUpgrade
+      value: ProductionLineCapacityUpgrade
       objectReference: {fileID: 0}
     - target: {fileID: 7639802138753879990, guid: 7f17c3e16525a904fbd2baaecf22010d, type: 3}
       propertyPath: standUpgradeActive
@@ -26601,7 +26781,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7639802138753879990, guid: 7f17c3e16525a904fbd2baaecf22010d, type: 3}
       propertyPath: gaTag
-      value: ProductionLine1-Upgrade
+      value: ProductionLine1-CapacityUpgrade
       objectReference: {fileID: 0}
     - target: {fileID: 7639802138753879990, guid: 7f17c3e16525a904fbd2baaecf22010d, type: 3}
       propertyPath: buyName
@@ -26629,7 +26809,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7639802138753879990, guid: 7f17c3e16525a904fbd2baaecf22010d, type: 3}
       propertyPath: standShowName
-      value: BMO Line Upgrade
+      value: Line Capacity Upgrade
       objectReference: {fileID: 0}
     - target: {fileID: 7639802138753879990, guid: 7f17c3e16525a904fbd2baaecf22010d, type: 3}
       propertyPath: currentCostBuild
@@ -26645,7 +26825,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7639802138753879990, guid: 7f17c3e16525a904fbd2baaecf22010d, type: 3}
       propertyPath: buyNameForResource
-      value: ProductionLineUpgrade
+      value: ProductionLineCapacityUpgrade
       objectReference: {fileID: 0}
     - target: {fileID: 7639802138753879990, guid: 7f17c3e16525a904fbd2baaecf22010d, type: 3}
       propertyPath: standUpgradeActive
@@ -27663,11 +27843,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: typeCount.Array.size
-      value: 5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: extraMoney.Array.size
-      value: 5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: tempIdList.Array.size
@@ -27675,7 +27855,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: vipImgList.Array.size
-      value: 5
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: typeCount.Array.data[0]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: typeCount.Array.data[1]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: typeCount.Array.data[2]
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: typeCount.Array.data[4]
@@ -27683,28 +27875,64 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: boxCountTotal.Array.size
-      value: 5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: carPrefabList.Array.size
-      value: 5
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: extraMoney.Array.data[0]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: extraMoney.Array.data[1]
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: extraMoney.Array.data[2]
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: extraMoney.Array.data[4]
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: vipImgList.Array.data[0]
+      value: 
+      objectReference: {fileID: 21300000, guid: 8a7a88506860ad34e9578137166c808c, type: 3}
+    - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: vipImgList.Array.data[1]
+      value: 
+      objectReference: {fileID: 21300000, guid: 91f48e4b35e1bdd41b0c6dbc04860d9a, type: 3}
+    - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: vipImgList.Array.data[2]
+      value: 
+      objectReference: {fileID: 21300000, guid: 4860f63a5bca8ea4aaf5c9779f66ad59, type: 3}
+    - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: vipImgList.Array.data[4]
       value: 
       objectReference: {fileID: 21300000, guid: 4860f63a5bca8ea4aaf5c9779f66ad59, type: 3}
+    - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: carStandPosList.Array.size
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: workAreaList.Array.data[0]
       value: 
       objectReference: {fileID: 6021431428857818008}
     - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
-      propertyPath: carPrefabList.Array.data[2]
+      propertyPath: carPrefabList.Array.data[0]
       value: 
       objectReference: {fileID: 7249812016189751342, guid: 2fd062e0eb271a242ad116e28c674017, type: 3}
+    - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: carPrefabList.Array.data[1]
+      value: 
+      objectReference: {fileID: 5920884603787467827, guid: 25440dd891ac25a4eb3f4c54592d5379, type: 3}
+    - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: carPrefabList.Array.data[2]
+      value: 
+      objectReference: {fileID: 1387288646096644963, guid: 58b89aa7dd6f6c34fad69c4e50da7bf7, type: 3}
     - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: carPrefabList.Array.data[3]
       value: 
@@ -27714,12 +27942,80 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1387288646096644963, guid: 58b89aa7dd6f6c34fad69c4e50da7bf7, type: 3}
     - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: cooldownTimeList.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: boxCountTotal.Array.data[0].x
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: boxCountTotal.Array.data[0].y
+      value: 24
+      objectReference: {fileID: 0}
+    - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: boxCountTotal.Array.data[1].x
+      value: 24
+      objectReference: {fileID: 0}
+    - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: boxCountTotal.Array.data[1].y
+      value: 48
+      objectReference: {fileID: 0}
+    - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: boxCountTotal.Array.data[2].x
+      value: 36
+      objectReference: {fileID: 0}
+    - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: boxCountTotal.Array.data[2].y
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: boxCountTotal.Array.data[4].x
       value: 36
       objectReference: {fileID: 0}
     - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: boxCountTotal.Array.data[4].y
       value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: carStandPosList.Array.data[0]
+      value: 
+      objectReference: {fileID: 7714129294633376544}
+    - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: carStandPosList.Array.data[1]
+      value: 
+      objectReference: {fileID: 361038819864078698}
+    - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: carStandPosList.Array.data[2]
+      value: 
+      objectReference: {fileID: 2920581062387473858}
+    - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: cooldownTimeList.Array.data[0]
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: cooldownTimeList.Array.data[1]
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: cooldownTimeList.Array.data[2]
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: trashDropPerCustomer.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: trashDropPerCustomer.Array.data[0]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: trashDropPerCustomer.Array.data[1]
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: trashDropPerCustomer.Array.data[2]
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 959860251286046510, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: cost
@@ -27793,6 +28089,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1833742546151014425, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: eda12460ae4bb7a4291de643bdd490d1, type: 3}
     - target: {fileID: 2238433986848109740, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: m_LocalPosition.x
       value: 4.630004
@@ -27839,7 +28139,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2250318679921702754, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: standShowName
-      value: New Delivery Slot
+      value: Delivery Slot
       objectReference: {fileID: 0}
     - target: {fileID: 2250318679921702754, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: currentCostBuild
@@ -27961,6 +28261,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Car 1 (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 5150770868911528489, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 5351d9892aae6074f848a5931a7360f9, type: 3}
     - target: {fileID: 5371422181764278934, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: m_LocalPosition.x
       value: 35.4
@@ -28025,6 +28329,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 18.4
       objectReference: {fileID: 0}
+    - target: {fileID: 7768684994781897345, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 5af25d10540c65a46b3d28de4a4f401d, type: 3}
     - target: {fileID: 7826313779655536965, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -28193,14 +28501,28 @@ PrefabInstance:
       propertyPath: currentCostBuild
       value: courier4upgrade2cost
       objectReference: {fileID: 0}
+    - target: {fileID: 8986497473841602079, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: buyAreas.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+--- !u!4 &361038819864078698 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6717445852174165510, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+  m_PrefabInstance: {fileID: 6357819943410257772}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2376531913846745811 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8701131099921327551, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+  m_PrefabInstance: {fileID: 6357819943410257772}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &2920581062387473858 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8123506972756169390, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
   m_PrefabInstance: {fileID: 6357819943410257772}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &3794042337168997929 stripped
@@ -28211,6 +28533,11 @@ Transform:
 --- !u!1 &5728551949244930105 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1676575084866787157, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+  m_PrefabInstance: {fileID: 6357819943410257772}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &7714129294633376544 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3690018426376574028, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
   m_PrefabInstance: {fileID: 6357819943410257772}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6532138135301735893
@@ -28912,7 +29239,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2250318679921702754, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: standShowName
-      value: New Delivery Slot
+      value: Delivery Slot
       objectReference: {fileID: 0}
     - target: {fileID: 2250318679921702754, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: checkMoneyActive
@@ -29697,7 +30024,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7639802138753879990, guid: 7f17c3e16525a904fbd2baaecf22010d, type: 3}
       propertyPath: gaTag
-      value: ProductionLine3-Upgrade
+      value: ProductionLine3-CapacityUpgrade
       objectReference: {fileID: 0}
     - target: {fileID: 7639802138753879990, guid: 7f17c3e16525a904fbd2baaecf22010d, type: 3}
       propertyPath: buyName
@@ -29725,7 +30052,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7639802138753879990, guid: 7f17c3e16525a904fbd2baaecf22010d, type: 3}
       propertyPath: standShowName
-      value: Sponge Line Upgrade
+      value: Line Capacity Upgrade
       objectReference: {fileID: 0}
     - target: {fileID: 7639802138753879990, guid: 7f17c3e16525a904fbd2baaecf22010d, type: 3}
       propertyPath: currentCostBuild
@@ -29741,7 +30068,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7639802138753879990, guid: 7f17c3e16525a904fbd2baaecf22010d, type: 3}
       propertyPath: buyNameForResource
-      value: ProductionLineUpgrade
+      value: ProductionLineCapacityUpgrade
       objectReference: {fileID: 0}
     - target: {fileID: 7639802138753879990, guid: 7f17c3e16525a904fbd2baaecf22010d, type: 3}
       propertyPath: standUpgradeActive
@@ -30212,7 +30539,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7639802138753879990, guid: 7f17c3e16525a904fbd2baaecf22010d, type: 3}
       propertyPath: gaTag
-      value: ProductionLine2-Upgrade
+      value: ProductionLine2-CapacityUpgrade
       objectReference: {fileID: 0}
     - target: {fileID: 7639802138753879990, guid: 7f17c3e16525a904fbd2baaecf22010d, type: 3}
       propertyPath: buyName
@@ -30240,7 +30567,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7639802138753879990, guid: 7f17c3e16525a904fbd2baaecf22010d, type: 3}
       propertyPath: standShowName
-      value: Toilet Paper Line Upgrade
+      value: Line Capacity Upgrade
       objectReference: {fileID: 0}
     - target: {fileID: 7639802138753879990, guid: 7f17c3e16525a904fbd2baaecf22010d, type: 3}
       propertyPath: currentCostBuild
@@ -30256,7 +30583,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7639802138753879990, guid: 7f17c3e16525a904fbd2baaecf22010d, type: 3}
       propertyPath: buyNameForResource
-      value: ProductionLineUpgrade
+      value: ProductionLineCapacityUpgrade
       objectReference: {fileID: 0}
     - target: {fileID: 7639802138753879990, guid: 7f17c3e16525a904fbd2baaecf22010d, type: 3}
       propertyPath: standUpgradeActive
@@ -31067,7 +31394,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7639802138753879990, guid: 7f17c3e16525a904fbd2baaecf22010d, type: 3}
       propertyPath: gaTag
-      value: ProductionLine2-Upgrade
+      value: ProductionLine2-CapacityUpgrade
       objectReference: {fileID: 0}
     - target: {fileID: 7639802138753879990, guid: 7f17c3e16525a904fbd2baaecf22010d, type: 3}
       propertyPath: buyName
@@ -31095,7 +31422,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7639802138753879990, guid: 7f17c3e16525a904fbd2baaecf22010d, type: 3}
       propertyPath: standShowName
-      value: Toilet Paper Line Upgrade
+      value: Line Capacity Upgrade
       objectReference: {fileID: 0}
     - target: {fileID: 7639802138753879990, guid: 7f17c3e16525a904fbd2baaecf22010d, type: 3}
       propertyPath: currentCostBuild
@@ -31111,7 +31438,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7639802138753879990, guid: 7f17c3e16525a904fbd2baaecf22010d, type: 3}
       propertyPath: buyNameForResource
-      value: ProductionLineUpgrade
+      value: ProductionLineCapacityUpgrade
       objectReference: {fileID: 0}
     - target: {fileID: 7639802138753879990, guid: 7f17c3e16525a904fbd2baaecf22010d, type: 3}
       propertyPath: standUpgradeActive
@@ -31214,11 +31541,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: typeCount.Array.size
-      value: 5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: extraMoney.Array.size
-      value: 5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: tempIdList.Array.size
@@ -31226,7 +31553,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: vipImgList.Array.size
-      value: 5
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: typeCount.Array.data[0]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: typeCount.Array.data[1]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: typeCount.Array.data[2]
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: typeCount.Array.data[4]
@@ -31234,28 +31573,64 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: boxCountTotal.Array.size
-      value: 5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: carPrefabList.Array.size
-      value: 5
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: extraMoney.Array.data[0]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: extraMoney.Array.data[1]
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: extraMoney.Array.data[2]
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: extraMoney.Array.data[4]
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: vipImgList.Array.data[0]
+      value: 
+      objectReference: {fileID: 21300000, guid: 8a7a88506860ad34e9578137166c808c, type: 3}
+    - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: vipImgList.Array.data[1]
+      value: 
+      objectReference: {fileID: 21300000, guid: 91f48e4b35e1bdd41b0c6dbc04860d9a, type: 3}
+    - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: vipImgList.Array.data[2]
+      value: 
+      objectReference: {fileID: 21300000, guid: 4860f63a5bca8ea4aaf5c9779f66ad59, type: 3}
+    - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: vipImgList.Array.data[4]
       value: 
       objectReference: {fileID: 21300000, guid: 4860f63a5bca8ea4aaf5c9779f66ad59, type: 3}
+    - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: carStandPosList.Array.size
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: workAreaList.Array.data[0]
       value: 
       objectReference: {fileID: 6021431428857818008}
     - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
-      propertyPath: carPrefabList.Array.data[2]
+      propertyPath: carPrefabList.Array.data[0]
       value: 
       objectReference: {fileID: 7249812016189751342, guid: 2fd062e0eb271a242ad116e28c674017, type: 3}
+    - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: carPrefabList.Array.data[1]
+      value: 
+      objectReference: {fileID: 5920884603787467827, guid: 25440dd891ac25a4eb3f4c54592d5379, type: 3}
+    - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: carPrefabList.Array.data[2]
+      value: 
+      objectReference: {fileID: 1387288646096644963, guid: 58b89aa7dd6f6c34fad69c4e50da7bf7, type: 3}
     - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: carPrefabList.Array.data[3]
       value: 
@@ -31265,12 +31640,80 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1387288646096644963, guid: 58b89aa7dd6f6c34fad69c4e50da7bf7, type: 3}
     - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: cooldownTimeList.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: boxCountTotal.Array.data[0].x
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: boxCountTotal.Array.data[0].y
+      value: 24
+      objectReference: {fileID: 0}
+    - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: boxCountTotal.Array.data[1].x
+      value: 24
+      objectReference: {fileID: 0}
+    - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: boxCountTotal.Array.data[1].y
+      value: 48
+      objectReference: {fileID: 0}
+    - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: boxCountTotal.Array.data[2].x
+      value: 36
+      objectReference: {fileID: 0}
+    - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: boxCountTotal.Array.data[2].y
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: boxCountTotal.Array.data[4].x
       value: 36
       objectReference: {fileID: 0}
     - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: boxCountTotal.Array.data[4].y
       value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: carStandPosList.Array.data[0]
+      value: 
+      objectReference: {fileID: 5769096835190394139}
+    - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: carStandPosList.Array.data[1]
+      value: 
+      objectReference: {fileID: 4468501417799974737}
+    - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: carStandPosList.Array.data[2]
+      value: 
+      objectReference: {fileID: 1406840216211327993}
+    - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: cooldownTimeList.Array.data[0]
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: cooldownTimeList.Array.data[1]
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: cooldownTimeList.Array.data[2]
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: trashDropPerCustomer.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: trashDropPerCustomer.Array.data[0]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: trashDropPerCustomer.Array.data[1]
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 920661261634048179, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: trashDropPerCustomer.Array.data[2]
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 959860251286046510, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: cost
@@ -31344,6 +31787,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1833742546151014425, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: eda12460ae4bb7a4291de643bdd490d1, type: 3}
     - target: {fileID: 2238433986848109740, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: m_LocalPosition.x
       value: 4.630004
@@ -31390,7 +31837,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2250318679921702754, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: standShowName
-      value: New Delivery Slot
+      value: Delivery Slot
       objectReference: {fileID: 0}
     - target: {fileID: 2250318679921702754, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: currentCostBuild
@@ -31508,6 +31955,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Car 1 (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 5150770868911528489, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 5351d9892aae6074f848a5931a7360f9, type: 3}
     - target: {fileID: 5371422181764278934, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: m_LocalPosition.x
       value: 35.4
@@ -31572,6 +32023,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 18.4
       objectReference: {fileID: 0}
+    - target: {fileID: 7768684994781897345, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 5af25d10540c65a46b3d28de4a4f401d, type: 3}
     - target: {fileID: 7826313779655536965, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -31740,6 +32195,10 @@ PrefabInstance:
       propertyPath: currentCostBuild
       value: courier5upgrade2cost
       objectReference: {fileID: 0}
+    - target: {fileID: 8986497473841602079, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+      propertyPath: buyAreas.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -31750,9 +32209,24 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7826313779655536965, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
   m_PrefabInstance: {fileID: 7150140832489199959}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &1406840216211327993 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8123506972756169390, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+  m_PrefabInstance: {fileID: 7150140832489199959}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2016143233421343976 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8701131099921327551, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+  m_PrefabInstance: {fileID: 7150140832489199959}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &4468501417799974737 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6717445852174165510, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
+  m_PrefabInstance: {fileID: 7150140832489199959}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &5769096835190394139 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3690018426376574028, guid: aeeb6559178f1fb49beb151c272fef23, type: 3}
   m_PrefabInstance: {fileID: 7150140832489199959}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &8394150174700178946 stripped
@@ -33301,7 +33775,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7639802138753879990, guid: 7f17c3e16525a904fbd2baaecf22010d, type: 3}
       propertyPath: gaTag
-      value: ProductionLine1-Upgrade
+      value: ProductionLine1-CapacityUpgrade
       objectReference: {fileID: 0}
     - target: {fileID: 7639802138753879990, guid: 7f17c3e16525a904fbd2baaecf22010d, type: 3}
       propertyPath: buyName
@@ -33329,7 +33803,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7639802138753879990, guid: 7f17c3e16525a904fbd2baaecf22010d, type: 3}
       propertyPath: standShowName
-      value: BMO Line Upgrade
+      value: Line Capacity Upgrade
       objectReference: {fileID: 0}
     - target: {fileID: 7639802138753879990, guid: 7f17c3e16525a904fbd2baaecf22010d, type: 3}
       propertyPath: currentCostBuild
@@ -33345,7 +33819,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7639802138753879990, guid: 7f17c3e16525a904fbd2baaecf22010d, type: 3}
       propertyPath: buyNameForResource
-      value: ProductionLineUpgrade
+      value: ProductionLineCapacityUpgrade
       objectReference: {fileID: 0}
     - target: {fileID: 7639802138753879990, guid: 7f17c3e16525a904fbd2baaecf22010d, type: 3}
       propertyPath: standUpgradeActive
@@ -35702,7 +36176,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7639802138753879990, guid: 7f17c3e16525a904fbd2baaecf22010d, type: 3}
       propertyPath: gaTag
-      value: ProductionLine1-Upgrade
+      value: ProductionLine1-CapacityUpgrade
       objectReference: {fileID: 0}
     - target: {fileID: 7639802138753879990, guid: 7f17c3e16525a904fbd2baaecf22010d, type: 3}
       propertyPath: buyName
@@ -35730,7 +36204,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7639802138753879990, guid: 7f17c3e16525a904fbd2baaecf22010d, type: 3}
       propertyPath: standShowName
-      value: BMO Line Upgrade
+      value: Line Capacity Upgrade
       objectReference: {fileID: 0}
     - target: {fileID: 7639802138753879990, guid: 7f17c3e16525a904fbd2baaecf22010d, type: 3}
       propertyPath: currentCostBuild
@@ -35746,7 +36220,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7639802138753879990, guid: 7f17c3e16525a904fbd2baaecf22010d, type: 3}
       propertyPath: buyNameForResource
-      value: ProductionLineUpgrade
+      value: ProductionLineCapacityUpgrade
       objectReference: {fileID: 0}
     - target: {fileID: 7639802138753879990, guid: 7f17c3e16525a904fbd2baaecf22010d, type: 3}
       propertyPath: standUpgradeActive
@@ -35962,10 +36436,22 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3098120056577530933, guid: 4c5640f3bcca3c04f9a475a19b57d440, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 1e5ff538f8c422049b68a319533c844b, type: 3}
     - target: {fileID: 6796764444096269619, guid: 4c5640f3bcca3c04f9a475a19b57d440, type: 3}
       propertyPath: buildPrefab
       value: 
       objectReference: {fileID: 3417995031392988854}
+    - target: {fileID: 6796764444096269619, guid: 4c5640f3bcca3c04f9a475a19b57d440, type: 3}
+      propertyPath: rewardedName
+      value: DeliverySlot3_REWARDED
+      objectReference: {fileID: 0}
+    - target: {fileID: 6796764444096269619, guid: 4c5640f3bcca3c04f9a475a19b57d440, type: 3}
+      propertyPath: standShowName
+      value: Delivery Slot
+      objectReference: {fileID: 0}
     - target: {fileID: 6796764444096269619, guid: 4c5640f3bcca3c04f9a475a19b57d440, type: 3}
       propertyPath: buyAreas.Array.data[0]
       value: 
@@ -36936,7 +37422,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7639802138753879990, guid: 7f17c3e16525a904fbd2baaecf22010d, type: 3}
       propertyPath: gaTag
-      value: ProductionLine3-Upgrade
+      value: ProductionLine3-CapacityUpgrade
       objectReference: {fileID: 0}
     - target: {fileID: 7639802138753879990, guid: 7f17c3e16525a904fbd2baaecf22010d, type: 3}
       propertyPath: buyName
@@ -36964,7 +37450,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7639802138753879990, guid: 7f17c3e16525a904fbd2baaecf22010d, type: 3}
       propertyPath: standShowName
-      value: Sponge Line Upgrade
+      value: Line Capacity Upgrade
       objectReference: {fileID: 0}
     - target: {fileID: 7639802138753879990, guid: 7f17c3e16525a904fbd2baaecf22010d, type: 3}
       propertyPath: currentCostBuild
@@ -36980,7 +37466,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7639802138753879990, guid: 7f17c3e16525a904fbd2baaecf22010d, type: 3}
       propertyPath: buyNameForResource
-      value: ProductionLineUpgrade
+      value: ProductionLineCapacityUpgrade
       objectReference: {fileID: 0}
     - target: {fileID: 7639802138753879990, guid: 7f17c3e16525a904fbd2baaecf22010d, type: 3}
       propertyPath: standUpgradeActive
@@ -38323,7 +38809,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7639802138753879990, guid: 7f17c3e16525a904fbd2baaecf22010d, type: 3}
       propertyPath: gaTag
-      value: ProductionLine3-Upgrade
+      value: ProductionLine3-CapacityUpgrade
       objectReference: {fileID: 0}
     - target: {fileID: 7639802138753879990, guid: 7f17c3e16525a904fbd2baaecf22010d, type: 3}
       propertyPath: buyName
@@ -38351,7 +38837,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7639802138753879990, guid: 7f17c3e16525a904fbd2baaecf22010d, type: 3}
       propertyPath: standShowName
-      value: Sponge Line Upgrade
+      value: Line Capacity Upgrade
       objectReference: {fileID: 0}
     - target: {fileID: 7639802138753879990, guid: 7f17c3e16525a904fbd2baaecf22010d, type: 3}
       propertyPath: currentCostBuild
@@ -38367,7 +38853,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7639802138753879990, guid: 7f17c3e16525a904fbd2baaecf22010d, type: 3}
       propertyPath: buyNameForResource
-      value: ProductionLineUpgrade
+      value: ProductionLineCapacityUpgrade
       objectReference: {fileID: 0}
     - target: {fileID: 7639802138753879990, guid: 7f17c3e16525a904fbd2baaecf22010d, type: 3}
       propertyPath: standUpgradeActive

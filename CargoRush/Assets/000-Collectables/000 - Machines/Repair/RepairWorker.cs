@@ -214,5 +214,8 @@ public class RepairWorker : MonoBehaviour
             WorkerRepairEnd();
         }
     }
-
+    public void OnlyRepairAnim()
+    {
+        animator.SetBool("repair", true);
+    }
 }

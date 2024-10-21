@@ -529,7 +529,7 @@ public class ProcessMachine : Stand, IStandUpgrade, IMachineActive
             {
                 if (PlayerPrefs.GetInt("tutorialcompleted") == 0)
                 {
-                    speedFactor2 = 2f;
+                    speedFactor2 = 3f;
                 }
                 else
                 {

@@ -80,7 +80,11 @@ public class MachineRepair : MonoBehaviour
     void RepairStarted()
     {
         StartCoroutine(RepairStartedDelay());
- 
+        if (PlayerPrefs.GetInt("firstrepairactive") == 0)
+        {
+            PlayerPrefs.SetInt("firstrepairactive", 1);
+            RepairManager.Instance.repairWorker.OnlyRepairAnim();
+        }
     }
     IEnumerator RepairStartedDelay()
     {
@@ -102,9 +106,17 @@ public class MachineRepair : MonoBehaviour
 
         PlayerController.Instance.PlayerControl_ReActive();
         PlayerController.Instance.animator.SetBool("repair", false);
+
+        if (PlayerPrefs.GetInt("firstrepairactive") == 1)
+        {
+            PlayerPrefs.SetInt("firstrepairactive", 2);
+            PopUpManager.Instance.repairPopUp.SetActive(true);
+        }
+
         yield return new WaitForSeconds(0.5f);
         imageRepairFill.fillAmount = 0;
         imageFill.fillAmount = 0;
         gameObject.SetActive(false);
+       
     }
 }

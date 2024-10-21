@@ -294,6 +294,15 @@ public class MineCrusher : Stand, IStandUpgrade
         //float waitTime = 1f;
         while (droppedCollectionList.Count > 0 && cannedCount < areaCount * productCountTotal)
         {
+            if (PlayerPrefs.GetInt("tutorialcompleted") == 0)
+            {
+                speedFactor2 = 3f;
+            }
+            else
+            {
+                speedFactor2 = 1f;
+            }
+
             MinesDropAreaCheck();
 
             //machineActive = true;
@@ -339,7 +348,7 @@ public class MineCrusher : Stand, IStandUpgrade
             //{
             //    _waitTime = Time.deltaTime;
             //}
-            yield return new WaitForSeconds(waitTime / speedFactors[Globals.machineSpeedLevel]);
+            yield return new WaitForSeconds(waitTime / (speedFactor2 * speedFactors[Globals.machineSpeedLevel]));
             CollectableCountSet();
         }
         MinesDropAreaCheck();
@@ -501,9 +510,9 @@ public class MineCrusher : Stand, IStandUpgrade
                 Vector3 direction = (_CollectProducts[prefabSelect].bandPosList[i].transform.position - oldProduct.transform.position).normalized;
 
                 Quaternion targetRotation = Quaternion.LookRotation(direction);
-                oldProduct.transform.rotation = Quaternion.Slerp(oldProduct.transform.rotation, targetRotation, speedFactors[Globals.machineSpeedLevel] * rotSpeed * Time.deltaTime);
+                oldProduct.transform.rotation = Quaternion.Slerp(oldProduct.transform.rotation, targetRotation, speedFactor2 * speedFactors[Globals.machineSpeedLevel] * rotSpeed * Time.deltaTime);
 
-                oldProduct.transform.Translate(oldProduct.transform.forward * moveSpeed * speedFactors[Globals.machineSpeedLevel] * Time.deltaTime, Space.World);
+                oldProduct.transform.Translate(oldProduct.transform.forward * moveSpeed * speedFactor2 * speedFactors[Globals.machineSpeedLevel] * Time.deltaTime, Space.World);
 
                 yield return null;
             }
@@ -1181,6 +1190,8 @@ public class MineCrusher : Stand, IStandUpgrade
 
     public int[] capacities;
     public float[] speedFactors;
+    float speedFactor2 = 1f;
+
     public void UpgradeValueInit()
     {
         CapacityInit();

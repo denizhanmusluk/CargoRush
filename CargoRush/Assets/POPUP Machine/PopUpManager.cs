@@ -17,6 +17,8 @@ public class PopUpManager : MonoBehaviour
     public List<GameObject> popUpList = new List<GameObject>();
     public List<GameObject> tipList = new List<GameObject>();
     public List<GameObject> boosterList = new List<GameObject>();
+
+    public GameObject repairPopUp;
     GameObject currentPopUp;
     GameObject currentTip;
     GameObject currentBooster;
@@ -161,5 +163,13 @@ public class PopUpManager : MonoBehaviour
             txt.color = new Color(txt.color.r, txt.color.g, txt.color.b, Mathf.Abs(1));
         }
         popUp.SetActive(false);
+    }
+    public void RepairImmediate()
+    {
+        RepairManager.Instance.repairWorker.showBuyRapairReward.RepairImmediate(true);
+    }
+    public void RepairImmediate_Cancel()
+    {
+        RepairManager.Instance.repairWorker.showBuyRapairReward.gameObject.SetActive(true);
     }
 }
