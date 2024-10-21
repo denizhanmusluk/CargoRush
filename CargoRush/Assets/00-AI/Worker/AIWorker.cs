@@ -430,8 +430,19 @@ public class AIWorker : MonoBehaviour, IWorkerModelSelect
 
             aiStackActive = false;
 
-            following = null;
-            following += GoToStandArea;
+
+            if (aiStackCollect.collectionTrs.Count > 0)
+            {
+                following = null;
+                following += GoToStandArea;
+            }
+            else
+            {
+                isStayHoldActive = false;
+
+                following = null;
+                following += StopPositionGo;
+            }
         }
     }
     float stepCounter = 0;

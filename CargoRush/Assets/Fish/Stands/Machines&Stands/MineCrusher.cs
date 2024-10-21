@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -307,9 +308,13 @@ public class MineCrusher : Stand, IStandUpgrade
 
             //machineActive = true;
             //creatingActive = true;
-         
-            Collectable fish = droppedCollectionList[droppedCollectionList.Count - 1];
+
+            Collectable fish;
+            OrderId();
+
+            fish = droppedCollectionList[droppedCollectionList.Count - 1];
             droppedCollectionList.Remove(droppedCollectionList[droppedCollectionList.Count - 1]);
+
             StartCoroutine(CreateCanned(fish));
             dropActive = false;
 
@@ -575,6 +580,7 @@ public class MineCrusher : Stand, IStandUpgrade
 
             }
         }
+        //OrderId();
         ProductFullCheck();
         if (selfDestroyActive)
         {
@@ -1204,5 +1210,98 @@ public class MineCrusher : Stand, IStandUpgrade
         speedFactor = speedFactors[standLevel];
         fishCountText.text = (fishCountTotal - fishCountCurrent).ToString() + "/" + (fishCountTotal).ToString();
 
+    }
+    [System.Serializable]
+    public struct MyStruct
+    {
+        public int value;
+        public CollectType collectType;
+        // Constructor ile struct'a deðer atama
+        public MyStruct(int _value, CollectType _collectType)
+        {
+            value = _value;
+            collectType = _collectType;
+        }
+    }
+    public List<MyStruct> myStruct;
+
+    //List<CollectType> collectTypeList;
+    //List<int> collectionListCount;
+    int _counter = 0;
+    void OrderId()
+    {
+        //collectTypeList.Clear();
+
+        myStruct.Clear();
+        for (int i = 0; i <= Globals.collectableLevel; i++)
+        {
+            if (i == 0)
+            {
+                myStruct.Add(new MyStruct(ironCollectionList.Count, CollectType.Type1));
+            }
+            if (i == 1)
+            {
+                myStruct.Add(new MyStruct(plasticCollectionList.Count, CollectType.Type2));
+            }
+            if (i == 2)
+            {
+                myStruct.Add(new MyStruct(yarnCollectionList.Count, CollectType.Type3));
+            }
+            if (i == 3)
+            {
+                myStruct.Add(new MyStruct(woodCollectionList.Count, CollectType.Type4));
+            }
+        }
+
+        myStruct.Sort((x, y) => x.value.CompareTo(y.value));
+
+        for (int i = 0; i <= Globals.collectableLevel; i++)
+        {
+            Collectable clt;
+            bool breakActive = false;
+            for(int c = 0; c < droppedCollectionList.Count; c++)
+            {
+                clt = droppedCollectionList[droppedCollectionList.Count - 1 - c];
+                if (clt.collectType == myStruct[i].collectType)
+                {
+                    Vector3 lastIndexPos;
+                    Vector3 selectedIndexPos;
+                    lastIndexPos = droppedCollectionList[droppedCollectionList.Count - 1].transform.localPosition;
+                    selectedIndexPos = clt.transform.localPosition;
+
+                    clt.transform.localPosition = lastIndexPos;
+                    droppedCollectionList[droppedCollectionList.Count - 1].transform.localPosition = selectedIndexPos;
+
+                    droppedCollectionList.Remove(clt);
+                    droppedCollectionList.Add(clt);
+                    breakActive = true;
+                    break;
+                }
+            }
+            if (breakActive)
+            {
+                break;
+            }
+        }
+        //collectionListCount.Sort();
+        //for(int i = 0; i < collectionListCount.Count; i++)
+        //{
+
+        //}
+        _counter++;
+
+        if (_counter % fishPosTR.Length == 0)
+        {
+            for (int i = 0; i < droppedCollectionList.Count; i++)
+            {
+                float deltaY = 0;
+                int posNo = i;
+                deltaY = (posNo) / fishPosTR.Length;
+                Transform targetTR = fishPosTR[(posNo) % fishPosTR.Length];
+                Vector3 dropPos = targetTR.position + new Vector3(0, deltaY * 0.7f, 0);
+
+                droppedCollectionList[i].transform.position = dropPos;
+            }
+        }
     }
 }

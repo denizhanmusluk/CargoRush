@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using HomaGames.HomaBelly;
 
 public class QuestCompleteQuest : QuestPanel
 {
@@ -15,6 +16,12 @@ public class QuestCompleteQuest : QuestPanel
             {
                 PlayerPrefs.SetInt(questName + "missionactive" + PlayerPrefs.GetInt("dailyQuestNo", 0), 2);
                 QuestCompleted();
+
+                int dailyQuestLevel = PlayerPrefs.GetInt("dailyQuestNo", 0);
+
+                string tag = $"DM_Day{dailyQuestLevel}Complated";
+                Analytics.DesignEvent(tag);
+
             }
         }
     }

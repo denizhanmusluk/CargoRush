@@ -291,16 +291,18 @@ public class StandRaw : Stand
             //newProduct.GetComponent<Collectable>().productCollectActive = true;
             yield return null;
         }
-        bandText.text = (currentBandCount).ToString() + "/" + (maxBandCapacity).ToString();
 
         if(currentBandCount == 0)
         {
             EmptyBand();
         }
+        bandText.text = (currentBandCount).ToString() + "/" + (maxBandCapacity).ToString();
+
     }
 
     public void EmptyBand()
     {
+        processMachine.CapacityInit();
         bandStock.ManuelRawCreate();
         needPackTape_GO.SetActive(true);
     }

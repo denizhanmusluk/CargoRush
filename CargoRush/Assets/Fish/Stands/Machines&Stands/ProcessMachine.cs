@@ -1214,15 +1214,15 @@ public class ProcessMachine : Stand, IStandUpgrade, IMachineActive
     public void UpgradeValueInit()
     {
         UpgradeTextSpawn();
-        CapacityInit();
+        //CapacityInit();
 
-
-        if (otherRawStand != null && !bandActive)
-        {
-            otherRawStand.bandStock.ManuelRawCreateWithCount(1);
-        }
+        //if (otherRawStand != null && !bandActive)
+        //{
+        //    otherRawStand.bandStock.ManuelRawCreateWithCount(1);
+        //}
     }
-    void CapacityInit()
+    //public int _maxBandCap;
+    public void CapacityInit()
     {
         fishCountTotal = capacitiesRaw[standLevel];
         productCountTotal = capacitiesProduct[standLevel];

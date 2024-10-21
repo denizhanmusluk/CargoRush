@@ -93,8 +93,8 @@ public class QuestManager : MonoBehaviour
                 PlayerPrefs.Save();
 
                 UpdateDailyQuest();
-                string tag = $"DM_Day{dailyQuestLevel}Complated";
-                Analytics.DesignEvent(tag);
+                //string tag = $"DM_Day{dailyQuestLevel}Complated";
+                //Analytics.DesignEvent(tag);
             }
 
             int countDownHour = timePeriodHour * 60 - (int)timeDifference.TotalMinutes;
