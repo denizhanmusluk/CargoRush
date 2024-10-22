@@ -10,10 +10,10 @@ public class DayCycleManager : MonoBehaviour
     public static DayCycleManager Instance => _instance;
     public bool IS_Active = true;
     // Start is called before the first frame update
-    [SerializeField] int firstInterstialTime = 900;
+    public int firstInterstialTime = 900;
     public int firstInterstialTimeCounter = 0;
 
-    [SerializeField] int dayCyclePeriod = 180;
+    public int dayCyclePeriod = 180;
     public int dayCycleCount = 0;
     public GameObject dayPanel_GO;
     public GameObject sun;

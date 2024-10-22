@@ -390,7 +390,8 @@ public class GameManager : Observer
 
     public void CheatIS()
     {
-        DayCycleManager.Instance.firstInterstialTimeCounter = 900;
+        DayCycleManager.Instance.firstInterstialTimeCounter = DayCycleManager.Instance.firstInterstialTime;
+        DayCycleManager.Instance.dayCycleCount = DayCycleManager.Instance.dayCyclePeriod;
     }
     public void CheatRewarded()
     {
@@ -398,5 +399,20 @@ public class GameManager : Observer
         SkillManager.Instance.CapacityRewardCreate();
         SkillManager.Instance.DoubleRewardCreate();
         SkillManager.Instance.MoneyRewardCreate();
+    }
+
+    public VipCustomerSlot vipCustomerSlot;
+    public void ResetVipCooldown()
+    {
+        vipCustomerSlot.firstVipTimeCounter = vipCustomerSlot.firstVipTime;
+        vipCustomerSlot.vipCycleCount = vipCustomerSlot.vipCyclePeriod;
+    }
+    public void NoAds()
+    {
+        ADVManager.Instance.NoAds();
+    }
+    public void MachineErroring()
+    {
+        FishDropArea.Instance.MachineManuelError();
     }
 }

@@ -386,11 +386,16 @@ public class AIWorker : MonoBehaviour, IWorkerModelSelect
                 {
                     if ((fishCollectArea.standCourierList[fishCollectArea.standCourierList.Count - 1 - i].collectType == CollectType.All || clt.collectType == fishCollectArea.standCourierList[fishCollectArea.standCourierList.Count - 1 - i].collectType || fishCollectArea.standCourierList[fishCollectArea.standCourierList.Count - 1 - i].collectType2 == CollectType.All || clt.collectType == fishCollectArea.standCourierList[fishCollectArea.standCourierList.Count - 1 - i].collectType2) && clt.collectID == cltId2 && fishCollectArea.standCourierList[fishCollectArea.standCourierList.Count - 1 - i].fishCountCurrent > 0)
                     {
+
                         targetChanged = true;
-                        targetStand = fishCollectArea.standCourierList[fishCollectArea.standCourierList.Count - 1 - i];
+                        if (targetStand != fishCollectArea.standCourierList[fishCollectArea.standCourierList.Count - 1 - i])
+                        {
+                            targetStand = fishCollectArea.standCourierList[fishCollectArea.standCourierList.Count - 1 - i];
+                        }
                         TargetFishStandSelect();
                         breakActive = true;
                         break;
+
                     }
                 }
                 if (breakActive)

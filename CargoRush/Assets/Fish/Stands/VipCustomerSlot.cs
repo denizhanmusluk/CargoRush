@@ -47,10 +47,10 @@ public class VipCustomerSlot : Stand, IMoneyArea
 
 
 
-    [SerializeField] int firstVipTime = 900;
+    public int firstVipTime = 900;
     public int firstVipTimeCounter = 0;
 
-    [SerializeField] int vipCyclePeriod = 180;
+    public int vipCyclePeriod = 180;
     public int vipCycleCount = 0;
     [SerializeField] GameObject bonusGO;
     [SerializeField] GameObject obstacleGO;
@@ -154,6 +154,7 @@ public class VipCustomerSlot : Stand, IMoneyArea
     {
         yield return new WaitForSeconds(1f);
         StartCoroutine(MoneyCreate());
+        GameManager.Instance.vipCustomerSlot = this;
     }
     int totalBoxCount = 0;
     public void LevelInit()

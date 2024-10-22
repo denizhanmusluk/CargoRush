@@ -402,6 +402,32 @@ public class FishDropArea : MonoBehaviour
             }
         }
     }
+    public void MachineManuelError()
+    {
+        PlayerPrefs.SetInt("totalboxpackagecount", 0);
+
+        List<IMachineActive> packMachinesTemp = new List<IMachineActive>();
+
+        for (int i = 0; i < packMachines.Count; i++)
+        {
+            if (!packMachines[i].errorActive)
+            {
+                packMachinesTemp.Add(packMachines[i]);
+            }
+        }
+        if (packMachinesTemp.Count > 0)
+        {
+            int randomSelectMach = errorCounter % packMachinesTemp.Count;
+            packMachinesTemp[randomSelectMach].MachineErrored();
+            PlayerPrefs.SetInt("machineerrorcount", PlayerPrefs.GetInt("machineerrorcount") + 1);
+
+            if (PlayerPrefs.GetInt("machineerrorcount") == 1)
+            {
+                RepairManager.Instance.OpenRepairWorker();
+            }
+        }
+        errorCounter++;
+    }
     int boxPackCount = 0;
 
     IEnumerator StartDelay()
