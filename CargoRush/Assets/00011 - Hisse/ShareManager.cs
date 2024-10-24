@@ -357,7 +357,7 @@ public class ShareManager : MonoBehaviour
         ShareCeo.Instance.BossGoExit();
     }
 
-    void RepairPopUp_Open()
+    public void RepairPopUp_Open()
     {
         repairPopUp_GO.SetActive(true);
 

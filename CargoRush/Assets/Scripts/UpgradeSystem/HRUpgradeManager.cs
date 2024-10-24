@@ -223,7 +223,7 @@ public class HRUpgradeManager : MonoBehaviour
                 //PlayerController.Instance.UpgradeTextSpawn("+Capacity");
                 AudioManager.Instance.UpgradeSound();
 
-                if (Globals.workerNoLevel == 1)
+                if (Globals.workerNoLevel == 1 && PlayerPrefs.GetInt("level") == 0)
                 {
                     exitTapTutorial_GO.SetActive(true);
                 }

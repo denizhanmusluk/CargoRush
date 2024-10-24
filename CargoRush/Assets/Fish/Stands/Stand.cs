@@ -44,6 +44,7 @@ public abstract class Stand : MonoBehaviour
     public bool resetActive = false;
     public float waitTime = 1f;
     public bool customerCar = false;
+    public bool isTrashStand = false;
     public abstract void SpecificStart();
     public abstract void SpecificReset();
     public abstract void DropCollection(int collectAmount, StackCollect _stackCollect);
@@ -100,12 +101,50 @@ public abstract class Stand : MonoBehaviour
         //        other.GetComponent<AIWorker>().aiDropActive = false;
         //    }
         //}
+        if (other.GetComponent<PlayerController>() != null && StandActive && isTrashStand)
+        {
+            if (dropActive)
+            {
+                cooldowner = true;
+                dropActive = false;
+                StartCoroutine(CooldownActive(1.25f));
+            }
+        }
     }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.GetComponent<PlayerController>() != null && StandActive && isTrashStand)
+        {
+            cooldowner = false;
+            rubbishActive = false;
+            dropActive = true;
+        }
 
+    }
+    bool cooldowner = false;
+    bool rubbishActive = false;
+
+    IEnumerator CooldownActive(float time)
+    {
+        cooldowner = true;
+        rubbishActive = false;
+        float counter = 0f;
+        while (counter < time && cooldowner)
+        {
+            counter += Time.deltaTime;
+            yield return null;
+        }
+        if (counter >= time)
+        {
+            cooldowner = false;
+            rubbishActive = true;
+        }
+
+    }
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.GetComponent<PlayerController>() != null && StandActive)
+        if (other.GetComponent<PlayerController>() != null && StandActive && !isTrashStand)
         {
             if (other.GetComponent<PlayerController>().dropActive)
             {
@@ -114,6 +153,17 @@ public abstract class Stand : MonoBehaviour
                 StartCoroutine(ColliderReset());
             }
         }
+        if (other.GetComponent<PlayerController>() != null && StandActive && isTrashStand)
+        {
+            if (other.GetComponent<PlayerController>().dropActive && rubbishActive)
+            {
+                other.GetComponent<PlayerController>().DropActivator();
+                CollectionChecking(other.GetComponent<PlayerController>()._stackCollect);
+                StartCoroutine(ColliderReset());
+            }
+        }
+
+
         if (other.GetComponent<AIWorker>() != null && StandActive)
         {
             if (other.GetComponent<AIWorker>().aiDropActive && other.GetComponent<AIWorker>().aiStackActive)
@@ -390,5 +440,9 @@ public abstract class Stand : MonoBehaviour
     {
         StandActive = true;
         GetComponent<Collider>().enabled = true;
+    }
+    public void StandDeActive()
+    {
+        StandActive = false;
     }
 }

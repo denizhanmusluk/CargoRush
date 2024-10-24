@@ -315,6 +315,7 @@ public class ProcessMachine : Stand, IStandUpgrade, IMachineActive
         ManuealRawCreate();
         ManuealProductCreate();
         CapacityInit();
+        CapacityOtherStandInit();
         MachineErroredCheckStart();
         //if (machineErrorActivator)
         //{
@@ -1214,7 +1215,7 @@ public class ProcessMachine : Stand, IStandUpgrade, IMachineActive
     public void UpgradeValueInit()
     {
         UpgradeTextSpawn();
-        //CapacityInit();
+        CapacityInit();
 
         //if (otherRawStand != null && !bandActive)
         //{
@@ -1229,6 +1230,12 @@ public class ProcessMachine : Stand, IStandUpgrade, IMachineActive
         fishCountCurrent = capacitiesRaw[standLevel] - droppedCollectionList.Count;
         //speedFactor = speedFactors[standLevel];
 
+       
+        fishCountText.text = (fishCountTotal - fishCountCurrent).ToString() + "/" + (fishCountTotal).ToString();
+
+    }
+    public void CapacityOtherStandInit()
+    {
         if (otherRawStand != null)
         {
             //bandPerPackageCount = bandPerPackCount[standLevel];
@@ -1236,10 +1243,7 @@ public class ProcessMachine : Stand, IStandUpgrade, IMachineActive
             otherRawStand.bandStock.fishCountTotal = standLevel + 5;
             otherRawStand.bandStock.productCountTotal = standLevel + 5;
         }
-        fishCountText.text = (fishCountTotal - fishCountCurrent).ToString() + "/" + (fishCountTotal).ToString();
-
     }
-
     public void TraySet()
     {
         int trayCount = (productCollectionList.Count) / productPosTR.Length;
@@ -1271,7 +1275,7 @@ public class ProcessMachine : Stand, IStandUpgrade, IMachineActive
 
     public void UpgradeTextSpawn()
     {
-        string[] upgradeNames = { "+Capacity", "+Speed" };
+        string[] upgradeNames = { "+Capacity"};
         int upgradeNameSelect = 0;
 
         upgradeNameSelect = Random.Range(0, upgradeNames.Length);

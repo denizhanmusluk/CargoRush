@@ -110,7 +110,8 @@ public class MachineRepair : MonoBehaviour
         if (PlayerPrefs.GetInt("firstrepairactive") == 1)
         {
             PlayerPrefs.SetInt("firstrepairactive", 2);
-            PopUpManager.Instance.repairPopUp.SetActive(true);
+            PurchaseManager.Instance.repairManPopUp_GO.SetActive(true);
+            //PopUpManager.Instance.repairPopUp.SetActive(true);
         }
 
         yield return new WaitForSeconds(0.5f);

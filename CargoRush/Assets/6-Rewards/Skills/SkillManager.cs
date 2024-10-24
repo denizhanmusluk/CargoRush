@@ -627,12 +627,12 @@ public class SkillManager : MonoBehaviour
     }
     IEnumerator CapacityTimeCounter()
     {
-        while (true)
+        while (true && (PlayerPrefs.GetInt("capacitybuttonopen") == 0))
         {
             Globals.capacityPlayTime++;
             PlayerPrefs.SetInt("capacityPlayTime", Globals.capacityPlayTime);
 
-            if (PlayerPrefs.GetInt("skillActive") == 1)
+            if (PlayerPrefs.GetInt("skillActive") == 1 && (PlayerPrefs.GetInt("capacitybuttonopen") == 0))
             {
                 Globals.capacityCreatingCooldown++;
                 PlayerPrefs.SetInt("capacityCreatingCooldown", Globals.capacityCreatingCooldown);

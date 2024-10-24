@@ -302,7 +302,8 @@ public class StandRaw : Stand
 
     public void EmptyBand()
     {
-        processMachine.CapacityInit();
+        processMachine.CapacityOtherStandInit();
+
         bandStock.ManuelRawCreate();
         needPackTape_GO.SetActive(true);
     }

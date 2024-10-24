@@ -6,6 +6,7 @@ public class TrashStand : Stand
 {
     public Animator animator;
     [SerializeField] Transform trashTargetTR;
+    public float delayTime = 1.25f;
     public override void CollectableCountSet()
     {
 

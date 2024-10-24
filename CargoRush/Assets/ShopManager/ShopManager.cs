@@ -125,18 +125,18 @@ public class ShopManager : MonoBehaviour
                 //    Analytics.LevelStarted(shopLevelIndex[0]);
                 //}
 
-                if (shopLevelUpRatio[PlayerPrefs.GetInt("shoprank" + PlayerPrefs.GetInt("level"))] <= shopCountCurrent[shopId])
+                if (shopLevelUpRatio[PlayerPrefs.GetInt("shoprank" + PlayerPrefs.GetInt("level"))] <= shopCountCurrent[shopId] )
                 {
                     int shopRank = PlayerPrefs.GetInt("shoprank" + PlayerPrefs.GetInt("level"));
                     shopRank++;
                     PlayerPrefs.SetInt("shoprank" + PlayerPrefs.GetInt("level") , shopRank);
 
-                    if (PlayerPrefs.GetInt("shoprank" + PlayerPrefs.GetInt("level")) > 1)
+                    if (PlayerPrefs.GetInt("shoprank" + PlayerPrefs.GetInt("level")) > 1 && PlayerPrefs.GetInt("shoprank" + PlayerPrefs.GetInt("level")) < 7)
                     {
                         Analytics.LevelCompleted();
                         Debug.Log("level completed");
                     }
-                    if (PlayerPrefs.GetInt("shoprank" + PlayerPrefs.GetInt("level")) < shopLevelIndex.Length)
+                    if (PlayerPrefs.GetInt("shoprank" + PlayerPrefs.GetInt("level")) < shopLevelIndex.Length && PlayerPrefs.GetInt("shoprank" + PlayerPrefs.GetInt("level")) < 6)
                     {
                         int levelId = shopLevelIndex[PlayerPrefs.GetInt("shoprank" + PlayerPrefs.GetInt("level"))] + PlayerPrefs.GetInt("level") * 8;
                         Analytics.LevelStarted(levelId);
