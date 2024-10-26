@@ -82,6 +82,7 @@ public class ProcessMachine : Stand, IStandUpgrade, IMachineActive
     int packageCount = 0;
 
     public Transform repairWorkerWaitingPos_TR;
+    public Transform repairWorkerWaitingPosForRepair_TR;
     public bool errorActive { get; set; }
 
     public GameObject machineDurable_GO;
@@ -94,6 +95,7 @@ public class ProcessMachine : Stand, IStandUpgrade, IMachineActive
     {
         errorActive = false;
         FishDropArea.Instance.packMachines.Add(this);
+        FishDropArea.Instance.processMachines.Add(this);
 
     }
     void MachineErroredCheckStart()
@@ -116,7 +118,10 @@ public class ProcessMachine : Stand, IStandUpgrade, IMachineActive
     {
         errorActive = true;
         machineErrored = true;
-        machineRepairArea.gameObject.SetActive(true);
+        if (!Globals.repairManActive)
+        {
+            machineRepairArea.gameObject.SetActive(true);
+        }
         PlayerPrefs.SetInt(machineName + "iserror" + PlayerPrefs.GetInt("level"), 1);
         CollectProgressManager.Instance.dirtyActiveImgGO.SetActive(true);
         Globals.machineErrorActive = true;

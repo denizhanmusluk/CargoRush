@@ -899,7 +899,7 @@ public class VipCustomerSlot : Stand, IMoneyArea
             //Analytics.ItemConsumed(_tag, 0, ItemFlowReason.RewardedVideoAd);
         }
         thisVip = false;
-        GameManager.Instance.ui.MoneyCreateVip((int)(totalBonus * 1.5f), true);
+        GameManager.Instance.ui.MoneyCreateVip((int)(totalBonus * 2f), true);
         bonusGO.SetActive(false);
         droppedCollectionList.Clear();
 

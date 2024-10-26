@@ -178,8 +178,8 @@ public class RepairWorker : MonoBehaviour
             }
             else
             {
-                targetTR = targetMachine.repairWorkerWaitingPos_TR;
-                aiMoving.GoTargetStart(targetMachine.repairWorkerWaitingPos_TR);
+                targetTR = targetMachine.repairWorkerWaitingPosForRepair_TR;
+                aiMoving.GoTargetStart(targetMachine.repairWorkerWaitingPosForRepair_TR);
                 aiMoving.BehaviourInit(SetPos_Machine);
             }
         }

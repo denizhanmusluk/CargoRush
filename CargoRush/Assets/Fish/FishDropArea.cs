@@ -347,6 +347,7 @@ public class FishDropArea : MonoBehaviour
     int errorCounter = 0;
 
     public List<IMachineActive> packMachines = new List<IMachineActive>();
+    public List<ProcessMachine> processMachines = new List<ProcessMachine>();
     public void BoxPackageCounter()
     {
         //if (Globals.repairManActive)
@@ -463,6 +464,14 @@ public class FishDropArea : MonoBehaviour
         foreach(var mch in packMachines)
         {
             mch.MachineRepaired();
+        }
+    }
+
+    public void AllMachineRepairClose()
+    {
+        foreach (var mch in processMachines)
+        {
+            mch.machineRepairArea.gameObject.SetActive(false);
         }
     }
 }

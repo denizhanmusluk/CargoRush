@@ -271,7 +271,7 @@ public class StandFishCar : Stand,IMoneyArea
         }
 
 
-        currentCar = Instantiate(carPrefabList[carLevel], carCreateTR.position, Quaternion.identity);
+        currentCar = Instantiate(carPrefabList[carLevel], carCreateTR.position, carCreateTR.rotation);
         //currentCar.GetComponent<FishCar>().CarLevelCreate(carLevel);
         currentCar.GetComponent<FishCar>().stand = this;
         currentCar.GetComponent<FishCar>().standPos = carStandPosList[carLevel];

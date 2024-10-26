@@ -87,6 +87,8 @@ public class RepairManager : MonoBehaviour
         buttonFree_GO.SetActive(false);
         buttonADV_GO.SetActive(true);
         StartCoroutine(RepairWorkerStart_Delay());
+
+        FishDropArea.Instance.AllMachineRepairClose();
     }
     IEnumerator RepairWorkerStart_Delay()
     {
