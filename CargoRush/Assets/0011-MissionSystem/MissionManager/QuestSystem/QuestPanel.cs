@@ -95,8 +95,8 @@ public abstract class QuestPanel : MonoBehaviour
     {
         PlayerPrefs.SetInt(questName + "missionactive" + PlayerPrefs.GetInt("dailyQuestNo", 0), 3);
         QuestCompleteAndDeactive();
-        GameManager.Instance.ui.MoneyCreateQuestReward(questPriceMoney, claimButton.transform.position);
-        
+        //GameManager.Instance.ui.MoneyCreateQuestReward(questPriceMoney, claimButton.transform.position);
+        GameManager.Instance.ui.GemCreate(1);
         if (PlayerPrefs.GetInt("missiontutorial") == 1)
         {
             PlayerPrefs.SetInt("missiontutorial", 2);

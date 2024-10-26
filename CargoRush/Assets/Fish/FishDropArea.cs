@@ -469,6 +469,12 @@ public class FishDropArea : MonoBehaviour
 
     public void AllMachineRepairClose()
     {
+        StartCoroutine(AllMachineRepairClose_Delay());
+    }
+
+    IEnumerator AllMachineRepairClose_Delay()
+    {
+        yield return new WaitForSeconds(0.1f);
         foreach (var mch in processMachines)
         {
             mch.machineRepairArea.gameObject.SetActive(false);

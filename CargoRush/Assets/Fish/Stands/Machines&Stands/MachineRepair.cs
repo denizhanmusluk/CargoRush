@@ -86,6 +86,7 @@ public class MachineRepair : MonoBehaviour
             RepairManager.Instance.repairWorker.OnlyRepairAnim();
         }
     }
+    public float repairDuration = 5f;
     IEnumerator RepairStartedDelay()
     {
         PlayerController.Instance.PlayerControlDeActive();
@@ -93,9 +94,9 @@ public class MachineRepair : MonoBehaviour
         PlayerController.Instance.CharacterRepairPosSet(characterRepairPosTR);
 
         float counter = 0f;
-        while (counter < 1f)
+        while (counter < 1f && !Globals.repairManActive)
         {
-            counter += 0.2f * Time.deltaTime;
+            counter += Time.deltaTime / repairDuration;
             imageRepairFill.fillAmount = Mathf.Lerp(0, 1, counter);
 
             yield return null;

@@ -31,6 +31,7 @@ public class OrderQuest : QuestPanel
         string coloredText = $"<color=#000000>{questTextTitle}</color> <color=#0DB3FF>{questTotalCount}</color> <color=#000000>{questTextTitle2}</color>";
         questTitleText.text = coloredText;
 
-        priceText.text = $"${questPriceMoney}";
+        priceText.text = $"{1}";
+        //priceText.text = $"${questPriceMoney}";
     }
 }

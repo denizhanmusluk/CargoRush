@@ -46,6 +46,7 @@ public class CompanySeqUpQuest : QuestPanel
 
         questTitleText.text = coloredText;
 
-        priceText.text = $"${questPriceMoney}";
+        priceText.text = $"{1}";
+        //priceText.text = $"${questPriceMoney}";
+        }
     }
-}

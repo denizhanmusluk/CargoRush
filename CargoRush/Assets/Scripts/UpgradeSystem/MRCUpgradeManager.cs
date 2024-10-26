@@ -116,6 +116,7 @@ public class MRCUpgradeManager : MonoBehaviour
             button_repairSpeedLevel.UpgradeValueFull(_characterUpgradeSettings.repairSpeed[Globals.repairSpeedLevel]);
             button_repairSpeedLevel.ButtonLevel(Globals.repairSpeedLevel, _characterUpgradeSettings.repairSpeed.Length - 1);
         }
+        VibratoManager.Instance.MediumVibration();
     }
     public void IsEnoughMoney()
     {

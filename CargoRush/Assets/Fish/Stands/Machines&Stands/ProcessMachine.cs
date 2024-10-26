@@ -50,7 +50,7 @@ public class ProcessMachine : Stand, IStandUpgrade, IMachineActive
     //public int[] bandPerPackCount;
     //public int[] bandCapacity;
 
-    float speedFactor = 1f;
+    public float baseSpeedFactor = 1f;
     float speedFactor2 = 1f;
     public AIPath aiPath;
     [SerializeField] List<GameObject> trayList = new List<GameObject>();
@@ -490,7 +490,7 @@ public class ProcessMachine : Stand, IStandUpgrade, IMachineActive
                 dropActive = false;
                 fishCountCurrent += rawCountPerProduct;
                 fishCountText.text = (fishCountTotal - fishCountCurrent).ToString() + "/" + (fishCountTotal).ToString();
-                yield return new WaitForSeconds((waitTime / Globals.repairSpeedSkin) / (Globals.machineSpeedFactor * MRCUpgradeManager.Instance._characterUpgradeSettings.machineSpeed[Globals.machineSpeedLevel] * speedFactor2));
+                yield return new WaitForSeconds((waitTime / Globals.repairSpeedSkin) / (Globals.machineSpeedFactor * MRCUpgradeManager.Instance._characterUpgradeSettings.machineSpeed[Globals.machineSpeedLevel] * speedFactor2 * baseSpeedFactor));
                 workAreaList[0].StnadFullCheck();
                 //MissionManager.Instance.TapeBoxMissionStart();
                 //MissionManager.Instance.tapeBoxMission.MissionUpdate();
@@ -550,7 +550,7 @@ public class ProcessMachine : Stand, IStandUpgrade, IMachineActive
                 dropActive = false;
                 fishCountCurrent += rawCountPerProduct;
                 fishCountText.text = (fishCountTotal - fishCountCurrent).ToString() + "/" + (fishCountTotal).ToString();
-                yield return new WaitForSeconds((waitTime / Globals.repairSpeedSkin) / (Globals.machineSpeedFactor * MRCUpgradeManager.Instance._characterUpgradeSettings.machineSpeed[Globals.machineSpeedLevel] * speedFactor2));
+                yield return new WaitForSeconds((waitTime / Globals.repairSpeedSkin) / (Globals.machineSpeedFactor * MRCUpgradeManager.Instance._characterUpgradeSettings.machineSpeed[Globals.machineSpeedLevel] * speedFactor2 * baseSpeedFactor));
                 workAreaList[0].StnadFullCheck();
 
 
@@ -665,7 +665,7 @@ public class ProcessMachine : Stand, IStandUpgrade, IMachineActive
         int prefabSelect = 0;
         float _speedFactor = 1f;
 
-        machineAnimator.SetFloat("speed", Globals.machineSpeedFactor * MRCUpgradeManager.Instance._characterUpgradeSettings.machineSpeed[Globals.machineSpeedLevel] * _speedFactor * speedFactor2);
+        machineAnimator.SetFloat("speed", Globals.machineSpeedFactor * MRCUpgradeManager.Instance._characterUpgradeSettings.machineSpeed[Globals.machineSpeedLevel] * _speedFactor * speedFactor2 * baseSpeedFactor);
         machineAnimator.SetTrigger("band");
         if (PlayerPrefs.GetInt("soundclose") == 0)
         {
@@ -685,7 +685,7 @@ public class ProcessMachine : Stand, IStandUpgrade, IMachineActive
         newProduct.GetComponent<Collectable>().fishCollectable = productCollectionList;
 
         newProduct.GetComponent<Collectable>().anim.SetTrigger("etiket");
-        newProduct.GetComponent<Collectable>().anim.SetFloat("speed", Globals.machineSpeedFactor * MRCUpgradeManager.Instance._characterUpgradeSettings.machineSpeed[Globals.machineSpeedLevel] * _speedFactor * speedFactor2);
+        newProduct.GetComponent<Collectable>().anim.SetFloat("speed", Globals.machineSpeedFactor * MRCUpgradeManager.Instance._characterUpgradeSettings.machineSpeed[Globals.machineSpeedLevel] * _speedFactor * speedFactor2 * baseSpeedFactor);
 
         counter = 0f;
 
@@ -699,7 +699,7 @@ public class ProcessMachine : Stand, IStandUpgrade, IMachineActive
         firstPos = fishOutTR.position;
 
         newProduct.GetComponent<Collectable>().bantGO.SetActive(true);
-        newProduct.GetComponent<Collectable>().bantGO.GetComponent<Animator>().SetFloat("speed", Globals.machineSpeedFactor * MRCUpgradeManager.Instance._characterUpgradeSettings.machineSpeed[Globals.machineSpeedLevel] * _speedFactor * speedFactor2);
+        newProduct.GetComponent<Collectable>().bantGO.GetComponent<Animator>().SetFloat("speed", Globals.machineSpeedFactor * MRCUpgradeManager.Instance._characterUpgradeSettings.machineSpeed[Globals.machineSpeedLevel] * _speedFactor * speedFactor2 * baseSpeedFactor);
        counter = 0f;
         while (counter < 1f)
         {
@@ -751,9 +751,9 @@ public class ProcessMachine : Stand, IStandUpgrade, IMachineActive
 
 
                 Quaternion targetRotation = Quaternion.LookRotation(direction);
-                box.transform.rotation = Quaternion.Slerp(box.transform.rotation, targetRotation, Globals.machineSpeedFactor * MRCUpgradeManager.Instance._characterUpgradeSettings.machineSpeed[Globals.machineSpeedLevel] * rotSpeed * Time.deltaTime * speedFactor2);
+                box.transform.rotation = Quaternion.Slerp(box.transform.rotation, targetRotation, Globals.machineSpeedFactor * MRCUpgradeManager.Instance._characterUpgradeSettings.machineSpeed[Globals.machineSpeedLevel] * rotSpeed * Time.deltaTime * speedFactor2 * baseSpeedFactor);
 
-                box.transform.Translate(box.transform.forward * moveSpeed * Globals.machineSpeedFactor * MRCUpgradeManager.Instance._characterUpgradeSettings.machineSpeed[Globals.machineSpeedLevel] * Time.deltaTime * speedFactor2, Space.World);
+                box.transform.Translate(box.transform.forward * moveSpeed * Globals.machineSpeedFactor * MRCUpgradeManager.Instance._characterUpgradeSettings.machineSpeed[Globals.machineSpeedLevel] * Time.deltaTime * speedFactor2 * baseSpeedFactor, Space.World);
 
                 yield return null;
             }
