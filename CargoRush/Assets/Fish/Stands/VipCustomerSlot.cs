@@ -54,6 +54,7 @@ public class VipCustomerSlot : Stand, IMoneyArea
     public int vipCycleCount = 0;
     [SerializeField] GameObject bonusGO;
     [SerializeField] GameObject obstacleGO;
+    [SerializeField] GameObject triggerGO;
     void StartCounter()
     {
         if (PlayerPrefs.GetInt("vipactive") == 0)
@@ -262,6 +263,7 @@ public class VipCustomerSlot : Stand, IMoneyArea
     void CarCreate()
     {
         obstacleGO.SetActive(true);
+        triggerGO.SetActive(true);
         bonusGO.SetActive(false);
         if (goatAnim != null)
         {
@@ -661,6 +663,7 @@ public class VipCustomerSlot : Stand, IMoneyArea
 
         currentCar.GetComponent<VipDrone>().CarGoOut();
         obstacleGO.SetActive(false);
+        triggerGO.SetActive(false);
 
         if (thisVip)
         {
@@ -736,6 +739,7 @@ public class VipCustomerSlot : Stand, IMoneyArea
 
         currentCar.GetComponent<VipDrone>().CarGoOut();
         obstacleGO.SetActive(false);
+        triggerGO.SetActive(false);
 
         if (thisVip)
         {

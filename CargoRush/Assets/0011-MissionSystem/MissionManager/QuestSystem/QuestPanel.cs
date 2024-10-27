@@ -91,12 +91,19 @@ public abstract class QuestPanel : MonoBehaviour
         yield return new WaitForSeconds(1f);
         gameObject.SetActive(false);
     }
+    public bool gemActive = false;
     public void ClickPriceButton()
     {
         PlayerPrefs.SetInt(questName + "missionactive" + PlayerPrefs.GetInt("dailyQuestNo", 0), 3);
         QuestCompleteAndDeactive();
-        GameManager.Instance.ui.MoneyCreateQuestReward(questPriceMoney, claimButton.transform.position);
-        GameManager.Instance.ui.GemCreate(1);
+        if (gemActive)
+        {
+            GameManager.Instance.ui.GemCreate(1);
+        }
+        else
+        {
+            GameManager.Instance.ui.MoneyCreateQuestReward(questPriceMoney, claimButton.transform.position);
+        }
         if (PlayerPrefs.GetInt("missiontutorial") == 1)
         {
             PlayerPrefs.SetInt("missiontutorial", 2);

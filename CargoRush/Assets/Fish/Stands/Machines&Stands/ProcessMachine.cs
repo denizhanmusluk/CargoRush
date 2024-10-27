@@ -767,6 +767,12 @@ public class ProcessMachine : Stand, IStandUpgrade, IMachineActive
 
         deltaY = (productCollectionList.Count - 1) / productPosTR.Length;
         Transform targetTR = productPosTR[(productCollectionList.Count - 1) % productPosTR.Length];
+       
+        if (productCollectionList.Count > 64)
+        {
+            deltaY = (64 - 1) / productPosTR.Length;
+            targetTR = productPosTR[productPosTR.Length - 1];
+        }
 
         Vector3 dropPos = targetTR.position + new Vector3(0, deltaY * 3f, 0);
 
@@ -989,6 +995,13 @@ public class ProcessMachine : Stand, IStandUpgrade, IMachineActive
         {
             targetTR = fishPosTR[(droppedCollectionList.Count - 1) % fishPosTR.Length];
         }
+
+        if (droppedCollectionList.Count > 72)
+        {
+            deltaY = (72 - 1) / fishPosTR.Length;
+            targetTR = fishPosTR[fishPosTR.Length - 1];
+        }
+
         Vector3 dropPos = targetTR.position + new Vector3(0, deltaY * 1.25f, 0);
         StartCoroutine(Drop(targetTR, dropPos, droppingCollection, Time.deltaTime));
         if (_stackCollect.player)
@@ -1104,6 +1117,12 @@ public class ProcessMachine : Stand, IStandUpgrade, IMachineActive
             deltaY = (droppedCollectionList.Count - 1) / fishPosTR.Length;
             targetTR = fishPosTR[(droppedCollectionList.Count - 1) % fishPosTR.Length];
 
+            if (droppedCollectionList.Count > 72)
+            {
+                deltaY = (72 - 1) / fishPosTR.Length;
+                targetTR = fishPosTR[fishPosTR.Length - 1];
+            }
+
             Vector3 dropPos = targetTR.position + new Vector3(0, deltaY * 1.25f, 0);
             Quaternion targetRot = targetTR.transform.rotation;
 
@@ -1149,6 +1168,12 @@ public class ProcessMachine : Stand, IStandUpgrade, IMachineActive
 
             deltaY = (productCollectionList.Count - 1) / productPosTR.Length;
             targetTR = productPosTR[(productCollectionList.Count - 1) % productPosTR.Length];
+
+            if (productCollectionList.Count > 64)
+            {
+                deltaY = (64 - 1) / productPosTR.Length;
+                targetTR = productPosTR[productPosTR.Length - 1];
+            }
 
             Vector3 dropPos = targetTR.position + new Vector3(0, deltaY * 3f, 0);
             Quaternion targetRot = targetTR.transform.rotation;
@@ -1198,6 +1223,12 @@ public class ProcessMachine : Stand, IStandUpgrade, IMachineActive
 
             deltaY = (productCollectionList.Count - 1) / productPosTR.Length;
             targetTR = productPosTR[(productCollectionList.Count - 1) % productPosTR.Length];
+
+            if(productCollectionList.Count > 64)
+            {
+                deltaY = (64 - 1) / productPosTR.Length;
+                targetTR = productPosTR[productPosTR.Length - 1];
+            }
 
             Vector3 dropPos = targetTR.position + new Vector3(0, deltaY * 3f, 0);
             Quaternion targetRot = targetTR.transform.rotation;
@@ -1256,6 +1287,11 @@ public class ProcessMachine : Stand, IStandUpgrade, IMachineActive
         if (trayCount > trayList.Count)
         {
             trayCount = trayList.Count;
+            productCount_GO.SetActive(true);
+        }
+        else
+        {
+            productCount_GO.SetActive(false);
         }
         for (int i = 0; i < trayList.Count; i++)
         {
@@ -1268,6 +1304,7 @@ public class ProcessMachine : Stand, IStandUpgrade, IMachineActive
                 trayList[i].SetActive(false);
             }
         }
+        productCount_Text.text = productCollectionList.Count.ToString();
         //for (int i = 0; i < trayCount; i++)
         //{
         //    trayList[i].SetActive(true);
@@ -1291,4 +1328,8 @@ public class ProcessMachine : Stand, IStandUpgrade, IMachineActive
         GameObject confetti = Instantiate(confettiParticles, confettiSpawnPos.position, confettiSpawnPos.rotation);
         Destroy(confetti, 5f);
     }
+
+
+    public GameObject productCount_GO;
+    public TextMeshProUGUI productCount_Text;
 }

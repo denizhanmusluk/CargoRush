@@ -30,7 +30,7 @@ public class CompanySeqUpQuest : QuestPanel
 
         string coloredText = "";
 
-        if(questTotalCount == 1)//3. sýraya yükselt
+        if (questTotalCount == 1)//3. sýraya yükselt
         {
             questTextTitle2 = "third";
         }
@@ -46,7 +46,7 @@ public class CompanySeqUpQuest : QuestPanel
 
         questTitleText.text = coloredText;
 
-        priceText.text = $"{1}";
-        //priceText.text = $"${questPriceMoney}";
-        }
+        //priceText.text = $"{1}";
+        priceText.text = $"${questPriceMoney}";
     }
+}

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
-
+using TMPro;
 public class MineCrusher : Stand, IStandUpgrade
 {
     [SerializeField] Transform inTR, convertTR, outTR;
@@ -498,7 +498,61 @@ public class MineCrusher : Stand, IStandUpgrade
             productFullTextGoList[3].SetActive(true);
         }
 
+
+
+        if (ironCollectionList.Count > boxCountBound)
+        {
+            productCount_1_GO.SetActive(true);
+            productCount_1_Text.text = "+" + (ironCollectionList.Count - boxCountBound).ToString();
+        }
+        else
+        {
+            productCount_1_GO.SetActive(false);
+        }
+
+        if (plasticCollectionList.Count > boxCountBound)
+        {
+            productCount_2_GO.SetActive(true);
+            productCount_2_Text.text = "+" + (plasticCollectionList.Count - boxCountBound).ToString();
+        }
+        else
+        {
+            productCount_2_GO.SetActive(false);
+        }
+
+        if (yarnCollectionList.Count > boxCountBound)
+        {
+            productCount_3_GO.SetActive(true);
+            productCount_3_Text.text = "+" + (yarnCollectionList.Count - boxCountBound).ToString();
+        }
+        else
+        {
+            productCount_3_GO.SetActive(false);
+        }
+
+        if (woodCollectionList.Count > boxCountBound)
+        {
+            productCount_4_GO.SetActive(true);
+            productCount_4_Text.text = "+" + (woodCollectionList.Count - boxCountBound).ToString();
+        }
+        else
+        {
+            productCount_4_GO.SetActive(false);
+        }
+
     }
+    int boxCountBound = 80;
+    public GameObject productCount_1_GO;
+    public TextMeshProUGUI productCount_1_Text;
+
+    public GameObject productCount_2_GO;
+    public TextMeshProUGUI productCount_2_Text;
+
+    public GameObject productCount_3_GO;
+    public TextMeshProUGUI productCount_3_Text;
+
+    public GameObject productCount_4_GO;
+    public TextMeshProUGUI productCount_4_Text;
     IEnumerator CreateMultiProduct(Collectable oldProduct, int prefabSelect)
     {
         bool selfDestroyActive = true;
@@ -604,6 +658,20 @@ public class MineCrusher : Stand, IStandUpgrade
                 {
                     deltaY = (ironCollectionList.Count - 1) / ironProductPosTR.Length;
                     targetTR = ironProductPosTR[(ironCollectionList.Count - 1) % ironProductPosTR.Length];
+
+                    if (ironCollectionList.Count > boxCountBound)
+                    {
+                        productCount_1_GO.SetActive(true);
+                        productCount_1_Text.text = "+" + (ironCollectionList.Count - boxCountBound).ToString();
+
+
+                        deltaY = (boxCountBound - 1) / ironProductPosTR.Length;
+                        targetTR = ironProductPosTR[ironProductPosTR.Length - 1];
+                    }
+                    else
+                    {
+                        productCount_1_GO.SetActive(false);
+                    }
                 }
             }
             else if (prefabSelect == 1)
@@ -617,6 +685,19 @@ public class MineCrusher : Stand, IStandUpgrade
                 {
                     deltaY = (plasticCollectionList.Count - 1) / plasticProductPosTR.Length;
                     targetTR = plasticProductPosTR[(plasticCollectionList.Count - 1) % plasticProductPosTR.Length];
+
+                    if (plasticCollectionList.Count > boxCountBound)
+                    {
+                        productCount_2_GO.SetActive(true);
+                        productCount_2_Text.text = "+" + (plasticCollectionList.Count - boxCountBound).ToString();
+
+                        deltaY = (boxCountBound - 1) / plasticProductPosTR.Length;
+                        targetTR = plasticProductPosTR[plasticProductPosTR.Length - 1];
+                    }
+                    else
+                    {
+                        productCount_2_GO.SetActive(false);
+                    }
                 }
             }
             else if (prefabSelect == 2)
@@ -630,6 +711,19 @@ public class MineCrusher : Stand, IStandUpgrade
                 {
                     deltaY = (yarnCollectionList.Count - 1) / yarnProductPosTR.Length;
                     targetTR = yarnProductPosTR[(yarnCollectionList.Count - 1) % yarnProductPosTR.Length];
+
+                    if (yarnCollectionList.Count > boxCountBound)
+                    {
+                        productCount_3_GO.SetActive(true);
+                        productCount_3_Text.text = "+" + (yarnCollectionList.Count - boxCountBound).ToString();
+
+                        deltaY = (boxCountBound - 1) / yarnProductPosTR.Length;
+                        targetTR = yarnProductPosTR[yarnProductPosTR.Length - 1];
+                    }
+                    else
+                    {
+                        productCount_3_GO.SetActive(false);
+                    }
                 }
             }
             else
@@ -643,6 +737,19 @@ public class MineCrusher : Stand, IStandUpgrade
                 {
                     deltaY = (woodCollectionList.Count - 1) / woodProductPosTR.Length;
                     targetTR = woodProductPosTR[(woodCollectionList.Count - 1) % woodProductPosTR.Length];
+
+                    if (woodCollectionList.Count > boxCountBound)
+                    {
+                        productCount_4_GO.SetActive(true);
+                        productCount_4_Text.text = "+" + (woodCollectionList.Count - boxCountBound).ToString();
+
+                        deltaY = (boxCountBound - 1) / woodProductPosTR.Length;
+                        targetTR = woodProductPosTR[woodProductPosTR.Length - 1];
+                    }
+                    else
+                    {
+                        productCount_4_GO.SetActive(false);
+                    }
                 }
             }
 
@@ -760,6 +867,19 @@ public class MineCrusher : Stand, IStandUpgrade
             deltaY = (ironCollectionList.Count - 1) / ironProductPosTR.Length;
             targetTR = ironProductPosTR[(ironCollectionList.Count - 1) % ironProductPosTR.Length];
 
+            if (ironCollectionList.Count > boxCountBound)
+            {
+                productCount_1_GO.SetActive(true);
+                productCount_1_Text.text = "+" + (ironCollectionList.Count - boxCountBound).ToString();
+
+                deltaY = (boxCountBound - 1) / ironProductPosTR.Length;
+                targetTR = ironProductPosTR[ironProductPosTR.Length - 1];
+            }
+            else
+            {
+                productCount_1_GO.SetActive(false);
+            }
+
             Vector3 dropPos = targetTR.position + new Vector3(0, deltaY * 1.25f, 0);
             Quaternion targetRot = targetTR.transform.rotation;
 
@@ -794,6 +914,19 @@ public class MineCrusher : Stand, IStandUpgrade
 
             deltaY = (plasticCollectionList.Count - 1) / plasticProductPosTR.Length;
             targetTR = plasticProductPosTR[(plasticCollectionList.Count - 1) % plasticProductPosTR.Length];
+
+            if (plasticCollectionList.Count > boxCountBound)
+            {
+                productCount_2_GO.SetActive(true);
+                productCount_2_Text.text = "+" + (plasticCollectionList.Count - boxCountBound).ToString();
+
+                deltaY = (boxCountBound - 1) / plasticProductPosTR.Length;
+                targetTR = plasticProductPosTR[plasticProductPosTR.Length - 1];
+            }
+            else
+            {
+                productCount_2_GO.SetActive(false);
+            }
 
             Vector3 dropPos = targetTR.position + new Vector3(0, deltaY * 1.25f, 0);
             Quaternion targetRot = targetTR.transform.rotation;
@@ -831,6 +964,19 @@ public class MineCrusher : Stand, IStandUpgrade
             deltaY = (yarnCollectionList.Count - 1) / yarnProductPosTR.Length;
             targetTR = yarnProductPosTR[(yarnCollectionList.Count - 1) % yarnProductPosTR.Length];
 
+            if (yarnCollectionList.Count > boxCountBound)
+            {
+                productCount_3_GO.SetActive(true);
+                productCount_3_Text.text = "+" + (yarnCollectionList.Count - boxCountBound).ToString();
+
+                deltaY = (boxCountBound - 1) / yarnProductPosTR.Length;
+                targetTR = yarnProductPosTR[yarnProductPosTR.Length - 1];
+            }
+            else
+            {
+                productCount_3_GO.SetActive(false);
+            }
+
             Vector3 dropPos = targetTR.position + new Vector3(0, deltaY * 1.25f, 0);
             Quaternion targetRot = targetTR.transform.rotation;
 
@@ -866,6 +1012,19 @@ public class MineCrusher : Stand, IStandUpgrade
 
             deltaY = (woodCollectionList.Count - 1) / woodProductPosTR.Length;
             targetTR = woodProductPosTR[(woodCollectionList.Count - 1) % woodProductPosTR.Length];
+
+            if (woodCollectionList.Count > boxCountBound)
+            {
+                productCount_4_GO.SetActive(true);
+                productCount_4_Text.text = "+" + (woodCollectionList.Count - boxCountBound).ToString();
+
+                deltaY = (boxCountBound - 1) / woodProductPosTR.Length;
+                targetTR = woodProductPosTR[woodProductPosTR.Length - 1];
+            }
+            else
+            {
+                productCount_4_GO.SetActive(false);
+            }
 
             Vector3 dropPos = targetTR.position + new Vector3(0, deltaY * 1.25f, 0);
             Quaternion targetRot = targetTR.transform.rotation;
