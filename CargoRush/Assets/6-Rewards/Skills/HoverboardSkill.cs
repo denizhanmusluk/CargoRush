@@ -29,7 +29,7 @@ public class HoverboardSkill : MonoBehaviour
     }
     private void OnTriggerStay(Collider other)
     {
-        if (other.GetComponent<PlayerController>() != null && collectActive && !other.GetComponent<PlayerController>().pressJoystick)
+        if (other.GetComponent<PlayerController>() != null && collectActive && !other.GetComponent<PlayerController>().pressJoystick && !Globals.goToCeoActive)
         {
             cicrcle.SetActive(false);
             collectActive = false;

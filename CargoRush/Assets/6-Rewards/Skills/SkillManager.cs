@@ -177,6 +177,7 @@ public class SkillManager : MonoBehaviour
     IEnumerator Capacity_Reset(int rewardTime)
     {
         GameManager.Instance.ui.capacityBoosterButton.interactable = false;
+        GameManager.Instance.ui.capacityBoosterText.SetActive(false);
         capacityCoroutineActive = false;
         yield return new WaitForSeconds(1);
         capacityCoroutineActive = true;
@@ -227,6 +228,7 @@ public class SkillManager : MonoBehaviour
                 PurchaseManager.Instance.DoubleCapacity_PopUp_Open();
             }
             GameManager.Instance.ui.capacityBoosterButton.interactable = true;
+            GameManager.Instance.ui.capacityBoosterText.SetActive(true);
         }
     }
     bool workerBoostCoroutineActive;
@@ -913,7 +915,12 @@ public class SkillManager : MonoBehaviour
         if (currentMoneyReward.GetComponent<MoneySkill>() != null)
         {
             //newReward.GetComponent<MoneySkill>().moneyValue = (Globals.collectableLevel * 300) + (Globals.openedCarSlotCount * 200) * (PlayerPrefs.GetInt("level") + 1);
-            currentMoneyReward.GetComponent<MoneySkill>().moneyValue = (int)(CheckExpensiveCost() * expensiveCostFactor);
+            int mnyVal = (int)(CheckExpensiveCost() * expensiveCostFactor);
+            if(mnyVal < 1350 * (PlayerPrefs.GetInt("level") + 1))
+            {
+                mnyVal = 1350 * (PlayerPrefs.GetInt("level") + 1);
+            }
+            currentMoneyReward.GetComponent<MoneySkill>().moneyValue = mnyVal;
             currentMoneyReward.GetComponent<MoneySkill>().ValueInit();
         }
     }

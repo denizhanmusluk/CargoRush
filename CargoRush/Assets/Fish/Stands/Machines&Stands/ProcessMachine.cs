@@ -485,6 +485,17 @@ public class ProcessMachine : Stand, IStandUpgrade, IMachineActive
                 cannedCount++;
                 Collectable raws = droppedCollectionList[droppedCollectionList.Count - 1];
                 droppedCollectionList.Remove(droppedCollectionList[droppedCollectionList.Count - 1]);
+
+                if (droppedCollectionList.Count > 72)
+                {
+                    rawCount_GO.SetActive(true);
+                    rawCount_Text.text = "+" + (droppedCollectionList.Count - 72).ToString();
+                }
+                else
+                {
+                    rawCount_GO.SetActive(false);
+                }
+
                 PlayerPrefs.SetInt(machineName + "rawcount" + PlayerPrefs.GetInt("level"), droppedCollectionList.Count);
                 StartCoroutine(CreateCanned(raws));
                 dropActive = false;
@@ -545,6 +556,17 @@ public class ProcessMachine : Stand, IStandUpgrade, IMachineActive
                 cannedCount++;
                 Collectable raws = droppedCollectionList[droppedCollectionList.Count - 1];
                 droppedCollectionList.Remove(droppedCollectionList[droppedCollectionList.Count - 1]);
+
+                if (droppedCollectionList.Count > 72)
+                {
+                    rawCount_GO.SetActive(true);
+                    rawCount_Text.text = "+" + (droppedCollectionList.Count - 72).ToString();
+                }
+                else
+                {
+                    rawCount_GO.SetActive(false);
+                }
+
                 PlayerPrefs.SetInt(machineName + "rawcount" + PlayerPrefs.GetInt("level"), droppedCollectionList.Count);
                 StartCoroutine(CreateCanned(raws));
                 dropActive = false;
@@ -1000,6 +1022,13 @@ public class ProcessMachine : Stand, IStandUpgrade, IMachineActive
         {
             deltaY = (72 - 1) / fishPosTR.Length;
             targetTR = fishPosTR[fishPosTR.Length - 1];
+
+            rawCount_GO.SetActive(true);
+            rawCount_Text.text = "+" + (droppedCollectionList.Count - 72).ToString();
+        }
+        else
+        {
+            rawCount_GO.SetActive(false);
         }
 
         Vector3 dropPos = targetTR.position + new Vector3(0, deltaY * 1.25f, 0);
@@ -1121,8 +1150,14 @@ public class ProcessMachine : Stand, IStandUpgrade, IMachineActive
             {
                 deltaY = (72 - 1) / fishPosTR.Length;
                 targetTR = fishPosTR[fishPosTR.Length - 1];
-            }
 
+                rawCount_GO.SetActive(true);
+                rawCount_Text.text = "+" + (droppedCollectionList.Count - 72).ToString();
+            }
+            else
+            {
+                rawCount_GO.SetActive(false);
+            }
             Vector3 dropPos = targetTR.position + new Vector3(0, deltaY * 1.25f, 0);
             Quaternion targetRot = targetTR.transform.rotation;
 
@@ -1287,11 +1322,9 @@ public class ProcessMachine : Stand, IStandUpgrade, IMachineActive
         if (trayCount > trayList.Count)
         {
             trayCount = trayList.Count;
-            productCount_GO.SetActive(true);
         }
         else
         {
-            productCount_GO.SetActive(false);
         }
         for (int i = 0; i < trayList.Count; i++)
         {
@@ -1304,7 +1337,16 @@ public class ProcessMachine : Stand, IStandUpgrade, IMachineActive
                 trayList[i].SetActive(false);
             }
         }
-        productCount_Text.text = productCollectionList.Count.ToString();
+
+        if (productCollectionList.Count > 64)
+        {
+            productCount_GO.SetActive(true);
+        }
+        else
+        {
+            productCount_GO.SetActive(false);
+        }
+        productCount_Text.text = "+" + (productCollectionList.Count - 64).ToString();
         //for (int i = 0; i < trayCount; i++)
         //{
         //    trayList[i].SetActive(true);
@@ -1332,4 +1374,7 @@ public class ProcessMachine : Stand, IStandUpgrade, IMachineActive
 
     public GameObject productCount_GO;
     public TextMeshProUGUI productCount_Text;
+
+    public GameObject rawCount_GO;
+    public TextMeshProUGUI rawCount_Text;
 }

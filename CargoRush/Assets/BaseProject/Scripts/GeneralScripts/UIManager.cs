@@ -62,6 +62,7 @@ public class UIManager : Subject
     public GameObject hrUpgradeTextGO;
 
     public Button capacityBoosterButton;
+    public GameObject capacityBoosterText;
     //public GameObject biggerPanelGO;
     //public TextMeshProUGUI biggerCounterText;
 
