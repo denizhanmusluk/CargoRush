@@ -24,7 +24,7 @@ public class PlaneGround : MonoBehaviour
             OpenScale(transform, firstScale, 1f, 1.2f, 0.1f, Ease.InFlash);
             if (canvasTR != null)
             {
-                OpenScale(canvasTR, firstScaleCanvasTR, 1f, 1.2f, 0.1f, Ease.InFlash);
+                //OpenScale(canvasTR, firstScaleCanvasTR, 1f, 1.2f, 0.1f, Ease.InFlash);
             }
         }
     }
@@ -35,7 +35,7 @@ public class PlaneGround : MonoBehaviour
             OpenScale(transform, firstScale, 1.2f, 1f, 0.1f, Ease.InFlash);
             if (canvasTR != null)
             {
-                OpenScale(canvasTR, firstScaleCanvasTR, 1.2f, 1f, 0.1f, Ease.InFlash);
+                //OpenScale(canvasTR, firstScaleCanvasTR, 1.2f, 1f, 0.1f, Ease.InFlash);
             }
         }
     }

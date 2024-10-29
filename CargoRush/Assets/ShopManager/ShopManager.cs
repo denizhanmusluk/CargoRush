@@ -79,8 +79,8 @@ public class ShopManager : MonoBehaviour
             buyOthersGO.SetActive(true);
         }
 
-        shopProgresFill.fillAmount = PlayerPrefs.GetFloat("shopprogressfill");
-        ratioText.text = ((int)(PlayerPrefs.GetFloat("shopprogressfill") * 100)).ToString() + "/100";
+        //shopProgresFill.fillAmount = PlayerPrefs.GetFloat("shopprogressfill");
+        //ratioText.text = ((int)(PlayerPrefs.GetFloat("shopprogressfill") * 100)).ToString() + "/100";
 
         
 

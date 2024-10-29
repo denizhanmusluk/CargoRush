@@ -17,11 +17,11 @@ public class MachineRepairArea : MonoBehaviour
     void RepairListOpen()
     {
         int minElementCount = 3;
-        if(minElementCount > machineRepairListAll.Count - 1)
+        if(minElementCount > machineRepairListAll.Count)
         {
-            minElementCount = machineRepairListAll.Count - 1;
+            minElementCount = machineRepairListAll.Count;
         }
-        int numberOfElementsToSelect = Random.Range(minElementCount, machineRepairListAll.Count);
+        int numberOfElementsToSelect = Random.Range(minElementCount, machineRepairListAll.Count + 1);
         selectedMachineRepairList.Clear();
         if (PlayerPrefs.GetInt("firsterrortutorial") == 0)
         {
