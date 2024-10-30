@@ -306,6 +306,8 @@ public class StandRaw : Stand
 
         bandStock.ManuelRawCreate();
         needPackTape_GO.SetActive(true);
+        bandText.text = (currentBandCount).ToString() + "/" + (maxBandCapacity).ToString();
+
     }
     public void FullBand()
     {
