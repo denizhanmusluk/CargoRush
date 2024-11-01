@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class RepairManager : MonoBehaviour
 {
@@ -13,6 +14,9 @@ public class RepairManager : MonoBehaviour
 
     public GameObject buttonFree_GO;
     public GameObject buttonADV_GO;
+
+    public TextMeshProUGUI repairCounterText;
+
     private void Awake()
     {
         _instance = this;
@@ -22,6 +26,7 @@ public class RepairManager : MonoBehaviour
        
         repairWorkerTimeCounter = PlayerPrefs.GetInt("repairWorkerTimeCounter");
         StartCoroutine(StartDelay());
+        repairCounterText = RewardPanel.Instance.repairCounterText;
 
     }
     IEnumerator StartDelay()
@@ -101,13 +106,26 @@ public class RepairManager : MonoBehaviour
     }
     IEnumerator RepairTimer()
     {
+        if (PlayerPrefs.GetInt("purchaserepairboost") == 0)
+        {
+            RewardPanel.Instance.repairRewardPanelGO.SetActive(true);
+        }
         repairWorkerTimeCounter = PlayerPrefs.GetInt("repairWorkerTimeCounter");
         while (repairWorkerTimeCounter < MRCUpgradeManager.Instance._characterUpgradeSettings.repairRunTime[Globals.repairRunTimeLevel])
         {
             repairWorkerTimeCounter++;
             PlayerPrefs.SetInt("repairWorkerTimeCounter", repairWorkerTimeCounter);
+            if (PlayerPrefs.GetInt("purchaserepairboost") == 0)
+            {
+                repairCounterText.text = ConvertSecondToMinSec.Converter(MRCUpgradeManager.Instance._characterUpgradeSettings.repairRunTime[Globals.repairRunTimeLevel] - repairWorkerTimeCounter);
+            }
+            else
+            {
+                RewardPanel.Instance.repairRewardPanelGO.SetActive(false);
+            }
             yield return new WaitForSeconds(1);
         }
+        RewardPanel.Instance.repairRewardPanelGO.SetActive(false);
         if (PlayerPrefs.GetInt("purchaserepairboost") == 0)
         {
             RepairEnd();

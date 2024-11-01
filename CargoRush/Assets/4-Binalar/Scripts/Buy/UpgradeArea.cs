@@ -114,7 +114,7 @@ public class UpgradeArea : MonoBehaviour, BuyCamera , IBuyCost
     {
         if (other.GetComponent<PlayerController>() != null && Globals.buyActive)
         {
-            StartCoroutine(CooldownActive(1f));
+            StartCoroutine(CooldownActive(1.25f));
         }
     }
     private void OnTriggerExit(Collider other)

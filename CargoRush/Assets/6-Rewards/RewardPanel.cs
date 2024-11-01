@@ -35,6 +35,10 @@ public class RewardPanel : MonoBehaviour
     public GameObject vipPanelGO;
     public TextMeshProUGUI vipCounterText;
 
+
+    public GameObject repairRewardPanelGO;
+    public TextMeshProUGUI repairCounterText;
+
     public Image vipImg;
 
     public VipCustomerSlot vipCar;
