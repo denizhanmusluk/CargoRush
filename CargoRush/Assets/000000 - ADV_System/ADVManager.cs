@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using System;
 using HomaGames.HomaBelly;
+using TMPro;
 
 public class ADVManager : MonoBehaviour
 {
@@ -90,7 +92,7 @@ public class ADVManager : MonoBehaviour
 
             if (Application.internetReachability == NetworkReachability.NotReachable)
             {
-
+                StartCoroutine(AdIsNotAnim());
             }
             else
             {
@@ -159,5 +161,56 @@ public class ADVManager : MonoBehaviour
     private void LoadBanner()
     {
         HomaBelly.Instance.LoadBanner(BannerSize.BANNER, BannerPosition.BOTTOM);
+    }
+    [SerializeField] GameObject advNotReadyPanel_GO;
+    [SerializeField] List<Image> advNotReadyImg_List;
+    [SerializeField] TextMeshProUGUI advNotText;
+    [SerializeField] Color transColorText;
+    [SerializeField] Color targetColorText;
+    [SerializeField] Color transColorImg;
+    [SerializeField] Color targetColorImg;
+    [SerializeField] float advNotDuration = 4f;
+    bool advNotActive;
+    IEnumerator AdIsNotAnim()
+    {
+        advNotActive = false;
+        yield return null;
+        advNotActive = true;
+        advNotReadyPanel_GO.gameObject.SetActive(true);
+
+        float counter = 0f;
+        while(counter < 1f && advNotActive)
+        {
+            counter += 2 * Time.deltaTime;
+            advNotText.color = Color.Lerp(transColorText, targetColorText, counter);
+            foreach (var img in advNotReadyImg_List)
+            {
+                img.color = Color.Lerp(transColorImg, targetColorImg, counter);
+            }
+            yield return null;
+        }
+
+        while(counter < advNotDuration && advNotActive)
+        {
+            counter += Time.deltaTime;
+
+            yield return null;
+        }
+
+        counter = 0f;
+        while (counter < 1f && advNotActive)
+        {
+            counter += 2 * Time.deltaTime;
+            advNotText.color = Color.Lerp(targetColorText, transColorText, counter);
+            foreach (var img in advNotReadyImg_List)
+            {
+                img.color = Color.Lerp(targetColorImg, transColorImg, counter);
+            }
+            yield return null;
+        }
+        if (advNotActive)
+        {
+            advNotReadyPanel_GO.gameObject.SetActive(false);
+        }
     }
 }
