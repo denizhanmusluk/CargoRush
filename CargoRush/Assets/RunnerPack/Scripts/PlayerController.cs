@@ -61,6 +61,7 @@ public class PlayerController : MonoBehaviour
     public Transform posTR;
     public Board _board;
     public List<GameObject> modelList = new List<GameObject>();
+    public GameObject modelParentGO;
     public GameObject bandBoard;
     public Transform bandBoardCreatePos;
 
@@ -71,10 +72,13 @@ public class PlayerController : MonoBehaviour
     public Transform hoverBoardCreatePos;
 
     public Transform characterSkinParent;
+    public Vector3 characterLocomotivePos;
 
     public GameObject nullVehicleGO;
     public Player _player;
     public GameObject fullTextGO;
+    public List<GameObject> vagons = new List<GameObject>();
+    public GameObject locomotiveGO;
 
     void Awake()
     {
@@ -126,44 +130,52 @@ public class PlayerController : MonoBehaviour
     }
     public void SkateBoardActive()
     {
-        if (_board != null)
+        if (!Globals.trainActive)
         {
-            Destroy(_board.gameObject);
-            _board = null;
+            if (_board != null)
+            {
+                Destroy(_board.gameObject);
+                _board = null;
+            }
+            nullVehicleGO.SetActive(false);
+            Board _sakteboard = Instantiate(skateBoard, skateCreatePos.position, skateCreatePos.rotation, skateCreatePos).GetComponent<Board>();
+            _board = _sakteboard;
+            StartCoroutine(AnimationSet("singlewheel"));
+            _stackCollect.stackLevel_1_PosList[0].transform.localPosition = new Vector3(_stackCollect.stackLevel_1_PosList[0].transform.localPosition.x, _stackCollect.stackLevel_1_PosList[0].transform.localPosition.y, -0.6f);
         }
-        nullVehicleGO.SetActive(false);
-        Board _sakteboard = Instantiate(skateBoard, skateCreatePos.position, skateCreatePos.rotation, skateCreatePos).GetComponent<Board>();
-        _board = _sakteboard;
-        StartCoroutine(AnimationSet("singlewheel"));
-        _stackCollect.stackLevel_1_PosList[0].transform.localPosition = new Vector3(_stackCollect.stackLevel_1_PosList[0].transform.localPosition.x, _stackCollect.stackLevel_1_PosList[0].transform.localPosition.y, -0.6f);
-
     }
     public void BandBoardActive()
     {
-        if (_board != null)
+        if (!Globals.trainActive)
         {
-            Destroy(_board.gameObject);
-            _board = null;
+            if (_board != null)
+            {
+                Destroy(_board.gameObject);
+                _board = null;
+            }
+            nullVehicleGO.SetActive(false);
+            Board _sakteboard = Instantiate(bandBoard, bandBoardCreatePos.position, bandBoardCreatePos.rotation, bandBoardCreatePos).GetComponent<Board>();
+            _board = _sakteboard;
+            StartCoroutine(AnimationSet("singlewheel"));
+            _stackCollect.stackLevel_1_PosList[0].transform.localPosition = new Vector3(_stackCollect.stackLevel_1_PosList[0].transform.localPosition.x, _stackCollect.stackLevel_1_PosList[0].transform.localPosition.y, 0.5f);
+            //transform.localPosition = new Vector3(transform.localPosition.x, 0.65f, transform.localPosition.z);
         }
-        nullVehicleGO.SetActive(false);
-        Board _sakteboard = Instantiate(bandBoard, bandBoardCreatePos.position, bandBoardCreatePos.rotation, bandBoardCreatePos).GetComponent<Board>();
-        _board = _sakteboard;
-        StartCoroutine(AnimationSet("singlewheel"));
-        _stackCollect.stackLevel_1_PosList[0].transform.localPosition = new Vector3(_stackCollect.stackLevel_1_PosList[0].transform.localPosition.x, _stackCollect.stackLevel_1_PosList[0].transform.localPosition.y, 0.5f);
-        //transform.localPosition = new Vector3(transform.localPosition.x, 0.65f, transform.localPosition.z);
     }
     public void HoverBoardActive()
     {
-        if (_board != null)
+        if (!Globals.trainActive)
         {
-            Destroy(_board.gameObject);
-            _board = null;
+            if (_board != null)
+            {
+                Destroy(_board.gameObject);
+                _board = null;
+            }
+            nullVehicleGO.SetActive(false);
+            Board _sakteboard = Instantiate(hoverBoard, skateCreatePos.position, hoverBoardCreatePos.rotation, hoverBoardCreatePos).GetComponent<Board>();
+            _board = _sakteboard;
+            StartCoroutine(AnimationSet("hoverboard"));
+            _stackCollect.stackLevel_1_PosList[0].transform.localPosition = new Vector3(_stackCollect.stackLevel_1_PosList[0].transform.localPosition.x, _stackCollect.stackLevel_1_PosList[0].transform.localPosition.y, 0.5f);
         }
-        nullVehicleGO.SetActive(false);
-        Board _sakteboard = Instantiate(hoverBoard, skateCreatePos.position, hoverBoardCreatePos.rotation, hoverBoardCreatePos).GetComponent<Board>();
-        _board = _sakteboard;
-        StartCoroutine(AnimationSet("hoverboard"));
-        _stackCollect.stackLevel_1_PosList[0].transform.localPosition = new Vector3(_stackCollect.stackLevel_1_PosList[0].transform.localPosition.x, _stackCollect.stackLevel_1_PosList[0].transform.localPosition.y, 0.5f);
     }
     public void NoneVehicle()
     {
@@ -394,6 +406,15 @@ public class PlayerController : MonoBehaviour
         //    //PlayerPrefs.SetInt("modelselect", 2);
         //    //ModelSelect();
         //}
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            TrainActive();
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            CloseTrain();
+        }
+
     }
     public void PlayerControlDeActive()
     {
@@ -554,7 +575,12 @@ public class PlayerController : MonoBehaviour
             moveDirection = rotatedDirection;
             //moveSpeed /= 2;
         }
-        transform.parent.transform.Translate(moveDirection * Time.deltaTime * (_characterUpgradeSettings.characterSpeed[Globals.characterSpeedLevel] * Globals.extraSpeedSkins * Globals.extraSpeed));
+        float trainSpeedFactor = _characterUpgradeSettings.trainSpeedFactor[Globals.trainSpeedLevel];
+        if (!Globals.trainActive)
+        {
+            trainSpeedFactor = 1f;
+        }
+        transform.parent.transform.Translate(trainSpeedFactor * moveDirection * Time.deltaTime * (_characterUpgradeSettings.characterSpeed[Globals.characterSpeedLevel] * Globals.extraSpeedSkins * Globals.extraSpeed));
 
     }
     private void runnerControl()
@@ -1085,5 +1111,75 @@ public class PlayerController : MonoBehaviour
         }
         transform.parent.position = repairPosTR.position;
         transform.rotation = repairPosTR.rotation;
+    }
+
+    public void TrainActive()
+    {
+        Globals.trainActive = true;
+        locomotiveGO.SetActive(true);
+        OpenVagons();
+        _stackCollect.stackLevel = 1;
+        _stackCollect.CollectedListReset();
+
+        characterSkinParent.localPosition = characterLocomotivePos;
+        animator.SetBool("sitting", true);
+        magnet.MagnetLevelUp(1);
+        modelParentGO.SetActive(false);
+        NoneVehicle();
+        GetComponent<CapsuleCollider>().radius = 1;
+    }
+    public void OpenVagons()
+    {
+        int vagonCount = MRCUpgradeManager.Instance._characterUpgradeSettings.trainCapacity[Globals.trainCapacityLevel];
+        if (Globals.trainActive)
+        {
+            for(int i = 0; i < vagonCount; i++)
+            {
+                vagons[i].SetActive(true);
+            }
+        }
+    }
+    public void CloseTrain()
+    {
+
+        Globals.trainActive = false;
+        locomotiveGO.SetActive(false);
+        _stackCollect.CollectionsNullParent();
+        for (int i = 0; i < vagons.Count; i++)
+        {
+            vagons[i].SetActive(false);
+            vagons[i].transform.parent = transform.parent;
+        }
+        _stackCollect.stackLevel = 0;
+        _stackCollect.CollectedListReset();
+        characterSkinParent.localPosition = Vector3.zero;
+
+        animator.SetBool("sitting", false);
+        magnet.MagnetLevelUp(0);
+        modelParentGO.SetActive(true);
+        GetComponent<CapsuleCollider>().radius = 0.5f;
+
+        if (PlayerPrefs.GetInt("purchasespeedboost") == 1)
+        {
+            BandBoardActive();
+        }
+
+        if (Globals.hoverboardActive)
+        {
+            int rewardSelect = PlayerPrefs.GetInt("speedskil") % 3;
+
+            if (rewardSelect == 0)
+            {
+                BandBoardActive();
+            }
+            else if (rewardSelect == 1)
+            {
+                SkateBoardActive();
+            }
+            else
+            {
+                HoverBoardActive();
+            }
+        }
     }
 }

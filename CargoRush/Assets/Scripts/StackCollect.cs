@@ -30,7 +30,7 @@ public abstract class StackCollect : MonoBehaviour
     Vector3 firstSize;
 
     public Transform[] stackLevel_1_PosList;
-    public Transform[] stackLevel_2_PosList;
+    public List<Transform> stackLevel_2_PosList;
     public Transform[] stackLevel_3_PosList;
     public int stackLevel = 0;
     public bool player;
@@ -98,6 +98,13 @@ public abstract class StackCollect : MonoBehaviour
         disperseActive = false;
         yield return new WaitForSeconds(1f);
         disperseActive = true;
+    }
+    public void CollectionsNullParent()
+    {
+        foreach(Collectable clt in collectionTrs)
+        {
+            clt.transform.parent = null;
+        }
     }
     public void Collecting(Collectable collectable)
     {
@@ -193,10 +200,18 @@ public abstract class StackCollect : MonoBehaviour
 
             if (stackLevel == 1)
             {
-                Transform targetTR = stackLevel_2_PosList[(collectionTrs.Count - 1) % stackLevel_2_PosList.Length];
+                if (collectionTrs[0].collectID == 0)
+                {
+                    stackStepOffset = 0.5f;
+                }
+                else
+                {
+                    stackStepOffset = 1.25f;
+                }
+                Transform targetTR = stackLevel_2_PosList[(collectionTrs.Count - 1) % stackLevel_2_PosList.Count];
 
                 float deltaY = 0;
-                deltaY = (float)(collectionTrs.Count - 1) / (float)stackLevel_2_PosList.Length;
+                deltaY = (collectionTrs.Count - 1) / stackLevel_2_PosList.Count;
                 //collectable.transform.parent = stackLevel_2_PosList[0];
                 StartCoroutine(ComeToMe(collectable,  targetTR, deltaY,true));
             }
@@ -272,7 +287,7 @@ public abstract class StackCollect : MonoBehaviour
         }
         StackFullCheck();
 
-        yield return new WaitForSeconds(0.4f);
+        yield return new WaitForSeconds(0.2f);
       
         for (int i = 0; i < collectionTrs.Count; i++)
         {
@@ -291,13 +306,13 @@ public abstract class StackCollect : MonoBehaviour
 
             if (stackLevel == 1)
             {
-                Transform targetTR = stackLevel_2_PosList[(i) % stackLevel_2_PosList.Length];
+                Transform targetTR = stackLevel_2_PosList[(i) % stackLevel_2_PosList.Count];
 
                 float deltaY = 0;
-                deltaY = (i) / stackLevel_2_PosList.Length;
+                deltaY = (i) / stackLevel_2_PosList.Count;
 
                 //collectionTrs[i].transform.parent = stackLevel_2_PosList[0];
-                StartCoroutine(CollectablePosReset(collectionTrs[i], targetTR, deltaY, parentActive));
+                StartCoroutine(CollectablePosReset(collectionTrs[i], targetTR, deltaY, true));
 
                 //StartCoroutine(ComeToMe(collectable, dropPos));
             }
@@ -334,7 +349,7 @@ public abstract class StackCollect : MonoBehaviour
             firstRot = collectable.transform.rotation;
             dropPos = targetTR.position + new Vector3(0, deltaY * stackStepOffset, 0);
             collectable.transform.position = Vector3.Lerp(firstPos, dropPos, timeCounter);
-            collectable.transform.rotation = Quaternion.Lerp(firstRot, transform.rotation, timeCounter);
+            collectable.transform.rotation = Quaternion.Lerp(firstRot, targetTR.rotation, timeCounter);
 
             yield return null;
         }
@@ -342,6 +357,7 @@ public abstract class StackCollect : MonoBehaviour
         if (parentActive)
         {
             collectable.transform.parent = targetTR;
+            collectable.transform.localRotation = Quaternion.identity;
         }
 
     }
@@ -519,12 +535,13 @@ public abstract class StackCollect : MonoBehaviour
         }
         dropPos = targetTR.position + new Vector3(0, deltaY * stackStepOffset, 0);
         collectable.transform.position = dropPos;
+        collectable.transform.localRotation = targetAngle;
         if (parentActive)
         {
             collectable.transform.parent = targetTR;
-            collectable.transform.localPosition = Vector3.zero;
+            //collectable.transform.localPosition = Vector3.zero;
+            collectable.transform.localRotation = Quaternion.identity;
         }
-        collectable.transform.localRotation = targetAngle;
         collectable.stackFollowingActive = true;
 
 

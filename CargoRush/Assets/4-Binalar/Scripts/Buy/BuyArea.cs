@@ -95,6 +95,7 @@ public class BuyArea : MonoBehaviour, BuyCamera, IBuyCost
     public bool specialVehicleOpener = false;
     public bool ticketTutorialActivator = false;
 
+    public bool trainActivator = false;
     bool shopValueAdded = false;
     public string buyNameForResource;
     void Awake()
@@ -595,6 +596,10 @@ public class BuyArea : MonoBehaviour, BuyCamera, IBuyCost
             //yield return new WaitForSeconds(10);
             //TutorialManager.Instance.SkinTutorialStart();
           
+        }
+        if (trainActivator)
+        {
+            TrainManager.Instance.TrainActivator();
         }
     }
     void ClosedAreas()

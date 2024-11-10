@@ -17,6 +17,14 @@ public class ADVManager : MonoBehaviour
     public event Action interstialFunction;
 
     public List<RewardedButton> allRewardedButtons = new List<RewardedButton>();
+
+
+
+    [SerializeField] GameObject advNotReadyPanel_GO;
+    [SerializeField] List<Image> advNotReadyImg_List;
+    [SerializeField] TextMeshProUGUI advNotText;
+    bool advNotActive;
+
     private void Awake()
     {
         _instance = this;
@@ -65,10 +73,7 @@ public class ADVManager : MonoBehaviour
             }
         }
     }
-    //public void RewardedSuggested(string rewardedName)
-    //{
-    //    Analytics.RewardedAdSuggested(rewardedName);
-    //}
+
     public void RewardedStart(RW_Function fnct, string rewardedName, bool activeTicket)
     {
         rewardedFunction = null;
@@ -162,17 +167,14 @@ public class ADVManager : MonoBehaviour
     {
         HomaBelly.Instance.LoadBanner(BannerSize.BANNER, BannerPosition.BOTTOM);
     }
-    [SerializeField] GameObject advNotReadyPanel_GO;
-    [SerializeField] List<Image> advNotReadyImg_List;
-    [SerializeField] TextMeshProUGUI advNotText;
-    [SerializeField] Color transColorText;
-    [SerializeField] Color targetColorText;
-    [SerializeField] Color transColorImg;
-    [SerializeField] Color targetColorImg;
-    [SerializeField] float advNotDuration = 4f;
-    bool advNotActive;
     IEnumerator AdIsNotAnim()
     {
+        float advNotDuration = 4f;
+        Color transColorText = new Color(1, 1, 1, 0);
+        Color transColorImg = new Color(0, 0, 0, 0);
+
+        Color targetColorText = Color.white;
+        Color targetColorImg = Color.black;
         advNotActive = false;
         yield return null;
         advNotActive = true;

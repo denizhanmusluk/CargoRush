@@ -8,13 +8,17 @@ public class DayCycleManager : MonoBehaviour
 {
     private static DayCycleManager _instance = null;
     public static DayCycleManager Instance => _instance;
-    public bool IS_Active = true;
-    // Start is called before the first frame update
-    public int firstInterstialTime = 900;
-    public int firstInterstialTimeCounter = 0;
 
-    public int dayCyclePeriod = 180;
+    public ISSettings iSSettings;
+
+    public bool IS_Active = true;
+
+
+    [HideInInspector]
+    public int firstInterstialTimeCounter = 0;
+    [HideInInspector]
     public int dayCycleCount = 0;
+
     public GameObject dayPanel_GO;
     public GameObject sun;
     public GameObject moon;
@@ -57,7 +61,7 @@ public class DayCycleManager : MonoBehaviour
         //FishDropArea.Instance.loadingAreaTextGO.SetActive(true);
 
         firstInterstialTimeCounter = PlayerPrefs.GetInt("firstInterstialTimeCounter");
-
+        int firstInterstialTime = iSSettings._firstIS_Time;
         while (firstInterstialTimeCounter < firstInterstialTime)
         {
             firstInterstialTimeCounter++;
@@ -89,7 +93,7 @@ public class DayCycleManager : MonoBehaviour
         dayPanel_GO.SetActive(true);
         dayCycleCount = 0;
         //dayCycleCount = PlayerPrefs.GetInt("dayCycleCount");
-
+        int dayCyclePeriod = iSSettings._period_IS;
         while (dayCycleCount < dayCyclePeriod)
         {
             dayCycleCount++;
@@ -161,7 +165,6 @@ public class DayCycleManager : MonoBehaviour
     }
     public void CheckIf24HoursPassed()
     {
-        // Kaydedilen tarihi al
         if (PlayerPrefs.HasKey(SavedDateKey))
         {
             string savedDateString = PlayerPrefs.GetString(SavedDateKey);

@@ -12,7 +12,7 @@ public class CollisionController : MonoBehaviour
     private void Start()
     {
         _characterUpgradeSettings = LevelManager.Instance._currnetCharacterUpgradeSettings;
-        MagnetLevelUp();
+        MagnetLevelUp(0);
         fullTextGO = GameManager.Instance.ui.fullCapacityText;
     }
     private void OnTriggerEnter(Collider other)
@@ -117,9 +117,9 @@ public class CollisionController : MonoBehaviour
             }
         }
     }
-    public void MagnetLevelUp()
+    public void MagnetLevelUp(int magnetLevel)
     {
-        transform.localScale = Vector3.one * _characterUpgradeSettings.magnetRadius[Globals.magnetRadiusLevel];
+        transform.localScale = Vector3.one * _characterUpgradeSettings.magnetRadius[magnetLevel];
     }
     bool fullTextActive = false;
     IEnumerator FullCapacity()

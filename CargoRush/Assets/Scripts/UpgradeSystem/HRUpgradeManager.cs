@@ -98,7 +98,6 @@ public class HRUpgradeManager : MonoBehaviour
                 GameManager.Instance.MoneyUpdate(-workerMoveSpeedCost);
                 Globals.workerMoveSpeedLevel++;
                 PlayerPrefs.SetInt("workerMoveSpeedLevel" + PlayerPrefs.GetInt("level"), Globals.workerMoveSpeedLevel);
-                PlayerController.Instance.magnet.MagnetLevelUp();
 
                 //string tag = "M" + (PlayerPrefs.GetInt("level") + 1).ToString() + "-WorkerSpeedUpgrade" + Globals.workerMoveSpeedLevel.ToString();
                 //GameManager.Instance.GameAnalyticsTag(tag);
@@ -399,7 +398,6 @@ public class HRUpgradeManager : MonoBehaviour
         {
             Globals.workerMoveSpeedLevel++;
             PlayerPrefs.SetInt("workerMoveSpeedLevel" + PlayerPrefs.GetInt("level"), Globals.workerMoveSpeedLevel);
-            PlayerController.Instance.magnet.MagnetLevelUp();
 
             //string tag = "M" + (PlayerPrefs.GetInt("level") + 1).ToString() + "-WorkerSpeedUpgrade" + Globals.workerMoveSpeedLevel.ToString() + "-REWARDED";
             //GameManager.Instance.GameAnalyticsTag(tag);

@@ -390,8 +390,8 @@ public class GameManager : Observer
 
     public void CheatIS()
     {
-        DayCycleManager.Instance.firstInterstialTimeCounter = DayCycleManager.Instance.firstInterstialTime;
-        DayCycleManager.Instance.dayCycleCount = DayCycleManager.Instance.dayCyclePeriod;
+        DayCycleManager.Instance.firstInterstialTimeCounter = DayCycleManager.Instance.iSSettings._firstIS_Time;
+        DayCycleManager.Instance.dayCycleCount = DayCycleManager.Instance.iSSettings._period_IS;
     }
     public void CheatRewarded()
     {

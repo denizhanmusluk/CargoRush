@@ -15,6 +15,8 @@ public class PurchaseBoostManager : MonoBehaviour
     public BuyRepair buyRepair;
     public BuySpeedPurchase buySpeed;
     public BuyDoubleIncome buyDoubleIncome;
+    public BuyTrain buyTrain;
+
     private void Awake()
     {
         _instance = this;
@@ -70,7 +72,22 @@ public class PurchaseBoostManager : MonoBehaviour
         }
         Analytics.ItemConsumed("Permanent_RepairMan", 0, ItemFlowReason.InAppPurchase);
     }
-
+    public void TrainBuy(float _cost, Button _buyButton)
+    {
+        cost = _cost;
+        buyButton = _buyButton;
+        PayingCompleted_Train();
+    }
+    void PayingCompleted_Train()
+    {
+        buyButton.interactable = true;
+        TrainManager.Instance.PurchaseTrainImmediateActive();
+        if (buyTrain != null)
+        {
+            buyTrain.CheckPurchased();
+        }
+        Analytics.ItemConsumed("Permanent_TrainVagon", 0, ItemFlowReason.InAppPurchase);
+    }
     public void SpeedBuy(float _cost, Button _buyButton)
     {
         cost = _cost;

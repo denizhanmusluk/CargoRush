@@ -100,7 +100,8 @@ public class Collectable : MonoBehaviour
         }
         Collider[] colliders = GetComponents<Collider>();
 
-        // Her bir CapsuleCollider için isTrigger özelliðini true yap
+        transform.parent = null;
+
         foreach (Collider collider in colliders)
         {
             collider.isTrigger = true;
@@ -115,6 +116,8 @@ public class Collectable : MonoBehaviour
         {
             GetComponent<Collector>().hitOutSd = false;
         }
+
+        transform.parent = null;
     }
     IEnumerator CollectActivator()
     {

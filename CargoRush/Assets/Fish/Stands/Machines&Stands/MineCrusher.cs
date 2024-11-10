@@ -1125,7 +1125,7 @@ public class MineCrusher : Stand, IStandUpgrade
 
         droppedCollectionList.Add(droppingCollection);
         PlayerPrefs.SetInt(machineName + "rawcount" + PlayerPrefs.GetInt("level"), droppedCollectionList.Count);
-
+        droppingCollection.transform.parent = null;
         yield return null;
         droppingCollection.collectActive = false;
         float deltaY = 0;
@@ -1308,6 +1308,9 @@ public class MineCrusher : Stand, IStandUpgrade
             }
             yield return null;
         }
+        //collectable.transform.parent = null;
+        collectable.transform.parent = dropPosTR.parent;
+
         collectable.transform.position = dropPos;
         //collectable.transform.localScale = new Vector3(collectable.transform.localScale.x * 0.5f, collectable.transform.localScale.y * 2f, collectable.transform.localScale.z);
         //OpenScale(collectable.transform, 1f, 2f, 1f, Ease.OutElastic);

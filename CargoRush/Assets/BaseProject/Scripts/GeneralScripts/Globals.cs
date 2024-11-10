@@ -35,6 +35,9 @@ public static class Globals
     public static int repairRunTimeLevel = 0;
     public static int repairSpeedLevel = 0;
 
+    public static int trainCapacityLevel = 0;
+    public static int trainSpeedLevel = 0;
+
     public static int maxBuildLevel = 0;
 
 
@@ -154,4 +157,6 @@ public static class Globals
     public static bool productCollectWorkerActive = true;
     public static bool hoverboardActive = false;
     public static int moneyRewardedValue = 0;
+
+    public static bool trainActive = false;
 }

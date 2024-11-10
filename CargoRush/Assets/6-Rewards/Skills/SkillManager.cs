@@ -7,35 +7,14 @@ public class SkillManager : MonoBehaviour
 {
     private static SkillManager _instance = null;
     public static SkillManager Instance => _instance;
-    [SerializeField] Color targetColor;
-    Color firstColor;
-    public int extraStack = 5;
-    public int workerStackFactor = 2;
-    public float workerSpeedFactor = 2;
-    public float machineSpeedFactor = 2;
 
+    public BoosterSettings boosterSettings;
 
-    public int hoverboardRewardTime;
     TextMeshProUGUI hoverboardCounterText;
-
-    public int capacityRewardTime;
     TextMeshProUGUI capacityCounterText;
-
-    public int doubleIncomeRewardTime;
     TextMeshProUGUI doubleIncomeCounterText;
-
-    public int workerRewardTime;
     TextMeshProUGUI workerCounterText;
-
-    public int machineRewardTime;
     TextMeshProUGUI machineCounterText;
-
-    [SerializeField] int speedRewPeriod;
-    [SerializeField] int capacityRewPeriod;
-    [SerializeField] int doubleIncomeRewPeriod;
-    [SerializeField] int moneyRewPeriod;
-    [SerializeField] int workerRewPeriod;
-    [SerializeField] int machineRewPeriod;
 
     public List<RewardPos> speedRewardPos = new List<RewardPos>();
     [SerializeField] GameObject[] speedRewards;
@@ -68,6 +47,8 @@ public class SkillManager : MonoBehaviour
     Transform currentWorkerReward_TR;
     Transform currentMachineReward_TR;
 
+    Color firstColor;
+
     private void Awake()
     {
         _instance = this;
@@ -78,7 +59,7 @@ public class SkillManager : MonoBehaviour
         int rewardSelect = PlayerPrefs.GetInt("speedskil") % 3;
         Globals.hoverboardActive = true;
         RewardPanel.Instance.hoverboardPanelGO.SetActive(true);
-        StartCoroutine(Hoverboard_Reset(hoverboardRewardTime));
+        StartCoroutine(Hoverboard_Reset(boosterSettings._speedBoosterDuration));
 
         if(rewardSelect == 0)
         {
@@ -116,35 +97,17 @@ public class SkillManager : MonoBehaviour
         int counter = rewardTime;
         while (counter > 0 && speedCoroutineActive)
         {
-            int minute = Mathf.FloorToInt(counter / 60);
-            int second = Mathf.FloorToInt(counter % 60);
+            hoverboardCounterText.text = ConvertSecondToMinSec.Converter(counter);
 
-            hoverboardCounterText.text = minute.ToString() + ":" + ($"{second}");
-            if (minute < 10)
+            if (counter <= 3)
             {
-                hoverboardCounterText.text = "0" + minute.ToString() + ":" + ($"{second}");
-
+                StartCoroutine(CounterTextColorSet(hoverboardCounterText));
+                VibratoManager.Instance.LightVibration();
             }
-            if (second < 10)
-            {
-                hoverboardCounterText.text = minute.ToString() + ":0" + ($"{second}");
-                if (minute < 10)
-                {
-                    hoverboardCounterText.text = "0" + minute.ToString() + ":0" + ($"{second}");
 
-                }
-                if (counter <= 3)
-                {
-                    StartCoroutine(CounterTextColorSet(hoverboardCounterText));
-                    VibratoManager.Instance.LightVibration();
-                }
-            }
             counter--;
             yield return new WaitForSeconds(1);
-            if (!Globals.holePlatformActive)
-            {
-                RewardPanel.Instance.hoverboardPanelGO.SetActive(true);
-            }
+
         }
         if (counter <= 0)
         {
@@ -168,8 +131,8 @@ public class SkillManager : MonoBehaviour
     {
         //PlayerController.Instance.CapacityUp();
         RewardPanel.Instance.capacityPanelGO.SetActive(true);
-        StartCoroutine(Capacity_Reset(capacityRewardTime));
-        Globals.extraStack = extraStack;
+        StartCoroutine(Capacity_Reset(boosterSettings._capacityBoosterDuration));
+        Globals.extraStack = boosterSettings._capacityValue;
 
 
     }
@@ -185,35 +148,16 @@ public class SkillManager : MonoBehaviour
 
         while (counter > 0 && capacityCoroutineActive)
         {
-            int minute = Mathf.FloorToInt(counter / 60);
-            int second = Mathf.FloorToInt(counter % 60);
+            capacityCounterText.text = ConvertSecondToMinSec.Converter(counter);
 
-            capacityCounterText.text = minute.ToString() + ":" + ($"{second}");
-            if (minute < 10)
+            if (counter <= 3)
             {
-                capacityCounterText.text = "0" + minute.ToString() + ":" + ($"{second}");
-
+                StartCoroutine(CounterTextColorSet(capacityCounterText));
+                VibratoManager.Instance.LightVibration();
             }
-            if (second < 10)
-            {
-                capacityCounterText.text = minute.ToString() + ":0" + ($"{second}");
-                if (minute < 10)
-                {
-                    capacityCounterText.text = "0" + minute.ToString() + ":0" + ($"{second}");
 
-                }
-                if (counter <= 3)
-                {
-                    StartCoroutine(CounterTextColorSet(capacityCounterText));
-                    VibratoManager.Instance.LightVibration();
-                }
-            }
             counter--;
             yield return new WaitForSeconds(1);
-            if (!Globals.holePlatformActive)
-            {
-                RewardPanel.Instance.capacityPanelGO.SetActive(true);
-            }
         }
         if (counter <= 0)
         {
@@ -235,9 +179,9 @@ public class SkillManager : MonoBehaviour
     public void WorkerBoostActive()
     {
         RewardPanel.Instance.workerRewardPanelGO.SetActive(true);
-        StartCoroutine(WorkerBoost_Reset(workerRewardTime));
-        Globals.workerStackFactor = workerStackFactor;
-        Globals.workerSpeedFactor = workerSpeedFactor;
+        StartCoroutine(WorkerBoost_Reset(boosterSettings._workerBoosterDuration));
+        Globals.workerStackFactor = boosterSettings._workerStackFactor;
+        Globals.workerSpeedFactor = boosterSettings._workerSpeedFactor;
         HRUpgradeManager.Instance.AllWorkerMoveSpeedInit();
     }
     IEnumerator WorkerBoost_Reset(int rewardTime)
@@ -249,34 +193,17 @@ public class SkillManager : MonoBehaviour
 
         while (counter > 0 && workerBoostCoroutineActive)
         {
-            int minute = Mathf.FloorToInt(counter / 60);
-            int second = Mathf.FloorToInt(counter % 60);
+            workerCounterText.text = ConvertSecondToMinSec.Converter(counter);
 
-            workerCounterText.text = minute.ToString() + ":" + ($"{second}");
-            if (minute < 10)
+            if (counter <= 3)
             {
-                workerCounterText.text = "0" + minute.ToString() + ":" + ($"{second}");
-
+                StartCoroutine(CounterTextColorSet(workerCounterText));
+                VibratoManager.Instance.LightVibration();
             }
-            if (second < 10)
-            {
-                workerCounterText.text = minute.ToString() + ":0" + ($"{second}");
-                if (minute < 10)
-                {
-                    workerCounterText.text = "0" + minute.ToString() + ":0" + ($"{second}");
 
-                }
-                if (counter <= 3)
-                {
-                    StartCoroutine(CounterTextColorSet(workerCounterText));
-                    VibratoManager.Instance.LightVibration();
-                }
-            }
             counter--;
             yield return new WaitForSeconds(1);
 
-            RewardPanel.Instance.workerRewardPanelGO.SetActive(true);
-            
         }
 
         if (counter <= 0)
@@ -299,8 +226,8 @@ public class SkillManager : MonoBehaviour
     public void MachineBoostActive()
     {
         RewardPanel.Instance.machineRewardPanelGO.SetActive(true);
-        StartCoroutine(MachineBoost_Reset(machineRewardTime));
-        Globals.machineSpeedFactor = machineSpeedFactor;
+        StartCoroutine(MachineBoost_Reset(boosterSettings._machineBoosterDuration));
+        Globals.machineSpeedFactor = boosterSettings._machineSpeedFactor;
     }
 
     IEnumerator MachineBoost_Reset(int rewardTime)
@@ -312,34 +239,16 @@ public class SkillManager : MonoBehaviour
 
         while (counter > 0 && machineBoostCoroutineActive)
         {
-            int minute = Mathf.FloorToInt(counter / 60);
-            int second = Mathf.FloorToInt(counter % 60);
+            machineCounterText.text = ConvertSecondToMinSec.Converter(counter);
 
-            machineCounterText.text = minute.ToString() + ":" + ($"{second}");
-            if (minute < 10)
+            if (counter <= 3)
             {
-                machineCounterText.text = "0" + minute.ToString() + ":" + ($"{second}");
-
+                StartCoroutine(CounterTextColorSet(machineCounterText));
+                VibratoManager.Instance.LightVibration();
             }
-            if (second < 10)
-            {
-                machineCounterText.text = minute.ToString() + ":0" + ($"{second}");
-                if (minute < 10)
-                {
-                    machineCounterText.text = "0" + minute.ToString() + ":0" + ($"{second}");
 
-                }
-                if (counter <= 3)
-                {
-                    StartCoroutine(CounterTextColorSet(machineCounterText));
-                    VibratoManager.Instance.LightVibration();
-                }
-            }
             counter--;
             yield return new WaitForSeconds(1);
-
-            RewardPanel.Instance.machineRewardPanelGO.SetActive(true);
-
         }
 
         if (counter <= 0)
@@ -360,7 +269,7 @@ public class SkillManager : MonoBehaviour
     public void DoubleIncomeActive()
     {
         RewardPanel.Instance.doubleIncomePanelGO.SetActive(true);
-        StartCoroutine(DoubleIncome_Reset(doubleIncomeRewardTime));
+        StartCoroutine(DoubleIncome_Reset(boosterSettings._doubleIncomeBoosterDuration));
         Globals.doubleIncomeActive = true;
 
     }
@@ -374,35 +283,16 @@ public class SkillManager : MonoBehaviour
 
         while (counter > 0 && doubleIncomeCoroutineActive)
         {
-            int minute = Mathf.FloorToInt(counter / 60);
-            int second = Mathf.FloorToInt(counter % 60);
+            doubleIncomeCounterText.text = ConvertSecondToMinSec.Converter(counter);
 
-            doubleIncomeCounterText.text = minute.ToString() + ":" + ($"{second}");
-            if (minute < 10)
+            if (counter <= 3)
             {
-                doubleIncomeCounterText.text = "0" + minute.ToString() + ":" + ($"{second}");
-
+                StartCoroutine(CounterTextColorSet(doubleIncomeCounterText));
+                VibratoManager.Instance.LightVibration();
             }
-            if (second < 10)
-            {
-                doubleIncomeCounterText.text = minute.ToString() + ":0" + ($"{second}");
-                if (minute < 10)
-                {
-                    doubleIncomeCounterText.text = "0" + minute.ToString() + ":0" + ($"{second}");
 
-                }
-                if (counter <= 3)
-                {
-                    StartCoroutine(CounterTextColorSet(doubleIncomeCounterText));
-                    VibratoManager.Instance.LightVibration();
-                }
-            }
             counter--;
             yield return new WaitForSeconds(1);
-            if (!Globals.holePlatformActive)
-            {
-                RewardPanel.Instance.doubleIncomePanelGO.SetActive(true);
-            }
         }
 
         if (counter <= 0)
@@ -428,7 +318,7 @@ public class SkillManager : MonoBehaviour
             counter += Time.deltaTime;
             value = (Mathf.Sin(Mathf.PI * counter));
             //holeTimerBG_Image.color = Color.Lerp(firstColor, targetColor, value);
-            txt.color = Color.Lerp(firstColor, targetColor, value);
+            txt.color = Color.Lerp(firstColor, Color.red, value);
             yield return null;
         }
     }
@@ -547,7 +437,7 @@ public class SkillManager : MonoBehaviour
                 PlayerPrefs.SetInt("speedCreatingCooldown", Globals.speedCreatingCooldown);
             }
 
-            int _speedRewPeriod = speedRewPeriod;
+            int _speedRewPeriod = boosterSettings._speedBoosterPeriod;
             if (PlayerPrefs.GetInt("speedRewCount") == 0)
             {
                 _speedRewPeriod = 180;
@@ -578,7 +468,7 @@ public class SkillManager : MonoBehaviour
                 PlayerPrefs.SetInt("workerBoostCreatingCooldown", Globals.workerBoostCreatingCooldown);
             }
 
-            int _workerRewPeriod = workerRewPeriod;
+            int _workerRewPeriod = boosterSettings._workerBoosterPeriod;
             //if (PlayerPrefs.GetInt("workerRewCount") == 0)
             //{
             //    _workerRewPeriod = 180;
@@ -609,7 +499,7 @@ public class SkillManager : MonoBehaviour
                 PlayerPrefs.SetInt("machineBoostCreatingCooldown", Globals.machineBoostCreatingCooldown);
             }
 
-            int _machineRewPeriod = machineRewPeriod;
+            int _machineRewPeriod = boosterSettings._machineBoosterPeriod;
             //if (PlayerPrefs.GetInt("workerRewCount") == 0)
             //{
             //    _workerRewPeriod = 180;
@@ -640,7 +530,7 @@ public class SkillManager : MonoBehaviour
                 PlayerPrefs.SetInt("capacityCreatingCooldown", Globals.capacityCreatingCooldown);
             }
 
-            int _capacityRewPeriod = capacityRewPeriod;
+            int _capacityRewPeriod = boosterSettings._capacityBoosterPeriod;
             if (PlayerPrefs.GetInt("capacityRewCount") == 0)
             {
                 _capacityRewPeriod = 180;
@@ -671,7 +561,7 @@ public class SkillManager : MonoBehaviour
                 PlayerPrefs.SetInt("doubleCreatingCooldown", Globals.doubleCreatingCooldown);
             }
 
-            int _doubleIncomeRewPeriod = doubleIncomeRewPeriod;
+            int _doubleIncomeRewPeriod = boosterSettings._doubleIncomeBoosterPeriod;
             if (PlayerPrefs.GetInt("doubleRewCount") == 0)
             {
                 _doubleIncomeRewPeriod = 180;
@@ -702,7 +592,7 @@ public class SkillManager : MonoBehaviour
                 PlayerPrefs.SetInt("moneyCreatingCooldown", Globals.moneyCreatingCooldown);
             }
 
-            int _moneyRewPeriod = moneyRewPeriod;
+            int _moneyRewPeriod = boosterSettings._moneyRewardedBoosterPeriod;
             if (PlayerPrefs.GetInt("moneyRewCount") == 0)
             {
                 _moneyRewPeriod = 180;
@@ -1026,14 +916,14 @@ public class SkillManager : MonoBehaviour
     public void PurchaseWorkerBoostActive()
     {
         PlayerPrefs.SetInt("purchaseworkerboost", 1);
-        Globals.workerStackFactor = workerStackFactor;
-        Globals.workerSpeedFactor = workerSpeedFactor;
+        Globals.workerStackFactor = boosterSettings._workerStackFactor;
+        Globals.workerSpeedFactor = boosterSettings._workerSpeedFactor;
         HRUpgradeManager.Instance.AllWorkerMoveSpeedInit();
     }
     public void PurchaseMachineBoostActive()
     {
         PlayerPrefs.SetInt("purchasemachineboost", 1);
-        Globals.machineSpeedFactor = machineSpeedFactor;
+        Globals.machineSpeedFactor = boosterSettings._machineSpeedFactor;
     }
     public void PurchaseRepairImmediateActive()
     {

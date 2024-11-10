@@ -1002,6 +1002,7 @@ public class ProcessMachine : Stand, IStandUpgrade, IMachineActive
 
         droppedCollectionList.Add(droppingCollection);
         PlayerPrefs.SetInt(machineName + "rawcount" + PlayerPrefs.GetInt("level"), droppedCollectionList.Count);
+        droppingCollection.transform.parent = null;
 
         yield return null;
         droppingCollection.collectActive = false;
@@ -1096,6 +1097,7 @@ public class ProcessMachine : Stand, IStandUpgrade, IMachineActive
             }
             yield return null;
         }
+        collectable.transform.parent = null;
         collectable.transform.position = dropPos;
 
 

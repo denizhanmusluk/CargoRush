@@ -7,10 +7,10 @@ using TMPro;
 
 public class MapRoom : MonoBehaviour, IMoneyArea
 {
-    public int maxOfflineCount;
-    public int pricePerPeriod = 10;
-
+    public MapSettings mapSettings;
     public int mapID;
+
+    [HideInInspector]
     public int offlineCount;
     public MoneyArea moneyArea;
 
@@ -51,7 +51,7 @@ public class MapRoom : MonoBehaviour, IMoneyArea
         mapRoomUI.shopRatio.fillAmount = openRatio;
         mapRoomUI.ratioText.text = ((int)(openRatio * 100)).ToString() + "/100";
         mapRoomUI.incomeText.text = "$" + totalIncome.ToString();
-        mapRoomUI.incomeText2.text = (pricePerPeriod * 60 / MapAreaManager.Instance.timePeriodMinute).ToString() + "/h";
+        mapRoomUI.incomeText2.text = (mapSettings._pricePerPeriod * 60 / MapAreaManager.Instance.timePeriodMinute).ToString() + "/h";
 
 
         if(PlayerPrefs.GetInt("level") == mapID)
@@ -75,11 +75,12 @@ public class MapRoom : MonoBehaviour, IMoneyArea
 
         int moneyListCount = moneyArea.moneyList.Count;
         int newMoneyCount = totalMoney - moneyListCount;
-        if(newMoneyCount > maxOfflineCount)
+        int maxOfflineCount = mapSettings._maxOfflineCount;
+        if (newMoneyCount > maxOfflineCount)
         {
             newMoneyCount = maxOfflineCount;
         }
-        newMoneyCount *= pricePerPeriod;
+        newMoneyCount *= mapSettings._pricePerPeriod;
         
         for (int i = 0; i < newMoneyCount; i++)
         {

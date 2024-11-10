@@ -13,12 +13,14 @@ public class UpgradePanel : MonoBehaviour
     public GameObject machinesUpgradePanelGO;
     public GameObject customerUpgradePanelGO;
     public GameObject repairUpgradePanelGO;
+    public GameObject trainUpgradePanelGO;
 
     public Button character_Upg_Button;
     public Button worker_Upg_Button;
     public Button machines_Upg_Button;
     public Button customer_Upg_Button;
     public Button repair_Upg_Button;
+    public Button train_Upg_Button;
     private void Awake()
     {
         _instance = this;
@@ -34,12 +36,14 @@ public class UpgradePanel : MonoBehaviour
         machinesUpgradePanelGO.SetActive(false);
         customerUpgradePanelGO.SetActive(false);
         repairUpgradePanelGO.SetActive(false);
+        trainUpgradePanelGO.SetActive(false);
 
         character_Upg_Button.interactable = false;
         worker_Upg_Button.interactable = true;
         machines_Upg_Button.interactable = true;
         customer_Upg_Button.interactable = true;
         repair_Upg_Button.interactable = true;
+        train_Upg_Button.interactable = true;
     }
 
 
@@ -50,12 +54,14 @@ public class UpgradePanel : MonoBehaviour
         machinesUpgradePanelGO.SetActive(false);
         customerUpgradePanelGO.SetActive(false);
         repairUpgradePanelGO.SetActive(false);
+        trainUpgradePanelGO.SetActive(false);
 
         character_Upg_Button.interactable = true;
         worker_Upg_Button.interactable = false;
         machines_Upg_Button.interactable = true;
         customer_Upg_Button.interactable = true;
         repair_Upg_Button.interactable = true;
+        train_Upg_Button.interactable = true;
     }
 
     public void OpenMachinesUpgradePanel()
@@ -65,12 +71,14 @@ public class UpgradePanel : MonoBehaviour
         machinesUpgradePanelGO.SetActive(true);
         customerUpgradePanelGO.SetActive(false);
         repairUpgradePanelGO.SetActive(false);
+        trainUpgradePanelGO.SetActive(false);
 
         character_Upg_Button.interactable = true;
         worker_Upg_Button.interactable = true;
         machines_Upg_Button.interactable = false;
         customer_Upg_Button.interactable = true;
         repair_Upg_Button.interactable = true;
+        train_Upg_Button.interactable = true;
     }
 
     public void OpenCustomerUpgradePanel()
@@ -80,12 +88,14 @@ public class UpgradePanel : MonoBehaviour
         machinesUpgradePanelGO.SetActive(false);
         customerUpgradePanelGO.SetActive(true);
         repairUpgradePanelGO.SetActive(false);
+        trainUpgradePanelGO.SetActive(false);
 
         character_Upg_Button.interactable = true;
         worker_Upg_Button.interactable = true;
         machines_Upg_Button.interactable = true;
         customer_Upg_Button.interactable = false;
         repair_Upg_Button.interactable = true;
+        train_Upg_Button.interactable = true;
     }
 
     public void OpenRepairUpgradePanel()
@@ -95,11 +105,30 @@ public class UpgradePanel : MonoBehaviour
         machinesUpgradePanelGO.SetActive(false);
         customerUpgradePanelGO.SetActive(false);
         repairUpgradePanelGO.SetActive(true);
+        trainUpgradePanelGO.SetActive(false);
 
         character_Upg_Button.interactable = true;
         worker_Upg_Button.interactable = true;
         machines_Upg_Button.interactable = true;
         customer_Upg_Button.interactable = true;
         repair_Upg_Button.interactable = false;
+        train_Upg_Button.interactable = true;
+    }
+
+    public void OpenTrainUpgradePanel()
+    {
+        characterUpgradePanelGO.SetActive(false);
+        workerUpgradePanelGO.SetActive(false);
+        machinesUpgradePanelGO.SetActive(false);
+        customerUpgradePanelGO.SetActive(false);
+        repairUpgradePanelGO.SetActive(false);
+        trainUpgradePanelGO.SetActive(true);
+
+        character_Upg_Button.interactable = true;
+        worker_Upg_Button.interactable = true;
+        machines_Upg_Button.interactable = true;
+        customer_Upg_Button.interactable = true;
+        repair_Upg_Button.interactable = true;
+        train_Upg_Button.interactable = false;
     }
 }
