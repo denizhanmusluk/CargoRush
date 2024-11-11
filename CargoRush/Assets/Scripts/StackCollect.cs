@@ -230,11 +230,11 @@ public abstract class StackCollect : MonoBehaviour
             {
                 collectable.fishCollectable.Remove(collectable);
             }
-            if (scallingEffectActive)
-            {
-                scallingEffectActive = false;
-                StartCoroutine(scaleCalling());
-            }
+            //if (scallingEffectActive)
+            //{
+            //    scallingEffectActive = false;
+            //    StartCoroutine(ScaleCalling());
+            //}
         }
     }
     public void ReverseCollectedList()
@@ -358,6 +358,7 @@ public abstract class StackCollect : MonoBehaviour
         {
             collectable.transform.parent = targetTR;
             collectable.transform.localRotation = Quaternion.identity;
+            collectable.transform.localPosition = new Vector3(0, collectable.transform.localPosition.y, 0);
         }
 
     }
@@ -663,18 +664,18 @@ public abstract class StackCollect : MonoBehaviour
     }
 
 
-    IEnumerator scaleCalling()
+    IEnumerator ScaleCalling()
     {
         int stackCount = collectionTrs.Count;
         for (int i = 0; i < collectionTrs.Count; i++)
         {
-            StartCoroutine(throughlyScaling(collectionTrs[collectionTrs.Count - 1 - i]));
+            StartCoroutine(ThroughlyScaling(collectionTrs[collectionTrs.Count - 1 - i]));
             yield return new WaitForSeconds(0.1f / scaleFrequency);
         }
         yield return new WaitForSeconds(0.5f);
         scallingEffectActive = true;
     }
-    IEnumerator throughlyScaling(Collectable Collect)
+    IEnumerator ThroughlyScaling(Collectable Collect)
     {
         float counter = 0f;
         float sizeDelta;

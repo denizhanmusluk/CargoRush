@@ -79,6 +79,10 @@ public class Player : MonoBehaviour
             {
                 SkillManager.Instance.PurchaseSpeedBoostActive();
             }
+            if (Globals.trainActive)
+            {
+                PlayerController.Instance.TrainActive();
+            }
         }
     }
 }

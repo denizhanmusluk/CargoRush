@@ -9,6 +9,7 @@ public class TrainManager : Singleton<TrainManager>
     public GameObject freeButtonGO;
     public GameObject advButtonGO;
     public ShowTrainReward showTrainReward;
+    public TrainParent train;
     [SerializeField] GameObject progressCanvasGO;
     [SerializeField] Image imageFill;
     bool trainOpenActive = false;
@@ -108,6 +109,7 @@ public class TrainManager : Singleton<TrainManager>
     }
     public void TrainStart()
     {
+        train.gameObject.SetActive(false);
         PlayerController.Instance.TrainActive();
         TrainCooldownStart();
     }
@@ -135,6 +137,7 @@ public class TrainManager : Singleton<TrainManager>
             //progressCanvasGO.SetActive(true);
             PlayerController.Instance.CloseTrain();
             showTrainReward.Canvas.SetActive(true);
+            train.gameObject.SetActive(true);
         }
     }
     public void PurchaseTrainImmediateActive()

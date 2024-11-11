@@ -1138,6 +1138,7 @@ public class PlayerController : MonoBehaviour
                 vagons[i].SetActive(true);
             }
         }
+        TrainManager.Instance.train.OpenVagons();
     }
     public void CloseTrain()
     {
