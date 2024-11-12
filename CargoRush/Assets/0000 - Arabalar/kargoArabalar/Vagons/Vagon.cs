@@ -55,7 +55,7 @@ public class Vagon : MonoBehaviour
     }
     void FollowingTranslate()
     {
-        float accelFactor = (characterUpgradeSettings.characterSpeed[Globals.characterSpeedLevel] * characterUpgradeSettings.trainSpeedFactor[Globals.trainSpeedLevel]) / (characterUpgradeSettings.characterSpeed[0] * characterUpgradeSettings.trainSpeedFactor[0]);
+        float accelFactor = (characterUpgradeSettings.characterSpeed[Globals.characterSpeedLevel] * characterUpgradeSettings.trainSpeedFactor) / (characterUpgradeSettings.characterSpeed[0] * characterUpgradeSettings.trainSpeedFactor);
 
         float _jointDistance = Vector3.Distance(jointTR.position, targetFollowTR.position);
         float vagonDistance = Vector3.Distance(transform.position, targetFollowTR.position);

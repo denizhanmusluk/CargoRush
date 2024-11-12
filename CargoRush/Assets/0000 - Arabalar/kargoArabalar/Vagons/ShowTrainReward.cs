@@ -17,9 +17,17 @@ public class ShowTrainReward : MonoBehaviour
     public void SetUsageTimeText()
     {
         float secTime = MRCUpgradeManager.Instance._characterUpgradeSettings.trainUsageTime[Globals.trainUsageTimeLevel];
-        float minute = (float)MRCUpgradeManager.Instance._characterUpgradeSettings.trainUsageTime[Globals.trainUsageTimeLevel] / 60f;
+        float minute = secTime / 60f;
         float avgTime = Mathf.Round(minute * 10f) / 10f;
-        useTimeText.text = $"{avgTime} MIN";
+
+        if (secTime < 60)
+        {
+            useTimeText.text = $"{secTime} SEC";
+        }
+        else
+        {
+            useTimeText.text = $"{avgTime} MIN";
+        }
     }
     public void ADV_ButtonClick()
     {

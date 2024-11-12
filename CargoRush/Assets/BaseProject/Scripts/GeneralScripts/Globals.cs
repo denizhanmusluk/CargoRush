@@ -35,8 +35,8 @@ public static class Globals
     public static int repairRunTimeLevel = 0;
     public static int repairSpeedLevel = 0;
 
-    public static int trainCapacityLevel = 0;
-    public static int trainSpeedLevel = 0;
+    public static int trainWagonLevel = 0;
+    public static int wagonCapacityLevel = 0;
     public static int trainUsageTimeLevel = 0;
     public static int trainExtraStack = 0;
 

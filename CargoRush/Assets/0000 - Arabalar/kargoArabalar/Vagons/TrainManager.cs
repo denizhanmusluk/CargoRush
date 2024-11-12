@@ -119,13 +119,14 @@ public class TrainManager : Singleton<TrainManager>
     }
     IEnumerator TrainCooldown()
     {
-        Globals.trainExtraStack = MRCUpgradeManager.Instance._characterUpgradeSettings.trainExtraCapacity[Globals.trainCapacityLevel];
+        Globals.trainExtraStack = (Globals.trainWagonLevel + 1) * (MRCUpgradeManager.Instance._characterUpgradeSettings.extraCapacityPerWagon[Globals.wagonCapacityLevel] + CharacterUpgradeManager.Instance._characterUpgradeSettings.stackCapacity[Globals.stackCapacityLevel]);
         //progressCanvasGO.SetActive(false);
         RewardPanel.Instance.trainRewardPanelGO.SetActive(true);
         int timer = 0;
 
         while (timer < MRCUpgradeManager.Instance._characterUpgradeSettings.trainUsageTime[Globals.trainUsageTimeLevel])
         {
+            Globals.trainExtraStack = (Globals.trainWagonLevel + 1) * (MRCUpgradeManager.Instance._characterUpgradeSettings.extraCapacityPerWagon[Globals.wagonCapacityLevel] + CharacterUpgradeManager.Instance._characterUpgradeSettings.stackCapacity[Globals.stackCapacityLevel]);
             trainCooldownTxt.text = ConvertSecondToMinSec.Converter(MRCUpgradeManager.Instance._characterUpgradeSettings.trainUsageTime[Globals.trainUsageTimeLevel] - timer);
             timer++;
             yield return new WaitForSeconds(1);

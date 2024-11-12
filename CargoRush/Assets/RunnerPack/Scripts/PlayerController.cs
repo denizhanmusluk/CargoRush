@@ -575,7 +575,7 @@ public class PlayerController : MonoBehaviour
             moveDirection = rotatedDirection;
             //moveSpeed /= 2;
         }
-        float trainSpeedFactor = _characterUpgradeSettings.trainSpeedFactor[Globals.trainSpeedLevel];
+        float trainSpeedFactor = _characterUpgradeSettings.trainSpeedFactor;
         if (!Globals.trainActive)
         {
             trainSpeedFactor = 1f;
@@ -1130,7 +1130,7 @@ public class PlayerController : MonoBehaviour
     }
     public void OpenVagons()
     {
-        int vagonCount = MRCUpgradeManager.Instance._characterUpgradeSettings.trainWagonCount[Globals.trainCapacityLevel];
+        int vagonCount = MRCUpgradeManager.Instance._characterUpgradeSettings.trainWagonCount[Globals.trainWagonLevel];
         if (Globals.trainActive)
         {
             for(int i = 0; i < vagonCount; i++)

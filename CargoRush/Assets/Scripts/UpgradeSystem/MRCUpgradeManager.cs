@@ -24,8 +24,8 @@ public class MRCUpgradeManager : MonoBehaviour
         Globals.repairSpeedLevel = PlayerPrefs.GetInt("repairSpeedLevel" + PlayerPrefs.GetInt("level"));
 
 
-        Globals.trainCapacityLevel = PlayerPrefs.GetInt("trainCapacityLevel" + PlayerPrefs.GetInt("level"));
-        Globals.trainSpeedLevel = PlayerPrefs.GetInt("trainSpeedLevel" + PlayerPrefs.GetInt("level"));
+        Globals.trainWagonLevel = PlayerPrefs.GetInt("trainCapacityLevel" + PlayerPrefs.GetInt("level"));
+        Globals.wagonCapacityLevel = PlayerPrefs.GetInt("trainSpeedLevel" + PlayerPrefs.GetInt("level"));
         Globals.trainUsageTimeLevel = PlayerPrefs.GetInt("trainUsageTimeLevel" + PlayerPrefs.GetInt("level"));
     }
     private void Start()
@@ -123,30 +123,30 @@ public class MRCUpgradeManager : MonoBehaviour
         }
 
 
-        if (Globals.trainCapacityLevel < _characterUpgradeSettings.trainWagonCount.Length - 1)
+        if (Globals.trainWagonLevel < _characterUpgradeSettings.trainWagonCount.Length - 1)
         {
-            button_TrainCapacity.TextInit(Globals.trainCapacityLevel, _characterUpgradeSettings.repairSpeedCost[Globals.trainCapacityLevel + 1]);
-            button_TrainCapacity.UpgradeValueTextInit(_characterUpgradeSettings.trainWagonCount[Globals.trainCapacityLevel], _characterUpgradeSettings.trainWagonCount[Globals.trainCapacityLevel + 1]);
-            button_TrainCapacity.ButtonLevel(Globals.trainCapacityLevel, _characterUpgradeSettings.trainWagonCount.Length - 1);
+            button_TrainCapacity.TextInit(Globals.trainWagonLevel, _characterUpgradeSettings.repairSpeedCost[Globals.trainWagonLevel + 1]);
+            button_TrainCapacity.UpgradeValueTextInit(_characterUpgradeSettings.trainWagonCount[Globals.trainWagonLevel], _characterUpgradeSettings.trainWagonCount[Globals.trainWagonLevel + 1]);
+            button_TrainCapacity.ButtonLevel(Globals.trainWagonLevel, _characterUpgradeSettings.trainWagonCount.Length - 1);
         }
         else
         {
             button_TrainCapacity.FullLevel();
-            button_TrainCapacity.UpgradeValueFull(_characterUpgradeSettings.trainWagonCount[Globals.trainCapacityLevel]);
-            button_TrainCapacity.ButtonLevel(Globals.trainCapacityLevel, _characterUpgradeSettings.trainWagonCount.Length - 1);
+            button_TrainCapacity.UpgradeValueFull(_characterUpgradeSettings.trainWagonCount[Globals.trainWagonLevel]);
+            button_TrainCapacity.ButtonLevel(Globals.trainWagonLevel, _characterUpgradeSettings.trainWagonCount.Length - 1);
         }
 
-        if (Globals.trainSpeedLevel < _characterUpgradeSettings.trainSpeedFactor.Length - 1)
+        if (Globals.wagonCapacityLevel < _characterUpgradeSettings.extraCapacityPerWagon.Length - 1)
         {
-            button_TrainSpeed.TextInit(Globals.trainSpeedLevel, _characterUpgradeSettings.trainSpeedFactorCost[Globals.trainSpeedLevel + 1]);
-            button_TrainSpeed.UpgradeValueTextInit(_characterUpgradeSettings.trainSpeedFactor[Globals.trainSpeedLevel], _characterUpgradeSettings.trainSpeedFactor[Globals.trainSpeedLevel + 1]);
-            button_TrainSpeed.ButtonLevel(Globals.trainSpeedLevel, _characterUpgradeSettings.trainSpeedFactor.Length - 1);
+            button_TrainSpeed.TextInit(Globals.wagonCapacityLevel, _characterUpgradeSettings.wagonCapacityCost[Globals.wagonCapacityLevel + 1]);
+            button_TrainSpeed.UpgradeValueTextInit(_characterUpgradeSettings.extraCapacityPerWagon[Globals.wagonCapacityLevel], _characterUpgradeSettings.extraCapacityPerWagon[Globals.wagonCapacityLevel + 1]);
+            button_TrainSpeed.ButtonLevel(Globals.wagonCapacityLevel, _characterUpgradeSettings.extraCapacityPerWagon.Length - 1);
         }
         else
         {
             button_TrainSpeed.FullLevel();
-            button_TrainSpeed.UpgradeValueFull(_characterUpgradeSettings.trainSpeedFactor[Globals.trainSpeedLevel]);
-            button_TrainSpeed.ButtonLevel(Globals.trainSpeedLevel, _characterUpgradeSettings.trainSpeedFactor.Length - 1);
+            button_TrainSpeed.UpgradeValueFull(_characterUpgradeSettings.extraCapacityPerWagon[Globals.wagonCapacityLevel]);
+            button_TrainSpeed.ButtonLevel(Globals.wagonCapacityLevel, _characterUpgradeSettings.extraCapacityPerWagon.Length - 1);
         }
 
 
@@ -231,7 +231,7 @@ public class MRCUpgradeManager : MonoBehaviour
 
 
 
-        if (Globals.trainCapacityLevel < _characterUpgradeSettings.trainWagonCount.Length - 1 && Globals.moneyAmount >= _characterUpgradeSettings.trainCapacityCost[Globals.trainCapacityLevel + 1])
+        if (Globals.trainWagonLevel < _characterUpgradeSettings.trainWagonCount.Length - 1 && Globals.moneyAmount >= _characterUpgradeSettings.trainWagonCost[Globals.trainWagonLevel + 1])
         {
             button_TrainCapacity.moneyButton.interactable = true;
         }
@@ -240,7 +240,7 @@ public class MRCUpgradeManager : MonoBehaviour
             button_TrainCapacity.moneyButton.interactable = false;
         }
 
-        if (Globals.trainSpeedLevel < _characterUpgradeSettings.trainSpeedFactor.Length - 1 && Globals.moneyAmount >= _characterUpgradeSettings.trainSpeedFactorCost[Globals.trainSpeedLevel + 1])
+        if (Globals.wagonCapacityLevel < _characterUpgradeSettings.extraCapacityPerWagon.Length - 1 && Globals.moneyAmount >= _characterUpgradeSettings.wagonCapacityCost[Globals.wagonCapacityLevel + 1])
         {
             button_TrainSpeed.moneyButton.interactable = true;
         }
@@ -415,19 +415,19 @@ public class MRCUpgradeManager : MonoBehaviour
     }
     public void TrainCapacityUpgrade_Button()
     {
-        if (Globals.trainCapacityLevel < _characterUpgradeSettings.trainWagonCount.Length - 1)
+        if (Globals.trainWagonLevel < _characterUpgradeSettings.trainWagonCount.Length - 1)
         {
-            if (Globals.moneyAmount >= _characterUpgradeSettings.trainCapacityCost[Globals.trainCapacityLevel + 1])
+            if (Globals.moneyAmount >= _characterUpgradeSettings.trainWagonCost[Globals.trainWagonLevel + 1])
             {
-                int trainCapacityCost = _characterUpgradeSettings.trainCapacityCost[Globals.trainCapacityLevel + 1];
+                int trainCapacityCost = _characterUpgradeSettings.trainWagonCost[Globals.trainWagonLevel + 1];
                 GameManager.Instance.MoneyUpdate(-trainCapacityCost);
-                Globals.trainCapacityLevel++;
-                PlayerPrefs.SetInt("trainCapacityLevel" + PlayerPrefs.GetInt("level"), Globals.trainCapacityLevel);
+                Globals.trainWagonLevel++;
+                PlayerPrefs.SetInt("trainCapacityLevel" + PlayerPrefs.GetInt("level"), Globals.trainWagonLevel);
                 IsEnoughMoney();
                 InitButtonValues();
 
-                Analytics.ItemUpgraded(ItemUpgradeType.Upgrade, "Zone " + (PlayerPrefs.GetInt("level") + 1) + " TrainCapacityUpgrade", Globals.trainCapacityLevel, ItemFlowReason.Progression);
-                Analytics.ResourceFlowEvent(ResourceFlowType.Sink, "Money", (float)trainCapacityCost, (float)Globals.moneyAmount, Globals.trainCapacityLevel.ToString(), "TrainCapacityUpgrade", ResourceFlowReason.Progression);
+                Analytics.ItemUpgraded(ItemUpgradeType.Upgrade, "Zone " + (PlayerPrefs.GetInt("level") + 1) + " TrainCapacityUpgrade", Globals.trainWagonLevel, ItemFlowReason.Progression);
+                Analytics.ResourceFlowEvent(ResourceFlowType.Sink, "Money", (float)trainCapacityCost, (float)Globals.moneyAmount, Globals.trainWagonLevel.ToString(), "TrainCapacityUpgrade", ResourceFlowReason.Progression);
 
                 AudioManager.Instance.UpgradeSound();
                 PlayerController.Instance.OpenVagons();
@@ -465,19 +465,19 @@ public class MRCUpgradeManager : MonoBehaviour
     }
     public void TrainSpeedUpgrade_Button()
     {
-        if (Globals.trainSpeedLevel < _characterUpgradeSettings.trainSpeedFactor.Length - 1)
+        if (Globals.wagonCapacityLevel < _characterUpgradeSettings.extraCapacityPerWagon.Length - 1)
         {
-            if (Globals.moneyAmount >= _characterUpgradeSettings.trainSpeedFactorCost[Globals.trainSpeedLevel + 1])
+            if (Globals.moneyAmount >= _characterUpgradeSettings.wagonCapacityCost[Globals.wagonCapacityLevel + 1])
             {
-                int trainSpeedCost = _characterUpgradeSettings.trainSpeedFactorCost[Globals.trainSpeedLevel + 1];
+                int trainSpeedCost = _characterUpgradeSettings.wagonCapacityCost[Globals.wagonCapacityLevel + 1];
                 GameManager.Instance.MoneyUpdate(-trainSpeedCost);
-                Globals.trainSpeedLevel++;
-                PlayerPrefs.SetInt("trainSpeedLevel" + PlayerPrefs.GetInt("level"), Globals.trainSpeedLevel);
+                Globals.wagonCapacityLevel++;
+                PlayerPrefs.SetInt("trainSpeedLevel" + PlayerPrefs.GetInt("level"), Globals.wagonCapacityLevel);
                 IsEnoughMoney();
                 InitButtonValues();
 
-                Analytics.ItemUpgraded(ItemUpgradeType.Upgrade, "Zone " + (PlayerPrefs.GetInt("level") + 1) + " TrainSpeedUpgrade", Globals.trainSpeedLevel, ItemFlowReason.Progression);
-                Analytics.ResourceFlowEvent(ResourceFlowType.Sink, "Money", (float)trainSpeedCost, (float)Globals.moneyAmount, Globals.trainSpeedLevel.ToString(), "TrainSpeedUpgrade", ResourceFlowReason.Progression);
+                Analytics.ItemUpgraded(ItemUpgradeType.Upgrade, "Zone " + (PlayerPrefs.GetInt("level") + 1) + " TrainSpeedUpgrade", Globals.wagonCapacityLevel, ItemFlowReason.Progression);
+                Analytics.ResourceFlowEvent(ResourceFlowType.Sink, "Money", (float)trainSpeedCost, (float)Globals.moneyAmount, Globals.wagonCapacityLevel.ToString(), "TrainSpeedUpgrade", ResourceFlowReason.Progression);
 
                 AudioManager.Instance.UpgradeSound();
                 PlayerController.Instance.OpenVagons();
@@ -731,21 +731,21 @@ public class MRCUpgradeManager : MonoBehaviour
     }
     public void TrainSpeedUpgrade_FREE(bool ticketActive)
     {
-        if (Globals.trainSpeedLevel < _characterUpgradeSettings.trainSpeedFactor.Length - 1)
+        if (Globals.wagonCapacityLevel < _characterUpgradeSettings.extraCapacityPerWagon.Length - 1)
         {
-            int trainSpeedCost = _characterUpgradeSettings.trainSpeedFactorCost[Globals.trainSpeedLevel + 1];
-            Globals.trainSpeedLevel++;
-            PlayerPrefs.SetInt("trainSpeedLevel" + PlayerPrefs.GetInt("level"), Globals.trainSpeedLevel);
+            int trainSpeedCost = _characterUpgradeSettings.wagonCapacityCost[Globals.wagonCapacityLevel + 1];
+            Globals.wagonCapacityLevel++;
+            PlayerPrefs.SetInt("trainSpeedLevel" + PlayerPrefs.GetInt("level"), Globals.wagonCapacityLevel);
             IsEnoughMoney();
             InitButtonValues();
 
             if (ticketActive)
             {
-                Analytics.ItemUpgraded(ItemUpgradeType.Upgrade, "Zone " + (PlayerPrefs.GetInt("level") + 1) + " TrainSpeedUpgrade", Globals.trainSpeedLevel, ItemFlowReason.Progression);
+                Analytics.ItemUpgraded(ItemUpgradeType.Upgrade, "Zone " + (PlayerPrefs.GetInt("level") + 1) + " TrainSpeedUpgrade", Globals.wagonCapacityLevel, ItemFlowReason.Progression);
             }
             else
             {
-                Analytics.ItemUpgraded(ItemUpgradeType.Upgrade, "Zone " + (PlayerPrefs.GetInt("level") + 1) + " TrainSpeedUpgrade", Globals.trainSpeedLevel, ItemFlowReason.RewardedVideoAd);
+                Analytics.ItemUpgraded(ItemUpgradeType.Upgrade, "Zone " + (PlayerPrefs.GetInt("level") + 1) + " TrainSpeedUpgrade", Globals.wagonCapacityLevel, ItemFlowReason.RewardedVideoAd);
             }
 
             AudioManager.Instance.UpgradeSound();
@@ -759,21 +759,21 @@ public class MRCUpgradeManager : MonoBehaviour
 
     public void TrainCapacityUpgrade_FREE(bool ticketActive)
     {
-        if (Globals.trainCapacityLevel < _characterUpgradeSettings.trainWagonCount.Length - 1)
+        if (Globals.trainWagonLevel < _characterUpgradeSettings.trainWagonCount.Length - 1)
         {
-            int trainCapacityCost = _characterUpgradeSettings.trainCapacityCost[Globals.trainCapacityLevel + 1];
-            Globals.trainCapacityLevel++;
-            PlayerPrefs.SetInt("trainCapacityLevel" + PlayerPrefs.GetInt("level"), Globals.trainCapacityLevel);
+            int trainCapacityCost = _characterUpgradeSettings.trainWagonCost[Globals.trainWagonLevel + 1];
+            Globals.trainWagonLevel++;
+            PlayerPrefs.SetInt("trainCapacityLevel" + PlayerPrefs.GetInt("level"), Globals.trainWagonLevel);
             IsEnoughMoney();
             InitButtonValues();
 
             if (ticketActive)
             {
-                Analytics.ItemUpgraded(ItemUpgradeType.Upgrade, "Zone " + (PlayerPrefs.GetInt("level") + 1) + " TrainCapacityUpgrade", Globals.trainCapacityLevel, ItemFlowReason.Progression);
+                Analytics.ItemUpgraded(ItemUpgradeType.Upgrade, "Zone " + (PlayerPrefs.GetInt("level") + 1) + " TrainCapacityUpgrade", Globals.trainWagonLevel, ItemFlowReason.Progression);
             }
             else
             {
-                Analytics.ItemUpgraded(ItemUpgradeType.Upgrade, "Zone " + (PlayerPrefs.GetInt("level") + 1) + " TrainCapacityUpgrade", Globals.trainCapacityLevel, ItemFlowReason.RewardedVideoAd);
+                Analytics.ItemUpgraded(ItemUpgradeType.Upgrade, "Zone " + (PlayerPrefs.GetInt("level") + 1) + " TrainCapacityUpgrade", Globals.trainWagonLevel, ItemFlowReason.RewardedVideoAd);
             }
 
             AudioManager.Instance.UpgradeSound();
