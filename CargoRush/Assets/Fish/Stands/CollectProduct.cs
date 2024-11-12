@@ -102,7 +102,7 @@ public class CollectProduct : MonoBehaviour
                             collectingActive = true;
                         }
 
-                        if ((collectingActive) && Globals.playerStackActive && collectables[collectables.Count - 1].productCollectActive && other.GetComponent<PlayerController>()._stackCollect.collectionTrs.Count < (Globals.stackFactor  * other.GetComponent<PlayerController>()._characterUpgradeSettings.stackCapacity[Globals.stackCapacityLevel] + Globals.extraStackSkin + Globals.extraStack))
+                        if ((collectingActive) && Globals.playerStackActive && collectables[collectables.Count - 1].productCollectActive && other.GetComponent<PlayerController>()._stackCollect.collectionTrs.Count < (Globals.stackFactor  * other.GetComponent<PlayerController>()._characterUpgradeSettings.stackCapacity[Globals.stackCapacityLevel] + Globals.extraStackSkin + Globals.extraStack + Globals.trainExtraStack))
                         {
                             if(noneCollectGO != null)
                             {
@@ -152,7 +152,7 @@ public class CollectProduct : MonoBehaviour
                                 }
                             }
                         }
-                        if(other.GetComponent<PlayerController>()._stackCollect.collectionTrs.Count >= (Globals.stackFactor * other.GetComponent<PlayerController>()._characterUpgradeSettings.stackCapacity[Globals.stackCapacityLevel] + Globals.extraStackSkin + Globals.extraStack))
+                        if(other.GetComponent<PlayerController>()._stackCollect.collectionTrs.Count >= (Globals.stackFactor * other.GetComponent<PlayerController>()._characterUpgradeSettings.stackCapacity[Globals.stackCapacityLevel] + Globals.extraStackSkin + Globals.extraStack + Globals.trainExtraStack))
                         {
                             //StartCoroutine(FullCapacity());
                         }

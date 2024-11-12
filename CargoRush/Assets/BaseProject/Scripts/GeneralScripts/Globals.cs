@@ -37,6 +37,8 @@ public static class Globals
 
     public static int trainCapacityLevel = 0;
     public static int trainSpeedLevel = 0;
+    public static int trainUsageTimeLevel = 0;
+    public static int trainExtraStack = 0;
 
     public static int maxBuildLevel = 0;
 

@@ -11,7 +11,7 @@ public class TrainParent : MonoBehaviour
     }
     public void OpenVagons()
     {
-        int vagonCount = MRCUpgradeManager.Instance._characterUpgradeSettings.trainCapacity[Globals.trainCapacityLevel];
+        int vagonCount = MRCUpgradeManager.Instance._characterUpgradeSettings.trainWagonCount[Globals.trainCapacityLevel];
         for (int i = 0; i < vagonCount; i++)
         {
             vagonList[i].SetActive(true);

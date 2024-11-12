@@ -14,7 +14,6 @@ public class TrainManager : Singleton<TrainManager>
     [SerializeField] Image imageFill;
     bool trainOpenActive = false;
 
-    [SerializeField] int trainDuration = 120;
     TextMeshProUGUI trainCooldownTxt;
     private void Start()
     {
@@ -120,25 +119,27 @@ public class TrainManager : Singleton<TrainManager>
     }
     IEnumerator TrainCooldown()
     {
+        Globals.trainExtraStack = MRCUpgradeManager.Instance._characterUpgradeSettings.trainExtraCapacity[Globals.trainCapacityLevel];
         //progressCanvasGO.SetActive(false);
         RewardPanel.Instance.trainRewardPanelGO.SetActive(true);
-        int timer = trainDuration;
+        int timer = 0;
 
-        while(timer > 0)
+        while (timer < MRCUpgradeManager.Instance._characterUpgradeSettings.trainUsageTime[Globals.trainUsageTimeLevel])
         {
-            trainCooldownTxt.text = ConvertSecondToMinSec.Converter(timer);
-            timer--;
+            trainCooldownTxt.text = ConvertSecondToMinSec.Converter(MRCUpgradeManager.Instance._characterUpgradeSettings.trainUsageTime[Globals.trainUsageTimeLevel] - timer);
+            timer++;
             yield return new WaitForSeconds(1);
         }
-        if (timer <= 0)
-        {
-            trainCooldownTxt.text = "00:00";
-            RewardPanel.Instance.trainRewardPanelGO.SetActive(false);
-            //progressCanvasGO.SetActive(true);
-            PlayerController.Instance.CloseTrain();
-            showTrainReward.Canvas.SetActive(true);
-            train.gameObject.SetActive(true);
-        }
+
+        trainCooldownTxt.text = "00:00";
+        RewardPanel.Instance.trainRewardPanelGO.SetActive(false);
+        //progressCanvasGO.SetActive(true);
+        PlayerController.Instance.CloseTrain();
+        showTrainReward.Canvas.SetActive(true);
+        showTrainReward.SetUsageTimeText();
+        train.gameObject.SetActive(true);
+
+        Globals.trainExtraStack = 0;
     }
     public void PurchaseTrainImmediateActive()
     {

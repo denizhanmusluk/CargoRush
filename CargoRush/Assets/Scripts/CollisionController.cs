@@ -36,7 +36,7 @@ public class CollisionController : MonoBehaviour
 
             if (other.GetComponent<Collectable>().isTrash)
             {
-                if (stackCollect.collectionTrs.Count < Globals.stackFactor * _characterUpgradeSettings.stackCapacity[Globals.stackCapacityLevel] + Globals.extraStackSkin + Globals.extraStack)
+                if (stackCollect.collectionTrs.Count < Globals.stackFactor * _characterUpgradeSettings.stackCapacity[Globals.stackCapacityLevel] + Globals.extraStackSkin + Globals.extraStack + Globals.trainExtraStack)
                 {
                     if (other.GetComponent<Rigidbody>() != null)
                     {
@@ -51,7 +51,7 @@ public class CollisionController : MonoBehaviour
             }
             else
             {
-                if ((!isThereTrash) && stackCollect.collectionTrs.Count < Globals.stackFactor  * _characterUpgradeSettings.stackCapacity[Globals.stackCapacityLevel] + Globals.extraStackSkin + Globals.extraStack)
+                if ((!isThereTrash) && stackCollect.collectionTrs.Count < Globals.stackFactor  * _characterUpgradeSettings.stackCapacity[Globals.stackCapacityLevel] + Globals.extraStackSkin + Globals.extraStack + Globals.trainExtraStack)
                 {
                     if(other.GetComponent<Collector>() != null)
                     {

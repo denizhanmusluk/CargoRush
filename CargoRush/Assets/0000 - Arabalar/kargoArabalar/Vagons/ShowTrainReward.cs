@@ -4,14 +4,23 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 using HomaGames.HomaBelly;
+using TMPro;
 
 public class ShowTrainReward : MonoBehaviour
 {
+    [SerializeField] TextMeshProUGUI useTimeText;
     public GameObject Canvas;
     Vector3 firstSize;
     public bool firstOpenCloseCanvas = false;
     public bool showActive = false;
     //public ProcessMachine processMachine;
+    public void SetUsageTimeText()
+    {
+        float secTime = MRCUpgradeManager.Instance._characterUpgradeSettings.trainUsageTime[Globals.trainUsageTimeLevel];
+        float minute = (float)MRCUpgradeManager.Instance._characterUpgradeSettings.trainUsageTime[Globals.trainUsageTimeLevel] / 60f;
+        float avgTime = Mathf.Round(minute * 10f) / 10f;
+        useTimeText.text = $"{avgTime} MIN";
+    }
     public void ADV_ButtonClick()
     {
         showActive = false;
@@ -111,6 +120,7 @@ public class ShowTrainReward : MonoBehaviour
                 PlayerPrefs.SetInt("traintutorial", 2);
                 IndicatorManager.Instance.IndicaorDeActive();
             }
+            SetUsageTimeText();
         }
     }
 

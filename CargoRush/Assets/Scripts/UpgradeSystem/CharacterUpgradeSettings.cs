@@ -52,9 +52,14 @@ public class CharacterUpgradeSettings : ScriptableObject
 
 
     [Header("       TRAIN UPGRADE")]
-    public int[] trainCapacity;
+    public int[] trainWagonCount;
+    public int[] trainExtraCapacity;
     public int[] trainCapacityCost;
 
     public float[] trainSpeedFactor;
     public int[] trainSpeedFactorCost;
+
+    public int[] trainUsageTime;
+    public int[] trainUsageCost;
+
 }
