@@ -125,7 +125,7 @@ public class MRCUpgradeManager : MonoBehaviour
 
         if (Globals.trainWagonLevel < _characterUpgradeSettings.trainWagonCount.Length - 1)
         {
-            button_TrainCapacity.TextInit(Globals.trainWagonLevel, _characterUpgradeSettings.repairSpeedCost[Globals.trainWagonLevel + 1]);
+            button_TrainCapacity.TextInit(Globals.trainWagonLevel, _characterUpgradeSettings.trainWagonCost[Globals.trainWagonLevel + 1]);
             button_TrainCapacity.UpgradeValueTextInit(_characterUpgradeSettings.trainWagonCount[Globals.trainWagonLevel], _characterUpgradeSettings.trainWagonCount[Globals.trainWagonLevel + 1]);
             button_TrainCapacity.ButtonLevel(Globals.trainWagonLevel, _characterUpgradeSettings.trainWagonCount.Length - 1);
         }
