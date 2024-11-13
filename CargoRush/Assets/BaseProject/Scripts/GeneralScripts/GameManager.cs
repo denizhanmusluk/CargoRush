@@ -399,6 +399,8 @@ public class GameManager : Observer
         SkillManager.Instance.CapacityRewardCreate();
         SkillManager.Instance.DoubleRewardCreate();
         SkillManager.Instance.MoneyRewardCreate();
+        SkillManager.Instance.WorkerRewardCreate();
+        SkillManager.Instance.MachineRewardCreate();
     }
 
     public VipCustomerSlot vipCustomerSlot;
