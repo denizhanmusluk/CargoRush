@@ -29,7 +29,7 @@ public class BuyTrain : MonoBehaviour
     }
     public void CheckPurchased()
     {
-        if (PlayerPrefs.GetInt("purchaserepairboost") == 0)
+        if (PlayerPrefs.GetInt("purchasetrainboost") == 0)
         {
             buyButton.gameObject.SetActive(true);
             purchasedGO.gameObject.SetActive(false);

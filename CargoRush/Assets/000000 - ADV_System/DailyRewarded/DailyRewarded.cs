@@ -16,19 +16,20 @@ public class DailyRewarded : MonoBehaviour
     public string dailyRewardedTag;
     public string dailyRewardedName;
     public int maxRewardedCount = 5;
-    public int[] moneyRewardedAmounts;
+    //public int[] moneyRewardedAmounts;
     public TextMeshProUGUI advCountText;
     public TextMeshProUGUI moneyAmountText;
     public Button advButton;
     [SerializeField] GameObject advImage_GO;
     [SerializeField] GameObject free_GO;
+    [SerializeField] DailyRewardedSettings dailyRewardedSettings;
     private void OnEnable()
     {
         switch (_dailyType)
         {
             case DailyType.Money:
                 {
-                    moneyAmountText.text = "$" + moneyRewardedAmounts[PlayerPrefs.GetInt("level")].ToString();
+                    moneyAmountText.text = "$" + dailyRewardedSettings._cashRewardAmount[PlayerPrefs.GetInt("level")].ToString();
                 }
                 break;
             case DailyType.Ticket:
@@ -160,13 +161,13 @@ public class DailyRewarded : MonoBehaviour
             case DailyType.Money:
                 {
                     PlayerPrefs.SetInt("firstdailyrewarded", 1);
-                    GameManager.Instance.ui.MoneyCreateDailyRewarded(moneyRewardedAmounts[PlayerPrefs.GetInt("level")], transform.position, rewardedActive);
+                    GameManager.Instance.ui.MoneyCreateDailyRewarded(dailyRewardedSettings._cashRewardAmount[PlayerPrefs.GetInt("level")], transform.position, rewardedActive);
 
                 }
                 break;
             case DailyType.Ticket:
                 {
-                    GameManager.Instance.ui.TicketCreateDailyRewarded(moneyRewardedAmounts[PlayerPrefs.GetInt("level")], transform.position, rewardedActive);
+                    GameManager.Instance.ui.TicketCreateDailyRewarded(dailyRewardedSettings._cashRewardAmount[PlayerPrefs.GetInt("level")], transform.position, rewardedActive);
 
                 }
                 break;

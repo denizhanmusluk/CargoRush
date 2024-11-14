@@ -141,6 +141,12 @@ public class TrainManager : Singleton<TrainManager>
         train.gameObject.SetActive(true);
 
         Globals.trainExtraStack = 0;
+
+        if(PlayerPrefs.GetInt("wagonfirstusage") == 0)
+        {
+            PlayerPrefs.SetInt("wagonfirstusage", 1);
+            PurchaseManager.Instance.wagonPopUp_GO.SetActive(true);
+        }
     }
     public void PurchaseTrainImmediateActive()
     {

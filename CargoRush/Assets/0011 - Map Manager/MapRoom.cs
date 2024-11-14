@@ -75,7 +75,7 @@ public class MapRoom : MonoBehaviour, IMoneyArea
 
         int moneyListCount = moneyArea.moneyList.Count;
         int newMoneyCount = totalMoney - moneyListCount;
-        int maxOfflineCount = mapSettings._maxOfflineCount;
+        int maxOfflineCount = mapSettings._maxOfflineEarning / mapSettings._pricePerPeriod;
         if (newMoneyCount > maxOfflineCount)
         {
             newMoneyCount = maxOfflineCount;

@@ -23,6 +23,7 @@ public class PurchaseManager : MonoBehaviour
     public GameObject doubleCapacityPopUp_GO;
     public GameObject doubleIncomePopUp_GO;
     public GameObject repairManPopUp_GO;
+    public GameObject wagonPopUp_GO;
 
     public Transform bundleButtonTR;
     public Transform boosterButtonTR;
