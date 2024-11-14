@@ -560,7 +560,7 @@ public abstract class StackCollect : MonoBehaviour
                 }
                 if (collectionTrs[0].stackFollowingActive)
                 {
-                    followObj(stackLevel_1_PosList[0], collectionTrs[0].transform, 0f);
+                    FollowObj(stackLevel_1_PosList[0], collectionTrs[0].transform, 0f);
                 }
             }
             for (int i = 0; i < collectionTrs.Count - 1; i++)
@@ -575,7 +575,7 @@ public abstract class StackCollect : MonoBehaviour
                 }
                 if (collectionTrs[i].stackFollowingActive)
                 {
-                    followObj(collectionTrs[i].transform, collectionTrs[i + 1].transform, i);
+                    FollowObj(collectionTrs[i].transform, collectionTrs[i + 1].transform, i);
                 }
             }
         }
@@ -583,7 +583,7 @@ public abstract class StackCollect : MonoBehaviour
     float counter = 0.5f;
     Vector3 distance = Vector3.zero;
 
-    void followObj(Transform obj1, Transform obj2, float multiply)
+    void FollowObj(Transform obj1, Transform obj2, float multiply)
     {
         float angleFactor;
         if ((int)multiply % 2 == 0)

@@ -93,13 +93,20 @@ public class CollectProduct : MonoBehaviour
                             }
                         }
 
-                        if (collectables[collectables.Count - 1].collectID == 50 && !isThereProduct)
+                        if (Globals.trainActive)
                         {
                             collectingActive = true;
                         }
-                        if (collectables[collectables.Count - 1].collectID != 50 && !isThereTrash)
+                        else
                         {
-                            collectingActive = true;
+                            if (collectables[collectables.Count - 1].collectID == 50 && !isThereProduct)
+                            {
+                                collectingActive = true;
+                            }
+                            if (collectables[collectables.Count - 1].collectID != 50 && !isThereTrash)
+                            {
+                                collectingActive = true;
+                            }
                         }
 
                         if ((collectingActive) && Globals.playerStackActive && collectables[collectables.Count - 1].productCollectActive && other.GetComponent<PlayerController>()._stackCollect.collectionTrs.Count < (Globals.stackFactor  * other.GetComponent<PlayerController>()._characterUpgradeSettings.stackCapacity[Globals.stackCapacityLevel] + Globals.extraStackSkin + Globals.extraStack + Globals.trainExtraStack))
