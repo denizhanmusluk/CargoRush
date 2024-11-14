@@ -15,19 +15,33 @@ public class UpgradePanel : MonoBehaviour
     public GameObject repairUpgradePanelGO;
     public GameObject trainUpgradePanelGO;
 
-    public Button character_Upg_Button;
-    public Button worker_Upg_Button;
-    public Button machines_Upg_Button;
-    public Button customer_Upg_Button;
-    public Button repair_Upg_Button;
-    public Button train_Upg_Button;
+    //public Button character_Upg_Button;
+    //public Button worker_Upg_Button;
+    //public Button machines_Upg_Button;
+    //public Button customer_Upg_Button;
+    //public Button repair_Upg_Button;
+    //public Button train_Upg_Button;
+
+    public ButtonUpgrade character_Upg_Button;
+    public ButtonUpgrade worker_Upg_Button;
+    public ButtonUpgrade machines_Upg_Button;
+    public ButtonUpgrade customer_Upg_Button;
+    public ButtonUpgrade repair_Upg_Button;
+    public ButtonUpgrade train_Upg_Button;
     private void Awake()
     {
         _instance = this;
     }
     private void Start()
     {
-        OpenCharacterUpgradePanel();
+        characterUpgradePanelGO.SetActive(true);
+        workerUpgradePanelGO.SetActive(false);
+        machinesUpgradePanelGO.SetActive(false);
+        customerUpgradePanelGO.SetActive(false);
+        repairUpgradePanelGO.SetActive(false);
+        trainUpgradePanelGO.SetActive(false);
+        character_Upg_Button.GetComponent<Button>().interactable = false;
+        //OpenCharacterUpgradePanel();
     }
     public void OpenCharacterUpgradePanel()
     {
@@ -38,12 +52,12 @@ public class UpgradePanel : MonoBehaviour
         repairUpgradePanelGO.SetActive(false);
         trainUpgradePanelGO.SetActive(false);
 
-        character_Upg_Button.interactable = false;
-        worker_Upg_Button.interactable = true;
-        machines_Upg_Button.interactable = true;
-        customer_Upg_Button.interactable = true;
-        repair_Upg_Button.interactable = true;
-        train_Upg_Button.interactable = true;
+        character_Upg_Button.MoveButtonUp();
+        worker_Upg_Button.MoveButtonDefaultPos();
+        machines_Upg_Button.MoveButtonDefaultPos();
+        customer_Upg_Button.MoveButtonDefaultPos();
+        repair_Upg_Button.MoveButtonDefaultPos();
+        train_Upg_Button.MoveButtonDefaultPos();
     }
 
 
@@ -56,12 +70,12 @@ public class UpgradePanel : MonoBehaviour
         repairUpgradePanelGO.SetActive(false);
         trainUpgradePanelGO.SetActive(false);
 
-        character_Upg_Button.interactable = true;
-        worker_Upg_Button.interactable = false;
-        machines_Upg_Button.interactable = true;
-        customer_Upg_Button.interactable = true;
-        repair_Upg_Button.interactable = true;
-        train_Upg_Button.interactable = true;
+        character_Upg_Button.MoveButtonDefaultPos();
+        worker_Upg_Button.MoveButtonUp();
+        machines_Upg_Button.MoveButtonDefaultPos();
+        customer_Upg_Button.MoveButtonDefaultPos();
+        repair_Upg_Button.MoveButtonDefaultPos();
+        train_Upg_Button.MoveButtonDefaultPos();
     }
 
     public void OpenMachinesUpgradePanel()
@@ -73,12 +87,12 @@ public class UpgradePanel : MonoBehaviour
         repairUpgradePanelGO.SetActive(false);
         trainUpgradePanelGO.SetActive(false);
 
-        character_Upg_Button.interactable = true;
-        worker_Upg_Button.interactable = true;
-        machines_Upg_Button.interactable = false;
-        customer_Upg_Button.interactable = true;
-        repair_Upg_Button.interactable = true;
-        train_Upg_Button.interactable = true;
+        character_Upg_Button.MoveButtonDefaultPos();
+        worker_Upg_Button.MoveButtonDefaultPos();
+        machines_Upg_Button.MoveButtonUp();
+        customer_Upg_Button.MoveButtonDefaultPos();
+        repair_Upg_Button.MoveButtonDefaultPos();
+        train_Upg_Button.MoveButtonDefaultPos();
     }
 
     public void OpenCustomerUpgradePanel()
@@ -90,12 +104,12 @@ public class UpgradePanel : MonoBehaviour
         repairUpgradePanelGO.SetActive(false);
         trainUpgradePanelGO.SetActive(false);
 
-        character_Upg_Button.interactable = true;
-        worker_Upg_Button.interactable = true;
-        machines_Upg_Button.interactable = true;
-        customer_Upg_Button.interactable = false;
-        repair_Upg_Button.interactable = true;
-        train_Upg_Button.interactable = true;
+        character_Upg_Button.MoveButtonDefaultPos();
+        worker_Upg_Button.MoveButtonDefaultPos();
+        machines_Upg_Button.MoveButtonDefaultPos();
+        customer_Upg_Button.MoveButtonUp();
+        repair_Upg_Button.MoveButtonDefaultPos();
+        train_Upg_Button.MoveButtonDefaultPos();
     }
 
     public void OpenRepairUpgradePanel()
@@ -107,12 +121,12 @@ public class UpgradePanel : MonoBehaviour
         repairUpgradePanelGO.SetActive(true);
         trainUpgradePanelGO.SetActive(false);
 
-        character_Upg_Button.interactable = true;
-        worker_Upg_Button.interactable = true;
-        machines_Upg_Button.interactable = true;
-        customer_Upg_Button.interactable = true;
-        repair_Upg_Button.interactable = false;
-        train_Upg_Button.interactable = true;
+        character_Upg_Button.MoveButtonDefaultPos();
+        worker_Upg_Button.MoveButtonDefaultPos();
+        machines_Upg_Button.MoveButtonDefaultPos();
+        customer_Upg_Button.MoveButtonDefaultPos();
+        repair_Upg_Button.MoveButtonUp();
+        train_Upg_Button.MoveButtonDefaultPos();
     }
 
     public void OpenTrainUpgradePanel()
@@ -124,11 +138,11 @@ public class UpgradePanel : MonoBehaviour
         repairUpgradePanelGO.SetActive(false);
         trainUpgradePanelGO.SetActive(true);
 
-        character_Upg_Button.interactable = true;
-        worker_Upg_Button.interactable = true;
-        machines_Upg_Button.interactable = true;
-        customer_Upg_Button.interactable = true;
-        repair_Upg_Button.interactable = true;
-        train_Upg_Button.interactable = false;
+        character_Upg_Button.MoveButtonDefaultPos();
+        worker_Upg_Button.MoveButtonDefaultPos();
+        machines_Upg_Button.MoveButtonDefaultPos();
+        customer_Upg_Button.MoveButtonDefaultPos();
+        repair_Upg_Button.MoveButtonDefaultPos();
+        train_Upg_Button.MoveButtonUp();
     }
 }
