@@ -153,6 +153,7 @@ public class TrainManager : Singleton<TrainManager>
         PlayerPrefs.SetInt("purchasetrainboost", 1);
         PlayerController.Instance.TrainActive();
         showTrainReward.gameObject.SetActive(false);
+        Globals.trainExtraStack = (Globals.trainWagonLevel + 1) * (MRCUpgradeManager.Instance._characterUpgradeSettings.extraCapacityPerWagon[Globals.wagonCapacityLevel] + CharacterUpgradeManager.Instance._characterUpgradeSettings.stackCapacity[Globals.stackCapacityLevel]);
 
     }
 }

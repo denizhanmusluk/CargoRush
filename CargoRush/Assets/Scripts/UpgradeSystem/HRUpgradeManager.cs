@@ -510,7 +510,18 @@ public class HRUpgradeManager : MonoBehaviour
             PlayerController.Instance.PlayerControlDeActive();
 
             IndicatorManager.Instance.TutorialStepStart(21);
-            UpgradePanel.Instance.OpenWorkerUpgradePanel();
+            //UpgradePanel.Instance.OpenWorkerUpgradePanel();
+
+
+            UpgradePanel.Instance.characterUpgradePanelGO.SetActive(false);
+            UpgradePanel.Instance.workerUpgradePanelGO.SetActive(true);
+            UpgradePanel.Instance.machinesUpgradePanelGO.SetActive(false);
+            UpgradePanel.Instance.customerUpgradePanelGO.SetActive(false);
+            UpgradePanel.Instance.repairUpgradePanelGO.SetActive(false);
+            UpgradePanel.Instance.trainUpgradePanelGO.SetActive(false);
+
+            UpgradePanel.Instance.character_Upg_Button.GetComponent<Button>().interactable = true;
+            UpgradePanel.Instance.worker_Upg_Button.GetComponent<Button>().interactable = false;
         }
     }
 }

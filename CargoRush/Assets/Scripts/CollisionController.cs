@@ -32,7 +32,10 @@ public class CollisionController : MonoBehaviour
                     isThereTrash = true;
                 }   
             }
-
+            if (Globals.trainActive)
+            {
+                isThereTrash = false;
+            }
 
             if (other.GetComponent<Collectable>().isTrash)
             {
