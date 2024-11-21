@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using HomaGames.HomaBelly.IAP;
+using TMPro;
 
 public class PurchaseManager : MonoBehaviour
 {
@@ -24,6 +25,7 @@ public class PurchaseManager : MonoBehaviour
     public GameObject doubleIncomePopUp_GO;
     public GameObject repairManPopUp_GO;
     public GameObject wagonPopUp_GO;
+    public GameObject wagonWithAd_GO;
 
     public Transform bundleButtonTR;
     public Transform boosterButtonTR;
@@ -34,6 +36,8 @@ public class PurchaseManager : MonoBehaviour
     Vector3 boosterButtonFirstPos;
     Vector3 ticketButtonFirstPos;
     Vector3 moneyButtonFirstPos;
+
+    public TextMeshProUGUI wagonDriveTimeTxt;
     private void Awake()
     {
         _instance = this;
@@ -45,6 +49,7 @@ public class PurchaseManager : MonoBehaviour
     }
     private void Start()
     {
+        wagonDriveTimeTxt.text=      ConvertSecondToMinSec.Converter(MRCUpgradeManager.Instance._characterUpgradeSettings.trainUsageTime[Globals.trainUsageTimeLevel]) + " Min";
         StartCoroutine(StartDelay());
         if(PlayerPrefs.GetInt("shopbuttonopen") == 1)
         {

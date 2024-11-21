@@ -28,6 +28,7 @@ public class IndicatorManager : MonoBehaviour
     public List<IndTargeter> targeterActiveList;
     public List<Stand> machines = new List<Stand>();
     public IndType _indType;
+ 
     private void Awake()
     {
         _instance = this;
@@ -276,13 +277,32 @@ public class IndicatorManager : MonoBehaviour
     }
 
     public void TutorialStepStart(int tutorialStepIndex)
-    {
+    {    
         Analytics.TutorialStepStarted(tutorialStepIndex);
-        Debug.Log("Tutorial Step: " + tutorialStepIndex);
+        Debug.Log("Tutorial Step: " + tutorialStepIndex);  
+        
+        if(tutorialStepIndex == 17)
+            PlayerPrefs.SetInt("firstTime",1);
+        if(tutorialStepIndex > 17) return;
+        PlayerController.Instance.TrainActive();
+    
     }
     public void TutorialStepCompleted()
     {
-        Analytics.TutorialStepCompleted();
+        Analytics.TutorialStepCompleted(); 
         Debug.Log("Tutorial Completed");
+        PlayerController.Instance.CloseTrain();
+        if (PlayerPrefs.HasKey("firstTime"))
+        {
+            StartCoroutine(WaitForWagonRewardedAd());
+        }
+    }
+
+    private IEnumerator WaitForWagonRewardedAd()
+    {
+        yield return new WaitForSeconds(.15f);
+        PurchaseManager.Instance.wagonDriveTimeTxt.text =
+            ConvertSecondToMinSec.Converter(MRCUpgradeManager.Instance._characterUpgradeSettings.trainUsageTime[Globals.trainUsageTimeLevel]) + " Min";
+        PurchaseManager.Instance.wagonWithAd_GO.SetActive(true);
     }
 }

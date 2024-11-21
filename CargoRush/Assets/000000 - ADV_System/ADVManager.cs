@@ -215,4 +215,30 @@ public class ADVManager : MonoBehaviour
             advNotReadyPanel_GO.gameObject.SetActive(false);
         }
     }
+
+    public void WatchAdForWagon()
+    {
+        string adv_name = "Train_REWARDED";  
+        RewardedStart(TrainImmediate,adv_name,true);
+        PurchaseManager.Instance.wagonWithAd_GO.gameObject.SetActive(false);
+        //GameManager.Instance.GameAnalyticsTag(tag);
+        //GameManager.Instance.HomaAnalyticsTag(tag); 
+
+    }
+
+    public void TrainImmediate(bool ticketActive)
+    {
+        string _tag = "Train_REWARDED"; 
+        TrainManager.Instance.TrainStart();
+        if (ticketActive)
+        {
+            Analytics.ItemObtained(_tag, 0, ItemFlowReason.Progression);
+            Analytics.ItemConsumed(_tag, 0, ItemFlowReason.Progression);
+        }
+        else
+        {
+            Analytics.ItemObtained(_tag, 0, ItemFlowReason.RewardedVideoAd);
+            Analytics.ItemConsumed(_tag, 0, ItemFlowReason.RewardedVideoAd);
+        }
+    }
 }
