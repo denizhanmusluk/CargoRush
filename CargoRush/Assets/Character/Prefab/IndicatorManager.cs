@@ -291,7 +291,8 @@ public class IndicatorManager : MonoBehaviour
     {
         Analytics.TutorialStepCompleted(); 
         Debug.Log("Tutorial Completed");
-        PlayerController.Instance.CloseTrain();
+        if(!PlayerPrefs.HasKey("wagonAdRecomendatitonSp"))
+            PlayerController.Instance.CloseTrain();
         if (PlayerPrefs.HasKey("firstTime"))
         {
             if(!PlayerPrefs.HasKey("wagonAdRecomendatitonSp"))
