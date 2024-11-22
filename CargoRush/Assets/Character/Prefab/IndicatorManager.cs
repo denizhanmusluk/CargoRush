@@ -294,7 +294,9 @@ public class IndicatorManager : MonoBehaviour
         PlayerController.Instance.CloseTrain();
         if (PlayerPrefs.HasKey("firstTime"))
         {
-            StartCoroutine(WaitForWagonRewardedAd());
+            if(!PlayerPrefs.HasKey("wagonAdRecomendatitonSp"))
+                StartCoroutine(WaitForWagonRewardedAd());
+            PlayerPrefs.SetInt("wagonAdRecomendatitonSp",1);
         }
     }
 
