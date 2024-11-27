@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,7 +16,7 @@ public class CameraManager : Observer
     [SerializeField] float fovHoleCurrent;
     [SerializeField] float fovHoleTarget;
 
-    public CinemachineVirtualCamera vCamPlayer;
+    public CinemachineVirtualCamera vCamPlayer,vCamWithZoom;
     [SerializeField] float fovPlayerFirst;
     [SerializeField] float fovPlayerLast;
     [SerializeField] float fovPlayerCurrent;
@@ -64,8 +65,7 @@ public class CameraManager : Observer
         }
     }
 
-
-
+ 
     public void PlayerCameraFovSet()
     {
         fovPlayerTarget = Mathf.Lerp(fovPlayerFirst, fovPlayerLast, (float)PlayerPrefs.GetInt("saleLevel") / (float)(AvailableForPurchase.Instance.saleBuilds.Count - 1));
@@ -77,10 +77,10 @@ public class CameraManager : Observer
         Tween tween = DOTween.To
           (() => value, x => value = x, lastValue, duration).SetEase(type).OnUpdate(delegate ()
           {
-              vCamPlayer.m_Lens.FieldOfView = value;
+              vCamPlayer.m_Lens.FieldOfView = value; 
           }).OnComplete(delegate ()
           {
-              vCamPlayer.m_Lens.FieldOfView = lastValue;
+              vCamPlayer.m_Lens.FieldOfView = lastValue; 
           });
         return tween;
     }

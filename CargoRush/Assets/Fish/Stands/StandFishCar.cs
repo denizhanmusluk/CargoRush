@@ -363,8 +363,11 @@ public class StandFishCar : Stand,IMoneyArea
         //{
         //    MissionManager.Instance.ShippingLineMissionStart();
         //}
-
-
+        if (!PlayerPrefs.HasKey("yolculuksayi2"))
+        {
+            PlayerPrefs.SetInt("yolculuksayi2", 1);
+            FishDropArea.Instance.totalProductCapacity = 75;
+        }
         GameManager.Instance.CourierLevelStartedAnalytic(PlayerPrefs.GetInt("completerodercount"));
     }
 

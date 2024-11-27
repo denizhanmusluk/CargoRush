@@ -16,6 +16,7 @@ public class MachineRepairArea : MonoBehaviour
     }
     void RepairListOpen()
     {
+        PlayerPrefs.SetInt("playerHandIndicator", 0);
         int minElementCount = 3;
         if(minElementCount > machineRepairListAll.Count)
         {
@@ -105,10 +106,10 @@ public class MachineRepairArea : MonoBehaviour
 
     List<T> GetRandomElements<T>(List<T> list, int count)
     {
-        // Rastgele sayýlar oluþturmak için Random sýnýfýný kullanýyoruz
+        // Rastgele sayï¿½lar oluï¿½turmak iï¿½in Random sï¿½nï¿½fï¿½nï¿½ kullanï¿½yoruz
         System.Random random = new System.Random();
 
-        // Listeyi rastgele sýraya diziyoruz ve istediðimiz sayýda elemaný alýyoruz
+        // Listeyi rastgele sï¿½raya diziyoruz ve istediï¿½imiz sayï¿½da elemanï¿½ alï¿½yoruz
         return list.OrderBy(x => random.Next()).Take(count).ToList();
     }
 
