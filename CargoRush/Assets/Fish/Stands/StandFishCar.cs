@@ -256,6 +256,19 @@ public class StandFishCar : Stand,IMoneyArea
         {
             FishDropArea.Instance.GarbageDroppingAfterTutorial();
         }
+        if (!PlayerPrefs.HasKey("totalProductCapacityController"))
+        {
+            if (PlayerPrefs.GetInt("completerodercount") >= FishDropArea.Instance.totalProductCapacityReturnCount)
+            {
+                PlayerPrefs.SetInt("totalProductCapacityController", 1);
+                FishDropArea.Instance.totalProductCapacity = 75;
+            }
+            else
+            {
+                FishDropArea.Instance.totalProductCapacity = 10;
+            }
+        }
+        
         GameManager.Instance.CourierLevelCompleted(PlayerPrefs.GetInt("completerodercount"));
 
     }
@@ -363,11 +376,11 @@ public class StandFishCar : Stand,IMoneyArea
         //{
         //    MissionManager.Instance.ShippingLineMissionStart();
         //}
-        if (!PlayerPrefs.HasKey("yolculuksayi2"))
-        {
-            PlayerPrefs.SetInt("yolculuksayi2", 1);
-            FishDropArea.Instance.totalProductCapacity = 75;
-        }
+        //if (!PlayerPrefs.HasKey("yolculuksayi2"))
+        //{
+        //    PlayerPrefs.SetInt("yolculuksayi2", 1);
+        //    FishDropArea.Instance.totalProductCapacity = 75;
+        //}
         GameManager.Instance.CourierLevelStartedAnalytic(PlayerPrefs.GetInt("completerodercount"));
     }
 

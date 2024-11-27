@@ -42,7 +42,8 @@ public class FishDropArea : MonoBehaviour
     public List<Transform> createPosList = new List<Transform>();
     public List<Transform> firstCreatePosList = new List<Transform>();
 
-    public int totalProductCapacity = 50;
+    public int totalProductCapacity = 75;
+    public int totalProductCapacityReturnCount = 4;
 
    public List<productType> proType = new List<productType>();
     public MineCrusher mineCrusher;
@@ -81,7 +82,7 @@ public class FishDropArea : MonoBehaviour
     {
         createTime = 0.1f;
         reactiveRateCurrent = 1;
-        extraProduct = 75;
+        extraProduct = totalProductCapacity;
         yield return new WaitForSeconds(2f);
         reactiveRateCurrent = reactiveRate;
         yield return new WaitForSeconds(5f);
@@ -110,6 +111,10 @@ public class FishDropArea : MonoBehaviour
     }
     void Start()
     {
+        if (!PlayerPrefs.HasKey("totalProductCapacityController"))
+        {
+            totalProductCapacity = 10;    
+        }
         errorFill = CollectProgressManager.Instance.errorFill;
 
         createTime = createPeriodTime[mineCrusher.standLevel];
