@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Cinemachine;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ZoomInOut : MonoBehaviour
 { 
@@ -12,6 +13,9 @@ public class ZoomInOut : MonoBehaviour
     private bool zoomIn = false;
     
     private Coroutine zoomInCoroutine;
+    [SerializeField] private Image zoomInOutImage;
+    [SerializeField] private Sprite zoomInSprite,zoomOutSprite;
+    
 
     public void ZoomInOUT()
     {
@@ -21,6 +25,7 @@ public class ZoomInOut : MonoBehaviour
                 StopCoroutine(zoomInCoroutine);
             zoomInCoroutine = StartCoroutine(LerpOrthographicSize(zoomInSize, zoomOutSize, lerpDuration));
             zoomIn = true;
+            zoomInOutImage.sprite = zoomInSprite;
         }
         else
         {
@@ -28,6 +33,7 @@ public class ZoomInOut : MonoBehaviour
                 StopCoroutine(zoomInCoroutine);
             zoomInCoroutine= StartCoroutine(LerpOrthographicSize(zoomOutSize, zoomInSize, lerpDuration));
             zoomIn = false;
+            zoomInOutImage.sprite = zoomOutSprite;
         }
     }
 
