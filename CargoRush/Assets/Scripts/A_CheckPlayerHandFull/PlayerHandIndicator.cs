@@ -11,11 +11,19 @@ public class PlayerHandIndicator : MonoBehaviour
     [SerializeField] private Transform packMachine1EklemeYeri;
     [SerializeField] private Transform packMachine2EklemeYeri;
 
+    private Material lineRendererMaterial;
     private bool isPassedOnTrigger = false;
     // CollectID 1 ise ve type 1 ise elindekleri ilk bant makine bir göister
     // COllectID 1 ise ve type 2 ise pembe box bant alanı göster
     
+    private float offset = 0f;
     //
+
+    private void Awake()
+    {
+        lineRendererMaterial = lineRenderer.material;
+    }
+
     private void Start()
     {
         CheckIfThisShouldWork();
@@ -41,6 +49,8 @@ public class PlayerHandIndicator : MonoBehaviour
             isPassedOnTrigger=false;
             return;
         }
+
+        IndicatorScaleSet();
         lineRenderer.gameObject.SetActive(true);
         foreach (var collectable in playerStackList)
         {
@@ -58,6 +68,12 @@ public class PlayerHandIndicator : MonoBehaviour
                     return;
             }
         }
+    }
+    
+    void IndicatorScaleSet()
+    {  
+        offset -= Time.deltaTime * 2; 
+        lineRendererMaterial.mainTextureOffset = new Vector2(offset, 0);
     }
 
     
